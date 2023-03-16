@@ -67,6 +67,18 @@ public class FFMpegBuilder {
     }
 
     /**
+     * Returns a new VideoCreator instance given the path to the output file and a non-null list of paths to the input images.
+     * @param outputFile The path to the output file
+     * @param inputFiles The non-null list of paths to the input images
+     * @return A new VideoCreator instance
+     * @throws NotEnoughArgumentsException when at least one of the given arguments is null
+     */
+    public VideoCreator newVideoCreator(@NotNull String outputFile, @NotNull String @NotNull ... inputFiles)
+            throws NotEnoughArgumentsException {
+        return new VideoCreator(this, outputFile, inputFiles);
+    }
+
+    /**
      * Same as for addInput(), but this can add multiple files. Throws NotEnoughArgumentsException if the input value is
      * null or if one of the input values is null.
      * @param inputFiles The list of paths of the input files to be added to the command
