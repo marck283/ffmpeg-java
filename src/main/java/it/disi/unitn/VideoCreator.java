@@ -48,6 +48,14 @@ public class VideoCreator {
         this.codecID = codecID; //TODO: check if this value is valid using the accepted codecs from ffmpeg
     }
 
+    public void setVideoSizeID(@NotNull String videoSizeID) throws InvalidArgumentException {
+        //TODO: check if the id of the size is recognizable by ffmpeg
+        if(videoSizeID == null) {
+            throw new InvalidArgumentException("The video size ID should not be null and it should be recognized by ffmpeg.");
+        }
+        this.videoSizeID = videoSizeID;
+    }
+
     public void setVideoQuality(int quality) {
         videoQuality = quality;
     }
@@ -55,14 +63,6 @@ public class VideoCreator {
     public void setVideoSize(int width, int height) {
         videoWidth = width;
         videoHeight = height;
-    }
-
-    public void setVideoSizeID(@NotNull String videoSizeID) throws InvalidArgumentException {
-        //TODO: check if the id of the size is recognizable by ffmpeg
-        if(videoSizeID == null) {
-            throw new InvalidArgumentException("The video size ID should not be null and it should be recognized by ffmpeg.");
-        }
-        this.videoSizeID = videoSizeID;
     }
 
     public void createCommand() throws InvalidArgumentException {
