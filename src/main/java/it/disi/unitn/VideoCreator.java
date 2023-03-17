@@ -22,6 +22,10 @@ public class VideoCreator {
 
     private int startInstant; //Starting instant of the new video with respect to the original video
 
+    private String audioBitRate; //Audio track0s bitrate (in Kbit/s)
+
+    private String videoBitRate; //Video track bitrate (in Kbit/s or Mbit/s)
+
     public VideoCreator(@NotNull FFMpegBuilder builder, @NotNull String outputFile,
                         @NotNull String @NotNull ... inputImages) throws NotEnoughArgumentsException {
         if(builder == null || inputImages == null || outputFile == null) {
@@ -149,6 +153,25 @@ public class VideoCreator {
     }
 
     /**
+     * This method sets the audio track's bitrate (in Kbit/s).
+     * @param val The audio track's bitrate
+     * @throws InvalidArgumentException of the given bitrate value is less than or equal to 0
+     */
+    private void setAudioBitRate(int val) throws InvalidArgumentException {
+        if(val <= 0) {
+            throw new InvalidArgumentException("The bitrate of the audio track must be greater than 0.");
+        }
+        audioBitRate = val + "k";
+    }
+
+    public void setVideoBitRate(int val, @NotNull String mode) throws InvalidArgumentException {
+        if(mode == null || (!mode.equals("k") && !mode.equals("m"))) {
+            throw new InvalidArgumentException("The \"mode\" parameter must be specified and it must be either \"k\" or \"m\".");
+        }
+        videoBitRate = val + mode;
+    }
+
+    /**
      * This method creates the command than, when run, will create the output video.
      * @throws InvalidArgumentException if the video width or height or the video size ID field is null
      */
@@ -167,6 +190,12 @@ public class VideoCreator {
             }
             if(codecID != null && !codecID.equals("")) {
                 builder.setCommand(builder.getCommand() + " -vcodec " + codecID);
+            }
+            if(videoBitRate != null && !videoBitRate.equals("")) {
+                builder.setCommand(builder.getCommand() + " -b:v " + videoBitRate);
+            }
+            if(audioBitRate != null && !audioBitRate.equals("")) {
+                builder.setCommand(builder.getCommand() + " -b:a " + audioBitRate);
             }
             if(startInstant > 0) {
                 builder.setCommand(builder.getCommand() + " -ss " + startInstant);
