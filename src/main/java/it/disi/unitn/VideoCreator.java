@@ -6,12 +6,13 @@ import org.jetbrains.annotations.NotNull;
 
 public class VideoCreator {
 
-    private FFMpegBuilder builder;
+    private final FFMpegBuilder builder;
     private int frameRate = 1, videoDuration; //Frame rate and video duration
 
-    private String outputFile = "", codecID = ""; //Name of output file and codec ID
+    private final String outputFile; //Name of output file
+    private String codecID = ""; //Name of codec ID
 
-    private String[] inputImages; //Paths to input images
+    private final String[] inputImages; //Paths to input images
 
     private int videoQuality = 0; //Quality of output video. For "x264", sane values should be between 18 and 28
 
@@ -166,6 +167,9 @@ public class VideoCreator {
             }
             if(codecID != null && !codecID.equals("")) {
                 builder.setCommand(builder.getCommand() + " -vcodec " + codecID);
+            }
+            if(startInstant > 0) {
+                builder.setCommand(builder.getCommand() + " -ss " + startInstant);
             }
             if(videoDuration > 0) {
                 builder.setCommand(builder.getCommand() + " -t " + videoDuration);
