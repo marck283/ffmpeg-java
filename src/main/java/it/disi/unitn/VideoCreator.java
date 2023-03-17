@@ -7,7 +7,7 @@ import org.jetbrains.annotations.NotNull;
 public class VideoCreator {
 
     private FFMpegBuilder builder;
-    private int frameRate = 1; //Frame rate
+    private int frameRate = 1, videoDuration; //Frame rate and video duration
 
     private String outputFile = "", codecID = ""; //Name of output file and codec ID
 
@@ -18,6 +18,8 @@ public class VideoCreator {
     private int videoWidth = 0, videoHeight = 0;
 
     private String videoSizeID = "";
+
+    private int startInstant; //Starting instant of the new video with respect to the original video
 
     public VideoCreator(@NotNull FFMpegBuilder builder, @NotNull String outputFile,
                         @NotNull String @NotNull ... inputImages) throws NotEnoughArgumentsException {
@@ -36,6 +38,11 @@ public class VideoCreator {
         }
     }
 
+    /**
+     * This method sets the output video's frame rate.
+     * @param val The output video's frame rate
+     * @throws InvalidArgumentException when the given frame rate is less than or equal to 0.
+     */
     public void setFrameRate(int val) throws InvalidArgumentException {
         if(val <= 0) {
             throw new InvalidArgumentException("The frame rate value should always be greater than or equal to 1.");
@@ -44,10 +51,72 @@ public class VideoCreator {
         }
     }
 
-    public void setCodecID(@NotNull String codecID) {
-        this.codecID = codecID; //TODO: check if this value is valid using the accepted codecs from ffmpeg
+    /**
+     * This method sets the duration of the output video.
+     * @param val The duration of the output video
+     * @throws InvalidArgumentException when the given duration is less than or equal to 0.
+     */
+    public void setVideoDuration(int val) throws InvalidArgumentException {
+        if(val <= 0) {
+            throw new InvalidArgumentException("The video duration must always be of at least 1 second.");
+        }
+        videoDuration = val;
     }
 
+    /**
+     * This method sets the starting instant of the resulting video, but it requires that the input file be itself a video
+     * of any format supported by ffmpeg.
+     * @param val The starting instant of the new video
+     * @throws InvalidArgumentException when the starting instant of the new video is less than or equal to 0.
+     */
+    public void setStartInstant(int val) throws InvalidArgumentException {
+        if(val <= 0) {
+            throw new InvalidArgumentException("The starting instant of the new video must be at least the starting instant" +
+                    " of the original video.");
+        }
+        startInstant = val;
+    }
+
+    /**
+     * This method checks if the given codec ID is supported by ffmpeg.
+     * @param codecID The given codec ID
+     * @return true if the given codec is valid, otherwise false
+     */
+    private boolean checkCodec(@NotNull String codecID) {
+        switch (codecID) {
+            case "a64_multi", "a64_multi5", "Cinepak", "GIF", "Hap", "jpeg2000", "libravle", "libaom-avl", "libsvtavl",
+                    "libjxl", "libkvazaar", "libopenh264", "libtheora", "libvpx", "libwebp", "libx264", "libx264rgb",
+                    "libx265", "libxavs2", "libxvid", "MediaFoundation", "mpeg2", "png", "ProRes", "snow", "vbn", "vc2" -> {
+                return true;
+            }
+            default -> {
+                return false;
+            }
+        }
+    }
+
+    /**
+     * This method sets the codec ID of the output video.
+     * @param codecID The given codec ID
+     * @throws NotEnoughArgumentsException if the given codec ID is null
+     * @throws InvalidArgumentException if the given codec ID is not supported by ffmpeg
+     */
+    public void setCodecID(@NotNull String codecID) throws NotEnoughArgumentsException, InvalidArgumentException {
+        if(codecID == null) {
+            throw new NotEnoughArgumentsException("The codec id must not be null.");
+        }
+        if(checkCodec(codecID)) {
+            this.codecID = codecID;
+        } else {
+            throw new InvalidArgumentException("Invalid video codec");
+        }
+    }
+
+    /**
+     * This method sets the width and height of the resulting video by means of the given video size ID.
+     * @param videoSizeID The given video size ID
+     * @throws InvalidArgumentException if the given video size ID is not supported by ffmpeg
+     */
     public void setVideoSizeID(@NotNull String videoSizeID) throws InvalidArgumentException {
         //TODO: check if the id of the size is recognizable by ffmpeg
         if(videoSizeID == null) {
@@ -56,15 +125,32 @@ public class VideoCreator {
         this.videoSizeID = videoSizeID;
     }
 
+    /**
+     * This method sets the quality of the output video.
+     * @param quality The quality of the output video
+     */
     public void setVideoQuality(int quality) {
         videoQuality = quality;
     }
 
-    public void setVideoSize(int width, int height) {
+    /**
+     * This method sets the size of the resulting video by means of the given width and height.
+     * @param width The given width
+     * @param height The given height
+     * @throws InvalidArgumentException if the given width or height parameter is less than or equal to 0
+     */
+    public void setVideoSize(int width, int height) throws InvalidArgumentException {
+        if(width <= 0 || height <= 0) {
+            throw new InvalidArgumentException("The given width or height parameter must be a strictly positive integer value.");
+        }
         videoWidth = width;
         videoHeight = height;
     }
 
+    /**
+     * This method creates the command than, when run, will create the output video.
+     * @throws InvalidArgumentException if the video width or height or the video size ID field is null
+     */
     public void createCommand() throws InvalidArgumentException {
         if(videoWidth == 0 || videoHeight == 0 || videoSizeID == null) {
             throw new InvalidArgumentException("The video width and height should not be null.");
@@ -80,6 +166,9 @@ public class VideoCreator {
             }
             if(codecID != null && !codecID.equals("")) {
                 builder.setCommand(builder.getCommand() + " -vcodec " + codecID);
+            }
+            if(videoDuration > 0) {
+                builder.setCommand(builder.getCommand() + " -t " + videoDuration);
             }
             if(videoQuality != 0) {
                 builder.setCommand(builder.getCommand() + " -crf " + videoQuality);
