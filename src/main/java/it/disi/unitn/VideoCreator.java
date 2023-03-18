@@ -108,7 +108,7 @@ public class VideoCreator {
                     "qoi", "qtrle", "r10k", "r210", "rawvideo", "roq", "rpza", "rv10", "rv20", "sgi", "smc", "snow",
                     "speedhq", "sunrast", "svq1", "targa", "libtheora", "tiff", "utvideo", "v210", "v308", "v408", "v410",
                     "vbn", "vnull", "libvpx", "libvpx-vp9", "vp9_qsv", "wbmp", "libwebp-anim", "libwebp", "wmv1", "wmv2",
-                    "wrapped_avframe", "xbm", "xface", "xwd", "y41p", "yuv4", "zlib", "zmbv" -> {
+                    "wrapped_avframe", "xbm", "xface", "xwd", "y41p", "yuv4", "zlib", "zmbv", "libx264" -> {
                 return true;
             }
             default -> {
@@ -213,6 +213,10 @@ public class VideoCreator {
             }
             if(codecID != null && !codecID.equals("")) {
                 builder.setCommand(builder.getCommand() + " -vcodec " + codecID);
+                if(codecID.equals("libx264")) {
+                    //libx264 needs even width and height, so we need to add this filter in order to divide them by 2.
+                    builder.setCommand(builder.getCommand() + " -vf \"pad=ceil(iw/2)*2:ceil(ih/2)*2\"");
+                }
             }
             if(videoBitRate != null && !videoBitRate.equals("")) {
                 builder.setCommand(builder.getCommand() + " -b:v " + videoBitRate);
@@ -229,6 +233,7 @@ public class VideoCreator {
             if(videoQuality != 0) {
                 builder.setCommand(builder.getCommand() + " -crf " + videoQuality);
             }
+            builder.setCommand(builder.getCommand() + " -pix_fmt yuv420p");
             builder.setCommand(builder.getCommand() + " " + outputFile);
         }
     }
