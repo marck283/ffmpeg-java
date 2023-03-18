@@ -4,6 +4,9 @@ import it.disi.unitn.exceptions.InvalidArgumentException;
 import it.disi.unitn.exceptions.NotEnoughArgumentsException;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * This class is used to create videos using different options compatible with ffmpeg.
+ */
 public class VideoCreator {
 
     private final FFMpegBuilder builder;
@@ -26,6 +29,13 @@ public class VideoCreator {
 
     private String videoBitRate; //Video track bitrate (in Kbit/s or Mbit/s)
 
+    /**
+     * The constructor of this class.
+     * @param builder The FFMpegBuilder instance that called this constructor
+     * @param outputFile The path to the output file
+     * @param inputImages A list of paths to the input files
+     * @throws NotEnoughArgumentsException if any of the arguments given to this constructor is null
+     */
     public VideoCreator(@NotNull FFMpegBuilder builder, @NotNull String outputFile,
                         @NotNull String @NotNull ... inputImages) throws NotEnoughArgumentsException {
         if(builder == null || inputImages == null || outputFile == null) {
@@ -83,15 +93,22 @@ public class VideoCreator {
     }
 
     /**
-     * This method checks if the given codec ID is supported by ffmpeg.
+     * This method checks if the given encoding codec ID is supported by ffmpeg.
      * @param codecID The given codec ID
      * @return true if the given codec is valid, otherwise false
      */
     private boolean checkCodec(@NotNull String codecID) {
         switch (codecID) {
-            case "a64_multi", "a64_multi5", "Cinepak", "GIF", "Hap", "jpeg2000", "libravle", "libaom-avl", "libsvtavl",
-                    "libjxl", "libkvazaar", "libopenh264", "libtheora", "libvpx", "libwebp", "libx264", "libx264rgb",
-                    "libx265", "libxavs2", "libxvid", "MediaFoundation", "mpeg2", "png", "ProRes", "snow", "vbn", "vc2" -> {
+            case "a64_multi", "a64_multi5", "alias_pix", "amv", "apng", "asv1", "asv2", "libaom-av1", "librav1e",
+                    "libsvtav1", "av1_nvenc", "av1_qsv", "av1_amf", "avrp", "avui", "ayuv", "bitpacked", "bmp", "cfhd",
+                    "cinepak", "cljr", "dnxhd", "dpx", "dvvideo", "exr", "ffv1", "ffvhuff", "fits", "flashsv", "flashsv2",
+                    "flv", "gif", "h261", "h263", "h263p", "h264", "hap", "hdr", "hevc", "huffyuv", "jpeg200", "libopenjpg",
+                    "jpegls", "ljpeg", "magicyuv", "mjpeg", "mpeg1video", "mpeg2video", "mpeg2_qsv", "mpeg4", "msmpeg4v2",
+                    "msmpeg4", "msvideo1", "pam", "pbm", "pcx", "pfm", "pgm", "pgmyuv", "phm", "png", "ppm", "prores",
+                    "qoi", "qtrle", "r10k", "r210", "rawvideo", "roq", "rpza", "rv10", "rv20", "sgi", "smc", "snow",
+                    "speedhq", "sunrast", "svq1", "targa", "libtheora", "tiff", "utvideo", "v210", "v308", "v408", "v410",
+                    "vbn", "vnull", "libvpx", "libvpx-vp9", "vp9_qsv", "wbmp", "libwebp-anim", "libwebp", "wmv1", "wmv2",
+                    "wrapped_avframe", "xbm", "xface", "xwd", "y41p", "yuv4", "zlib", "zmbv" -> {
                 return true;
             }
             default -> {
@@ -164,6 +181,12 @@ public class VideoCreator {
         audioBitRate = val + "k";
     }
 
+    /**
+     * This method sets the output video's bitrate in Kilobits or Megabits.
+     * @param val The bitrate value
+     * @param mode A value between "k" and "m" (short for Kilobit and Megabit respectively)
+     * @throws InvalidArgumentException if the "mode" argument is null or it is not equal to "k" or "m"
+     */
     public void setVideoBitRate(int val, @NotNull String mode) throws InvalidArgumentException {
         if(mode == null || (!mode.equals("k") && !mode.equals("m"))) {
             throw new InvalidArgumentException("The \"mode\" parameter must be specified and it must be either \"k\" or \"m\".");
@@ -186,7 +209,7 @@ public class VideoCreator {
                 builder.setCommand(builder.getCommand() + " -s " + videoSizeID);
             }
             for(String s: inputImages) {
-                builder.setCommand(builder.getCommand() + " - i " + s);
+                builder.setCommand(builder.getCommand() + " -i " + s);
             }
             if(codecID != null && !codecID.equals("")) {
                 builder.setCommand(builder.getCommand() + " -vcodec " + codecID);
