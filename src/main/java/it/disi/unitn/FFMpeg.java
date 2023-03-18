@@ -2,15 +2,12 @@ package it.disi.unitn;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.io.FileNotFoundException;
-import java.util.concurrent.TimeUnit;
-
 /**
  * Convenience class to execute ffmpeg commands.
  */
 public class FFMpeg {
 
-    private FFMpegBuilder ffBuilder;
+    private final FFMpegBuilder ffBuilder;
     private ProcessBuilder builder;
 
     FFMpeg(@NotNull FFMpegBuilder ffBuilder) {
@@ -27,14 +24,11 @@ public class FFMpeg {
         Process p;
         try {
             p = builder.start();
+            //p = Runtime.getRuntime().exec(ffBuilder.getCommand());
 
-            // wait for 500 milliseconds before continuing
-            p.waitFor(500, TimeUnit.MILLISECONDS);
-        } catch(FileNotFoundException ex) {
-            ex.printStackTrace();
-            System.out.println("NOT FOUND");
-            return;
-        } catch (Exception ex) {
+            // wait for the process's termination before continuing
+            p.waitFor();
+        } catch(Exception ex) {
             ex.printStackTrace();
             System.out.println("oops");
             return;

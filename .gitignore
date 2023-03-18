@@ -1,3 +1,5 @@
 secret/
 lib/
 build/libs/
+it/disi/unitn/test
+src/main/resources

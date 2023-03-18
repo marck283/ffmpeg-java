@@ -3,8 +3,8 @@
   <groupId>it.disi.unitn.ffmpeg</groupId>
   <artifactId>ffmpeg-java-id</artifactId>
   <versioning>
-    <latest>1.0.5-beta3</latest>
-    <release>1.0.5-beta3</release>
+    <latest>1.0.5-beta3-windows</latest>
+    <release>1.0.5-beta3-windows</release>
     <versions>
       <version>1.0.0</version>
       <version>1.0.1</version>
@@ -20,7 +20,8 @@
       <version>1.0.5-beta1</version>
       <version>1.0.5-beta2</version>
       <version>1.0.5-beta3</version>
+      <version>1.0.5-beta3-windows</version>
     </versions>
-    <lastUpdated>20230318013840</lastUpdated>
+    <lastUpdated>20230318043535</lastUpdated>
   </versioning>
 </metadata>

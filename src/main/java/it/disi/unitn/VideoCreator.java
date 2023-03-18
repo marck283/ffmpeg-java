@@ -13,7 +13,7 @@ public class VideoCreator {
     private int frameRate = 1, videoDuration; //Frame rate and video duration
 
     private final String outputFile; //Name of output file
-    private String codecID = ""; //Name of codec ID
+    private String codecID = "libx264"; //Name of codec ID
 
     private final String[] inputImages; //Paths to input images
 
@@ -213,8 +213,9 @@ public class VideoCreator {
             }
             if(codecID != null && !codecID.equals("")) {
                 builder.setCommand(builder.getCommand() + " -vcodec " + codecID);
-                if(codecID.equals("libx264")) {
-                    //libx264 needs even width and height, so we need to add this filter in order to divide them by 2.
+                if(codecID.equals("libx264") || codecID.equals("mpeg4")) {
+                    //libx264 (default codec when no value is specified) needs even width and height, so we need to add
+                    //this filter in order to divide them by 2.
                     builder.setCommand(builder.getCommand() + " -vf \"pad=ceil(iw/2)*2:ceil(ih/2)*2\"");
                 }
             }

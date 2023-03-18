@@ -1,10 +1,10 @@
 -classpath 'C:\\Users\\marve\\IdeaProjects\\ffmpeg-java\\build\\classes\\java\\main;C:\\Users\\marve\\IdeaProjects\\ffmpeg-java\\build\\resources\\main;C:\\Users\\marve\\.gradle\\caches\\modules-2\\files-2.1\\org.jetbrains\\annotations\\23.0.0\\8cc20c07506ec18e0834947b84a864bfc094484e\\annotations-23.0.0.jar'
 -d 'C:\\Users\\marve\\IdeaProjects\\ffmpeg-java\\build\\docs\\javadoc'
--doctitle 'ffmpeg-java-id 1.0.5-beta3 API'
+-doctitle 'ffmpeg-java-id 1.0.5-beta3-windows API'
 -html5 
 -notimestamp 
 -quiet 
--windowtitle 'ffmpeg-java-id 1.0.5-beta3 API'
+-windowtitle 'ffmpeg-java-id 1.0.5-beta3-windows API'
 'C:\\Users\\marve\\IdeaProjects\\ffmpeg-java\\src\\main\\java\\it\\disi\\unitn\\exceptions\\InvalidArgumentException.java'
 'C:\\Users\\marve\\IdeaProjects\\ffmpeg-java\\src\\main\\java\\it\\disi\\unitn\\exceptions\\NotEnoughArgumentsException.java'
 'C:\\Users\\marve\\IdeaProjects\\ffmpeg-java\\src\\main\\java\\it\\disi\\unitn\\FFMpeg.java'
