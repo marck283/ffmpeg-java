@@ -212,8 +212,8 @@ public class VideoCreator {
                 builder.setCommand(builder.getCommand() + " -i " + s);
             }
             if(codecID != null && !codecID.equals("")) {
-                builder.setCommand(builder.getCommand() + " -vcodec " + codecID);
-                if(codecID.equals("libx264") || codecID.equals("mpeg4")) {
+                builder.setCommand(builder.getCommand() + " -c:v " + codecID);
+                if(codecID.equals("libx264")) {
                     //libx264 (default codec when no value is specified) needs even width and height, so we need to add
                     //this filter in order to divide them by 2.
                     builder.setCommand(builder.getCommand() + " -vf \"pad=ceil(iw/2)*2:ceil(ih/2)*2\"");
