@@ -3,6 +3,7 @@ package it.disi.unitn;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.InputStream;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Convenience class to execute ffmpeg commands.
@@ -18,16 +19,15 @@ public class FFMpeg {
     /**
      * Executes the given command on the given ProcessBuilder instance.
      */
-    public void executeCMD() {
+    public void executeCMD(long timeout, TimeUnit timeUnit) {
         ProcessBuilder builder = new ProcessBuilder(ffBuilder.getCommand());
         Process p;
         try {
             p = builder.start();
 
             // wait for the process's termination before continuing
-            int exitValue = p.waitFor();
-            if(exitValue != 0) {
-                System.err.println(exitValue);
+            boolean exited = p.waitFor(timeout, timeUnit);
+            if(exited) {
                 InputStream istream = p.getErrorStream();
                 byte[] byteArr = istream.readAllBytes();
                 for(byte b: byteArr) {

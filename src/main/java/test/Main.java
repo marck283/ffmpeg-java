@@ -6,6 +6,8 @@ import it.disi.unitn.VideoCreator;
 import it.disi.unitn.exceptions.InvalidArgumentException;
 import it.disi.unitn.exceptions.NotEnoughArgumentsException;
 
+import java.util.concurrent.TimeUnit;
+
 /**
  * Main sample class
  */
@@ -35,7 +37,7 @@ public class Main {
             creator.createCommand();
 
             FFMpeg creationProcess = builder.build();
-            creationProcess.executeCMD();
+            creationProcess.executeCMD(15L, TimeUnit.SECONDS);
         } catch(NotEnoughArgumentsException | InvalidArgumentException ex) {
             ex.printStackTrace();
         }
