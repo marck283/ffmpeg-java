@@ -27,12 +27,11 @@ public class Main {
             FFMpegBuilder builder = new FFMpegBuilder("\"./lib/ffmpeg-fullbuild/bin/ffmpeg.exe\"");
 
             VideoCreator creator = builder.newVideoCreator("\"./src/main/resources/it/disi/unitn/input/video/input.mp4\"",
-                    "\"./src/main/resources/it/disi/unitn/input/images/InterazioneDatabasePerInfoUtenti.png\"",
-                    "\"./src/main/resources/it/disi/unitn/input/images/Pattern_matching.png\"");
+                    "./src/main/resources/it/disi/unitn/input/images", "%03d.png");
             creator.setVideoSize(800, 600);
             creator.setFrameRate(1);
-            //creator.setCodecID("libx264");
-            //creator.setVideoQuality(18);
+            creator.setCodecID("libx264");
+            creator.setVideoQuality(26);
             creator.createCommand();
 
             FFMpeg creationProcess = builder.build();

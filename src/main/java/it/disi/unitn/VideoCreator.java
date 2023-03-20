@@ -15,7 +15,9 @@ public class VideoCreator {
     private final String outputFile; //Name of output file
     private String codecID = "libx264"; //Name of codec ID
 
-    private final String[] inputImages; //Paths to input images
+    private final String folder; //Folder to search into when executing the command
+
+    private final String pattern; //Pattern of the names of the files to be included in the video
 
     private int videoQuality = 0; //Quality of output video. For "x264", sane values should be between 18 and 28
 
@@ -33,22 +35,18 @@ public class VideoCreator {
      * The constructor of this class.
      * @param builder The FFMpegBuilder instance that called this constructor
      * @param outputFile The path to the output file
-     * @param inputImages A list of paths to the input files
+     * @param inputFolder The path to the folder containing the input files
+     * @param pattern The pattern of the names of the images to include in the video
      * @throws NotEnoughArgumentsException if any of the arguments given to this constructor is null
      */
     public VideoCreator(@NotNull FFMpegBuilder builder, @NotNull String outputFile,
-                        @NotNull String @NotNull ... inputImages) throws NotEnoughArgumentsException {
-        if(builder == null || inputImages == null || outputFile == null) {
+                        @NotNull String inputFolder, @NotNull String pattern) throws NotEnoughArgumentsException {
+        if(builder == null || inputFolder == null || outputFile == null || pattern == null) {
             throw new NotEnoughArgumentsException("The arguments given to the VideoCreator constructor cannot be null.");
         } else {
-            for(String s: inputImages) {
-                if(s == null) {
-                    throw new NotEnoughArgumentsException("The arguments given to the VideoCreator constructor cannot be null.");
-                }
-            }
-
+            folder = inputFolder;
+            this.pattern = pattern;
             this.builder = builder;
-            this.inputImages = inputImages;
             this.outputFile = outputFile;
         }
     }
@@ -208,15 +206,13 @@ public class VideoCreator {
             } else {
                 builder.setCommand(builder.getCommand() + " -s " + videoSizeID);
             }
-            for(String s: inputImages) {
-                builder.setCommand(builder.getCommand() + " -i " + s);
-            }
+            builder.setCommand(builder.getCommand() + " -i " + folder + "/" + pattern);
             if(codecID != null && !codecID.equals("")) {
                 builder.setCommand(builder.getCommand() + " -c:v " + codecID);
                 if(codecID.equals("libx264")) {
                     //libx264 (default codec when no value is specified) needs even width and height, so we need to add
                     //this filter in order to divide them by 2.
-                    builder.setCommand(builder.getCommand() + " -vf \"scale=ceil(.5*iw)*2:ceil(.5*ih)*2\"");
+                    builder.setCommand(builder.getCommand() + " -vf \"pad=ceil(.5*iw)*2:ceil(.5*ih)*2\"");
                 }
             }
             if(videoBitRate != null && !videoBitRate.equals("")) {
