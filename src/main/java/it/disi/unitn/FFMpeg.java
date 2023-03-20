@@ -16,24 +16,53 @@ public class FFMpeg {
         this.ffBuilder = ffBuilder;
     }
 
+    private void printStream(@NotNull Process p) throws Exception {
+        InputStream istream = p.getErrorStream();
+        byte[] byteArr = istream.readAllBytes();
+        for(byte b: byteArr) {
+            System.err.print((char)b);
+        }
+        throw new Exception("An error has occurred.");
+    }
+
     /**
-     * Executes the given command on the given ProcessBuilder instance.
+     * This method accomplishes the same goal as executeCMD(long, TimeUnit), but it does not set a time limit for the
+     * current process to wait for the child process's termination. Use with caution. This method has been kept and should
+     * be used only for those situations where the process terminates in a reasonable time interval or where waiting for
+     * the child process is not a problem.
      */
-    public void executeCMD(long timeout, TimeUnit timeUnit) {
+    public void executeCMD() {
         ProcessBuilder builder = new ProcessBuilder(ffBuilder.getCommand());
         Process p;
         try {
             p = builder.start();
 
             // wait for the process's termination before continuing
+            int exitValue = p.waitFor();
+            if(exitValue != 0) {
+                printStream(p);
+            }
+        } catch(Exception ex) {
+            ex.printStackTrace();
+            System.out.println("oops");
+        }
+    }
+
+    /**
+     * This method executes the given command on the ProcessBuilder instance on which this class has been instantiated.
+     * @param timeout The maximum time interval the calling process will wait for the child process to terminate
+     * @param timeUnit The TimeUnit instance that specifies the time unit associated to the first parameter
+     */
+    public void executeCMD(long timeout, @NotNull TimeUnit timeUnit) {
+        ProcessBuilder builder = new ProcessBuilder(ffBuilder.getCommand());
+        Process p;
+        try {
+            p = builder.start();
+
+            // wait for the process's termination or for the time limit before continuing
             boolean exited = p.waitFor(timeout, timeUnit);
             if(exited) {
-                InputStream istream = p.getErrorStream();
-                byte[] byteArr = istream.readAllBytes();
-                for(byte b: byteArr) {
-                    System.err.print((char)b);
-                }
-                throw new Exception("An error has occurred.");
+                printStream(p);
             }
         } catch(Exception ex) {
             ex.printStackTrace();
