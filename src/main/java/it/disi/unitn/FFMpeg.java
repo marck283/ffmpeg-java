@@ -20,7 +20,6 @@ public class FFMpeg {
      */
     public void executeCMD() {
         ProcessBuilder builder = new ProcessBuilder(ffBuilder.getCommand());
-        //builder.redirectErrorStream(true);
         Process p;
         try {
             p = builder.start();
