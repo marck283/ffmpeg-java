@@ -41,6 +41,8 @@ public class FFMpeg {
             int exitValue = p.waitFor();
             if(exitValue != 0) {
                 printStream(p);
+            } else {
+                System.out.println("Video creation finished.");
             }
         } catch(Exception ex) {
             ex.printStackTrace();
@@ -61,8 +63,10 @@ public class FFMpeg {
 
             // wait for the process's termination or for the time limit before continuing
             boolean exited = p.waitFor(timeout, timeUnit);
-            if(exited) {
+            if(!exited) {
                 printStream(p);
+            } else {
+                System.out.println("Video creation finished.");
             }
         } catch(Exception ex) {
             ex.printStackTrace();

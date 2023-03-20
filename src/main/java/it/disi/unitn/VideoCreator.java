@@ -212,7 +212,7 @@ public class VideoCreator {
                 if(codecID.equals("libx264")) {
                     //libx264 (default codec when no value is specified) needs even width and height, so we need to add
                     //this filter in order to divide them by 2.
-                    builder.setCommand(builder.getCommand() + " -vf \"pad=ceil(.5*iw)*2:ceil(.5*ih)*2\"");
+                    builder.setCommand(builder.getCommand() + " -vf \"scale=ceil(.5*iw)*2:ceil(.5*ih)*2\"");
                 }
             }
             if(videoBitRate != null && !videoBitRate.equals("")) {
