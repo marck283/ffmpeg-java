@@ -61,7 +61,7 @@ public class FFMpeg {
         try {
             p = builder.start();
 
-            // wait for the process's termination or for the time limit before continuing
+            // wait for the process's termination or for the time limit to be reached before continuing
             //No idea why, but this instruction always causes the current thread to wait until the child process identified
             //by "p" has terminated.
             /*boolean exited = p.waitFor(timeout, timeUnit);
