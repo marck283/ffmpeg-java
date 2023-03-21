@@ -112,7 +112,7 @@ public class FFMpegBuilder {
 
     /**
      * Sets the video frame size from the given sizeID.
-     * See here for the recognized size IDs: https://ffmpeg.org/ffmpeg-all.html#Video-size.
+     * See <a href="https://ffmpeg.org/ffmpeg-all.html#Video-size">here</a> for the recognized size IDs.
      * @param sizeID The given size ID
      */
     public void setVideoFrameSize(@NotNull String sizeID) {

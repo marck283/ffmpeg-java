@@ -36,8 +36,10 @@ public class Main {
             creator.setVideoQuality(26);
             creator.createCommand();
 
-            FFMpeg creationProcess = builder.build();
-            creationProcess.executeCMD(15L, TimeUnit.SECONDS);
+            Thread t = new Thread (() -> {
+                FFMpeg creationProcess = builder.build();
+                creationProcess.executeCMD(15L, TimeUnit.SECONDS);
+            });
         } catch(NotEnoughArgumentsException | InvalidArgumentException ex) {
             ex.printStackTrace();
         }
