@@ -1,5 +1,6 @@
 package it.disi.unitn;
 
+import it.disi.unitn.streamhandlers.InputHandler;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.InputStream;
@@ -16,12 +17,11 @@ public class FFMpeg {
         this.ffBuilder = ffBuilder;
     }
 
-    private void printStream(@NotNull Process p) throws Exception {
-        InputStream istream = p.getErrorStream();
+    private void printStream(@NotNull InputStream istream) throws Exception {
         byte[] byteArr = istream.readAllBytes();
-        for(byte b: byteArr) {
+        /*for(byte b: byteArr) {
             System.err.print((char)b);
-        }
+        }*/
         throw new Exception("An error has occurred.");
     }
 
@@ -36,14 +36,21 @@ public class FFMpeg {
         Process p;
         try {
             p = builder.start();
+            InputStream istream = p.getErrorStream();
+
+            /*
+             * FFMpeg hangs when we do not use two separate threads to handle the Error and Output streams.
+             */
+            InputHandler errorHandler = new InputHandler(istream, "Error Stream");
+            errorHandler.start();
+            InputHandler inputHandler = new InputHandler(p.getInputStream(), "Output Stream");
+            inputHandler.start();
 
             //Wait for the process's termination before continuing.
             int exitValue = p.waitFor();
             if(exitValue != 0) {
-                printStream(p);
-            } else {
-                //Why does the Thread instance not print to stdout?
-                System.out.println("Video creation finished.");
+                printStream(istream);
+                p.destroy(); //Kill the process to release resources
             }
         } catch(Exception ex) {
             ex.printStackTrace();
@@ -61,14 +68,21 @@ public class FFMpeg {
         Process p;
         try {
             p = builder.start();
+            InputStream istream = p.getErrorStream();
+
+            /*
+             * FFMpeg hangs when we do not use two separate threads to handle the Error and Output streams.
+             */
+            InputHandler errorHandler = new InputHandler(istream, "Error Stream");
+            errorHandler.start();
+            InputHandler inputHandler = new InputHandler(p.getInputStream(), "Output Stream");
+            inputHandler.start();
 
             //Wait for the process's termination or for the time limit to be reached before continuing.
             boolean exited = p.waitFor(timeout, timeUnit);
             if(!exited) {
-                printStream(p);
-            } else {
-                //Why does the Thread instance not print to stdout?
-                System.out.println("Video creation finished.");
+                printStream(istream);
+                p.destroy(); //Kill the process to release resources
             }
         } catch(Exception ex) {
             ex.printStackTrace();

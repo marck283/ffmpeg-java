@@ -27,7 +27,7 @@ public class TracksMerger {
     }
 
     /**
-     * This method enables the stream-copy option without trailing spaces.
+     * This method enables the stream-copy option.
      * @param val A boolean value used to denote whether the tracks should be stream-copied
      */
     public void streamCopy(boolean val) {
@@ -44,7 +44,7 @@ public class TracksMerger {
         if(streamCopy) {
             builder.setCommand(builder.getCommand() + " -c:v copy");
         }
-        builder.setCommand(builder.getCommand() + " -map 1:a");
+        builder.setCommand(builder.getCommand() + " -c:a copy -map 1:a");
         builder.addOutput(videoOutput);
     }
 }

@@ -2,6 +2,7 @@ package test;
 
 import it.disi.unitn.FFMpeg;
 import it.disi.unitn.FFMpegBuilder;
+import it.disi.unitn.TracksMerger;
 import it.disi.unitn.VideoCreator;
 import it.disi.unitn.exceptions.InvalidArgumentException;
 import it.disi.unitn.exceptions.NotEnoughArgumentsException;
@@ -33,14 +34,27 @@ public class Main {
             creator.setVideoSize(800, 600);
             creator.setFrameRate(1);
             creator.setCodecID("libx264");
-            creator.setVideoQuality(26);
+            creator.setVideoQuality(18);
             creator.createCommand();
 
             Thread t = new Thread (() -> {
                 FFMpeg creationProcess = builder.build();
-                creationProcess.executeCMD(15L, TimeUnit.SECONDS);
+                creationProcess.executeCMD(30L, TimeUnit.SECONDS);
             });
-        } catch(NotEnoughArgumentsException | InvalidArgumentException ex) {
+            t.start();
+            t.join();
+
+            builder.setCommand("\"./lib/ffmpeg-fullbuild/bin/ffmpeg.exe\"");
+
+            TracksMerger unitnMerger = builder.newTracksMerger(
+                    "\"./src/main/resources/it/disi/unitn/output/output.mp4\"",
+                    "\"./src/main/resources/it/disi/unitn/input/audio/input.mp3\"",
+                    "\"./src/main/resources/it/disi/unitn/input/video/input.mp4\"");
+            unitnMerger.streamCopy(true);
+            unitnMerger.merge();
+            FFMpeg creationProcess = builder.build();
+            creationProcess.executeCMD(15L, TimeUnit.SECONDS);
+        } catch(NotEnoughArgumentsException | InvalidArgumentException | InterruptedException ex) {
             ex.printStackTrace();
         }
     }

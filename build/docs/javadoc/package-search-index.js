@@ -1,1 +1,1 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"it.disi.unitn"},{"l":"it.disi.unitn.exceptions"},{"l":"test"}];updateSearchResults();
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"it.disi.unitn"},{"l":"it.disi.unitn.exceptions"},{"l":"it.disi.unitn.streamhandlers"},{"l":"test"}];updateSearchResults();
