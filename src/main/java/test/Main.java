@@ -45,6 +45,8 @@ public class Main {
             creator.setVideoQuality(18);
             creator.createCommand();
 
+            //Programmare cancellazione file immagini dopo la creazione del video intermedio.
+
             FFMpeg creationProcess = builder.build();
             creationProcess.executeCMD(30L, TimeUnit.SECONDS);
 
