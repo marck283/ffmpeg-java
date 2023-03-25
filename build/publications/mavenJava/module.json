@@ -27,11 +27,11 @@
         {
           "name": "ffmpeg-java-id-1.0.6-alpha5.jar",
           "url": "ffmpeg-java-id-1.0.6-alpha5.jar",
-          "size": 1087843,
-          "sha512": "cb995fb2a93b8137f2b5a5037ef0133c638b0e3eda724e12d7b1cd7c02b6b9c724ce8a4f06ed5f3651949d8d81375ad3b55e9110577c1fbde5368468ad403b17",
-          "sha256": "d41b76fe50f8d0d249bef1977a0d2b24c2a974147b078cf32ea82fca41e54807",
-          "sha1": "70f7591ac2f803e3666214cb7ec2348e067675ff",
-          "md5": "882ff03337d6bf6eece26137426ad706"
+          "size": 954759,
+          "sha512": "02912052dec95efe97bb1737ed6c45c7f8359ae0b7a268ccc21d2a18b4db19d89e816ec443d26cb169490628ad80f96519ee2cb8ef95570480b86724ec2eaf40",
+          "sha256": "a4e0cb9334e598340363405a17d730ee5d9fbf4a440c956621414d700d9dfb34",
+          "sha1": "54b14928f10a13b22785ca228fb594aee3dd8c77",
+          "md5": "3bb22ac6201d00c664ef068a44150f14"
         }
       ]
     },
@@ -51,17 +51,42 @@
           "version": {
             "requires": "23.0.0"
           }
+        },
+        {
+          "group": "com.google.cloud",
+          "module": "libraries-bom",
+          "version": {
+            "requires": "26.10.0"
+          },
+          "attributes": {
+            "org.gradle.category": "platform"
+          },
+          "endorseStrictVersions": true
+        },
+        {
+          "group": "com.google.code.gson",
+          "module": "gson",
+          "version": {
+            "requires": "2.10.1"
+          }
+        },
+        {
+          "group": "jakarta.json",
+          "module": "jakarta.json-api",
+          "version": {
+            "requires": "2.1.1"
+          }
         }
       ],
       "files": [
         {
           "name": "ffmpeg-java-id-1.0.6-alpha5.jar",
           "url": "ffmpeg-java-id-1.0.6-alpha5.jar",
-          "size": 1087843,
-          "sha512": "cb995fb2a93b8137f2b5a5037ef0133c638b0e3eda724e12d7b1cd7c02b6b9c724ce8a4f06ed5f3651949d8d81375ad3b55e9110577c1fbde5368468ad403b17",
-          "sha256": "d41b76fe50f8d0d249bef1977a0d2b24c2a974147b078cf32ea82fca41e54807",
-          "sha1": "70f7591ac2f803e3666214cb7ec2348e067675ff",
-          "md5": "882ff03337d6bf6eece26137426ad706"
+          "size": 954759,
+          "sha512": "02912052dec95efe97bb1737ed6c45c7f8359ae0b7a268ccc21d2a18b4db19d89e816ec443d26cb169490628ad80f96519ee2cb8ef95570480b86724ec2eaf40",
+          "sha256": "a4e0cb9334e598340363405a17d730ee5d9fbf4a440c956621414d700d9dfb34",
+          "sha1": "54b14928f10a13b22785ca228fb594aee3dd8c77",
+          "md5": "3bb22ac6201d00c664ef068a44150f14"
         }
       ]
     },
@@ -77,11 +102,11 @@
         {
           "name": "ffmpeg-java-id-1.0.6-alpha5-javadoc.jar",
           "url": "ffmpeg-java-id-1.0.6-alpha5-javadoc.jar",
-          "size": 120923,
-          "sha512": "fa5144d7eab624d3ae180a3d9f0e930cde28e7c54a20b72bd2d42bad62c9511bb4293a0ac0f0edaa63e4099c3f99a8c6f0f24061ce883181fff7c4c3448e1310",
-          "sha256": "0a5e77eb900abe472d0262ba61e6d9fc88b7fb0c99f8256f6af7222554575b3e",
-          "sha1": "a8d52336c29c66513be6c1183704b17976195b16",
-          "md5": "de631c21971d267b831445e8e2c9e61b"
+          "size": 121779,
+          "sha512": "27af2193759e45350c51e764692202c4029530055caf27c328c12f14a79871fc54dec539f4cc8565e466e24ffd89adebecb0fd9486c274f6f5123de16fa638f3",
+          "sha256": "0dd29b2a9502e02ae39b1705763f854f5b066b9086afe452e1568ef5c6c7d9be",
+          "sha1": "850840d92bf2eb6c0c7afd1ba70600afaeb6faa6",
+          "md5": "1bef30785af9ea0db6458b5a96385970"
         }
       ]
     },
@@ -97,11 +122,11 @@
         {
           "name": "ffmpeg-java-id-1.0.6-alpha5-sources.jar",
           "url": "ffmpeg-java-id-1.0.6-alpha5-sources.jar",
-          "size": 1083120,
-          "sha512": "02ca0952c309dfc4cc7add793e85f8d0f5253a52d16646eaf5776e00e604386dd6b49f7fb420242ad853ec72bd7e6c8deff1a20086e35584f4a14ee527f6e256",
-          "sha256": "d1bf9a4f3c40bb1db432d6e415bcaebd06a62413220c4fa91c279505b63925f5",
-          "sha1": "4b060ca47d70042113151e8daaa4f3337091c98c",
-          "md5": "a19d7dc51a4797a789a884ea277384ae"
+          "size": 949866,
+          "sha512": "23d83b23aa944b477248dae92c6409ef7c512d6d3bd3e7f5a4436ce43e834cb1f1073e8bc60db4e0e12a4b681f18a55de9857b1e183c32a7365cad5cbbd4cf93",
+          "sha256": "9921ed58f4801a70e53b45687149cf4ac9017232ee3e04a3c3e751cf26946224",
+          "sha1": "f5ab1486c5d9af17577f38bb33b4cf85a7d3332c",
+          "md5": "3c5ddca389639cf886ac3d3b57f66049"
         }
       ]
     }

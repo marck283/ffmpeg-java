@@ -18,10 +18,6 @@ public class FFMpeg {
     }
 
     private void printStream(@NotNull InputStream istream) throws Exception {
-        byte[] byteArr = istream.readAllBytes();
-        /*for(byte b: byteArr) {
-            System.err.print((char)b);
-        }*/
         throw new Exception("An error has occurred.");
     }
 
@@ -40,6 +36,7 @@ public class FFMpeg {
 
             /*
              * FFMpeg hangs when we do not use two separate threads to handle the Error and Output streams.
+             * See here: https://ffmpeg-user.ffmpeg.narkive.com/3WBzsW4a/ffmpeg-hangs-when-being-executed-from-within-java
              */
             InputHandler errorHandler = new InputHandler(istream, "Error Stream");
             errorHandler.start();
@@ -49,8 +46,8 @@ public class FFMpeg {
             //Wait for the process's termination before continuing.
             int exitValue = p.waitFor();
             if(exitValue != 0) {
-                printStream(istream);
                 p.destroy(); //Kill the process to release resources
+                throw new Exception("An error has occurred.");
             }
         } catch(Exception ex) {
             ex.printStackTrace();
@@ -72,6 +69,7 @@ public class FFMpeg {
 
             /*
              * FFMpeg hangs when we do not use two separate threads to handle the Error and Output streams.
+             * See here: https://ffmpeg-user.ffmpeg.narkive.com/3WBzsW4a/ffmpeg-hangs-when-being-executed-from-within-java
              */
             InputHandler errorHandler = new InputHandler(istream, "Error Stream");
             errorHandler.start();
@@ -81,8 +79,8 @@ public class FFMpeg {
             //Wait for the process's termination or for the time limit to be reached before continuing.
             boolean exited = p.waitFor(timeout, timeUnit);
             if(!exited) {
-                printStream(istream);
                 p.destroy(); //Kill the process to release resources
+                throw new Exception("An error has occurred.");
             }
         } catch(Exception ex) {
             ex.printStackTrace();

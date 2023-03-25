@@ -53,6 +53,11 @@ dependencies {
     implementation 'org.jetbrains:annotations:23.0.0'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+
+    implementation platform('com.google.cloud:libraries-bom:26.10.0')
+    implementation 'com.google.code.gson:gson:2.10.1'
+    implementation 'jakarta.json:jakarta.json-api:2.1.1'
+    implementation 'org.eclipse.parsson:jakarta.json:1.1.1'
 }
 
 test {

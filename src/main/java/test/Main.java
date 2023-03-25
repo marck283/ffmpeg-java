@@ -6,7 +6,10 @@ import it.disi.unitn.TracksMerger;
 import it.disi.unitn.VideoCreator;
 import it.disi.unitn.exceptions.InvalidArgumentException;
 import it.disi.unitn.exceptions.NotEnoughArgumentsException;
+import it.disi.unitn.json.JSONToImage;
 
+import java.awt.*;
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -29,6 +32,11 @@ public class Main {
         try {
             FFMpegBuilder builder = new FFMpegBuilder("\"./lib/ffmpeg-fullbuild/bin/ffmpeg.exe\"");
 
+            JSONToImage json2Image = new JSONToImage("./src/main/resources/it/disi/unitn/input/json/imageArray.json");
+            json2Image.generate("png", "./src/main/resources/it/disi/unitn/input/images");
+            json2Image.addText("./src/main/resources/it/disi/unitn/input/images/000.png", "Hello, world!",
+                    100, 100, 30f, Color.BLACK);
+
             VideoCreator creator = builder.newVideoCreator("\"./src/main/resources/it/disi/unitn/input/video/input.mp4\"",
                     "./src/main/resources/it/disi/unitn/input/images", "%03d.png");
             creator.setVideoSize(800, 600);
@@ -37,12 +45,8 @@ public class Main {
             creator.setVideoQuality(18);
             creator.createCommand();
 
-            Thread t = new Thread (() -> {
-                FFMpeg creationProcess = builder.build();
-                creationProcess.executeCMD(30L, TimeUnit.SECONDS);
-            });
-            t.start();
-            t.join();
+            FFMpeg creationProcess = builder.build();
+            creationProcess.executeCMD(30L, TimeUnit.SECONDS);
 
             builder.setCommand("\"./lib/ffmpeg-fullbuild/bin/ffmpeg.exe\"");
 
@@ -52,9 +56,9 @@ public class Main {
                     "\"./src/main/resources/it/disi/unitn/input/video/input.mp4\"");
             unitnMerger.streamCopy(true);
             unitnMerger.merge();
-            FFMpeg creationProcess = builder.build();
+            creationProcess = builder.build();
             creationProcess.executeCMD(15L, TimeUnit.SECONDS);
-        } catch(NotEnoughArgumentsException | InvalidArgumentException | InterruptedException ex) {
+        } catch(NotEnoughArgumentsException | InvalidArgumentException | IOException ex) {
             ex.printStackTrace();
         }
     }
