@@ -110,7 +110,7 @@ public class JSONToImage {
      * @param color The font's color
      * @throws IOException if an error occurs during writing or when not able to create required ImageOutputStream
      */
-    public void addText(@NotNull String filePath, @NotNull String inputText, int x, int y, float fontDim,
+    public void addText(@NotNull String filePath, @NotNull String formatName, @NotNull String inputText, int x, int y, float fontDim,
                         @NotNull Color color) throws IOException {
         File file = new File(filePath);
         final BufferedImage image = ImageIO.read(file);
@@ -121,6 +121,6 @@ public class JSONToImage {
         g.drawString(inputText, x, y);
         g.dispose();
 
-        ImageIO.write(image, "png", file);
+        ImageIO.write(image, formatName, file);
     }
 }
