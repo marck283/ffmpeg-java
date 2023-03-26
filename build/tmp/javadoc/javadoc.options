@@ -1,10 +1,10 @@
--classpath 'C:\\Users\\marve\\IdeaProjects\\ffmpeg-java\\build\\classes\\java\\main;C:\\Users\\marve\\IdeaProjects\\ffmpeg-java\\build\\resources\\main;C:\\Users\\marve\\.gradle\\caches\\modules-2\\files-2.1\\org.jetbrains\\annotations\\23.0.0\\8cc20c07506ec18e0834947b84a864bfc094484e\\annotations-23.0.0.jar;C:\\Users\\marve\\.gradle\\caches\\modules-2\\files-2.1\\com.google.code.gson\\gson\\2.10.1\\b3add478d4382b78ea20b1671390a858002feb6c\\gson-2.10.1.jar;C:\\Users\\marve\\.gradle\\caches\\modules-2\\files-2.1\\jakarta.json\\jakarta.json-api\\2.1.1\\9fb92ec0ea12d3ef92d5eeca351b946cdb06317e\\jakarta.json-api-2.1.1.jar'
+-classpath 'C:\\Users\\marve\\IdeaProjects\\ffmpeg-java\\build\\classes\\java\\main;C:\\Users\\marve\\IdeaProjects\\ffmpeg-java\\build\\resources\\main;C:\\Users\\marve\\.gradle\\caches\\modules-2\\files-2.1\\org.jetbrains\\annotations\\23.0.0\\8cc20c07506ec18e0834947b84a864bfc094484e\\annotations-23.0.0.jar;C:\\Users\\marve\\.gradle\\caches\\modules-2\\files-2.1\\com.google.code.gson\\gson\\2.10.1\\b3add478d4382b78ea20b1671390a858002feb6c\\gson-2.10.1.jar'
 -d 'C:\\Users\\marve\\IdeaProjects\\ffmpeg-java\\build\\docs\\javadoc'
--doctitle 'ffmpeg-java-id 1.0.6-alpha5 API'
+-doctitle 'ffmpeg-java-id 1.0.6-beta1 API'
 -html5 
 -notimestamp 
 -quiet 
--windowtitle 'ffmpeg-java-id 1.0.6-alpha5 API'
+-windowtitle 'ffmpeg-java-id 1.0.6-beta1 API'
 'C:\\Users\\marve\\IdeaProjects\\ffmpeg-java\\src\\main\\java\\it\\disi\\unitn\\exceptions\\InvalidArgumentException.java'
 'C:\\Users\\marve\\IdeaProjects\\ffmpeg-java\\src\\main\\java\\it\\disi\\unitn\\exceptions\\NotEnoughArgumentsException.java'
 'C:\\Users\\marve\\IdeaProjects\\ffmpeg-java\\src\\main\\java\\it\\disi\\unitn\\FFMpeg.java'
@@ -13,3 +13,4 @@
 'C:\\Users\\marve\\IdeaProjects\\ffmpeg-java\\src\\main\\java\\it\\disi\\unitn\\streamhandlers\\InputHandler.java'
 'C:\\Users\\marve\\IdeaProjects\\ffmpeg-java\\src\\main\\java\\it\\disi\\unitn\\TracksMerger.java'
 'C:\\Users\\marve\\IdeaProjects\\ffmpeg-java\\src\\main\\java\\it\\disi\\unitn\\VideoCreator.java'
+'C:\\Users\\marve\\IdeaProjects\\ffmpeg-java\\src\\main\\java\\test\\Main.java'

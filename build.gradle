@@ -14,7 +14,7 @@ plugins {
 }
 
 group 'it.disi.unitn'
-version '1.0.6-alpha5'
+version '1.0.6-beta1'
 
 java {
     withJavadocJar()
@@ -56,8 +56,6 @@ dependencies {
 
     implementation platform('com.google.cloud:libraries-bom:26.10.0')
     implementation 'com.google.code.gson:gson:2.10.1'
-    implementation 'jakarta.json:jakarta.json-api:2.1.1'
-    implementation 'org.eclipse.parsson:jakarta.json:1.1.1'
 }
 
 test {
