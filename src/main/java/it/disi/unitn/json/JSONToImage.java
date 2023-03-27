@@ -103,6 +103,7 @@ public class JSONToImage {
      * Adds the given text to the image associated to the given file path starting at the point (x, y). This method also
      * allows the user to specify the font's dimension and its color.
      * @param filePath The path of the given image
+     * @param formatName The name of the file's format
      * @param inputText The text to be inserted into the given image
      * @param x The abscissa at which to add the given text
      * @param y The ordinate at which to add the given text

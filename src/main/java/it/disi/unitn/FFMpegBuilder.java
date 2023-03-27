@@ -67,6 +67,17 @@ public class FFMpegBuilder {
     }
 
     /**
+     * This method performs the same action as newTracksMerger(String, String, String), but it should be used only when
+     * creating the final output video.
+     * @param outputFile The path to the output file
+     * @return The newly created TracksMerger instance
+     * @throws NotEnoughArgumentsException when the TracksMerger's constructor throws this exception
+     */
+    public TracksMerger newTracksMerger(@NotNull String outputFile) throws NotEnoughArgumentsException {
+        return new TracksMerger(this, outputFile);
+    }
+
+    /**
      * Returns a new VideoCreator instance given the path to the output file and a non-null list of paths to the input images.
      * @param outputFile The path to the output file
      * @param inputFolder The non-null path to the folder containing the input images

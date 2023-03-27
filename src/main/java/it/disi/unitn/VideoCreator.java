@@ -13,11 +13,13 @@ public class VideoCreator {
     private int frameRate = 1, videoDuration; //Frame rate and video duration
 
     private final String outputFile; //Name of output file
+
     private String codecID = "libx264"; //Name of codec ID
 
     private final String folder; //Folder to search into when executing the command
 
-    private final String pattern; //Pattern of the names of the files to be included in the video
+    //Pattern of the names of the files to be included in the video or name of the file to be included in the video
+    private final String pattern;
 
     private int videoQuality = 0; //Quality of output video. For "x264", sane values should be between 18 and 28
 

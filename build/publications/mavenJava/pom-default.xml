@@ -9,7 +9,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>it.disi.unitn.ffmpeg</groupId>
   <artifactId>ffmpeg-java-id</artifactId>
-  <version>1.0.6-beta1</version>
+  <version>1.0.6-beta4</version>
   <dependencyManagement>
     <dependencies>
       <dependency>
@@ -32,6 +32,18 @@
       <groupId>com.google.code.gson</groupId>
       <artifactId>gson</artifactId>
       <version>2.10.1</version>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.google.cloud</groupId>
+      <artifactId>google-cloud-texttospeech</artifactId>
+      <version>2.13.0</version>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>commons-io</groupId>
+      <artifactId>commons-io</artifactId>
+      <version>2.11.0</version>
       <scope>runtime</scope>
     </dependency>
   </dependencies>
