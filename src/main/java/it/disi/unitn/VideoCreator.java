@@ -39,6 +39,7 @@ public class VideoCreator {
      * @param outputFile The path to the output file
      * @param inputFolder The path to the folder containing the input files
      * @param pattern The pattern of the names of the images to include in the video
+     *                or the name of the file to be included in the video
      * @throws NotEnoughArgumentsException if any of the arguments given to this constructor is null
      */
     public VideoCreator(@NotNull FFMpegBuilder builder, @NotNull String outputFile,

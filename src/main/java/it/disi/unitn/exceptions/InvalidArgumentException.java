@@ -10,7 +10,7 @@ public class InvalidArgumentException extends Exception {
     /**
      * The message that will be printed by this instance of InvalidArgumentException.
      */
-    private String message = "";
+    private final String message;
 
     /**
      * Class constructor.

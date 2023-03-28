@@ -7,8 +7,6 @@ import org.jetbrains.annotations.NotNull;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.List;
 
 /**
@@ -22,8 +20,7 @@ public class TracksMerger {
     private boolean streamCopy;
 
     TracksMerger(@NotNull FFMpegBuilder builder, @NotNull String outputFile, @NotNull String audioInput,
-                        @NotNull String videoInput)
-            throws NotEnoughArgumentsException {
+                        @NotNull String videoInput) throws NotEnoughArgumentsException {
         if(builder == null || audioInput == null || videoInput == null) {
             throw new NotEnoughArgumentsException("The arguments to TracksMerger's constructor cannot be null.");
         }
@@ -77,7 +74,7 @@ public class TracksMerger {
         if(inputFiles == null) {
             throw new IllegalArgumentException("No arguments to this method can be null.");
         }
-        File file = new File("./src/main/resources/it/disi/unitn/input/txt/inputFile.txt");
+        File file = new File("./inputFile.txt");
         if(file.exists()) {
             file.delete();
         }
@@ -87,7 +84,8 @@ public class TracksMerger {
                 file.delete();
                 throw new IllegalArgumentException("No arguments to this method can be null or empty strings.");
             }
-            FileUtils.writeStringToFile(file, "file '" + s.replace('\\', '/') + "'\n", StandardCharsets.UTF_8, true);
+            FileUtils.writeStringToFile(file, "file '" + s.replace('\\', '/') + "'\n",
+                    StandardCharsets.UTF_8, true);
         }
 
         return file;
@@ -105,7 +103,6 @@ public class TracksMerger {
         if(streamCopy) {
             builder.setCommand(builder.getCommand() + " -c copy ");
         }
-        //builder.addOutput(videoOutput);
-        builder.setCommand(builder.getCommand() + "\"" + videoOutput + "\"");
+        builder.addOutput(videoOutput);
     }
 }
