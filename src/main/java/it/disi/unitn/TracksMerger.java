@@ -101,8 +101,8 @@ public class TracksMerger {
         builder.setCommand(builder.getCommand() + " -f concat -safe 0 -i \"" +
                 inputTXTFile.getPath().replace('\\', '/') + "\"");
         if(streamCopy) {
-            builder.setCommand(builder.getCommand() + " -c copy ");
+            builder.setCommand(builder.getCommand() + " -c copy");
         }
-        builder.addOutput(videoOutput);
+        builder.addOutput("\"" + videoOutput + "\"");
     }
 }

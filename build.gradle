@@ -19,6 +19,22 @@ version '1.0.6-beta5'
 java {
     withJavadocJar()
     withSourcesJar()
+
+    sourceCompatibility = JavaVersion.VERSION_18
+    targetCompatibility = JavaVersion.VERSION_18
+}
+
+configurations {
+    java11ApiElements {
+        attributes {
+            attribute TargetJvmVersion.TARGET_JVM_VERSION_ATTRIBUTE, 18
+        }
+    }
+    java11RuntimeElements {
+        attributes {
+            attribute TargetJvmVersion.TARGET_JVM_VERSION_ATTRIBUTE, 18
+        }
+    }
 }
 
 publishing {

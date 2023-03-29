@@ -19,7 +19,7 @@
       "attributes": {
         "org.gradle.category": "library",
         "org.gradle.dependency.bundling": "external",
-        "org.gradle.jvm.version": 19,
+        "org.gradle.jvm.version": 18,
         "org.gradle.libraryelements": "jar",
         "org.gradle.usage": "java-api"
       },
@@ -27,11 +27,11 @@
         {
           "name": "ffmpeg-java-id-1.0.6-beta5.jar",
           "url": "ffmpeg-java-id-1.0.6-beta5.jar",
-          "size": 934353,
-          "sha512": "8e479668068b415863a66ffd44e04a73256cf71adfcb519d2f3eeba8672a1e7480d204986b44e7c186d2d2c9dd3def9626e32f874ce60401b1dc4de7484c09a5",
-          "sha256": "6107fa606c5b1407f2ba39a415137bf2fa92504906e7ab8bba21d7cefe8af450",
-          "sha1": "087f837bac6a678ec220bec914527e61ebe100ab",
-          "md5": "0c224613927e4ad76884f5ede4be528a"
+          "size": 934010,
+          "sha512": "20e99d17f148d934e281362dec2b8b1e946a6d1a8fb00c682485e311b17ff9d807730a9b76da681fc540124c745ce5d9820994832c3522222e5f52e390d3d56b",
+          "sha256": "eb1ebfc2817ce1c41e699b130f4f31e7810abad8781455b4d3eecfc29380fe0e",
+          "sha1": "783bca2d6a468b7a353936d1bdf773734502542c",
+          "md5": "3a00904026328555ba0e3a6e7a3b5a95"
         }
       ]
     },
@@ -40,7 +40,7 @@
       "attributes": {
         "org.gradle.category": "library",
         "org.gradle.dependency.bundling": "external",
-        "org.gradle.jvm.version": 19,
+        "org.gradle.jvm.version": 18,
         "org.gradle.libraryelements": "jar",
         "org.gradle.usage": "java-runtime"
       },
@@ -89,11 +89,11 @@
         {
           "name": "ffmpeg-java-id-1.0.6-beta5.jar",
           "url": "ffmpeg-java-id-1.0.6-beta5.jar",
-          "size": 934353,
-          "sha512": "8e479668068b415863a66ffd44e04a73256cf71adfcb519d2f3eeba8672a1e7480d204986b44e7c186d2d2c9dd3def9626e32f874ce60401b1dc4de7484c09a5",
-          "sha256": "6107fa606c5b1407f2ba39a415137bf2fa92504906e7ab8bba21d7cefe8af450",
-          "sha1": "087f837bac6a678ec220bec914527e61ebe100ab",
-          "md5": "0c224613927e4ad76884f5ede4be528a"
+          "size": 934010,
+          "sha512": "20e99d17f148d934e281362dec2b8b1e946a6d1a8fb00c682485e311b17ff9d807730a9b76da681fc540124c745ce5d9820994832c3522222e5f52e390d3d56b",
+          "sha256": "eb1ebfc2817ce1c41e699b130f4f31e7810abad8781455b4d3eecfc29380fe0e",
+          "sha1": "783bca2d6a468b7a353936d1bdf773734502542c",
+          "md5": "3a00904026328555ba0e3a6e7a3b5a95"
         }
       ]
     },
@@ -129,11 +129,11 @@
         {
           "name": "ffmpeg-java-id-1.0.6-beta5-sources.jar",
           "url": "ffmpeg-java-id-1.0.6-beta5-sources.jar",
-          "size": 928739,
-          "sha512": "512873a8787414f1048c790fbb7bdcfb5a6af3cbce9eb0f705ee5bbc07259d42b4d1523d6fb8c6dae9a1d05c178ccf07273ee1959a88fafb9ed29e73d1ecde26",
-          "sha256": "4758d1745ff63f7d70a36a10bc3c10d2c262d45c47a2257afecb3b1ac7e24f83",
-          "sha1": "c22f1e5d899e49be6f05e321c9ae691f5c333b39",
-          "md5": "263d1ecda6b6d80dae4851677ee1187b"
+          "size": 928395,
+          "sha512": "3e5539c77d8901ce7adc66acae51015b1d5191b3bfbfc41a165b77cbbcd5e7a0b40f92a224a5d894a79de37015c77df23f00c040b48cadc0a2fdd3218aaa7e03",
+          "sha256": "706a004538341aff54b1d157902b1469b5c5e8a608052a5fded837b2b4903ac9",
+          "sha1": "40d6f45d63ee3c45220f7ce860425bfe91f7139e",
+          "md5": "11567adea65921c474efc7efe7bddeb2"
         }
       ]
     }
