@@ -50,7 +50,7 @@ public class FFMpegBuilder {
      * @param inputFile The input file whose path is to be added to the command
      */
     public void addInput(@NotNull String inputFile) {
-        command += " -i " + inputFile;
+        command += " -i \"" + inputFile + "\"";
     }
 
     /**
@@ -99,16 +99,16 @@ public class FFMpegBuilder {
      */
     public void addAllInputs(@NotNull String @NotNull ... inputFiles) throws NotEnoughArgumentsException {
         if(inputFiles == null) {
-            throw new NotEnoughArgumentsException("The argument to this method cannot be null.");
+            throw new NotEnoughArgumentsException("None of the arguments given to this method can be null.");
         }
         for(String s: inputFiles) {
             if(s == null) {
-                throw new NotEnoughArgumentsException("One of the arguments given to this method is null.");
+                throw new NotEnoughArgumentsException("None of the arguments given to this method can be null.");
             }
         }
         StringBuilder newCmd = new StringBuilder(command);
         for(String s: inputFiles) {
-            newCmd.append(" -i ").append(s);
+            newCmd.append(" -i \"").append(s).append("\"");
         }
         command = newCmd.toString();
     }

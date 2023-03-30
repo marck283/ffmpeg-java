@@ -24,8 +24,8 @@ public class FFMpeg {
     /**
      * This method accomplishes the same goal as executeCMD(long, TimeUnit), but it does not set a time limit for the
      * current thread to wait for the child process's termination. Use with caution. This method should be used only for
-     * those situations where the process terminates in a reasonable time interval or where waiting for the child process
-     * is not a problem.
+     * those situations where the developer can be sure that the process will terminate in a reasonable time interval or
+     * where waiting for the child process is not a problem.
      */
     public void executeCMD() {
         ProcessBuilder builder = new ProcessBuilder(ffBuilder.getCommand());
