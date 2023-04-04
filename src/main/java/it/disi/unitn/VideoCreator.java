@@ -209,7 +209,12 @@ public class VideoCreator {
             } else {
                 builder.setCommand(builder.getCommand() + " -s " + videoSizeID);
             }
-            builder.setCommand(builder.getCommand() + " -i " + folder + "/" + pattern);
+
+            //The following line works both on Windows and Linux systems
+            builder.addInput(folder + "/" + pattern);
+
+            //The following line will work only on Windows systems
+            //builder.setCommand(builder.getCommand() + " -i " + folder + "/" + pattern);
             if(codecID != null && !codecID.equals("")) {
                 builder.setCommand(builder.getCommand() + " -c:v " + codecID);
                 if(codecID.equals("libx264")) {
@@ -234,7 +239,7 @@ public class VideoCreator {
                 builder.setCommand(builder.getCommand() + " -crf " + videoQuality);
             }
             builder.setCommand(builder.getCommand() + " -pix_fmt yuv420p");
-            builder.setCommand(builder.getCommand() + " -y " + outputFile);
+            builder.addOutput(outputFile);
         }
     }
 }

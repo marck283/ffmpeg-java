@@ -11,10 +11,16 @@ plugins {
     id 'maven-publish'
     id 'signing'
     id "com.google.cloud.artifactregistry.gradle-plugin" version "2.2.0"
+    /*id 'com.github.johnrengelman.shadow' version '7.1.2'
+    id 'application'*/
 }
 
+/*application {
+    mainClassName = 'it.disi.unitn.lasagna.Main'
+}*/
+
 group 'it.disi.unitn'
-version '1.0.6-beta5'
+version '1.0.6'
 
 java {
     withJavadocJar()
@@ -65,6 +71,24 @@ repositories {
     }
 }
 
+/*jar {
+    manifest {
+        attributes "Main-Class": "it.disi.unitn.lasagna.Main"
+        duplicatesStrategy(DuplicatesStrategy.INCLUDE)
+    }
+
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
+
+// Output to build/libs folder
+shadowJar {
+    archiveBaseName.set('ffmpeg-java-id-shadow')
+    archiveClassifier.set('')
+    archiveVersion.set('1.0')
+}*/
+
 dependencies {
     implementation 'org.jetbrains:annotations:23.0.0'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
@@ -76,6 +100,7 @@ dependencies {
     implementation ('com.google.cloud:google-cloud-texttospeech:2.13.0')
 
     implementation 'commons-io:commons-io:2.11.0'
+    implementation 'org.apache.commons:commons-lang3:3.8.1'
 }
 
 test {

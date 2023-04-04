@@ -1,7 +1,10 @@
 package it.disi.unitn;
 
 import it.disi.unitn.exceptions.NotEnoughArgumentsException;
+import it.disi.unitn.exceptions.UnsupportedOperatingSystemException;
+import org.apache.commons.lang3.SystemUtils;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Builder class for convenience class FFMpeg
@@ -11,14 +14,19 @@ public class FFMpegBuilder {
 
     /**
      * This constructor initializes the class with the path to ffmpeg's command line utility and the command to be executed.
-     * @param ffmpegPath The relative path to ffmpeg's command line utility
+     * @param ffmpegPath The relative path to ffmpeg's command line utility. This parameter must not be null only if
+     *                   the user is operating on a Windows Operating System.
      * @throws NotEnoughArgumentsException when one or both of this constructor's arguments are set to null
      */
-    public FFMpegBuilder(@NotNull String ffmpegPath) throws NotEnoughArgumentsException {
-        if(ffmpegPath == null) {
-            throw new NotEnoughArgumentsException("The arguments to FFMpegBuilder's constructor cannot be null.");
+    public FFMpegBuilder(@Nullable String ffmpegPath) throws NotEnoughArgumentsException {
+        if(SystemUtils.IS_OS_WINDOWS) {
+            if(ffmpegPath == null) {
+                throw new NotEnoughArgumentsException("The arguments to FFMpegBuilder's constructor cannot be null.");
+            }
+            command = ffmpegPath;
+        } else {
+            command = "ffmpeg";
         }
-        this.command = ffmpegPath;
     }
 
     /**
@@ -43,6 +51,41 @@ public class FFMpegBuilder {
      */
     public void setCommand(@NotNull String newCmd) {
         command = newCmd;
+    }
+
+    /**
+     * This method is internally called in order to reset this Builder's command when the user is operating on a Windows
+     * Operating System. It is required that the parameter to this method be not null.
+     * @param pathToFFMpeg The path to the ffmpeg executable
+     */
+    private void resetCommandWindows(@NotNull String pathToFFMpeg) {
+        command = "\"" + pathToFFMpeg + "\"";
+    }
+
+    /**
+     * This method allows the user to reset the command of this Builder.
+     * @param pathToFFMpeg The path to the ffmpeg executable. This parameter must not be null only if the user is operating
+     *                     on a Windows Operating System.
+     * @throws NotEnoughArgumentsException If the user is operating on a Windows Operating System and the parameter of
+     * this method is null.
+     * @throws UnsupportedOperatingSystemException If the user is operating on an operating system that is not supported
+     * by this library (i.e., all operating systems other than Windows and Linux OSs).
+     */
+    public void resetCommand(@Nullable String pathToFFMpeg) throws NotEnoughArgumentsException,
+            UnsupportedOperatingSystemException {
+        if(SystemUtils.IS_OS_WINDOWS) {
+            if(pathToFFMpeg != null) {
+                resetCommandWindows(pathToFFMpeg);
+            } else {
+                throw new NotEnoughArgumentsException("The argument to this method cannot be null.");
+            }
+        } else {
+            if(SystemUtils.IS_OS_LINUX) {
+                command = "ffmpeg";
+            } else {
+                throw new UnsupportedOperatingSystemException();
+            }
+        }
     }
 
     /**
@@ -118,7 +161,7 @@ public class FFMpegBuilder {
      * @param outputFile The path of the output file to be added
      */
     public void addOutput(@NotNull String outputFile) {
-        command += " -y " + outputFile;
+        command += " -y \"" + outputFile + "\"";
     }
 
     /**

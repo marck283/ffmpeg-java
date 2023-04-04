@@ -1,6 +1,7 @@
 package it.disi.unitn;
 
 import it.disi.unitn.streamhandlers.InputHandler;
+import org.apache.commons.lang3.SystemUtils;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.InputStream;
@@ -61,17 +62,22 @@ public class FFMpeg {
      * @param timeUnit The TimeUnit instance that specifies the time unit associated to the first parameter
      */
     public void executeCMD(long timeout, @NotNull TimeUnit timeUnit) {
-        ProcessBuilder builder = new ProcessBuilder(ffBuilder.getCommand());
-        Process p;
+        ProcessBuilder builder;
+        if(SystemUtils.IS_OS_WINDOWS) {
+            builder = new ProcessBuilder(ffBuilder.getCommand());
+        } else {
+            builder = new ProcessBuilder("bash", "-c", ffBuilder.getCommand());
+        }
+
         try {
-            p = builder.start();
-            InputStream istream = p.getErrorStream();
+            Process p = builder.start();
+            builder.inheritIO();
 
             /*
              * FFMpeg hangs when we do not use two separate threads to handle the Error and Output streams.
              * See here: https://ffmpeg-user.ffmpeg.narkive.com/3WBzsW4a/ffmpeg-hangs-when-being-executed-from-within-java
              */
-            InputHandler errorHandler = new InputHandler(istream, "Error Stream");
+            InputHandler errorHandler = new InputHandler(p.getErrorStream(), "Error Stream");
             errorHandler.start();
             InputHandler inputHandler = new InputHandler(p.getInputStream(), "Output Stream");
             inputHandler.start();
@@ -79,6 +85,7 @@ public class FFMpeg {
             //Wait for the process's termination or for the time limit to be reached before continuing.
             boolean exited = p.waitFor(timeout, timeUnit);
             if(!exited) {
+                System.out.println("Exit code: " + p.exitValue());
                 p.destroy(); //Kill the process to release resources
                 throw new Exception("An error has occurred.");
             }

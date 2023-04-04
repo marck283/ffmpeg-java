@@ -103,6 +103,6 @@ public class TracksMerger {
         if(streamCopy) {
             builder.setCommand(builder.getCommand() + " -c copy");
         }
-        builder.addOutput("\"" + videoOutput + "\"");
+        builder.addOutput(videoOutput);
     }
 }
