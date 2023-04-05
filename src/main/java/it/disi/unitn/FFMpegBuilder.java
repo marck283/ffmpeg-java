@@ -13,10 +13,10 @@ public class FFMpegBuilder {
     private String command;
 
     /**
-     * This constructor initializes the class with the path to ffmpeg's command line utility and the command to be executed.
+     * This constructor initializes the class with the path to ffmpeg's command line utility.
      * @param ffmpegPath The relative path to ffmpeg's command line utility. This parameter must not be null only if
      *                   the user is operating on a Windows Operating System.
-     * @throws NotEnoughArgumentsException when one or both of this constructor's arguments are set to null
+     * @throws NotEnoughArgumentsException when this constructor's argument is set to null
      */
     public FFMpegBuilder(@Nullable String ffmpegPath) throws NotEnoughArgumentsException {
         if(SystemUtils.IS_OS_WINDOWS) {
