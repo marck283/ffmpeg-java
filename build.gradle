@@ -11,16 +11,10 @@ plugins {
     id 'maven-publish'
     id 'signing'
     id "com.google.cloud.artifactregistry.gradle-plugin" version "2.2.0"
-    /*id 'com.github.johnrengelman.shadow' version '7.1.2'
-    id 'application'*/
 }
 
-/*application {
-    mainClassName = 'it.disi.unitn.lasagna.Main'
-}*/
-
 group 'it.disi.unitn'
-version '1.0.6'
+version '1.0.7-beta1'
 
 java {
     withJavadocJar()
@@ -70,24 +64,6 @@ repositories {
         url "artifactregistry://europe-west8-maven.pkg.dev/tirocinio-380209/ffmpeg-java"
     }
 }
-
-/*jar {
-    manifest {
-        attributes "Main-Class": "it.disi.unitn.lasagna.Main"
-        duplicatesStrategy(DuplicatesStrategy.INCLUDE)
-    }
-
-    from {
-        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
-    }
-}
-
-// Output to build/libs folder
-shadowJar {
-    archiveBaseName.set('ffmpeg-java-id-shadow')
-    archiveClassifier.set('')
-    archiveVersion.set('1.0')
-}*/
 
 dependencies {
     implementation 'org.jetbrains:annotations:23.0.0'

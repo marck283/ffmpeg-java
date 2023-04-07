@@ -34,7 +34,7 @@ public class JSONToImage {
      * @param pathToJsonFile The path to the JSON file on which to initialize an object of this class
      */
     public JSONToImage(@NotNull String pathToJsonFile) {
-        jsonFile = new File(pathToJsonFile.replace("\\", "/"));
+        jsonFile = new File(pathToJsonFile/*.replace("\\", "/")*/);
         byteArrList = new ArrayList<>();
     }
 

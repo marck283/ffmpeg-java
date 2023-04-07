@@ -4,6 +4,8 @@ import it.disi.unitn.exceptions.InvalidArgumentException;
 import it.disi.unitn.exceptions.NotEnoughArgumentsException;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.concurrent.TimeUnit;
+
 /**
  * This class is used to create videos using different options compatible with ffmpeg.
  */
@@ -196,11 +198,13 @@ public class VideoCreator {
     }
 
     /**
-     * This method creates the command than, when run, will create the output video.
+     * This method creates the command that, when run, will create the output video.
+     * @param time The maximum amount of time to wait for the video's creation
+     * @param timeUnit The TimeUnit instance to be used
      * @throws InvalidArgumentException if the video width or height or the video size ID field is null
      */
-    public void createCommand() throws InvalidArgumentException {
-        if(videoWidth == 0 || videoHeight == 0 || videoSizeID == null) {
+    public void createCommand(long time, @NotNull TimeUnit timeUnit) throws InvalidArgumentException {
+        if(videoWidth == 0 || videoHeight == 0 || videoSizeID == null || timeUnit == null || time <= 0) {
             throw new InvalidArgumentException("The video width and height should not be null.");
         } else {
             builder.setCommand(builder.getCommand() + " -r " + frameRate);
@@ -240,6 +244,10 @@ public class VideoCreator {
             }
             builder.setCommand(builder.getCommand() + " -pix_fmt yuv420p");
             builder.addOutput(outputFile);
+
+            //Now we will execute the given command
+            FFMpeg ffmpeg = builder.build();
+            ffmpeg.executeCMD(time, timeUnit);
         }
     }
 }

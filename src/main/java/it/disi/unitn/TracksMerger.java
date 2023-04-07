@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * A class that helps merge audio and video tracks.
@@ -52,9 +53,11 @@ public class TracksMerger {
 
     /**
      * This method sets the correct command to merge the audio and video tracks.
+     * @param time The maximum amount of time to wait for the video's creation
+     * @param timeUnit The TimeUnit instance to be used
      * @throws NotEnoughArgumentsException when the video input path or audio input path is null
      */
-    public void mergeAudioWithVideo() throws NotEnoughArgumentsException {
+    public void mergeAudioWithVideo(long time, @NotNull TimeUnit timeUnit) throws NotEnoughArgumentsException {
         builder.addAllInputs(videoInput, audioInput);
         builder.setCommand(builder.getCommand() + " -map 0:v");
         if(streamCopy) {
@@ -62,6 +65,9 @@ public class TracksMerger {
         }
         builder.setCommand(builder.getCommand() + " -c:a copy -map 1:a");
         builder.addOutput(videoOutput);
+
+        FFMpeg ffmpeg = builder.build();
+        ffmpeg.executeCMD(time, timeUnit);
     }
 
     /**
@@ -94,9 +100,11 @@ public class TracksMerger {
     /**
      * This method allows any object of this class to concatenate two or more videos whose path is given as input.
      * @param inputFiles The paths to the input files
+     * @param time The maximum amount of time to wait for the video's creation
+     * @param timeUnit The TimeUnit instance to be used
      * @throws IOException if an I/O error occurs
      */
-    public void mergeVideos(@NotNull List<String> inputFiles) throws IOException {
+    public void mergeVideos(long time, @NotNull TimeUnit timeUnit, @NotNull List<String> inputFiles) throws IOException {
         File inputTXTFile = writeTXTFile(inputFiles);
         builder.setCommand(builder.getCommand() + " -f concat -safe 0 -i \"" +
                 inputTXTFile.getPath().replace('\\', '/') + "\"");
@@ -104,5 +112,8 @@ public class TracksMerger {
             builder.setCommand(builder.getCommand() + " -c copy");
         }
         builder.addOutput(videoOutput);
+
+        FFMpeg ffmpeg = builder.build();
+        ffmpeg.executeCMD(time, timeUnit);
     }
 }
