@@ -19,43 +19,44 @@ import java.util.List;
  * This class translates a given JSON file into a list of Image objects.
  */
 public class JSONToImage {
-    /**
-     * The JSON file
-     */
-    private final File jsonFile;
 
     /**
      * The list of arrays of bytes representing the images
      */
     private final List<byte[]> byteArrList;
 
+    private final JsonArray array;
+
     /**
-     * The class's constructor
+     * The class's constructor. At the time of writing, this constructor only supports "image/jpeg" and "image/png" types.
+     * Any other type will make this constructor throw an IllegalArgumentException.
      * @param pathToJsonFile The path to the JSON file on which to initialize an object of this class
+     * @throws IllegalArgumentException When the specified format name is not supported
      */
-    public JSONToImage(@NotNull String pathToJsonFile) {
-        jsonFile = new File(pathToJsonFile/*.replace("\\", "/")*/);
+    public JSONToImage(@NotNull String pathToJsonFile) throws IllegalArgumentException, IOException {
+        /**
+         * The JSON file
+         */
+        File jsonFile = new File(pathToJsonFile);
+
         byteArrList = new ArrayList<>();
+        Gson gson = new GsonBuilder().create();
+        Reader r = Files.newBufferedReader(jsonFile.toPath().toAbsolutePath());
+        JsonObject object = gson.fromJson(r, JsonObject.class);
+        array = object.getAsJsonArray("array");
     }
 
     /**
      * This method transforms each of the elements of the array of JSON objects in the previously given file into an
      * array of bytes.
-     * @throws IOException if an I/O error occurs when opening the file
      */
-    private void toByteArray() throws IOException {
-        try (Reader r = Files.newBufferedReader(jsonFile.toPath().toAbsolutePath())) {
-            Gson gson = new GsonBuilder().create();
-            JsonObject object = gson.fromJson(r, JsonObject.class);
-            JsonArray jsonArray1 = object.getAsJsonArray("array");
-
-            for(JsonElement e: jsonArray1) {
-                JsonObject el = e.getAsJsonObject();
-                String data = el.get("data").getAsString();
-                data = data.replace("data:image/jpeg;base64", "")
-                        .replace("data:image/png;base64", "");
-                byteArrList.add(Base64.getDecoder().decode(data.getBytes(StandardCharsets.UTF_8)));
-            }
+    private void toByteArray() {
+        for(JsonElement e: array) {
+            JsonObject el = e.getAsJsonObject();
+            String data = el.get("data").getAsString();
+            data = data.replace("data:image/jpeg;base64", "")
+                    .replace("data:image/png;base64", "");
+            byteArrList.add(Base64.getDecoder().decode(data.getBytes(StandardCharsets.UTF_8)));
         }
     }
 
@@ -78,14 +79,11 @@ public class JSONToImage {
 
     /**
      * This method generates images from the previously obtained list of arrays of bytes.
-     * @param formatName The images' format names. ATTENTION: this parameter must be either "jpg" or "png".
-     *                   Other format names are not currently accepted and will make this method throw IllegalArgumentException.
      * @param pathToImagesFolder The (either absolute or relative) path to the folder that will contain the generated images.
-     * @throws IOException if an error occurs during reading or when not able to create required ImageInputStream
+     * @throws IOException If an error occurs when writing to or creating the file
      */
-    public void generate(@NotNull String formatName, @NotNull String pathToImagesFolder) throws IOException {
-        if(pathToImagesFolder == null || pathToImagesFolder.equals("") || formatName == null || formatName.equals("") ||
-                (formatName != null && !formatName.equals("") && !formatName.equals("jpg") && !formatName.equals("png"))) {
+    public void generate(@NotNull String pathToImagesFolder) throws IOException {
+        if(pathToImagesFolder == null || pathToImagesFolder.equals("")) {
             throw new IllegalArgumentException("A null or illegal value was passed as argument to this method.");
         }
 
@@ -93,7 +91,19 @@ public class JSONToImage {
 
         int i = 0;
         for(byte[] arr: byteArrList) {
-            Path path = Paths.get(pathToImagesFolder, padStart(String.valueOf(i)) + "." + formatName);
+            Path path;
+
+            JsonObject obj = array.get(i).getAsJsonObject();
+            String mime = obj.get("mime").getAsString();
+            if(mime.equals("image/jpeg")) {
+                path = Paths.get(pathToImagesFolder, padStart(String.valueOf(i)) + ".jpg");
+            } else {
+                if(mime.equals("image/png")) {
+                    path = Paths.get(pathToImagesFolder, padStart(String.valueOf(i)) + ".png");
+                } else {
+                    throw new UnsupportedEncodingException("An unsupported file extension was used.");
+                }
+            }
             Files.write(path, arr);
             i++;
         }
