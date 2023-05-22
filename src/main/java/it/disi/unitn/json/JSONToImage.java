@@ -123,7 +123,14 @@ public class JSONToImage {
      */
     public void addText(@NotNull String filePath, @NotNull String formatName, @NotNull String inputText, int x, int y, float fontDim,
                         @NotNull Color color) throws IOException {
-        File file = new File(filePath);
+        if(formatName.equals("image/jpeg")) {
+            formatName = "jpg";
+        } else {
+            if(formatName.equals("image/png")) {
+                formatName = "png";
+            }
+        }
+        File file = new File(filePath + "." + formatName);
         final BufferedImage image = ImageIO.read(file);
 
         Graphics g = image.getGraphics();
