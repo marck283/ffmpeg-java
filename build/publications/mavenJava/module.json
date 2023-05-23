@@ -3,7 +3,7 @@
   "component": {
     "group": "it.disi.unitn.ffmpeg",
     "module": "ffmpeg-java-id",
-    "version": "1.0.7-beta2",
+    "version": "1.0.7",
     "attributes": {
       "org.gradle.status": "release"
     }
@@ -25,13 +25,13 @@
       },
       "files": [
         {
-          "name": "ffmpeg-java-id-1.0.7-beta2.jar",
-          "url": "ffmpeg-java-id-1.0.7-beta2.jar",
-          "size": 1137867,
-          "sha512": "36d7aaa9e2ff37e6db2a36322513aba61490e9dea56a9d06dd0c8550cce029fb3c57c2b6d0e9b397780706f6d5ceb1c33e824fd0818cd21013b9f17674efcb1c",
-          "sha256": "9aacc50323455494c01c58af26e70304a7bf46b10da0a3e0f4d739f711afd13f",
-          "sha1": "fac05cd94f0fe081cd7603f67deb5d1452883add",
-          "md5": "2d1c6ee7a99264ad8d391b6cbabf54ed"
+          "name": "ffmpeg-java-id-1.0.7.jar",
+          "url": "ffmpeg-java-id-1.0.7.jar",
+          "size": 1139131,
+          "sha512": "c96b6f8776195ad22174ca02393f3619bca44d9a4948b11694de0ea7547ec222708c8dc73bc2598b65af4c13cdf4dcb5ae8695c46d1054d0b536a6c3c53ff06e",
+          "sha256": "eca307ebd97d5e19a911c36b59b3887a31e874d24222df22361a4ea8f956599f",
+          "sha1": "25e9bf798c69b6de20504557775bcb4730b9365d",
+          "md5": "514af69030db41311945a3f6dcfb8fb2"
         }
       ]
     },
@@ -94,13 +94,13 @@
       ],
       "files": [
         {
-          "name": "ffmpeg-java-id-1.0.7-beta2.jar",
-          "url": "ffmpeg-java-id-1.0.7-beta2.jar",
-          "size": 1137867,
-          "sha512": "36d7aaa9e2ff37e6db2a36322513aba61490e9dea56a9d06dd0c8550cce029fb3c57c2b6d0e9b397780706f6d5ceb1c33e824fd0818cd21013b9f17674efcb1c",
-          "sha256": "9aacc50323455494c01c58af26e70304a7bf46b10da0a3e0f4d739f711afd13f",
-          "sha1": "fac05cd94f0fe081cd7603f67deb5d1452883add",
-          "md5": "2d1c6ee7a99264ad8d391b6cbabf54ed"
+          "name": "ffmpeg-java-id-1.0.7.jar",
+          "url": "ffmpeg-java-id-1.0.7.jar",
+          "size": 1139131,
+          "sha512": "c96b6f8776195ad22174ca02393f3619bca44d9a4948b11694de0ea7547ec222708c8dc73bc2598b65af4c13cdf4dcb5ae8695c46d1054d0b536a6c3c53ff06e",
+          "sha256": "eca307ebd97d5e19a911c36b59b3887a31e874d24222df22361a4ea8f956599f",
+          "sha1": "25e9bf798c69b6de20504557775bcb4730b9365d",
+          "md5": "514af69030db41311945a3f6dcfb8fb2"
         }
       ]
     },
@@ -114,13 +114,13 @@
       },
       "files": [
         {
-          "name": "ffmpeg-java-id-1.0.7-beta2-javadoc.jar",
-          "url": "ffmpeg-java-id-1.0.7-beta2-javadoc.jar",
-          "size": 127018,
-          "sha512": "7abafbb6e4fd64093d4451a4478a6ad6ccedbee47d83f6c0711189f9ba53575b7c21eedf7ac20bbc81921a4e3a6eb8f6262300d03cfe02ebe70ed7115a94cd75",
-          "sha256": "7c0c5c00fa133bf9cd7b5eebb53d1a4d61dadcdd629df75623a0616531c683d7",
-          "sha1": "8d488f47f3b7ba7e61c323799a840520de1c2fe2",
-          "md5": "45b7c957a008859a4e15735e3a37d5cd"
+          "name": "ffmpeg-java-id-1.0.7-javadoc.jar",
+          "url": "ffmpeg-java-id-1.0.7-javadoc.jar",
+          "size": 130243,
+          "sha512": "6bc4bac7d7bf9328933b19636db969173c9c9f2c565b757cf1ad23cd79fdab278e17cc2e8ace7b69b29d70acc4eda89060dbe511b270fb6daebf173fe389831a",
+          "sha256": "f83904b6232caebe71b886614775f49f229c4ed3b55543129f0e4b3646a6559a",
+          "sha1": "ca9d75e53145215bc5937cfc46328df17e72ddd9",
+          "md5": "e9622417acc253e9c7d4dc63dc2fba95"
         }
       ]
     },
@@ -134,13 +134,13 @@
       },
       "files": [
         {
-          "name": "ffmpeg-java-id-1.0.7-beta2-sources.jar",
-          "url": "ffmpeg-java-id-1.0.7-beta2-sources.jar",
-          "size": 1132092,
-          "sha512": "2a76af41e08b95663f3dff348048bbc8de646a964a20efc675817eda09adf0463227421b6c382455f3347d732fdd9dece98d206d94dbe8fb84a60e9325ec0deb",
-          "sha256": "ae19a1992ed55eea7989607636ca2a603781c6dd77c4b418ec217743ee10f735",
-          "sha1": "ad533bcb5082927c7b90ace58f7ddbd4bde791ca",
-          "md5": "63b117b3c1092c6503747eb697f5ca09"
+          "name": "ffmpeg-java-id-1.0.7-sources.jar",
+          "url": "ffmpeg-java-id-1.0.7-sources.jar",
+          "size": 1133058,
+          "sha512": "62d17f03a6810febf9101d45e00755fe6fc3ac86fcce0c04480eae62856e191969699f53df61b2de68fd67dfdb289b49f82119821ab70298b0dd5d43f1aadd4d",
+          "sha256": "4824b2763ca664c58020f6da179e6946fe302355d3062c438bdfb13f545029ed",
+          "sha1": "1e0e34f6defd6c1ce76cf4a6b2124b6209ee9bd1",
+          "md5": "48aaf421d2f347ed23af788c41cec2b3"
         }
       ]
     }

@@ -1,6 +1,8 @@
 package it.disi.unitn.json;
 
 import com.google.gson.*;
+import it.disi.unitn.StringExt;
+import it.disi.unitn.exceptions.InvalidArgumentException;
 import org.jetbrains.annotations.NotNull;
 
 import javax.imageio.ImageIO;
@@ -32,6 +34,7 @@ public class JSONToImage {
      * Any other type will make this constructor throw an IllegalArgumentException.
      * @param pathToJsonFile The path to the JSON file on which to initialize an object of this class
      * @throws IllegalArgumentException When the specified format name is not supported
+     * @throws IOException If an I/O error occurs opening the file
      */
     public JSONToImage(@NotNull String pathToJsonFile) throws IllegalArgumentException, IOException {
         /**
@@ -60,29 +63,14 @@ public class JSONToImage {
         }
     }
 
-    private String padStart(@NotNull String fileName) {
-        if(fileName == null || fileName.equals("")) {
-            throw new IllegalArgumentException("An illegal value was passed as argument to this method.");
-        }
-
-        int missing = 3 - fileName.length();
-        if(missing > 0) {
-            StringBuilder fileNameBuilder = new StringBuilder(fileName);
-            for(int i = 0; i < missing; i++) {
-                fileNameBuilder.insert(0, "0");
-            }
-            fileName = fileNameBuilder.toString();
-        }
-
-        return fileName;
-    }
-
     /**
      * This method generates images from the previously obtained list of arrays of bytes.
      * @param pathToImagesFolder The (either absolute or relative) path to the folder that will contain the generated images.
      * @throws IOException If an error occurs when writing to or creating the file
+     * @throws InvalidArgumentException If a null or illegal value (e.e, the empty string) is passed as argument to this
+     * method
      */
-    public void generate(@NotNull String pathToImagesFolder) throws IOException {
+    public void generate(@NotNull String pathToImagesFolder) throws IOException, InvalidArgumentException {
         if(pathToImagesFolder == null || pathToImagesFolder.equals("")) {
             throw new IllegalArgumentException("A null or illegal value was passed as argument to this method.");
         }
@@ -95,16 +83,31 @@ public class JSONToImage {
 
             JsonObject obj = array.get(i).getAsJsonObject();
             String mime = obj.get("mime").getAsString();
+            StringExt fileName = new StringExt(String.valueOf(i));
+            fileName.padStart();
             if(mime.equals("image/jpeg")) {
-                path = Paths.get(pathToImagesFolder, padStart(String.valueOf(i)) + ".jpg");
+                path = Paths.get(pathToImagesFolder, fileName.getVal() + ".jpg");
             } else {
                 if(mime.equals("image/png")) {
-                    path = Paths.get(pathToImagesFolder, padStart(String.valueOf(i)) + ".png");
+                    path = Paths.get(pathToImagesFolder, fileName.getVal() + ".png");
                 } else {
                     throw new UnsupportedEncodingException("An unsupported file extension was used.");
                 }
             }
             Files.write(path, arr);
+
+            JsonArray imageText = obj.getAsJsonArray("inputText");
+
+            StringExt i1ext = new StringExt(String.valueOf(i));
+            i1ext.padStart();
+            for (JsonElement e1 : imageText) {
+                JsonObject textInfo = e1.getAsJsonObject();
+                String text = textInfo.get("text").getAsString();
+
+                JsonObject position = textInfo.getAsJsonObject("position");
+                addText(pathToImagesFolder + "/" + i1ext.getVal(), mime, text,
+                        position.get("x").getAsInt(), position.get("y").getAsInt(), 30f, Color.BLACK);
+            }
             i++;
         }
     }
