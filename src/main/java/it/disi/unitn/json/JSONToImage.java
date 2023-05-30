@@ -96,15 +96,28 @@ public class JSONToImage {
             }
             Files.write(path, arr);
 
-            JsonArray imageText = obj.getAsJsonArray("inputText");
-
+            JsonArray imageText = obj.getAsJsonArray("stats");
             StringExt i1ext = new StringExt(String.valueOf(i));
             i1ext.padStart();
+
+            for(JsonElement e1: imageText) {
+                JsonObject textInfo = e1.getAsJsonObject();
+                String text = textInfo.get("name").getAsString(), text1 = textInfo.get("value").getAsString();
+
+                JsonObject position = textInfo.getAsJsonObject("print");
+                addText(pathToImagesFolder + "/" + i1ext.getVal(), mime, text,
+                        position.get("x").getAsInt(), position.get("y").getAsInt(), 30f, Color.BLACK);
+                addText(pathToImagesFolder + "/" + i1ext.getVal(), mime, text1,
+                        position.get("x").getAsInt(), position.get("y").getAsInt(), 30f, Color.BLACK);
+            }
+
+            imageText = obj.getAsJsonArray("entities");
+
             for (JsonElement e1 : imageText) {
                 JsonObject textInfo = e1.getAsJsonObject();
                 String text = textInfo.get("text").getAsString();
 
-                JsonObject position = textInfo.getAsJsonObject("position");
+                JsonObject position = textInfo.getAsJsonObject("print");
                 addText(pathToImagesFolder + "/" + i1ext.getVal(), mime, text,
                         position.get("x").getAsInt(), position.get("y").getAsInt(), 30f, Color.BLACK);
             }
