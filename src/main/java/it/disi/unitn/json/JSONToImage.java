@@ -56,9 +56,9 @@ public class JSONToImage {
     private void toByteArray() {
         for(JsonElement e: array) {
             JsonObject el = e.getAsJsonObject();
-            String data = el.get("data").getAsString();
-            data = data.replace("data:image/jpeg;base64", "")
-                    .replace("data:image/png;base64", "");
+            String data = el.get("image-background").getAsString();
+            data = data.replace("data:image/jpeg;base64,", "")
+                    .replace("data:image/png;base64,", "");
             byteArrList.add(Base64.getDecoder().decode(data.getBytes(StandardCharsets.UTF_8)));
         }
     }
@@ -69,8 +69,9 @@ public class JSONToImage {
      * @throws IOException If an error occurs when writing to or creating the file
      * @throws InvalidArgumentException If a null or illegal value (e.e, the empty string) is passed as argument to this
      * method
+     * @return String The type of the generated images.
      */
-    public void generate(@NotNull String pathToImagesFolder) throws IOException, InvalidArgumentException {
+    public String generate(@NotNull String pathToImagesFolder) throws IOException, InvalidArgumentException {
         if(pathToImagesFolder == null || pathToImagesFolder.equals("")) {
             throw new IllegalArgumentException("A null or illegal value was passed as argument to this method.");
         }
@@ -78,6 +79,7 @@ public class JSONToImage {
         toByteArray();
 
         int i = 0;
+        String imageExt = "";
         for(byte[] arr: byteArrList) {
             Path path;
 
@@ -87,9 +89,11 @@ public class JSONToImage {
             fileName.padStart();
             if(mime.equals("image/jpeg")) {
                 path = Paths.get(pathToImagesFolder, fileName.getVal() + ".jpg");
+                imageExt = "jpg";
             } else {
                 if(mime.equals("image/png")) {
                     path = Paths.get(pathToImagesFolder, fileName.getVal() + ".png");
+                    imageExt = "png";
                 } else {
                     throw new UnsupportedEncodingException("An unsupported file extension was used.");
                 }
@@ -123,6 +127,8 @@ public class JSONToImage {
             }
             i++;
         }
+
+        return imageExt;
     }
 
     /**

@@ -64,7 +64,7 @@ public class FFMpeg {
     public void executeCMD(long timeout, @NotNull TimeUnit timeUnit) {
         ProcessBuilder builder;
         if(SystemUtils.IS_OS_WINDOWS) {
-            builder = new ProcessBuilder("?" + ffBuilder.getCommand());
+            builder = new ProcessBuilder("?", ffBuilder.getCommand());
         } else {
             builder = new ProcessBuilder("bash", "-c", ffBuilder.getCommand());
         }
