@@ -65,7 +65,7 @@ public class JSONToImage {
 
     /**
      * This method generates images from the previously obtained list of arrays of bytes.
-     * @Warning This method will fail to return the correct file type if the JSON array that is used in this class
+     * WARNING: This method will fail to return the correct file type if the JSON array that is used in this class
      * contains images of different MIME types. Please insert only images of the same MIME type.
      * @param pathToImagesFolder The (either absolute or relative) path to the folder that will contain the generated images.
      * @throws IOException If an error occurs when writing to or creating the file
@@ -106,26 +106,29 @@ public class JSONToImage {
             StringExt i1ext = new StringExt(String.valueOf(i));
             i1ext.padStart();
 
+            int positionx, positiony;
+            float fontDim;
             for(JsonElement e1: imageText) {
                 JsonObject textInfo = e1.getAsJsonObject();
                 String text = textInfo.get("name").getAsString(), text1 = textInfo.get("value").getAsString();
 
-                JsonObject position = textInfo.getAsJsonObject("print");
-                addText(pathToImagesFolder + "/" + i1ext.getVal(), mime, text,
-                        position.get("x").getAsInt(), position.get("y").getAsInt(), 30f, Color.BLACK);
-                addText(pathToImagesFolder + "/" + i1ext.getVal(), mime, text1,
-                        position.get("x").getAsInt(), position.get("y").getAsInt(), 30f, Color.BLACK);
+                fontDim = textInfo.get("font").getAsFloat();
+                positionx = textInfo.get("print-x").getAsInt();
+                positiony = textInfo.get("print-y").getAsInt();
+                addText(pathToImagesFolder + "/" + i1ext.getVal(), mime, text + ": " + text1,
+                        positionx, positiony, fontDim, Color.BLACK);
             }
 
             imageText = obj.getAsJsonArray("entities");
-
             for (JsonElement e1 : imageText) {
                 JsonObject textInfo = e1.getAsJsonObject();
                 String text = textInfo.get("text").getAsString();
 
-                JsonObject position = textInfo.getAsJsonObject("print");
+                fontDim = textInfo.get("font").getAsFloat();
+                positionx = textInfo.get("print-x").getAsInt();
+                positiony = textInfo.get("print-y").getAsInt();
                 addText(pathToImagesFolder + "/" + i1ext.getVal(), mime, text,
-                        position.get("x").getAsInt(), position.get("y").getAsInt(), 30f, Color.BLACK);
+                        positionx, positiony, fontDim, Color.BLACK);
             }
             i++;
         }
