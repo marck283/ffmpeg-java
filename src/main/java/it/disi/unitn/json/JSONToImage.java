@@ -65,6 +65,8 @@ public class JSONToImage {
 
     /**
      * This method generates images from the previously obtained list of arrays of bytes.
+     * @Warning This method will fail to return the correct file type if the JSON array that is used in this class
+     * contains images of different MIME types. Please insert only images of the same MIME type.
      * @param pathToImagesFolder The (either absolute or relative) path to the folder that will contain the generated images.
      * @throws IOException If an error occurs when writing to or creating the file
      * @throws InvalidArgumentException If a null or illegal value (e.e, the empty string) is passed as argument to this
