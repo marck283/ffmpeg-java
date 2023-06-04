@@ -9,7 +9,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>it.disi.unitn.ffmpeg</groupId>
   <artifactId>ffmpeg-java-id</artifactId>
-  <version>1.0.8-beta10</version>
+  <version>1.0.8-beta12</version>
   <dependencyManagement>
     <dependencies>
       <dependency>

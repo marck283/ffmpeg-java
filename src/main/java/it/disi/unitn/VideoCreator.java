@@ -35,6 +35,8 @@ public class VideoCreator {
 
     private String videoBitRate; //Video track bitrate (in Kbit/s or Mbit/s)
 
+    private String pixelFormat;
+
     /**
      * The constructor of this class.
      * @param builder The FFMpegBuilder instance that called this constructor
@@ -132,6 +134,9 @@ public class VideoCreator {
         }
         if(checkCodec(codecID)) {
             this.codecID = codecID;
+            if(codecID.equals("libx264")) {
+                setPixelFormat("yuvj420p");
+            }
         } else {
             throw new InvalidArgumentException("Invalid video codec");
         }
@@ -197,6 +202,14 @@ public class VideoCreator {
         videoBitRate = val + mode;
     }
 
+    public void setPixelFormat(@NotNull String pxfmt) throws InvalidArgumentException {
+        if(pxfmt == null || pxfmt.equals("")) {
+            throw new InvalidArgumentException("The argument to this method cannot be null.");
+        }
+
+
+    }
+
     /**
      * This method creates the command that, when run, will create the output video.
      * @param time The maximum amount of time to wait for the video's creation
@@ -242,7 +255,10 @@ public class VideoCreator {
             if(videoQuality != 0) {
                 builder.setCommand(builder.getCommand() + " -crf " + videoQuality);
             }
-            builder.setCommand(builder.getCommand() + " -pix_fmt yuv420p");
+            if(pixelFormat == null || pixelFormat.equals("")) {
+                pixelFormat = "yuvj420p";
+            }
+            builder.setCommand(builder.getCommand() + " -pix_fmt " + pixelFormat);
             builder.addOutput(outputFile);
 
             //Now we will execute the given command
