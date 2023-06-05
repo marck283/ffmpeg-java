@@ -206,8 +206,7 @@ public class VideoCreator {
         if(pxfmt == null || pxfmt.equals("")) {
             throw new InvalidArgumentException("The argument to this method cannot be null.");
         }
-
-
+        pixelFormat = pxfmt;
     }
 
     /**
@@ -232,12 +231,17 @@ public class VideoCreator {
 
             //The following line will work only on Windows systems
             //builder.setCommand(builder.getCommand() + " -i " + folder + "/" + pattern);
+            if(pixelFormat == null || pixelFormat.equals("")) {
+                pixelFormat = "yuvj420p";
+            }
             if(codecID != null && !codecID.equals("")) {
                 builder.setCommand(builder.getCommand() + " -c:v " + codecID);
                 if(codecID.equals("libx264")) {
                     //libx264 (default codec when no value is specified) needs even width and height, so we need to add
                     //this filter in order to divide them by 2.
                     builder.setCommand(builder.getCommand() + " -vf \"scale=ceil(.5*iw)*2:ceil(.5*ih)*2\"");
+                } else {
+                    builder.setCommand(builder.getCommand() +  " -vf \"scale=1920*1080,format=" + pixelFormat + "\"");
                 }
             }
             if(videoBitRate != null && !videoBitRate.equals("")) {
@@ -254,9 +258,6 @@ public class VideoCreator {
             }
             if(videoQuality != 0) {
                 builder.setCommand(builder.getCommand() + " -crf " + videoQuality);
-            }
-            if(pixelFormat == null || pixelFormat.equals("")) {
-                pixelFormat = "yuvj420p";
             }
             builder.setCommand(builder.getCommand() + " -pix_fmt " + pixelFormat);
             builder.addOutput(outputFile);
