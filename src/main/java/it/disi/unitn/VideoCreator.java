@@ -31,9 +31,9 @@ public class VideoCreator {
 
     private int startInstant; //Starting instant of the new video with respect to the original video
 
-    private String audioBitRate; //Audio track0s bitrate (in Kbit/s)
+    private String audioBitRate; //Audio track's bitrate (in Kbit/s)
 
-    private String videoBitRate; //Video track bitrate (in Kbit/s or Mbit/s)
+    private String videoBitRate; //Video track's bitrate (in Kbit/s or Mbit/s)
 
     private String pixelFormat;
 
@@ -134,7 +134,7 @@ public class VideoCreator {
         }
         if(checkCodec(codecID)) {
             this.codecID = codecID;
-            if(codecID.equals("libx264")) {
+            if(codecID.equals("libx264") || codecID.equals("mjpeg")) {
                 setPixelFormat("yuvj420p");
             }
         } else {
@@ -193,7 +193,7 @@ public class VideoCreator {
      * This method sets the output video's bitrate in Kilobits or Megabits.
      * @param val The bitrate value
      * @param mode A value between "k" and "m" (short for Kilobit and Megabit respectively)
-     * @throws InvalidArgumentException if the "mode" argument is null or it is not equal to "k" or "m"
+     * @throws InvalidArgumentException if the "mode" argument is null, or it is not equal to "k" or "m"
      */
     public void setVideoBitRate(int val, @NotNull String mode) throws InvalidArgumentException {
         if(mode == null || (!mode.equals("k") && !mode.equals("m"))) {
@@ -202,6 +202,11 @@ public class VideoCreator {
         videoBitRate = val + mode;
     }
 
+    /**
+     * Imposta il formato dei pixel.
+     * @param pxfmt L'identificatore del formato dei pixel.
+     * @throws InvalidArgumentException Se l'argomento fornito in input è null.
+     */
     public void setPixelFormat(@NotNull String pxfmt) throws InvalidArgumentException {
         if(pxfmt == null || pxfmt.equals("")) {
             throw new InvalidArgumentException("The argument to this method cannot be null.");
@@ -216,55 +221,60 @@ public class VideoCreator {
      * @throws InvalidArgumentException if the video width or height or the video size ID field is null
      */
     public void createCommand(long time, @NotNull TimeUnit timeUnit) throws InvalidArgumentException {
-        if(videoWidth == 0 || videoHeight == 0 || videoSizeID == null || timeUnit == null || time <= 0) {
+        if(videoWidth == 0 || videoHeight == 0 || videoSizeID == null) {
             throw new InvalidArgumentException("The video width and height should not be null.");
         } else {
-            builder.setCommand(builder.getCommand() + " -r " + frameRate);
-            if(videoWidth != 0 && videoHeight != 0) {
-                builder.setCommand(builder.getCommand() + " -s " + videoWidth + "x" + videoHeight);
+            if(timeUnit == null) {
+                throw new InvalidArgumentException("The given time unit should not be null.");
             } else {
-                builder.setCommand(builder.getCommand() + " -s " + videoSizeID);
-            }
-
-            //The following line works both on Windows and Linux systems
-            builder.addInput(folder + "/" + pattern);
-
-            //The following line will work only on Windows systems
-            //builder.setCommand(builder.getCommand() + " -i " + folder + "/" + pattern);
-            if(pixelFormat == null || pixelFormat.equals("")) {
-                pixelFormat = "yuvj420p";
-            }
-            if(codecID != null && !codecID.equals("")) {
-                builder.setCommand(builder.getCommand() + " -c:v " + codecID);
-                if(codecID.equals("libx264")) {
-                    //libx264 (default codec when no value is specified) needs even width and height, so we need to add
-                    //this filter in order to divide them by 2.
-                    builder.setCommand(builder.getCommand() + " -vf \"scale=ceil(.5*iw)*2:ceil(.5*ih)*2\"");
+                if(time <= 0) {
+                    throw new InvalidArgumentException("The given time should not be less than or equal to zero.");
                 } else {
-                    builder.setCommand(builder.getCommand() +  " -vf \"scale=1920*1080,format=" + pixelFormat + "\"");
+                    builder.setCommand(builder.getCommand() + " -r " + frameRate);
+                    if(videoWidth != 0 && videoHeight != 0) {
+                        builder.setCommand(builder.getCommand() + " -s " + videoWidth + "x" + videoHeight);
+                    } else {
+                        builder.setCommand(builder.getCommand() + " -s " + videoSizeID);
+                    }
+
+                    builder.addInput(folder + "/" + pattern);
+
+                    if(pixelFormat == null || pixelFormat.equals("")) {
+                        pixelFormat = "yuvj420p";
+                    }
+                    if(codecID != null && !codecID.equals("")) {
+                        builder.setCommand(builder.getCommand() + " -c:v " + codecID);
+                        if(codecID.equals("libx264")) {
+                            //libx264 (default codec when no value is specified) needs even width and height, so we need to add
+                            //this filter in order to divide them by 2.
+                            builder.setCommand(builder.getCommand() + " -vf \"scale=ceil(.5*iw)*2:ceil(.5*ih)*2\"");
+                        } else {
+                            builder.setCommand(builder.getCommand() +  " -vf \"scale=1920*1080,format=" + pixelFormat + "\"");
+                        }
+                    }
+                    if(videoBitRate != null && !videoBitRate.equals("")) {
+                        builder.setCommand(builder.getCommand() + " -b:v " + videoBitRate);
+                    }
+                    if(audioBitRate != null && !audioBitRate.equals("")) {
+                        builder.setCommand(builder.getCommand() + " -b:a " + audioBitRate);
+                    }
+                    if(startInstant > 0) {
+                        builder.setCommand(builder.getCommand() + " -ss " + startInstant);
+                    }
+                    if(videoDuration > 0) {
+                        builder.setCommand(builder.getCommand() + " -t " + videoDuration);
+                    }
+                    if(videoQuality != 0) {
+                        builder.setCommand(builder.getCommand() + " -crf " + videoQuality);
+                    }
+                    builder.setCommand(builder.getCommand() + " -pix_fmt " + pixelFormat);
+                    builder.addOutput(outputFile);
+
+                    //Now we will execute the given command
+                    FFMpeg ffmpeg = builder.build();
+                    ffmpeg.executeCMD(time, timeUnit);
                 }
             }
-            if(videoBitRate != null && !videoBitRate.equals("")) {
-                builder.setCommand(builder.getCommand() + " -b:v " + videoBitRate);
-            }
-            if(audioBitRate != null && !audioBitRate.equals("")) {
-                builder.setCommand(builder.getCommand() + " -b:a " + audioBitRate);
-            }
-            if(startInstant > 0) {
-                builder.setCommand(builder.getCommand() + " -ss " + startInstant);
-            }
-            if(videoDuration > 0) {
-                builder.setCommand(builder.getCommand() + " -t " + videoDuration);
-            }
-            if(videoQuality != 0) {
-                builder.setCommand(builder.getCommand() + " -crf " + videoQuality);
-            }
-            builder.setCommand(builder.getCommand() + " -pix_fmt " + pixelFormat);
-            builder.addOutput(outputFile);
-
-            //Now we will execute the given command
-            FFMpeg ffmpeg = builder.build();
-            ffmpeg.executeCMD(time, timeUnit);
         }
     }
 }

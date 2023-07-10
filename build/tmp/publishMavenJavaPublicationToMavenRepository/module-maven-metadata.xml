@@ -3,26 +3,9 @@
   <groupId>it.disi.unitn.ffmpeg</groupId>
   <artifactId>ffmpeg-java-id</artifactId>
   <versioning>
-    <latest>1.0.8-beta13</latest>
-    <release>1.0.8-beta13</release>
+    <latest>1.0.9-alpha1</latest>
+    <release>1.0.9-alpha1</release>
     <versions>
-      <version>1.0.0</version>
-      <version>1.0.1</version>
-      <version>1.0.2</version>
-      <version>1.0.3</version>
-      <version>1.0.4</version>
-      <version>1.0.5-alpha</version>
-      <version>1.0.5-alpha1</version>
-      <version>1.0.5-alpha2</version>
-      <version>1.0.5-alpha3</version>
-      <version>1.0.5-alpha4</version>
-      <version>1.0.5-alpha5</version>
-      <version>1.0.5-beta1</version>
-      <version>1.0.5-beta2</version>
-      <version>1.0.5-beta3</version>
-      <version>1.0.5-beta3-windows</version>
-      <version>1.0.5-beta4</version>
-      <version>1.0.5</version>
       <version>1.0.6-alpha</version>
       <version>1.0.6-alpha1</version>
       <version>1.0.6-alpha2</version>
@@ -62,7 +45,11 @@
       <version>1.0.8-beta11</version>
       <version>1.0.8-beta12</version>
       <version>1.0.8-beta13</version>
+      <version>1.0.8-beta14</version>
+      <version>1.0.8-beta15</version>
+      <version>1.0.8</version>
+      <version>1.0.9-alpha1</version>
     </versions>
-    <lastUpdated>20230605042639</lastUpdated>
+    <lastUpdated>20230710001206</lastUpdated>
   </versioning>
 </metadata>

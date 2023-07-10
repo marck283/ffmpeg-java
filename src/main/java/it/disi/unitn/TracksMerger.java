@@ -44,7 +44,7 @@ public class TracksMerger {
     }
 
     /**
-     * This method enables the stream-copy option.
+     * This method enables (or disables) the stream-copy option.
      * @param val A boolean value used to denote whether the tracks should be stream-copied
      */
     public void streamCopy(boolean val) {
@@ -73,14 +73,15 @@ public class TracksMerger {
     /**
      * This method allows the program to write a TXT file that will be used when concatenating two or more videos.
      * @param inputFiles The path to the input files to be concatenated
+     * @param tempFile The path to the file that wil contain the paths of the files to be merged
      * @return The File instance of the file containing the paths that were passed to this method
      * @throws IOException if an I/O error occurred
      */
-    private @NotNull File writeTXTFile(@NotNull List<String> inputFiles) throws IOException {
-        if(inputFiles == null) {
+    private @NotNull File writeTXTFile(@NotNull List<String> inputFiles, @NotNull String tempFile) throws IOException {
+        if(inputFiles == null || tempFile == null) {
             throw new IllegalArgumentException("No arguments to this method can be null.");
         }
-        File file = new File("./inputFile.txt");
+        File file = new File(tempFile);
         if(file.exists()) {
             file.delete();
         }
@@ -102,10 +103,12 @@ public class TracksMerger {
      * @param inputFiles The paths to the input files
      * @param time The maximum amount of time to wait for the video's creation
      * @param timeUnit The TimeUnit instance to be used
+     * @param tempFile A temporary file used to store the paths of the files to be merged
      * @throws IOException if an I/O error occurs
      */
-    public void mergeVideos(long time, @NotNull TimeUnit timeUnit, @NotNull List<String> inputFiles) throws IOException {
-        File inputTXTFile = writeTXTFile(inputFiles);
+    public void mergeVideos(long time, @NotNull TimeUnit timeUnit, @NotNull List<String> inputFiles,
+                            @NotNull String tempFile) throws IOException {
+        File inputTXTFile = writeTXTFile(inputFiles, tempFile);
         builder.setCommand(builder.getCommand() + " -f concat -safe 0 -i \"" +
                 inputTXTFile.getPath().replace('\\', '/') + "\"");
         if(streamCopy) {
