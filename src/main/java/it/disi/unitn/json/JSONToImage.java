@@ -32,7 +32,7 @@ public class JSONToImage {
 
     private final JsonArray array;
 
-    private boolean useGAN;
+    private final boolean useGAN;
 
     /**
      * The class's constructor. At the time of writing, this constructor only supports "image/jpeg" and "image/png" types.
@@ -43,9 +43,6 @@ public class JSONToImage {
      * @throws IOException If an I/O error occurs opening the file
      */
     public JSONToImage(@NotNull String pathToJsonFile, boolean useGAN) throws IllegalArgumentException, IOException {
-        /**
-         * The JSON file
-         */
         File jsonFile = new File(pathToJsonFile);
 
         byteArrList = new ArrayList<>();
@@ -142,7 +139,7 @@ public class JSONToImage {
 
     /**
      * This method instructs the library to generate the images with a GAN. The meanings of its parameters are the same
-     * as for generate().
+     * as for generate(). It is worth noting that this method will generate one image per description given by the user.
      * @param pathToImagesFolder The (either absolute or relative) path to the folder that will contain the generated images.
      * @param file The file to be used to instruct the GAN on what to include in the resulting images. This parameter
      *             must not be null if and only if the library is instructed to use a GAN
@@ -166,13 +163,10 @@ public class JSONToImage {
         String[] content = outDir.list();
         if(content != null) {
             int len = content.length;
-            if(len > 0) {
-                //Ritentare così e vedere se il programma restituisce ancora un'ArrayIndexOutOfBoundsException.
-                for(int i = 0; i < len; i++) {
-                    JsonObject obj = array.get(i).getAsJsonObject();
-                    String mime = obj.get("mime").getAsString();
-                    modifyImage(obj, i, pathToImagesFolder, mime);
-                }
+            for(int i = 0; i < len; ++i) {
+                JsonObject obj = array.get(i).getAsJsonObject();
+                String mime = obj.get("mime").getAsString();
+                modifyImage(obj, i, pathToImagesFolder, mime);
             }
         } else {
             throw new NullPointerException("Either the given pathname does not represent a directory " +
