@@ -49,12 +49,18 @@ public class BigGANWrapper {
 
     /**
      * Questo metodo permette di salvare le immagini prodotte dalla rete neurale.
+     * @param pathToImagesFolder La cartella che conterr&agrave; le immagini generate
      * @param generatedImages Le immagini generate dalla rete neurale
      * @param extension L'estensione delle immagini risultanti
      * @throws IOException Se accade un errore di I/O
+     * @throws IllegalArgumentException Se il primo argomento &egrave; null
      */
-    public void saveImages(Image @NotNull [] generatedImages, String extension) throws IOException {
-        Path outputPath = Paths.get("./src/main/resources/it/disi/unitn/input/images"); //Ottieni la cartella di output
+    public void saveImages(@NotNull String pathToImagesFolder, Image @NotNull [] generatedImages, String extension)
+            throws IOException, IllegalArgumentException {
+        if(pathToImagesFolder == null || pathToImagesFolder.equals("")) {
+            throw new IllegalArgumentException("The first argument to this method cannot be null.");
+        }
+        Path outputPath = Paths.get(pathToImagesFolder); //Get output folder
         Files.createDirectories(outputPath);
 
         for (int i = 0; i < generatedImages.length; ++i) {
@@ -78,11 +84,13 @@ public class BigGANWrapper {
      * @throws TranslateException If an error occurs during the generation of the images
      */
     public Image[] generate() throws IOException, TranslateException {
+        //DJL model zoo contains 3 BigGAN generators for different
+        //square image output sizes, 128px, 256px and 512px.
         Criteria<int[], Image[]> criteria =
                 Criteria.builder()
                         .optApplication(Application.CV.IMAGE_GENERATION)
                         .setTypes(int[].class, Image[].class)
-                        .optFilter("size", "256")
+                        .optFilter("size", "512")
                         .optArgument("truncation", 0.4f)
                         .optEngine("PyTorch")
                         .optProgress(new ProgressBar())

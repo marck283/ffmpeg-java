@@ -14,7 +14,7 @@ plugins {
 }
 
 group 'it.disi.unitn'
-version '1.0.9-beta3'
+version '1.0.9-beta7-debug1'
 
 java {
     withJavadocJar()
