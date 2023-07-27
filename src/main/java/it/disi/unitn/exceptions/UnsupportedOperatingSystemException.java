@@ -10,12 +10,12 @@ public class UnsupportedOperatingSystemException extends Exception {
     /**
      * This exception's message.
      */
-    private String message;
+    private final String message;
 
     /**
      * The language of the user's Operating System.
      */
-    private Locale locale;
+    private final Locale locale;
 
     /**
      * The class's constructor.

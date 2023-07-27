@@ -15,7 +15,7 @@ public class StringExt {
      * @throws InvalidArgumentException If the given argument is null or the empty string
      */
     public StringExt(@NotNull String str) throws InvalidArgumentException {
-        if(str == null || str.equals("")) {
+        if(str == null || str.isEmpty()) {
             throw new InvalidArgumentException("The argument given to this constructor cannot be null nor can it be the " +
                     "empty string.");
         }
@@ -27,7 +27,7 @@ public class StringExt {
      * @throws InvalidArgumentException If the original string's length is not greater than 0 and less than or equal to 3.
      */
     public void padStart() throws InvalidArgumentException {
-        if(val.length() == 0 || val.length() > 3) {
+        if(val.isEmpty() || val.length() > 3) {
             throw new InvalidArgumentException("The original string's length is not greater than 0 and less than or " +
                     "equal to 3.");
         }

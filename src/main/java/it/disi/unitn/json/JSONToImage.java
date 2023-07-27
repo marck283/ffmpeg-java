@@ -149,8 +149,8 @@ public class JSONToImage {
      * @throws TranslateException If the library is instructed to create images using a GAN and the generation fails
      */
     private void generateWithGAN(@NotNull String pathToImagesFolder, @NotNull String file, @NotNull String imageExtension,
-                                 @NotNull String @NotNull ... descriptions) throws IOException, TranslateException {
-        BigGANWrapper bgw = BigGANWrapper.create(file, descriptions);
+                                 @NotNull String @NotNull ... descriptions) throws IOException, TranslateException, InterruptedException {
+        /*BigGANWrapper bgw = BigGANWrapper.create(file, descriptions);
         bgw.saveImages(pathToImagesFolder, bgw.generate(), imageExtension);
 
         File outDir = new File(pathToImagesFolder);
@@ -171,7 +171,10 @@ public class JSONToImage {
         } else {
             throw new NullPointerException("Either the given pathname does not represent a directory " +
                     "or an I/O has occurred.");
-        }
+        }*/
+        ProcessBuilder pb = new ProcessBuilder("bash -c \"python3 ./main.py\"");
+        Process p = pb.start();
+        p.wait();
     }
 
     /**
@@ -192,20 +195,20 @@ public class JSONToImage {
      */
     public void generate(@NotNull String pathToImagesFolder, String file, @NotNull String imageExtension,
                            String ... descriptions) throws IOException, InvalidArgumentException,
-            TranslateException {
-        if(pathToImagesFolder == null || pathToImagesFolder.equals("")) {
+            TranslateException, InterruptedException {
+        if(pathToImagesFolder == null || pathToImagesFolder.isEmpty()) {
             throw new IllegalArgumentException("A null or illegal value was passed as argument to this method.");
         }
 
         if(useGAN) {
             //Generate images using a GAN
             //First check that the parameters have correct values
-            if(file == null || file.equals("") || descriptions == null) {
+            if(file == null || file.isEmpty() || descriptions == null) {
                 throw new IllegalArgumentException("None of the arguments given to this method can be null or an " +
                         "empty string.");
             }
             for(String s: descriptions) {
-                if(s == null || s.equals("")) {
+                if(s == null || s.isEmpty()) {
                     throw new IllegalArgumentException("None of the descriptions can be null or an empty string.");
                 }
             }

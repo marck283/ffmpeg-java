@@ -208,7 +208,7 @@ public class VideoCreator {
      * @throws InvalidArgumentException Se l'argomento fornito in input è null.
      */
     public void setPixelFormat(@NotNull String pxfmt) throws InvalidArgumentException {
-        if(pxfmt == null || pxfmt.equals("")) {
+        if(pxfmt == null || pxfmt.isEmpty()) {
             throw new InvalidArgumentException("The argument to this method cannot be null.");
         }
         pixelFormat = pxfmt;
@@ -239,10 +239,10 @@ public class VideoCreator {
 
                     builder.addInput(folder + "/" + pattern);
 
-                    if(pixelFormat == null || pixelFormat.equals("")) {
+                    if(pixelFormat == null || pixelFormat.isEmpty()) {
                         pixelFormat = "yuvj420p";
                     }
-                    if(codecID != null && !codecID.equals("")) {
+                    if(codecID != null && !codecID.isEmpty()) {
                         builder.setCommand(builder.getCommand() + " -c:v " + codecID);
                         if(codecID.equals("libx264")) {
                             //libx264 (default codec when no value is specified) needs even width and height, so we need to add
@@ -252,10 +252,10 @@ public class VideoCreator {
                             builder.setCommand(builder.getCommand() +  " -vf \"scale=1920*1080,format=" + pixelFormat + "\"");
                         }
                     }
-                    if(videoBitRate != null && !videoBitRate.equals("")) {
+                    if(videoBitRate != null && !videoBitRate.isEmpty()) {
                         builder.setCommand(builder.getCommand() + " -b:v " + videoBitRate);
                     }
-                    if(audioBitRate != null && !audioBitRate.equals("")) {
+                    if(audioBitRate != null && !audioBitRate.isEmpty()) {
                         builder.setCommand(builder.getCommand() + " -b:a " + audioBitRate);
                     }
                     if(startInstant > 0) {

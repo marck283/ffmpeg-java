@@ -57,7 +57,7 @@ public class BigGANWrapper {
      */
     public void saveImages(@NotNull String pathToImagesFolder, Image @NotNull [] generatedImages, String extension)
             throws IOException, IllegalArgumentException {
-        if(pathToImagesFolder == null || pathToImagesFolder.equals("")) {
+        if(pathToImagesFolder == null || pathToImagesFolder.isEmpty()) {
             throw new IllegalArgumentException("The first argument to this method cannot be null.");
         }
         Path outputPath = Paths.get(pathToImagesFolder); //Get output folder

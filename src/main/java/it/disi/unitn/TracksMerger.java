@@ -87,7 +87,7 @@ public class TracksMerger {
         }
         boolean created = file.createNewFile();
         for(String s: inputFiles) {
-            if(s == null || s.equals("")) {
+            if(s == null || s.isEmpty()) {
                 file.delete();
                 throw new IllegalArgumentException("No arguments to this method can be null or empty strings.");
             }
