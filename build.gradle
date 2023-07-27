@@ -14,7 +14,7 @@ plugins {
 }
 
 group 'it.disi.unitn'
-version '1.0.9-beta7-debug1'
+version '1.0.9-beta7-debug3'
 
 java {
     withJavadocJar()
@@ -70,18 +70,19 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
 
-    implementation "ai.djl:bom:0.22.1"
+    /*implementation "ai.djl:bom:0.22.1"
     implementation "ai.djl:api:0.22.1"
     implementation "ai.djl.pytorch:pytorch-engine:0.22.1"
     implementation "ai.djl.pytorch:pytorch-model-zoo:0.22.1"
     runtimeOnly "ai.djl.pytorch:pytorch-jni:2.0.0-0.22.1"
     runtimeOnly "ai.djl.pytorch:pytorch-native-cu118:2.0.0:win-x86_64" //Windows version of PyTorch library
-    runtimeOnly "ai.djl.pytorch:pytorch-native-cu118:2.0.1:linux-x86_64" //Linux version of PyTorch library
+    runtimeOnly "ai.djl.pytorch:pytorch-native-cu118:2.0.1:linux-x86_64" //Linux version of PyTorch library*/
 
     implementation platform('com.google.cloud:libraries-bom:26.10.0')
     implementation 'com.google.code.gson:gson:2.10.1'
     implementation ('com.google.cloud:google-cloud-texttospeech:2.13.0')
 
+    implementation 'org.slf4j:slf4j-api:1.7.5'
     implementation 'commons-io:commons-io:2.11.0'
     implementation 'org.apache.commons:commons-lang3:3.8.1'
 }

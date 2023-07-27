@@ -1,6 +1,6 @@
 package it.disi.unitn.json;
 
-import ai.djl.translate.TranslateException;
+//import ai.djl.translate.TranslateException;
 import com.google.gson.*;
 import it.disi.unitn.BigGAN.BigGANWrapper;
 import it.disi.unitn.StringExt;
@@ -146,10 +146,10 @@ public class JSONToImage {
      * @param descriptions The categories to be represented in the resulting images. These categories must all be contained
      *                     in <a href="https://gist.github.com/yrevar/942d3a0ac09ec9e5eb3a">this file</a>.
      * @throws IOException If an error occurs when writing to or creating the file
-     * @throws TranslateException If the library is instructed to create images using a GAN and the generation fails
+     * //@throws TranslateException If the library is instructed to create images using a GAN and the generation fails
      */
     private void generateWithGAN(@NotNull String pathToImagesFolder, @NotNull String file, @NotNull String imageExtension,
-                                 @NotNull String @NotNull ... descriptions) throws IOException, TranslateException, InterruptedException {
+                                 @NotNull String @NotNull ... descriptions) throws IOException, /*TranslateException,*/ InterruptedException {
         /*BigGANWrapper bgw = BigGANWrapper.create(file, descriptions);
         bgw.saveImages(pathToImagesFolder, bgw.generate(), imageExtension);
 
@@ -191,11 +191,11 @@ public class JSONToImage {
      * @throws IOException If an error occurs when writing to or creating the file
      * @throws InvalidArgumentException If a null or illegal value (e.e, the empty string) is passed as argument to this
      * method
-     * @throws TranslateException If the library is instructed to create images using a GAN and the generation fails
+     * //@throws TranslateException If the library is instructed to create images using a GAN and the generation fails
      */
     public void generate(@NotNull String pathToImagesFolder, String file, @NotNull String imageExtension,
                            String ... descriptions) throws IOException, InvalidArgumentException,
-            TranslateException, InterruptedException {
+            /*TranslateException,*/ InterruptedException {
         if(pathToImagesFolder == null || pathToImagesFolder.isEmpty()) {
             throw new IllegalArgumentException("A null or illegal value was passed as argument to this method.");
         }

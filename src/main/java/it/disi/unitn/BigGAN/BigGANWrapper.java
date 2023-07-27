@@ -1,13 +1,13 @@
 package it.disi.unitn.BigGAN;
 
-import ai.djl.Application;
+/*import ai.djl.Application;
 import ai.djl.ModelException;
 import ai.djl.inference.Predictor;
 import ai.djl.modality.cv.Image;
 import ai.djl.repository.zoo.Criteria;
 import ai.djl.repository.zoo.ZooModel;
 import ai.djl.training.util.ProgressBar;
-import ai.djl.translate.TranslateException;
+import ai.djl.translate.TranslateException;*/
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
@@ -47,7 +47,7 @@ public class BigGANWrapper {
         descs.addAll(List.of(descriptions));
     }
 
-    /**
+    /*/**
      * Questo metodo permette di salvare le immagini prodotte dalla rete neurale.
      * @param pathToImagesFolder La cartella che conterr&agrave; le immagini generate
      * @param generatedImages Le immagini generate dalla rete neurale
@@ -55,7 +55,7 @@ public class BigGANWrapper {
      * @throws IOException Se accade un errore di I/O
      * @throws IllegalArgumentException Se il primo argomento &egrave; null
      */
-    public void saveImages(@NotNull String pathToImagesFolder, Image @NotNull [] generatedImages, String extension)
+    /*public void saveImages(@NotNull String pathToImagesFolder, Image @NotNull [] generatedImages, String extension)
             throws IOException, IllegalArgumentException {
         if(pathToImagesFolder == null || pathToImagesFolder.isEmpty()) {
             throw new IllegalArgumentException("The first argument to this method cannot be null.");
@@ -83,7 +83,7 @@ public class BigGANWrapper {
      * @throws IOException If an I/O error occurs
      * @throws TranslateException If an error occurs during the generation of the images
      */
-    public Image[] generate() throws IOException, TranslateException {
+    /*public Image[] generate() throws IOException, TranslateException {
         //DJL model zoo contains 3 BigGAN generators for different
         //square image output sizes, 128px, 256px and 512px.
         Criteria<int[], Image[]> criteria =
@@ -140,7 +140,7 @@ public class BigGANWrapper {
      * @throws IllegalArgumentException Se almeno uno degli argomenti forniti è null o se una delle descrizioni fornite
      * non è presente nel file fornito in input
      */
-    public static @NotNull BigGANWrapper create(@NotNull String file, @NotNull String @NotNull ... descriptions)
+    /*public static @NotNull BigGANWrapper create(@NotNull String file, @NotNull String @NotNull ... descriptions)
             throws IOException, IllegalArgumentException {
         if(file == null) {
             throw new IllegalArgumentException("L'argomento a questo metodo puo' essere null.");
@@ -175,5 +175,5 @@ public class BigGANWrapper {
 
             return new BigGANWrapper(jmap, descriptions);
         }
-    }
+    }*/
 }
