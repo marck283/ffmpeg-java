@@ -174,6 +174,8 @@ public class JSONToImage {
         }*/
 
         //Esegue il file che contiene il codice per la creazione delle immagini
+        //Si noti che il codice Python contenuto in questo file non sarà eseguito perché il computer utilizzato
+        //manca della potenza computazionale necessaria (i.e., di una GPU abbastanza potente)
         ProcessBuilder pb = new ProcessBuilder("bash -c \"python3 ./main.py\"");
         Process p = pb.start();
         p.wait();
