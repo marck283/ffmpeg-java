@@ -172,6 +172,8 @@ public class JSONToImage {
             throw new NullPointerException("Either the given pathname does not represent a directory " +
                     "or an I/O has occurred.");
         }*/
+
+        //Esegue il file che contiene il codice per la creazione delle immagini
         ProcessBuilder pb = new ProcessBuilder("bash -c \"python3 ./main.py\"");
         Process p = pb.start();
         p.wait();
