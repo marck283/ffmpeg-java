@@ -13,15 +13,10 @@ public class UnsupportedOperatingSystemException extends Exception {
     private final String message;
 
     /**
-     * The language of the user's Operating System.
-     */
-    private final Locale locale;
-
-    /**
      * The class's constructor.
      */
     public UnsupportedOperatingSystemException() {
-        locale = Locale.getDefault();
+        Locale locale = Locale.getDefault();
         if(locale == Locale.ITALIAN || locale == Locale.ITALY) {
             message = "Sistema operativo non supportato";
         } else {
