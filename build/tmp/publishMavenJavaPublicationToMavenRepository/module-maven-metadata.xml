@@ -3,32 +3,15 @@
   <groupId>it.disi.unitn.ffmpeg</groupId>
   <artifactId>ffmpeg-java-id</artifactId>
   <versioning>
-    <latest>1.0.9-beta7-debug3</latest>
-    <release>1.0.9-beta7-debug3</release>
+    <latest>1.0.9-beta7-debug4</latest>
+    <release>1.0.9-beta7-debug4</release>
     <versions>
-      <version>1.0.7-beta1</version>
-      <version>1.0.7-beta2</version>
-      <version>1.0.7-beta3</version>
-      <version>1.0.7-beta4</version>
-      <version>1.0.7-beta5</version>
-      <version>1.0.7-beta6</version>
-      <version>1.0.7</version>
-      <version>1.0.8-beta1</version>
-      <version>1.0.8-beta2</version>
-      <version>1.0.8-beta3</version>
-      <version>1.0.8-beta4</version>
-      <version>1.0.8-beta5</version>
-      <version>1.0.8-beta6</version>
-      <version>1.0.8-beta7</version>
-      <version>1.0.8-beta8</version>
-      <version>1.0.8-beta9</version>
       <version>1.0.8-beta10</version>
       <version>1.0.8-beta11</version>
       <version>1.0.8-beta12</version>
       <version>1.0.8-beta13</version>
       <version>1.0.8-beta14</version>
       <version>1.0.8-beta15</version>
-      <version>1.0.8</version>
       <version>1.0.9-alpha1</version>
       <version>1.0.9-alpha2</version>
       <version>1.0.9-alpha4</version>
@@ -50,7 +33,8 @@
       <version>1.0.9-beta7-debug1</version>
       <version>1.0.9-beta7-debug2</version>
       <version>1.0.9-beta7-debug3</version>
+      <version>1.0.9-beta7-debug4</version>
     </versions>
-    <lastUpdated>20230727015540</lastUpdated>
+    <lastUpdated>20230808205957</lastUpdated>
   </versioning>
 </metadata>
