@@ -196,6 +196,7 @@ public class JSONToImage {
      * @throws InvalidArgumentException If a null or illegal value (e.e, the empty string) is passed as argument to this
      * method
      * //@throws TranslateException If the library is instructed to create images using a GAN and the generation fails
+     * @throws InterruptedException If the current thread is interrupted by any other thread
      */
     public void generate(@NotNull String pathToImagesFolder, String file, @NotNull String imageExtension,
                            String ... descriptions) throws IOException, InvalidArgumentException,
