@@ -186,9 +186,9 @@ public class JSONToImage {
             i.padStart();
             JsonObject obj = array.get(index).getAsJsonObject();
             String mime = obj.get("mime").getAsString();
-            File image = new File(i + "." + imageExtension);
-            byte[] arr = Files.readAllBytes(image.toPath());
             Path path = Paths.get(pathToImagesFolder, i.getVal() + "." + imageExtension);
+            File image = path.toFile();
+            byte[] arr = Files.readAllBytes(image.toPath());
             Files.write(path, arr);
 
             modifyImage(obj, index, pathToImagesFolder, mime);
