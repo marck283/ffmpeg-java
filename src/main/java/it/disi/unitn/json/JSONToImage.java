@@ -143,13 +143,26 @@ public class JSONToImage {
      * as for generate(). It is worth noting that this method will generate one image per description given by the user.
      * @param pathToImagesFolder The (either absolute or relative) path to the folder that will contain the generated images.
      * @param imageExtension The extension of the generated images
+     * @param width The width of the generated images
+     * @param height The height of the generated images
      * @throws IOException If an error occurs when writing to or creating the file
      */
-    private void generateWithGAN(@NotNull String pathToImagesFolder, @NotNull String imageExtension)
+    private void generateWithGAN(@NotNull String pathToImagesFolder, @NotNull String imageExtension, int width, int height)
             throws IOException, InterruptedException, ProcessStillAliveException, InvalidArgumentException {
-        //Esegue il file che contiene il codice per la creazione delle immagini
         if(pathToImagesFolder == null || pathToImagesFolder.isEmpty() || imageExtension == null || imageExtension.isEmpty()) {
             throw new IllegalArgumentException("At least one of the given arguments is either null or an empty string.");
+        }
+
+        if(width <= 0 || height <= 0) {
+            throw new IllegalArgumentException("Both the image's width and height must be strictly positive.");
+        }
+
+        if(width % 8 != 0 || height % 8 != 0) {
+            throw new IllegalArgumentException("Both the image's width and height must be divisible by either 8 or 64.");
+        }
+
+        if(width%64 != 0 || height%64 != 0) {
+            throw new IllegalArgumentException("Both the image's width and height must be divisible by either 8 or 64");
         }
 
         int index = 0;
@@ -157,7 +170,7 @@ public class JSONToImage {
             JsonObject el = e.getAsJsonObject();
             String desc = el.get("image-description").getAsString();
             ProcessBuilder pb = new ProcessBuilder("bash", "-c", "python3 ./model.py \"" + desc + "\" " + index + " " +
-                    imageExtension + " " + pathToImagesFolder);
+                    imageExtension + " " + pathToImagesFolder + " " + width + " " + height);
             Process p = pb.start();
 
             InputStream istream = p.getErrorStream();
@@ -204,13 +217,17 @@ public class JSONToImage {
      * contains images of different MIME types. Please insert only images of the same MIME type.
      * @param pathToImagesFolder The (either absolute or relative) path to the folder that will contain the generated images.
      * @param imageExtension The extension of the generated images
+     * @param width The width of the generated images. This value should be positive if the program uses a
+     *               neural network to generate the images
+     * @param height The height of the generated images. This value should be positive if the program uses a
+     *               neural network to generate the images
      * @throws IOException If an error occurs when writing to or creating the file
      * @throws InvalidArgumentException If a null or illegal value (e.e, the empty string) is passed as argument to this
      * @throws InterruptedException If the current thread is interrupted while waiting
      * @throws ProcessStillAliveException If the child process is still alive. This exception is thrown only if a neural
      * network is used to generate the pictures.
      */
-    public void generate(@NotNull String pathToImagesFolder, @NotNull String imageExtension)
+    public void generate(@NotNull String pathToImagesFolder, @NotNull String imageExtension, int width, int height)
             throws IOException, InvalidArgumentException, InterruptedException,
             ProcessStillAliveException {
         if(pathToImagesFolder == null || pathToImagesFolder.isEmpty()) {
@@ -219,7 +236,7 @@ public class JSONToImage {
 
         if(useGAN) {
             //Avvia la rete neurale per produrre le immagini
-            generateWithGAN(pathToImagesFolder, imageExtension);
+            generateWithGAN(pathToImagesFolder, imageExtension, width, height);
         } else {
             toByteArray();
 
