@@ -3,8 +3,9 @@ package it.disi.unitn.json;
 import com.google.gson.*;
 import it.disi.unitn.StringExt;
 import it.disi.unitn.exceptions.InvalidArgumentException;
-import it.disi.unitn.exceptions.ProcessStillAliveException;
-import it.disi.unitn.streamhandlers.InputHandler;
+//import it.disi.unitn.exceptions.ProcessStillAliveException;
+import it.disi.unitn.json.processpool.ProcessPool;
+//import it.disi.unitn.streamhandlers.InputHandler;
 import org.jetbrains.annotations.NotNull;
 
 import javax.imageio.ImageIO;
@@ -18,8 +19,10 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
+//import java.util.Locale;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
+import java.util.function.Consumer;
 
 /**
  * This class translates a given JSON file into a list of Image objects.
@@ -148,7 +151,7 @@ public class JSONToImage {
      * @throws IOException If an error occurs when writing to or creating the file
      */
     private void generateWithGAN(@NotNull String pathToImagesFolder, @NotNull String imageExtension, int width, int height)
-            throws IOException, InterruptedException, ProcessStillAliveException, InvalidArgumentException {
+            throws IOException/*, InterruptedException, ProcessStillAliveException, InvalidArgumentException*/ {
         if(pathToImagesFolder == null || pathToImagesFolder.isEmpty() || imageExtension == null || imageExtension.isEmpty()) {
             throw new IllegalArgumentException("At least one of the given arguments is either null or an empty string.");
         }
@@ -166,12 +169,13 @@ public class JSONToImage {
         }
 
         int index = 0;
+        ProcessPool pool = new ProcessPool(array.size(), 30, TimeUnit.MINUTES);
         for(JsonElement e: array) {
             JsonObject el = e.getAsJsonObject();
             String desc = el.get("image-description").getAsString();
             ProcessBuilder pb = new ProcessBuilder("bash", "-c", "python3 ./model.py \"" + desc + "\" " + index + " " +
                     imageExtension + " " + pathToImagesFolder + " " + width + " " + height);
-            Process p = pb.start();
+            /*Process p = pb.start();
 
             InputStream istream = p.getErrorStream();
 
@@ -181,10 +185,7 @@ public class JSONToImage {
             inputHandler.start();
 
             p.waitFor(5, TimeUnit.MINUTES);
-            if(p.isAlive()) {
-                throw new ProcessStillAliveException();
-            }
-            if(!p.isAlive() && p.exitValue() != 0) {
+            if(p.isAlive() || p.exitValue() != 0) {
                 Locale locale = Locale.getDefault();
                 if(locale == Locale.ITALY || locale == Locale.ITALIAN) {
                     System.err.println("Il processo di generazione dell'immagine e' terminato con un errore.");
@@ -193,22 +194,40 @@ public class JSONToImage {
                 }
                 System.err.println(p.exitValue());
                 System.exit(p.exitValue());
-            }
+            }*/
 
-            StringExt i = new StringExt(String.valueOf(index));
-            i.padStart();
-            JsonObject obj = array.get(index).getAsJsonObject();
-            String mime = obj.get("mime").getAsString();
-            Path path = Paths.get(pathToImagesFolder, i.getVal() + "." + imageExtension);
-            File image = path.toFile();
-            byte[] arr = Files.readAllBytes(image.toPath());
-            Files.write(path, arr);
+            final int index1 = index;
+            Consumer<Process> c = process -> {
+                try {
+                    StringExt i = new StringExt(String.valueOf(index1));
+                    i.padStart();
+                    JsonObject obj = array.get(index1).getAsJsonObject();
+                    String mime = obj.get("mime").getAsString();
+                    Path path = Paths.get(pathToImagesFolder, i.getVal() + "." + imageExtension);
+                    File image = path.toFile();
+                    byte[] arr = Files.readAllBytes(image.toPath());
+                    Files.write(path, arr);
 
-            modifyImage(obj, index, pathToImagesFolder, mime);
+                    modifyImage(obj, index1, pathToImagesFolder, mime);
+                } catch(InvalidArgumentException | IOException ex) {
+                    ex.printStackTrace();
+                }
+            };
+            pool.execute(pb, c);
 
             index = index + 1;
         }
 
+        if(!pool.shutdown()) {
+            Locale locale = Locale.getDefault();
+            if(locale == Locale.ITALY || locale == Locale.ITALIAN) {
+                System.err.println("Alcuni thread non sono terminati in tempo. Si prega di riprovare ad eseguire il " +
+                        "programma.");
+            } else {
+                System.err.println("Some of the threads did not shut down on time. Please try running this program again.");
+            }
+            System.exit(1);
+        }
     }
 
     /**
@@ -223,13 +242,13 @@ public class JSONToImage {
      *               neural network to generate the images
      * @throws IOException If an error occurs when writing to or creating the file
      * @throws InvalidArgumentException If a null or illegal value (e.e, the empty string) is passed as argument to this
-     * @throws InterruptedException If the current thread is interrupted while waiting
-     * @throws ProcessStillAliveException If the child process is still alive. This exception is thrown only if a neural
+     //* @throws InterruptedException If the current thread is interrupted while waiting
+     //* @throws ProcessStillAliveException If the child process is still alive. This exception is thrown only if a neural
      * network is used to generate the pictures.
      */
     public void generate(@NotNull String pathToImagesFolder, @NotNull String imageExtension, int width, int height)
-            throws IOException, InvalidArgumentException, InterruptedException,
-            ProcessStillAliveException {
+            throws IOException, InvalidArgumentException/*, InterruptedException,
+            ProcessStillAliveException*/ {
         if(pathToImagesFolder == null || pathToImagesFolder.isEmpty()) {
             throw new IllegalArgumentException("A null or illegal value was passed as argument to this method.");
         }
