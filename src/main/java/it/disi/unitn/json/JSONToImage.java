@@ -197,6 +197,8 @@ public class JSONToImage {
             }*/
 
             final int index1 = index;
+
+            //Uso la classe Consumer per dichiarare una callback da eseguire al termine di ogni processo.
             Consumer<Process> c = process -> {
                 try {
                     StringExt i = new StringExt(String.valueOf(index1));
