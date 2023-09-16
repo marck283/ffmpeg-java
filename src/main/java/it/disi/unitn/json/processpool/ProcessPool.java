@@ -61,11 +61,13 @@ public class ProcessPool {
      */
     public boolean shutdown() {
         executor.shutdown();
+
+        boolean aterm;
         try {
-            executor.awaitTermination(30, TimeUnit.MINUTES);
+            aterm = executor.awaitTermination(30, TimeUnit.MINUTES);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-        return executor.isTerminated();
+        return aterm && executor.isTerminated();
     }
 }

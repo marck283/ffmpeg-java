@@ -91,7 +91,7 @@ public class FFMpeg {
             }
         } catch(Exception ex) {
             ex.printStackTrace();
-            System.out.println("oops");
+            System.out.println(ex.getMessage());
         }
     }
 }

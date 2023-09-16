@@ -81,16 +81,17 @@ public class TracksMerger {
         if(inputFiles == null || tempFile == null) {
             throw new IllegalArgumentException("No arguments to this method can be null.");
         }
+
+        boolean match = inputFiles.stream().anyMatch(s -> s == null || s.isEmpty());
         File file = new File(tempFile);
-        if(file.exists()) {
+        if(file.exists() || match) {
             file.delete();
+        }
+        if(match) {
+            throw new IllegalArgumentException("No arguments to this method can be null or empty strings.");
         }
         boolean created = file.createNewFile();
         for(String s: inputFiles) {
-            if(s == null || s.isEmpty()) {
-                file.delete();
-                throw new IllegalArgumentException("No arguments to this method can be null or empty strings.");
-            }
             FileUtils.writeStringToFile(file, "file '" + s.replace('\\', '/') + "'\n",
                     StandardCharsets.UTF_8, true);
         }
