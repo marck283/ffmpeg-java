@@ -303,7 +303,7 @@ public class JSONToImage {
         final BufferedImage image = ImageIO.read(file);
 
         Graphics g = image.getGraphics();
-        //g.setFont(<font>);
+        //g.setFont(<font>); //Per font personalizzati
         g.setFont(g.getFont().deriveFont(fontDim));
         g.setColor(color);
         g.drawString(inputText, x, y);
