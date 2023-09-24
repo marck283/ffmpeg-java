@@ -100,6 +100,8 @@ public class FFMpeg {
             ex.printStackTrace();
             System.err.println(ex.getMessage());
         }*/
+
+        //A questo punto, utilizzo la libreria Apache Commons Exec per eseguire FFmpeg.
         CommandLine cmdLine = CommandLine.parse(ffBuilder.getCommand());
         PumpStreamHandler streamHandler = new PumpStreamHandler();
         DefaultExecutor executor = new DefaultExecutor();
