@@ -3,9 +3,10 @@ package it.disi.unitn.json;
 import com.google.gson.*;
 import it.disi.unitn.StringExt;
 import it.disi.unitn.exceptions.InvalidArgumentException;
-//import it.disi.unitn.exceptions.ProcessStillAliveException;
+import it.disi.unitn.exceptions.ProcessStillAliveException;
 import it.disi.unitn.json.processpool.ProcessPool;
-//import it.disi.unitn.streamhandlers.InputHandler;
+import it.disi.unitn.streamhandlers.InputHandler;
+import org.apache.commons.lang3.SystemUtils;
 import org.jetbrains.annotations.NotNull;
 
 import javax.imageio.ImageIO;
@@ -19,7 +20,6 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
-//import java.util.Locale;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
@@ -165,17 +165,26 @@ public class JSONToImage {
         }
 
         if(width%64 != 0 || height%64 != 0) {
-            throw new IllegalArgumentException("Both the image's width and height must be divisible by either 8 or 64");
+            throw new IllegalArgumentException("Both the image's width and height must be divisible by either 8 or 64.");
         }
 
         int index = 0;
-        ProcessPool pool = new ProcessPool(array.size(), 30, TimeUnit.MINUTES);
+        Path dir = Paths.get(""); //Gets the current working directory
+        File model = dir.resolve("model.py").toFile();
+        ProcessPool pool = new ProcessPool(model, imageExtension, pathToImagesFolder, width, height);
         for(JsonElement e: array) {
             JsonObject el = e.getAsJsonObject();
             String desc = el.get("image-description").getAsString();
-            ProcessBuilder pb = new ProcessBuilder("bash", "-c", "python3 ./model.py \"" + desc + "\" " + index + " " +
-                    imageExtension + " " + pathToImagesFolder + " " + width + " " + height);
-            /*Process p = pb.start();
+            pool.setDesc(desc);
+            pool.setIndex(index);
+            //ProcessBuilder pb;
+
+            /*if(SystemUtils.IS_OS_WINDOWS) {
+                pb = new ProcessBuilder("cmd", "/c", s);
+            } else {
+                pb = new ProcessBuilder("bash", "-c", s);
+            }
+            Process p = pb.start();
 
             InputStream istream = p.getErrorStream();
 
@@ -184,7 +193,7 @@ public class JSONToImage {
             InputHandler inputHandler = new InputHandler(p.getInputStream(), "Output Stream");
             inputHandler.start();
 
-            p.waitFor(5, TimeUnit.MINUTES);
+            p.waitFor(30, TimeUnit.MINUTES);
             if(p.isAlive() || p.exitValue() != 0) {
                 Locale locale = Locale.getDefault();
                 if(locale == Locale.ITALY || locale == Locale.ITALIAN) {
@@ -194,7 +203,7 @@ public class JSONToImage {
                 }
                 System.err.println(p.exitValue());
                 System.exit(p.exitValue());
-            }*/
+            }
 
             final int index1 = index;
 
@@ -215,12 +224,13 @@ public class JSONToImage {
                     ex.printStackTrace();
                 }
             };
-            pool.execute(pb, c);
+            pool.execute(pb, c);*/
+            pool.execute(array, this);
 
             index = index + 1;
         }
 
-        if(!pool.shutdown()) {
+        /*if(!pool.shutdown()) {
             Locale locale = Locale.getDefault();
             if(locale == Locale.ITALY || locale == Locale.ITALIAN) {
                 System.err.println("Alcuni thread non sono terminati in tempo. Si prega di riprovare ad eseguire il " +
@@ -229,7 +239,7 @@ public class JSONToImage {
                 System.err.println("Some of the threads did not shut down on time. Please try running this program again.");
             }
             System.exit(1);
-        }
+        }*/
     }
 
     /**

@@ -1,10 +1,16 @@
 package it.disi.unitn;
 
+import com.google.gson.JsonObject;
+import it.disi.unitn.exceptions.InvalidArgumentException;
 import it.disi.unitn.streamhandlers.InputHandler;
+import org.apache.commons.exec.*;
 import org.apache.commons.lang3.SystemUtils;
 import org.jetbrains.annotations.NotNull;
 
-import java.io.InputStream;
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -60,24 +66,25 @@ public class FFMpeg {
      * This method executes the given command on the ProcessBuilder instance on which this class has been instantiated.
      * @param timeout The maximum time interval the calling process will wait for the child process to terminate
      * @param timeUnit The TimeUnit instance that specifies the time unit associated to the first parameter
+     * @throws IOException If an I/O error occurs
      */
-    public void executeCMD(long timeout, @NotNull TimeUnit timeUnit) {
-        ProcessBuilder builder;
+    public void executeCMD(long timeout, @NotNull TimeUnit timeUnit) throws IOException {
+        /*ProcessBuilder builder;
         if(SystemUtils.IS_OS_WINDOWS) {
-            builder = new ProcessBuilder("?", ffBuilder.getCommand());
+            builder = new ProcessBuilder(ffBuilder.getCommand());
         } else {
             builder = new ProcessBuilder("bash", "-c", ffBuilder.getCommand());
         }
 
         try {
             Process p = builder.start();
-            builder.inheritIO();
+            builder.inheritIO();*/
 
             /*
              * FFMpeg hangs when we do not use two separate threads to handle the Error and Output streams.
              * See here: https://ffmpeg-user.ffmpeg.narkive.com/3WBzsW4a/ffmpeg-hangs-when-being-executed-from-within-java
              */
-            InputHandler errorHandler = new InputHandler(p.getErrorStream(), "Error Stream");
+            /*InputHandler errorHandler = new InputHandler(p.getErrorStream(), "Error Stream");
             errorHandler.start();
             InputHandler inputHandler = new InputHandler(p.getInputStream(), "Output Stream");
             inputHandler.start();
@@ -91,7 +98,25 @@ public class FFMpeg {
             }
         } catch(Exception ex) {
             ex.printStackTrace();
-            System.out.println(ex.getMessage());
+            System.err.println(ex.getMessage());
+        }*/
+        CommandLine cmdLine = CommandLine.parse(ffBuilder.getCommand());
+        PumpStreamHandler streamHandler = new PumpStreamHandler();
+        DefaultExecutor executor = new DefaultExecutor();
+        ExecuteWatchdog watchdog = new ExecuteWatchdog(1800000); //30 minuti
+        executor.setStreamHandler(streamHandler);
+        streamHandler.start();
+        executor.setWatchdog(watchdog);
+        int exitCode = executor.execute(cmdLine);
+        try {
+            if(exitCode != 0) {
+                System.err.println("EXIT CODE: " + exitCode);
+                throw new Exception("An error has occurred.");
+            }
+        } catch(Exception ex) {
+            ex.printStackTrace();
+            System.err.println(ex.getMessage());
+            System.exit(1);
         }
     }
 }

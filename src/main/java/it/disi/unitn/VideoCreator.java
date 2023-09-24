@@ -4,6 +4,7 @@ import it.disi.unitn.exceptions.InvalidArgumentException;
 import it.disi.unitn.exceptions.NotEnoughArgumentsException;
 import org.jetbrains.annotations.NotNull;
 
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -219,8 +220,9 @@ public class VideoCreator {
      * @param time The maximum amount of time to wait for the video's creation
      * @param timeUnit The TimeUnit instance to be used
      * @throws InvalidArgumentException if the video width or height or the video size ID field is null
+     * @throws IOException If an I/O error occurs
      */
-    public void createCommand(long time, @NotNull TimeUnit timeUnit) throws InvalidArgumentException {
+    public void createCommand(long time, @NotNull TimeUnit timeUnit) throws InvalidArgumentException, IOException {
         if(videoWidth == 0 || videoHeight == 0 || videoSizeID == null) {
             throw new InvalidArgumentException("The video width and height should not be null.");
         } else {

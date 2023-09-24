@@ -56,8 +56,9 @@ public class TracksMerger {
      * @param time The maximum amount of time to wait for the video's creation
      * @param timeUnit The TimeUnit instance to be used
      * @throws NotEnoughArgumentsException when the video input path or audio input path is null
+     * @throws IOException If an I/O error occurs
      */
-    public void mergeAudioWithVideo(long time, @NotNull TimeUnit timeUnit) throws NotEnoughArgumentsException {
+    public void mergeAudioWithVideo(long time, @NotNull TimeUnit timeUnit) throws NotEnoughArgumentsException, IOException {
         builder.addAllInputs(videoInput, audioInput);
         builder.setCommand(builder.getCommand() + " -map 0:v");
         if(streamCopy) {
