@@ -5,29 +5,23 @@ import com.google.gson.JsonObject;
 import it.disi.unitn.StringExt;
 import it.disi.unitn.exceptions.InvalidArgumentException;
 import it.disi.unitn.json.JSONToImage;
-import it.disi.unitn.streamhandlers.InputHandler;
-import org.apache.commons.exec.CommandLine;
-import org.apache.commons.exec.DefaultExecutor;
-import org.apache.commons.exec.ExecuteWatchdog;
-import org.apache.commons.exec.PumpStreamHandler;
+import org.apache.commons.exec.*;
+import org.apache.commons.lang3.tuple.Pair;
 import org.jetbrains.annotations.NotNull;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
-import java.util.function.Consumer;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This class is used to create a thread pool which will be used to execute a specified number of threads.
  */
 public class ProcessPool {
+
     //private final ThreadPoolExecutor executor;
 
     private final String scriptpath, imageExtension, pathToImagesFolder;
@@ -37,6 +31,8 @@ public class ProcessPool {
     private final int width, height;
 
     private int index;
+
+    private static final List<ExecutorResHandler> exlist = new ArrayList<>();
 
     /**
      * This constructor creates a new thread pool which will be used to execute a specified number of threads.
@@ -88,6 +84,25 @@ public class ProcessPool {
     }
 
     /**
+     * This method checks if all tasks have terminated correctly. Returns false if any task is still running.
+     * @return true if all processes have terminated correctly, false otherwise
+     */
+    public boolean isTerminated() {
+        return exlist.isEmpty();
+    }
+
+    /**
+     * This method removes ExecutorResHandler instances from the list of currently active instances.
+     * @param handler The ExecutorResHandler instance to be used
+     */
+    public void removeHandler(Object handler) {
+        System.out.println("EMPTY: " + exlist.isEmpty());
+        exlist.remove((ExecutorResHandler) handler);
+        System.out.println("SIZE: " + exlist.size());
+        System.out.println("EMPTY: " + exlist.isEmpty());
+    }
+
+    /**
      * This method executes a process from a ProcessBuilder instance and keeps track of a callback to be executed at the
      * process's termination.
      //* @param pb The ProcessBuilder instance. This parameter must not be null
@@ -98,7 +113,7 @@ public class ProcessPool {
      * @throws IllegalArgumentException if any of the arguments to this method is null
      * @throws IOException if an I/O error occurs
      */
-    public void execute(/*@NotNull ProcessBuilder pb String s, @NotNull Consumer<Process> c, */@NotNull JsonArray array,
+    public void execute(/*@NotNull ProcessBuilder pb, @NotNull Consumer<Process> c, */@NotNull JsonArray array,
                                                                                                @NotNull JSONToImage jti)
             throws IOException {
         /*Process p = pb.start();
@@ -118,32 +133,9 @@ public class ProcessPool {
         ExecuteWatchdog watchdog = new ExecuteWatchdog(1800000); //30 minuti
         executor.setStreamHandler(streamHandler);
         executor.setWatchdog(watchdog);
-        int exitCode = executor.execute(cmdLine);
-        if(exitCode == 0) {
-            try {
-                StringExt i = new StringExt(String.valueOf(index));
-                i.padStart();
-                JsonObject obj = array.get(index).getAsJsonObject();
-                String mime = obj.get("mime").getAsString();
-                Path path = Paths.get(pathToImagesFolder, i.getVal() + "." + imageExtension);
-                File image = path.toFile();
-                byte[] arr = Files.readAllBytes(image.toPath());
-                Files.write(path, arr);
-
-                jti.modifyImage(obj, index, pathToImagesFolder, mime);
-            } catch(InvalidArgumentException | IOException ex) {
-                ex.printStackTrace();
-            }
-        } else {
-            try {
-                System.err.println("EXIT CODE: " + exitCode);
-                throw new Exception("An error has occurred.");
-            } catch(Exception ex) {
-                ex.printStackTrace();
-                System.err.println(ex.getMessage());
-                System.exit(1);
-            }
-        }
+        ExecutorResHandler exrhandler = new ExecutorResHandler(array, index, pathToImagesFolder, imageExtension, jti, this);
+        exlist.add(exrhandler);
+        /*int exitValue = */executor.execute(cmdLine, exrhandler);
         //executor.execute(new ProcessObserver(c, p, 30, TimeUnit.MINUTES));
     }
 

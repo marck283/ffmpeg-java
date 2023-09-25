@@ -78,7 +78,7 @@ public class JSONToImage {
      * @param i An array index
      * @param pathToImagesFolder The path to the folder containing the input images
      * @param mime The image's MIME type
-     * @throws IOException Se un errore di I/O si è verificato durante l'esecuzione di questo metodo
+     * @throws IOException If an I/O error happened during this method's execution
      */
     public void modifyImage(@NotNull JsonObject obj, int i, @NotNull String pathToImagesFolder, @NotNull String mime)
             throws IOException {
@@ -240,6 +240,13 @@ public class JSONToImage {
             }
             System.exit(1);
         }*/
+
+        System.out.println("PID: " + ProcessHandle.current().pid());
+        while(!pool.isTerminated()) {
+            //Polling cycle; might cause hanging problems!
+            System.out.println("TERMINATED: " + pool.isTerminated());
+        }
+        System.out.println("EMPTY LIST!");
     }
 
     /**
