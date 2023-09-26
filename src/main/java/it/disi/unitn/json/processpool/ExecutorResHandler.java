@@ -18,7 +18,7 @@ import java.nio.file.Paths;
 /**
  * This class handles the execution of a callback to be executed at the termination of any picture's inference.
  */
-class ExecutorResHandler implements ExecuteResultHandler {
+public class ExecutorResHandler implements ExecuteResultHandler {
 
     private final JsonArray array;
 

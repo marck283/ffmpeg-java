@@ -153,10 +153,10 @@ public class JSONToImage {
      * @param imageExtension     The extension of the generated images
      * @param width              The width of the generated images
      * @param height             The height of the generated images
-     * @throws IOException If an error occurs when writing to or creating the file
+     * @throws InterruptedException if a thread is interrupted during its execution
      */
     private void generateWithGAN(@NotNull String pathToImagesFolder, @NotNull String imageExtension, int width, int height)
-            throws IOException, InterruptedException/*, InterruptedException, ProcessStillAliveException, InvalidArgumentException*/ {
+            throws InterruptedException/*, InterruptedException, ProcessStillAliveException, InvalidArgumentException*/ {
         if (pathToImagesFolder == null || pathToImagesFolder.isEmpty() || imageExtension == null || imageExtension.isEmpty()) {
             throw new IllegalArgumentException("At least one of the given arguments is either null or an empty string.");
         }

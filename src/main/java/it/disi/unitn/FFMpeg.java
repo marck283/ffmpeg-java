@@ -63,6 +63,35 @@ public class FFMpeg {
     }
 
     /**
+     * This method converts the given timeout in milliseconds using a given TimeUnit constant.
+     * @param timeout The given timeout
+     * @param tu The given TimeUnit instance or constant. This value defaults to TimeUnit.MILLISECONDS
+     * @return The given timeout in milliseconds
+     */
+    private long timeConversion(long timeout, @NotNull TimeUnit tu) {
+        switch(tu) {
+            case DAYS -> {
+                return timeout*86400000;
+            }
+            case HOURS -> {
+                return timeout*3600000;
+            }
+            case MINUTES -> {
+                return timeout*60000;
+            }
+            case SECONDS -> {
+                return timeout*1000;
+            }
+            case MICROSECONDS -> {
+                return (long)(0.001*timeout);
+            }
+            default -> {
+                return timeout;
+            }
+        }
+    }
+
+    /**
      * This method executes the given command on the ProcessBuilder instance on which this class has been instantiated.
      * @param timeout The maximum time interval the calling process will wait for the child process to terminate
      * @param timeUnit The TimeUnit instance that specifies the time unit associated to the first parameter
@@ -105,7 +134,7 @@ public class FFMpeg {
         CommandLine cmdLine = CommandLine.parse(ffBuilder.getCommand());
         PumpStreamHandler streamHandler = new PumpStreamHandler();
         DefaultExecutor executor = new DefaultExecutor();
-        ExecuteWatchdog watchdog = new ExecuteWatchdog(1800000); //30 minuti
+        ExecuteWatchdog watchdog = new ExecuteWatchdog(timeConversion(timeout, timeUnit)); //30 minuti
         executor.setStreamHandler(streamHandler);
         streamHandler.start();
         executor.setWatchdog(watchdog);

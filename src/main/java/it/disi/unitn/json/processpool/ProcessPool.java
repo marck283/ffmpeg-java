@@ -34,10 +34,6 @@ public class ProcessPool {
 
     private final List<ExecutorResHandler> exlist = new ArrayList<>();
 
-    private JsonArray array;
-
-    private JSONToImage jti;
-
     /**
      * This constructor creates a new thread pool which will be used to execute a specified number of threads.
      //* @param num The number of threads to be executed
@@ -127,19 +123,17 @@ public class ProcessPool {
         InputHandler inputHandler = new InputHandler(p.getInputStream(), "Output Stream");
         inputHandler.start();*/
 
-        this.array = array;
-        this.jti = jti;
-
         try {
+            String ptif = "\"" + pathToImagesFolder + "\"";
             String s = "python3 " + scriptpath + " \"" + desc + "\" " + index + " " + imageExtension + " " +
-                    pathToImagesFolder + " " + width + " " + height;
+                    ptif + " " + width + " " + height;
             CommandLine cmdLine = CommandLine.parse(s);
             PumpStreamHandler streamHandler = new PumpStreamHandler();
             DefaultExecutor executor = new DefaultExecutor();
             ExecuteWatchdog watchdog = new ExecuteWatchdog(1800000); //30 minuti
             executor.setStreamHandler(streamHandler);
             executor.setWatchdog(watchdog);
-            ExecutorResHandler exrhandler = new ExecutorResHandler(array, index, pathToImagesFolder, imageExtension, jti, this);
+            ExecutorResHandler exrhandler = new ExecutorResHandler(array, index, ptif, imageExtension, jti, this);
             exlist.add(exrhandler);
             executor.execute(cmdLine, exrhandler);
         } catch (IOException e) {
