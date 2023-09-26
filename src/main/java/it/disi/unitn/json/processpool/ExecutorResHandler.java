@@ -37,6 +37,7 @@ public class ExecutorResHandler implements ExecuteResultHandler {
      * @param pathToImagesFolder The path to each picture's destination folder
      * @param imageExtension The picture's file extension
      * @param jti The JSONToImage instance to be used
+     * @param pp The ProcessPool instance to be used
      */
     public ExecutorResHandler(@NotNull JsonArray arr, int i, @NotNull String pathToImagesFolder,
                               @NotNull String imageExtension, @NotNull JSONToImage jti, @NotNull ProcessPool pp) {
