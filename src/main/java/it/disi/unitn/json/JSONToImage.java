@@ -22,6 +22,7 @@ import java.util.Base64;
 import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.ReentrantLock;
 import java.util.function.Consumer;
 
 /**
@@ -41,10 +42,11 @@ public class JSONToImage {
     /**
      * The class's constructor. At the time of writing, this constructor only supports "image/jpeg" and "image/png" types.
      * Any other type will make this constructor throw an IllegalArgumentException.
+     *
      * @param pathToJsonFile The path to the JSON file on which to initialize an object of this class
-     * @param useGAN A boolean value that, if true, instructs the program to use a GAN
+     * @param useGAN         A boolean value that, if true, instructs the program to use a GAN
      * @throws IllegalArgumentException When the specified format name is not supported
-     * @throws IOException If an I/O error occurs opening the file
+     * @throws IOException              If an I/O error occurs opening the file
      */
     public JSONToImage(@NotNull String pathToJsonFile, boolean useGAN) throws IllegalArgumentException, IOException {
         File jsonFile = new File(pathToJsonFile);
@@ -62,7 +64,7 @@ public class JSONToImage {
      * array of bytes.
      */
     private void toByteArray() {
-        for(JsonElement e: array) {
+        for (JsonElement e : array) {
             JsonObject el = e.getAsJsonObject();
             String data = el.get("image-background").getAsString();
             data = data.replace("data:image/jpeg;base64,", "")
@@ -74,10 +76,11 @@ public class JSONToImage {
     /**
      * This method modifies the given image (denoted by the given path and the given array index) with the text obtained
      * by reading the JSON file that was given as input to this class's constructor.
-     * @param obj The JSON object representing the current image
-     * @param i An array index
+     *
+     * @param obj                The JSON object representing the current image
+     * @param i                  An array index
      * @param pathToImagesFolder The path to the folder containing the input images
-     * @param mime The image's MIME type
+     * @param mime               The image's MIME type
      * @throws IOException If an I/O error happened during this method's execution
      */
     public void modifyImage(@NotNull JsonObject obj, int i, @NotNull String pathToImagesFolder, @NotNull String mime)
@@ -89,7 +92,7 @@ public class JSONToImage {
 
             int positionx, positiony;
             float fontDim;
-            for(JsonElement e1: imageText) {
+            for (JsonElement e1 : imageText) {
                 JsonObject textInfo = e1.getAsJsonObject();
                 String text = textInfo.get("name").getAsString(), text1 = textInfo.get("value").getAsString();
 
@@ -120,18 +123,19 @@ public class JSONToImage {
     /**
      * This method returns the extension of the resulting images by reading the MIME type requested by the user
      * through a JsonObject instance.
+     *
      * @param obj The JsonObject instance that contains the "mime" attribute
      * @return The extension of the resulting images as a String instance
      * @throws UnsupportedEncodingException When the requested MIME type refers to a file encoding other than "image/jpeg"
-     * or "image/png"
+     *                                      or "image/png"
      */
     public @NotNull String getMIME(@NotNull JsonObject obj) throws UnsupportedEncodingException {
         String mime = obj.get("mime").getAsString(), imageExt;
 
-        if(mime.equals("image/jpeg")) {
+        if (mime.equals("image/jpeg")) {
             imageExt = "jpeg";
         } else {
-            if(mime.equals("image/png")) {
+            if (mime.equals("image/png")) {
                 imageExt = "png";
             } else {
                 throw new UnsupportedEncodingException("An unsupported file extension was used.");
@@ -144,27 +148,28 @@ public class JSONToImage {
     /**
      * This method instructs the library to generate the images with a GAN. The meanings of its parameters are the same
      * as for generate(). It is worth noting that this method will generate one image per description given by the user.
+     *
      * @param pathToImagesFolder The (either absolute or relative) path to the folder that will contain the generated images.
-     * @param imageExtension The extension of the generated images
-     * @param width The width of the generated images
-     * @param height The height of the generated images
+     * @param imageExtension     The extension of the generated images
+     * @param width              The width of the generated images
+     * @param height             The height of the generated images
      * @throws IOException If an error occurs when writing to or creating the file
      */
     private void generateWithGAN(@NotNull String pathToImagesFolder, @NotNull String imageExtension, int width, int height)
-            throws IOException/*, InterruptedException, ProcessStillAliveException, InvalidArgumentException*/ {
-        if(pathToImagesFolder == null || pathToImagesFolder.isEmpty() || imageExtension == null || imageExtension.isEmpty()) {
+            throws IOException, InterruptedException/*, InterruptedException, ProcessStillAliveException, InvalidArgumentException*/ {
+        if (pathToImagesFolder == null || pathToImagesFolder.isEmpty() || imageExtension == null || imageExtension.isEmpty()) {
             throw new IllegalArgumentException("At least one of the given arguments is either null or an empty string.");
         }
 
-        if(width <= 0 || height <= 0) {
+        if (width <= 0 || height <= 0) {
             throw new IllegalArgumentException("Both the image's width and height must be strictly positive.");
         }
 
-        if(width % 8 != 0 || height % 8 != 0) {
+        if (width % 8 != 0 || height % 8 != 0) {
             throw new IllegalArgumentException("Both the image's width and height must be divisible by either 8 or 64.");
         }
 
-        if(width%64 != 0 || height%64 != 0) {
+        if (width % 64 != 0 || height % 64 != 0) {
             throw new IllegalArgumentException("Both the image's width and height must be divisible by either 8 or 64.");
         }
 
@@ -172,7 +177,7 @@ public class JSONToImage {
         Path dir = Paths.get(""); //Gets the current working directory
         File model = dir.resolve("model.py").toFile();
         ProcessPool pool = new ProcessPool(model, imageExtension, pathToImagesFolder, width, height);
-        for(JsonElement e: array) {
+        for (JsonElement e : array) {
             JsonObject el = e.getAsJsonObject();
             String desc = el.get("image-description").getAsString();
             pool.setDesc(desc);
@@ -241,11 +246,17 @@ public class JSONToImage {
             System.exit(1);
         }*/
 
-        System.out.println("PID: " + ProcessHandle.current().pid());
-        while(!pool.isTerminated()) {
-            //Polling cycle; might cause hanging problems!
-            System.out.println("TERMINATED: " + pool.isTerminated());
-        }
+        Thread t1 = new Thread(() -> {
+            try {
+                //Waits until this thread is notified. This method needs to be synchronized for this call to work properly.
+                pool.doWait();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        });
+        t1.start();
+        t1.join();
+
         System.out.println("EMPTY LIST!");
     }
 
@@ -253,33 +264,34 @@ public class JSONToImage {
      * This method generates images from the previously obtained list of arrays of bytes.
      * WARNING: This method will fail to return the correct file type if the JSON array that is used in this class
      * contains images of different MIME types. Please insert only images of the same MIME type.
+     *
      * @param pathToImagesFolder The (either absolute or relative) path to the folder that will contain the generated images.
-     * @param imageExtension The extension of the generated images
-     * @param width The width of the generated images. This value should be positive if the program uses a
-     *               neural network to generate the images
-     * @param height The height of the generated images. This value should be positive if the program uses a
-     *               neural network to generate the images
-     * @throws IOException If an error occurs when writing to or creating the file
+     * @param imageExtension     The extension of the generated images
+     * @param width              The width of the generated images. This value should be positive if the program uses a
+     *                           neural network to generate the images
+     * @param height             The height of the generated images. This value should be positive if the program uses a
+     *                           neural network to generate the images
+     * @throws IOException              If an error occurs when writing to or creating the file
      * @throws InvalidArgumentException If a null or illegal value (e.e, the empty string) is passed as argument to this
-     //* @throws InterruptedException If the current thread is interrupted while waiting
-     //* @throws ProcessStillAliveException If the child process is still alive. This exception is thrown only if a neural
-     * network is used to generate the pictures.
+     * @throws InterruptedException     If the current thread is interrupted while waiting
+     *                                  //* @throws ProcessStillAliveException If the child process is still alive. This exception is thrown only if a neural
+     *                                  network is used to generate the pictures.
      */
     public void generate(@NotNull String pathToImagesFolder, @NotNull String imageExtension, int width, int height)
-            throws IOException, InvalidArgumentException/*, InterruptedException,
+            throws IOException, InvalidArgumentException, InterruptedException/*,
             ProcessStillAliveException*/ {
-        if(pathToImagesFolder == null || pathToImagesFolder.isEmpty()) {
+        if (pathToImagesFolder == null || pathToImagesFolder.isEmpty()) {
             throw new IllegalArgumentException("A null or illegal value was passed as argument to this method.");
         }
 
-        if(useGAN) {
+        if (useGAN) {
             //Avvia la rete neurale per produrre le immagini
             generateWithGAN(pathToImagesFolder, imageExtension, width, height);
         } else {
             toByteArray();
 
             int i = 0;
-            for(byte[] arr: byteArrList) {
+            for (byte[] arr : byteArrList) {
                 JsonObject obj = array.get(i).getAsJsonObject();
                 String mime = obj.get("mime").getAsString();
                 StringExt fileName = new StringExt(String.valueOf(i));
@@ -296,22 +308,23 @@ public class JSONToImage {
     /**
      * Adds the given text to the image associated to the given file path starting at the point (x, y). This method also
      * allows the user to specify the font's dimension and its color.
-     * @param filePath The path of the given image
+     *
+     * @param filePath   The path of the given image
      * @param formatName The name of the file's format
-     * @param inputText The text to be inserted into the given image
-     * @param x The abscissa at which to add the given text
-     * @param y The ordinate at which to add the given text
-     * @param fontDim The font's dimension
-     * @param color The font's color
+     * @param inputText  The text to be inserted into the given image
+     * @param x          The abscissa at which to add the given text
+     * @param y          The ordinate at which to add the given text
+     * @param fontDim    The font's dimension
+     * @param color      The font's color
      * @throws IOException if an error occurs during writing or when not able to create required ImageOutputStream
      */
     public void addText(@NotNull String filePath, @NotNull String formatName, @NotNull String inputText, int x, int y,
                         float fontDim, @NotNull Color color) throws IOException {
         String fname = "";
-        if(formatName.equals("image/jpeg")) {
+        if (formatName.equals("image/jpeg")) {
             fname = "jpeg";
         } else {
-            if(formatName.equals("image/png")) {
+            if (formatName.equals("image/png")) {
                 fname = "png";
             }
         }

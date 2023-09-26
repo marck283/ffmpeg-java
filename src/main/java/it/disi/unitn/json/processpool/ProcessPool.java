@@ -32,7 +32,11 @@ public class ProcessPool {
 
     private int index;
 
-    private static final List<ExecutorResHandler> exlist = new ArrayList<>();
+    private final List<ExecutorResHandler> exlist = new ArrayList<>();
+
+    private JsonArray array;
+
+    private JSONToImage jti;
 
     /**
      * This constructor creates a new thread pool which will be used to execute a specified number of threads.
@@ -84,38 +88,36 @@ public class ProcessPool {
     }
 
     /**
-     * This method checks if all tasks have terminated correctly. Returns false if any task is still running.
-     * @return true if all processes have terminated correctly, false otherwise
+     * This method waits until all tasks have terminated correctly.
+     * @throws InterruptedException if any thread interrupted the current thread before or while the current thread was
+     * waiting. The interrupted status of the current thread is cleared when this exception is thrown.
      */
-    public boolean isTerminated() {
-        return exlist.isEmpty();
+    public synchronized void doWait() throws InterruptedException {
+        wait();
     }
 
     /**
      * This method removes ExecutorResHandler instances from the list of currently active instances.
      * @param handler The ExecutorResHandler instance to be used
      */
-    public void removeHandler(Object handler) {
-        System.out.println("EMPTY: " + exlist.isEmpty());
-        exlist.remove((ExecutorResHandler) handler);
-        System.out.println("SIZE: " + exlist.size());
-        System.out.println("EMPTY: " + exlist.isEmpty());
+    public synchronized void removeHandler(ExecutorResHandler handler) {
+        if(exlist.size() == 1 && exlist.contains(handler)) {
+            //Notifies all threads that were waiting on this object's monitor. This call needs to happen either inside a
+            //synchronized method or inside a synchronized code block.
+            notifyAll();
+        }
+        exlist.remove(handler);
     }
 
     /**
      * This method executes a process from a ProcessBuilder instance and keeps track of a callback to be executed at the
      * process's termination.
-     //* @param pb The ProcessBuilder instance. This parameter must not be null
-     //* @param s The command to be executed on the command line
-     //* @param c The callback to be executed at the process's termination. This parameter must not be null
      * @param array The JsonArray instance from which to take the necessary information about the final pictures
      * @param jti The JSONToImage instance to be used
      * @throws IllegalArgumentException if any of the arguments to this method is null
-     * @throws IOException if an I/O error occurs
      */
     public void execute(/*@NotNull ProcessBuilder pb, @NotNull Consumer<Process> c, */@NotNull JsonArray array,
-                                                                                               @NotNull JSONToImage jti)
-            throws IOException {
+                                                                                               @NotNull JSONToImage jti) {
         /*Process p = pb.start();
 
         InputStream istream = p.getErrorStream();
@@ -125,17 +127,27 @@ public class ProcessPool {
         InputHandler inputHandler = new InputHandler(p.getInputStream(), "Output Stream");
         inputHandler.start();*/
 
-        String s = "python3 " + scriptpath + " \"" + desc + "\" " + index + " " + imageExtension + " " + pathToImagesFolder +
-                " " + width + " " + height;
-        CommandLine cmdLine = CommandLine.parse(s);
-        PumpStreamHandler streamHandler = new PumpStreamHandler();
-        DefaultExecutor executor = new DefaultExecutor();
-        ExecuteWatchdog watchdog = new ExecuteWatchdog(1800000); //30 minuti
-        executor.setStreamHandler(streamHandler);
-        executor.setWatchdog(watchdog);
-        ExecutorResHandler exrhandler = new ExecutorResHandler(array, index, pathToImagesFolder, imageExtension, jti, this);
-        exlist.add(exrhandler);
-        /*int exitValue = */executor.execute(cmdLine, exrhandler);
+        this.array = array;
+        this.jti = jti;
+
+        try {
+            String s = "python3 " + scriptpath + " \"" + desc + "\" " + index + " " + imageExtension + " " +
+                    pathToImagesFolder + " " + width + " " + height;
+            CommandLine cmdLine = CommandLine.parse(s);
+            PumpStreamHandler streamHandler = new PumpStreamHandler();
+            DefaultExecutor executor = new DefaultExecutor();
+            ExecuteWatchdog watchdog = new ExecuteWatchdog(1800000); //30 minuti
+            executor.setStreamHandler(streamHandler);
+            executor.setWatchdog(watchdog);
+            ExecutorResHandler exrhandler = new ExecutorResHandler(array, index, pathToImagesFolder, imageExtension, jti, this);
+            exlist.add(exrhandler);
+            executor.execute(cmdLine, exrhandler);
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.err.println(e.getLocalizedMessage());
+            System.exit(1);
+        }
+
         //executor.execute(new ProcessObserver(c, p, 30, TimeUnit.MINUTES));
     }
 

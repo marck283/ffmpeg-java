@@ -84,24 +84,30 @@ class ExecutorResHandler implements ExecuteResultHandler {
                         System.exit(1);
                     }
                 }*/
-        try {
-            StringExt i = new StringExt(String.valueOf(index));
-            i.padStart();
-            JsonObject obj = array.get(index).getAsJsonObject();
-            String mime = obj.get("mime").getAsString();
-            Path path = Paths.get(pathToImagesFolder, i.getVal() + "." + imageExtension);
-            File image = path.toFile();
-            byte[] arr = Files.readAllBytes(image.toPath());
-            Files.write(path, arr);
+        Thread t2 = new Thread(() -> {
+            try {
+                StringExt i = new StringExt(String.valueOf(index));
+                i.padStart();
+                JsonObject obj = array.get(index).getAsJsonObject();
+                String mime = obj.get("mime").getAsString();
+                Path path = Paths.get(pathToImagesFolder, i.getVal() + "." + imageExtension);
+                File image = path.toFile();
+                byte[] arr = Files.readAllBytes(image.toPath());
+                Files.write(path, arr);
 
-            jti.modifyImage(obj, index, pathToImagesFolder, mime);
-            System.out.println("COMPLETED");
-            pp.removeHandler(this); //Might cause problems because pp is final or effectively final.
-            System.out.println(ProcessHandle.current().pid());
-        } catch (InvalidArgumentException | IOException ex) {
-            ex.printStackTrace();
-            System.err.println(ex.getMessage());
-            System.exit(1);
+                jti.modifyImage(obj, index, pathToImagesFolder, mime);
+                pp.removeHandler(this);
+            } catch (InvalidArgumentException | IOException ex) {
+                ex.printStackTrace();
+                System.err.println(ex.getMessage());
+                System.exit(1);
+            }
+        });
+        t2.start();
+        try {
+            t2.join();
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
         }
     }
 
