@@ -124,16 +124,15 @@ public class ProcessPool {
         inputHandler.start();*/
 
         try {
-            String ptif = "\"" + pathToImagesFolder + "\"";
             String s = "python3 " + scriptpath + " \"" + desc + "\" " + index + " " + imageExtension + " " +
-                    ptif + " " + width + " " + height;
+                    pathToImagesFolder + " " + width + " " + height;
             CommandLine cmdLine = CommandLine.parse(s);
             PumpStreamHandler streamHandler = new PumpStreamHandler();
             DefaultExecutor executor = new DefaultExecutor();
             ExecuteWatchdog watchdog = new ExecuteWatchdog(1800000); //30 minuti
             executor.setStreamHandler(streamHandler);
             executor.setWatchdog(watchdog);
-            ExecutorResHandler exrhandler = new ExecutorResHandler(array, index, ptif, imageExtension, jti, this);
+            ExecutorResHandler exrhandler = new ExecutorResHandler(array, index, pathToImagesFolder, imageExtension, jti, this);
             exlist.add(exrhandler);
             executor.execute(cmdLine, exrhandler);
         } catch (IOException e) {
