@@ -3,10 +3,10 @@ package it.disi.unitn.json;
 import com.google.gson.*;
 import it.disi.unitn.StringExt;
 import it.disi.unitn.exceptions.InvalidArgumentException;
-import it.disi.unitn.exceptions.ProcessStillAliveException;
+//import it.disi.unitn.exceptions.ProcessStillAliveException;
 import it.disi.unitn.json.processpool.ProcessPool;
-import it.disi.unitn.streamhandlers.InputHandler;
-import org.apache.commons.lang3.SystemUtils;
+/*import it.disi.unitn.streamhandlers.InputHandler;
+import org.apache.commons.lang3.SystemUtils;*/
 import org.jetbrains.annotations.NotNull;
 
 import javax.imageio.ImageIO;
@@ -20,10 +20,10 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
-import java.util.Locale;
+/*import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.ReentrantLock;
-import java.util.function.Consumer;
+import java.util.function.Consumer;*/
 
 /**
  * This class translates a given JSON file into a list of Image objects.
@@ -182,9 +182,9 @@ public class JSONToImage {
             String desc = el.get("image-description").getAsString();
             pool.setDesc(desc);
             pool.setIndex(index);
-            //ProcessBuilder pb;
+            /*ProcessBuilder pb;
 
-            /*if(SystemUtils.IS_OS_WINDOWS) {
+            if(SystemUtils.IS_OS_WINDOWS) {
                 pb = new ProcessBuilder("cmd", "/c", s);
             } else {
                 pb = new ProcessBuilder("bash", "-c", s);
@@ -219,9 +219,10 @@ public class JSONToImage {
                     i.padStart();
                     JsonObject obj = array.get(index1).getAsJsonObject();
                     String mime = obj.get("mime").getAsString();
-                    Path path = Paths.get(pathToImagesFolder, i.getVal() + "." + imageExtension);
-                    File image = path.toFile();
-                    byte[] arr = Files.readAllBytes(image.toPath());
+                    Path path = getPath(pathToImagesFolder, i.getVal() + "." + imageExtension);
+                    //File image = path.toFile();
+                    //byte[] arr = Files.readAllBytes(image.toPath());
+                    byte[] arr = Files.readAllBytes(path);
                     Files.write(path, arr);
 
                     modifyImage(obj, index1, pathToImagesFolder, mime);

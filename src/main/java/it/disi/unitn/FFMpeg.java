@@ -1,16 +1,18 @@
 package it.disi.unitn;
 
-import com.google.gson.JsonObject;
+/*import com.google.gson.JsonObject;
 import it.disi.unitn.exceptions.InvalidArgumentException;
-import it.disi.unitn.streamhandlers.InputHandler;
+import it.disi.unitn.streamhandlers.InputHandler;*/
 import org.apache.commons.exec.*;
-import org.apache.commons.lang3.SystemUtils;
+//import org.apache.commons.lang3.SystemUtils;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.*;
-import java.nio.file.Files;
+/*import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.FileSystem;
+import java.nio.file.FileSystems;*/
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -24,8 +26,30 @@ public class FFMpeg {
         this.ffBuilder = ffBuilder;
     }
 
-    private void printStream(@NotNull InputStream istream) throws Exception {
-        throw new Exception("An error has occurred.");
+    private void execProcess(boolean withTimeout, long timeout) throws IOException {
+        CommandLine cmdLine = CommandLine.parse(ffBuilder.getCommand());
+        PumpStreamHandler streamHandler = new PumpStreamHandler();
+        DefaultExecutor executor = new DefaultExecutor();
+        ExecuteWatchdog watchdog = null;
+        if(withTimeout) {
+            watchdog = new ExecuteWatchdog(timeout); //30 minuti
+        }
+        executor.setStreamHandler(streamHandler);
+        streamHandler.start();
+        if(withTimeout) {
+            executor.setWatchdog(watchdog);
+        }
+        int exitCode = executor.execute(cmdLine);
+        try {
+            if(exitCode != 0) {
+                System.err.println("EXIT CODE: " + exitCode);
+                throw new Exception("An error has occurred.");
+            }
+        } catch(Exception ex) {
+            ex.printStackTrace();
+            System.err.println(ex.getMessage());
+            System.exit(1);
+        }
     }
 
     /**
@@ -33,9 +57,10 @@ public class FFMpeg {
      * current thread to wait for the child process's termination. Use with caution. This method should be used only for
      * those situations where the developer can be sure that the process will terminate in a reasonable time interval or
      * where waiting for the child process is not a problem.
+     * @throws IOException If an I/O error occurs
      */
-    public void executeCMD() {
-        ProcessBuilder builder = new ProcessBuilder(ffBuilder.getCommand());
+    public void executeCMD() throws IOException {
+        /*ProcessBuilder builder = new ProcessBuilder(ffBuilder.getCommand());
         Process p;
         try {
             p = builder.start();
@@ -45,7 +70,7 @@ public class FFMpeg {
              * FFMpeg hangs when we do not use two separate threads to handle the Error and Output streams.
              * See here: https://ffmpeg-user.ffmpeg.narkive.com/3WBzsW4a/ffmpeg-hangs-when-being-executed-from-within-java
              */
-            InputHandler errorHandler = new InputHandler(istream, "Error Stream");
+            /*InputHandler errorHandler = new InputHandler(istream, "Error Stream");
             errorHandler.start();
             InputHandler inputHandler = new InputHandler(p.getInputStream(), "Output Stream");
             inputHandler.start();
@@ -59,7 +84,10 @@ public class FFMpeg {
         } catch(Exception ex) {
             ex.printStackTrace();
             System.out.println("oops");
-        }
+        }*/
+
+        //Utilizzo la libreria Apache Commons Exec per eseguire FFmpeg.
+        execProcess(false, 0);
     }
 
     /**
@@ -129,25 +157,8 @@ public class FFMpeg {
             ex.printStackTrace();
             System.err.println(ex.getMessage());
         }*/
-
+        
         //A questo punto, utilizzo la libreria Apache Commons Exec per eseguire FFmpeg.
-        CommandLine cmdLine = CommandLine.parse(ffBuilder.getCommand());
-        PumpStreamHandler streamHandler = new PumpStreamHandler();
-        DefaultExecutor executor = new DefaultExecutor();
-        ExecuteWatchdog watchdog = new ExecuteWatchdog(timeConversion(timeout, timeUnit)); //30 minuti
-        executor.setStreamHandler(streamHandler);
-        streamHandler.start();
-        executor.setWatchdog(watchdog);
-        int exitCode = executor.execute(cmdLine);
-        try {
-            if(exitCode != 0) {
-                System.err.println("EXIT CODE: " + exitCode);
-                throw new Exception("An error has occurred.");
-            }
-        } catch(Exception ex) {
-            ex.printStackTrace();
-            System.err.println(ex.getMessage());
-            System.exit(1);
-        }
+        execProcess(true, timeConversion(timeout, timeUnit));
     }
 }

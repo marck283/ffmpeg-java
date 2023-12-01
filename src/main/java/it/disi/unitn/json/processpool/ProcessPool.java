@@ -1,19 +1,19 @@
 package it.disi.unitn.json.processpool;
 
 import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
+/*import com.google.gson.JsonObject;
 import it.disi.unitn.StringExt;
-import it.disi.unitn.exceptions.InvalidArgumentException;
+import it.disi.unitn.exceptions.InvalidArgumentException;*/
 import it.disi.unitn.json.JSONToImage;
 import org.apache.commons.exec.*;
-import org.apache.commons.lang3.tuple.Pair;
+//import org.apache.commons.lang3.tuple.Pair;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
+/*import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.nio.file.Paths;*/
 import java.util.ArrayList;
 import java.util.List;
 

@@ -7,9 +7,10 @@ import it.disi.unitn.exceptions.InvalidArgumentException;
 import it.disi.unitn.json.JSONToImage;
 import org.apache.commons.exec.ExecuteException;
 import org.apache.commons.exec.ExecuteResultHandler;
+import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 
-import java.io.File;
+//java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -54,6 +55,18 @@ public class ExecutorResHandler implements ExecuteResultHandler {
     }
 
     /**
+     * This method resolves the path to the given directories and joins them to form a single path.
+     * @param first The first folder of the path
+     * @param path Other folders of the path. These must be given in the same order as they appear
+     *             in the file system (e.g., "foo" and "bar" must correspond to "foo/bar"
+     *             in the file system)
+     * @return The resulting Path instance
+     */
+    private @NotNull Path getPath(@NonNls String first, @NonNls String ... path) {
+        return Paths.get(first, path);
+    }
+
+    /**
      * To be executed on process completion
      *
      * @param exitValue the exit value of the sub-process
@@ -66,7 +79,7 @@ public class ExecutorResHandler implements ExecuteResultHandler {
                         i.padStart();
                         JsonObject obj = array.get(index).getAsJsonObject();
                         String mime = obj.get("mime").getAsString();
-                        Path path = Paths.get(pathToImagesFolder, i.getVal() + "." + imageExtension);
+                        Path path = getPath(pathToImagesFolder, i.getVal() + "." + imageExtension);
                         File image = path.toFile();
                         byte[] arr = Files.readAllBytes(image.toPath());
                         Files.write(path, arr);
@@ -91,9 +104,8 @@ public class ExecutorResHandler implements ExecuteResultHandler {
                 i.padStart();
                 JsonObject obj = array.get(index).getAsJsonObject();
                 String mime = obj.get("mime").getAsString();
-                Path path = Paths.get(pathToImagesFolder, i.getVal() + "." + imageExtension);
-                File image = path.toFile();
-                byte[] arr = Files.readAllBytes(image.toPath());
+                Path path = getPath(pathToImagesFolder, i.getVal() + "." + imageExtension);
+                byte[] arr = Files.readAllBytes(path);
                 Files.write(path, arr);
 
                 jti.modifyImage(obj, index, pathToImagesFolder, mime);

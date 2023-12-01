@@ -14,7 +14,7 @@ plugins {
 }
 
 group 'it.disi.unitn'
-version '1.0.23'
+version '1.0.24'
 
 java {
     withJavadocJar()
@@ -69,14 +69,6 @@ dependencies {
     implementation 'org.jetbrains:annotations:23.0.0'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
-
-    /*implementation "ai.djl:bom:0.22.1"
-    implementation "ai.djl:api:0.22.1"
-    implementation "ai.djl.pytorch:pytorch-engine:0.22.1"
-    implementation "ai.djl.pytorch:pytorch-model-zoo:0.22.1"
-    runtimeOnly "ai.djl.pytorch:pytorch-jni:2.0.0-0.22.1"
-    runtimeOnly "ai.djl.pytorch:pytorch-native-cu118:2.0.0:win-x86_64" //Windows version of PyTorch library
-    runtimeOnly "ai.djl.pytorch:pytorch-native-cu118:2.0.1:linux-x86_64" //Linux version of PyTorch library*/
 
     implementation platform('com.google.cloud:libraries-bom:26.10.0')
     implementation 'com.google.code.gson:gson:2.10.1'

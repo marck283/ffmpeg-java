@@ -3,7 +3,7 @@
   "component": {
     "group": "it.disi.unitn.ffmpeg",
     "module": "ffmpeg-java-id",
-    "version": "1.0.23",
+    "version": "1.0.24",
     "attributes": {
       "org.gradle.status": "release"
     }
@@ -25,13 +25,13 @@
       },
       "files": [
         {
-          "name": "ffmpeg-java-id-1.0.23.jar",
-          "url": "ffmpeg-java-id-1.0.23.jar",
-          "size": 1149609,
-          "sha512": "190ca425fc125fc10fcee0cae6800fc1c5b2ab829071171c8ba889093bdbafb55cb321fc76c34dbed4352809fd0f19cf96b5b3ebaeb5eacf8b4a373a6ad345b0",
-          "sha256": "13493079befd943e24d00d57c45326cd129f3934b61706305bc2b7396bc52109",
-          "sha1": "dfabddf6b2761fbf5004e8034b68349eb430d89f",
-          "md5": "6b67f2cc3c9082315982004bb75c59e7"
+          "name": "ffmpeg-java-id-1.0.24.jar",
+          "url": "ffmpeg-java-id-1.0.24.jar",
+          "size": 1149228,
+          "sha512": "e4fd09415267c1d7aa6c3e59fe7bdaf99e35d62730b18acc483f6e50f3668ff3bac84ac092c33864e5dd5fff21a64a2cfabe2dae45a1548747022fea2587d2da",
+          "sha256": "d7bb8cbf453bfd2dd493f41c2ebcb0285945d40b7c501a363fdac68b7d880ff5",
+          "sha1": "8b0babf72bad50284a205b4e6712241f0dca6c7b",
+          "md5": "8584c67320fb519f1ceb7ee37715782e"
         }
       ]
     },
@@ -108,13 +108,13 @@
       ],
       "files": [
         {
-          "name": "ffmpeg-java-id-1.0.23.jar",
-          "url": "ffmpeg-java-id-1.0.23.jar",
-          "size": 1149609,
-          "sha512": "190ca425fc125fc10fcee0cae6800fc1c5b2ab829071171c8ba889093bdbafb55cb321fc76c34dbed4352809fd0f19cf96b5b3ebaeb5eacf8b4a373a6ad345b0",
-          "sha256": "13493079befd943e24d00d57c45326cd129f3934b61706305bc2b7396bc52109",
-          "sha1": "dfabddf6b2761fbf5004e8034b68349eb430d89f",
-          "md5": "6b67f2cc3c9082315982004bb75c59e7"
+          "name": "ffmpeg-java-id-1.0.24.jar",
+          "url": "ffmpeg-java-id-1.0.24.jar",
+          "size": 1149228,
+          "sha512": "e4fd09415267c1d7aa6c3e59fe7bdaf99e35d62730b18acc483f6e50f3668ff3bac84ac092c33864e5dd5fff21a64a2cfabe2dae45a1548747022fea2587d2da",
+          "sha256": "d7bb8cbf453bfd2dd493f41c2ebcb0285945d40b7c501a363fdac68b7d880ff5",
+          "sha1": "8b0babf72bad50284a205b4e6712241f0dca6c7b",
+          "md5": "8584c67320fb519f1ceb7ee37715782e"
         }
       ]
     },
@@ -128,13 +128,13 @@
       },
       "files": [
         {
-          "name": "ffmpeg-java-id-1.0.23-javadoc.jar",
-          "url": "ffmpeg-java-id-1.0.23-javadoc.jar",
-          "size": 150212,
-          "sha512": "1be6b28acfa1bdf69c4a96286e5a1bcda2b53916910cf1c3d816df8faee69e149659909f4bf4efcb04b9bcd0c376666a7623fe2b584ca4eda3830763d7f413f0",
-          "sha256": "60a3dba8e9e64948d825cf4304a4fbc8fab4f5104ab5707165118f6277fe7850",
-          "sha1": "0678a2e47572652835bb7c74ce6fb8be82e85296",
-          "md5": "94f629e6a8a029176f29eb1c801a21c1"
+          "name": "ffmpeg-java-id-1.0.24-javadoc.jar",
+          "url": "ffmpeg-java-id-1.0.24-javadoc.jar",
+          "size": 150225,
+          "sha512": "f7bbf02dd2975d7fca3c5b0e17e86241a8d8e958897fbef4eb53b7de88edb2316cde58f8789d51885b9588e42cc8a026858bb074c1de161693601026df2b5c0e",
+          "sha256": "debbf2ea575c6b007d3f223d13160d6ff0eafac707521a8bcc0e44a4402eff47",
+          "sha1": "ea7da0acbde12e5dca0e814b6b9b18248d1adb55",
+          "md5": "1eb47dfc20f0fbc85d92dbeaeca07853"
         }
       ]
     },
@@ -148,13 +148,13 @@
       },
       "files": [
         {
-          "name": "ffmpeg-java-id-1.0.23-sources.jar",
-          "url": "ffmpeg-java-id-1.0.23-sources.jar",
-          "size": 1141727,
-          "sha512": "0bc12774e5b5b0e0ed52d7c3fabfcde1ac1b1344cb19372ad125351a22a91828d8b294056cba69d9cbbb46892dfb770da5b5bab71ba85a6dfc273255974a17e5",
-          "sha256": "9252861fea9586567d54561af0bd14c8ddc553d1bc6c3d63f4a23a22a9948258",
-          "sha1": "481c7961ce315b9f63e3d0ddf0e919e28a72c373",
-          "md5": "32e9dbb0df9a9e3d3ec5c3113b4968bb"
+          "name": "ffmpeg-java-id-1.0.24-sources.jar",
+          "url": "ffmpeg-java-id-1.0.24-sources.jar",
+          "size": 1142079,
+          "sha512": "e32cd6036804439ef19fd2b1582d88a175f43cf66b2752365df4dd1f23d40977d57a598a20f1874b41ca92cc7930c978fe25d52b2c536298098aa1d7ebe104fe",
+          "sha256": "47054dd73a130e013012c607fc3b2abdfc0b3230060ff4843f5b31201696315d",
+          "sha1": "93fad4591db124d0e0bf2c7902e289df6601a37c",
+          "md5": "33a10a42c227bc6dd89a00bf1a267605"
         }
       ]
     }
