@@ -7,6 +7,7 @@ import it.disi.unitn.exceptions.InvalidArgumentException;
 import it.disi.unitn.json.processpool.ProcessPool;
 /*import it.disi.unitn.streamhandlers.InputHandler;
 import org.apache.commons.lang3.SystemUtils;*/
+import it.disi.unitn.jsonparser.JsonParser;
 import org.jetbrains.annotations.NotNull;
 
 import javax.imageio.ImageIO;
@@ -39,6 +40,8 @@ public class JSONToImage {
 
     private final boolean useGAN;
 
+    private final JsonParser parser;
+
     /**
      * The class's constructor. At the time of writing, this constructor only supports "image/jpeg" and "image/png" types.
      * Any other type will make this constructor throw an IllegalArgumentException.
@@ -55,6 +58,7 @@ public class JSONToImage {
         Gson gson = new GsonBuilder().create();
         Reader r = Files.newBufferedReader(jsonFile.toPath().toAbsolutePath());
         JsonObject object = gson.fromJson(r, JsonObject.class);
+        parser = new JsonParser(r);
         array = object.getAsJsonArray("array");
         this.useGAN = useGAN;
     }
@@ -65,8 +69,9 @@ public class JSONToImage {
      */
     private void toByteArray() {
         for (JsonElement e : array) {
-            JsonObject el = e.getAsJsonObject();
-            String data = el.get("image-background").getAsString();
+            String data = parser.getString(e, "image-background");
+            /*JsonObject el = parser.getJsonObject(e);
+            String data = el.get("image-background").getAsString();*/
             data = data.replace("data:image/jpeg;base64,", "")
                     .replace("data:image/png;base64,", "");
             byteArrList.add(Base64.getDecoder().decode(data.getBytes(StandardCharsets.UTF_8)));
@@ -86,31 +91,40 @@ public class JSONToImage {
     public void modifyImage(@NotNull JsonObject obj, int i, @NotNull String pathToImagesFolder, @NotNull String mime)
             throws IOException {
         try {
-            JsonArray imageText = obj.getAsJsonArray("stats");
+            //JsonArray imageText = obj.getAsJsonArray("stats");
+            JsonArray imageText = parser.getJsonArray("stats");
             StringExt i1ext = new StringExt(String.valueOf(i));
             i1ext.padStart();
 
             int positionx, positiony;
             float fontDim;
             for (JsonElement e1 : imageText) {
-                JsonObject textInfo = e1.getAsJsonObject();
-                String text = textInfo.get("name").getAsString(), text1 = textInfo.get("value").getAsString();
+                //JsonObject textInfo = e1.getAsJsonObject();
+                //String text = textInfo.get("name").getAsString(), text1 = textInfo.get("value").getAsString();
+                String text = parser.getString(e1, "name"), text1 = parser.getString(e1, "value");
 
-                fontDim = textInfo.get("font").getAsFloat();
-                positionx = textInfo.get("print-x").getAsInt();
-                positiony = textInfo.get("print-y").getAsInt();
+                //fontDim = textInfo.get("font").getAsFloat();
+                fontDim = parser.getFloat(e1, "font");
+                //positionx = textInfo.get("print-x").getAsInt();
+                positionx = parser.getInt(e1, "print-x");
+                //positiony = textInfo.get("print-y").getAsInt();
+                positiony = parser.getInt(e1, "print-y");
                 addText(pathToImagesFolder + "/" + i1ext.getVal(), mime, text + ": " + text1,
                         positionx, positiony, fontDim, Color.BLACK);
             }
 
             imageText = obj.getAsJsonArray("entities");
             for (JsonElement e1 : imageText) {
-                JsonObject textInfo = e1.getAsJsonObject();
-                String text = textInfo.get("text").getAsString();
+                //JsonObject textInfo = e1.getAsJsonObject();
+                //String text = textInfo.get("text").getAsString();
+                String text = parser.getString(e1, "text");
 
-                fontDim = textInfo.get("font").getAsFloat();
-                positionx = textInfo.get("print-x").getAsInt();
-                positiony = textInfo.get("print-y").getAsInt();
+                //fontDim = textInfo.get("font").getAsFloat();
+                fontDim = parser.getFloat(e1, "font");
+                //positionx = textInfo.get("print-x").getAsInt();
+                positionx = parser.getInt(e1, "print-x");
+                //positiony = textInfo.get("print-y").getAsInt();
+                positiony = parser.getInt(e1, "print-y");
                 addText(pathToImagesFolder + "/" + i1ext.getVal(), mime, text,
                         positionx, positiony, fontDim, Color.BLACK);
             }
@@ -155,8 +169,9 @@ public class JSONToImage {
      * @param height             The height of the generated images
      * @throws InterruptedException if a thread is interrupted during its execution
      */
-    private void generateWithGAN(@NotNull String pathToImagesFolder, @NotNull String imageExtension, int width, int height)
-            throws InterruptedException/*, InterruptedException, ProcessStillAliveException, InvalidArgumentException*/ {
+    private void generateWithGAN(@NotNull String pathToImagesFolder, @NotNull String imageExtension,
+                                 int width, int height) throws InterruptedException
+    /*, InterruptedException, ProcessStillAliveException, InvalidArgumentException*/ {
         if (pathToImagesFolder == null || pathToImagesFolder.isEmpty() || imageExtension == null || imageExtension.isEmpty()) {
             throw new IllegalArgumentException("At least one of the given arguments is either null or an empty string.");
         }
@@ -178,8 +193,9 @@ public class JSONToImage {
         File model = dir.resolve("model.py").toFile();
         ProcessPool pool = new ProcessPool(model, imageExtension, pathToImagesFolder, width, height);
         for (JsonElement e : array) {
-            JsonObject el = e.getAsJsonObject();
-            String desc = el.get("image-description").getAsString();
+            //JsonObject el = e.getAsJsonObject();
+            //String desc = el.get("image-description").getAsString();
+            String desc = parser.getString(e, "image-description");
             pool.setDesc(desc);
             pool.setIndex(index);
             /*ProcessBuilder pb;
@@ -293,7 +309,9 @@ public class JSONToImage {
 
             int i = 0;
             for (byte[] arr : byteArrList) {
-                JsonObject obj = array.get(i).getAsJsonObject();
+                //JsonObject obj = array.get(i).getAsJsonObject();
+                JsonObject obj = parser.getJsonObject(array.get(i));
+                //String mime = obj.get("mime").getAsString();
                 String mime = obj.get("mime").getAsString();
                 StringExt fileName = new StringExt(String.valueOf(i));
                 fileName.padStart();
