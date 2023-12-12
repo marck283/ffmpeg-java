@@ -1,13 +1,20 @@
-package it.disi.unitn.jsonparser;
+package it.disi.unitn.json.jsonparser;
 
 import com.google.gson.*;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.Reader;
 
+/**
+ * Classe wrapper per il parser JSON di Google.
+ */
 public class JsonParser {
     private final JsonObject obj;
 
+    /**
+     * Il costruttore della classe. Costruisce un'istanza di questa classe utilizzando un Reader.
+     * @param reader Il Reader utilizzato
+     */
     public JsonParser(@NotNull Reader reader) {
         Gson gson = new GsonBuilder().create();
         obj = gson.fromJson(reader, JsonObject.class);

@@ -3,7 +3,7 @@
   "component": {
     "group": "it.disi.unitn.ffmpeg",
     "module": "ffmpeg-java-id",
-    "version": "1.0.25",
+    "version": "1.0.27",
     "attributes": {
       "org.gradle.status": "release"
     }
@@ -25,13 +25,13 @@
       },
       "files": [
         {
-          "name": "ffmpeg-java-id-1.0.25.jar",
-          "url": "ffmpeg-java-id-1.0.25.jar",
-          "size": 43359,
-          "sha512": "2762479fb58f587f8a5f53920220d85c12ff8cfffa1e9d535d7f920e61d6e42ca9cca46ba5e18e1fe6c5226dac68876edc90abeae8b27ca33cb11a32e9419c7b",
-          "sha256": "fd587a068f191516336f1ae28859d0d09fe21b389506f2abb2b8222da41bc487",
-          "sha1": "fe6fda1f54254f93901d432009d05e47b4c6d19e",
-          "md5": "959ac2d9bb422e8535b72c976752f6e4"
+          "name": "ffmpeg-java-id-1.0.27.jar",
+          "url": "ffmpeg-java-id-1.0.27.jar",
+          "size": 42684,
+          "sha512": "ca8805d76d97f7ec8a8255d3ce05e3a8ad77672ab814bd006d5c1ec00c9e31a69185fb0e5281d1e3ef36ce3d5a59cea7a0af4c4f45ab368b27ce390e55981754",
+          "sha256": "5e85464216d10d1a0ed44264d29deaabc0316b2e632b1beda6dab970eb1d3c69",
+          "sha1": "f5c1c3f70a4bd895e04515bd97c1508ed0405e11",
+          "md5": "2a976b2f9682f495e591b8c69d032169"
         }
       ]
     },
@@ -108,13 +108,13 @@
       ],
       "files": [
         {
-          "name": "ffmpeg-java-id-1.0.25.jar",
-          "url": "ffmpeg-java-id-1.0.25.jar",
-          "size": 43359,
-          "sha512": "2762479fb58f587f8a5f53920220d85c12ff8cfffa1e9d535d7f920e61d6e42ca9cca46ba5e18e1fe6c5226dac68876edc90abeae8b27ca33cb11a32e9419c7b",
-          "sha256": "fd587a068f191516336f1ae28859d0d09fe21b389506f2abb2b8222da41bc487",
-          "sha1": "fe6fda1f54254f93901d432009d05e47b4c6d19e",
-          "md5": "959ac2d9bb422e8535b72c976752f6e4"
+          "name": "ffmpeg-java-id-1.0.27.jar",
+          "url": "ffmpeg-java-id-1.0.27.jar",
+          "size": 42684,
+          "sha512": "ca8805d76d97f7ec8a8255d3ce05e3a8ad77672ab814bd006d5c1ec00c9e31a69185fb0e5281d1e3ef36ce3d5a59cea7a0af4c4f45ab368b27ce390e55981754",
+          "sha256": "5e85464216d10d1a0ed44264d29deaabc0316b2e632b1beda6dab970eb1d3c69",
+          "sha1": "f5c1c3f70a4bd895e04515bd97c1508ed0405e11",
+          "md5": "2a976b2f9682f495e591b8c69d032169"
         }
       ]
     },
@@ -128,13 +128,13 @@
       },
       "files": [
         {
-          "name": "ffmpeg-java-id-1.0.25-javadoc.jar",
-          "url": "ffmpeg-java-id-1.0.25-javadoc.jar",
-          "size": 157177,
-          "sha512": "c327d75b5979dac6ed353e15050aa0d134c68dabe277dc918dc0d4a84849e1334e5b0830c1507d2698a0b5c73c2ba73879f268a2a7af49c0dfe4a4178b54f736",
-          "sha256": "bac94e3ce13eb8abd4b4f9334eaceaa31f303cf83449cb6ddc2e0a8eb39191bc",
-          "sha1": "8f3ab4b1e885a99efd925313a39a62d3ce651ba7",
-          "md5": "eda7930fabcd3fc46ef5b46aef99d694"
+          "name": "ffmpeg-java-id-1.0.27-javadoc.jar",
+          "url": "ffmpeg-java-id-1.0.27-javadoc.jar",
+          "size": 153565,
+          "sha512": "53bf468da96e98f2d67baf09c44eff242246334cde09667e756d0d6f0b57d15e3a5e35478cf9d107decd0686c2de2e36b87374fcb32c81d011db2fe43ce077e0",
+          "sha256": "4d519ba92a12542bb0d6bc5181cbf1802c35941eecb2421d173af40675134aac",
+          "sha1": "4d37c286496f3c826a93ab017dc898f9a2331076",
+          "md5": "e532e39a9fb10368c9efa44d7ef58c53"
         }
       ]
     },
@@ -148,13 +148,13 @@
       },
       "files": [
         {
-          "name": "ffmpeg-java-id-1.0.25-sources.jar",
-          "url": "ffmpeg-java-id-1.0.25-sources.jar",
-          "size": 35994,
-          "sha512": "c7c4df11f8cb4ce4ce9ae26b5d417486ed089e676231b2f583af4d48886e5efc28c312f21f7677977ad04487b5a00ce4c8d93f9b4c7324a82e1b182ab8470347",
-          "sha256": "4b68d1c096eead9cf38318c63ab6f4768adf28d0fdeb2870e2aabd371cac03ff",
-          "sha1": "898a406efb3797b28d3e07272b6fb888e50d0f96",
-          "md5": "829a2343d290ae6d34ffbf21adc89395"
+          "name": "ffmpeg-java-id-1.0.27-sources.jar",
+          "url": "ffmpeg-java-id-1.0.27-sources.jar",
+          "size": 35423,
+          "sha512": "3b449532f3657ee18b7f94be1bca21d7a1a2347ffce9795f21d7c2360948f1b5ca9a12f45967ec06ba03870fd78c768755b42e49c5efbcef6399ed0cf8e6a51d",
+          "sha256": "9d44cafb0bbda59edafd5ef9a7b6a572e025c397a15e8a70825c510d367f36e5",
+          "sha1": "e82d3a19fb41caf0fbc7c6b05119063d343d82f4",
+          "md5": "c92e1625fa598e2557cc57dc6a8fd62e"
         }
       ]
     }

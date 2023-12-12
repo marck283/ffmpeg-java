@@ -7,7 +7,7 @@ import it.disi.unitn.exceptions.InvalidArgumentException;
 import it.disi.unitn.json.processpool.ProcessPool;
 /*import it.disi.unitn.streamhandlers.InputHandler;
 import org.apache.commons.lang3.SystemUtils;*/
-import it.disi.unitn.jsonparser.JsonParser;
+import it.disi.unitn.json.jsonparser.JsonParser;
 import org.jetbrains.annotations.NotNull;
 
 import javax.imageio.ImageIO;
@@ -258,7 +258,7 @@ public class JSONToImage {
                 System.err.println("Alcuni thread non sono terminati in tempo. Si prega di riprovare ad eseguire il " +
                         "programma.");
             } else {
-                System.err.println("Some of the threads did not shut down on time. Please try running this program again.");
+                System.err.println("Some of the threads did not shut down in time. Please try running this program again.");
             }
             System.exit(1);
         }*/
