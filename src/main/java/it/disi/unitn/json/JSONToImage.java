@@ -91,8 +91,7 @@ public class JSONToImage {
     public void modifyImage(@NotNull JsonObject obj, int i, @NotNull String pathToImagesFolder, @NotNull String mime)
             throws IOException {
         try {
-            //JsonArray imageText = obj.getAsJsonArray("stats");
-            JsonArray imageText = parser.getJsonArray("stats");
+            JsonArray imageText = obj.getAsJsonArray("stats");
             StringExt i1ext = new StringExt(String.valueOf(i));
             i1ext.padStart();
 
