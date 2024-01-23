@@ -309,11 +309,11 @@ public class VideoCreator {
                         builder.setCommand(builder.getCommand() + " -t " + videoDuration);
                     }
                     if(videoQuality != 0) {
-                        if(codecID != null && codecID.equals("mjpeg")) {
-                            //Use -q:v option to set video quality for mjpeg
-                            builder.setCommand(builder.getCommand() + " -q:v " + videoQuality);
-                        } else {
+                        if(codecID != null && codecID.equals("h264")) {
                             builder.setCommand(builder.getCommand() + " -crf " + videoQuality);
+                        } else {
+                            //Use -q:v option to set video quality for all other codecs
+                            builder.setCommand(builder.getCommand() + " -q:v " + videoQuality);
                         }
                     }
                     builder.setCommand(builder.getCommand() + " -pix_fmt " + pixelFormat);
