@@ -69,7 +69,7 @@ public class ExecutorResHandler implements ExecuteResultHandler {
         try {
             outstream.close();
 
-            if(FileUtils.readFileToString(tempFile.toFile(), StandardCharsets.UTF_8).contains(codecID)) {
+            if(exitValue == 0) {
                 setValue();
             }
             Files.delete(tempFile);

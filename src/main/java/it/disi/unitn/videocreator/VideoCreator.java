@@ -4,13 +4,23 @@ import it.disi.unitn.FFMpeg;
 import it.disi.unitn.FFMpegBuilder;
 import it.disi.unitn.exceptions.InvalidArgumentException;
 import it.disi.unitn.exceptions.NotEnoughArgumentsException;
-import org.apache.commons.exec.*;
+//import org.apache.commons.exec.*;
+import it.disi.unitn.exceptions.UnsupportedOperatingSystemException;
+import org.apache.commons.exec.CommandLine;
+//import org.apache.commons.exec.Watchdog;
+import org.apache.commons.exec.DefaultExecutor;
+import org.apache.commons.exec.PumpStreamHandler;
+import org.apache.commons.lang3.SystemUtils;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.*;
+/*import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;*/
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
+import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -105,6 +115,48 @@ public class VideoCreator {
     }
 
     /**
+     * This method checks if the given codec is supported by the current installation of FFmpeg.
+     * @param s The given codec ID.
+     * @return true if the given codec is supported, otherwise false
+     * @throws UnsupportedOperationException if the Operating System is not yet supported.
+     */
+    private boolean enumCodecs(String s) throws IOException, InvalidArgumentException, UnsupportedOperatingSystemException {
+        if(SystemUtils.IS_OS_LINUX) {
+            //Questo blocco di codice si blocca perché non riesce a creare o a scrivere sul file temporaneo. Perché?
+            CommandLine cmdline = CommandLine.parse("./src/ffcodec/cpp/ffcodec.o " + s);
+            Path tempFile = Files.createTempFile("ffmpeg-java-temp", ".txt");
+            BufferedOutputStream outstream = new BufferedOutputStream(Files.newOutputStream(tempFile,
+                    StandardOpenOption.WRITE));
+            PumpStreamHandler streamHandler = new PumpStreamHandler(outstream, System.err);
+            DefaultExecutor executor = new DefaultExecutor();
+            executor.setStreamHandler(streamHandler);
+            ExecutorResHandler execResHandler = new ExecutorResHandler(outstream, tempFile, s);
+            try {
+                executor.execute(cmdline, execResHandler);
+                Thread t1 = new Thread(() -> {
+                    try {
+                        execResHandler.doWait();
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                });
+                t1.start();
+                t1.join();
+
+                return execResHandler.getValue() == 1;
+            } catch (IOException | InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        } else {
+            if(SystemUtils.IS_OS_WINDOWS) {
+                //Per Windows
+                throw new UnsupportedOperatingSystemException();
+            }
+        }
+        return false;
+    }
+
+    /**
      * This method checks if the given encoding codec ID is supported by ffmpeg.
      * @param codecID The given codec ID
      * @return true if the given codec is valid, otherwise false
@@ -113,7 +165,7 @@ public class VideoCreator {
      * @throws InvalidArgumentException if the codec ID is null or an empty string or an internal error occurred
      */
     private boolean checkCodec(@NotNull String codecID) throws InterruptedException, IOException,
-            InvalidArgumentException {
+            InvalidArgumentException, UnsupportedOperatingSystemException {
         if(codecID == null || codecID.isEmpty()) {
             throw new InvalidArgumentException("The argument to this method must not be null or an empty string.");
         }
@@ -135,9 +187,20 @@ public class VideoCreator {
             }
         }*/
 
+        if(!enumCodecs(codecID)) {
+            Locale l = Locale.getDefault();
+            if(l == Locale.ITALY || l == Locale.ITALIAN) {
+                System.err.println("Questo codec non e' supportato dall'installazione di FFmpeg presente in questo sistema. " +
+                        "Si prega di riprovare con un altro codec.");
+            } else {
+                System.err.println("This codec is not supported by your installation of FFmpeg. Please try another one.");
+            }
+            return false;
+        }
+
         //Thread per stampare su file i codec supportati da FFmpeg ed eseguire grep per verificare che il codec
         //richiesto sia supportato.
-        Path tempFile = Files.createTempFile("ffmpeg-java-temp", ".txt");
+        /*Path tempFile = Files.createTempFile("ffmpeg-java-temp", ".txt");
         BufferedOutputStream outstream = new BufferedOutputStream(Files.newOutputStream(tempFile,
                 StandardOpenOption.WRITE));
         ExecutorResHandler execResHandler = new ExecutorResHandler(outstream, tempFile, codecID);
@@ -160,7 +223,9 @@ public class VideoCreator {
             return execResHandler.getValue() == 1;
         } catch (IOException e) {
             throw new RuntimeException(e);
-        }
+        }*/
+
+        return true;
     }
 
     /**
@@ -170,14 +235,16 @@ public class VideoCreator {
      * @throws InvalidArgumentException if the given codec ID is not supported by ffmpeg
      * @throws IOException if an I/O error occurs
      * @throws InterruptedException if the Thread created in this method is interrupted
+     * @throws UnsupportedOperatingSystemException if the Operating System is not yet supported
      */
-    public void setCodecID(@NotNull String codecID) throws NotEnoughArgumentsException, InvalidArgumentException, IOException, InterruptedException {
+    public void setCodecID(@NotNull String codecID) throws NotEnoughArgumentsException, InvalidArgumentException,
+            IOException, InterruptedException, UnsupportedOperatingSystemException {
         if(codecID == null) {
             throw new NotEnoughArgumentsException("The codec id must not be null.");
         }
-        if(checkCodec(codecID)) { //Perché qui non entra nel ramo if, ma nel ramo else?
+        if(checkCodec(codecID)) {
             this.codecID = codecID;
-            if(codecID.equals("libx264") || codecID.equals("mjpeg")) {
+            if(codecID.equals("h264") || codecID.equals("mjpeg")) {
                 setPixelFormat("yuvj420p");
             }
         } else {

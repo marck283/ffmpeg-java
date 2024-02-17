@@ -8,13 +8,15 @@ buildscript {
 
 plugins {
     id 'java-library'
+    id 'application'
     id 'maven-publish'
     id 'signing'
     id "com.google.cloud.artifactregistry.gradle-plugin" version "2.2.0"
+    //id 'cpp'
 }
 
 group 'it.disi.unitn'
-version '1.1.2-alpha2'
+version '1.1.2'
 
 java {
     withJavadocJar()
@@ -64,6 +66,49 @@ repositories {
         url "artifactregistry://europe-west8-maven.pkg.dev/tirocinio-380209/ffmpeg-java"
     }
 }
+
+/*compileJava {
+    options.setHeaderOutputDirectory(new File("./src/ffcodec/cpp"))
+}
+
+import org.gradle.internal.jvm.Jvm
+
+model {
+    platforms {
+        x64 {
+            architecture "x86_64"
+        }
+    }
+
+    components {
+        compileFfcodecSharedLibraryFfcodecCpp(NativeLibrarySpec) {
+            targetPlatform "x64"
+            binaries.all {
+                def jvmHome = Jvm.current().javaHome
+                if (targetPlatform.operatingSystem.macOsX) {
+                    cCompiler.args '-I', "${jvmHome}/include"
+                    cCompiler.args '-I', "${jvmHome}/include/darwin"
+                    cCompiler.args '-mmacosx-version-min=10.4'
+                    linker.args '-mmacosx-version-min=10.4'
+                } else if (targetPlatform.operatingSystem.linux) {
+                    cCompiler.args '-I', "${jvmHome}/include"
+                    cCompiler.args '-I', "${jvmHome}/include/linux"
+                    cCompiler.args '-D_FILE_OFFSET_BITS=64'
+                } else if (targetPlatform.operatingSystem.windows) {
+                    cCompiler.args "-I${jvmHome}/include"
+                    cCompiler.args "-I${jvmHome}/include/win32"
+                } else if (targetPlatform.operatingSystem.freeBSD) {
+                    cCompiler.args '-I', "${jvmHome}/include"
+                    cCompiler.args '-I', "${jvmHome}/include/freebsd"
+                }
+            }
+        }
+    }
+}
+
+tasks.register("compileFfcodecSharedLibraryFfcodecCpp") {
+    inputs.files compileJava
+}*/
 
 dependencies {
     implementation 'org.jetbrains:annotations:23.0.0'
