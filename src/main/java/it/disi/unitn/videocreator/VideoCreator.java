@@ -114,46 +114,68 @@ public class VideoCreator {
         startInstant = val;
     }
 
+    private boolean performCheck(@NotNull CommandLine cmdline, String s) throws IOException, InvalidArgumentException {
+        Path tempFile = Files.createTempFile("ffmpeg-java-temp", ".txt");
+        BufferedOutputStream outstream = new BufferedOutputStream(Files.newOutputStream(tempFile,
+                StandardOpenOption.WRITE));
+        PumpStreamHandler streamHandler = new PumpStreamHandler(outstream, System.err);
+        DefaultExecutor executor = new DefaultExecutor();
+        executor.setStreamHandler(streamHandler);
+        ExecutorResHandler execResHandler = new ExecutorResHandler(outstream, tempFile, s);
+        try {
+            executor.execute(cmdline, execResHandler);
+            Thread t1 = new Thread(() -> {
+                try {
+                    execResHandler.doWait();
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            });
+            t1.start();
+            t1.join();
+
+            return execResHandler.getValue() == 1;
+        } catch (IOException | InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     /**
      * This method checks if the given codec is supported by the current installation of FFmpeg.
      * @param s The given codec ID.
      * @return true if the given codec is supported, otherwise false
-     * @throws UnsupportedOperationException if the Operating System is not yet supported.
+     * @throws UnsupportedOperatingSystemException if the Operating System is not yet supported.
      */
     private boolean enumCodecs(String s) throws IOException, InvalidArgumentException, UnsupportedOperatingSystemException {
+        CommandLine cmdline;
         if(SystemUtils.IS_OS_LINUX) {
-            //Questo blocco di codice si blocca perché non riesce a creare o a scrivere sul file temporaneo. Perché?
-            CommandLine cmdline = CommandLine.parse("./src/ffcodec/cpp/ffcodec.o " + s);
-            Path tempFile = Files.createTempFile("ffmpeg-java-temp", ".txt");
-            BufferedOutputStream outstream = new BufferedOutputStream(Files.newOutputStream(tempFile,
-                    StandardOpenOption.WRITE));
-            PumpStreamHandler streamHandler = new PumpStreamHandler(outstream, System.err);
-            DefaultExecutor executor = new DefaultExecutor();
-            executor.setStreamHandler(streamHandler);
-            ExecutorResHandler execResHandler = new ExecutorResHandler(outstream, tempFile, s);
-            try {
-                executor.execute(cmdline, execResHandler);
-                Thread t1 = new Thread(() -> {
-                    try {
-                        execResHandler.doWait();
-                    } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
-                    }
-                });
-                t1.start();
-                t1.join();
-
-                return execResHandler.getValue() == 1;
-            } catch (IOException | InterruptedException e) {
-                throw new RuntimeException(e);
-            }
+            cmdline = CommandLine.parse("./src/ffcodec/cpp/ffcodec.o " + s);
+            return performCheck(cmdline, s);
         } else {
             if(SystemUtils.IS_OS_WINDOWS) {
                 //Per Windows
+                cmdline = CommandLine.parse("./src/ffcodec/cpp/ffcodec.exe " + s);
+                return performCheck(cmdline, s);
+                /*switch (codecID) {
+                    case "av1", "rawvideo", "avs2", "avs3", "libxevd", "v210", "v210x", "vc1", "mvc1",
+                            "vc1image", "mpeg1video", "mpeg2video", "mpeg4", "msmpeg4v1", "msmpeg4v2", "msmpeg4v3",
+                            "h264", "hevc", "jpeg", "jpegls", "jepgxl", "mjpeg", "mjpegb", "smvjpeg",
+                            "apdcm_ima_smjpeg", "vp8", "vp9", "a64_multi",
+                            "a64_multi5", "cinepak",
+                            "gif", "hap", "jpeg2000", "ravle", "libkvazaar",
+                            "libopenh264", "theora", "webp",
+                            "mpeg5", "png", "prores", "snow",
+                            "vbn", "dirac", "mvc2", "libx265" -> {
+                        return true;
+                    }
+                    default -> {
+                        return false;
+                    }
+                }*/
+            } else {
                 throw new UnsupportedOperatingSystemException();
             }
         }
-        return false;
     }
 
     /**
