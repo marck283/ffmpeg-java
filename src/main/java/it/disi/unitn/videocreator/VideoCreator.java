@@ -149,12 +149,12 @@ public class VideoCreator {
     private boolean enumCodecs(String s) throws IOException, InvalidArgumentException, UnsupportedOperatingSystemException {
         CommandLine cmdline;
         if(SystemUtils.IS_OS_LINUX) {
-            cmdline = CommandLine.parse("./src/ffcodec/cpp/ffcodec.o " + s);
+            cmdline = CommandLine.parse("./src/ffcodec/bin/linux/ffcodec.o " + s);
             return performCheck(cmdline, s);
         } else {
             if(SystemUtils.IS_OS_WINDOWS) {
                 //Per Windows
-                cmdline = CommandLine.parse("./src/ffcodec/cpp/ffcodec.exe " + s);
+                cmdline = CommandLine.parse("./src/ffcodec/bin/windows/ffcodec.exe " + s);
                 return performCheck(cmdline, s);
                 /*switch (codecID) {
                     case "av1", "rawvideo", "avs2", "avs3", "libxevd", "v210", "v210x", "vc1", "mvc1",
