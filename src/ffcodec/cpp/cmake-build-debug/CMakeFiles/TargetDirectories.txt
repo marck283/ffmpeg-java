@@ -1,0 +1,3 @@
+/home/marco/IdeaProjects/ffmpeg-java/src/ffcodec/cpp/cmake-build-debug/CMakeFiles/cpp.dir
+/home/marco/IdeaProjects/ffmpeg-java/src/ffcodec/cpp/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/marco/IdeaProjects/ffmpeg-java/src/ffcodec/cpp/cmake-build-debug/CMakeFiles/rebuild_cache.dir

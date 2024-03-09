@@ -3,12 +3,12 @@ package it.disi.unitn.videocreator;
 import it.disi.unitn.exceptions.InvalidArgumentException;
 import org.apache.commons.exec.ExecuteException;
 import org.apache.commons.exec.ExecuteResultHandler;
-import org.apache.commons.io.FileUtils;
+//import org.apache.commons.io.FileUtils;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.io.OutputStream;
-import java.nio.charset.StandardCharsets;
+//import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
@@ -16,7 +16,7 @@ import java.nio.file.Path;
  * This class handles the result of the command "ffmpeg -codecs -hide_banner".
  */
 public class ExecutorResHandler implements ExecuteResultHandler {
-    private int value = 0;
+    private int value = 0, width = -1, height = -1;
 
     private final OutputStream outstream;
 
@@ -31,14 +31,22 @@ public class ExecutorResHandler implements ExecuteResultHandler {
      * @param codecID The codec's ID
      * @throws InvalidArgumentException if any of the arguments to this constructor is null or an empty string
      */
-    public ExecutorResHandler(@NotNull OutputStream out, @NotNull Path tempp, @NotNull String codecID)
+    public ExecutorResHandler(OutputStream out, Path tempp, @NotNull String codecID)
             throws InvalidArgumentException {
-        if(out == null || tempp == null || codecID == null || codecID.isEmpty()) {
+        if(codecID == null || codecID.isEmpty()) {
             throw new InvalidArgumentException("No arguments to this constructor must be null or empty strings.");
         }
         outstream = out;
         tempFile = tempp;
         this.codecID = codecID;
+    }
+
+    public ExecutorResHandler(int width, int height) {
+        outstream = OutputStream.nullOutputStream();
+        tempFile = null;
+        codecID = "";
+        this.width = width;
+        this.height = height;
     }
 
     /**
@@ -51,9 +59,10 @@ public class ExecutorResHandler implements ExecuteResultHandler {
 
     /**
      * Sets the value equal to 1.
+     * @param val The value the field "value" will be set to.
      */
-    private void setValue() {
-        value = 1;
+    public void setValue(int val) {
+        value = val;
     }
 
     /**
@@ -70,9 +79,11 @@ public class ExecutorResHandler implements ExecuteResultHandler {
             outstream.close();
 
             if(exitValue == 0) {
-                setValue();
+                setValue(1);
             }
-            Files.delete(tempFile);
+            if(tempFile != null) {
+                Files.delete(tempFile);
+            }
 
             notifyAll();
         } catch (IOException e) {
@@ -85,6 +96,7 @@ public class ExecutorResHandler implements ExecuteResultHandler {
         try {
             outstream.close();
         } catch (IOException ex) {
+            System.err.println(ex.getMessage());
             throw new RuntimeException(ex);
         }
     }

@@ -165,12 +165,12 @@ public class FFMpegBuilder {
         command += " -y \"" + outputFile + "\"";
     }
 
-    /**
+    /*/**
      * Sets the video frame size from the given sizeID.
      * See <a href="https://ffmpeg.org/ffmpeg-all.html#Video-size">here</a> for the recognized size IDs.
      * @param sizeID The given size ID
      */
-    public void setVideoFrameSize(@NotNull String sizeID) {
+    /*public void setVideoFrameSize(@NotNull String sizeID) {
         command += " -video_size " + sizeID;
     }
 
@@ -179,7 +179,7 @@ public class FFMpegBuilder {
      * @param width The width of the frame
      * @param height The height of the frame
      */
-    public void setVideoFrameSize(int width, int height) {
+    /*public void setVideoFrameSize(int width, int height) {
         command += " -video_size " + width + "x" + height;
-    }
+    }*/
 }

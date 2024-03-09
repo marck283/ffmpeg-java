@@ -1,1 +1,0 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"it.disi.unitn"},{"l":"it.disi.unitn.exceptions"},{"l":"it.disi.unitn.json"},{"l":"it.disi.unitn.json.jsonparser"},{"l":"it.disi.unitn.json.processpool"},{"l":"it.disi.unitn.streamhandlers"},{"l":"it.disi.unitn.videocreator"}];updateSearchResults();

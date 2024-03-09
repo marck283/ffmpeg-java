@@ -17,9 +17,7 @@ import java.io.*;
 /*import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;*/
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.StandardOpenOption;
+import java.nio.file.*;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
@@ -33,7 +31,7 @@ public class VideoCreator {
 
     private final String outputFile; //Name of output file
 
-    private String codecID = "libx264"; //Name of codec ID
+    private String codecID = "h264"; //Name of codec ID
 
     private final String folder; //Folder to search into when executing the command
 
@@ -54,6 +52,10 @@ public class VideoCreator {
 
     private String pixelFormat;
 
+    private String execFile = "";
+
+    private boolean isOutFullRange;
+
     /**
      * The constructor of this class.
      * @param builder The FFMpegBuilder instance that called this constructor
@@ -72,6 +74,14 @@ public class VideoCreator {
             this.pattern = pattern;
             this.builder = builder;
             this.outputFile = outputFile;
+            if(SystemUtils.IS_OS_LINUX) {
+                execFile = "./src/ffcodec/bin/linux/ffcodec";
+            } else {
+                if(SystemUtils.IS_OS_WINDOWS) {
+                    execFile = "./src/ffcodec/bin/windows/ffcodec.exe";
+                }
+            }
+            isOutFullRange = false;
         }
     }
 
@@ -114,14 +124,35 @@ public class VideoCreator {
         startInstant = val;
     }
 
-    private boolean performCheck(@NotNull CommandLine cmdline, String s) throws IOException, InvalidArgumentException {
-        Path tempFile = Files.createTempFile("ffmpeg-java-temp", ".txt");
-        BufferedOutputStream outstream = new BufferedOutputStream(Files.newOutputStream(tempFile,
-                StandardOpenOption.WRITE));
-        PumpStreamHandler streamHandler = new PumpStreamHandler(outstream, System.err);
-        DefaultExecutor executor = new DefaultExecutor();
-        executor.setStreamHandler(streamHandler);
-        ExecutorResHandler execResHandler = new ExecutorResHandler(outstream, tempFile, s);
+    /**
+     * This method checks if the given file path refers to an executable file.
+     * @return True if thr path refers to an executable file, otherwise false.
+     */
+    private boolean checkExecutable() {
+        if(!Files.isExecutable(Paths.get(execFile))) {
+            Locale l = Locale.getDefault();
+            if(l == Locale.ITALY || l == Locale.ITALIAN) {
+                System.err.println("Non e' possibile eseguire il file " + execFile + ". Si prega di controllarne i permessi " +
+                        "di esecuzione e l'esistenza.");
+            } else {
+                System.err.println("Cannot execute file " + execFile + ". Please check the user's permissions and that the file exists.");
+            }
+
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * This method executes the given Command Line command.
+     * @param executor A DefaultExecutor instance
+     * @param execResHandler An ExecutorResHandler instance
+     * @param cmdline A CommandLine instance
+     * @return True if the CommandLine instance has a field "value" whose value is equal to zero, otherwise false
+     */
+    private boolean executeCML(@NotNull DefaultExecutor executor, @NotNull ExecutorResHandler execResHandler,
+                               @NotNull CommandLine cmdline) {
         try {
             executor.execute(cmdline, execResHandler);
             Thread t1 = new Thread(() -> {
@@ -134,10 +165,51 @@ public class VideoCreator {
             t1.start();
             t1.join();
 
-            return execResHandler.getValue() == 1;
+            int val = execResHandler.getValue();
+            execResHandler.setValue(0);
+            if(val == 0) {
+                Locale l = Locale.getDefault();
+                if(l == Locale.ITALY || l == Locale.ITALIAN) {
+                    System.err.println("Questo codec non e' supportato dall'installazione di FFmpeg presente in questo sistema. " +
+                            "Si prega di riprovare con un altro codec.");
+                } else {
+                    System.err.println("This codec is not supported by your installation of FFmpeg. Please try another one.");
+                }
+                return false;
+            }
+            return true;
         } catch (IOException | InterruptedException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    /**
+     * This method checks if the given codec is supported by the user's installation of FFmpeg.
+     * @param cmdline The CommandLine instance
+     * @param s The given codec
+     * @return True if the user's installation of FFmpeg supports the given codec, otherwise false
+     * @throws IOException If an I/O error occurs
+     * @throws InvalidArgumentException if the given codec is null or an empty string
+     */
+    private boolean performCheck(@NotNull CommandLine cmdline, String s) throws IOException, InvalidArgumentException {
+        try {
+            if(!checkExecutable()) {
+                return false;
+            }
+
+            Path tempFile = Files.createTempFile("ffmpeg-java-temp", ".txt");
+            BufferedOutputStream outstream = new BufferedOutputStream(Files.newOutputStream(tempFile,
+                    StandardOpenOption.WRITE));
+            PumpStreamHandler streamHandler = new PumpStreamHandler(outstream, System.err);
+            DefaultExecutor executor = new DefaultExecutor();
+            executor.setStreamHandler(streamHandler);
+            ExecutorResHandler execResHandler = new ExecutorResHandler(outstream, tempFile, s);
+            return executeCML(executor, execResHandler, cmdline);
+        } catch(InvalidPathException ex) {
+            System.err.println(ex.getLocalizedMessage());
+        }
+
+        return false;
     }
 
     /**
@@ -148,33 +220,11 @@ public class VideoCreator {
      */
     private boolean enumCodecs(String s) throws IOException, InvalidArgumentException, UnsupportedOperatingSystemException {
         CommandLine cmdline;
-        if(SystemUtils.IS_OS_LINUX) {
-            cmdline = CommandLine.parse("./src/ffcodec/bin/linux/ffcodec.o " + s);
+        if(SystemUtils.IS_OS_LINUX || SystemUtils.IS_OS_WINDOWS) {
+            cmdline = CommandLine.parse(execFile + " " + s);
             return performCheck(cmdline, s);
         } else {
-            if(SystemUtils.IS_OS_WINDOWS) {
-                //Per Windows
-                cmdline = CommandLine.parse("./src/ffcodec/bin/windows/ffcodec.exe " + s);
-                return performCheck(cmdline, s);
-                /*switch (codecID) {
-                    case "av1", "rawvideo", "avs2", "avs3", "libxevd", "v210", "v210x", "vc1", "mvc1",
-                            "vc1image", "mpeg1video", "mpeg2video", "mpeg4", "msmpeg4v1", "msmpeg4v2", "msmpeg4v3",
-                            "h264", "hevc", "jpeg", "jpegls", "jepgxl", "mjpeg", "mjpegb", "smvjpeg",
-                            "apdcm_ima_smjpeg", "vp8", "vp9", "a64_multi",
-                            "a64_multi5", "cinepak",
-                            "gif", "hap", "jpeg2000", "ravle", "libkvazaar",
-                            "libopenh264", "theora", "webp",
-                            "mpeg5", "png", "prores", "snow",
-                            "vbn", "dirac", "mvc2", "libx265" -> {
-                        return true;
-                    }
-                    default -> {
-                        return false;
-                    }
-                }*/
-            } else {
-                throw new UnsupportedOperatingSystemException();
-            }
+            throw new UnsupportedOperatingSystemException();
         }
     }
 
@@ -182,11 +232,10 @@ public class VideoCreator {
      * This method checks if the given encoding codec ID is supported by ffmpeg.
      * @param codecID The given codec ID
      * @return true if the given codec is valid, otherwise false
-     * @throws InterruptedException if the Thread created in this method is interrupted
      * @throws IOException if an I/O error occurs
      * @throws InvalidArgumentException if the codec ID is null or an empty string or an internal error occurred
      */
-    private boolean checkCodec(@NotNull String codecID) throws InterruptedException, IOException,
+    private boolean checkCodec(@NotNull String codecID) throws IOException,
             InvalidArgumentException, UnsupportedOperatingSystemException {
         if(codecID == null || codecID.isEmpty()) {
             throw new InvalidArgumentException("The argument to this method must not be null or an empty string.");
@@ -201,7 +250,7 @@ public class VideoCreator {
                     "qoi", "qtrle", "r10k", "r210", "rawvideo", "roq", "rpza", "rv10", "rv20", "sgi", "smc", "snow",
                     "speedhq", "sunrast", "svq1", "targa", "libtheora", "tiff", "utvideo", "v210", "v308", "v408", "v410",
                     "vbn", "vnull", "libvpx", "libvpx-vp9", "vp9_qsv", "wbmp", "libwebp-anim", "libwebp", "wmv1", "wmv2",
-                    "wrapped_avframe", "xbm", "xface", "xwd", "y41p", "yuv4", "zlib", "zmbv", "libx264" -> {
+                    "wrapped_avframe", "xbm", "xface", "xwd", "y41p", "yuv4", "zlib", "zmbv" -> {
                 return true;
             }
             default -> {
@@ -209,16 +258,7 @@ public class VideoCreator {
             }
         }*/
 
-        if(!enumCodecs(codecID)) {
-            Locale l = Locale.getDefault();
-            if(l == Locale.ITALY || l == Locale.ITALIAN) {
-                System.err.println("Questo codec non e' supportato dall'installazione di FFmpeg presente in questo sistema. " +
-                        "Si prega di riprovare con un altro codec.");
-            } else {
-                System.err.println("This codec is not supported by your installation of FFmpeg. Please try another one.");
-            }
-            return false;
-        }
+        return enumCodecs(codecID);
 
         //Thread per stampare su file i codec supportati da FFmpeg ed eseguire grep per verificare che il codec
         //richiesto sia supportato.
@@ -246,8 +286,6 @@ public class VideoCreator {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }*/
-
-        return true;
     }
 
     /**
@@ -256,22 +294,61 @@ public class VideoCreator {
      * @throws NotEnoughArgumentsException if the given codec ID is null
      * @throws InvalidArgumentException if the given codec ID is not supported by ffmpeg
      * @throws IOException if an I/O error occurs
-     * @throws InterruptedException if the Thread created in this method is interrupted
      * @throws UnsupportedOperatingSystemException if the Operating System is not yet supported
      */
     public void setCodecID(@NotNull String codecID) throws NotEnoughArgumentsException, InvalidArgumentException,
-            IOException, InterruptedException, UnsupportedOperatingSystemException {
+            IOException, UnsupportedOperatingSystemException {
         if(codecID == null) {
             throw new NotEnoughArgumentsException("The codec id must not be null.");
         }
         if(checkCodec(codecID)) {
             this.codecID = codecID;
-            if(codecID.equals("h264") || codecID.equals("mjpeg")) {
+            if(codecID.equals("h264")) {
+                setPixelFormat("yuv420p");
+            }
+            if(codecID.equals("mjpeg")) {
                 setPixelFormat("yuvj420p");
             }
         } else {
-            throw new InvalidArgumentException("Invalid video codec");
+            Locale l = Locale.getDefault();
+            if(l == Locale.ITALY || l == Locale.ITALIAN) {
+                throw new InvalidArgumentException("Codec non valido.");
+            } else {
+                throw new InvalidArgumentException("Invalid video codec.");
+            }
         }
+    }
+
+    /**
+     * This method checks if the given dimensions are accepted by FFmpeg.
+     * @param width The width
+     * @param height The height
+     * @return True if the given dimensions are accepted, false otherwise
+     */
+    private boolean checkSize(int width, int height) {
+        CommandLine cmdLine = CommandLine.parse("./src/ffcodec/bin/linux/checkSize/main " + width + " " + height);
+        PumpStreamHandler streamHandler = new PumpStreamHandler();
+        DefaultExecutor executor = new DefaultExecutor();
+        executor.setStreamHandler(streamHandler);
+        ExecutorResHandler execResHandler = new ExecutorResHandler(width, height);
+        return executeCML(executor, execResHandler, cmdLine);
+    }
+
+    /**
+     * This method checks if the given size ID is accepted by FFmpeg.
+     * @param sizeID The given size ID
+     * @return True if the given size ID is accepted by FFmpeg, otherwise false
+     */
+    private boolean checkSizeID(@NotNull String sizeID) {
+        return switch (sizeID) {
+            case "ntsc", "pal", "qntsc", "qpal", "sntsc", "spal", "film", "ntsc-film", "sqcif", "qcif", "cif", "4cif",
+                    "16cif", "qqvga", "qvga", "vga", "svga", "xga", "uxga", "qxga", "sxga", "qsxga", "hsxga", "wvga",
+                    "wxga", "wsxga", "wuxga", "woxga", "wqsxga", "wquxga", "whsxga", "whuxga", "cga", "ega", "hd480",
+                    "hd720", "hd1080", "2k", "2kflat", "2kscope", "4k", "4kflat", "4kscope", "nhd", "hqvga", "wqvga",
+                    "fwqvga", "hvga", "qhd", "2kdci", "4kdci", "uhd2160", "uhd4320" ->
+                    true;
+            default -> false;
+        };
     }
 
     /**
@@ -280,11 +357,19 @@ public class VideoCreator {
      * @throws InvalidArgumentException if the given video size ID is not supported by ffmpeg
      */
     public void setVideoSizeID(@NotNull String videoSizeID) throws InvalidArgumentException {
-        //TODO: check if the id of the size is recognizable by ffmpeg
         if(videoSizeID == null) {
             throw new InvalidArgumentException("The video size ID should not be null and it should be recognized by ffmpeg.");
         }
-        this.videoSizeID = videoSizeID;
+        if(checkSizeID(videoSizeID)) {
+            this.videoSizeID = videoSizeID;
+        } else {
+            Locale l = Locale.getDefault();
+            if(l == Locale.ITALIAN || l == Locale.ITALY) {
+                System.err.println("Risoluzione immagine non valida.");
+            } else {
+                System.err.println("Invalid image resolution.");
+            }
+        }
     }
 
     /**
@@ -305,8 +390,10 @@ public class VideoCreator {
         if(width <= 0 || height <= 0) {
             throw new InvalidArgumentException("The given width or height parameter must be a strictly positive integer value.");
         }
-        videoWidth = width;
-        videoHeight = height;
+        if(checkSize(width, height)) {
+            videoWidth = width;
+            videoHeight = height;
+        }
     }
 
     /**
@@ -347,15 +434,25 @@ public class VideoCreator {
     }
 
     /**
+     * Questo metodo imposta la modalità di resa dei colori.
+     * @param val Valore booleano per indicare la modalità di resa dei colori
+     */
+    public void setOutFullRange(boolean val) {
+        isOutFullRange = val;
+    }
+
+    /**
      * This method creates the command that, when run, will create the output video.
      * @param time The maximum amount of time to wait for the video's creation
      * @param timeUnit The TimeUnit instance to be used
      * @throws InvalidArgumentException if the video width or height or the video size ID field is null
      * @throws IOException If an I/O error occurs
+     * @throws UnsupportedOperatingSystemException if the underlying Operating System is not yet supported
      */
-    public void createCommand(long time, @NotNull TimeUnit timeUnit) throws InvalidArgumentException, IOException {
-        if(videoWidth == 0 || videoHeight == 0 || videoSizeID == null) {
-            throw new InvalidArgumentException("The video width and height should not be null.");
+    public void createCommand(long time, @NotNull TimeUnit timeUnit) throws InvalidArgumentException, IOException,
+            UnsupportedOperatingSystemException, NotEnoughArgumentsException {
+        if((videoWidth == 0 || videoHeight == 0) && (videoSizeID == null || videoSizeID.isEmpty())) {
+            throw new InvalidArgumentException("The video width and height should not be null or empty strings.");
         } else {
             if(timeUnit == null) {
                 throw new InvalidArgumentException("The given time unit should not be null.");
@@ -364,25 +461,42 @@ public class VideoCreator {
                     throw new InvalidArgumentException("The given time should not be less than or equal to zero.");
                 } else {
                     builder.setCommand(builder.getCommand() + " -r " + frameRate);
-                    if(videoWidth != 0 && videoHeight != 0) {
-                        builder.setCommand(builder.getCommand() + " -s " + videoWidth + "x" + videoHeight);
+                    /*if(videoWidth != 0 && videoHeight != 0) {
+                        builder.setCommand(builder.getCommand() + " -vf \"scale=" + videoWidth + ":" + videoHeight + "\"");
                     } else {
                         builder.setCommand(builder.getCommand() + " -s " + videoSizeID);
-                    }
+                    }*/
 
                     builder.addInput(folder + "/" + pattern);
 
                     if(pixelFormat == null || pixelFormat.isEmpty()) {
-                        pixelFormat = "yuvj420p";
+                        //ATTENZIONE: il codec mjpeg non supporta il formato yuv420p perché non è un formato full-range!
+                        pixelFormat = "yuv420p";
                     }
+
+                    String scale = "\"scale=";
+                    builder.setCommand(builder.getCommand() + " -pix_fmt " + pixelFormat);
                     if(codecID != null && !codecID.isEmpty()) {
                         builder.setCommand(builder.getCommand() + " -c:v " + codecID);
-                        if(codecID.equals("libx264")) {
-                            //libx264 (default codec when no value is specified) needs even width and height, so we need to add
+                        if(codecID.equals("h264")) {
+                            //h264 (default codec when no value is specified) needs even width and height, so we need to add
                             //this filter in order to divide them by 2.
-                            builder.setCommand(builder.getCommand() + " -vf \"scale=ceil(.5*iw)*2:ceil(.5*ih)*2\"");
+                            scale = scale.concat("ceil(.5*iw)*2:ceil(.5*ih)*2");
+                            if(isOutFullRange) {
+                                scale = scale.concat(":out_range=full");
+                            }
+                            builder.setCommand(builder.getCommand() + " -vf " + scale + "\"");
                         } else {
-                            builder.setCommand(builder.getCommand() +  " -vf \"scale=1920*1080,format=" + pixelFormat + "\"");
+                            if(videoWidth != 0 && videoHeight != 0) {
+                                scale = scale.concat( + videoWidth + ":" + videoHeight);
+                                if(isOutFullRange) {
+                                    scale = scale.concat(":out_range=full");
+                                }
+                                scale = scale.concat(",format=" + pixelFormat);
+                                builder.setCommand(builder.getCommand() +  " -vf " + scale + "\"");
+                            } else {
+                                builder.setCommand(builder.getCommand() + " -video_size " + videoSizeID);
+                            }
                         }
                     }
                     if(videoBitRate != null && !videoBitRate.isEmpty()) {
@@ -398,14 +512,8 @@ public class VideoCreator {
                         builder.setCommand(builder.getCommand() + " -t " + videoDuration);
                     }
                     if(videoQuality != 0) {
-                        if(codecID != null && codecID.equals("h264")) {
-                            builder.setCommand(builder.getCommand() + " -crf " + videoQuality);
-                        } else {
-                            //Use -q:v option to set video quality for all other codecs
-                            builder.setCommand(builder.getCommand() + " -q:v " + videoQuality);
-                        }
+                        builder.setCommand(builder.getCommand() + " -q:v " + videoQuality);
                     }
-                    builder.setCommand(builder.getCommand() + " -pix_fmt " + pixelFormat);
                     builder.addOutput(outputFile);
 
                     //Now we will execute the given command
