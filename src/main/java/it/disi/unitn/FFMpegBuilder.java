@@ -7,6 +7,8 @@ import org.apache.commons.lang3.SystemUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Arrays;
+
 /**
  * Builder class for convenience class FFMpeg
  */
@@ -142,13 +144,8 @@ public class FFMpegBuilder {
      * @throws NotEnoughArgumentsException when one of the arguments given to this method is null
      */
     public void addAllInputs(@NotNull String @NotNull ... inputFiles) throws NotEnoughArgumentsException {
-        if(inputFiles == null) {
+        if(inputFiles == null || Arrays.stream(inputFiles).anyMatch(s -> s == null)) {
             throw new NotEnoughArgumentsException("None of the arguments given to this method can be null.");
-        }
-        for(String s: inputFiles) {
-            if(s == null) {
-                throw new NotEnoughArgumentsException("None of the arguments given to this method can be null.");
-            }
         }
         StringBuilder newCmd = new StringBuilder(command);
         for(String s: inputFiles) {

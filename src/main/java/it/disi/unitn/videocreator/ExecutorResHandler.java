@@ -41,6 +41,11 @@ public class ExecutorResHandler implements ExecuteResultHandler {
         this.codecID = codecID;
     }
 
+    /**
+     * The class's constructor to be used when width and height need to be specified.
+     * @param width Each frame's width
+     * @param height Each frame's height
+     */
     public ExecutorResHandler(int width, int height) {
         outstream = OutputStream.nullOutputStream();
         tempFile = null;

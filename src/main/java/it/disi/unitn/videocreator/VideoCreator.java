@@ -447,10 +447,8 @@ public class VideoCreator {
      * @param timeUnit The TimeUnit instance to be used
      * @throws InvalidArgumentException if the video width or height or the video size ID field is null
      * @throws IOException If an I/O error occurs
-     * @throws UnsupportedOperatingSystemException if the underlying Operating System is not yet supported
      */
-    public void createCommand(long time, @NotNull TimeUnit timeUnit) throws InvalidArgumentException, IOException,
-            UnsupportedOperatingSystemException, NotEnoughArgumentsException {
+    public void createCommand(long time, @NotNull TimeUnit timeUnit) throws InvalidArgumentException, IOException {
         if((videoWidth == 0 || videoHeight == 0) && (videoSizeID == null || videoSizeID.isEmpty())) {
             throw new InvalidArgumentException("The video width and height should not be null or empty strings.");
         } else {
