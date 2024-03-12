@@ -4,7 +4,7 @@ import it.disi.unitn.exceptions.InvalidArgumentException;
 import org.apache.commons.exec.ExecuteException;
 import org.apache.commons.exec.ExecuteResultHandler;
 //import org.apache.commons.io.FileUtils;
-import org.jetbrains.annotations.NotNull;
+//import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -16,42 +16,42 @@ import java.nio.file.Path;
  * This class handles the result of the command "ffmpeg -codecs -hide_banner".
  */
 public class ExecutorResHandler implements ExecuteResultHandler {
-    private int value = 0, width = -1, height = -1;
+    private int value = 0/*, width = -1, height = -1*/;
 
     private final OutputStream outstream;
 
     private final Path tempFile;
 
-    private final String codecID;
+    //private final String codecID;
 
     /**
      * The class's constructor.
      * @param out The given OutputStream to write to.
      * @param tempp The Path instance corresponding to the OutputStream
-     * @param codecID The codec's ID
+     * //@param codecID The codec's ID
      * @throws InvalidArgumentException if any of the arguments to this constructor is null or an empty string
      */
-    public ExecutorResHandler(OutputStream out, Path tempp, @NotNull String codecID)
+    public ExecutorResHandler(OutputStream out, Path tempp/*, @NotNull String codecID*/)
             throws InvalidArgumentException {
-        if(codecID == null || codecID.isEmpty()) {
+        /*if(codecID == null || codecID.isEmpty()) {
             throw new InvalidArgumentException("No arguments to this constructor must be null or empty strings.");
-        }
+        }*/
         outstream = out;
         tempFile = tempp;
-        this.codecID = codecID;
+        //this.codecID = codecID;
     }
 
     /**
      * The class's constructor to be used when width and height need to be specified.
-     * @param width Each frame's width
-     * @param height Each frame's height
+     * //@param width Each frame's width
+     * //@param height Each frame's height
      */
-    public ExecutorResHandler(int width, int height) {
+    public ExecutorResHandler(/*int width, int height*/) {
         outstream = OutputStream.nullOutputStream();
         tempFile = null;
-        codecID = "";
-        this.width = width;
-        this.height = height;
+        //codecID = "";
+        /*this.width = width;
+        this.height = height;*/
     }
 
     /**

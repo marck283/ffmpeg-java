@@ -31,7 +31,7 @@ public class VideoCreator {
 
     private final String outputFile; //Name of output file
 
-    private String codecID = "h264"; //Name of codec ID
+    private String codecID = "h264", audioCodec; //Name of video and audio codec ID
 
     private final String folder; //Folder to search into when executing the command
 
@@ -203,7 +203,7 @@ public class VideoCreator {
             PumpStreamHandler streamHandler = new PumpStreamHandler(outstream, System.err);
             DefaultExecutor executor = new DefaultExecutor();
             executor.setStreamHandler(streamHandler);
-            ExecutorResHandler execResHandler = new ExecutorResHandler(outstream, tempFile, s);
+            ExecutorResHandler execResHandler = new ExecutorResHandler(outstream, tempFile/*, s*/);
             return executeCML(executor, execResHandler, cmdline);
         } catch(InvalidPathException ex) {
             System.err.println(ex.getLocalizedMessage());
@@ -216,6 +216,8 @@ public class VideoCreator {
      * This method checks if the given codec is supported by the current installation of FFmpeg.
      * @param s The given codec ID.
      * @return true if the given codec is supported, otherwise false
+     * @throws IOException If an I/O error occurs
+     * @throws InvalidArgumentException if the given codec is null or an empty string
      * @throws UnsupportedOperatingSystemException if the Operating System is not yet supported.
      */
     private boolean enumCodecs(String s) throws IOException, InvalidArgumentException, UnsupportedOperatingSystemException {
@@ -312,11 +314,23 @@ public class VideoCreator {
         } else {
             Locale l = Locale.getDefault();
             if(l == Locale.ITALY || l == Locale.ITALIAN) {
-                throw new InvalidArgumentException("Codec non valido.");
+                throw new InvalidArgumentException("Codec video non valido.");
             } else {
                 throw new InvalidArgumentException("Invalid video codec.");
             }
         }
+    }
+
+    /**
+     * This method allows the user to set the audio codec for the resulting video. WARNING: the audio codec should always
+     * be compatible with the video codec.
+     * @param ac The audio codec to be used in the resulting video
+     */
+    public void setAudioCodec(@NotNull String ac) {
+        if(ac == null || ac.isEmpty()) {
+            throw new IllegalArgumentException();
+        }
+        audioCodec = ac;
     }
 
     /**
@@ -330,7 +344,7 @@ public class VideoCreator {
         PumpStreamHandler streamHandler = new PumpStreamHandler();
         DefaultExecutor executor = new DefaultExecutor();
         executor.setStreamHandler(streamHandler);
-        ExecutorResHandler execResHandler = new ExecutorResHandler(width, height);
+        ExecutorResHandler execResHandler = new ExecutorResHandler(/*width, height*/);
         return executeCML(executor, execResHandler, cmdLine);
     }
 
@@ -496,6 +510,9 @@ public class VideoCreator {
                                 builder.setCommand(builder.getCommand() + " -video_size " + videoSizeID);
                             }
                         }
+                    }
+                    if(audioCodec != null && !audioCodec.isEmpty()) {
+                        builder.setCommand(builder.getCommand() + " -c:a " + audioCodec);
                     }
                     if(videoBitRate != null && !videoBitRate.isEmpty()) {
                         builder.setCommand(builder.getCommand() + " -b:v " + videoBitRate);
