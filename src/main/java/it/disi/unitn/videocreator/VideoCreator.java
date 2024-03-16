@@ -501,7 +501,7 @@ public class VideoCreator {
         if((videoWidth <= 0 || videoHeight <= 0) && (videoSizeID == null || videoSizeID.isEmpty())) {
             throw new InvalidArgumentException("Either the video size ID is null or an empty string or the video width " +
                     "or height are less than or equal to 0.", "Si e' verificato un errore: o la proporzione di ogni frame " +
-                    "e' null o una stringa vuota, o ampiezza o l'altezza sono minori o uguali a 0.");
+                    "e' null o una stringa vuota, o l'ampiezza o l'altezza sono minori o uguali a 0.");
         } else {
             if(timeUnit == null) {
                 throw new InvalidArgumentException("The given time unit should not be null.", "La data unita' di tempo " +
