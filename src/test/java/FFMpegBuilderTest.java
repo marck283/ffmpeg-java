@@ -2,6 +2,7 @@ import it.disi.unitn.FFMpeg;
 import it.disi.unitn.FFMpegBuilder;
 import it.disi.unitn.exceptions.InvalidArgumentException;
 import it.disi.unitn.exceptions.NotEnoughArgumentsException;
+import it.disi.unitn.exceptions.UnsupportedOperatingSystemException;
 import it.disi.unitn.videocreator.VideoCreator;
 import org.junit.jupiter.api.Test;
 
@@ -11,7 +12,7 @@ import java.util.concurrent.TimeUnit;
 class FFMpegBuilderTest {
 
     @Test
-    void setVideoFrameSize() throws NotEnoughArgumentsException, IOException, InvalidArgumentException {
+    void setVideoFrameSize() throws NotEnoughArgumentsException, IOException, InvalidArgumentException, UnsupportedOperatingSystemException {
         FFMpegBuilder builder = new FFMpegBuilder("ffmpeg");
         VideoCreator vc = builder.newVideoCreator("./src/test/resources/input/mp4/000-1.mp4",
                 "./src/test/resources/input/mp4", "000.mp4");
@@ -23,7 +24,7 @@ class FFMpegBuilderTest {
     }
 
     @Test
-    void testSetVideoFrameSize() throws NotEnoughArgumentsException, IOException, InvalidArgumentException {
+    void testSetVideoFrameSize() throws NotEnoughArgumentsException, IOException, InvalidArgumentException, UnsupportedOperatingSystemException {
         FFMpegBuilder builder = new FFMpegBuilder("ffmpeg");
         VideoCreator vc = builder.newVideoCreator("./src/test/resources/input/mp4/000-1.mp4",
                 "./src/test/resources/input/mp4", "000.mp4");

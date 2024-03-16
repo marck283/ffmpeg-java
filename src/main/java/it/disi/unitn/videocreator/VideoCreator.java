@@ -357,14 +357,26 @@ public class VideoCreator {
      * @param pix_fmt The pixel format used in the video
      * @return True if the given dimensions are accepted, false otherwise
      * @throws NotEnoughArgumentsException If the pixel format is null or an empty string
+     * @throws UnsupportedOperatingSystemException If the Operating System the user is currently operating on is not yet
+     * supported by this library
      */
-    private boolean checkSize(int width, int height, @NotNull String pix_fmt) throws NotEnoughArgumentsException {
+    private boolean checkSize(int width, int height, @NotNull String pix_fmt) throws NotEnoughArgumentsException, UnsupportedOperatingSystemException {
         if(pix_fmt == null || pix_fmt.isEmpty()) {
             throw new NotEnoughArgumentsException("The pixel format must neither be null nor an empty string.",
                     "Il formato dei pixel non puo' essere null o una stringa vuota.");
         }
-        CommandLine cmdLine = CommandLine.parse("./src/ffcodec/bin/linux/checkSize/main " + width + " " + height +
-                " " + pix_fmt);
+        CommandLine cmdLine;
+        if(SystemUtils.IS_OS_LINUX) {
+            cmdLine = CommandLine.parse("./src/ffcodec/bin/linux/checkSize/main " + width + " " + height +
+                    " " + pix_fmt);
+        } else {
+            if(SystemUtils.IS_OS_WINDOWS) {
+                cmdLine = CommandLine.parse("./src/ffcodec/bin/windows/checkSize.exe " + width + " " + height +
+                        " " + pix_fmt);
+            } else {
+                throw new UnsupportedOperatingSystemException();
+            }
+        }
         PumpStreamHandler streamHandler = new PumpStreamHandler();
         DefaultExecutor executor = DefaultExecutor.builder().get();
         executor.setStreamHandler(streamHandler);
@@ -426,9 +438,11 @@ public class VideoCreator {
      * @param development A boolean parameter indicating whether the user is running the program with a custom version of FFmpeg
      * @throws InvalidArgumentException if the given width or height parameter is less than or equal to 0
      * @throws NotEnoughArgumentsException If the given pixel format is null or an empty string
+     * @throws UnsupportedOperatingSystemException If the Operating System the user is currently operating on is not yet
+     * supported by this library
      */
     public void setVideoSize(int width, int height, @NotNull String pix_fmt, boolean development) throws InvalidArgumentException,
-            NotEnoughArgumentsException {
+            NotEnoughArgumentsException, UnsupportedOperatingSystemException {
         if(width <= 0 || height <= 0) {
             throw new InvalidArgumentException("The given width or height parameter must be a strictly positive " +
                     "integer value.", "Sia l'ampiezza che la larghezza devono essere valori strettamente positivi.");
