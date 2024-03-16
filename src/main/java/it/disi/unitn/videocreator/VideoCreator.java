@@ -13,6 +13,7 @@ import org.apache.commons.exec.PumpStreamHandler;
 import org.apache.commons.lang3.SystemUtils;
 import org.jetbrains.annotations.NotNull;
 
+//import java.awt.*;
 import java.io.*;
 /*import java.nio.file.Files;
 import java.nio.file.Path;
@@ -42,6 +43,8 @@ public class VideoCreator {
 
     private int videoWidth = 0, videoHeight = 0;
 
+    //double screenWidth = 0.0, screenHeight = 0.0;
+
     private String videoSizeID = "";
 
     private int startInstant; //Starting instant of the new video with respect to the original video
@@ -56,6 +59,8 @@ public class VideoCreator {
 
     private boolean isOutFullRange;
 
+    private final Locale l;
+
     /**
      * The constructor of this class.
      * @param builder The FFMpegBuilder instance that called this constructor
@@ -67,8 +72,11 @@ public class VideoCreator {
      */
     public VideoCreator(@NotNull FFMpegBuilder builder, @NotNull String outputFile,
                         @NotNull String inputFolder, @NotNull String pattern) throws NotEnoughArgumentsException {
-        if(builder == null || inputFolder == null || outputFile == null || pattern == null) {
-            throw new NotEnoughArgumentsException("The arguments given to the VideoCreator constructor cannot be null.");
+        if(builder == null || inputFolder == null  || inputFolder.isEmpty() || outputFile == null || outputFile.isEmpty() ||
+                pattern == null || pattern.isEmpty()) {
+            throw new NotEnoughArgumentsException("The arguments given to this class's constructor cannot be null or " +
+                    "empty values.", "Gli argomenti forniti al costruttore di questa classe non possono essere null o " +
+                    "valori non specificati.");
         } else {
             folder = inputFolder;
             this.pattern = pattern;
@@ -81,7 +89,13 @@ public class VideoCreator {
                     execFile = "./src/ffcodec/bin/windows/ffcodec.exe";
                 }
             }
+            File file = new File(execFile);
+            if(!file.exists()) {
+                System.err.println("ffcodec does not exist");
+                System.exit(1);
+            }
             isOutFullRange = false;
+            l = Locale.getDefault();
         }
     }
 
@@ -92,7 +106,8 @@ public class VideoCreator {
      */
     public void setFrameRate(int val) throws InvalidArgumentException {
         if(val <= 0) {
-            throw new InvalidArgumentException("The frame rate value should always be greater than or equal to 1.");
+            throw new InvalidArgumentException("The frame rate value should always be greater than or equal to 1.",
+                    "Il valore del frame rate deve essere sempre maggiore o uguale ad 1.");
         } else {
             frameRate = val;
         }
@@ -105,7 +120,8 @@ public class VideoCreator {
      */
     public void setVideoDuration(int val) throws InvalidArgumentException {
         if(val <= 0) {
-            throw new InvalidArgumentException("The video duration must always be of at least 1 second.");
+            throw new InvalidArgumentException("The video duration must always be of at least 1 second.", "La durata del " +
+                    "video deve essere di almeno 1 secondo.");
         }
         videoDuration = val;
     }
@@ -119,7 +135,8 @@ public class VideoCreator {
     public void setStartInstant(int val) throws InvalidArgumentException {
         if(val <= 0) {
             throw new InvalidArgumentException("The starting instant of the new video must be at least the starting instant" +
-                    " of the original video.");
+                    " of the original video.", "L'istante di partenza del nuovo video deve essere almeno pari a quello" +
+                    " del video originale.");
         }
         startInstant = val;
     }
@@ -130,7 +147,6 @@ public class VideoCreator {
      */
     private boolean checkExecutable() {
         if(!Files.isExecutable(Paths.get(execFile))) {
-            Locale l = Locale.getDefault();
             if(l == Locale.ITALY || l == Locale.ITALIAN) {
                 System.err.println("Non e' possibile eseguire il file " + execFile + ". Si prega di controllarne i permessi " +
                         "di esecuzione e l'esistenza.");
@@ -168,7 +184,6 @@ public class VideoCreator {
             int val = execResHandler.getValue();
             execResHandler.setValue(0);
             if(val == 0) {
-                Locale l = Locale.getDefault();
                 if(l == Locale.ITALY || l == Locale.ITALIAN) {
                     System.err.println("Questo codec non e' supportato dall'installazione di FFmpeg presente in questo sistema. " +
                             "Si prega di riprovare con un altro codec.");
@@ -186,12 +201,11 @@ public class VideoCreator {
     /**
      * This method checks if the given codec is supported by the user's installation of FFmpeg.
      * @param cmdline The CommandLine instance
-     * @param s The given codec
      * @return True if the user's installation of FFmpeg supports the given codec, otherwise false
      * @throws IOException If an I/O error occurs
      * @throws InvalidArgumentException if the given codec is null or an empty string
      */
-    private boolean performCheck(@NotNull CommandLine cmdline, String s) throws IOException, InvalidArgumentException {
+    private boolean performCheck(@NotNull CommandLine cmdline) throws IOException, InvalidArgumentException {
         try {
             if(!checkExecutable()) {
                 return false;
@@ -201,9 +215,9 @@ public class VideoCreator {
             BufferedOutputStream outstream = new BufferedOutputStream(Files.newOutputStream(tempFile,
                     StandardOpenOption.WRITE));
             PumpStreamHandler streamHandler = new PumpStreamHandler(outstream, System.err);
-            DefaultExecutor executor = new DefaultExecutor();
+            DefaultExecutor executor = DefaultExecutor.builder().get();
             executor.setStreamHandler(streamHandler);
-            ExecutorResHandler execResHandler = new ExecutorResHandler(outstream, tempFile/*, s*/);
+            ExecutorResHandler execResHandler = new ExecutorResHandler(outstream, tempFile);
             return executeCML(executor, execResHandler, cmdline);
         } catch(InvalidPathException ex) {
             System.err.println(ex.getLocalizedMessage());
@@ -221,10 +235,8 @@ public class VideoCreator {
      * @throws UnsupportedOperatingSystemException if the Operating System is not yet supported.
      */
     private boolean enumCodecs(String s) throws IOException, InvalidArgumentException, UnsupportedOperatingSystemException {
-        CommandLine cmdline;
         if(SystemUtils.IS_OS_LINUX || SystemUtils.IS_OS_WINDOWS) {
-            cmdline = CommandLine.parse(execFile + " " + s);
-            return performCheck(cmdline, s);
+            return performCheck(CommandLine.parse(execFile + " " + s));
         } else {
             throw new UnsupportedOperatingSystemException();
         }
@@ -235,12 +247,13 @@ public class VideoCreator {
      * @param codecID The given codec ID
      * @return true if the given codec is valid, otherwise false
      * @throws IOException if an I/O error occurs
-     * @throws InvalidArgumentException if the codec ID is null or an empty string or an internal error occurred
+     * @throws InvalidArgumentException if the codec ID is null or an empty string
      */
     private boolean checkCodec(@NotNull String codecID) throws IOException,
             InvalidArgumentException, UnsupportedOperatingSystemException {
         if(codecID == null || codecID.isEmpty()) {
-            throw new InvalidArgumentException("The argument to this method must not be null or an empty string.");
+            throw new InvalidArgumentException("The argument to this method must not be null or an empty string.",
+                    "L'argomento fornito a questo metodo non puo' essere null o una stringa vuota.");
         }
         /*switch (codecID) {
             case "a64_multi", "a64_multi5", "alias_pix", "amv", "apng", "asv1", "asv2", "libaom-av1", "librav1e",
@@ -293,15 +306,22 @@ public class VideoCreator {
     /**
      * This method sets the codec ID of the output video.
      * @param codecID The given codec ID
+     * @param development This boolean field tells the method if th user is running the program with a recompiled version
+     *                    of FFmpeg
      * @throws NotEnoughArgumentsException if the given codec ID is null
      * @throws InvalidArgumentException if the given codec ID is not supported by ffmpeg
      * @throws IOException if an I/O error occurs
      * @throws UnsupportedOperatingSystemException if the Operating System is not yet supported
      */
-    public void setCodecID(@NotNull String codecID) throws NotEnoughArgumentsException, InvalidArgumentException,
+    public void setCodecID(@NotNull String codecID, boolean development) throws NotEnoughArgumentsException, InvalidArgumentException,
             IOException, UnsupportedOperatingSystemException {
-        if(codecID == null) {
-            throw new NotEnoughArgumentsException("The codec id must not be null.");
+        if(codecID == null || codecID.isEmpty()) {
+            throw new NotEnoughArgumentsException("The codec id must not be null.", "L'id del codec non deve essere null " +
+                    "o una stringa vuota.");
+        }
+        if(!development) {
+            this.codecID = codecID;
+            return;
         }
         if(checkCodec(codecID)) {
             this.codecID = codecID;
@@ -312,12 +332,7 @@ public class VideoCreator {
                 setPixelFormat("yuvj420p");
             }
         } else {
-            Locale l = Locale.getDefault();
-            if(l == Locale.ITALY || l == Locale.ITALIAN) {
-                throw new InvalidArgumentException("Codec video non valido.");
-            } else {
-                throw new InvalidArgumentException("Invalid video codec.");
-            }
+            throw new InvalidArgumentException("Invalid video codec.", "Codec video non valido.");
         }
     }
 
@@ -325,10 +340,12 @@ public class VideoCreator {
      * This method allows the user to set the audio codec for the resulting video. WARNING: the audio codec should always
      * be compatible with the video codec.
      * @param ac The audio codec to be used in the resulting video
+     * @throws InvalidArgumentException If the given audio codec is represented by a nul or empty string
      */
-    public void setAudioCodec(@NotNull String ac) {
+    public void setAudioCodec(@NotNull String ac) throws InvalidArgumentException {
         if(ac == null || ac.isEmpty()) {
-            throw new IllegalArgumentException();
+            throw new InvalidArgumentException("The given audio codec is represented by a null or empty string.", "Il " +
+                    "codec audio fornito e' rappresentato da una stringa null o vuota.");
         }
         audioCodec = ac;
     }
@@ -337,12 +354,19 @@ public class VideoCreator {
      * This method checks if the given dimensions are accepted by FFmpeg.
      * @param width The width
      * @param height The height
+     * @param pix_fmt The pixel format used in the video
      * @return True if the given dimensions are accepted, false otherwise
+     * @throws NotEnoughArgumentsException If the pixel format is null or an empty string
      */
-    private boolean checkSize(int width, int height) {
-        CommandLine cmdLine = CommandLine.parse("./src/ffcodec/bin/linux/checkSize/main " + width + " " + height);
+    private boolean checkSize(int width, int height, @NotNull String pix_fmt) throws NotEnoughArgumentsException {
+        if(pix_fmt == null || pix_fmt.isEmpty()) {
+            throw new NotEnoughArgumentsException("The pixel format must neither be null nor an empty string.",
+                    "Il formato dei pixel non puo' essere null o una stringa vuota.");
+        }
+        CommandLine cmdLine = CommandLine.parse("./src/ffcodec/bin/linux/checkSize/main " + width + " " + height +
+                " " + pix_fmt);
         PumpStreamHandler streamHandler = new PumpStreamHandler();
-        DefaultExecutor executor = new DefaultExecutor();
+        DefaultExecutor executor = DefaultExecutor.builder().get();
         executor.setStreamHandler(streamHandler);
         ExecutorResHandler execResHandler = new ExecutorResHandler(/*width, height*/);
         return executeCML(executor, execResHandler, cmdLine);
@@ -372,12 +396,12 @@ public class VideoCreator {
      */
     public void setVideoSizeID(@NotNull String videoSizeID) throws InvalidArgumentException {
         if(videoSizeID == null) {
-            throw new InvalidArgumentException("The video size ID should not be null and it should be recognized by ffmpeg.");
+            throw new InvalidArgumentException("The video size ID should not be null.", "L'ID della proporzione visiva " +
+                    "non deve essere null.");
         }
         if(checkSizeID(videoSizeID)) {
             this.videoSizeID = videoSizeID;
         } else {
-            Locale l = Locale.getDefault();
             if(l == Locale.ITALIAN || l == Locale.ITALY) {
                 System.err.println("Risoluzione immagine non valida.");
             } else {
@@ -398,26 +422,33 @@ public class VideoCreator {
      * This method sets the size of the resulting video by means of the given width and height.
      * @param width The given width
      * @param height The given height
+     * @param pix_fmt The pixel format used in the resulting video
+     * @param development A boolean parameter indicating whether the user is running the program with a custom version of FFmpeg
      * @throws InvalidArgumentException if the given width or height parameter is less than or equal to 0
+     * @throws NotEnoughArgumentsException If the given pixel format is null or an empty string
      */
-    public void setVideoSize(int width, int height) throws InvalidArgumentException {
+    public void setVideoSize(int width, int height, @NotNull String pix_fmt, boolean development) throws InvalidArgumentException,
+            NotEnoughArgumentsException {
         if(width <= 0 || height <= 0) {
-            throw new InvalidArgumentException("The given width or height parameter must be a strictly positive integer value.");
+            throw new InvalidArgumentException("The given width or height parameter must be a strictly positive " +
+                    "integer value.", "Sia l'ampiezza che la larghezza devono essere valori strettamente positivi.");
         }
-        if(checkSize(width, height)) {
+
+        if(!development || checkSize(width, height, pix_fmt)) {
             videoWidth = width;
             videoHeight = height;
         }
     }
 
     /**
-     * This method sets the audio track's bitrate (in Kbit/s).
-     * @param val The audio track's bitrate
+     * This method sets the audio track&rsquo;s bitrate (in Kbit/s).
+     * @param val The audio track&rsquo;s bitrate
      * @throws InvalidArgumentException of the given bitrate value is less than or equal to 0
      */
     private void setAudioBitRate(int val) throws InvalidArgumentException {
         if(val <= 0) {
-            throw new InvalidArgumentException("The bitrate of the audio track must be greater than 0.");
+            throw new InvalidArgumentException("The bitrate of the audio track must be greater than 0.", "Il bitrate " +
+                    "della traccia audio deve essere maggiore di 0.");
         }
         audioBitRate = val + "k";
     }
@@ -430,26 +461,29 @@ public class VideoCreator {
      */
     public void setVideoBitRate(int val, @NotNull String mode) throws InvalidArgumentException {
         if(mode == null || (!mode.equals("k") && !mode.equals("m"))) {
-            throw new InvalidArgumentException("The \"mode\" parameter must be specified and it must be either \"k\" or \"m\".");
+            throw new InvalidArgumentException("The \"mode\" parameter must be specified and it must be either \"k\" " +
+                    "or \"m\".", "Il parametro \"mode\" deve essere specificato e deve avere valore pari a \"k\" o " +
+                    "\"m\".");
         }
         videoBitRate = val + mode;
     }
 
     /**
      * Imposta il formato dei pixel.
-     * @param pxfmt L'identificatore del formato dei pixel.
-     * @throws InvalidArgumentException Se l'argomento fornito in input è null.
+     * @param pxfmt L&rsquo;identificatore del formato dei pixel.
+     * @throws InvalidArgumentException Se l&rsquo;argomento fornito in input &egrave; null.
      */
     public void setPixelFormat(@NotNull String pxfmt) throws InvalidArgumentException {
         if(pxfmt == null || pxfmt.isEmpty()) {
-            throw new InvalidArgumentException("The argument to this method cannot be null.");
+            throw new InvalidArgumentException("The argument to this method cannot be null or an empty string.", "L'argomento " +
+                    "fornito a questo metodo non puo' essere null o una stringa vuota.");
         }
         pixelFormat = pxfmt;
     }
 
     /**
-     * Questo metodo imposta la modalità di resa dei colori.
-     * @param val Valore booleano per indicare la modalità di resa dei colori
+     * Questo metodo imposta la modalit&agrave; di resa dei colori.
+     * @param val Valore booleano per indicare la modalit&agrave; di resa dei colori
      */
     public void setOutFullRange(boolean val) {
         isOutFullRange = val;
@@ -457,27 +491,35 @@ public class VideoCreator {
 
     /**
      * This method creates the command that, when run, will create the output video.
-     * @param time The maximum amount of time to wait for the video's creation
-     * @param timeUnit The TimeUnit instance to be used
+     * @param time The maximum amount of time to wait for the video's creation. This parameter cannot be less than or
+     *             equal to 0
+     * @param timeUnit The TimeUnit instance to be used. This parameter cannot be null
      * @throws InvalidArgumentException if the video width or height or the video size ID field is null
      * @throws IOException If an I/O error occurs
      */
     public void createCommand(long time, @NotNull TimeUnit timeUnit) throws InvalidArgumentException, IOException {
-        if((videoWidth == 0 || videoHeight == 0) && (videoSizeID == null || videoSizeID.isEmpty())) {
-            throw new InvalidArgumentException("The video width and height should not be null or empty strings.");
+        if(videoWidth <= 0 || videoHeight <= 0) {
+            if(videoSizeID == null || videoSizeID.isEmpty()) {
+                throw new InvalidArgumentException("The video size ID must not be null or an empty string.",
+                        "La proporzione di ogni frame non puo' essere null o una stringa vuota.");
+            }
+            throw new InvalidArgumentException("The video width and height should not be less than or equal to 0.",
+                    "L'ampiezza e l'altezza non dovrebbero essere minori o uguali a 0.");
         } else {
             if(timeUnit == null) {
-                throw new InvalidArgumentException("The given time unit should not be null.");
+                throw new InvalidArgumentException("The given time unit should not be null.", "La data unita' di tempo " +
+                        "non dovrebbe essere null.");
             } else {
                 if(time <= 0) {
-                    throw new InvalidArgumentException("The given time should not be less than or equal to zero.");
+                    throw new InvalidArgumentException("The given time should not be less than or equal to zero.",
+                            "L'intervallo di tempo fornito non puo' essere minore o uguale a zero.");
                 } else {
                     builder.setCommand(builder.getCommand() + " -r " + frameRate);
-                    /*if(videoWidth != 0 && videoHeight != 0) {
-                        builder.setCommand(builder.getCommand() + " -vf \"scale=" + videoWidth + ":" + videoHeight + "\"");
-                    } else {
-                        builder.setCommand(builder.getCommand() + " -s " + videoSizeID);
-                    }*/
+                        /*if(videoWidth != 0 && videoHeight != 0) {
+                            builder.setCommand(builder.getCommand() + " -vf \"scale=" + videoWidth + ":" + videoHeight + "\"");
+                        } else {
+                            builder.setCommand(builder.getCommand() + " -s " + videoSizeID);
+                        }*/
 
                     builder.addInput(folder + "/" + pattern);
 
@@ -486,10 +528,11 @@ public class VideoCreator {
                         pixelFormat = "yuv420p";
                     }
 
-                    String scale = "\"scale=";
                     builder.setCommand(builder.getCommand() + " -pix_fmt " + pixelFormat);
                     if(codecID != null && !codecID.isEmpty()) {
                         builder.setCommand(builder.getCommand() + " -c:v " + codecID);
+
+                        String scale = "\"scale=";
                         if(codecID.equals("h264")) {
                             //h264 (default codec when no value is specified) needs even width and height, so we need to add
                             //this filter in order to divide them by 2.
@@ -500,7 +543,7 @@ public class VideoCreator {
                             builder.setCommand(builder.getCommand() + " -vf " + scale + "\"");
                         } else {
                             if(videoWidth != 0 && videoHeight != 0) {
-                                scale = scale.concat( + videoWidth + ":" + videoHeight);
+                                scale = scale.concat(videoWidth + ":" + videoHeight);
                                 if(isOutFullRange) {
                                     scale = scale.concat(":out_range=full");
                                 }

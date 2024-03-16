@@ -3,7 +3,7 @@
   "component": {
     "group": "it.disi.unitn.ffmpeg",
     "module": "ffmpeg-java-id",
-    "version": "1.1.9-alpha",
+    "version": "1.1.11-alpha1",
     "attributes": {
       "org.gradle.status": "release"
     }
@@ -25,13 +25,13 @@
       },
       "files": [
         {
-          "name": "ffmpeg-java-id-1.1.9-alpha.jar",
-          "url": "ffmpeg-java-id-1.1.9-alpha.jar",
-          "size": 45121,
-          "sha512": "a83c59f506627a4b144cd37d65b60f7b48e97e341b6c7915b3e661724bc22985a75d3456fe60b652cd00afba8109d8dd6ab8ba2d154395bd0dcfacac9dc11343",
-          "sha256": "a7868b00e708db2811d766907992754158904d589beffc7e626ab3de147d4a7e",
-          "sha1": "43ab6f05d5b7dfdda77d229b201ded30fa6f243f",
-          "md5": "235223e8fb32e33ed58ea0982bf00c65"
+          "name": "ffmpeg-java-id-1.1.11-alpha1.jar",
+          "url": "ffmpeg-java-id-1.1.11-alpha1.jar",
+          "size": 46880,
+          "sha512": "a5f0be51b4dbe440d693b26b148ebf850e8dbad71c334d509f89202c4e39d3d6a5ad21fb2bed962f8e2d0539fd81d5dad58bf84814dc740579400729d25b52b8",
+          "sha256": "96979321c0a5b62d4d51f609a44a861a407ee6313f9c8314f3d799c749874411",
+          "sha1": "57ad97cba8c475f01b8657d38bca232a2b4b2ec9",
+          "md5": "24fb2619a32be6e75d1d59d49bbe89ba"
         }
       ]
     },
@@ -49,7 +49,7 @@
           "group": "org.jetbrains",
           "module": "annotations",
           "version": {
-            "requires": "23.0.0"
+            "requires": "24.1.0"
           }
         },
         {
@@ -71,50 +71,43 @@
           }
         },
         {
-          "group": "com.google.cloud",
-          "module": "google-cloud-texttospeech",
-          "version": {
-            "requires": "2.13.0"
-          }
-        },
-        {
           "group": "org.slf4j",
           "module": "slf4j-api",
           "version": {
-            "requires": "1.7.5"
+            "requires": "2.0.12"
           }
         },
         {
           "group": "commons-io",
           "module": "commons-io",
           "version": {
-            "requires": "2.11.0"
+            "requires": "2.15.1"
           }
         },
         {
           "group": "org.apache.commons",
           "module": "commons-lang3",
           "version": {
-            "requires": "3.8.1"
+            "requires": "3.14.0"
           }
         },
         {
           "group": "org.apache.commons",
           "module": "commons-exec",
           "version": {
-            "requires": "1.3"
+            "requires": "1.4.0"
           }
         }
       ],
       "files": [
         {
-          "name": "ffmpeg-java-id-1.1.9-alpha.jar",
-          "url": "ffmpeg-java-id-1.1.9-alpha.jar",
-          "size": 45121,
-          "sha512": "a83c59f506627a4b144cd37d65b60f7b48e97e341b6c7915b3e661724bc22985a75d3456fe60b652cd00afba8109d8dd6ab8ba2d154395bd0dcfacac9dc11343",
-          "sha256": "a7868b00e708db2811d766907992754158904d589beffc7e626ab3de147d4a7e",
-          "sha1": "43ab6f05d5b7dfdda77d229b201ded30fa6f243f",
-          "md5": "235223e8fb32e33ed58ea0982bf00c65"
+          "name": "ffmpeg-java-id-1.1.11-alpha1.jar",
+          "url": "ffmpeg-java-id-1.1.11-alpha1.jar",
+          "size": 46880,
+          "sha512": "a5f0be51b4dbe440d693b26b148ebf850e8dbad71c334d509f89202c4e39d3d6a5ad21fb2bed962f8e2d0539fd81d5dad58bf84814dc740579400729d25b52b8",
+          "sha256": "96979321c0a5b62d4d51f609a44a861a407ee6313f9c8314f3d799c749874411",
+          "sha1": "57ad97cba8c475f01b8657d38bca232a2b4b2ec9",
+          "md5": "24fb2619a32be6e75d1d59d49bbe89ba"
         }
       ]
     },
@@ -128,13 +121,13 @@
       },
       "files": [
         {
-          "name": "ffmpeg-java-id-1.1.9-alpha-javadoc.jar",
-          "url": "ffmpeg-java-id-1.1.9-alpha-javadoc.jar",
-          "size": 163260,
-          "sha512": "1d75c26d8773f0f97bfe23f4fecf73c82d3fa86139826ebf7ac920a1909e368bc1861817829ea7cccb303f1e68101e393bc702636352ddba07853c286c7040d0",
-          "sha256": "1cad1346aac65ff9eb40561b5469e307678e03a60f6bae8f97017ff5f31e6897",
-          "sha1": "db501584a229058881eae228d7e18558cf7cc6e9",
-          "md5": "d04e67ec528a85d5ed870374b481b977"
+          "name": "ffmpeg-java-id-1.1.11-alpha1-javadoc.jar",
+          "url": "ffmpeg-java-id-1.1.11-alpha1-javadoc.jar",
+          "size": 160423,
+          "sha512": "6ef2ae207b6a2063fce017800870a91f59f0509380bdb6f117ccfb7c79d6db612eadff39e35673f958f667681ed7534467697e60b7d959de3009e9b9af04d8dd",
+          "sha256": "718d4ce683628d3e68cd9f9fcfd3391e824316c60245ad6605689b2171140b55",
+          "sha1": "ca2de09aebb98b810fad51172887507ad49fe45f",
+          "md5": "b38965cde3cce4605ed061812464a5df"
         }
       ]
     },
@@ -148,13 +141,13 @@
       },
       "files": [
         {
-          "name": "ffmpeg-java-id-1.1.9-alpha-sources.jar",
-          "url": "ffmpeg-java-id-1.1.9-alpha-sources.jar",
-          "size": 38567,
-          "sha512": "3023ac3d877c12bfdebe071229ecab0de6e59ec7805663b784d3885352ade012863e9220996fa709f35724de907661e9cf0c4cbe7ea2632686a7a01b4a230a33",
-          "sha256": "1f4276a4f212d76f2df76e149363b637b88fe80f52aea44c7d0a9f2727eda8b2",
-          "sha1": "b70818e68ab765912172d4149e840e25e7b03241",
-          "md5": "51a18aa9a9f4504b33df4f85364d4bd0"
+          "name": "ffmpeg-java-id-1.1.11-alpha1-sources.jar",
+          "url": "ffmpeg-java-id-1.1.11-alpha1-sources.jar",
+          "size": 39376,
+          "sha512": "0bc2f2ac34c08d9ec4da222c8ed05d932312a0000ab322de1fdd140dea7800d3a45c47c09012b2225ed66053518fe69b2802318e9d54556f8926bfe6ef521388",
+          "sha256": "b4055d44bd73c5322bb300f11b172211862b5b7f149a8031cad1c367cf73d944",
+          "sha1": "e608c44a0544518d1667dece8acef963b96e5c98",
+          "md5": "a8652154f85cddab47afe69bca0c8380"
         }
       ]
     }

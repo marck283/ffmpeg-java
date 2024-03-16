@@ -5,6 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4e206741-5dd1-4a84-99b2-29854b378e54" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.gradle/8.3/checksums/checksums.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.3/checksums/md5-checksums.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.3/checksums/sha1-checksums.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.3/checksums/sha256-checksums.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.3/checksums/sha512-checksums.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.3/dependencies-accessors/dependencies-accessors.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.3/dependencies-accessors/gc.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.3/executionHistory/executionHistory.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.3/executionHistory/executionHistory.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.3/fileChanges/last-build.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.3/fileHashes/fileHashes.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.3/fileHashes/fileHashes.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.3/fileHashes/resourceHashesCache.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.3/gc.properties" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.5/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.5/checksums/checksums.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.5/checksums/md5-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.5/checksums/md5-checksums.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.5/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.5/checksums/sha1-checksums.bin" afterDir="false" />
@@ -20,8 +34,22 @@
       <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/it/disi/unitn/FFMpeg$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/it/disi/unitn/FFMpeg$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/it/disi/unitn/FFMpeg.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/it/disi/unitn/FFMpeg.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/it/disi/unitn/FFMpegBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/it/disi/unitn/FFMpegBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/it/disi/unitn/StringExt.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/it/disi/unitn/StringExt.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/it/disi/unitn/TracksMerger.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/it/disi/unitn/TracksMerger.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/it/disi/unitn/exceptions/InvalidArgumentException.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/it/disi/unitn/exceptions/InvalidArgumentException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/it/disi/unitn/exceptions/NotEnoughArgumentsException.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/it/disi/unitn/exceptions/NotEnoughArgumentsException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/it/disi/unitn/json/JSONToImage.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/it/disi/unitn/json/JSONToImage.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/it/disi/unitn/json/jsonparser/JsonParser.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/it/disi/unitn/json/jsonparser/JsonParser.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/it/disi/unitn/json/processpool/ExecutorResHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/it/disi/unitn/json/processpool/ExecutorResHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/it/disi/unitn/json/processpool/ProcessObserver.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/it/disi/unitn/json/processpool/ProcessPool.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/it/disi/unitn/json/processpool/ProcessPool.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/it/disi/unitn/videocreator/ExecutorResHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/it/disi/unitn/videocreator/ExecutorResHandler.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/it/disi/unitn/videocreator/VideoCreator.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/it/disi/unitn/videocreator/VideoCreator.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/test/FFMpegBuilderTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/test/FFMpegBuilderTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/test/it/disi/unitn/json/JSONToImageTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/test/it/disi/unitn/json/JSONToImageTest.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/test/it/disi/unitn/videocreator/VideoCreatorTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/test/it/disi/unitn/videocreator/VideoCreatorTest.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/docs/javadoc/allclasses-index.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/allclasses-index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/docs/javadoc/allpackages-index.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/allpackages-index.html" afterDir="false" />
@@ -44,7 +72,7 @@
       <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/json/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/json/package-summary.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/json/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/json/package-tree.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/json/processpool/ExecutorResHandler.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/json/processpool/ExecutorResHandler.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/json/processpool/ProcessObserver.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/json/processpool/ProcessObserver.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/json/processpool/ProcessObserver.html" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/json/processpool/ProcessPool.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/json/processpool/ProcessPool.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/json/processpool/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/json/processpool/package-summary.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/json/processpool/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/json/processpool/package-tree.html" afterDir="false" />
@@ -59,24 +87,48 @@
       <change beforePath="$PROJECT_DIR$/build/docs/javadoc/overview-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/overview-tree.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/docs/javadoc/search.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/search.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/docs/javadoc/serialized-form.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/serialized-form.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/type-search-index.js" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/type-search-index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/publications/mavenJava/module.json" beforeDir="false" afterPath="$PROJECT_DIR$/build/publications/mavenJava/module.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/publications/mavenJava/pom-default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/build/publications/mavenJava/pom-default.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/reports/tests/test/classes/it.disi.unitn.videocreator.VideoCreatorTest.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/tests/test/classes/it.disi.unitn.videocreator.VideoCreatorTest.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/reports/tests/test/classes/it.disi.unitn.videocreator.VideoCreatorTest.html" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/build/reports/tests/test/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/tests/test/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/reports/tests/test/packages/it.disi.unitn.videocreator.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/tests/test/packages/it.disi.unitn.videocreator.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/test-results/test/TEST-it.disi.unitn.videocreator.VideoCreatorTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/build/test-results/test/TEST-it.disi.unitn.videocreator.VideoCreatorTest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/reports/tests/test/packages/it.disi.unitn.videocreator.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/test/input/images/000.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/test/input/images/000.jpeg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/test/input/images/001.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/test/input/images/001.jpeg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/test/input/mp4/example.mp4" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/test/input/mp4/example.mp4" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/scripts/ffmpeg-java-id" beforeDir="false" afterPath="$PROJECT_DIR$/build/scripts/ffmpeg-java-id" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/scripts/ffmpeg-java-id.bat" beforeDir="false" afterPath="$PROJECT_DIR$/build/scripts/ffmpeg-java-id.bat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/test-results/test/TEST-it.disi.unitn.videocreator.VideoCreatorTest.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/build/test-results/test/binary/output.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/test-results/test/binary/output.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/test-results/test/binary/output.bin.idx" beforeDir="false" afterPath="$PROJECT_DIR$/build/test-results/test/binary/output.bin.idx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/test-results/test/binary/results.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/test-results/test/binary/results.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/ExecutorResHandler.class.uniqueId4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/TracksMerger.class.uniqueId5" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/VideoCreator.class.uniqueId2" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/VideoCreator.class.uniqueId2" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/FFMpeg$1.class.uniqueId0" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/FFMpeg.class.uniqueId3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/FFMpegBuilder.class.uniqueId1" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/TracksMerger.class.uniqueId4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/VideoCreator.class.uniqueId2" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/tmp/compileTestJava/compileTransaction/stash-dir/VideoCreatorTest.class.uniqueId1" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileTestJava/compileTransaction/stash-dir/VideoCreatorTest.class.uniqueId1" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/tmp/compileTestJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileTestJava/previous-compilation-data.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/tmp/javadoc/javadoc.options" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/javadoc/javadoc.options" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/tmp/publishMavenJavaPublicationToMavenRepository/module-maven-metadata.xml" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/publishMavenJavaPublicationToMavenRepository/module-maven-metadata.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/disi/unitn/FFMpeg.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/disi/unitn/FFMpeg.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/disi/unitn/FFMpegBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/disi/unitn/FFMpegBuilder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/disi/unitn/StringExt.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/disi/unitn/StringExt.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/disi/unitn/TracksMerger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/disi/unitn/TracksMerger.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/disi/unitn/exceptions/InvalidArgumentException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/disi/unitn/exceptions/InvalidArgumentException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/disi/unitn/exceptions/NotEnoughArgumentsException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/disi/unitn/exceptions/NotEnoughArgumentsException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/disi/unitn/json/JSONToImage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/disi/unitn/json/JSONToImage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/disi/unitn/json/jsonparser/JsonParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/disi/unitn/json/jsonparser/JsonParser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/disi/unitn/json/processpool/ExecutorResHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/disi/unitn/json/processpool/ExecutorResHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/disi/unitn/json/processpool/ProcessObserver.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/disi/unitn/json/processpool/ProcessPool.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/disi/unitn/json/processpool/ProcessPool.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/disi/unitn/videocreator/ExecutorResHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/disi/unitn/videocreator/ExecutorResHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/disi/unitn/videocreator/VideoCreator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/disi/unitn/videocreator/VideoCreator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/FFMpegBuilderTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/FFMpegBuilderTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/it/disi/unitn/json/JSONToImageTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/disi/unitn/json/JSONToImageTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/it/disi/unitn/videocreator/VideoCreatorTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/disi/unitn/videocreator/VideoCreatorTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/input/mp4/example.mp4" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/input/mp4/example.mp4" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -105,6 +157,12 @@
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="ffmpeg-java-id" type="f1a62948:ProjectNode" />
                 <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="ffmpeg-java-id" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="build" type="c8890929:TasksNode$1" />
               </path>
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
@@ -163,6 +221,7 @@
     "Gradle.VideoCreatorTest.executor": "Run",
     "Gradle.ffmpeg-java [build].executor": "Run",
     "Gradle.ffmpeg-java [publishAllPublicationsToMavenRepository].executor": "Run",
+    "Gradle.ffmpeg-java [publishMavenJavaPublicationToMavenLocal].executor": "Run",
     "Gradle.ffmpeg-java [publishToMavenLocal].executor": "Run",
     "Gradle.ffmpeg-java [testClasses].executor": "Run",
     "Gradle.ffmpeg-java [test].executor": "Run",
@@ -179,7 +238,7 @@
     "Repository.Attach.Sources": "false",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "com.google.cloudcode.ide_session_index": "20240309_0001",
+    "com.google.cloudcode.ide_session_index": "20240316_0000",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
     "create.test.in.the.same.root": "true",
@@ -224,54 +283,6 @@
     </key>
   </component>
   <component name="RunManager" selected="Gradle.ffmpeg-java [publishAllPublicationsToMavenRepository]">
-    <configuration name="FFMpegBuilderTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":test" />
-            <option value="--tests" />
-            <option value="&quot;FFMpegBuilderTest&quot;" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>true</RunAsTest>
-      <method v="2" />
-    </configuration>
-    <configuration name="FFMpegBuilderTest.testSetVideoFrameSize" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":test" />
-            <option value="--tests" />
-            <option value="&quot;FFMpegBuilderTest.testSetVideoFrameSize&quot;" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>true</RunAsTest>
-      <method v="2" />
-    </configuration>
     <configuration name="JSONToImageTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -320,6 +331,28 @@
       <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
+    <configuration name="ffmpeg-java [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="build" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
     <configuration name="ffmpeg-java [publishAllPublicationsToMavenRepository]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -342,20 +375,42 @@
       <RunAsTest>false</RunAsTest>
       <method v="2" />
     </configuration>
+    <configuration name="ffmpeg-java [publishMavenJavaPublicationToMavenLocal]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="publishMavenJavaPublicationToMavenLocal" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
     <list>
+      <item itemvalue="Gradle.ffmpeg-java [build]" />
+      <item itemvalue="Gradle.ffmpeg-java [publishMavenJavaPublicationToMavenLocal]" />
       <item itemvalue="Gradle.ffmpeg-java [publishAllPublicationsToMavenRepository]" />
       <item itemvalue="Gradle.VideoCreatorTest" />
-      <item itemvalue="Gradle.FFMpegBuilderTest.testSetVideoFrameSize" />
       <item itemvalue="Gradle.JSONToImageTest" />
-      <item itemvalue="Gradle.FFMpegBuilderTest" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Gradle.ffmpeg-java [publishAllPublicationsToMavenRepository]" />
-        <item itemvalue="Gradle.VideoCreatorTest" />
         <item itemvalue="Gradle.JSONToImageTest" />
-        <item itemvalue="Gradle.FFMpegBuilderTest.testSetVideoFrameSize" />
-        <item itemvalue="Gradle.FFMpegBuilderTest" />
+        <item itemvalue="Gradle.ffmpeg-java [publishMavenJavaPublicationToMavenLocal]" />
+        <item itemvalue="Gradle.ffmpeg-java [build]" />
+        <item itemvalue="Gradle.VideoCreatorTest" />
       </list>
     </recent_temporary>
   </component>
@@ -405,6 +460,11 @@
       <workItem from="1709915296181" duration="11030000" />
       <workItem from="1709978717975" duration="3190000" />
       <workItem from="1709982007552" duration="13086000" />
+      <workItem from="1710245848205" duration="51000" />
+      <workItem from="1710246201757" duration="3416000" />
+      <workItem from="1710337113479" duration="3508000" />
+      <workItem from="1710525907027" duration="15337000" />
+      <workItem from="1710546324999" duration="758000" />
     </task>
     <servers />
   </component>
@@ -415,9 +475,54 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/it/disi/unitn/FFMpeg.java</url>
-          <line>41</line>
-          <option name="timeStamp" value="61" />
+          <url>file://$PROJECT_DIR$/src/test/java/it/disi/unitn/json/JSONToImageTest.java</url>
+          <line>36</line>
+          <option name="timeStamp" value="62" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/it/disi/unitn/json/JSONToImage.java</url>
+          <line>104</line>
+          <option name="timeStamp" value="64" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/it/disi/unitn/json/JSONToImage.java</url>
+          <line>105</line>
+          <option name="timeStamp" value="65" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/it/disi/unitn/json/JSONToImage.java</url>
+          <line>106</line>
+          <option name="timeStamp" value="66" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/it/disi/unitn/json/JSONToImage.java</url>
+          <line>113</line>
+          <option name="timeStamp" value="67" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/it/disi/unitn/json/JSONToImage.java</url>
+          <line>116</line>
+          <option name="timeStamp" value="68" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/it/disi/unitn/json/JSONToImage.java</url>
+          <line>118</line>
+          <option name="timeStamp" value="69" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/it/disi/unitn/json/JSONToImage.java</url>
+          <line>120</line>
+          <option name="timeStamp" value="70" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/it/disi/unitn/json/JSONToImage.java</url>
+          <line>121</line>
+          <option name="timeStamp" value="71" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/it/disi/unitn/json/JSONToImage.java</url>
+          <line>129</line>
+          <option name="timeStamp" value="72" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

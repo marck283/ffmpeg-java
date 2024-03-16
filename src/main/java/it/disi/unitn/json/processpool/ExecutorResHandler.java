@@ -38,12 +38,15 @@ public class ExecutorResHandler implements ExecuteResultHandler {
      * @param imageExtension The picture's file extension
      * @param jti The JSONToImage instance to be used
      * @param pp The ProcessPool instance to be used
+     * @throws InvalidArgumentException If any of the arguments given to this constructor is null or an empty string
      */
     public ExecutorResHandler(@NotNull JsonArray arr, int i, @NotNull String pathToImagesFolder,
-                              @NotNull String imageExtension, @NotNull JSONToImage jti, @NotNull ProcessPool pp) {
+                              @NotNull String imageExtension, @NotNull JSONToImage jti, @NotNull ProcessPool pp)
+            throws InvalidArgumentException {
         if (arr == null || pathToImagesFolder == null || pathToImagesFolder.isEmpty() || imageExtension == null ||
-                imageExtension.isEmpty() || jti == null) {
-            throw new IllegalArgumentException("No argument to this constructor can be null or an empty string.");
+                imageExtension.isEmpty() || jti == null || pp == null) {
+            throw new InvalidArgumentException("No argument to this constructor can be null or an empty string.",
+                    "Nessuno degli argomenti forniti a questo costruttore puo' essere null o una stringa vuota.");
         }
         array = arr;
         index = i;
@@ -66,37 +69,12 @@ public class ExecutorResHandler implements ExecuteResultHandler {
     }
 
     /**
-     * To be executed on process completion
+     * To be executed on process completion.
      *
      * @param exitValue the exit value of the sub-process
      */
     @Override
     public void onProcessComplete(int exitValue) {
-        /*if(exitValue == 0) {
-                    try {
-                        StringExt i = new StringExt(String.valueOf(index));
-                        i.padStart();
-                        JsonObject obj = array.get(index).getAsJsonObject();
-                        String mime = obj.get("mime").getAsString();
-                        Path path = getPath(pathToImagesFolder, i.getVal() + "." + imageExtension);
-                        File image = path.toFile();
-                        byte[] arr = Files.readAllBytes(image.toPath());
-                        Files.write(path, arr);
-
-                        jti.modifyImage(obj, index, pathToImagesFolder, mime);
-                    } catch(InvalidArgumentException | IOException ex) {
-                        ex.printStackTrace();
-                    }
-                } else {
-                    try {
-                        System.err.println("EXIT CODE: " + exitValue);
-                        throw new Exception("An error has occurred.");
-                    } catch(Exception ex) {
-                        ex.printStackTrace();
-                        System.err.println(ex.getMessage());
-                        System.exit(1);
-                    }
-                }*/
         Thread t2 = new Thread(() -> {
             try {
                 StringExt i = new StringExt(String.valueOf(index));

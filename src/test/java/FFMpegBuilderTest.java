@@ -16,7 +16,7 @@ class FFMpegBuilderTest {
         VideoCreator vc = builder.newVideoCreator("./src/test/resources/input/mp4/000-1.mp4",
                 "./src/test/resources/input/mp4", "000.mp4");
         builder.addInput("./src/test/resources/input/mp4/000.mp4");
-        vc.setVideoSize(250, 200);
+        vc.setVideoSize(250, 200, "yuvj420p", true);
         builder.addOutput("./src/test/resources/input/mp4/000-1.mp4");
         FFMpeg ffmpeg = builder.build();
         ffmpeg.executeCMD(1L, TimeUnit.MINUTES);
@@ -28,7 +28,7 @@ class FFMpegBuilderTest {
         VideoCreator vc = builder.newVideoCreator("./src/test/resources/input/mp4/000-1.mp4",
                 "./src/test/resources/input/mp4", "000.mp4");
         builder.addInput("./src/test/resources/input/mp4/000.mp4");
-        vc.setVideoSize(250, 200);
+        vc.setVideoSize(250, 200, "yuvj420p", true);
         builder.addOutput("./src/test/resources/input/mp4/000-1.mp4");
         FFMpeg ffmpeg = builder.build();
         ffmpeg.executeCMD(1L, TimeUnit.MINUTES);

@@ -8,6 +8,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 /**
  * Builder class for convenience class FFMpeg
@@ -23,8 +24,10 @@ public class FFMpegBuilder {
      */
     public FFMpegBuilder(@Nullable String ffmpegPath) throws NotEnoughArgumentsException {
         if(SystemUtils.IS_OS_WINDOWS) {
-            if(ffmpegPath == null) {
-                throw new NotEnoughArgumentsException("The arguments to FFMpegBuilder's constructor cannot be null.");
+            if(ffmpegPath == null || ffmpegPath.isEmpty()) {
+                throw new NotEnoughArgumentsException("The argument to this class's constructor cannot be null or an " +
+                        "empty string.", "L'argomento fornito al costruttore di questa classe non puo' essere " +
+                        "null o una stringa vuota.");
             }
             command = ffmpegPath;
         } else {
@@ -77,10 +80,11 @@ public class FFMpegBuilder {
     public void resetCommand(@Nullable String pathToFFMpeg) throws NotEnoughArgumentsException,
             UnsupportedOperatingSystemException {
         if(SystemUtils.IS_OS_WINDOWS) {
-            if(pathToFFMpeg != null) {
-                resetCommandWindows(pathToFFMpeg);
+            if(pathToFFMpeg == null || pathToFFMpeg.isEmpty()) {
+                throw new NotEnoughArgumentsException("The argument to this method cannot be null or an empty string.",
+                        "L'argomento fornito a questo metodo non puo' essere null o una stringa vuota.");
             } else {
-                throw new NotEnoughArgumentsException("The argument to this method cannot be null.");
+                resetCommandWindows(pathToFFMpeg);
             }
         } else {
             if(SystemUtils.IS_OS_LINUX) {
@@ -144,8 +148,9 @@ public class FFMpegBuilder {
      * @throws NotEnoughArgumentsException when one of the arguments given to this method is null
      */
     public void addAllInputs(@NotNull String @NotNull ... inputFiles) throws NotEnoughArgumentsException {
-        if(inputFiles == null || Arrays.stream(inputFiles).anyMatch(s -> s == null)) {
-            throw new NotEnoughArgumentsException("None of the arguments given to this method can be null.");
+        if(inputFiles == null || Arrays.stream(inputFiles).anyMatch(Objects::isNull)) {
+            throw new NotEnoughArgumentsException("None of the arguments given to this method can be null or an empty " +
+                    "string.", "Nessuno degli argomenti forniti a questo metodo puo' essere null o una stringa vuota.");
         }
         StringBuilder newCmd = new StringBuilder(command);
         for(String s: inputFiles) {

@@ -13,7 +13,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import static java.lang.System.exit;
-import static org.junit.jupiter.api.Assertions.*;
 
 class JSONToImageTest {
 
@@ -35,7 +34,7 @@ class JSONToImageTest {
             JsonArray array = parser.getJsonArray("array");
             JSONToImage json2image = new JSONToImage(jsonFile, false);
             String imageExt = json2image.getMIME(array.get(0).getAsJsonObject());
-            json2image.generate("./src/test/resources/input/images", imageExt, 800, 600);
+            json2image.generate("./src/test/resources/input/images", imageExt, 800, 600, 1800000);
         } catch (InvalidArgumentException | InterruptedException e) {
             System.err.println(e.getMessage());
             //throw new RuntimeException(e);

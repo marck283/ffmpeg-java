@@ -17,7 +17,7 @@ public class StringExt {
     public StringExt(@NotNull String str) throws InvalidArgumentException {
         if(str == null || str.isEmpty()) {
             throw new InvalidArgumentException("The argument given to this constructor cannot be null nor can it be the " +
-                    "empty string.");
+                    "empty string.", "L'argomento fornito a questo costruttore non puo' essere null o una stringa vuota.");
         }
         val = str;
     }
@@ -29,7 +29,7 @@ public class StringExt {
     public void padStart() throws InvalidArgumentException {
         if(val.isEmpty() || val.length() > 3) {
             throw new InvalidArgumentException("The original string's length is not greater than 0 and less than or " +
-                    "equal to 3.");
+                    "equal to 3.", "La lunghezza della stringa originale non e' maggiore di zero e minore o uguale a 3.");
         }
 
         int missing = 3 - val.length();

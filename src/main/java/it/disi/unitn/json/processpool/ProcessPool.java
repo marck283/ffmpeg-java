@@ -4,6 +4,7 @@ import com.google.gson.JsonArray;
 /*import com.google.gson.JsonObject;
 import it.disi.unitn.StringExt;
 import it.disi.unitn.exceptions.InvalidArgumentException;*/
+import it.disi.unitn.exceptions.InvalidArgumentException;
 import it.disi.unitn.json.JSONToImage;
 import org.apache.commons.exec.*;
 //import org.apache.commons.lang3.tuple.Pair;
@@ -14,6 +15,7 @@ import java.io.IOException;
 /*import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;*/
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,17 +47,16 @@ public class ProcessPool {
      * @param pathToImagesFolder The path to the pictures' folder
      * @param width The pictures' width
      * @param height The pictures' height
-     * @throws IllegalArgumentException if the number of threads to be executed is greater than 1024
+     * @throws InvalidArgumentException If any of the arguments given to this constructor is null or less than or equal
+     * to zero
      */
-    public ProcessPool(/*int num, int keepAliveTime, TimeUnit tu*/@NotNull File model, @NotNull String imageExtension,
-                                                                  @NotNull String pathToImagesFolder, int width, int height) {
-        /*if(num > 1024) {
-            throw new IllegalArgumentException("Cannot execute more than 1024 threads.");
-        }
-        executor = new ThreadPoolExecutor(num, 1024, keepAliveTime, tu, new LinkedBlockingQueue<>());*/
+    public ProcessPool(@NotNull File model, @NotNull String imageExtension, @NotNull String pathToImagesFolder, int width,
+                       int height) throws InvalidArgumentException {
         if(model == null || imageExtension == null || imageExtension.isEmpty() || pathToImagesFolder == null ||
-                pathToImagesFolder.isEmpty()) {
-            throw new IllegalArgumentException("No argument to this constructor can be null.");
+                pathToImagesFolder.isEmpty() || width <= 0 || height <= 0) {
+            throw new InvalidArgumentException("No argument to this constructor can be null, an empty string  or less " +
+                    "than or equal to zero.", "Nessuno degli argomenti forniti a questo costruttore puo' essere null, " +
+                    "una stringa vuota o minore o uguale a zero.");
         }
         scriptpath = model.getAbsolutePath();
         this.imageExtension = imageExtension;
@@ -67,10 +68,12 @@ public class ProcessPool {
     /**
      * This method sets the description to be used when producing the final pictures.
      * @param newdesc The description to be used
+     * @throws InvalidArgumentException If the argument given to this method is null or an empty string
      */
-    public void setDesc(@NotNull String newdesc) {
+    public void setDesc(@NotNull String newdesc) throws InvalidArgumentException {
         if(newdesc == null || newdesc.isEmpty()) {
-            throw new IllegalArgumentException("The argument to this method cannot be null or an empty string.");
+            throw new InvalidArgumentException("The argument to this method cannot be null or an empty string.", "L'argomento " +
+                    "fornito a questo metodo non puo' essere null o una stringa vuota.");
         }
         desc = newdesc;
     }
@@ -110,10 +113,10 @@ public class ProcessPool {
      * process's termination.
      * @param array The JsonArray instance from which to take the necessary information about the final pictures
      * @param jti The JSONToImage instance to be used
-     * @throws IllegalArgumentException if any of the arguments to this method is null
+     * @param timeout The timeout in milliseconds
+     * @throws InvalidArgumentException if any of the arguments to this method is null
      */
-    public void execute(/*@NotNull ProcessBuilder pb, @NotNull Consumer<Process> c, */@NotNull JsonArray array,
-                                                                                               @NotNull JSONToImage jti) {
+    public void execute(@NotNull JsonArray array, @NotNull JSONToImage jti, long timeout) throws InvalidArgumentException {
         /*Process p = pb.start();
 
         InputStream istream = p.getErrorStream();
@@ -128,8 +131,10 @@ public class ProcessPool {
                     pathToImagesFolder + " " + width + " " + height;
             CommandLine cmdLine = CommandLine.parse(s);
             PumpStreamHandler streamHandler = new PumpStreamHandler();
-            DefaultExecutor executor = new DefaultExecutor();
-            ExecuteWatchdog watchdog = new ExecuteWatchdog(1800000); //30 minuti
+            DefaultExecutor executor = DefaultExecutor.builder().get();
+            ExecuteWatchdog.Builder builder = ExecuteWatchdog.builder();
+            builder.setTimeout(Duration.ofMillis(timeout)); //Durata in minuti
+            ExecuteWatchdog watchdog = builder.get();
             executor.setStreamHandler(streamHandler);
             executor.setWatchdog(watchdog);
             ExecutorResHandler exrhandler = new ExecutorResHandler(array, index, pathToImagesFolder, imageExtension, jti, this);

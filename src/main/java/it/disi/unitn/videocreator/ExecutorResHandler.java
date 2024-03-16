@@ -13,7 +13,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 /**
- * This class handles the result of the command "ffmpeg -codecs -hide_banner".
+ * This class handles the result of the command used to check either that the aspect ratio of each frame is compatible with
+ * the given pixel format or that the given codec is supported by the current installation of FFmpeg.
  */
 public class ExecutorResHandler implements ExecuteResultHandler {
     private int value = 0/*, width = -1, height = -1*/;

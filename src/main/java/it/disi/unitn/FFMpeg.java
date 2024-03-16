@@ -13,6 +13,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.FileSystem;
 import java.nio.file.FileSystems;*/
+import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -29,10 +30,12 @@ public class FFMpeg {
     private void execProcess(boolean withTimeout, long timeout) throws IOException {
         CommandLine cmdLine = CommandLine.parse(ffBuilder.getCommand());
         PumpStreamHandler streamHandler = new PumpStreamHandler();
-        DefaultExecutor executor = new DefaultExecutor();
+        DefaultExecutor executor = DefaultExecutor.builder().get();
         ExecuteWatchdog watchdog = null;
+        ExecuteWatchdog.Builder builder = ExecuteWatchdog.builder();
+        builder.setTimeout(Duration.ofMillis(timeout));
         if(withTimeout) {
-            watchdog = new ExecuteWatchdog(timeout); //30 minuti
+            watchdog = builder.get();
         }
         executor.setStreamHandler(streamHandler);
         streamHandler.start();

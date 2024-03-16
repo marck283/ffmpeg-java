@@ -17,8 +17,8 @@ class VideoCreatorTest {
         FFMpegBuilder builder = new FFMpegBuilder("ffmpeg");
         VideoCreator creator = builder.newVideoCreator("./src/test/resources/input/mp4/example.mp4",
                 "./src/test/resources/input/images", "000.jpeg");
-        creator.setVideoSize(800, 600);
-        creator.setCodecID("mjpeg");
+        creator.setVideoSize(800, 600, "yuvj420p", true);
+        creator.setCodecID("mjpeg", true);
         creator.setPixelFormat("yuv420p");
         creator.setOutFullRange(true); //If using mjpeg and YUV pixel formats, we have to set the color range to full.
         creator.setVideoQuality(18);
