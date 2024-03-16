@@ -498,13 +498,10 @@ public class VideoCreator {
      * @throws IOException If an I/O error occurs
      */
     public void createCommand(long time, @NotNull TimeUnit timeUnit) throws InvalidArgumentException, IOException {
-        if(videoWidth <= 0 || videoHeight <= 0) {
-            if(videoSizeID == null || videoSizeID.isEmpty()) {
-                throw new InvalidArgumentException("The video size ID must not be null or an empty string.",
-                        "La proporzione di ogni frame non puo' essere null o una stringa vuota.");
-            }
-            throw new InvalidArgumentException("The video width and height should not be less than or equal to 0.",
-                    "L'ampiezza e l'altezza non dovrebbero essere minori o uguali a 0.");
+        if((videoWidth <= 0 || videoHeight <= 0) && (videoSizeID == null || videoSizeID.isEmpty())) {
+            throw new InvalidArgumentException("Either the video size ID is null or an empty string or the video width " +
+                    "or height are less than or equal to 0.", "Si e' verificato un errore: o la proporzione di ogni frame " +
+                    "e' null o una stringa vuota, o ampiezza o l'altezza sono minori o uguali a 0.");
         } else {
             if(timeUnit == null) {
                 throw new InvalidArgumentException("The given time unit should not be null.", "La data unita' di tempo " +

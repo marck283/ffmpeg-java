@@ -3,8 +3,8 @@
   <groupId>it.disi.unitn.ffmpeg</groupId>
   <artifactId>ffmpeg-java-id</artifactId>
   <versioning>
-    <latest>1.1.11-alpha1</latest>
-    <release>1.1.11-alpha1</release>
+    <latest>1.1.11</latest>
+    <release>1.1.11</release>
     <versions>
       <version>1.0.8-beta10</version>
       <version>1.0.8-beta11</version>
@@ -142,7 +142,8 @@
       <version>1.1.9</version>
       <version>1.1.10</version>
       <version>1.1.11-alpha1</version>
+      <version>1.1.11</version>
     </versions>
-    <lastUpdated>20240315234809</lastUpdated>
+    <lastUpdated>20240316002518</lastUpdated>
   </versioning>
 </metadata>

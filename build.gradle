@@ -16,7 +16,7 @@ plugins {
 }
 
 group 'it.disi.unitn'
-version '1.1.11-alpha1'
+version '1.1.11'
 
 java {
     withJavadocJar()
