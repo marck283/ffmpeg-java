@@ -31,7 +31,7 @@ public class JsonParser {
      * come parametro.
      * @param arrName Il nome dell'oggetto da ritornare
      * @return Un'istanza di JsonArray che rappresenta l'oggetto identificato dal nome fornito come
-     * parametro.
+     * parametro, o null se tale parametro non esiste.
      * @throws InvalidArgumentException If the argument given to this method is null or an empty string
      */
     public JsonArray getJsonArray(@NotNull String arrName) throws InvalidArgumentException {
@@ -46,7 +46,8 @@ public class JsonParser {
      * Ritorna una stringa avente come valore quello dell&rsquo;attributo identificato dal parametro fornito.
      * @param name Il nome del parametro di cui ritornare il valore. Non pu&ograve; essere null o una
      *             stringa vuota.
-     * @return Una stringa avente come valore quello dell&rsquo;attributo identificato dal parametro fornito.
+     * @return Una stringa avente come valore quello dell&rsquo;attributo identificato dal parametro fornito (se un tale
+     * attributo esiste), altrimenti una stringa vuota.
      * @throws InvalidArgumentException If the argument given to this method is null or an empty string
      */
     public String getString(@NotNull String name) throws InvalidArgumentException {
@@ -54,7 +55,12 @@ public class JsonParser {
             throw new InvalidArgumentException("The parameter given to this method cannot be null or an empty string.",
                     "Il parametro fornito a questo metodo non puo' essere null o una stringa vuota.");
         }
-        return obj.get(name).getAsString();
+
+        JsonElement jel = obj.get(name);
+        if(jel != null) {
+            return jel.getAsString();
+        }
+        return "";
     }
 
     /**
@@ -90,7 +96,7 @@ public class JsonParser {
      * Gets the String value of the element identified by the given name.
      * @param el A JsonElement instance
      * @param name The given element's name. This element has to be inside the structure of the given JsonElement
-     * @return The value of the element identified by the given name
+     * @return The value of the element identified by the given name if such element can be found, otherwise an empty string
      * @throws InvalidArgumentException If any of the parameters passed to this method is null or an empty string
      */
     public String getString(@NotNull JsonElement el, @NotNull String name) throws InvalidArgumentException {
@@ -98,14 +104,19 @@ public class JsonParser {
             throw new InvalidArgumentException("The parameters passed to this method cannot be null or empty strings.",
                     "I parametri passati a questo metodo non possono essere null o stringhe vuote.");
         }
-        return getElement(el, name).getAsString();
+
+        JsonElement jel = getElement(el, name);
+        if(jel != null) {
+            return jel.getAsString();
+        }
+        return "";
     }
 
     /**
      * Gets the floating point value of the element identified by the given name.
      * @param el A JsonElement instance
      * @param name The given element's name. This element has to be inside the structure of the given JsonElement
-     * @return The value of the element identified by the given name
+     * @return The value of the element identified by the given name (if such element can be found), otherwise -1F
      * @throws InvalidArgumentException If any of the parameters passed to this method is null or an empty string
      */
     public float getFloat(@NotNull JsonElement el, @NotNull String name) throws InvalidArgumentException {
@@ -113,14 +124,19 @@ public class JsonParser {
             throw new InvalidArgumentException("The parameters passed to this method cannot be null or empty strings.",
                     "I parametri passati a questo metodo non possono essere null o stringhe vuote.");
         }
-        return getElement(el, name).getAsFloat();
+
+        JsonElement jel = getElement(el, name);
+        if(jel != null) {
+            return jel.getAsFloat();
+        }
+        return -1F;
     }
 
     /**
      * Gets the integer value of the element identified by the given name.
      * @param el A JsonElement instance
      * @param name The given element's name. This element has to be inside the structure of the given JsonElement
-     * @return The value of the element identified by the given name
+     * @return The value of the element identified by the given name if such element can be found, otherwise -1
      * @throws InvalidArgumentException If any of the parameters passed to this method is null or an empty string
      */
     public int getInt(@NotNull JsonElement el, @NotNull String name) throws InvalidArgumentException {
@@ -128,6 +144,11 @@ public class JsonParser {
             throw new InvalidArgumentException("The parameters passed to this method cannot be null or empty strings.",
                     "I parametri passati a questo metodo non possono essere null o stringhe vuote.");
         }
-        return getElement(el, name).getAsInt();
+
+        JsonElement jel = getElement(el, name);
+        if(jel != null) {
+            return jel.getAsInt();
+        }
+        return -1;
     }
 }
