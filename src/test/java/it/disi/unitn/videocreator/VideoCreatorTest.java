@@ -1,5 +1,6 @@
 package it.disi.unitn.videocreator;
 
+import it.disi.unitn.FFMpeg;
 import it.disi.unitn.FFMpegBuilder;
 import it.disi.unitn.exceptions.InvalidArgumentException;
 import it.disi.unitn.exceptions.NotEnoughArgumentsException;
@@ -22,6 +23,9 @@ class VideoCreatorTest {
         creator.setPixelFormat("yuv420p");
         creator.setOutFullRange(true); //If using mjpeg and YUV pixel formats, we have to set the color range to full.
         creator.setVideoQuality(18);
-        creator.createCommand(30L, TimeUnit.SECONDS);
+        creator.createCommand(true/*30L, TimeUnit.SECONDS*/);
+
+        FFMpeg ffmpeg = builder.build();
+        ffmpeg.executeCMD(30L, TimeUnit.SECONDS);
     }
 }
