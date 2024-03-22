@@ -28,7 +28,8 @@ public class FFMpeg {
     }
 
     private void execProcess(boolean withTimeout, long timeout) throws IOException {
-        CommandLine cmdLine = CommandLine.parse(ffBuilder.getCommand());
+        String command = ffBuilder.getCommand();
+        CommandLine cmdLine = CommandLine.parse(command);
         PumpStreamHandler streamHandler = new PumpStreamHandler();
         DefaultExecutor executor = DefaultExecutor.builder().get();
         ExecuteWatchdog watchdog = null;

@@ -1,5 +1,7 @@
-package it.disi.unitn;
+package it.disi.unitn.videocreator;
 
+import it.disi.unitn.FFMpeg;
+import it.disi.unitn.FFMpegBuilder;
 import it.disi.unitn.exceptions.InvalidArgumentException;
 import it.disi.unitn.exceptions.NotEnoughArgumentsException;
 import org.apache.commons.io.FileUtils;
@@ -9,20 +11,32 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
+import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 /**
  * A class that helps merge audio and video tracks.
  */
-public class TracksMerger {
+public class TracksMerger extends VideoCreator {
     private final String videoOutput, audioInput, videoInput;
 
     private final FFMpegBuilder builder;
 
     private boolean streamCopy;
 
-    TracksMerger(@NotNull FFMpegBuilder builder, @NotNull String outputFile, @NotNull String audioInput,
-                        @NotNull String videoInput) throws NotEnoughArgumentsException {
+    /**
+     * The class's constructor.
+     * @param builder The FFMpegBuilderInstance
+     * @param outputFile The path to the output video
+     * @param inputFolder The path to the input folder
+     * @param pattern The name of the file to be included in the video
+     * @param audioInput The path to the input audio file
+     * @param videoInput The path to the input video file
+     * @throws NotEnoughArgumentsException If any of the arguments given to this method is null or an empty string
+     */
+    public TracksMerger(@NotNull FFMpegBuilder builder, @NotNull String outputFile, @NotNull String inputFolder, @NotNull String pattern,
+                 @NotNull String audioInput, @NotNull String videoInput) throws NotEnoughArgumentsException {
+        super(builder, outputFile, inputFolder, pattern);
         if(builder == null || audioInput == null || audioInput.isEmpty() || videoInput == null || videoInput.isEmpty() ||
         outputFile == null || outputFile.isEmpty()) {
             throw new NotEnoughArgumentsException("The arguments to this class's constructor cannot be null or empty " +
@@ -36,12 +50,18 @@ public class TracksMerger {
         videoOutput = outputFile;
     }
 
-    TracksMerger(@NotNull FFMpegBuilder builder, @NotNull String outputVideo) throws NotEnoughArgumentsException {
-        if(builder == null || outputVideo == null || outputVideo.isEmpty()) {
-            throw new NotEnoughArgumentsException("The arguments to this class's constructor cannot be null or empty " +
-                    "strings.", "Nessuno degli argomenti forniti al costruttore di questa classe puo' essere null o una " +
-                    "stringa vuota.");
-        }
+    /**
+     * The class's constructor. This constructor should only be called when the program is about to create the output
+     * video.
+     * @param builder The FFMpegBuilderInstance
+     * @param outputVideo The path to the output video
+     * @param inputFolder The path to the input folder
+     * @param pattern The name of the file to be included in the video
+     * @throws NotEnoughArgumentsException If any of the arguments given to this method is null or an empty string
+     */
+    public TracksMerger(@NotNull FFMpegBuilder builder, @NotNull String outputVideo, @NotNull String inputFolder, @NotNull String pattern)
+            throws NotEnoughArgumentsException {
+        super(builder, outputVideo, inputFolder, pattern);
 
         this.builder = builder;
         videoOutput = outputVideo;
@@ -66,11 +86,14 @@ public class TracksMerger {
      */
     public void mergeAudioWithVideo(long time, @NotNull TimeUnit timeUnit) throws NotEnoughArgumentsException, IOException {
         builder.addAllInputs(videoInput, audioInput);
-        builder.setCommand(builder.getCommand() + " -map 0:v");
+        builder.add("-map 0:v");
+        //builder.setCommand(builder.getCommand() + " -map 0:v");
         if(streamCopy) {
-            builder.setCommand(builder.getCommand() + " -c:v copy");
+            builder.add("-c:v copy");
+            //builder.setCommand(builder.getCommand() + " -c:v copy");
         }
-        builder.setCommand(builder.getCommand() + " -c:a copy -map 1:a");
+        builder.add("-c:a copy -map 1:a");
+        //builder.setCommand(builder.getCommand() + " -c:a copy -map 1:a");
         builder.addOutput(videoOutput);
 
         FFMpeg ffmpeg = builder.build();
@@ -100,6 +123,15 @@ public class TracksMerger {
             file.delete();
         }
         boolean created = file.createNewFile();
+        if(!created) {
+            Locale l = Locale.getDefault();
+            if(l == Locale.ITALIAN || l == Locale.ITALY) {
+                System.err.println("Impossibile creare il file " + tempFile);
+            } else {
+                System.err.println("Cannot create file " + tempFile);
+            }
+            System.exit(1);
+        }
         for(String s: inputFiles) {
             FileUtils.writeStringToFile(file, "file '" + s.replace('\\', '/') + "'\n",
                     StandardCharsets.UTF_8, true);
@@ -117,21 +149,26 @@ public class TracksMerger {
      * @throws IOException if an I/O error occurs
      * @throws InvalidArgumentException If any of the arguments given to this method is null, an empty string, is less
      * than or equal to zero, or it contains null or empty strings
+     * @throws NotEnoughArgumentsException If any of the given arguments is less than or equal to zero, null or an empty
+     * string or contains null or empty strings
      */
     public void mergeVideos(long time, @NotNull TimeUnit timeUnit, @NotNull List<String> inputFiles,
-                            @NotNull String tempFile) throws IOException, InvalidArgumentException {
+                            @NotNull String tempFile) throws IOException, InvalidArgumentException, NotEnoughArgumentsException {
         if(time <= 0 || timeUnit == null || inputFiles == null || inputFiles.stream().anyMatch(s -> s == null || s.isEmpty()) ||
         tempFile == null || tempFile.isEmpty()) {
-            throw new InvalidArgumentException("No argument to this method can be null, less than or equal to zero or " +
+            throw new NotEnoughArgumentsException("No argument to this method can be null, less than or equal to zero or " +
                     " an empty string, nor can it contain null or empty strings.", "Nessuno degli argomenti forniti a " +
                     "questo metodo puo' essere null, minore o uguale a zero o una stringa vuota o contenere stringhe null " +
                     "o vuote.");
         }
         File inputTXTFile = writeTXTFile(inputFiles, tempFile);
-        builder.setCommand(builder.getCommand() + " -f concat -safe 0 -i \"" +
+        builder.add("-f concat -safe 0 -i \"" +
                 inputTXTFile.getPath().replace('\\', '/') + "\"");
+        /*builder.setCommand(builder.getCommand() + " -f concat -safe 0 -i \"" +
+                inputTXTFile.getPath().replace('\\', '/') + "\"");*/
         if(streamCopy) {
-            builder.setCommand(builder.getCommand() + " -c copy");
+            builder.add("-c copy");
+            //builder.setCommand(builder.getCommand() + " -c copy");
         }
         builder.addOutput(videoOutput);
 

@@ -9,6 +9,7 @@ import it.disi.unitn.json.JSONToImage;
 import org.apache.commons.exec.*;
 //import org.apache.commons.lang3.tuple.Pair;
 import org.jetbrains.annotations.NotNull;
+import org.owasp.encoder.Encode;
 
 import java.io.File;
 import java.io.IOException;
@@ -17,7 +18,9 @@ import java.nio.file.Path;
 import java.nio.file.Paths;*/
 import java.time.Duration;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * This class is used to create a thread pool which will be used to execute a specified number of threads.
@@ -127,9 +130,26 @@ public class ProcessPool {
         inputHandler.start();*/
 
         try {
-            String s = "python3 " + scriptpath + " \"" + desc + "\" " + index + " " + imageExtension + " " +
+            /*String s = "python3 " + scriptpath + " \"" + desc + "\" " + index + " " + imageExtension + " " +
                     pathToImagesFolder + " " + width + " " + height;
-            CommandLine cmdLine = CommandLine.parse(s);
+            CommandLine cmdLine = CommandLine.parse(s);*/
+            Map<String, String> m = new HashMap<>();
+
+            String nscriptpath = Encode.forJava(scriptpath), ndesc = Encode.forJava(desc), niext = Encode.forJava(imageExtension),
+            nptif = Encode.forJava(pathToImagesFolder);
+            m.put("scriptpath", nscriptpath);
+            m.put("desc", "\"" + ndesc + "\"");
+
+            String i = String.valueOf(index);
+            m.put(i, i);
+            m.put("imageExtension", niext);
+            m.put("pathToImagesFolder", nptif);
+
+            String w = String.valueOf(width), h = String.valueOf(height);
+            m.put("w", w);
+            m.put("h", h);
+            CommandLine cmdLine = CommandLine.parse("python3 ${scriptpath} ${desc} ${i} ${imageExtension} " +
+                    "${pathToImagesFolder} ${w} ${h}", m);
             PumpStreamHandler streamHandler = new PumpStreamHandler();
             DefaultExecutor executor = DefaultExecutor.builder().get();
             ExecuteWatchdog.Builder builder = ExecuteWatchdog.builder();
@@ -137,7 +157,7 @@ public class ProcessPool {
             ExecuteWatchdog watchdog = builder.get();
             executor.setStreamHandler(streamHandler);
             executor.setWatchdog(watchdog);
-            ExecutorResHandler exrhandler = new ExecutorResHandler(array, index, pathToImagesFolder, imageExtension, jti, this);
+            ExecutorResHandler exrhandler = new ExecutorResHandler(array, index, nptif, niext, jti, this);
             exlist.add(exrhandler);
             executor.execute(cmdLine, exrhandler);
         } catch (IOException e) {

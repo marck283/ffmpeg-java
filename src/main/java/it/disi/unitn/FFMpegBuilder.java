@@ -2,19 +2,25 @@ package it.disi.unitn;
 
 import it.disi.unitn.exceptions.NotEnoughArgumentsException;
 import it.disi.unitn.exceptions.UnsupportedOperatingSystemException;
+import it.disi.unitn.videocreator.TracksMerger;
 import it.disi.unitn.videocreator.VideoCreator;
+import it.disi.unitn.videocreator.transcoder.VideoTranscoder;
 import org.apache.commons.lang3.SystemUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 
 /**
  * Builder class for convenience class FFMpeg
  */
 public class FFMpegBuilder {
-    private String command;
+    //private String command;
+
+    private List<String> lcommand;
 
     /**
      * This constructor initializes the class with the path to ffmpeg's command line utility.
@@ -23,15 +29,18 @@ public class FFMpegBuilder {
      * @throws NotEnoughArgumentsException when this constructor's argument is set to null
      */
     public FFMpegBuilder(@Nullable String ffmpegPath) throws NotEnoughArgumentsException {
+        lcommand = new ArrayList<>();
         if(SystemUtils.IS_OS_WINDOWS) {
             if(ffmpegPath == null || ffmpegPath.isEmpty()) {
                 throw new NotEnoughArgumentsException("The argument to this class's constructor cannot be null or an " +
                         "empty string.", "L'argomento fornito al costruttore di questa classe non puo' essere " +
                         "null o una stringa vuota.");
             }
-            command = ffmpegPath;
+            //command = ffmpegPath;
+            lcommand.add(ffmpegPath);
         } else {
-            command = "ffmpeg";
+            //command = "ffmpeg";
+            lcommand.add("ffmpeg");
         }
     }
 
@@ -48,30 +57,60 @@ public class FFMpegBuilder {
      * @return The command to be executed
      */
     public String getCommand() {
-        return command;
+        //return command;
+        return String.join(" ", lcommand).trim().replaceAll("  +", " ");
     }
 
-    /**
+    /*/**
      * Sets this Builder's command to the given ffmpeg command.
      * @param newCmd The given ffmpeg command
      */
+    /*@Deprecated
     public void setCommand(@NotNull String newCmd) {
         command = newCmd;
+    }*/
+
+    /**
+     * Adds a new flag to the command to be executed.
+     * @param elem The flag to be added
+     * @throws NotEnoughArgumentsException If the given argument is null or an empty string
+     */
+    public void add(@NotNull String elem) throws NotEnoughArgumentsException {
+        if(elem == null || elem.isEmpty()) {
+            throw new NotEnoughArgumentsException("An attempt to add a null or empty argument to the FFmpeg command was made.",
+                    "E' stato effettuato un tentativo di aggiungere un argomento null o una stringa vuota al comando " +
+                            "FFmpeg.");
+        }
+        lcommand.add(elem);
     }
 
     /**
-     * This method is internally called in order to reset this Builder's command when the user is operating on a Windows
-     * Operating System. It is required that the parameter to this method be not null.
-     * @param pathToFFMpeg The path to the ffmpeg executable
+     * This method adds the given string at the given position inside the FFmpeg command.
+     * @param index The given position
+     * @param elem The string to be inserted
+     * @throws NotEnoughArgumentsException If the second argument is null or an empty string
      */
-    private void resetCommandWindows(@NotNull String pathToFFMpeg) {
-        command = "\"" + pathToFFMpeg + "\"";
+    public void add(int index, @NotNull String elem) throws NotEnoughArgumentsException {
+        if(elem == null || elem.isEmpty()) {
+            throw new NotEnoughArgumentsException("An attempt to add a null or empty argument to the FFmpeg command was made.",
+                    "E' stato effettuato un tentativo di aggiungere un argomento null o una stringa vuota al comando " +
+                            "FFmpeg.");
+        }
+        lcommand.add(index, elem);
+    }
+
+    /**
+     * Convenience method to get the FFmpeg command to be executed as a List instance.
+     * @return The FFmpeg command to be executed as a List instance
+     */
+    public List<String> getLCommand() {
+        return lcommand;
     }
 
     /**
      * This method allows the user to reset the command of this Builder.
      * @param pathToFFMpeg The path to the ffmpeg executable. This parameter must not be null only if the user is operating
-     *                     on a Windows Operating System.
+     * on a Windows Operating System.
      * @throws NotEnoughArgumentsException If the user is operating on a Windows Operating System and the parameter of
      * this method is null.
      * @throws UnsupportedOperatingSystemException If the user is operating on an operating system that is not supported
@@ -79,16 +118,20 @@ public class FFMpegBuilder {
      */
     public void resetCommand(@Nullable String pathToFFMpeg) throws NotEnoughArgumentsException,
             UnsupportedOperatingSystemException {
+        lcommand = new ArrayList<>();
+
         if(SystemUtils.IS_OS_WINDOWS) {
             if(pathToFFMpeg == null || pathToFFMpeg.isEmpty()) {
                 throw new NotEnoughArgumentsException("The argument to this method cannot be null or an empty string.",
                         "L'argomento fornito a questo metodo non puo' essere null o una stringa vuota.");
             } else {
-                resetCommandWindows(pathToFFMpeg);
+                //command = "\"" + pathToFFMpeg + "\"";
+                add("\"" + pathToFFMpeg + "\"");
             }
         } else {
             if(SystemUtils.IS_OS_LINUX) {
-                command = "ffmpeg";
+                //command = "ffmpeg";
+                add("ffmpeg");
             } else {
                 throw new UnsupportedOperatingSystemException();
             }
@@ -98,47 +141,74 @@ public class FFMpegBuilder {
     /**
      * Adds the path to an input file to the command to be executed.
      * @param inputFile The input file whose path is to be added to the command
+     * @throws NotEnoughArgumentsException If the argument given to this method is null or an empty string
      */
-    public void addInput(@NotNull String inputFile) {
-        command += " -i \"" + inputFile + "\"";
+    public void addInput(@NotNull String inputFile) throws NotEnoughArgumentsException {
+        if(inputFile == null || inputFile.isEmpty()) {
+            throw new NotEnoughArgumentsException("The argument given to this method cannot be null or an empty string.",
+                    "L'argomento fornito a questo metodo non puo' essere null o una stringa vuota.");
+        }
+        //command += " -i \"" + inputFile + "\"";
+        add("-i \"" + inputFile + "\"");
     }
 
     /**
      * Create a new TracksMerger instance given a video output file and an audio and a video input file.
      * @param outputFile The given video output file
+     * @param inputFolder The folder containing the input files
+     * @param pattern The output file's extension
      * @param audioInput The given audio input file
      * @param videoInput The given video input file
      * @return The newly created TracksMerger instance
      * @throws NotEnoughArgumentsException when the TracksMerger's constructor throws this exception
      */
-    public TracksMerger newTracksMerger(@NotNull String outputFile, @NotNull String audioInput,
-                                        @NotNull String videoInput) throws NotEnoughArgumentsException {
-        return new TracksMerger(this, outputFile, audioInput, videoInput);
+    public TracksMerger newTracksMerger(@NotNull String outputFile, @NotNull String inputFolder, @NotNull String pattern,
+                                        @NotNull String audioInput, @NotNull String videoInput) throws NotEnoughArgumentsException {
+        return new TracksMerger(this, outputFile, inputFolder, pattern, audioInput, videoInput);
     }
 
     /**
      * This method performs the same action as newTracksMerger(String, String, String), but it should be used only when
      * creating the final output video.
      * @param outputFile The path to the output file
+     * @param inputFolder The folder containing the input files
+     * @param pattern The output file's extension
      * @return The newly created TracksMerger instance
      * @throws NotEnoughArgumentsException when the TracksMerger's constructor throws this exception
      */
-    public TracksMerger newTracksMerger(@NotNull String outputFile) throws NotEnoughArgumentsException {
-        return new TracksMerger(this, outputFile);
+    public TracksMerger newTracksMerger(@NotNull String outputFile, @NotNull String inputFolder, @NotNull String pattern)
+            throws NotEnoughArgumentsException {
+        return new TracksMerger(this, outputFile, inputFolder, pattern);
     }
 
     /**
-     * Returns a new VideoCreator instance given the path to the output file and a non-null list of paths to the input images.
+     * Returns a new VideoCreator instance given the path to the output file, the path to the input folder and the
+     * output file's extension.
      * @param outputFile The path to the output file
      * @param inputFolder The non-null path to the folder containing the input images
      * @param pattern The pattern that specifies the names of the files to be included in the output video.
-     *                This path has to be ffmpeg-compatible, and it must include the file extensions.
+     * This path has to be ffmpeg-compatible, and it must include the file extensions.
      * @return A new VideoCreator instance
-     * @throws NotEnoughArgumentsException when at least one of the given arguments is null
+     * @throws NotEnoughArgumentsException If at least one of the given arguments is null or an empty string
      */
     public VideoCreator newVideoCreator(@NotNull String outputFile, @NotNull String inputFolder, @NotNull String pattern)
             throws NotEnoughArgumentsException {
         return new VideoCreator(this, outputFile, inputFolder, pattern);
+    }
+
+    /**
+     * Returns a new VideoTranscoder instance given the path to the output file, the path to the input folder and the
+     * output file's extension.
+     * @param outputFile The path to the output file
+     * @param inputFolder The non-null path to the folder containing the input images
+     * @param pattern The pattern that specifies the names of the files to be included in the output video.
+     * This path has to be ffmpeg-compatible, and it must include the file extensions.
+     * @return A new VideoTranscoder instance
+     * @throws NotEnoughArgumentsException If at least one of the given arguments is null or an empty string
+     */
+    public VideoTranscoder newVideoTranscoder(@NotNull String outputFile, @NotNull String inputFolder, @NotNull String pattern)
+            throws NotEnoughArgumentsException {
+        return new VideoTranscoder(this, outputFile, inputFolder, pattern);
     }
 
     /**
@@ -152,36 +222,26 @@ public class FFMpegBuilder {
             throw new NotEnoughArgumentsException("None of the arguments given to this method can be null or an empty " +
                     "string.", "Nessuno degli argomenti forniti a questo metodo puo' essere null o una stringa vuota.");
         }
-        StringBuilder newCmd = new StringBuilder(command);
+        //StringBuilder newCmd = new StringBuilder(command);
         for(String s: inputFiles) {
-            newCmd.append(" -i \"").append(s).append("\"");
+            add("-i \"" + s + "\"");
+            //newCmd.append(" -i \"").append(s).append("\"");
         }
-        command = newCmd.toString();
+        //command = newCmd.toString();
     }
 
     /**
      * Adds the path of an output file to the command.
      * @param outputFile The path of the output file to be added
+     * @throws NotEnoughArgumentsException If the given argument is null or an empty string
      */
-    public void addOutput(@NotNull String outputFile) {
-        command += " -y \"" + outputFile + "\"";
+    public void addOutput(@NotNull String outputFile) throws NotEnoughArgumentsException {
+        if(outputFile == null || outputFile.isEmpty()) {
+            throw new NotEnoughArgumentsException("An attempt to add a null or empty argument to the FFmpeg command to " +
+                    "be executed was made.", "E' stato effettuato un tentativo di aggiungere un argomento null o una " +
+                    "stringa vuota al comando FFmpeg da eseguire.");
+        }
+        //command += " -y \"" + outputFile + "\"";
+        add("-y \"" + outputFile + "\"");
     }
-
-    /*/**
-     * Sets the video frame size from the given sizeID.
-     * See <a href="https://ffmpeg.org/ffmpeg-all.html#Video-size">here</a> for the recognized size IDs.
-     * @param sizeID The given size ID
-     */
-    /*public void setVideoFrameSize(@NotNull String sizeID) {
-        command += " -video_size " + sizeID;
-    }
-
-    /**
-     * Sets the video frame size on the given width and height parameters.
-     * @param width The width of the frame
-     * @param height The height of the frame
-     */
-    /*public void setVideoFrameSize(int width, int height) {
-        command += " -video_size " + width + "x" + height;
-    }*/
 }

@@ -3,17 +3,17 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 <meta http-equiv="x-ua-compatible" content="IE=edge"/>
-<title>Test results - Class FFMpegBuilderTest</title>
+<title>Test results - VideoTranscoderTest</title>
 <link href="../css/base-style.css" rel="stylesheet" type="text/css"/>
 <link href="../css/style.css" rel="stylesheet" type="text/css"/>
 <script src="../js/report.js" type="text/javascript"></script>
 </head>
 <body>
 <div id="content">
-<h1>Class FFMpegBuilderTest</h1>
+<h1>VideoTranscoderTest</h1>
 <div class="breadcrumbs">
 <a href="../index.html">all</a> &gt; 
-<a href="../packages/default-package.html">default-package</a> &gt; FFMpegBuilderTest</div>
+<a href="../packages/it.disi.unitn.videocreator.transcoder.html">it.disi.unitn.videocreator.transcoder</a> &gt; VideoTranscoderTest</div>
 <div id="summary">
 <table>
 <tr>
@@ -41,7 +41,7 @@
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">0.109s</div>
+<div class="counter">0.062s</div>
 <p>duration</p>
 </div>
 </td>
@@ -78,13 +78,13 @@
 </tr>
 </thead>
 <tr>
-<td class="success">setVideoFrameSize()</td>
-<td class="success">0.064s</td>
+<td class="success">createCommand()</td>
+<td class="success">0.056s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
-<td class="success">testSetVideoFrameSize()</td>
-<td class="success">0.045s</td>
+<td class="success">createCommandForAudio()</td>
+<td class="success">0.006s</td>
 <td class="success">passed</td>
 </tr>
 </table>
@@ -102,39 +102,38 @@
   libavfilter     9. 17.100 /  9. 17.100
   libswscale      7.  6.100 /  7.  6.100
   libswresample   4. 13.100 /  4. 13.100
-Input #0, mov,mp4,m4a,3gp,3g2,mj2, from './src/test/resources/input/mp4/000.mp4':
+Input #0, mov,mp4,m4a,3gp,3g2,mj2, from './src/test/resources/input/mp4/example.mp4':
   Metadata:
     major_brand     : isom
     minor_version   : 512
     compatible_brands: isomiso2mp41
     encoder         : Lavf60.20.100
-  Duration: 00:00:01.00, start: 0.000000, bitrate: 338 kb/s
-  Stream #0:0[0x1](und): Video: mjpeg (Baseline) (mp4v / 0x7634706D), yuvj420p(pc, bt470bg/unknown/unknown, progressive), 1920x1080 [SAR 4501:8000 DAR 4501:4500], 332 kb/s, 1 fps, 1 tbr, 16384 tbn (default)
+  Duration: 00:00:01.00, start: 0.000000, bitrate: 139 kb/s
+  Stream #0:0[0x1](und): Video: mjpeg (Baseline) (mp4v / 0x7634706D), yuvj420p(pc, bt470bg/unknown/unknown, progressive), 800x600 [SAR 4501:6000 DAR 4501:4500], 132 kb/s, 1 fps, 1 tbr, 16384 tbn (default)
       Metadata:
         handler_name    : VideoHandler
         vendor_id       : [0][0][0][0]
         encoder         : Lavc60.38.100 mjpeg
 Stream mapping:
-  Stream #0:0 -&gt; #0:0 (mjpeg (native) -&gt; mpeg4 (native))
+  Stream #0:0 -&gt; #0:0 (mjpeg (native) -&gt; mjpeg (native))
 Press [q] to stop, [?] for help
-[swscaler @ 0x76b7f4012dc0] deprecated pixel format used, make sure you did set range correctly
+[swscaler @ 0x74d324013280] deprecated pixel format used, make sure you did set range correctly
     Last message repeated 3 times
-[mpeg4 @ 0x57a1f554ec00] Invalid pixel aspect ratio 4501/8000, limit is 255/255 reducing
-Output #0, mp4, to './src/test/resources/input/mp4/000-1.mp4':
+Output #0, mov, to './src/test/resources/input/mp4/example.mov':
   Metadata:
     major_brand     : isom
     minor_version   : 512
     compatible_brands: isomiso2mp41
     encoder         : Lavf60.20.100
-  Stream #0:0(und): Video: mpeg4 (mp4v / 0x7634706D), yuv420p(progressive), 1920x1080 [SAR 9:16 DAR 1:1], q=2-31, 200 kb/s, SAR 4501:8000 DAR 4501:4500, 1 fps, 16384 tbn (default)
+  Stream #0:0(und): Video: mjpeg (jpeg / 0x6765706A), yuv420p(pc, progressive), 800x600 [SAR 4501:6000 DAR 4501:4500], q=2-31, 200 kb/s, 1 fps, 16384 tbn (default)
       Metadata:
         handler_name    : VideoHandler
         vendor_id       : [0][0][0][0]
-        encoder         : Lavc60.38.100 mpeg4
+        encoder         : Lavc60.38.100 mjpeg
       Side data:
         cpb: bitrate max/min/avg: 0/0/200000 buffer size: 0 vbv_delay: N/A
-[out#0/mp4 @ 0x57a1f5550100] video:57kB audio:0kB subtitle:0kB other streams:0kB global headers:0kB muxing overhead: 1.493399%
-frame=    1 fps=0.0 q=8.5 Lsize=      58kB time=00:00:01.00 bitrate= 477.9kbits/s speed=29.7x    
+[out#0/mov @ 0x5f8f2acbe280] video:16kB audio:0kB subtitle:0kB other streams:0kB global headers:0kB muxing overhead: 4.899885%
+frame=    1 fps=0.0 q=18.0 Lsize=      17kB time=00:00:01.00 bitrate= 138.7kbits/s speed=86.2x    
 ffmpeg version N-113412-g0b8e51b584 Copyright (c) 2000-2024 the FFmpeg developers
   built with gcc 13 (Ubuntu 13.2.0-4ubuntu3)
   configuration: --enable-avformat --enable-avcodec
@@ -145,39 +144,23 @@ ffmpeg version N-113412-g0b8e51b584 Copyright (c) 2000-2024 the FFmpeg developer
   libavfilter     9. 17.100 /  9. 17.100
   libswscale      7.  6.100 /  7.  6.100
   libswresample   4. 13.100 /  4. 13.100
-Input #0, mov,mp4,m4a,3gp,3g2,mj2, from './src/test/resources/input/mp4/000.mp4':
+Input #0, asf, from './src/test/resources/input/mp4/002.wmv':
   Metadata:
-    major_brand     : isom
-    minor_version   : 512
-    compatible_brands: isomiso2mp41
     encoder         : Lavf60.20.100
-  Duration: 00:00:01.00, start: 0.000000, bitrate: 338 kb/s
-  Stream #0:0[0x1](und): Video: mjpeg (Baseline) (mp4v / 0x7634706D), yuvj420p(pc, bt470bg/unknown/unknown, progressive), 1920x1080 [SAR 4501:8000 DAR 4501:4500], 332 kb/s, 1 fps, 1 tbr, 16384 tbn (default)
-      Metadata:
-        handler_name    : VideoHandler
-        vendor_id       : [0][0][0][0]
-        encoder         : Lavc60.38.100 mjpeg
+  Duration: 00:00:01.32, start: 0.000000, bitrate: 141 kb/s
+  Stream #0:0: Video: wmv2 (WMV2 / 0x32564D57), yuv420p, 800x600, SAR 4501:6000 DAR 4501:4500, 1k tbr, 1k tbn
+  Stream #0:1: Audio: mp3 (U[0][0][0] / 0x0055), 24000 Hz, mono, fltp, 32 kb/s
 Stream mapping:
-  Stream #0:0 -&gt; #0:0 (mjpeg (native) -&gt; mpeg4 (native))
+  Stream #0:1 -&gt; #0:0 (mp3 (mp3float) -&gt; wmav2 (native))
 Press [q] to stop, [?] for help
-[swscaler @ 0x795f20012dc0] deprecated pixel format used, make sure you did set range correctly
-    Last message repeated 3 times
-[mpeg4 @ 0x5e89f50dac00] Invalid pixel aspect ratio 4501/8000, limit is 255/255 reducing
-Output #0, mp4, to './src/test/resources/input/mp4/000-1.mp4':
+Output #0, asf, to './src/test/resources/input/mp4/002.wma':
   Metadata:
-    major_brand     : isom
-    minor_version   : 512
-    compatible_brands: isomiso2mp41
-    encoder         : Lavf60.20.100
-  Stream #0:0(und): Video: mpeg4 (mp4v / 0x7634706D), yuv420p(progressive), 1920x1080 [SAR 9:16 DAR 1:1], q=2-31, 200 kb/s, SAR 4501:8000 DAR 4501:4500, 1 fps, 16384 tbn (default)
+    WM/EncodingSettings: Lavf60.20.100
+  Stream #0:0: Audio: wmav2 (a[1][0][0] / 0x0161), 24000 Hz, mono, fltp, 128 kb/s
       Metadata:
-        handler_name    : VideoHandler
-        vendor_id       : [0][0][0][0]
-        encoder         : Lavc60.38.100 mpeg4
-      Side data:
-        cpb: bitrate max/min/avg: 0/0/200000 buffer size: 0 vbv_delay: N/A
-[out#0/mp4 @ 0x5e89f50dc100] video:57kB audio:0kB subtitle:0kB other streams:0kB global headers:0kB muxing overhead: 1.493399%
-frame=    1 fps=0.0 q=8.5 Lsize=      58kB time=00:00:01.00 bitrate= 477.9kbits/s speed=  27x    
+        encoder         : Lavc60.38.100 wmav2
+[out#0/asf @ 0x5845e9900640] video:0kB audio:21kB subtitle:0kB other streams:0kB global headers:0kB muxing overhead: 19.706960%
+size=      26kB time=00:00:01.23 bitrate= 169.4kbits/s speed= 744x    
 </pre>
 </span>
 </div>
@@ -189,7 +172,7 @@ frame=    1 fps=0.0 q=8.5 Lsize=      58kB time=00:00:01.00 bitrate= 477.9kbits/
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="http://www.gradle.org">Gradle 8.5</a> at 17 mar 2024, 17:54:59</p>
+<a href="http://www.gradle.org">Gradle 8.5</a> at 22 mar 2024, 04:13:51</p>
 </div>
 </div>
 </body>
