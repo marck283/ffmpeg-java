@@ -145,23 +145,29 @@ public class VideoTranscoder extends VideoCreator {
      * video track (therefore creating a new video) and the video size ID or the width and the height parameters
      * are not set accordingly
      */
-    public void createCommand() throws InvalidArgumentException, NotEnoughArgumentsException {
+    public void createCommand() throws InvalidArgumentException {
         super.createCommand(videoStreamCopy || extractVideo || audioStreamCopy);
 
-        if(videoStreamCopy) {
-            removeParams("vs");
-        } else {
-            if(extractVideo) {
-                readyUpForTrackExtraction("video");
+        try {
+            if(videoStreamCopy) {
+                removeParams("vs");
+            } else {
+                if(extractVideo) {
+                    readyUpForTrackExtraction("video");
+                }
             }
-        }
 
-        if(audioStreamCopy) {
-            removeParams("va");
-        } else {
-            if(extractAudio) {
-                readyUpForTrackExtraction("audio");
+            if(audioStreamCopy) {
+                removeParams("va");
+            } else {
+                if(extractAudio) {
+                    readyUpForTrackExtraction("audio");
+                }
             }
+        } catch (NotEnoughArgumentsException ex) {
+            System.err.println(ex.getMessage());
+            ex.printStackTrace();
+            System.exit(1);
         }
     }
 

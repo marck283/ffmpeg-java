@@ -84,6 +84,12 @@ public class FFMpegBuilder {
         lcommand.add(elem);
     }
 
+    /**
+     * This method adds the given string at the given position inside the FFmpeg command.
+     * @param index The given position
+     * @param elem The string to be inserted
+     * @throws NotEnoughArgumentsException If the second argument is null or an empty string
+     */
     public void add(int index, @NotNull String elem) throws NotEnoughArgumentsException {
         if(elem == null || elem.isEmpty()) {
             throw new NotEnoughArgumentsException("An attempt to add a null or empty argument to the FFmpeg command was made.",
@@ -135,8 +141,13 @@ public class FFMpegBuilder {
     /**
      * Adds the path to an input file to the command to be executed.
      * @param inputFile The input file whose path is to be added to the command
+     * @throws NotEnoughArgumentsException If the argument given to this method is null or an empty string
      */
     public void addInput(@NotNull String inputFile) throws NotEnoughArgumentsException {
+        if(inputFile == null || inputFile.isEmpty()) {
+            throw new NotEnoughArgumentsException("The argument given to this method cannot be null or an empty string.",
+                    "L'argomento fornito a questo metodo non puo' essere null o una stringa vuota.");
+        }
         //command += " -i \"" + inputFile + "\"";
         add("-i \"" + inputFile + "\"");
     }
