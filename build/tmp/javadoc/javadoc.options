@@ -1,10 +1,10 @@
 -classpath '/home/marco/IdeaProjects/ffmpeg-java/build/classes/java/main:/home/marco/IdeaProjects/ffmpeg-java/build/resources/main:/home/marco/.gradle/caches/modules-2/files-2.1/org.jetbrains/annotations/24.1.0/7af6a669488450c4a07c2c3254e2151df42d7d04/annotations-24.1.0.jar:/home/marco/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.10.1/b3add478d4382b78ea20b1671390a858002feb6c/gson-2.10.1.jar:/home/marco/.gradle/caches/modules-2/files-2.1/org.slf4j/slf4j-api/2.0.12/48f109a2a6d8f446c794f3e3fa0d86df0cdfa312/slf4j-api-2.0.12.jar:/home/marco/.gradle/caches/modules-2/files-2.1/commons-io/commons-io/2.15.1/f11560da189ab563a5c8e351941415430e9304ea/commons-io-2.15.1.jar:/home/marco/.gradle/caches/modules-2/files-2.1/org.apache.commons/commons-lang3/3.14.0/1ed471194b02f2c6cb734a0cd6f6f107c673afae/commons-lang3-3.14.0.jar:/home/marco/.gradle/caches/modules-2/files-2.1/org.apache.commons/commons-exec/1.4.0/e9061b21958bfaf1cb736eb22e36cbf02d8fe9f/commons-exec-1.4.0.jar'
 -d '/home/marco/IdeaProjects/ffmpeg-java/build/docs/javadoc'
--doctitle 'ffmpeg-java-id 1.1.15-alpha3 API'
+-doctitle 'ffmpeg-java-id 1.1.15-beta1 API'
 -html5 
 -notimestamp 
 -quiet 
--windowtitle 'ffmpeg-java-id 1.1.15-alpha3 API'
+-windowtitle 'ffmpeg-java-id 1.1.15-beta1 API'
 '/home/marco/IdeaProjects/ffmpeg-java/src/main/java/it/disi/unitn/FFMpegBuilder.java'
 '/home/marco/IdeaProjects/ffmpeg-java/src/main/java/it/disi/unitn/videocreator/transcoder/VideoTranscoder.java'
 '/home/marco/IdeaProjects/ffmpeg-java/src/main/java/it/disi/unitn/videocreator/TracksMerger.java'

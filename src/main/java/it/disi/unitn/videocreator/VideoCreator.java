@@ -13,6 +13,7 @@ import org.apache.commons.exec.DefaultExecutor;
 import org.apache.commons.exec.PumpStreamHandler;
 import org.apache.commons.lang3.SystemUtils;
 import org.jetbrains.annotations.NotNull;
+import org.owasp.encoder.Encode;
 
 //import java.awt.*;
 import java.io.*;
@@ -20,7 +21,9 @@ import java.io.*;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;*/
 import java.nio.file.*;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 //import java.util.concurrent.TimeUnit;
 
 /**
@@ -245,7 +248,11 @@ public class VideoCreator {
      */
     private boolean enumCodecs(String s) throws IOException, InvalidArgumentException, UnsupportedOperatingSystemException {
         if (SystemUtils.IS_OS_LINUX || SystemUtils.IS_OS_WINDOWS) {
-            return performCheck(CommandLine.parse(execFile + " " + s));
+            Map<String, String> m = new HashMap<>();
+            m.put("execFile", execFile);
+            m.put("s", s);
+            //return performCheck(CommandLine.parse(execFile + " " + s));
+            return performCheck(CommandLine.parse("${execFile} ${s}", m));
         } else {
             throw new UnsupportedOperatingSystemException();
         }
@@ -379,13 +386,17 @@ public class VideoCreator {
                     "Il formato dei pixel non puo' essere null o una stringa vuota.");
         }
         CommandLine cmdLine;
+        Map<String, String> m = new HashMap<>();
+        m.put("width", String.valueOf(width));
+        m.put("height", String.valueOf(height));
+        pix_fmt = Encode.forJava(pix_fmt);
+        m.put("pix_fmt", pix_fmt);
         if (SystemUtils.IS_OS_LINUX) {
-            cmdLine = CommandLine.parse("./src/ffcodec/bin/linux/checkSize/main " + width + " " + height +
-                    " " + pix_fmt);
+            cmdLine = CommandLine.parse("./src/ffcodec/bin/linux/checkSize/main ${width} ${height} ${pix_fmt}", m);
         } else {
             if (SystemUtils.IS_OS_WINDOWS) {
-                cmdLine = CommandLine.parse("./src/ffcodec/bin/windows/checkSize.exe " + width + " " + height +
-                        " " + pix_fmt);
+                cmdLine = CommandLine.parse("./src/ffcodec/bin/windows/checkSize.exe ${width} ${height} ${pix_fmt}",
+                        m);
             } else {
                 throw new UnsupportedOperatingSystemException();
             }

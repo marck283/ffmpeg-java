@@ -16,7 +16,7 @@ plugins {
 }
 
 group 'it.disi.unitn'
-version '1.1.15-alpha3'
+version '1.1.15-beta1'
 
 java {
     withJavadocJar()
@@ -79,6 +79,10 @@ dependencies {
     implementation 'commons-io:commons-io:2.15.1'
     implementation 'org.apache.commons:commons-lang3:3.14.0'
     implementation 'org.apache.commons:commons-exec:1.4.0'
+
+    // https://mvnrepository.com/artifact/org.owasp.esapi/esapi
+    implementation 'org.owasp.encoder:encoder:1.2.3'
+
 }
 
 test {
