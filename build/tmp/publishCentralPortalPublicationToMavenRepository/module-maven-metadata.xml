@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+  <groupId>it.disi.unitn</groupId>
+  <artifactId>ffmpeg-java</artifactId>
+  <versioning>
+    <latest>1.1.17</latest>
+    <release>1.1.17</release>
+    <versions>
+      <version>1.1.15</version>
+      <version>1.1.16</version>
+      <version>1.1.17</version>
+    </versions>
+    <lastUpdated>20240322051539</lastUpdated>
+  </versioning>
+</metadata>

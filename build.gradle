@@ -12,11 +12,13 @@ plugins {
     id 'maven-publish'
     id 'signing'
     id "com.google.cloud.artifactregistry.gradle-plugin" version "2.2.0"
+    id "com.vanniktech.maven.publish" version "0.28.0"
+    id("net.thebugmc.gradle.sonatype-central-portal-publisher") version "1.2.3"
     //id 'cpp'
 }
 
-group 'it.disi.unitn'
-version '1.1.15-beta1'
+group 'io.github.marck283'
+version '1.1.17'
 
 java {
     withJavadocJar()
@@ -36,6 +38,41 @@ configurations {
         attributes {
             attribute TargetJvmVersion.TARGET_JVM_VERSION_ATTRIBUTE, 18
         }
+    }
+}
+
+signing {
+    useGpgCmd()
+}
+
+centralPortal {
+    name = "ffmpeg-java"
+    description="This library acts as a Java wrapper around FFmpeg, allowing the user to " +
+            "create new videos, transcode them and extract audio and video tracks from them."
+    centralPortal.username="Sqx0WcO/"
+    centralPortal.password="okGDOEps8wXC2XdxG+zwOEwJoEtHzL+T57E+eP/uQ9Wc"
+    pom {
+        url = "https://github.com/marck283/ffmpeg-java"
+        licenses {
+            license {
+                name = "The Apache 2.0 License"
+                url = "https://www.apache.org/licenses/LICENSE-2.0.txt"
+            }
+        }
+        developers {
+            developer {
+                name = "Marco Lasagna"
+                email = "marvel00.ml@gmail.com"
+                organization = "Università degli Studi di Trento"
+                organizationUrl = "https://www.unitn.it/"
+            }
+        }
+        scm {
+            connection = "scm:git:https://github.com/marck283/ffmpeg-java"
+            developerConnection = "scm:git:https://github.com/marck283/ffmpeg-java"
+            url = "https://github.com/marck283/ffmpeg-java"
+        }
+
     }
 }
 
