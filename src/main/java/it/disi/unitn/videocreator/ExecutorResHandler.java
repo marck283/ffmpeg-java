@@ -1,14 +1,10 @@
 package it.disi.unitn.videocreator;
 
-import it.disi.unitn.exceptions.InvalidArgumentException;
 import org.apache.commons.exec.ExecuteException;
 import org.apache.commons.exec.ExecuteResultHandler;
-//import org.apache.commons.io.FileUtils;
-//import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.io.OutputStream;
-//import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
@@ -30,10 +26,8 @@ public class ExecutorResHandler implements ExecuteResultHandler {
      * @param out The given OutputStream to write to.
      * @param tempp The Path instance corresponding to the OutputStream
      * //@param codecID The codec's ID
-     * @throws InvalidArgumentException if any of the arguments to this constructor is null or an empty string
      */
-    public ExecutorResHandler(OutputStream out, Path tempp/*, @NotNull String codecID*/)
-            throws InvalidArgumentException {
+    public ExecutorResHandler(OutputStream out, Path tempp/*, @NotNull String codecID*/) {
         /*if(codecID == null || codecID.isEmpty()) {
             throw new InvalidArgumentException("No arguments to this constructor must be null or empty strings.");
         }*/

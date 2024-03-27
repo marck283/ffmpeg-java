@@ -307,10 +307,14 @@ public class JSONToImage {
     public void addText(@NotNull String filePath, @NotNull String formatName, @NotNull String inputText, int x, int y,
                         float fontDim, @NotNull Color color) throws IOException, InvalidArgumentException {
         if(filePath == null || filePath.isEmpty() || formatName == null || formatName.isEmpty() || inputText == null ||
-        inputText.isEmpty() || x < 0 || y < 0 || Float.max(fontDim, 0.0F) == 0.0F || color == null) {
+        inputText.isEmpty() || x < 0 || y < 0 || color == null) {
             throw new InvalidArgumentException("None of the parameters passed to this method can be null, less than zero " +
                     "or an empty string.", "Nessuno dei parametri forniti a questo metodo puo' essere null, minore di zero " +
                     "o una stringa vuota.");
+        }
+        if(Float.max(fontDim, 0.0F) == 0.0F) {
+            throw new InvalidArgumentException("The font's dimension cannot be less than or equal to zero.", "La dimensione " +
+                    "del font non puo' essere minore o uguale a zero.");
         }
         String fname = "";
         if (formatName.equals("image/jpeg")) {
