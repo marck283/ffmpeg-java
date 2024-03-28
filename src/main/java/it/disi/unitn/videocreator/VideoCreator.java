@@ -7,6 +7,8 @@ import it.disi.unitn.exceptions.InvalidArgumentException;
 import it.disi.unitn.exceptions.NotEnoughArgumentsException;
 //import org.apache.commons.exec.*;
 import it.disi.unitn.exceptions.UnsupportedOperatingSystemException;
+import it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.Scale;
+import it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.scalingalgs.Bicubic;
 import org.apache.commons.exec.CommandLine;
 //import org.apache.commons.exec.Watchdog;
 import org.apache.commons.exec.DefaultExecutor;
@@ -61,7 +63,7 @@ public class VideoCreator {
 
     private String execFile = "";
 
-    private boolean isOutFullRange, videoStreamCopy;
+    private boolean isOutFullRange;
 
     private final Locale l;
 
@@ -536,14 +538,6 @@ public class VideoCreator {
     }
 
     /**
-     * Enables/disables video stream copying
-     * @param streamCopy Boolean parameter to enable/disable video stream copying
-     */
-    public void setVideoStreamCopy(boolean streamCopy) {
-        this.videoStreamCopy = streamCopy;
-    }
-
-    /**
      * This method creates the command that, when run, will create the output video.
      * @param videoCreation A boolean parameter that tells the program if the user wants to create a video. This flag should
      *                      be set to "false" only when the user is calling this method through {@code VideoTranscoder.createCommand()}
@@ -569,36 +563,40 @@ public class VideoCreator {
                 builder.add("-pix_fmt " + pixelFormat);
                 //builder.setCommand(builder.getCommand() + " -pix_fmt " + pixelFormat);
                 if (codecID != null && !codecID.isEmpty()) {
-                    if(videoStreamCopy) {
-                        builder.add("-c:v copy");
+                    builder.add("-c:v " + codecID);
+                    //builder.setCommand(builder.getCommand() + " -c:v " + codecID);
+
+                    String scale = "scale=";
+                    Scale scale1;
+                    if (codecID.equals("h264")) {
+                        //h264 (default codec when no value is specified) needs even width and height, so we need to add
+                        //this filter in order to divide them by 2.
+
+                        //PAY ATTENTION HERE TO THE INPUT RANGE!
+                        scale1 = new Scale("ceil(.5*iw)*2", "ceil(.5*ih)*2", true, isOutFullRange);
+                        //scale = scale.concat("ceil(.5*iw)*2:ceil(.5*ih)*2");
+                        /*if (isOutFullRange) {
+                            scale = scale.concat(":out_range=full");
+                        }*/
+                        //builder.add("-vf \"" + scale + "\""); //Add a simple filter graph
+                        scale1.setSwsFlags(new Bicubic(0.3333, 0.3333));
+                        scale1.setSwsDither("auto"); //Valore di default per sws_dither
+                        scale1.setAlphablend("none"); //valore di default per alphablend
+                        scale1.createMap();
+                        builder.add("-vf \"" + scale1.toString() + "\"");
+                        //builder.setCommand(builder.getCommand() + " -vf " + scale + "\"");
                     } else {
-                        builder.add("-c:v " + codecID);
-
-                        //builder.setCommand(builder.getCommand() + " -c:v " + codecID);
-
-                        String scale = "scale=";
-                        if (codecID.equals("h264")) {
-                            //h264 (default codec when no value is specified) needs even width and height, so we need to add
-                            //this filter in order to divide them by 2.
-                            scale = scale.concat("ceil(.5*iw)*2:ceil(.5*ih)*2");
+                        if (videoWidth != 0 && videoHeight != 0) {
+                            scale = scale.concat(videoWidth + ":" + videoHeight);
                             if (isOutFullRange) {
                                 scale = scale.concat(":out_range=full");
                             }
+                            scale = scale.concat(",format=" + pixelFormat);
                             builder.add("-vf \"" + scale + "\"");
                             //builder.setCommand(builder.getCommand() + " -vf " + scale + "\"");
                         } else {
-                            if (videoWidth != 0 && videoHeight != 0) {
-                                scale = scale.concat(videoWidth + ":" + videoHeight);
-                                if (isOutFullRange) {
-                                    scale = scale.concat(":out_range=full");
-                                }
-                                scale = scale.concat(",format=pix_fmts=" + pixelFormat);
-                                builder.add("-vf \"" + scale + "\"");
-                                //builder.setCommand(builder.getCommand() + " -vf " + scale + "\"");
-                            } else {
-                                builder.add("-video_size " + videoSizeID);
-                                //builder.setCommand(builder.getCommand() + " -video_size " + videoSizeID);
-                            }
+                            builder.add("-video_size " + videoSizeID);
+                            //builder.setCommand(builder.getCommand() + " -video_size " + videoSizeID);
                         }
                     }
                 }
