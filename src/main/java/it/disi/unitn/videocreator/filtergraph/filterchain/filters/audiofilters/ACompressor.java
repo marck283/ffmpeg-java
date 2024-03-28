@@ -1,4 +1,4 @@
-package it.disi.unitn.videocreator.filtergraph.filterchain.filters;
+package it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters;
 
 import it.disi.unitn.exceptions.InvalidArgumentException;
 import org.jetbrains.annotations.NotNull;
@@ -6,7 +6,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Wrapper class for the acompressor FFmpeg filter.
  */
-public class ACompressor extends Filter {
+public class ACompressor extends AudioFilter {
 
     /**
      * The class's constructor.
@@ -27,10 +27,6 @@ public class ACompressor extends Filter {
         }
         String lvlin = String.valueOf(val);
         options.put("level_in", lvlin);
-    }
-
-    private boolean checkNullOrEmpty(@NotNull String val) {
-        return val == null || val.isEmpty();
     }
 
     /**

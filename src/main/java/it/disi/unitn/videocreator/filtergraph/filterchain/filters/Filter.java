@@ -10,6 +10,10 @@ public class Filter {
 
     protected Map<String, String> options;
 
+    protected static boolean checkNullOrEmpty(String val) {
+        return val == null || val.isEmpty();
+    }
+
     protected Filter(@NotNull String filterName) {
         this.filterName = filterName;
         options = new TreeMap<>();
