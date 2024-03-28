@@ -15,6 +15,7 @@ public class Filter {
         options = new TreeMap<>();
     }
 
+    @Override
     public String toString() {
         List<String> helpList = new ArrayList<>();
         for(Map.Entry<String, String> e: options.entrySet()) {
