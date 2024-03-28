@@ -90,6 +90,7 @@ public class FilterChain {
      * This method returns the String representation of this filter chain.
      * @return The String representation of this filter chain
      */
+    @Override
     public String toString() {
         List<String> helpList = new ArrayList<>();
         for(Filter f: filterList) {
