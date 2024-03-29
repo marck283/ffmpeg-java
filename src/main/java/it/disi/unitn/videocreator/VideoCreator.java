@@ -9,6 +9,7 @@ import it.disi.unitn.exceptions.NotEnoughArgumentsException;
 import it.disi.unitn.exceptions.UnsupportedOperatingSystemException;
 import it.disi.unitn.videocreator.filtergraph.VideoSimpleFilterGraph;
 import it.disi.unitn.videocreator.filtergraph.filterchain.SimpleFilterChain;
+import it.disi.unitn.videocreator.filtergraph.filterchain.VideoSimpleFilterChain;
 import it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.Scale;
 import it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.scalingalgs.Bicubic;
 import org.apache.commons.exec.CommandLine;
@@ -587,7 +588,7 @@ public class VideoCreator {
                         scale1.createMap();
 
                         VideoSimpleFilterGraph sfg = new VideoSimpleFilterGraph();
-                        SimpleFilterChain sfc = new SimpleFilterChain();
+                        VideoSimpleFilterChain sfc = new VideoSimpleFilterChain();
                         sfc.addFilter(scale1);
                         sfg.addFilterChain(sfc);
                         builder.add(sfg.toString());
