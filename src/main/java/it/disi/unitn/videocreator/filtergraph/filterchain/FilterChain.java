@@ -12,9 +12,9 @@ import java.util.List;
  */
 public class FilterChain {
 
-    private final List<String> input, output;
+    protected final List<Filter> filterList;
 
-    private final List<Filter> filterList;
+    private final List<String> input, output;
 
     public FilterChain() {
         filterList = new ArrayList<>();
