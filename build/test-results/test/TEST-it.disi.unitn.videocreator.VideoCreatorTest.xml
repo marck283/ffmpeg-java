@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="it.disi.unitn.videocreator.VideoCreatorTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-03-28T23:16:15" hostname="marco-Dell-G15-5530" time="0.271">
+<testsuite name="it.disi.unitn.videocreator.VideoCreatorTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-03-29T01:13:04" hostname="marco-Dell-G15-5530" time="0.308">
   <properties/>
-  <testcase name="createCommand()" classname="it.disi.unitn.videocreator.VideoCreatorTest" time="0.271"/>
+  <testcase name="createCommand()" classname="it.disi.unitn.videocreator.VideoCreatorTest" time="0.308"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[ffmpeg version N-113412-g0b8e51b584 Copyright (c) 2000-2024 the FFmpeg developers
   built with gcc 13 (Ubuntu 13.2.0-4ubuntu3)
@@ -19,7 +19,7 @@ Input #0, image2, from './src/test/resources/input/images/000.jpeg':
 Stream mapping:
   Stream #0:0 -> #0:0 (mjpeg (native) -> mjpeg (native))
 Press [q] to stop, [?] for help
-[swscaler @ 0x752e9c013280] deprecated pixel format used, make sure you did set range correctly
+[swscaler @ 0x7a8eac013280] deprecated pixel format used, make sure you did set range correctly
     Last message repeated 3 times
 Output #0, mp4, to './src/test/resources/input/mp4/example.mp4':
   Metadata:
@@ -29,7 +29,7 @@ Output #0, mp4, to './src/test/resources/input/mp4/example.mp4':
         encoder         : Lavc60.38.100 mjpeg
       Side data:
         cpb: bitrate max/min/avg: 0/0/200000 buffer size: 0 vbv_delay: N/A
-[out#0/mp4 @ 0x5c38e7f34ac0] video:16kB audio:0kB subtitle:0kB other streams:0kB global headers:0kB muxing overhead: 5.043184%
-frame=    1 fps=0.0 q=18.0 Lsize=      17kB time=00:00:01.00 bitrate= 139.1kbits/s speed=5.68x    
+[out#0/mp4 @ 0x5f7f3fc67ac0] video:16kB audio:0kB subtitle:0kB other streams:0kB global headers:0kB muxing overhead: 5.043184%
+frame=    1 fps=0.0 q=18.0 Lsize=      17kB time=00:00:01.00 bitrate= 139.1kbits/s speed=5.24x    
 ]]></system-err>
 </testsuite>
