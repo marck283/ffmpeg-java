@@ -28,6 +28,6 @@ public class FilterGraph {
         for(FilterChain fc: fcList) {
             helperList.add(fc.toString());
         }
-        return String.join(";", helperList);
+        return "-filter_graph \"" + String.join(";", helperList) + "\"";
     }
 }

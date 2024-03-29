@@ -5,15 +5,38 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4e206741-5dd1-4a84-99b2-29854b378e54" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/AudioFilter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/disi/unitn/videocreator/filtergraph/filterchain/filters/videofilters/Scale.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/disi/unitn/videocreator/filtergraph/filterchain/filters/videofilters/VideoFilter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/disi/unitn/videocreator/filtergraph/filterchain/filters/videofilters/scalingalgs/Bicubic.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/disi/unitn/videocreator/filtergraph/filterchain/filters/videofilters/scalingalgs/ScalingAlgorithm.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/it/disi/unitn/videocreator/filtergraph/AudioSimpleFilterGraph.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/it/disi/unitn/videocreator/filtergraph/SimpleFilterGraph.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/it/disi/unitn/videocreator/filtergraph/VideoSimpleFilterGraph.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/it/disi/unitn/videocreator/filtergraph/filterchain/SimpleFilterChain.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.5/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.5/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.5/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.5/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.5/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.5/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.5/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.5/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.5/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.5/fileHashes/resourceHashesCache.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/it/disi/unitn/videocreator/VideoCreator.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/it/disi/unitn/videocreator/VideoCreator.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/it/disi/unitn/videocreator/filtergraph/FilterGraph.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/it/disi/unitn/videocreator/filtergraph/FilterGraph.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/it/disi/unitn/videocreator/filtergraph/filterchain/FilterChain.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/it/disi/unitn/videocreator/filtergraph/filterchain/FilterChain.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/reports/tests/test/classes/it.disi.unitn.videocreator.VideoCreatorTest.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/tests/test/classes/it.disi.unitn.videocreator.VideoCreatorTest.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/reports/tests/test/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/tests/test/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/reports/tests/test/packages/it.disi.unitn.videocreator.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/tests/test/packages/it.disi.unitn.videocreator.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/test-results/test/TEST-it.disi.unitn.videocreator.VideoCreatorTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/build/test-results/test/TEST-it.disi.unitn.videocreator.VideoCreatorTest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/test-results/test/binary/output.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/test-results/test/binary/output.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/test-results/test/binary/results.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/test-results/test/binary/results.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/ExecutorResHandler.class.uniqueId5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/VideoCreator.class.uniqueId3" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/VideoCreator.class.uniqueId3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/VideoTranscoder.class.uniqueId6" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileTestJava/compileTransaction/stash-dir/FFMpegBuilderTest.class.uniqueId1" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileTestJava/compileTransaction/stash-dir/JSONToImageTest.class.uniqueId0" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileTestJava/compileTransaction/stash-dir/VideoCreatorTest.class.uniqueId3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileTestJava/compileTransaction/stash-dir/VideoTranscoderTest.class.uniqueId2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileTestJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileTestJava/previous-compilation-data.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/disi/unitn/videocreator/VideoCreator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/disi/unitn/videocreator/VideoCreator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/disi/unitn/videocreator/filtergraph/filterchain/filters/ACompressor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/ACompressor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/disi/unitn/videocreator/filtergraph/filterchain/filters/Filter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/disi/unitn/videocreator/filtergraph/filterchain/filters/Filter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/disi/unitn/videocreator/filtergraph/FilterGraph.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/disi/unitn/videocreator/filtergraph/FilterGraph.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/disi/unitn/videocreator/filtergraph/filterchain/FilterChain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/disi/unitn/videocreator/filtergraph/filterchain/FilterChain.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -95,66 +118,66 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ACTIVE_CLOUD_PROJECT_ACCOUNT&quot;: &quot;marvel00.ml@gmail.com&quot;,
-    &quot;ACTIVE_CLOUD_PROJECT_ID&quot;: &quot;tirocinio-380209&quot;,
-    &quot;ACTIVE_CLOUD_PROJECT_NAME&quot;: &quot;Tirocinio&quot;,
-    &quot;ACTIVE_CLOUD_PROJECT_NUMBER&quot;: &quot;984985190211&quot;,
-    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
-    &quot;Gradle.Build ffmpeg-java.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.Download Sources.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.FFMpegBuilderTest.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.FFMpegBuilderTest.setVideoFrameSize.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.FFMpegBuilderTest.testSetVideoFrameSize.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.JSONToImageTest.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.JSONToImageTest.generate.executor&quot;: &quot;Debug&quot;,
-    &quot;Gradle.VideoCreatorTest.createCommand.executor&quot;: &quot;Debug&quot;,
-    &quot;Gradle.VideoCreatorTest.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.VideoTranscoderTest.createCommandForAudio.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.VideoTranscoderTest.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.ffmpeg-java [build].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.ffmpeg-java [publishAllPublicationsToMavenRepository].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.ffmpeg-java [publishCentralPortalPublicationToMavenRepository].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.ffmpeg-java [publishMavenJavaPublicationToMavenLocal].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.ffmpeg-java [publishToCentralPortal].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.ffmpeg-java [publishToMavenLocal].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.ffmpeg-java [testClasses].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.ffmpeg-java [test].executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.All in ffmpeg-java-id.test (1).executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.All in ffmpeg-java-id.test.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.FFMpegBuilderTest (1).executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.FFMpegBuilderTest.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.FFMpegBuilderTest.setVideoFrameSize (1).executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.FFMpegBuilderTest.setVideoFrameSize.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.test in ffmpeg-java-id.test.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.unitn in ffmpeg-java-id.test.executor&quot;: &quot;Run&quot;,
-    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;com.google.cloudcode.ide_session_index&quot;: &quot;20240328_0004&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
-    &quot;create.test.in.the.same.root&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;newFilterGraph&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_directory_selection&quot;: &quot;/home/marco/IdeaProjects/ffmpeg-java/src/test/java/it/disi/unitn/videocreator&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/marco/IdeaProjects/ffmpeg-java/build/MavenCompFolder&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.3356828&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.project.gradle&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ACTIVE_CLOUD_PROJECT_ACCOUNT": "marvel00.ml@gmail.com",
+    "ACTIVE_CLOUD_PROJECT_ID": "tirocinio-380209",
+    "ACTIVE_CLOUD_PROJECT_NAME": "Tirocinio",
+    "ACTIVE_CLOUD_PROJECT_NUMBER": "984985190211",
+    "Downloaded.Files.Path.Enabled": "false",
+    "Gradle.Build ffmpeg-java.executor": "Run",
+    "Gradle.Download Sources.executor": "Run",
+    "Gradle.FFMpegBuilderTest.executor": "Run",
+    "Gradle.FFMpegBuilderTest.setVideoFrameSize.executor": "Run",
+    "Gradle.FFMpegBuilderTest.testSetVideoFrameSize.executor": "Run",
+    "Gradle.JSONToImageTest.executor": "Run",
+    "Gradle.JSONToImageTest.generate.executor": "Debug",
+    "Gradle.VideoCreatorTest.createCommand.executor": "Run",
+    "Gradle.VideoCreatorTest.executor": "Run",
+    "Gradle.VideoTranscoderTest.createCommandForAudio.executor": "Run",
+    "Gradle.VideoTranscoderTest.executor": "Run",
+    "Gradle.ffmpeg-java [build].executor": "Run",
+    "Gradle.ffmpeg-java [publishAllPublicationsToMavenRepository].executor": "Run",
+    "Gradle.ffmpeg-java [publishCentralPortalPublicationToMavenRepository].executor": "Run",
+    "Gradle.ffmpeg-java [publishMavenJavaPublicationToMavenLocal].executor": "Run",
+    "Gradle.ffmpeg-java [publishToCentralPortal].executor": "Run",
+    "Gradle.ffmpeg-java [publishToMavenLocal].executor": "Run",
+    "Gradle.ffmpeg-java [testClasses].executor": "Run",
+    "Gradle.ffmpeg-java [test].executor": "Run",
+    "JUnit.All in ffmpeg-java-id.test (1).executor": "Run",
+    "JUnit.All in ffmpeg-java-id.test.executor": "Run",
+    "JUnit.FFMpegBuilderTest (1).executor": "Run",
+    "JUnit.FFMpegBuilderTest.executor": "Run",
+    "JUnit.FFMpegBuilderTest.setVideoFrameSize (1).executor": "Run",
+    "JUnit.FFMpegBuilderTest.setVideoFrameSize.executor": "Run",
+    "JUnit.test in ffmpeg-java-id.test.executor": "Run",
+    "JUnit.unitn in ffmpeg-java-id.test.executor": "Run",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "com.google.cloudcode.ide_session_index": "20240328_0004",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
+    "create.test.in.the.same.root": "true",
+    "git-widget-placeholder": "newFilterGraph",
+    "kotlin-language-version-configured": "true",
+    "last_directory_selection": "/home/marco/IdeaProjects/ffmpeg-java/src/test/java/it/disi/unitn/videocreator",
+    "last_opened_file_path": "/home/marco/IdeaProjects/ffmpeg-java/build/MavenCompFolder",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Libraries",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.3356828",
+    "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/build/MavenCompFolder" />

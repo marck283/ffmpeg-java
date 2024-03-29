@@ -7,6 +7,8 @@ import it.disi.unitn.exceptions.InvalidArgumentException;
 import it.disi.unitn.exceptions.NotEnoughArgumentsException;
 //import org.apache.commons.exec.*;
 import it.disi.unitn.exceptions.UnsupportedOperatingSystemException;
+import it.disi.unitn.videocreator.filtergraph.VideoSimpleFilterGraph;
+import it.disi.unitn.videocreator.filtergraph.filterchain.SimpleFilterChain;
 import it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.Scale;
 import it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.scalingalgs.Bicubic;
 import org.apache.commons.exec.CommandLine;
@@ -583,7 +585,12 @@ public class VideoCreator {
                         scale1.setSwsDither("auto"); //Valore di default per sws_dither
                         scale1.setAlphablend("none"); //valore di default per alphablend
                         scale1.createMap();
-                        builder.add("-vf \"" + scale1.toString() + "\"");
+
+                        VideoSimpleFilterGraph sfg = new VideoSimpleFilterGraph();
+                        SimpleFilterChain sfc = new SimpleFilterChain();
+                        sfc.addFilter(scale1);
+                        sfg.addFilterChain(sfc);
+                        builder.add(sfg.toString());
                         //builder.setCommand(builder.getCommand() + " -vf " + scale + "\"");
                     } else {
                         if (videoWidth != 0 && videoHeight != 0) {
