@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="FFMpegBuilderTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2024-03-30T02:54:28" hostname="marco-Dell-G15-5530" time="0.248">
+<testsuite name="FFMpegBuilderTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2024-03-30T17:21:24" hostname="marco-Dell-G15-5530" time="0.109">
   <properties/>
-  <testcase name="setVideoFrameSize()" classname="FFMpegBuilderTest" time="0.149"/>
-  <testcase name="testSetVideoFrameSize()" classname="FFMpegBuilderTest" time="0.096"/>
+  <testcase name="setVideoFrameSize()" classname="FFMpegBuilderTest" time="0.065"/>
+  <testcase name="testSetVideoFrameSize()" classname="FFMpegBuilderTest" time="0.043"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[ffmpeg version N-113412-g0b8e51b584 Copyright (c) 2000-2024 the FFmpeg developers
   built with gcc 13 (Ubuntu 13.2.0-4ubuntu3)
@@ -29,9 +29,9 @@ Input #0, mov,mp4,m4a,3gp,3g2,mj2, from './src/test/resources/input/mp4/000.mp4'
 Stream mapping:
   Stream #0:0 -> #0:0 (mjpeg (native) -> mpeg4 (native))
 Press [q] to stop, [?] for help
-[swscaler @ 0x79007c012dc0] deprecated pixel format used, make sure you did set range correctly
+[swscaler @ 0x7af89c012dc0] deprecated pixel format used, make sure you did set range correctly
     Last message repeated 3 times
-[mpeg4 @ 0x5bf52625cc00] Invalid pixel aspect ratio 4501/8000, limit is 255/255 reducing
+[mpeg4 @ 0x617c95af4c00] Invalid pixel aspect ratio 4501/8000, limit is 255/255 reducing
 Output #0, mp4, to './src/test/resources/input/mp4/000-1.mp4':
   Metadata:
     major_brand     : isom
@@ -45,8 +45,8 @@ Output #0, mp4, to './src/test/resources/input/mp4/000-1.mp4':
         encoder         : Lavc60.38.100 mpeg4
       Side data:
         cpb: bitrate max/min/avg: 0/0/200000 buffer size: 0 vbv_delay: N/A
-[out#0/mp4 @ 0x5bf52625e100] video:57kB audio:0kB subtitle:0kB other streams:0kB global headers:0kB muxing overhead: 1.493399%
-frame=    1 fps=0.0 q=8.5 Lsize=      58kB time=00:00:01.00 bitrate= 477.9kbits/s speed=12.3x    
+[out#0/mp4 @ 0x617c95af6100] video:57kB audio:0kB subtitle:0kB other streams:0kB global headers:0kB muxing overhead: 1.493399%
+frame=    1 fps=0.0 q=8.5 Lsize=      58kB time=00:00:01.00 bitrate= 477.9kbits/s speed=27.1x    
 ffmpeg version N-113412-g0b8e51b584 Copyright (c) 2000-2024 the FFmpeg developers
   built with gcc 13 (Ubuntu 13.2.0-4ubuntu3)
   configuration: --enable-avformat --enable-avcodec
@@ -72,9 +72,9 @@ Input #0, mov,mp4,m4a,3gp,3g2,mj2, from './src/test/resources/input/mp4/000.mp4'
 Stream mapping:
   Stream #0:0 -> #0:0 (mjpeg (native) -> mpeg4 (native))
 Press [q] to stop, [?] for help
-[swscaler @ 0x7f1240012dc0] deprecated pixel format used, make sure you did set range correctly
+[swscaler @ 0x7bc150012dc0] deprecated pixel format used, make sure you did set range correctly
     Last message repeated 3 times
-[mpeg4 @ 0x603f07badc00] Invalid pixel aspect ratio 4501/8000, limit is 255/255 reducing
+[mpeg4 @ 0x5e58a0662c00] Invalid pixel aspect ratio 4501/8000, limit is 255/255 reducing
 Output #0, mp4, to './src/test/resources/input/mp4/000-1.mp4':
   Metadata:
     major_brand     : isom
@@ -88,7 +88,7 @@ Output #0, mp4, to './src/test/resources/input/mp4/000-1.mp4':
         encoder         : Lavc60.38.100 mpeg4
       Side data:
         cpb: bitrate max/min/avg: 0/0/200000 buffer size: 0 vbv_delay: N/A
-[out#0/mp4 @ 0x603f07baf100] video:57kB audio:0kB subtitle:0kB other streams:0kB global headers:0kB muxing overhead: 1.493399%
-frame=    1 fps=0.0 q=8.5 Lsize=      58kB time=00:00:01.00 bitrate= 477.9kbits/s speed=12.9x    
+[out#0/mp4 @ 0x5e58a0664100] video:57kB audio:0kB subtitle:0kB other streams:0kB global headers:0kB muxing overhead: 1.493399%
+frame=    1 fps=0.0 q=8.5 Lsize=      58kB time=00:00:01.00 bitrate= 477.9kbits/s speed=  28x    
 ]]></system-err>
 </testsuite>

@@ -1,4 +1,4 @@
-package it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.scalingalgs;
+package it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.scale.scalingalgs;
 
 import it.disi.unitn.exceptions.InvalidArgumentException;
 import org.jetbrains.annotations.NotNull;
@@ -11,6 +11,9 @@ public abstract class ScalingAlgorithm {
 
     private final String algname;
 
+    /**
+     * These parameters can sometimes be given to the scaling algorithm (depending on the algorithm).
+     */
     protected double param0, param1;
 
     /**

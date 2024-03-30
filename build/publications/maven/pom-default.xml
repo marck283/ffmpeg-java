@@ -9,7 +9,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>io.github.marck283</groupId>
   <artifactId>ffmpeg-java-id</artifactId>
-  <version>1.1.18-alpha4</version>
+  <version>1.1.19-alpha1</version>
   <dependencyManagement>
     <dependencies>
       <dependency>
