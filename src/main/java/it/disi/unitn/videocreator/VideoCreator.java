@@ -573,10 +573,10 @@ public class VideoCreator {
 
                 builder.add("-pix_fmt " + pixelFormat);
                 //builder.setCommand(builder.getCommand() + " -pix_fmt " + pixelFormat);
-                if(videoStreamCopy) {
-                    builder.add("-c:v copy");
-                } else {
-                    if (codecID != null && !codecID.isEmpty()) {
+                if (codecID != null && !codecID.isEmpty()) {
+                    if(videoStreamCopy) {
+                        builder.add("-c:v copy");
+                    } else {
                         builder.add("-c:v " + codecID);
                         //builder.setCommand(builder.getCommand() + " -c:v " + codecID);
 
@@ -589,9 +589,9 @@ public class VideoCreator {
                             //PAY ATTENTION HERE TO THE INPUT RANGE!
                             scale1 = new Scale("ceil(.5*iw)*2", "ceil(.5*ih)*2", true, isOutFullRange);
                             //scale = scale.concat("ceil(.5*iw)*2:ceil(.5*ih)*2");
-                        /*if (isOutFullRange) {
-                            scale = scale.concat(":out_range=full");
-                        }*/
+                            /*if (isOutFullRange) {
+                                scale = scale.concat(":out_range=full");
+                            }*/
                             //builder.add("-vf \"" + scale + "\""); //Add a simple filter graph
                             scale1.setSwsFlags(new Bicubic(0.3333, 0.3333));
                             scale1.setSwsDither("auto"); //Valore di default per sws_dither
