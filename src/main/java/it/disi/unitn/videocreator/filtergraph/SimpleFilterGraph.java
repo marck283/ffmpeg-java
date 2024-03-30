@@ -15,9 +15,14 @@ import java.util.List;
 //solo i filtri VideoFilter?
 public abstract class SimpleFilterGraph {
 
+    /**
+     * The list of SimpleFilterChain instances to be used in this filter graph.
+     */
     protected final List<SimpleFilterChain> sfcList;
 
-
+    /**
+     * This class's constructor.
+     */
     public SimpleFilterGraph() {
         sfcList = new ArrayList<>();
     }

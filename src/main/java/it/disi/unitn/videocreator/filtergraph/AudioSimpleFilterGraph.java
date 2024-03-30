@@ -9,6 +9,14 @@ import java.util.List;
  * This class is used to instantiate a new simple filter graph for the audio track.
  */
 public class AudioSimpleFilterGraph extends SimpleFilterGraph {
+
+    /**
+     * This class's constructor.
+     */
+    public AudioSimpleFilterGraph() {
+        super();
+    }
+
     @Override
     public String toString() {
         List<String> helperList = new ArrayList<>();

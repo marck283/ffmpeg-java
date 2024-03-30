@@ -1,9 +1,13 @@
-package it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters;
+package it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.scale;
 
 import it.disi.unitn.exceptions.InvalidArgumentException;
-import it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.scalingalgs.ScalingAlgorithm;
+import it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.VideoFilter;
+import it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.scale.scalingalgs.ScalingAlgorithm;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * This class implements the "scale" video filter.
+ */
 public class Scale extends VideoFilter {
 
     private ScalingAlgorithm sws_flags; //These flags will then be joined by using String.join("+", sws_flags)
@@ -14,7 +18,16 @@ public class Scale extends VideoFilter {
 
     private String sws_dither = "auto", alphablend = "none";
 
-    public Scale(@NotNull String width, @NotNull String height, boolean src_range, boolean dst_range) {
+    /**
+     * This class's constructor. Constructs a new "scale" filter.
+     * @param width The given width
+     * @param height The given height
+     * @param src_range The given input range
+     * @param dst_range The given output range
+     * @throws InvalidArgumentException If the filter's name (given by this constructor to the superclass) is null or
+     * an empty string
+     */
+    public Scale(@NotNull String width, @NotNull String height, boolean src_range, boolean dst_range) throws InvalidArgumentException {
         super("scale");
         this.width = width;
         this.height = height;
