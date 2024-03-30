@@ -21,6 +21,7 @@ class VideoCreatorTest {
         creator.setVideoSize(800, 600, "yuvj420p", true);
         creator.setCodecID("mjpeg", true);
         creator.setPixelFormat("yuv420p");
+        creator.setVideoStreamCopy(true);
         creator.setOutFullRange(true); //If using mjpeg and YUV pixel formats, we have to set the color range to full.
         creator.setVideoQuality(18);
         creator.createCommand(true/*30L, TimeUnit.SECONDS*/);
