@@ -61,7 +61,7 @@ public class VideoCreator {
 
     private String execFile = "";
 
-    private boolean isOutFullRange;
+    private boolean isOutFullRange, videoStreamCopy;
 
     private final Locale l;
 
@@ -536,6 +536,14 @@ public class VideoCreator {
     }
 
     /**
+     * Enables/disables video stream copying
+     * @param streamCopy Boolean parameter to enable/disable video stream copying
+     */
+    public void setVideoStreamCopy(boolean streamCopy) {
+        this.videoStreamCopy = streamCopy;
+    }
+
+    /**
      * This method creates the command that, when run, will create the output video.
      * @param videoCreation A boolean parameter that tells the program if the user wants to create a video. This flag should
      *                      be set to "false" only when the user is calling this method through {@code VideoTranscoder.createCommand()}
@@ -561,31 +569,36 @@ public class VideoCreator {
                 builder.add("-pix_fmt " + pixelFormat);
                 //builder.setCommand(builder.getCommand() + " -pix_fmt " + pixelFormat);
                 if (codecID != null && !codecID.isEmpty()) {
-                    builder.add("-c:v " + codecID);
-                    //builder.setCommand(builder.getCommand() + " -c:v " + codecID);
-
-                    String scale = "scale=";
-                    if (codecID.equals("h264")) {
-                        //h264 (default codec when no value is specified) needs even width and height, so we need to add
-                        //this filter in order to divide them by 2.
-                        scale = scale.concat("ceil(.5*iw)*2:ceil(.5*ih)*2");
-                        if (isOutFullRange) {
-                            scale = scale.concat(":out_range=full");
-                        }
-                        builder.add("-vf \"" + scale + "\"");
-                        //builder.setCommand(builder.getCommand() + " -vf " + scale + "\"");
+                    if(videoStreamCopy) {
+                        builder.add("-c:v copy");
                     } else {
-                        if (videoWidth != 0 && videoHeight != 0) {
-                            scale = scale.concat(videoWidth + ":" + videoHeight);
+                        builder.add("-c:v " + codecID);
+
+                        //builder.setCommand(builder.getCommand() + " -c:v " + codecID);
+
+                        String scale = "scale=";
+                        if (codecID.equals("h264")) {
+                            //h264 (default codec when no value is specified) needs even width and height, so we need to add
+                            //this filter in order to divide them by 2.
+                            scale = scale.concat("ceil(.5*iw)*2:ceil(.5*ih)*2");
                             if (isOutFullRange) {
                                 scale = scale.concat(":out_range=full");
                             }
-                            scale = scale.concat(",format=" + pixelFormat);
                             builder.add("-vf \"" + scale + "\"");
                             //builder.setCommand(builder.getCommand() + " -vf " + scale + "\"");
                         } else {
-                            builder.add("-video_size " + videoSizeID);
-                            //builder.setCommand(builder.getCommand() + " -video_size " + videoSizeID);
+                            if (videoWidth != 0 && videoHeight != 0) {
+                                scale = scale.concat(videoWidth + ":" + videoHeight);
+                                if (isOutFullRange) {
+                                    scale = scale.concat(":out_range=full");
+                                }
+                                scale = scale.concat(",format=pix_fmts=" + pixelFormat);
+                                builder.add("-vf \"" + scale + "\"");
+                                //builder.setCommand(builder.getCommand() + " -vf " + scale + "\"");
+                            } else {
+                                builder.add("-video_size " + videoSizeID);
+                                //builder.setCommand(builder.getCommand() + " -video_size " + videoSizeID);
+                            }
                         }
                     }
                 }
