@@ -12,10 +12,16 @@ import java.util.List;
  */
 public class FilterChain {
 
+    /**
+     * The list of filters to be used in this filter chain.
+     */
     protected final List<Filter> filterList;
 
     private final List<String> input, output;
 
+    /**
+     * This class's constructor.
+     */
     public FilterChain() {
         filterList = new ArrayList<>();
         input = new ArrayList<>();

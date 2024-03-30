@@ -7,10 +7,19 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class implements a simple filter chain.
+ */
 public abstract class SimpleFilterChain {
 
+    /**
+     * The list of filters to be used in this filter chain.
+     */
     protected final List<Filter> filterList;
 
+    /**
+     * This class's constructor.
+     */
     public SimpleFilterChain() {
         filterList = new ArrayList<>();
     }

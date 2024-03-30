@@ -4,7 +4,10 @@ import it.disi.unitn.FFMpegBuilder;
 import it.disi.unitn.exceptions.InvalidArgumentException;
 import it.disi.unitn.exceptions.NotEnoughArgumentsException;
 import it.disi.unitn.videocreator.VideoCreator;
+import it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.AudioFilter;
+import it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.scale.scalingalgs.ScalingAlgorithm;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * This class performs the video transcoding operations.
@@ -141,12 +144,14 @@ public class VideoTranscoder extends VideoCreator {
     /**
      * This method will create the FFmpeg command which can then be used to run the FFmpeg process and produce the desired
      * result.
-     * @throws InvalidArgumentException If either the user wants to stream-copy the audio or video track orto extract the
+     * @param audioFilter The given audio filter. Can be null
+     * @param alg The given scaling algorithm. Can be null
+     * @throws InvalidArgumentException If either the user wants to stream-copy the audio or video track or to extract the
      * video track (therefore creating a new video) and the video size ID or the width and the height parameters
      * are not set accordingly
      */
-    public void createCommand() throws InvalidArgumentException {
-        super.createCommand(videoStreamCopy || extractVideo || audioStreamCopy);
+    public void createCommand(@Nullable AudioFilter audioFilter, @Nullable ScalingAlgorithm alg) throws InvalidArgumentException {
+        super.createCommand(videoStreamCopy || extractVideo || audioStreamCopy, audioFilter, alg);
 
         try {
             if(videoStreamCopy) {

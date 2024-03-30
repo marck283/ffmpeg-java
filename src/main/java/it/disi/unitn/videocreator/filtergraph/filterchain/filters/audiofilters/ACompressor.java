@@ -10,8 +10,10 @@ public class ACompressor extends AudioFilter {
 
     /**
      * The class's constructor.
+     * @throws InvalidArgumentException If the filter's name (given by this constructor to the superclass) is null or
+     * an empty string
      */
-    protected ACompressor() {
+    public ACompressor() throws InvalidArgumentException {
         super("acompressor");
     }
 

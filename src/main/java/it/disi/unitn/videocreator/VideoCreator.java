@@ -7,17 +7,25 @@ import it.disi.unitn.exceptions.InvalidArgumentException;
 import it.disi.unitn.exceptions.NotEnoughArgumentsException;
 //import org.apache.commons.exec.*;
 import it.disi.unitn.exceptions.UnsupportedOperatingSystemException;
+import it.disi.unitn.videocreator.filtergraph.AudioSimpleFilterGraph;
+import it.disi.unitn.videocreator.filtergraph.SimpleFilterGraph;
 import it.disi.unitn.videocreator.filtergraph.VideoSimpleFilterGraph;
 //import it.disi.unitn.videocreator.filtergraph.filterchain.SimpleFilterChain;
+import it.disi.unitn.videocreator.filtergraph.filterchain.AudioSimpleFilterChain;
+import it.disi.unitn.videocreator.filtergraph.filterchain.SimpleFilterChain;
 import it.disi.unitn.videocreator.filtergraph.filterchain.VideoSimpleFilterChain;
-import it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.Scale;
-import it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.scalingalgs.Bicubic;
+import it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.AudioFilter;
+import it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.format.Format;
+import it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.scale.Scale;
+import it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.scale.scalingalgs.ScalingAlgorithm;
 import org.apache.commons.exec.CommandLine;
 //import org.apache.commons.exec.Watchdog;
 import org.apache.commons.exec.DefaultExecutor;
 import org.apache.commons.exec.PumpStreamHandler;
 import org.apache.commons.lang3.SystemUtils;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.owasp.encoder.Encode;
 
 //import java.awt.*;
@@ -66,7 +74,7 @@ public class VideoCreator {
 
     private String execFile = "";
 
-    private boolean isOutFullRange, videoStreamCopy;
+    private boolean isOutFullRange, videoStreamCopy, audioStreamCopy;
 
     private final Locale l;
 
@@ -541,7 +549,7 @@ public class VideoCreator {
     }
 
     /**
-     * Enables/disables video stream copying
+     * Enables/disables video stream copying.
      * @param streamCopy Boolean parameter to enable/disable video stream copying
      */
     public void setVideoStreamCopy(boolean streamCopy) {
@@ -549,13 +557,57 @@ public class VideoCreator {
     }
 
     /**
+     * Enables/disables audio stream copying.
+     * @param streamCopy Boolean parameter to enable/disable audio stream copying
+     */
+    public void setAudioStreamCopy(boolean streamCopy) {
+        audioStreamCopy = streamCopy;
+    }
+
+    private @NotNull Scale setScaleParams(@NotNull Scale scale, @Nullable ScalingAlgorithm alg) throws InvalidArgumentException {
+        if(scale == null) {
+            throw new InvalidArgumentException("The given \"scale\" filter cannot be null.", "Il filtro \"scale\" fornito " +
+                    "non puo' essere null.");
+        }
+        if(alg != null) {
+            scale.setSwsFlags(alg);
+        }
+        scale.setSwsDither("auto"); //Valore di default per sws_dither
+        scale.setAlphablend("none"); //valore di default per alphablend
+        scale.createMap();
+
+        return scale;
+    }
+
+    /**
+     * Sets the parameters of a Format filter instance.
+     * @param format The given Format filter instance
+     * @return The given Format filter instance with all parameters set
+     */
+    @Contract("_ -> param1")
+    private @NotNull Format setFormat(@NotNull Format format) {
+        format.addPixelFormat(pixelFormat);
+        if(isOutFullRange) {
+            format.addColorRange("pc"); //Full range
+        } else {
+            format.addColorRange("tv"); //Limited range
+        }
+        format.updateMap();
+
+        return format;
+    }
+
+    /**
      * This method creates the command that, when run, will create the output video.
      * @param videoCreation A boolean parameter that tells the program if the user wants to create a video. This flag should
      *                      be set to "false" only when the user is calling this method through {@code VideoTranscoder.createCommand()}
      *                      in order to extract the audio track from a video; otherwise, it should be set to "true"
+     * @param audioFilter The given AudioFilter instance. Can be null
+     * @param alg The given scaling algorithm. Can be null
      * @throws InvalidArgumentException if the video width or height or the video size ID field is null
      */
-    public void createCommand(boolean videoCreation) throws InvalidArgumentException {
+    public void createCommand(boolean videoCreation, @Nullable AudioFilter audioFilter, @Nullable ScalingAlgorithm alg)
+            throws InvalidArgumentException {
         if (videoCreation && (videoWidth <= 0 || videoHeight <= 0) && (videoSizeID == null || videoSizeID.isEmpty())) {
             throw new InvalidArgumentException("Either the video size ID is null or an empty string or the video width " +
                     "or height are less than or equal to 0.", "Si e' verificato un errore: o la proporzione di ogni frame " +
@@ -575,13 +627,16 @@ public class VideoCreator {
                 //builder.setCommand(builder.getCommand() + " -pix_fmt " + pixelFormat);
                 if (codecID != null && !codecID.isEmpty()) {
                     if(videoStreamCopy) {
+                        //No video filtering allowed when stream copying video
                         builder.add("-c:v copy");
                     } else {
                         builder.add("-c:v " + codecID);
                         //builder.setCommand(builder.getCommand() + " -c:v " + codecID);
 
-                        String scale = "scale=";
+                        //String scale = "scale=";
                         Scale scale1;
+                        VideoSimpleFilterGraph sfg = new VideoSimpleFilterGraph();
+                        VideoSimpleFilterChain sfc = new VideoSimpleFilterChain();
                         if (codecID.equals("h264")) {
                             //h264 (default codec when no value is specified) needs even width and height, so we need to add
                             //this filter in order to divide them by 2.
@@ -593,25 +648,32 @@ public class VideoCreator {
                                 scale = scale.concat(":out_range=full");
                             }*/
                             //builder.add("-vf \"" + scale + "\""); //Add a simple filter graph
-                            scale1.setSwsFlags(new Bicubic(0.3333, 0.3333));
-                            scale1.setSwsDither("auto"); //Valore di default per sws_dither
-                            scale1.setAlphablend("none"); //valore di default per alphablend
-                            scale1.createMap();
+                            scale1 = setScaleParams(scale1, alg);
 
-                            VideoSimpleFilterGraph sfg = new VideoSimpleFilterGraph();
-                            VideoSimpleFilterChain sfc = new VideoSimpleFilterChain();
-                            sfc.addFilter(scale1);
+                            Format format = setFormat(new Format());
+
+                            sfc.addAllFilters(scale1, format);
                             sfg.addFilterChain(sfc);
                             builder.add(sfg.toString());
                             //builder.setCommand(builder.getCommand() + " -vf " + scale + "\"");
                         } else {
                             if (videoWidth != 0 && videoHeight != 0) {
-                                scale = scale.concat(videoWidth + ":" + videoHeight);
-                                if (isOutFullRange) {
+                                //scale = scale.concat(videoWidth + ":" + videoHeight);
+                                scale1 = new Scale(String.valueOf(videoWidth), String.valueOf(videoHeight),
+                                        true, isOutFullRange);
+                                scale1 = setScaleParams(scale1, alg);
+                                /*if (isOutFullRange) {
                                     scale = scale.concat(":out_range=full");
                                 }
                                 scale = scale.concat(",format=" + pixelFormat);
-                                builder.add("-vf \"" + scale + "\"");
+                                builder.add("-vf \"" + scale + "\"");*/
+
+                                Format format = setFormat(new Format());
+                                sfc.addAllFilters(scale1, format);
+                                sfg.addFilterChain(sfc);
+
+                                builder.add(sfg.toString());
+
                                 //builder.setCommand(builder.getCommand() + " -vf " + scale + "\"");
                             } else {
                                 builder.add("-video_size " + videoSizeID);
@@ -621,8 +683,21 @@ public class VideoCreator {
                     }
                 }
                 if (audioCodec != null && !audioCodec.isEmpty()) {
-                    builder.add("-c:a " + audioCodec);
-                    //builder.setCommand(builder.getCommand() + " -c:a " + audioCodec);
+                    if(audioStreamCopy) {
+                        //No audio filtering allowed when stream copying audio
+                        builder.add("-c:a copy");
+                    } else {
+                        builder.add("-c:a " + audioCodec);
+                        //builder.setCommand(builder.getCommand() + " -c:a " + audioCodec);
+
+                        if(audioFilter != null) {
+                            SimpleFilterGraph sfg = new AudioSimpleFilterGraph();
+                            SimpleFilterChain sfc = new AudioSimpleFilterChain();
+                            sfc.addFilter(audioFilter);
+                            sfg.addFilterChain(sfc);
+                            builder.add(sfg.toString());
+                        }
+                    }
                 }
                 if (videoBitRate != null && !videoBitRate.isEmpty()) {
                     builder.add("-b:v " + videoBitRate);

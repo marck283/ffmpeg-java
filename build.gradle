@@ -12,12 +12,11 @@ plugins {
     id 'maven-publish'
     id 'signing'
     id "com.google.cloud.artifactregistry.gradle-plugin" version "2.2.0"
-    id "com.vanniktech.maven.publish" version "0.28.0"
     //id 'cpp'
 }
 
 group 'io.github.marck283'
-version '1.1.17'
+version '1.1.19-alpha5'
 
 java {
     withJavadocJar()

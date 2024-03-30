@@ -5,6 +5,7 @@ import it.disi.unitn.FFMpegBuilder;
 import it.disi.unitn.exceptions.InvalidArgumentException;
 import it.disi.unitn.exceptions.NotEnoughArgumentsException;
 import it.disi.unitn.exceptions.UnsupportedOperatingSystemException;
+import it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.ACompressor;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -23,7 +24,13 @@ class VideoTranscoderTest {
         transcoder.setPixelFormat("yuv420p");
         transcoder.setOutFullRange(true); //If using mjpeg and YUV pixel formats, we have to set the color range to full.
         transcoder.setVideoQuality(18);
-        transcoder.createCommand(/*30L, TimeUnit.MINUTES*/);
+        transcoder.setAudioCodec("flac");
+
+        ACompressor acomp = new ACompressor();
+        acomp.setThreshold(0.123);
+        acomp.setAttack(0.01);
+
+        transcoder.createCommand(false/*30L, TimeUnit.MINUTES*/, acomp, null);
         FFMpeg ffmpeg = builder.build();
         ffmpeg.executeCMD(30L, TimeUnit.MINUTES);
     }
@@ -31,10 +38,16 @@ class VideoTranscoderTest {
     @Test
     void createCommandForAudio() throws NotEnoughArgumentsException, InvalidArgumentException, IOException {
         FFMpegBuilder builder = new FFMpegBuilder("ffmpeg");
-        VideoTranscoder transcoder = builder.newVideoTranscoder("./src/test/resources/input/mp4/002.wma",
+        VideoTranscoder transcoder = builder.newVideoTranscoder("./src/test/resources/input/mp4/002.wav",
                 "./src/test/resources/input/mp4", "002.wmv");
         transcoder.enableAudioExtraction();
-        transcoder.createCommand(/*30L, TimeUnit.MINUTES*/);
+        transcoder.setAudioCodec("flac");
+
+        ACompressor acomp = new ACompressor();
+        acomp.setThreshold(0.123);
+        acomp.setAttack(0.01);
+
+        transcoder.createCommand(false/*30L, TimeUnit.MINUTES*/, acomp, null);
         FFMpeg ffmpeg = builder.build();
         ffmpeg.executeCMD(30L, TimeUnit.MINUTES);
     }

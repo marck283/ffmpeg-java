@@ -4,4 +4,12 @@ it.disi.unitn.json
 it.disi.unitn.json.jsonparser
 it.disi.unitn.json.processpool
 it.disi.unitn.videocreator
+it.disi.unitn.videocreator.filtergraph
+it.disi.unitn.videocreator.filtergraph.filterchain
+it.disi.unitn.videocreator.filtergraph.filterchain.filters
+it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters
+it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters
+it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.format
+it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.scale
+it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.scale.scalingalgs
 it.disi.unitn.videocreator.transcoder
