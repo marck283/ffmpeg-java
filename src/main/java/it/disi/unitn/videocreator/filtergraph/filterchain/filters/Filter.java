@@ -40,6 +40,8 @@ public abstract class Filter {
         options = new LinkedHashMap<>();
     }
 
+    protected abstract void updateMap();
+
     @Override
     public String toString() {
         List<String> helpList = new ArrayList<>();
