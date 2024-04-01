@@ -574,7 +574,7 @@ public class VideoCreator {
         }
         scale.setSwsDither("auto"); //Valore di default per sws_dither
         scale.setAlphablend("none"); //valore di default per alphablend
-        scale.createMap();
+        scale.updateMap();
 
         return scale;
     }
