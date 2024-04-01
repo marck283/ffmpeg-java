@@ -25,7 +25,7 @@ public class AudioSimpleFilterChain extends SimpleFilterChain {
     /**
      * Adds a new filter to this filter chain.
      * @param filter The Filter to be added. This parameter must be an instance of AudioFilter
-     * @throws InvalidArgumentException If the given Filter instance is null
+     * @throws InvalidArgumentException If the given Filter instance is null, or it is an instance of VideoFilter
      */
     @Override
     public void addFilter(@NotNull Filter filter) throws InvalidArgumentException {
@@ -57,7 +57,7 @@ public class AudioSimpleFilterChain extends SimpleFilterChain {
     /**
      * Removes the given filter from this filter chain.
      * @param filter The Filter to be removed. This parameter must be an instance of AudioFilter
-     * @throws InvalidArgumentException If the given Filter instance is null
+     * @throws InvalidArgumentException If the given Filter instance is null, or it is an instance of VideoFilter
      */
     @Override
     public void removeFilter(@NotNull Filter filter) throws InvalidArgumentException {
