@@ -1,12 +1,19 @@
-package it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters;
+package it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.acompressor;
 
 import it.disi.unitn.exceptions.InvalidArgumentException;
+import it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.AudioFilter;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Wrapper class for the acompressor FFmpeg filter.
  */
 public class ACompressor extends AudioFilter {
+
+    private double levelIn, threshold, attack, release, knee, mix;
+
+    private int makeup;
+
+    private String mode, ratio, link, detection;
 
     /**
      * The class's constructor.
@@ -27,8 +34,8 @@ public class ACompressor extends AudioFilter {
             throw new InvalidArgumentException("The input gain cannot be less than 0.015625 or greater than 64.",
                     "L'input gain non puo' essere inferiore a 0.015625 o maggiore di 64.");
         }
-        String lvlin = String.valueOf(val);
-        options.put("level_in", lvlin);
+
+        levelIn = val;
     }
 
     /**
@@ -42,7 +49,8 @@ public class ACompressor extends AudioFilter {
                     "different from \"downward\" and \"upward\".", "La modalita' fornita al filtro ACompressor non puo' " +
                     "essere null, vuota o corrispondere ad un valore diverso da \"downward\" o \"upward\".");
         }
-        options.put("mode", val);
+
+        mode = val;
     }
 
     /**
@@ -56,7 +64,8 @@ public class ACompressor extends AudioFilter {
                     "0.00097563 or greater than 1.", "Il limite massimo fornito al filtero ACompressor non puo' essere " +
                     "inferiore a 0.00097563 o maggiore di 1.");
         }
-        options.put("threshold", String.valueOf(val));
+
+        threshold = val;
     }
 
     /**
@@ -64,14 +73,19 @@ public class ACompressor extends AudioFilter {
      * @param val The new ratio
      * @throws InvalidArgumentException If the given ratio is less than 1 or greater than 20
      */
-    public void setRatio(int val) throws InvalidArgumentException {
+    public void setRatio(double val) throws InvalidArgumentException {
         //Remember that it is possible to have a ratio of 1:2!
-        if(val < 1 || val > 20) {
+        if((val < 1 && val != 0.5) || val > 20) {
             throw new InvalidArgumentException("The ratio given to the ACompressor filter cannot be less than 1 or " +
                     "greater than 20.", "La proporzione data al filtro ACompressor non puo' essere inferiore a 1 o " +
                     "maggiore di 20.");
         }
-        options.put("ratio", String.valueOf(val));
+
+        if(val == 0.5) {
+            ratio = "1:2";
+        } else {
+            ratio = String.valueOf(val);
+        }
     }
 
     /**
@@ -87,7 +101,8 @@ public class ACompressor extends AudioFilter {
                     "millisecondi per i quali il segnale deve salire sopra il limite massimo prima che parta la fase di " +
                     "gain reduction non puo' essere minore di 0.01 o maggiore di 2000.");
         }
-        options.put("attack", String.valueOf(val));
+
+        attack = val;
     }
 
     /**
@@ -103,7 +118,8 @@ public class ACompressor extends AudioFilter {
                     "millisecondi per i quali il segnale deve scendere sotto il limite massimo prima che la riduzione " +
                     "diminuisca nuovamente non puo' essere minore di 0.01 o maggiore di 9000.");
         }
-        options.put("release", String.valueOf(val));
+
+        release = val;
     }
 
     /**
@@ -117,7 +133,8 @@ public class ACompressor extends AudioFilter {
                     "or greater than 64.", "Il valore di amplificazione del segnale in post-processing non puo' essere " +
                     "inferiore a 1 o maggiore di 64.");
         }
-        options.put("makeup", String.valueOf(val));
+
+        makeup = val;
     }
 
     /**
@@ -130,7 +147,8 @@ public class ACompressor extends AudioFilter {
             throw new InvalidArgumentException("The \"knee\" value cannot be less than 1 or greater than 8.", "Il valore " +
                     "del parametro \"knee\" non puo' essere inferiore a 1 o maggiore di 8.");
         }
-        options.put("knee", String.valueOf(val));
+
+        knee = val;
     }
 
     /**
@@ -144,7 +162,8 @@ public class ACompressor extends AudioFilter {
                     "\"maximum\".", "Il valore del parametro \"link\" non puo' essere null, vuoto o diverso da \"average\" " +
                     "o \"maximum\".");
         }
-        options.put("link", val);
+
+        link = val;
     }
 
     /**
@@ -158,7 +177,8 @@ public class ACompressor extends AudioFilter {
                     "\"rms\".", "il valore del parametro \"detection\" non puo' essere null, vuoto o diverso da \"peak\" " +
                     "o \"rms\"");
         }
-        options.put("detection", val);
+
+        detection = val;
     }
 
     /**
@@ -171,6 +191,22 @@ public class ACompressor extends AudioFilter {
             throw new InvalidArgumentException("The \"mix\" value cannot be less than 0.0 or greater than 1.0.", "Il " +
                     "valore del parametro \"mix\" non puo' essere inferiore a 0.0 o maggiore di 1.0.");
         }
-        options.put("mix", String.valueOf(val));
+
+        mix = val;
+    }
+
+    @Override
+    protected void updateMap() {
+        options.put("level_in", String.valueOf(levelIn));
+        options.put("mode", mode);
+        options.put("threshold", String.valueOf(threshold));
+        options.put("ratio", ratio);
+        options.put("attack", String.valueOf(attack));
+        options.put("release", String.valueOf(release));
+        options.put("makeup", String.valueOf(makeup));
+        options.put("knee", String.valueOf(knee));
+        options.put("link", link);
+        options.put("detection", detection);
+        options.put("mix", String.valueOf(mix));
     }
 }

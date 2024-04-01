@@ -90,7 +90,7 @@ public class Scale extends VideoFilter {
     /**
      * Fills the Map declared in Filter with the correct values.
      */
-    public void createMap() {
+    public void updateMap() {
         options.put("width", width);
         options.put("height", height);
         options.put("flags", sws_flags.toString());

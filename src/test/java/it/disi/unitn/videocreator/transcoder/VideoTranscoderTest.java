@@ -5,7 +5,7 @@ import it.disi.unitn.FFMpegBuilder;
 import it.disi.unitn.exceptions.InvalidArgumentException;
 import it.disi.unitn.exceptions.NotEnoughArgumentsException;
 import it.disi.unitn.exceptions.UnsupportedOperatingSystemException;
-import it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.ACompressor;
+import it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.acompressor.ACompressor;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
