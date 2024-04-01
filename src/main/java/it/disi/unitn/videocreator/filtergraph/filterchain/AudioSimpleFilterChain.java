@@ -31,8 +31,8 @@ public class AudioSimpleFilterChain extends SimpleFilterChain {
     public void addFilter(@NotNull Filter filter) throws InvalidArgumentException {
         checkNullFilter(filter);
         if(!(filter instanceof AudioFilter)) {
-            System.err.println("Cannot add a video filter to an audio filter chain.");
-            System.exit(1);
+            throw new InvalidArgumentException("Cannot add a video filter to an audio filter chain.", "Non e' possibile " +
+                    "aggiungere un filtro video ad una catena di filtri audio.");
         }
         filterList.add(filter);
     }
@@ -63,8 +63,8 @@ public class AudioSimpleFilterChain extends SimpleFilterChain {
     public void removeFilter(@NotNull Filter filter) throws InvalidArgumentException {
         checkNullFilter(filter);
         if(!(filter instanceof VideoFilter)) {
-            System.err.println("Cannot remove a video filter from an audio filter chain.");
-            System.exit(1);
+            throw new InvalidArgumentException("Cannot remove a video filter from an audio filter chain.", "Non e' possibile " +
+                    "rimuovere un filtro video da una catena di filtri audio.");
         }
         filterList.remove(filter);
     }
