@@ -417,7 +417,7 @@ public class VideoCreator {
         PumpStreamHandler streamHandler = new PumpStreamHandler();
         DefaultExecutor executor = DefaultExecutor.builder().get();
         executor.setStreamHandler(streamHandler);
-        ExecutorResHandler execResHandler = new ExecutorResHandler(/*width, height*/);
+        ExecutorResHandler execResHandler = new ExecutorResHandler();
         return executeCML(executor, execResHandler, cmdLine);
     }
 
@@ -443,7 +443,7 @@ public class VideoCreator {
      * See <a href="https://ffmpeg.org/ffmpeg-all.html#Video-size">here</a> for the recognized size IDs.
      *
      * @param videoSizeID The given video size ID
-     * @throws InvalidArgumentException if the given video size ID is not supported by ffmpeg
+     * @throws InvalidArgumentException if the given video size ID is null or not supported by FFmpeg
      */
     public void setVideoSizeID(@NotNull String videoSizeID) throws InvalidArgumentException {
         if (videoSizeID == null) {
@@ -453,11 +453,7 @@ public class VideoCreator {
         if (checkSizeID(videoSizeID)) {
             this.videoSizeID = videoSizeID;
         } else {
-            if (l == Locale.ITALIAN || l == Locale.ITALY) {
-                System.err.println("Risoluzione immagine non valida.");
-            } else {
-                System.err.println("Invalid image resolution.");
-            }
+            throw new InvalidArgumentException("Invalid image resolution", "Risoluzione immagine non valida.");
         }
     }
 
@@ -476,7 +472,8 @@ public class VideoCreator {
      * @param width       The given width
      * @param height      The given height
      * @param pix_fmt     The pixel format used in the resulting video
-     * @param development A boolean parameter indicating whether the user is running the program with a custom version of FFmpeg
+     * @param development A boolean parameter indicating whether the user is running the program with a custom version
+     *                    of FFmpeg
      * @throws InvalidArgumentException            if the given width or height parameter is less than or equal to 0
      * @throws NotEnoughArgumentsException         If the given pixel format is null or an empty string
      * @throws UnsupportedOperatingSystemException If the Operating System the user is currently operating on is not yet
@@ -510,11 +507,11 @@ public class VideoCreator {
     }
 
     /**
-     * This method sets the output video's bitrate in Kilobits or Megabits.
+     * This method sets the output video&rsquo;s bitrate in Kilobits or Megabits.
      *
      * @param val  The bitrate value
      * @param mode A value between "k" and "m" (short for Kilobit and Megabit respectively)
-     * @throws InvalidArgumentException if the "mode" argument is null, or it is not equal to "k" or "m"
+     * @throws InvalidArgumentException If the "mode" argument is null, or it is not equal to "k" or "m"
      */
     public void setVideoBitRate(int val, @NotNull String mode) throws InvalidArgumentException {
         if (mode == null || (!mode.equals("k") && !mode.equals("m"))) {
@@ -526,10 +523,10 @@ public class VideoCreator {
     }
 
     /**
-     * Imposta il formato dei pixel.
+     * Sets the pixel format.
      *
-     * @param pxfmt L&rsquo;identificatore del formato dei pixel.
-     * @throws InvalidArgumentException Se l&rsquo;argomento fornito in input &egrave; null.
+     * @param pxfmt The identifier of the requested pixel format
+     * @throws InvalidArgumentException If the given pixel format is null
      */
     public void setPixelFormat(@NotNull String pxfmt) throws InvalidArgumentException {
         if (pxfmt == null || pxfmt.isEmpty()) {
