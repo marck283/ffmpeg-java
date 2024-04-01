@@ -564,6 +564,13 @@ public class VideoCreator {
         audioStreamCopy = streamCopy;
     }
 
+    /**
+     * Sets the "scale" filter parameters.
+     * @param scale The "scale" filter instance
+     * @param alg The ScalingAlgorithm instance
+     * @return The "scale" filter instance with all parameters set
+     * @throws InvalidArgumentException If the given "scale" filter instance is null
+     */
     private @NotNull Scale setScaleParams(@NotNull Scale scale, @Nullable ScalingAlgorithm alg) throws InvalidArgumentException {
         if(scale == null) {
             throw new InvalidArgumentException("The given \"scale\" filter cannot be null.", "Il filtro \"scale\" fornito " +
