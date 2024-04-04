@@ -88,7 +88,7 @@ public class ExecutorResHandler implements ExecuteResultHandler {
                 jti.modifyImage(obj, index, pathToImagesFolder, mime);
                 pp.removeHandler(this);
             } catch (InvalidArgumentException | IOException ex) {
-                ex.printStackTrace();
+                //ex.printStackTrace();
                 System.err.println(ex.getMessage());
                 System.exit(1);
             }
@@ -108,7 +108,7 @@ public class ExecutorResHandler implements ExecuteResultHandler {
      */
     @Override
     public void onProcessFailed(@NotNull ExecuteException e) {
-        e.printStackTrace();
+        //e.printStackTrace();
         System.err.println(e.getMessage());
         System.exit(1);
     }

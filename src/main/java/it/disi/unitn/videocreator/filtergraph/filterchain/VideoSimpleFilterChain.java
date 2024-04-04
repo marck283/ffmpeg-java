@@ -47,6 +47,11 @@ public class VideoSimpleFilterChain extends SimpleFilterChain {
         filterList.addAll(Arrays.asList(filters));
     }
 
+    /**
+     * Removes the given Filter instance from this Video Filter Chain.
+     * @param filter The Filter to be removed
+     * @throws InvalidArgumentException If the given Filter instance is null or not an instance of VideoFilter
+     */
     public void removeFilter(@NotNull Filter filter) throws InvalidArgumentException {
         checkNullFilter(filter);
         if(!(filter instanceof VideoFilter)) {
@@ -55,5 +60,4 @@ public class VideoSimpleFilterChain extends SimpleFilterChain {
         }
         filterList.remove(filter);
     }
-
 }

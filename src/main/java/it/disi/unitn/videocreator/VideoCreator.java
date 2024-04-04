@@ -45,6 +45,7 @@ import java.util.Map;
 public class VideoCreator {
 
     private final FFMpegBuilder builder;
+
     private int frameRate = 1, videoDuration; //Frame rate and video duration
 
     private final String outputFile; //Name of output file
@@ -60,19 +61,13 @@ public class VideoCreator {
 
     private int videoWidth = 0, videoHeight = 0;
 
-    //double screenWidth = 0.0, screenHeight = 0.0;
-
-    private String videoSizeID = "";
-
     private int startInstant; //Starting instant of the new video with respect to the original video
 
     private String audioBitRate; //Audio track's bitrate (in Kbit/s)
 
     private String videoBitRate; //Video track's bitrate (in Kbit/s or Mbit/s)
 
-    private String pixelFormat;
-
-    private String execFile = "";
+    private String videoSizeID = "", pixelFormat, execFile = "";
 
     private boolean isOutFullRange, videoStreamCopy, audioStreamCopy;
 
@@ -173,7 +168,8 @@ public class VideoCreator {
                 System.err.println("Non e' possibile eseguire il file " + execFile + ". Si prega di controllarne i permessi " +
                         "di esecuzione e l'esistenza.");
             } else {
-                System.err.println("Cannot execute file " + execFile + ". Please check the user's permissions and that the file exists.");
+                System.err.println("Cannot execute file " + execFile + ". Please check the user's permissions and that " +
+                        "the file exists.");
             }
 
             return false;
@@ -227,9 +223,8 @@ public class VideoCreator {
      * @param cmdline The CommandLine instance
      * @return True if the user's installation of FFmpeg supports the given codec, otherwise false
      * @throws IOException              If an I/O error occurs
-     * @throws InvalidArgumentException if the given codec is null or an empty string
      */
-    private boolean performCheck(@NotNull CommandLine cmdline) throws IOException, InvalidArgumentException {
+    private boolean performCheck(@NotNull CommandLine cmdline) throws IOException {
         try {
             if (!checkExecutable()) {
                 return false;
@@ -256,81 +251,17 @@ public class VideoCreator {
      * @param s The given codec ID.
      * @return true if the given codec is supported, otherwise false
      * @throws IOException                         If an I/O error occurs
-     * @throws InvalidArgumentException            if the given codec is null or an empty string
      * @throws UnsupportedOperatingSystemException if the Operating System is not yet supported.
      */
-    private boolean enumCodecs(String s) throws IOException, InvalidArgumentException, UnsupportedOperatingSystemException {
+    private boolean enumCodecs(String s) throws IOException, UnsupportedOperatingSystemException {
         if (SystemUtils.IS_OS_LINUX || SystemUtils.IS_OS_WINDOWS) {
             Map<String, String> m = new HashMap<>();
             m.put("execFile", execFile);
             m.put("s", s);
-            //return performCheck(CommandLine.parse(execFile + " " + s));
             return performCheck(CommandLine.parse("${execFile} ${s}", m));
         } else {
             throw new UnsupportedOperatingSystemException();
         }
-    }
-
-    /**
-     * This method checks if the given encoding codec ID is supported by ffmpeg.
-     *
-     * @param codecID The given codec ID
-     * @return true if the given codec is valid, otherwise false
-     * @throws IOException              if an I/O error occurs
-     * @throws InvalidArgumentException if the codec ID is null or an empty string
-     */
-    private boolean checkCodec(@NotNull String codecID) throws IOException,
-            InvalidArgumentException, UnsupportedOperatingSystemException {
-        if (codecID == null || codecID.isEmpty()) {
-            throw new InvalidArgumentException("The argument to this method must not be null or an empty string.",
-                    "L'argomento fornito a questo metodo non puo' essere null o una stringa vuota.");
-        }
-        /*switch (codecID) {
-            case "a64_multi", "a64_multi5", "alias_pix", "amv", "apng", "asv1", "asv2", "libaom-av1", "librav1e",
-                    "libsvtav1", "av1_nvenc", "av1_qsv", "av1_amf", "avrp", "avui", "ayuv", "bitpacked", "bmp", "cfhd",
-                    "cinepak", "cljr", "dnxhd", "dpx", "dvvideo", "exr", "ffv1", "ffvhuff", "fits", "flashsv", "flashsv2",
-                    "flv", "gif", "h261", "h263", "h263p", "h264", "hap", "hdr", "hevc", "huffyuv", "jpeg200", "libopenjpg",
-                    "jpegls", "ljpeg", "magicyuv", "mjpeg", "mpeg1video", "mpeg2video", "mpeg2_qsv", "mpeg4", "msmpeg4v2",
-                    "msmpeg4", "msvideo1", "pam", "pbm", "pcx", "pfm", "pgm", "pgmyuv", "phm", "png", "ppm", "prores",
-                    "qoi", "qtrle", "r10k", "r210", "rawvideo", "roq", "rpza", "rv10", "rv20", "sgi", "smc", "snow",
-                    "speedhq", "sunrast", "svq1", "targa", "libtheora", "tiff", "utvideo", "v210", "v308", "v408", "v410",
-                    "vbn", "vnull", "libvpx", "libvpx-vp9", "vp9_qsv", "wbmp", "libwebp-anim", "libwebp", "wmv1", "wmv2",
-                    "wrapped_avframe", "xbm", "xface", "xwd", "y41p", "yuv4", "zlib", "zmbv" -> {
-                return true;
-            }
-            default -> {
-                return false;
-            }
-        }*/
-
-        return enumCodecs(codecID);
-
-        //Thread per stampare su file i codec supportati da FFmpeg ed eseguire grep per verificare che il codec
-        //richiesto sia supportato.
-        /*Path tempFile = Files.createTempFile("ffmpeg-java-temp", ".txt");
-        BufferedOutputStream outstream = new BufferedOutputStream(Files.newOutputStream(tempFile,
-                StandardOpenOption.WRITE));
-        ExecutorResHandler execResHandler = new ExecutorResHandler(outstream, tempFile, codecID);
-        CommandLine cmdline = CommandLine.parse(builder.getCommand() + " -codecs -hide_banner");
-        PumpStreamHandler streamHandler = new PumpStreamHandler(outstream, System.err);
-        DefaultExecutor executor = new DefaultExecutor();
-        executor.setStreamHandler(streamHandler);
-        try {
-            executor.execute(cmdline, execResHandler);
-            Thread t1 = new Thread(() -> {
-                try {
-                    execResHandler.doWait();
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
-            });
-            t1.start();
-            t1.join();
-
-            return execResHandler.getValue() == 1;
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }*/
     }
 
     /**
@@ -354,7 +285,7 @@ public class VideoCreator {
             this.codecID = codecID;
             return;
         }
-        if (checkCodec(codecID)) {
+        if (enumCodecs(codecID)) {
             this.codecID = codecID;
             if (codecID.equals("h264")) {
                 setPixelFormat("yuv420p");
@@ -498,7 +429,7 @@ public class VideoCreator {
      * @param val The audio track&rsquo;s bitrate
      * @throws InvalidArgumentException of the given bitrate value is less than or equal to 0
      */
-    private void setAudioBitRate(int val) throws InvalidArgumentException {
+    public void setAudioBitRate(int val) throws InvalidArgumentException {
         if (val <= 0) {
             throw new InvalidArgumentException("The bitrate of the audio track must be greater than 0.", "Il bitrate " +
                     "della traccia audio deve essere maggiore di 0.");
@@ -563,24 +494,18 @@ public class VideoCreator {
 
     /**
      * Sets the "scale" filter parameters.
+     *
      * @param scale The "scale" filter instance
-     * @param alg The ScalingAlgorithm instance
-     * @return The "scale" filter instance with all parameters set
-     * @throws InvalidArgumentException If the given "scale" filter instance is null
+     * @param alg   The ScalingAlgorithm instance
+     * @throws InvalidArgumentException If the given ScalingAlgorithm has an empty string as its name
      */
-    private @NotNull Scale setScaleParams(@NotNull Scale scale, @Nullable ScalingAlgorithm alg) throws InvalidArgumentException {
-        if(scale == null) {
-            throw new InvalidArgumentException("The given \"scale\" filter cannot be null.", "Il filtro \"scale\" fornito " +
-                    "non puo' essere null.");
-        }
+    private void setScaleParams(@NotNull Scale scale, @Nullable ScalingAlgorithm alg) throws InvalidArgumentException {
         if(alg != null) {
             scale.setSwsFlags(alg);
         }
         scale.setSwsDither("auto"); //Valore di default per sws_dither
         scale.setAlphablend("none"); //valore di default per alphablend
         scale.updateMap();
-
-        return scale;
     }
 
     /**
@@ -608,9 +533,11 @@ public class VideoCreator {
      *                      in order to extract the audio track from a video; otherwise, it should be set to "true"
      * @param audioFilter The given AudioFilter instance. Can be null
      * @param alg The given scaling algorithm. Can be null
+     * @param colorInFullRange True if the input color range is full, otherwise false
      * @throws InvalidArgumentException if the video width or height or the video size ID field is null
      */
-    public void createCommand(boolean videoCreation, @Nullable AudioFilter audioFilter, @Nullable ScalingAlgorithm alg)
+    public void createCommand(boolean videoCreation, @Nullable AudioFilter audioFilter, @Nullable ScalingAlgorithm alg,
+                              boolean colorInFullRange)
             throws InvalidArgumentException {
         if (videoCreation && (videoWidth <= 0 || videoHeight <= 0) && (videoSizeID == null || videoSizeID.isEmpty())) {
             throw new InvalidArgumentException("Either the video size ID is null or an empty string or the video width " +
@@ -646,13 +573,13 @@ public class VideoCreator {
                             //this filter in order to divide them by 2.
 
                             //PAY ATTENTION HERE TO THE INPUT RANGE!
-                            scale1 = new Scale("ceil(.5*iw)*2", "ceil(.5*ih)*2", true, isOutFullRange);
+                            scale1 = new Scale("ceil(.5*iw)*2", "ceil(.5*ih)*2", colorInFullRange, isOutFullRange);
                             //scale = scale.concat("ceil(.5*iw)*2:ceil(.5*ih)*2");
                             /*if (isOutFullRange) {
                                 scale = scale.concat(":out_range=full");
                             }*/
                             //builder.add("-vf \"" + scale + "\""); //Add a simple filter graph
-                            scale1 = setScaleParams(scale1, alg);
+                            setScaleParams(scale1, alg);
 
                             Format format = setFormat(new Format());
 
@@ -664,8 +591,8 @@ public class VideoCreator {
                             if (videoWidth != 0 && videoHeight != 0) {
                                 //scale = scale.concat(videoWidth + ":" + videoHeight);
                                 scale1 = new Scale(String.valueOf(videoWidth), String.valueOf(videoHeight),
-                                        true, isOutFullRange);
-                                scale1 = setScaleParams(scale1, alg);
+                                        colorInFullRange, isOutFullRange);
+                                setScaleParams(scale1, alg);
                                 /*if (isOutFullRange) {
                                     scale = scale.concat(":out_range=full");
                                 }
@@ -726,7 +653,7 @@ public class VideoCreator {
                 builder.addOutput(outputFile);
             } catch(NotEnoughArgumentsException ex) {
                 System.err.println(ex.getMessage());
-                ex.printStackTrace();
+                //ex.printStackTrace();
                 System.exit(1);
             }
         }

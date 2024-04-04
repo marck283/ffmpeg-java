@@ -30,7 +30,7 @@ class VideoTranscoderTest {
         acomp.setThreshold(0.123);
         acomp.setAttack(0.01);
 
-        transcoder.createCommand(false/*30L, TimeUnit.MINUTES*/, acomp, null);
+        transcoder.createCommand(false/*30L, TimeUnit.MINUTES*/, acomp, null, true);
         FFMpeg ffmpeg = builder.build();
         ffmpeg.executeCMD(30L, TimeUnit.MINUTES);
     }
@@ -47,7 +47,7 @@ class VideoTranscoderTest {
         acomp.setThreshold(0.123);
         acomp.setAttack(0.01);
 
-        transcoder.createCommand(false/*30L, TimeUnit.MINUTES*/, acomp, null);
+        transcoder.createCommand(false/*30L, TimeUnit.MINUTES*/, acomp, null, true);
         FFMpeg ffmpeg = builder.build();
         ffmpeg.executeCMD(30L, TimeUnit.MINUTES);
     }

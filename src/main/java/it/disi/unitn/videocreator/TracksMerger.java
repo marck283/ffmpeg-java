@@ -37,8 +37,7 @@ public class TracksMerger extends VideoCreator {
     public TracksMerger(@NotNull FFMpegBuilder builder, @NotNull String outputFile, @NotNull String inputFolder, @NotNull String pattern,
                  @NotNull String audioInput, @NotNull String videoInput) throws NotEnoughArgumentsException {
         super(builder, outputFile, inputFolder, pattern);
-        if(builder == null || audioInput == null || audioInput.isEmpty() || videoInput == null || videoInput.isEmpty() ||
-        outputFile == null || outputFile.isEmpty()) {
+        if(audioInput == null || audioInput.isEmpty() || videoInput == null || videoInput.isEmpty()) {
             throw new NotEnoughArgumentsException("The arguments to this class's constructor cannot be null or empty " +
                     "strings.", "Nessuno degli argomenti forniti al costruttore di questa classe puo' essere null o una " +
                     "stringa vuota.");
@@ -83,8 +82,10 @@ public class TracksMerger extends VideoCreator {
      * @param timeUnit The TimeUnit instance to be used
      * @throws NotEnoughArgumentsException when the video input path or audio input path is null
      * @throws IOException If an I/O error occurs
+     * @throws InvalidArgumentException If the given timeout is negative or the TimeUnit instance is null
      */
-    public void mergeAudioWithVideo(long time, @NotNull TimeUnit timeUnit) throws NotEnoughArgumentsException, IOException {
+    public void mergeAudioWithVideo(long time, @NotNull TimeUnit timeUnit) throws NotEnoughArgumentsException, IOException,
+            InvalidArgumentException {
         builder.addAllInputs(videoInput, audioInput);
         builder.add("-map 0:v");
         //builder.setCommand(builder.getCommand() + " -map 0:v");
@@ -106,20 +107,10 @@ public class TracksMerger extends VideoCreator {
      * @param tempFile The path to the file that wil contain the paths of the files to be merged
      * @return The File instance of the file containing the paths that were passed to this method
      * @throws IOException if an I/O error occurred
-     * @throws InvalidArgumentException If any argument to this method is null or an empty string or contains null or
-     * empty strings
      */
-    private @NotNull File writeTXTFile(@NotNull List<String> inputFiles, @NotNull String tempFile) throws IOException,
-            InvalidArgumentException {
-        boolean match = inputFiles.stream().anyMatch(s -> s == null || s.isEmpty());
-        if(inputFiles == null || match || tempFile == null || tempFile.isEmpty()) {
-            throw new InvalidArgumentException("No argument to this method can be null or an empty string, nor can it " +
-                    "contain null or empty strings.", "Nessuno degli argomenti forniti a questo metodo puo' essere null " +
-                    "o una stringa vuota o contenere stringhe null o vuote.");
-        }
-
+    private @NotNull File writeTXTFile(@NotNull List<String> inputFiles, @NotNull String tempFile) throws IOException {
         File file = new File(tempFile);
-        if(file.exists() || match) {
+        if(file.exists()) {
             file.delete();
         }
         boolean created = file.createNewFile();
@@ -147,13 +138,13 @@ public class TracksMerger extends VideoCreator {
      * @param timeUnit The TimeUnit instance to be used
      * @param tempFile A temporary file used to store the paths of the files to be merged
      * @throws IOException if an I/O error occurs
-     * @throws InvalidArgumentException If any of the arguments given to this method is null, an empty string, is less
-     * than or equal to zero, or it contains null or empty strings
      * @throws NotEnoughArgumentsException If any of the given arguments is less than or equal to zero, null or an empty
      * string or contains null or empty strings
+     * @throws InvalidArgumentException If the given timeout is negative or the given TimeUnit instance is null
      */
     public void mergeVideos(long time, @NotNull TimeUnit timeUnit, @NotNull List<String> inputFiles,
-                            @NotNull String tempFile) throws IOException, InvalidArgumentException, NotEnoughArgumentsException {
+                            @NotNull String tempFile) throws IOException, NotEnoughArgumentsException, InvalidArgumentException {
+        //Da riscrivere rispettando le specifiche sopra fornite
         if(time <= 0 || timeUnit == null || inputFiles == null || inputFiles.stream().anyMatch(s -> s == null || s.isEmpty()) ||
         tempFile == null || tempFile.isEmpty()) {
             throw new NotEnoughArgumentsException("No argument to this method can be null, less than or equal to zero or " +
@@ -173,6 +164,6 @@ public class TracksMerger extends VideoCreator {
         builder.addOutput(videoOutput);
 
         FFMpeg ffmpeg = builder.build();
-        ffmpeg.executeCMD(time, timeUnit);
+        ffmpeg.executeCMD(time, timeUnit); //"time" and "timeUnit" are never null here.
     }
 }
