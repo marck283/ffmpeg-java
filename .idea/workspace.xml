@@ -5,51 +5,31 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4e206741-5dd1-4a84-99b2-29854b378e54" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/adelay/ADelay.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/aformat/AFormat.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/aformat/ChannelLayout.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/afreqshift/AFreqShift.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.5/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.5/executionHistory/executionHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.5/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.5/executionHistory/executionHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.5/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.5/fileHashes/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.5/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.5/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.5/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.5/fileHashes/resourceHashesCache.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules/ffmpeg-java-id.main.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.5/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.5/checksums/checksums.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.5/checksums/md5-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.5/checksums/md5-checksums.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.5/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.5/checksums/sha1-checksums.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/it/disi/unitn/videocreator/VideoCreator.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/it/disi/unitn/videocreator/VideoCreator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/it/disi/unitn/videocreator/filtergraph/filterchain/AudioSimpleFilterChain.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/it/disi/unitn/videocreator/filtergraph/filterchain/AudioSimpleFilterChain.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/it/disi/unitn/videocreator/filtergraph/filterchain/VideoSimpleFilterChain.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/it/disi/unitn/videocreator/filtergraph/filterchain/VideoSimpleFilterChain.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/it/disi/unitn/videocreator/filtergraph/filterchain/filters/Filter.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/it/disi/unitn/videocreator/filtergraph/filterchain/filters/Filter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/ACompressor.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/it/disi/unitn/videocreator/filtergraph/filterchain/filters/videofilters/scale/Scale.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/it/disi/unitn/videocreator/filtergraph/filterchain/filters/videofilters/scale/Scale.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/it/disi/unitn/videocreator/transcoder/VideoTranscoder.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/it/disi/unitn/videocreator/transcoder/VideoTranscoder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/test/it/disi/unitn/videocreator/VideoCreatorTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/test/it/disi/unitn/videocreator/VideoCreatorTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/test/it/disi/unitn/videocreator/transcoder/VideoTranscoderTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/test/it/disi/unitn/videocreator/transcoder/VideoTranscoderTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/reports/tests/test/classes/FFMpegBuilderTest.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/reports/tests/test/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/tests/test/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/reports/tests/test/packages/default-package.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/test/input/mp4/002.wav" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/test/input/mp4/002.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/test/input/mp4/example.mov" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/test/input/mp4/example.mov" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/test-results/test/TEST-FFMpegBuilderTest.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/test-results/test/binary/output.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/test-results/test/binary/output.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/test-results/test/binary/output.bin.idx" beforeDir="false" afterPath="$PROJECT_DIR$/build/test-results/test/binary/output.bin.idx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/test-results/test/binary/results.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/test-results/test/binary/results.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/FFMpeg$1.class.uniqueId0" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/FFMpeg.class.uniqueId4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/FFMpegBuilder.class.uniqueId2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/TracksMerger.class.uniqueId1" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/VideoCreator.class.uniqueId3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/VideoTranscoder.class.uniqueId5" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileTestJava/compileTransaction/stash-dir/FFMpegBuilderTest.class.uniqueId0" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileTestJava/compileTransaction/stash-dir/VideoCreatorTest.class.uniqueId2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileTestJava/compileTransaction/stash-dir/VideoTranscoderTest.class.uniqueId1" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileTestJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileTestJava/previous-compilation-data.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/disi/unitn/FFMpeg.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/disi/unitn/FFMpeg.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/disi/unitn/json/JSONToImage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/disi/unitn/json/JSONToImage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/disi/unitn/json/jsonparser/JsonParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/disi/unitn/json/jsonparser/JsonParser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/disi/unitn/json/processpool/ExecutorResHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/disi/unitn/json/processpool/ExecutorResHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/disi/unitn/json/processpool/ProcessPool.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/disi/unitn/json/processpool/ProcessPool.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/disi/unitn/videocreator/TracksMerger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/disi/unitn/videocreator/TracksMerger.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/disi/unitn/videocreator/VideoCreator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/disi/unitn/videocreator/VideoCreator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/disi/unitn/videocreator/filtergraph/filterchain/VideoSimpleFilterChain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/disi/unitn/videocreator/filtergraph/filterchain/VideoSimpleFilterChain.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/acontrast/AContrast.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/acontrast/AContrast.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/adecorrelate/ADecorrelate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/adecorrelate/ADecorrelate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/aformat/ChannelLayout.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/aformat/ChannelLayout.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/afreqshift/AFreqShift.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/afreqshift/AFreqShift.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/disi/unitn/videocreator/filtergraph/filterchain/filters/videofilters/format/Format.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/disi/unitn/videocreator/filtergraph/filterchain/filters/videofilters/format/Format.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/disi/unitn/videocreator/filtergraph/filterchain/filters/videofilters/scale/Scale.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/disi/unitn/videocreator/filtergraph/filterchain/filters/videofilters/scale/Scale.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/disi/unitn/videocreator/transcoder/VideoTranscoder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/disi/unitn/videocreator/transcoder/VideoTranscoder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/it/disi/unitn/videocreator/VideoCreatorTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/disi/unitn/videocreator/VideoCreatorTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/it/disi/unitn/videocreator/transcoder/VideoTranscoderTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/disi/unitn/videocreator/transcoder/VideoTranscoderTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/input/mp4/example.mov" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/input/mp4/example.mov" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -122,6 +102,9 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 7
 }</component>
@@ -171,7 +154,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "com.google.cloudcode.ide_session_index": "20240403_0001",
+    "com.google.cloudcode.ide_session_index": "20240404_0007",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
     "create.test.in.the.same.root": "true",
@@ -184,10 +167,11 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Libraries",
+    "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.3356828",
-    "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -353,8 +337,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="jdk-20.0.2-azul-20.0.2-3183f394aec4-18ea16e8" />
-        <option value="jdk-21.0.1-openjdk-21.0.1-3183f394aec4-920bfa72" />
+        <option value="bundled-jdk-9f38398b9061-18abd8497189-intellij.indexing.shared.core-IU-241.14494.240" />
+        <option value="bundled-js-predefined-1d06a55b98c1-74d2a5396914-JavaScript-IU-241.14494.240" />
       </set>
     </attachedChunks>
   </component>
@@ -415,7 +399,12 @@
       <workItem from="1711923606256" duration="11466000" />
       <workItem from="1712013185933" duration="67000" />
       <workItem from="1712098134893" duration="986000" />
-      <workItem from="1712155719603" duration="9160000" />
+      <workItem from="1712155719603" duration="9239000" />
+      <workItem from="1712196496869" duration="89000" />
+      <workItem from="1712196755559" duration="133000" />
+      <workItem from="1712223884142" duration="2774000" />
+      <workItem from="1712226808835" duration="3636000" />
+      <workItem from="1712240031949" duration="2736000" />
     </task>
     <servers />
   </component>

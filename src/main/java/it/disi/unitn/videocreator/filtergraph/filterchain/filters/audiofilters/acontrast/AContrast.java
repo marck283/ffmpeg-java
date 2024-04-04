@@ -15,7 +15,7 @@ public class AContrast extends Filter {
      *
      * @throws InvalidArgumentException If the given filter's name is null or an empty string
      */
-    protected AContrast() throws InvalidArgumentException {
+    public AContrast() throws InvalidArgumentException {
         super("acontrast");
     }
 

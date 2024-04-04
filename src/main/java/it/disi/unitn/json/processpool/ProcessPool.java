@@ -27,8 +27,6 @@ import java.util.Map;
  */
 public class ProcessPool {
 
-    //private final ThreadPoolExecutor executor;
-
     private final String scriptpath, imageExtension, pathToImagesFolder;
 
     private String desc;
@@ -41,10 +39,6 @@ public class ProcessPool {
 
     /**
      * This constructor creates a new thread pool which will be used to execute a specified number of threads.
-     //* @param num The number of threads to be executed
-     //* @param keepAliveTime when the number of threads is greater than the core, this is the maximum time that excess
-     //*                      idle threads will wait for new tasks before terminating
-     //* @param tu the time unit for the keepAliveTime argument
      * @param model The File instance from which to create the process pool
      * @param imageExtension The picture's extension
      * @param pathToImagesFolder The path to the pictures' folder
@@ -161,7 +155,7 @@ public class ProcessPool {
             exlist.add(exrhandler);
             executor.execute(cmdLine, exrhandler);
         } catch (IOException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
             System.err.println(e.getLocalizedMessage());
             System.exit(1);
         }

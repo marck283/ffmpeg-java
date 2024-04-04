@@ -85,10 +85,6 @@ public class JsonParser {
      * @throws InvalidArgumentException If any of the parameters declared for this method is null or an empty string
      */
     private JsonElement getElement(@NotNull JsonElement el, @NotNull String name) throws InvalidArgumentException {
-        if(el == null || name == null || name.isEmpty()) {
-            throw new InvalidArgumentException("The parameters declared for this method cannot be null or empty strings.",
-                    "I parametri passati a questo metodo non possono essere null o stringhe vuote.");
-        }
         return getJsonObject(el).get(name);
     }
 

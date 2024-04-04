@@ -189,16 +189,6 @@ public class JSONToImage {
      */
     private void generateWithGAN(@NotNull String pathToImagesFolder, @NotNull String imageExtension,
                                  int width, int height, long timeout) throws InterruptedException, InvalidArgumentException {
-        if (pathToImagesFolder == null || pathToImagesFolder.isEmpty() || imageExtension == null || imageExtension.isEmpty()) {
-            throw new InvalidArgumentException("At least one of the given arguments is either null or an empty string.",
-                    "Almeno uno degli argomenti forniti e' null o una stringa vuota.");
-        }
-
-        if (width <= 0 || height <= 0) {
-            throw new InvalidArgumentException("Both the image's width and height must be strictly positive.", "Sia " +
-                    "l'ampiezza che l'altezza dell'immagine devono essere strettamente positive.");
-        }
-
         if (width % 8 != 0 || height % 8 != 0) {
             throw new InvalidArgumentException("Both the image's width and height must be divisible by 8.", "Sia l'ampiezza " +
                     "che l'altezza dell'immagine devono essere divisibili per 8.");
