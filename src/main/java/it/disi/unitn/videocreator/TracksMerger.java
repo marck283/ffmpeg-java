@@ -138,15 +138,17 @@ public class TracksMerger extends VideoCreator {
      * @param timeUnit The TimeUnit instance to be used
      * @param tempFile A temporary file used to store the paths of the files to be merged
      * @throws IOException if an I/O error occurs
-     * @throws NotEnoughArgumentsException If any of the given arguments is less than or equal to zero, null or an empty
-     * string or contains null or empty strings
+     * @throws NotEnoughArgumentsException If the third or fourth arguments are null or an empty string or contain null
+     * or empty strings
      * @throws InvalidArgumentException If the given timeout is negative or the given TimeUnit instance is null
      */
     public void mergeVideos(long time, @NotNull TimeUnit timeUnit, @NotNull List<String> inputFiles,
                             @NotNull String tempFile) throws IOException, NotEnoughArgumentsException, InvalidArgumentException {
-        //Da riscrivere rispettando le specifiche sopra fornite
-        if(time <= 0 || timeUnit == null || inputFiles == null || inputFiles.stream().anyMatch(s -> s == null || s.isEmpty()) ||
-        tempFile == null || tempFile.isEmpty()) {
+        if(time <= 0 || timeUnit == null) {
+            throw new InvalidArgumentException("Either the given timeout is less than or equal to zero or the given TimeUnit " +
+                    "instance is null.", "Il timeout fornito è minore o uguale a zero oppure l'istanza di TimeUnit è null.");
+        }
+        if(inputFiles == null || inputFiles.stream().anyMatch(s -> s == null || s.isEmpty()) || tempFile == null || tempFile.isEmpty()) {
             throw new NotEnoughArgumentsException("No argument to this method can be null, less than or equal to zero or " +
                     " an empty string, nor can it contain null or empty strings.", "Nessuno degli argomenti forniti a " +
                     "questo metodo puo' essere null, minore o uguale a zero o una stringa vuota o contenere stringhe null " +
