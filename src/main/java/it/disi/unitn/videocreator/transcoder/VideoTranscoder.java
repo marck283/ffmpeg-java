@@ -9,6 +9,8 @@ import it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.s
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.List;
+
 /**
  * This class performs the video transcoding operations.
  */
@@ -130,15 +132,18 @@ public class VideoTranscoder extends VideoCreator {
                     "e' null o una stringa vuota.");
         }
 
-        String output = builder.getLCommand().removeLast();
+        //String output = builder.getLCommand().removeLast();
+        List<String> outList = builder.getLCommand();
+        //String output = outList.getLast();
+        int finInd = outList.indexOf(outList.getLast());
         if(whichTrack.equals("video")) {
             //Video track is extracted
-            builder.add("-an");
+            builder.add(finInd, "-an");
         } else {
             //Audio track is extracted
-            builder.add("-vn");
+            builder.add(finInd, "-vn");
         }
-        builder.add(output);
+        //builder.add(output);
     }
 
     /**
