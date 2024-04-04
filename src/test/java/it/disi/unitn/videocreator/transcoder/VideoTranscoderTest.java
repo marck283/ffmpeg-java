@@ -19,7 +19,7 @@ class VideoTranscoderTest {
         VideoTranscoder transcoder = builder.newVideoTranscoder("./src/test/resources/input/mp4/example.mov",
                 "./src/test/resources/input/mp4", "example.mp4");
         transcoder.enableVideoExtraction();
-        transcoder.setVideoSize(800, 600, "yuvj420p", true);
+        transcoder.setVideoSize(800, 600, "yuv420p", true);
         transcoder.setCodecID("mjpeg", true);
         transcoder.setPixelFormat("yuv420p");
         transcoder.setOutFullRange(true); //If using mjpeg and YUV pixel formats, we have to set the color range to full.
