@@ -101,10 +101,6 @@ public class VideoTranscoder extends VideoCreator {
      * @throws NotEnoughArgumentsException If the argument given to this method is null or an empty string
      */
     private void removeParams(@NotNull String param) throws NotEnoughArgumentsException {
-        if(param == null || param.isEmpty()) {
-            throw new NotEnoughArgumentsException("The given argument is null or an empty string.", "L'argomento fornito " +
-                    "e' null o una stringa vuota.");
-        }
         builder.getLCommand().forEach(e -> {
             if((param.equals("vs") && e.startsWith("-c:v")) || (param.equals("as") && e.startsWith("-c:a"))) {
                 int index = builder.getLCommand().indexOf(e);
@@ -113,7 +109,7 @@ public class VideoTranscoder extends VideoCreator {
                     builder.add(index, e + " copy");
                 } catch (NotEnoughArgumentsException ex) {
                     System.err.println(ex.getMessage());
-                    ex.printStackTrace();
+                    //ex.printStackTrace();
                     System.exit(1);
                 }
             }
@@ -127,11 +123,6 @@ public class VideoTranscoder extends VideoCreator {
      * @throws NotEnoughArgumentsException If the given argument to this method is null or an empty string
      */
     private void readyUpForTrackExtraction(@NotNull String whichTrack) throws NotEnoughArgumentsException {
-        if(whichTrack == null || whichTrack.isEmpty()) {
-            throw new NotEnoughArgumentsException("The given argument is null or an empty string.", "L'argomento fornito " +
-                    "e' null o una stringa vuota.");
-        }
-
         //String output = builder.getLCommand().removeLast();
         List<String> outList = builder.getLCommand();
         //String output = outList.getLast();
@@ -156,7 +147,7 @@ public class VideoTranscoder extends VideoCreator {
      * are not set accordingly
      */
     public void createCommand(@Nullable AudioFilter audioFilter, @Nullable ScalingAlgorithm alg) throws InvalidArgumentException {
-        super.createCommand(videoStreamCopy || extractVideo || audioStreamCopy, audioFilter, alg);
+        super.createCommand(videoStreamCopy || extractVideo || audioStreamCopy, audioFilter, alg, true);
 
         try {
             if(videoStreamCopy) {
@@ -176,7 +167,7 @@ public class VideoTranscoder extends VideoCreator {
             }
         } catch (NotEnoughArgumentsException ex) {
             System.err.println(ex.getMessage());
-            ex.printStackTrace();
+            //ex.printStackTrace();
             System.exit(1);
         }
     }

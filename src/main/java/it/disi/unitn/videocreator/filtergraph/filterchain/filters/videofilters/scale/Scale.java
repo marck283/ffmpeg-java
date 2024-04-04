@@ -12,7 +12,7 @@ public class Scale extends VideoFilter {
 
     private ScalingAlgorithm sws_flags; //These flags will then be joined by using String.join("+", sws_flags)
 
-    private boolean src_range = false, dst_range = false; //false = 0
+    private final boolean src_range, dst_range; //false = 0
 
     private final String width, height;
 
@@ -41,12 +41,13 @@ public class Scale extends VideoFilter {
      * @throws InvalidArgumentException If the given ScalingAlgorithm instance is null
      */
     public void setSwsFlags(@NotNull ScalingAlgorithm val) throws InvalidArgumentException {
-        if(val == null || val.getName().isEmpty()) {
-            throw new InvalidArgumentException("The given \"sws flags\" value cannot be null or an empty string.", "Il " +
+        String algName = val.getName();
+        if(algName.isEmpty()) {
+            throw new InvalidArgumentException("The given \"sws flags\" value cannot be an empty string.", "Il " +
                     "valore \"sws flags\" fornito non puo' essere null o una stringa vuota.");
         }
 
-        switch(val.getName()) {
+        switch(algName) {
             case "fast_bilinear", "bilinear", "bicubic", "experimental", "neighbor", "area", "bicublin", "gauss", "sinc",
                     "lanczos", "spline", "print_info", "accurate_rnd", "full_chroma_int", "full_chroma_inp", "bitexact" -> sws_flags = val;
             default -> throw new InvalidArgumentException("Illegal sws_flags value.", "Valore sws_flags non permesso.");

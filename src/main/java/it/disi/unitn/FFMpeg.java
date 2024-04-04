@@ -1,18 +1,10 @@
 package it.disi.unitn;
 
-/*import com.google.gson.JsonObject;
 import it.disi.unitn.exceptions.InvalidArgumentException;
-import it.disi.unitn.streamhandlers.InputHandler;*/
 import org.apache.commons.exec.*;
-//import org.apache.commons.lang3.SystemUtils;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.*;
-/*import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.FileSystem;
-import java.nio.file.FileSystems;*/
 import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
@@ -50,7 +42,7 @@ public class FFMpeg {
                 throw new Exception("An error has occurred.");
             }
         } catch(Exception ex) {
-            ex.printStackTrace();
+            //ex.printStackTrace();
             System.err.println(ex.getMessage());
             System.exit(1);
         }
@@ -128,8 +120,17 @@ public class FFMpeg {
      * @param timeout The maximum time interval the calling process will wait for the child process to terminate
      * @param timeUnit The TimeUnit instance that specifies the time unit associated to the first parameter
      * @throws IOException If an I/O error occurs
+     * @throws InvalidArgumentException If the given timeout is negative or the TimeUnit instance is null
      */
-    public void executeCMD(long timeout, @NotNull TimeUnit timeUnit) throws IOException {
+    public void executeCMD(long timeout, @NotNull TimeUnit timeUnit) throws IOException, InvalidArgumentException {
+        if(timeout < 0) {
+            throw new InvalidArgumentException("The given timeout cannot be negative.", "Il timeout fornito non puo' essere " +
+                    "negativo.");
+        }
+        if(timeUnit == null) {
+            throw new InvalidArgumentException("The given TimeUnit instance cannot be null.", "L'istanza di TimeUnit " +
+                    "fornita non puo' essere null.");
+        }
         /*ProcessBuilder builder;
         if(SystemUtils.IS_OS_WINDOWS) {
             builder = new ProcessBuilder(ffBuilder.getCommand());

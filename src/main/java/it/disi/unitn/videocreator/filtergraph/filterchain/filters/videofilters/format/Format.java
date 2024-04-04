@@ -12,7 +12,7 @@ import java.util.List;
  */
 public class Format extends VideoFilter {
 
-    private List<String> pix_fmts, col_spcs, col_rngs;
+    private final List<String> pix_fmts, col_spcs, col_rngs;
 
     /**
      * This class's constructor. Constructs a new "format" filter.

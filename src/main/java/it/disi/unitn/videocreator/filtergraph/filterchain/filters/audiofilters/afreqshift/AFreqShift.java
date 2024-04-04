@@ -54,7 +54,7 @@ public class AFreqShift extends AudioFilter {
      * @param val The new "order" value
      * @throws InvalidArgumentException If the new "order" value is less than 1 or greater than 16
      */
-    private void setOrder(int val) throws InvalidArgumentException {
+    public void setOrder(int val) throws InvalidArgumentException {
         if(val < 1 || val > 16) {
             throw new InvalidArgumentException("The \"order\" value cannot be less than 1 or greater than 16.", "Il valore " +
                     "del parametro \"value\" non puo' essere minore di 1 o maggiore di 16.");
