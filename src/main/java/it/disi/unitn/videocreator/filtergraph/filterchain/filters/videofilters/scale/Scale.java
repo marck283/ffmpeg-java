@@ -93,7 +93,9 @@ public class Scale extends VideoFilter {
     public void updateMap() {
         options.put("width", width);
         options.put("height", height);
-        options.put("flags", sws_flags.toString());
+        if(sws_flags != null) {
+            options.put("flags", sws_flags.toString());
+        }
         if(src_range) {
             options.put("src_range", "1");
         } else {
