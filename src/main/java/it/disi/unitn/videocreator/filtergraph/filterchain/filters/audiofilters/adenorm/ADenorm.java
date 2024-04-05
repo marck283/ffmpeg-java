@@ -4,6 +4,9 @@ import it.disi.unitn.exceptions.InvalidArgumentException;
 import it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.AudioFilter;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * This class implements the FFmpeg "adenorm" filter.
+ */
 public class ADenorm extends AudioFilter {
 
     private int level = -351;
