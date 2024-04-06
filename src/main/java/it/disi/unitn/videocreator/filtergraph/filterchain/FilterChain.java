@@ -53,7 +53,8 @@ public class FilterChain {
     }
 
     /**
-     * Adds an input stream to this filter chain.
+     * Adds an input stream to this filter chain. The given input stream must be expressed without the square brackets
+     * around.
      * @param streamName The input stream's name
      * @throws InvalidArgumentException If the given argument is null or an empty string
      */
@@ -63,7 +64,8 @@ public class FilterChain {
     }
 
     /**
-     * Adds an output stream to this filter chain.
+     * Adds an output stream to this filter chain. The given output stream must be expressed without the square brackets
+     * around.
      * @param streamName The output stream's name
      * @throws InvalidArgumentException If the given argument is null or an empty string
      */

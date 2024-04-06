@@ -16,7 +16,7 @@ public class StringExt {
      */
     public StringExt(@NotNull String str) throws InvalidArgumentException {
         if(str == null || str.isEmpty()) {
-            throw new InvalidArgumentException("The argument given to this constructor cannot be null nor can it be the " +
+            throw new InvalidArgumentException("The argument given to this constructor cannot be null nor can it be an " +
                     "empty string.", "L'argomento fornito a questo costruttore non puo' essere null o una stringa vuota.");
         }
         val = str;
