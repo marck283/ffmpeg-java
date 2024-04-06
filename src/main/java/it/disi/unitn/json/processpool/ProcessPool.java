@@ -4,6 +4,7 @@ import com.google.gson.JsonArray;
 /*import com.google.gson.JsonObject;
 import it.disi.unitn.StringExt;
 import it.disi.unitn.exceptions.InvalidArgumentException;*/
+import it.disi.unitn.StringExt;
 import it.disi.unitn.exceptions.InvalidArgumentException;
 import it.disi.unitn.json.JSONToImage;
 import org.apache.commons.exec.*;
@@ -134,8 +135,10 @@ public class ProcessPool {
             m.put("scriptpath", nscriptpath);
             m.put("desc", "\"" + ndesc + "\"");
 
-            String i = String.valueOf(index);
-            m.put(i, i);
+            StringExt i = new StringExt(String.valueOf(index));
+            i.padStart();
+            System.out.println("INDEX: " + i.getVal());
+            m.put("i", i.getVal());
             m.put("imageExtension", niext);
             m.put("pathToImagesFolder", nptif);
 
