@@ -56,7 +56,7 @@ public class ADenorm extends AudioFilter {
     }
 
     @Override
-    protected void updateMap() {
+    public void updateMap() {
         options.put("level", String.valueOf(level));
         options.put("type", type);
     }

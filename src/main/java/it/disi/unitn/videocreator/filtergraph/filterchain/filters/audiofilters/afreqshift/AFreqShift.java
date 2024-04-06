@@ -64,7 +64,7 @@ public class AFreqShift extends AudioFilter {
     }
 
     @Override
-    protected void updateMap() {
+    public void updateMap() {
         options.put("shift", Double.toString(shift));
         options.put("level", Double.toString(level));
         options.put("order", Integer.toString(order));

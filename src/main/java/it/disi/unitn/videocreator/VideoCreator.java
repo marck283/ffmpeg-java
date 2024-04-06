@@ -15,6 +15,7 @@ import it.disi.unitn.videocreator.filtergraph.filterchain.AudioSimpleFilterChain
 import it.disi.unitn.videocreator.filtergraph.filterchain.SimpleFilterChain;
 import it.disi.unitn.videocreator.filtergraph.filterchain.VideoSimpleFilterChain;
 import it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.AudioFilter;
+import it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.adynamicequalizer.ADynamicEqualizer;
 import it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.format.Format;
 import it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.scale.Scale;
 import it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.scale.scalingalgs.ScalingAlgorithm;
