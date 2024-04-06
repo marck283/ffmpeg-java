@@ -123,9 +123,7 @@ public class VideoTranscoder extends VideoCreator {
      * @throws NotEnoughArgumentsException If the given argument to this method is null or an empty string
      */
     private void readyUpForTrackExtraction(@NotNull String whichTrack) throws NotEnoughArgumentsException {
-        //String output = builder.getLCommand().removeLast();
         List<String> outList = builder.getLCommand();
-        //String output = outList.getLast();
         int finInd = outList.indexOf(outList.getLast());
         if(whichTrack.equals("video")) {
             //Video track is extracted
@@ -134,7 +132,6 @@ public class VideoTranscoder extends VideoCreator {
             //Audio track is extracted
             builder.add(finInd, "-vn");
         }
-        //builder.add(output);
     }
 
     /**

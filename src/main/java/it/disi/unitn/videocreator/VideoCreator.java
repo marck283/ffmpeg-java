@@ -571,14 +571,7 @@ public class VideoCreator {
                         if (codecID.equals("h264")) {
                             //h264 (default codec when no value is specified) needs even width and height, so we need to add
                             //this filter in order to divide them by 2.
-
-                            //PAY ATTENTION HERE TO THE INPUT RANGE!
                             scale1 = new Scale("ceil(.5*iw)*2", "ceil(.5*ih)*2", colorInFullRange, isOutFullRange);
-                            //scale = scale.concat("ceil(.5*iw)*2:ceil(.5*ih)*2");
-                            /*if (isOutFullRange) {
-                                scale = scale.concat(":out_range=full");
-                            }*/
-                            //builder.add("-vf \"" + scale + "\""); //Add a simple filter graph
                             setScaleParams(scale1, alg);
 
                             Format format = setFormat(new Format());
@@ -586,29 +579,19 @@ public class VideoCreator {
                             sfc.addAllFilters(scale1, format);
                             sfg.addFilterChain(sfc);
                             builder.add(sfg.toString());
-                            //builder.setCommand(builder.getCommand() + " -vf " + scale + "\"");
                         } else {
                             if (videoWidth != 0 && videoHeight != 0) {
-                                //scale = scale.concat(videoWidth + ":" + videoHeight);
                                 scale1 = new Scale(String.valueOf(videoWidth), String.valueOf(videoHeight),
                                         colorInFullRange, isOutFullRange);
                                 setScaleParams(scale1, alg);
-                                /*if (isOutFullRange) {
-                                    scale = scale.concat(":out_range=full");
-                                }
-                                scale = scale.concat(",format=" + pixelFormat);
-                                builder.add("-vf \"" + scale + "\"");*/
 
                                 Format format = setFormat(new Format());
                                 sfc.addAllFilters(scale1, format);
                                 sfg.addFilterChain(sfc);
 
                                 builder.add(sfg.toString());
-
-                                //builder.setCommand(builder.getCommand() + " -vf " + scale + "\"");
                             } else {
                                 builder.add("-video_size " + videoSizeID);
-                                //builder.setCommand(builder.getCommand() + " -video_size " + videoSizeID);
                             }
                         }
                     }
@@ -619,7 +602,6 @@ public class VideoCreator {
                         builder.add("-c:a copy");
                     } else {
                         builder.add("-c:a " + audioCodec);
-                        //builder.setCommand(builder.getCommand() + " -c:a " + audioCodec);
 
                         if(audioFilter != null) {
                             SimpleFilterGraph sfg = new AudioSimpleFilterGraph();
@@ -632,23 +614,18 @@ public class VideoCreator {
                 }
                 if (videoBitRate != null && !videoBitRate.isEmpty()) {
                     builder.add("-b:v " + videoBitRate);
-                    //builder.setCommand(builder.getCommand() + " -b:v " + videoBitRate);
                 }
                 if (audioBitRate != null && !audioBitRate.isEmpty()) {
                     builder.add("-b:a " + audioBitRate);
-                    //builder.setCommand(builder.getCommand() + " -b:a " + audioBitRate);
                 }
                 if (startInstant > 0) {
                     builder.add("-ss " + startInstant);
-                    //builder.setCommand(builder.getCommand() + " -ss " + startInstant);
                 }
                 if (videoDuration > 0) {
                     builder.add("-t " + videoDuration);
-                    //builder.setCommand(builder.getCommand() + " -t " + videoDuration);
                 }
                 if (videoQuality != 0) {
                     builder.add("-q:v " + videoQuality);
-                    //builder.setCommand(builder.getCommand() + " -q:v " + videoQuality);
                 }
                 builder.addOutput(outputFile);
             } catch(NotEnoughArgumentsException ex) {
