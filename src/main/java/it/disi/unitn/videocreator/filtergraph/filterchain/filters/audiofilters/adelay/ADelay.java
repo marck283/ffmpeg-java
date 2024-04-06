@@ -74,7 +74,7 @@ public class ADelay extends AudioFilter {
     }
 
     @Override
-    protected void updateMap() {
+    public void updateMap() {
         options.put("delays", String.join("|", delList));
         options.put("all", String.valueOf(all));
     }

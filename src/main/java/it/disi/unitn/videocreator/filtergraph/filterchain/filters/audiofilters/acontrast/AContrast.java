@@ -34,7 +34,7 @@ public class AContrast extends Filter {
     }
 
     @Override
-    protected void updateMap() {
+    public void updateMap() {
         options.put("contrast", String.valueOf(contrast));
     }
 }

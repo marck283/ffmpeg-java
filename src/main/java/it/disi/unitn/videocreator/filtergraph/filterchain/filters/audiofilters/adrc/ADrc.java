@@ -79,7 +79,7 @@ public class ADrc extends AudioFilter {
 
     //To be tested
     @Override
-    protected void updateMap() {
+    public void updateMap() {
         options.put("transfer", transfer);
         options.put("attack", String.valueOf(attack));
         options.put("release", String.valueOf(release));

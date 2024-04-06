@@ -71,7 +71,7 @@ public class AFormat extends AudioFilter {
     }
 
     @Override
-    protected void updateMap() {
+    public void updateMap() {
         options.put("sample_fmts", String.join("|", sample_fmts));
         options.put("sample_rates", String.join("|", sample_rates));
 
