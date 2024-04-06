@@ -196,7 +196,7 @@ public class ACompressor extends AudioFilter {
     }
 
     @Override
-    protected void updateMap() {
+    public void updateMap() {
         options.put("level_in", String.valueOf(levelIn));
         options.put("mode", mode);
         options.put("threshold", String.valueOf(threshold));

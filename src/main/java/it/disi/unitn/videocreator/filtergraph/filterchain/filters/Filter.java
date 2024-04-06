@@ -43,7 +43,7 @@ public abstract class Filter {
     /**
      * Updates the options for the calling Filter instance.
      */
-    protected abstract void updateMap();
+    public abstract void updateMap();
 
     @Override
     public String toString() {

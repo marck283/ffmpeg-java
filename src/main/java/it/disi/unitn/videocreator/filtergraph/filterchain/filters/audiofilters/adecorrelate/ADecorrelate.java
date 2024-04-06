@@ -50,7 +50,7 @@ public class ADecorrelate extends Filter {
     }
 
     @Override
-    protected void updateMap() {
+    public void updateMap() {
         options.put("stages", String.valueOf(stages));
         options.put("seed", String.valueOf(seed));
     }
