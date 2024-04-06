@@ -7,12 +7,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+/**
+ * This class implements FFmpeg's channel layouts.
+ */
 public class ChannelLayout {
 
     private String chID;
 
     private final List<String> chidList;
 
+    /**
+     * The class's constructor.
+     */
     public ChannelLayout() {
         chidList = new ArrayList<>();
     }
@@ -75,6 +81,14 @@ public class ChannelLayout {
             }
             throw new UnsupportedOperationException();
         }
+    }
+
+    /**
+     * Gets the list of channel IDs in this ChannelLayout instance.
+     * @return The list of channel IDs in this ChannelLayout instance
+     */
+    public List<String> getChannels() {
+        return chidList;
     }
 
     @Override

@@ -8,7 +8,16 @@ it.disi.unitn.videocreator.filtergraph
 it.disi.unitn.videocreator.filtergraph.filterchain
 it.disi.unitn.videocreator.filtergraph.filterchain.filters
 it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters
+it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.acompressor
+it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.acontrast
+it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.adecorrelate
+it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.adelay
+it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.adenorm
+it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.adrc
+it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.aformat
+it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.afreqshift
 it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters
+it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.colorcorrect
 it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.format
 it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.scale
 it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.scale.scalingalgs

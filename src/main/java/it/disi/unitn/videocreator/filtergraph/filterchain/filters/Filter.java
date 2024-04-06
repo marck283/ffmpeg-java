@@ -40,6 +40,9 @@ public abstract class Filter {
         options = new LinkedHashMap<>();
     }
 
+    /**
+     * Updates the options for the calling Filter instance.
+     */
     protected abstract void updateMap();
 
     @Override
