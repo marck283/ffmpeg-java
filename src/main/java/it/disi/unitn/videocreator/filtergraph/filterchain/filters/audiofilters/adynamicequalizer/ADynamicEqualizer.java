@@ -4,6 +4,9 @@ import it.disi.unitn.exceptions.InvalidArgumentException;
 import it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.AudioFilter;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * This class implements FFmpeg's "adynamicequalizer" filter.
+ */
 public class ADynamicEqualizer extends AudioFilter {
 
     private int threshold = 0, dfrequency = 1000, tfrequency = 1000, attack = 20, release = 200, ratio = 1, makeup = 0,
