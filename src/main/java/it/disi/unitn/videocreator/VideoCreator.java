@@ -589,7 +589,6 @@ public class VideoCreator {
                 }
 
                 builder.add("-pix_fmt " + pixelFormat);
-                //builder.setCommand(builder.getCommand() + " -pix_fmt " + pixelFormat);
                 if (codecID != null && !codecID.isEmpty()) {
                     if(videoStreamCopy) {
                         //No video filtering allowed when stream copying video
@@ -600,24 +599,30 @@ public class VideoCreator {
                         Scale scale1 = new Scale();
                         VideoSimpleFilterGraph sfg = new VideoSimpleFilterGraph();
                         VideoSimpleFilterChain sfc = new VideoSimpleFilterChain();
+                        String width = "", height = "";
                         if (codecID.equals("h264")) {
                             //h264 (default codec when no value is specified) needs even width and height, so we need to add
                             //this filter in order to divide them by 2.
 
-                            setScaleParams(scale1, alg, "ceil(.5*iw)*2", "ceil(.5*ih)*2", incolmatname,
-                                    outcolmatname, incolrange, outcolrange, evalSize, interlMode, forceOAsRatio, divisibleBy);
+                            width = "ceil(.5*iw)*2";
+                            height = "ceil(.5*ih)*2";
                         } else {
-                            if (videoWidth != 0 && videoHeight != 0) {
-                                setScaleParams(scale1, alg, String.valueOf(videoWidth), String.valueOf(videoHeight),
-                                        incolmatname, outcolmatname, incolrange, outcolrange,
-                                            evalSize, interlMode, forceOAsRatio, divisibleBy);
+                            if (videoWidth > 0 && videoHeight > 0) {
+                                width = String.valueOf(videoWidth);
+                                height = String.valueOf(videoHeight);
                             } else {
-                                //builder.add("-video_size " + videoSizeID);
-
                                 //Ancora da testare
                                 setScaleParamsWithSizeID(scale1, alg, videoSizeID, incolmatname, outcolmatname, incolrange,
                                         outcolrange, evalSize, interlMode, forceOAsRatio, divisibleBy);
                             }
+                        }
+
+                        if(!width.isEmpty()) {
+                            //Width and height are always assigned together, so, if width is not empty, height is also
+                            //not empty.
+                            setScaleParams(scale1, alg, width, height,
+                                    incolmatname, outcolmatname, incolrange, outcolrange,
+                                    evalSize, interlMode, forceOAsRatio, divisibleBy);
                         }
 
                         Format format = setFormat(new Format());
