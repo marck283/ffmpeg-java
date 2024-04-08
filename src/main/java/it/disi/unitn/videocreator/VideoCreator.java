@@ -15,7 +15,7 @@ import it.disi.unitn.videocreator.filtergraph.filterchain.AudioSimpleFilterChain
 import it.disi.unitn.videocreator.filtergraph.filterchain.SimpleFilterChain;
 import it.disi.unitn.videocreator.filtergraph.filterchain.VideoSimpleFilterChain;
 import it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.AudioFilter;
-import it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.adynamicequalizer.ADynamicEqualizer;
+//import it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.adynamicequalizer.ADynamicEqualizer;
 import it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.format.Format;
 import it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.scale.Scale;
 import it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.scale.scalingalgs.ScalingAlgorithm;
@@ -354,42 +354,6 @@ public class VideoCreator {
     }
 
     /**
-     * This method checks if the given size ID is accepted by FFmpeg.
-     *
-     * @param sizeID The given size ID
-     * @return True if the given size ID is accepted by FFmpeg, otherwise false
-     */
-    private boolean checkSizeID(@NotNull String sizeID) {
-        return switch (sizeID) {
-            case "ntsc", "pal", "qntsc", "qpal", "sntsc", "spal", "film", "ntsc-film", "sqcif", "qcif", "cif", "4cif",
-                    "16cif", "qqvga", "qvga", "vga", "svga", "xga", "uxga", "qxga", "sxga", "qsxga", "hsxga", "wvga",
-                    "wxga", "wsxga", "wuxga", "woxga", "wqsxga", "wquxga", "whsxga", "whuxga", "cga", "ega", "hd480",
-                    "hd720", "hd1080", "2k", "2kflat", "2kscope", "4k", "4kflat", "4kscope", "nhd", "hqvga", "wqvga",
-                    "fwqvga", "hvga", "qhd", "2kdci", "4kdci", "uhd2160", "uhd4320" -> true;
-            default -> false;
-        };
-    }
-
-    /**
-     * This method sets the width and height of the resulting video by means of the given video size ID.
-     * See <a href="https://ffmpeg.org/ffmpeg-all.html#Video-size">here</a> for the recognized size IDs.
-     *
-     * @param videoSizeID The given video size ID
-     * @throws InvalidArgumentException if the given video size ID is null or not supported by FFmpeg
-     */
-    public void setVideoSizeID(@NotNull String videoSizeID) throws InvalidArgumentException {
-        if (videoSizeID == null) {
-            throw new InvalidArgumentException("The video size ID should not be null.", "L'ID della proporzione visiva " +
-                    "non deve essere null.");
-        }
-        if (checkSizeID(videoSizeID)) {
-            this.videoSizeID = videoSizeID;
-        } else {
-            throw new InvalidArgumentException("Invalid image resolution", "Risoluzione immagine non valida.");
-        }
-    }
-
-    /**
      * This method sets the quality of the output video.
      *
      * @param quality The quality of the output video
@@ -498,14 +462,72 @@ public class VideoCreator {
      *
      * @param scale The "scale" filter instance
      * @param alg   The ScalingAlgorithm instance
+     * @param width Each frame's width
+     * @param height Each frame's height
+     * @param incolmatname The name of the input color matrix, as described by FFmpeg's documentation of the scaling filter
+     * @param outcolmatname The name of the output color matrix, as described by FFmpeg's documentation of the scaling
+     *                      filter
+     * @param incolrange The input color range
+     * @param outcolrange The output color range
+     * @param evalSize The value that tells when to evaluate the expressions for width and height
+     * @param interlMode The interlacing mode
+     * @param forceOAsRatio A parameter that tells the program whether to force the original aspect ratio
+     * @param divisibleBy An integer that tells the program what the width and height should be divisible by
      * @throws InvalidArgumentException If the given ScalingAlgorithm has an empty string as its name
      */
-    private void setScaleParams(@NotNull Scale scale, @Nullable ScalingAlgorithm alg) throws InvalidArgumentException {
+    private void setScaleParams(@NotNull Scale scale, @Nullable ScalingAlgorithm alg, @NotNull String width, @NotNull String height,
+                                @NotNull String incolmatname, @NotNull String outcolmatname, @NotNull String incolrange,
+                                @NotNull String outcolrange, @NotNull String evalSize, @NotNull String interlMode,
+                                @NotNull String forceOAsRatio, int divisibleBy)
+            throws InvalidArgumentException {
         if(alg != null) {
             scale.setSwsFlags(alg);
         }
-        scale.setSwsDither("auto"); //Valore di default per sws_dither
-        scale.setAlphablend("none"); //valore di default per alphablend
+        scale.setSize(width, height);
+        scale.setInputColorMatrix(incolmatname);
+        scale.setOutColorMatrix(outcolmatname);
+        scale.setInputRange(incolrange);
+        scale.setOutputRange(outcolrange);
+        scale.setEval(evalSize);
+        scale.setInterl(interlMode);
+        scale.forceOriginalAspectRatio(forceOAsRatio);
+        scale.setDivisibleBy(divisibleBy);
+        scale.updateMap();
+    }
+
+    /**
+     * Sets the "scale" filter parameters.
+     *
+     * @param scale The "scale" filter instance
+     * @param alg   The ScalingAlgorithm instance
+     * @param videoSizeID A parameter that sets the video size id according to the FFmpeg documentation on this matter
+     * @param incolmatname The name of the input color matrix, as described by FFmpeg's documentation of the scaling filter
+     * @param outcolmatname The name of the output color matrix, as described by FFmpeg's documentation of the scalingù
+     *                      filter
+     * @param incolrange The input color range
+     * @param outcolrange The output color range
+     * @param evalSize The value that tells when to evaluate the expressions for width and height
+     * @param interlMode The interlacing mode
+     * @param forceOAsRatio A parameter that tells the program whether to force the original aspect ratio
+     * @param divisibleBy An integer that tells the program what the width and height should be divisible by
+     * @throws InvalidArgumentException If the given ScalingAlgorithm has an empty string as its name
+     */
+    private void setScaleParamsWithSizeID(@NotNull Scale scale, @Nullable ScalingAlgorithm alg, @NotNull String videoSizeID,
+                                @NotNull String incolmatname, @NotNull String outcolmatname, @NotNull String incolrange,
+                                @NotNull String outcolrange, @NotNull String evalSize, @NotNull String interlMode,
+                                @NotNull String forceOAsRatio, int divisibleBy) throws InvalidArgumentException {
+        if(alg != null) {
+            scale.setSwsFlags(alg);
+        }
+        scale.setVideoSizeID(videoSizeID);
+        scale.setInputColorMatrix(incolmatname);
+        scale.setOutColorMatrix(outcolmatname);
+        scale.setInputRange(incolrange);
+        scale.setOutputRange(outcolrange);
+        scale.setEval(evalSize);
+        scale.setInterl(interlMode);
+        scale.forceOriginalAspectRatio(forceOAsRatio);
+        scale.setDivisibleBy(divisibleBy);
         scale.updateMap();
     }
 
@@ -513,9 +535,10 @@ public class VideoCreator {
      * Sets the parameters of a Format filter instance.
      * @param format The given Format filter instance
      * @return The given Format filter instance with all parameters set
+     * @throws InvalidArgumentException If the set pixel format is null or an empty string
      */
     @Contract("_ -> param1")
-    private @NotNull Format setFormat(@NotNull Format format) {
+    private @NotNull Format setFormat(@NotNull Format format) throws InvalidArgumentException {
         format.addPixelFormat(pixelFormat);
         if(isOutFullRange) {
             format.addColorRange("pc"); //Full range
@@ -534,11 +557,21 @@ public class VideoCreator {
      *                      in order to extract the audio track from a video; otherwise, it should be set to "true"
      * @param audioFilter The given AudioFilter instance. Can be null
      * @param alg The given scaling algorithm. Can be null
-     * @param colorInFullRange True if the input color range is full, otherwise false
+     * @param incolmatname The name of the input color matrix, as described by FFmpeg's documentation of the scaling filter
+     * @param outcolmatname The name of the output color matrix, as described by FFmpeg's documentation of the scalingù
+     *                      filter
+     * @param incolrange The input color range
+     * @param outcolrange The output color range
+     * @param evalSize The value that tells when to evaluate the expressions for width and height
+     * @param interlMode The interlacing mode
+     * @param forceOAsRatio A parameter that tells the program whether to force the original aspect ratio
+     * @param divisibleBy An integer that tells the program what the width and height should be divisible by
      * @throws InvalidArgumentException if the video width or height or the video size ID field is null
      */
     public void createCommand(boolean videoCreation, @Nullable AudioFilter audioFilter, @Nullable ScalingAlgorithm alg,
-                              boolean colorInFullRange)
+                              @NotNull String incolmatname, @NotNull String outcolmatname, @NotNull String incolrange,
+                              @NotNull String outcolrange, @NotNull String evalSize, @NotNull String interlMode,
+                              @NotNull String forceOAsRatio, int divisibleBy)
             throws InvalidArgumentException {
         if (videoCreation && (videoWidth <= 0 || videoHeight <= 0) && (videoSizeID == null || videoSizeID.isEmpty())) {
             throw new InvalidArgumentException("Either the video size ID is null or an empty string or the video width " +
@@ -563,38 +596,34 @@ public class VideoCreator {
                         builder.add("-c:v copy");
                     } else {
                         builder.add("-c:v " + codecID);
-                        //builder.setCommand(builder.getCommand() + " -c:v " + codecID);
 
-                        //String scale = "scale=";
-                        Scale scale1;
+                        Scale scale1 = new Scale();
                         VideoSimpleFilterGraph sfg = new VideoSimpleFilterGraph();
                         VideoSimpleFilterChain sfc = new VideoSimpleFilterChain();
                         if (codecID.equals("h264")) {
                             //h264 (default codec when no value is specified) needs even width and height, so we need to add
                             //this filter in order to divide them by 2.
-                            scale1 = new Scale("ceil(.5*iw)*2", "ceil(.5*ih)*2", colorInFullRange, isOutFullRange);
-                            setScaleParams(scale1, alg);
 
-                            Format format = setFormat(new Format());
-
-                            sfc.addAllFilters(scale1, format);
-                            sfg.addFilterChain(sfc);
-                            builder.add(sfg.toString());
+                            setScaleParams(scale1, alg, "ceil(.5*iw)*2", "ceil(.5*ih)*2", incolmatname,
+                                    outcolmatname, incolrange, outcolrange, evalSize, interlMode, forceOAsRatio, divisibleBy);
                         } else {
                             if (videoWidth != 0 && videoHeight != 0) {
-                                scale1 = new Scale(String.valueOf(videoWidth), String.valueOf(videoHeight),
-                                        colorInFullRange, isOutFullRange);
-                                setScaleParams(scale1, alg);
-
-                                Format format = setFormat(new Format());
-                                sfc.addAllFilters(scale1, format);
-                                sfg.addFilterChain(sfc);
-
-                                builder.add(sfg.toString());
+                                setScaleParams(scale1, alg, String.valueOf(videoWidth), String.valueOf(videoHeight),
+                                        incolmatname, outcolmatname, incolrange, outcolrange,
+                                            evalSize, interlMode, forceOAsRatio, divisibleBy);
                             } else {
-                                builder.add("-video_size " + videoSizeID);
+                                //builder.add("-video_size " + videoSizeID);
+
+                                //Ancora da testare
+                                setScaleParamsWithSizeID(scale1, alg, videoSizeID, incolmatname, outcolmatname, incolrange,
+                                        outcolrange, evalSize, interlMode, forceOAsRatio, divisibleBy);
                             }
                         }
+
+                        Format format = setFormat(new Format());
+                        sfc.addAllFilters(scale1, format);
+                        sfg.addFilterChain(sfc);
+                        builder.add(sfg.toString());
                     }
                 }
                 if (audioCodec != null && !audioCodec.isEmpty()) {
