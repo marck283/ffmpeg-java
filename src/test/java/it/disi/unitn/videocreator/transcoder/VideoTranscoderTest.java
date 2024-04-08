@@ -42,6 +42,8 @@ class VideoTranscoderTest {
         VideoTranscoder transcoder = builder.newVideoTranscoder("./src/test/resources/input/mp4/002.wav",
                 "./src/test/resources/input/mp4", "002.wmv");
         transcoder.enableAudioExtraction();
+
+        //FLAC supports encoding with 4-32 bits per sample, but encoders only support encoding with 4-24 bits per sample.
         transcoder.setAudioCodec("flac");
 
         ACompressor acomp = new ACompressor();
@@ -49,7 +51,7 @@ class VideoTranscoderTest {
         acomp.setAttack(0.01);
 
         transcoder.createCommand(acomp, null, "auto", "bt601", "auto",
-                "auto", "init", "0", "disable", 0); //Inserire tutti i valori di default mancanti
+                "auto", "init", "0", "disable", 0);
         FFMpeg ffmpeg = builder.build();
         ffmpeg.executeCMD(30L, TimeUnit.MINUTES);
     }
