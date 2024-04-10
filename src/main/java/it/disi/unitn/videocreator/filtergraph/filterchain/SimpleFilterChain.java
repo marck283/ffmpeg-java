@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * This class implements a simple filter chain.
  */
-public abstract class SimpleFilterChain {
+public abstract class SimpleFilterChain extends FilterChain {
 
     /**
      * The list of filters to be used in this filter chain.

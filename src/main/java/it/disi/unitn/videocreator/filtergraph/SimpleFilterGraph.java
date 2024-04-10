@@ -1,6 +1,9 @@
 package it.disi.unitn.videocreator.filtergraph;
 
+import it.disi.unitn.exceptions.InvalidArgumentException;
+import it.disi.unitn.videocreator.filtergraph.filterchain.FilterChain;
 import it.disi.unitn.videocreator.filtergraph.filterchain.SimpleFilterChain;
+import it.disi.unitn.videocreator.filtergraph.filterchain.filters.Filter;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -13,7 +16,7 @@ import java.util.List;
 //NOTA: e' veramente necessario permettere anche alle filter chain per l'audio di entrare a far parte del simple filter
 //graph dei video? Le filter chain audio, infatti, non dovrebbero usare solo i filtri AudioFilter, mentre quelle video
 //solo i filtri VideoFilter?
-public abstract class SimpleFilterGraph {
+public abstract class SimpleFilterGraph extends FilterGraph {
 
     /**
      * The list of SimpleFilterChain instances to be used in this filter graph.
@@ -30,16 +33,28 @@ public abstract class SimpleFilterGraph {
     /**
      * This method adds the given filter chain to the calling instance of this class.
      * @param filterChain The given filter chain
+     * @throws InvalidArgumentException If the given filter chain is not an instance of SimpleFilterChain
      */
-    public void addFilterChain(@NotNull SimpleFilterChain filterChain) {
-        sfcList.add(filterChain);
+    @Override
+    public void addFilterChain(@NotNull FilterChain filterChain) throws InvalidArgumentException {
+        if(!(filterChain instanceof SimpleFilterChain)) {
+            throw new InvalidArgumentException("The given filter chain must be an instance of SimpleFitlerChain.", "La " +
+                    "catena di filtri fornita in input deve essere un'istanza di SimpleFilterChain.");
+        }
+        sfcList.add((SimpleFilterChain) filterChain);
     }
 
     /**
      * This method removes the given filter chain from the calling instance of this class.
      * @param filterChain The given filter chain
+     * @throws InvalidArgumentException If the given filter chain is not an instance of SimpleFilterChain
      */
-    public void removeFilterChain(@NotNull SimpleFilterChain filterChain) {
+    @Override
+    public void removeFilterChain(@NotNull FilterChain filterChain) throws InvalidArgumentException {
+        if(!(filterChain instanceof SimpleFilterChain)) {
+            throw new InvalidArgumentException("The given filter chain must be an instance of SimpleFitlerChain.", "La " +
+                    "catena di filtri fornita in input deve essere un'istanza di SimpleFilterChain.");
+        }
         sfcList.remove(filterChain);
     }
 
