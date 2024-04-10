@@ -5,7 +5,13 @@ import it.disi.unitn.FFMpegBuilder;
 import it.disi.unitn.exceptions.InvalidArgumentException;
 import it.disi.unitn.exceptions.NotEnoughArgumentsException;
 import it.disi.unitn.exceptions.UnsupportedOperatingSystemException;
+import it.disi.unitn.videocreator.filtergraph.AudioSimpleFilterGraph;
+import it.disi.unitn.videocreator.filtergraph.VideoSimpleFilterGraph;
+import it.disi.unitn.videocreator.filtergraph.filterchain.AudioSimpleFilterChain;
+import it.disi.unitn.videocreator.filtergraph.filterchain.VideoSimpleFilterChain;
 import it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.acompressor.ACompressor;
+import it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.format.Format;
+import it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.scale.Scale;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -19,19 +25,31 @@ class VideoTranscoderTest {
         VideoTranscoder transcoder = builder.newVideoTranscoder("./src/test/resources/input/mp4/example.mov",
                 "./src/test/resources/input/mp4", "example.mp4");
         transcoder.enableVideoExtraction();
-        transcoder.setVideoSize(800, 600, "yuv420p", true);
+
+        //transcoder.setVideoSize(800, 600, "yuv420p", true);
         transcoder.setCodecID("mjpeg", true);
         transcoder.setPixelFormat("yuv420p");
         transcoder.setOutFullRange(true); //If using mjpeg and YUV pixel formats, we have to set the color range to full.
         transcoder.setVideoQuality(18);
         transcoder.setAudioCodec("flac");
 
+        Scale scale = new Scale();
+        transcoder.setScaleParams(true, scale, null, "800", "-1", "auto",
+                "bt709", "auto", "auto", "init", "0",
+                "disable", 0);
+        VideoSimpleFilterGraph vsfg = new VideoSimpleFilterGraph();
+        VideoSimpleFilterChain vsfc = new VideoSimpleFilterChain();
+        Format format = transcoder.setFormat(new Format());
+        vsfc.addAllFilters(scale, format);
+        vsfg.addFilterChain(vsfc);
+        transcoder.setVideoSimpleFilterGraph(vsfg);
+
         ACompressor acomp = new ACompressor();
         acomp.setThreshold(0.123);
         acomp.setAttack(0.01);
 
-        transcoder.createCommand(acomp, null, "auto", "bt709", "auto",
-                "auto", "init", "0", "disable", 0);
+        transcoder.createCommand(/*acomp, null, "auto", "bt709", "auto",
+                "auto", "init", "0", "disable", 0*/);
         FFMpeg ffmpeg = builder.build();
         ffmpeg.executeCMD(30L, TimeUnit.MINUTES);
     }
@@ -50,8 +68,14 @@ class VideoTranscoderTest {
         acomp.setThreshold(0.123);
         acomp.setAttack(0.01);
 
-        transcoder.createCommand(acomp, null, "auto", "bt601", "auto",
-                "auto", "init", "0", "disable", 0);
+        AudioSimpleFilterGraph asfg = new AudioSimpleFilterGraph();
+        AudioSimpleFilterChain asfc = new AudioSimpleFilterChain();
+        asfc.addFilter(acomp);
+        asfg.addFilterChain(asfc);
+        transcoder.setAudioSimpleFilterGraph(asfg);
+
+        transcoder.createCommand(/*acomp, null, "auto", "bt601", "auto",
+                "auto", "init", "0", "disable", 0*/);
         FFMpeg ffmpeg = builder.build();
         ffmpeg.executeCMD(30L, TimeUnit.MINUTES);
     }

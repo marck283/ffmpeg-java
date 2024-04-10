@@ -8,13 +8,14 @@ import it.disi.unitn.exceptions.NotEnoughArgumentsException;
 //import org.apache.commons.exec.*;
 import it.disi.unitn.exceptions.UnsupportedOperatingSystemException;
 import it.disi.unitn.videocreator.filtergraph.AudioSimpleFilterGraph;
-import it.disi.unitn.videocreator.filtergraph.SimpleFilterGraph;
+import it.disi.unitn.videocreator.filtergraph.FilterGraph;
+//import it.disi.unitn.videocreator.filtergraph.SimpleFilterGraph;
 import it.disi.unitn.videocreator.filtergraph.VideoSimpleFilterGraph;
 //import it.disi.unitn.videocreator.filtergraph.filterchain.SimpleFilterChain;
-import it.disi.unitn.videocreator.filtergraph.filterchain.AudioSimpleFilterChain;
-import it.disi.unitn.videocreator.filtergraph.filterchain.SimpleFilterChain;
-import it.disi.unitn.videocreator.filtergraph.filterchain.VideoSimpleFilterChain;
-import it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.AudioFilter;
+//import it.disi.unitn.videocreator.filtergraph.filterchain.AudioSimpleFilterChain;
+//import it.disi.unitn.videocreator.filtergraph.filterchain.SimpleFilterChain;
+//import it.disi.unitn.videocreator.filtergraph.filterchain.VideoSimpleFilterChain;
+//import it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.AudioFilter;
 //import it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.adynamicequalizer.ADynamicEqualizer;
 import it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.format.Format;
 import it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.scale.Scale;
@@ -27,7 +28,7 @@ import org.apache.commons.lang3.SystemUtils;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.owasp.encoder.Encode;
+//import org.owasp.encoder.Encode;
 
 //import java.awt.*;
 import java.io.*;
@@ -60,7 +61,7 @@ public class VideoCreator {
 
     private int videoQuality = 0; //Quality of output video. For "x264", sane values should be between 18 and 28
 
-    private int videoWidth = 0, videoHeight = 0;
+    //private int videoWidth = 0, videoHeight = 0;
 
     private int startInstant; //Starting instant of the new video with respect to the original video
 
@@ -68,11 +69,15 @@ public class VideoCreator {
 
     private String videoBitRate; //Video track's bitrate (in Kbit/s or Mbit/s)
 
-    private String videoSizeID = "", pixelFormat, execFile = "";
+    //private String videoSizeID = "";
+
+    private String pixelFormat, execFile = "";
 
     private boolean isOutFullRange, videoStreamCopy, audioStreamCopy;
 
     private final Locale l;
+
+    private FilterGraph vfg, afg, cfg; //Video, audio and complex filter graphs
 
     /**
      * The constructor of this class.
@@ -314,7 +319,7 @@ public class VideoCreator {
         audioCodec = ac;
     }
 
-    /**
+    /*/**
      * This method checks if the given dimensions are accepted by FFmpeg.
      *
      * @param width   The width
@@ -325,7 +330,7 @@ public class VideoCreator {
      * @throws UnsupportedOperatingSystemException If the Operating System the user is currently operating on is not yet
      *                                             supported by this library
      */
-    private boolean checkSize(int width, int height, @NotNull String pix_fmt) throws NotEnoughArgumentsException, UnsupportedOperatingSystemException {
+    /*private boolean checkSize(int width, int height, @NotNull String pix_fmt) throws NotEnoughArgumentsException, UnsupportedOperatingSystemException {
         if (pix_fmt == null || pix_fmt.isEmpty()) {
             throw new NotEnoughArgumentsException("The pixel format must neither be null nor an empty string.",
                     "Il formato dei pixel non puo' essere null o una stringa vuota.");
@@ -351,7 +356,7 @@ public class VideoCreator {
         executor.setStreamHandler(streamHandler);
         ExecutorResHandler execResHandler = new ExecutorResHandler();
         return executeCML(executor, execResHandler, cmdLine);
-    }
+    }*/
 
     /**
      * This method sets the quality of the output video.
@@ -362,7 +367,7 @@ public class VideoCreator {
         videoQuality = quality;
     }
 
-    /**
+    /*/**
      * This method sets the size of the resulting video by means of the given width and height.
      *
      * @param width       The given width
@@ -375,7 +380,7 @@ public class VideoCreator {
      * @throws UnsupportedOperatingSystemException If the Operating System the user is currently operating on is not yet
      *                                             supported by this library
      */
-    public void setVideoSize(int width, int height, @NotNull String pix_fmt, boolean development) throws InvalidArgumentException,
+    /*public void setVideoSize(int width, int height, @NotNull String pix_fmt, boolean development) throws InvalidArgumentException,
             NotEnoughArgumentsException, UnsupportedOperatingSystemException {
         if (width <= 0 || height <= 0) {
             throw new InvalidArgumentException("The given width or height parameter must be a strictly positive " +
@@ -386,7 +391,21 @@ public class VideoCreator {
             videoWidth = width;
             videoHeight = height;
         }
-    }
+    }*/
+
+    /*/**
+     * Sets the video size id.
+     * @param videoSizeID The given video size id
+     * @throws InvalidArgumentException If the given video size id is null or an empty string
+     */
+    /*public void setVideoSizeID(@NotNull String videoSizeID) throws InvalidArgumentException {
+        if(videoSizeID == null || videoSizeID.isEmpty()) {
+            throw new InvalidArgumentException("The video size ID cannot be null or an empty string.", "L'id della dimensione " +
+                    "del video non puo' essere null o una stringa vuota.");
+        }
+
+        this.videoSizeID = videoSizeID;
+    }*/
 
     /**
      * This method sets the audio track&rsquo;s bitrate (in Kbit/s).
@@ -475,15 +494,15 @@ public class VideoCreator {
      * @param divisibleBy An integer that tells the program what the width and height should be divisible by
      * @throws InvalidArgumentException If the given ScalingAlgorithm has an empty string as its name
      */
-    private void setScaleParams(@NotNull Scale scale, @Nullable ScalingAlgorithm alg, @NotNull String width, @NotNull String height,
+    public void setScaleParams(boolean development, @NotNull Scale scale, @Nullable ScalingAlgorithm alg, @NotNull String width, @NotNull String height,
                                 @NotNull String incolmatname, @NotNull String outcolmatname, @NotNull String incolrange,
                                 @NotNull String outcolrange, @NotNull String evalSize, @NotNull String interlMode,
                                 @NotNull String forceOAsRatio, int divisibleBy)
-            throws InvalidArgumentException {
+            throws InvalidArgumentException, UnsupportedOperatingSystemException, NotEnoughArgumentsException {
         if(alg != null) {
             scale.setSwsFlags(alg);
         }
-        scale.setSize(width, height);
+        scale.setSize(development, width, height, pixelFormat);
         scale.setInputColorMatrix(incolmatname);
         scale.setOutColorMatrix(outcolmatname);
         scale.setInputRange(incolrange);
@@ -512,7 +531,7 @@ public class VideoCreator {
      * @param divisibleBy An integer that tells the program what the width and height should be divisible by
      * @throws InvalidArgumentException If the given ScalingAlgorithm has an empty string as its name
      */
-    private void setScaleParamsWithSizeID(@NotNull Scale scale, @Nullable ScalingAlgorithm alg, @NotNull String videoSizeID,
+    public void setScaleParamsWithSizeID(@NotNull Scale scale, @Nullable ScalingAlgorithm alg, @NotNull String videoSizeID,
                                 @NotNull String incolmatname, @NotNull String outcolmatname, @NotNull String incolrange,
                                 @NotNull String outcolrange, @NotNull String evalSize, @NotNull String interlMode,
                                 @NotNull String forceOAsRatio, int divisibleBy) throws InvalidArgumentException {
@@ -538,7 +557,7 @@ public class VideoCreator {
      * @throws InvalidArgumentException If the set pixel format is null or an empty string
      */
     @Contract("_ -> param1")
-    private @NotNull Format setFormat(@NotNull Format format) throws InvalidArgumentException {
+    public @NotNull Format setFormat(@NotNull Format format) throws InvalidArgumentException {
         format.addPixelFormat(pixelFormat);
         if(isOutFullRange) {
             format.addColorRange("pc"); //Full range
@@ -551,33 +570,94 @@ public class VideoCreator {
     }
 
     /**
-     * This method creates the command that, when run, will create the output video.
+     * Sets the video simple filter graph.
+     * @param vfg The given video simple filter graph
+     * @throws InvalidArgumentException If the given video simple filter graph is null or not an instance of VideoSimpleFilterGraph
+     * or the complex filter graph is not null
+     */
+    public void setVideoSimpleFilterGraph(@NotNull FilterGraph vfg) throws InvalidArgumentException {
+        if(vfg == null || !(vfg instanceof VideoSimpleFilterGraph)) {
+            throw new InvalidArgumentException("The video filter graph must be an instance of VideoSimpleFilterGraph.",
+                    "Il grafo del filtro video deve essere un'istanza di VideoSimpleFilterGraph.");
+        }
+
+        if(cfg != null) {
+            throw new InvalidArgumentException("The complex filter graph must be null in order to set the video simple " +
+                    "filter graph.", "Il grafo complesso dei filtri deve essere null per impostare quello semplice dei " +
+                    "filtri video.");
+        }
+
+        this.vfg = vfg;
+    }
+
+    /**
+     * Sets the audio simple filter graph
+     * @param afg The given audio simple filter graph
+     * @throws InvalidArgumentException If the given audio simple filter graph is null or not an instance of AudioSimpleFilterGraph
+     * or the complex filter graph is not null
+     */
+    public void setAudioSimpleFilterGraph(@NotNull FilterGraph afg) throws InvalidArgumentException {
+        if(afg == null || !(afg instanceof AudioSimpleFilterGraph)) {
+            throw new InvalidArgumentException("The audio filter graph must be an instance of AudioSimpleFilterGraph.",
+                    "Il grafo del filtro audio deve essere un'istanza di AudioSimpleFilterGraph.");
+        }
+
+        if(cfg != null) {
+            throw new InvalidArgumentException("The complex filter graph must be null in order to set the audio simple " +
+                    "filter graph.", "Il grafo complesso dei filtri deve essere null per poter impostare il grafo semplice " +
+                    "dei filtri audio.");
+        }
+
+        this.afg = afg;
+    }
+
+    /**
+     * Sets the complex filter graph.
+     * @param cfg The given complex filter graph
+     * @throws InvalidArgumentException If the given complex filter graph is null or the video or audio filter graphs are
+     * not null
+     */
+    public void setComplexFilterGraph(@NotNull FilterGraph cfg) throws InvalidArgumentException {
+        if(cfg == null) {
+            throw new InvalidArgumentException("The given complex filter graph cannot be null.", "Il grafo dei filtri " +
+                    "non puo' essere null.");
+        }
+        if(vfg != null || afg != null) {
+            throw new InvalidArgumentException("The video and audio filter graphs must be null in order to set the complex " +
+                    "filter graph.", "I grafi dei filtri video e audio devono essere null per poter impostare quello complesso.");
+        }
+        this.cfg = cfg;
+    }
+
+    /**
+     * This method creates the command that, when run, will create the output video. WARNING: all needed filters, filter
+     * chains and filter graphs must be set BEFORE calling this method.
      * @param videoCreation A boolean parameter that tells the program if the user wants to create a video. This flag should
      *                      be set to "false" only when the user is calling this method through {@code VideoTranscoder.createCommand()}
      *                      in order to extract the audio track from a video; otherwise, it should be set to "true"
-     * @param audioFilter The given AudioFilter instance. Can be null
-     * @param alg The given scaling algorithm. Can be null
-     * @param incolmatname The name of the input color matrix, as described by FFmpeg's documentation of the scaling filter
-     * @param outcolmatname The name of the output color matrix, as described by FFmpeg's documentation of the scalingù
-     *                      filter
-     * @param incolrange The input color range
-     * @param outcolrange The output color range
-     * @param evalSize The value that tells when to evaluate the expressions for width and height
-     * @param interlMode The interlacing mode
-     * @param forceOAsRatio A parameter that tells the program whether to force the original aspect ratio
-     * @param divisibleBy An integer that tells the program what the width and height should be divisible by
-     * @throws InvalidArgumentException if the video width or height or the video size ID field is null
+     //* @param audioFilter The given AudioFilter instance. Can be null
+     //* @param alg The given scaling algorithm. Can be null
+     //* @param incolmatname The name of the input color matrix, as described by FFmpeg's documentation of the scaling filter
+     //* @param outcolmatname The name of the output color matrix, as described by FFmpeg's documentation of the scaling
+     //*                      filter
+     //* @param incolrange The input color range
+     //* @param outcolrange The output color range
+     //* @param evalSize The value that tells when to evaluate the expressions for width and height
+     //* @param interlMode The interlacing mode
+     //* @param forceOAsRatio A parameter that tells the program whether to force the original aspect ratio
+     //* @param divisibleBy An integer that tells the program what the width and height should be divisible by
+     //* @throws InvalidArgumentException if the video width or height or the video size ID field is null
      */
-    public void createCommand(boolean videoCreation, @Nullable AudioFilter audioFilter, @Nullable ScalingAlgorithm alg,
+    public void createCommand(boolean videoCreation/*, @Nullable AudioFilter audioFilter, @Nullable ScalingAlgorithm alg,
                               @NotNull String incolmatname, @NotNull String outcolmatname, @NotNull String incolrange,
                               @NotNull String outcolrange, @NotNull String evalSize, @NotNull String interlMode,
-                              @NotNull String forceOAsRatio, int divisibleBy)
-            throws InvalidArgumentException {
-        if (videoCreation && (videoWidth <= 0 || videoHeight <= 0) && (videoSizeID == null || videoSizeID.isEmpty())) {
+                              @NotNull String forceOAsRatio, int divisibleBy*/)
+            /*throws InvalidArgumentException*/ {
+        /*if (videoCreation && (videoWidth <= 0 || videoHeight <= 0) && (videoSizeID == null || videoSizeID.isEmpty())) {
             throw new InvalidArgumentException("Either the video size ID is null or an empty string or the video width " +
                     "or height are less than or equal to 0.", "Si e' verificato un errore: o la proporzione di ogni frame " +
                     "e' null o una stringa vuota, o l'ampiezza o l'altezza sono minori o uguali a 0.");
-        } else {
+        } else {*/
             try {
                 builder.add("-r " + frameRate);
 
@@ -588,7 +668,7 @@ public class VideoCreator {
                     pixelFormat = "yuv420p";
                 }
 
-                builder.add("-pix_fmt " + pixelFormat);
+                //builder.add("-pix_fmt " + pixelFormat);
                 if (codecID != null && !codecID.isEmpty()) {
                     if(videoStreamCopy) {
                         //No video filtering allowed when stream copying video
@@ -596,7 +676,7 @@ public class VideoCreator {
                     } else {
                         builder.add("-c:v " + codecID);
 
-                        Scale scale1 = new Scale();
+                        /*Scale scale1 = new Scale();
                         VideoSimpleFilterGraph sfg = new VideoSimpleFilterGraph();
                         VideoSimpleFilterChain sfc = new VideoSimpleFilterChain();
                         String width = "", height = "";
@@ -625,10 +705,14 @@ public class VideoCreator {
                                     evalSize, interlMode, forceOAsRatio, divisibleBy);
                         }
 
+                        //All needed filters must be added by the users to this library
                         Format format = setFormat(new Format());
                         sfc.addAllFilters(scale1, format);
                         sfg.addFilterChain(sfc);
-                        builder.add(sfg.toString());
+                        builder.add(sfg.toString());*/
+                        if(vfg != null) {
+                            builder.add(vfg.toString());
+                        }
                     }
                 }
                 if (audioCodec != null && !audioCodec.isEmpty()) {
@@ -638,14 +722,21 @@ public class VideoCreator {
                     } else {
                         builder.add("-c:a " + audioCodec);
 
-                        if(audioFilter != null) {
+                        /*if(audioFilter != null) {
                             SimpleFilterGraph sfg = new AudioSimpleFilterGraph();
                             SimpleFilterChain sfc = new AudioSimpleFilterChain();
                             sfc.addFilter(audioFilter);
                             sfg.addFilterChain(sfc);
                             builder.add(sfg.toString());
+                        }*/
+
+                        if(afg != null) {
+                            builder.add(afg.toString());
                         }
                     }
+                }
+                if(cfg != null) {
+                    builder.add(cfg.toString());
                 }
                 if (videoBitRate != null && !videoBitRate.isEmpty()) {
                     builder.add("-b:v " + videoBitRate);
@@ -668,6 +759,6 @@ public class VideoCreator {
                 //ex.printStackTrace();
                 System.exit(1);
             }
-        }
+        //}
     }
 }

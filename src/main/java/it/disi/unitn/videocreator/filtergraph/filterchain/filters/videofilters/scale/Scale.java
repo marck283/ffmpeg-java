@@ -1,11 +1,22 @@
 package it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.scale;
 
 import it.disi.unitn.exceptions.InvalidArgumentException;
+import it.disi.unitn.exceptions.NotEnoughArgumentsException;
+import it.disi.unitn.exceptions.UnsupportedOperatingSystemException;
+import it.disi.unitn.videocreator.ExecutorResHandler;
 import it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.VideoFilter;
 import it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.scale.scalingalgs.ScalingAlgorithm;
+import org.apache.commons.exec.CommandLine;
+import org.apache.commons.exec.DefaultExecutor;
+import org.apache.commons.exec.PumpStreamHandler;
+import org.apache.commons.lang3.SystemUtils;
 import org.jetbrains.annotations.NotNull;
+import org.owasp.encoder.Encode;
 
+import java.io.IOException;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 /**
  * This class implements the "scale" video filter.
@@ -51,18 +62,94 @@ public class Scale extends VideoFilter {
     }
 
     /**
+     * This method executes the given Command Line command.
+     *
+     * @param executor       A DefaultExecutor instance
+     * @param execResHandler An ExecutorResHandler instance
+     * @param cmdline        A CommandLine instance
+     * @return True if the CommandLine instance has a field "value" whose value is equal to zero, otherwise false
+     */
+    private boolean executeCML(@NotNull DefaultExecutor executor, @NotNull ExecutorResHandler execResHandler,
+                               @NotNull CommandLine cmdline) {
+        try {
+            executor.execute(cmdline, execResHandler);
+            Thread t1 = new Thread(() -> {
+                try {
+                    execResHandler.doWait();
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            });
+            t1.start();
+            t1.join();
+
+            int val = execResHandler.getValue();
+            execResHandler.setValue(0);
+
+            Locale l = Locale.getDefault();
+            if (val == 0) {
+                if (l == Locale.ITALY || l == Locale.ITALIAN) {
+                    System.err.println("Questo codec non e' supportato dall'installazione di FFmpeg presente in questo sistema. " +
+                            "Si prega di riprovare con un altro codec.");
+                } else {
+                    System.err.println("This codec is not supported by your installation of FFmpeg. Please try another one.");
+                }
+                return false;
+            }
+            return true;
+        } catch (IOException | InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * This method checks if the given dimensions are accepted by FFmpeg.
+     *
+     * @param width   The width
+     * @param height  The height
+     * @param pix_fmt The pixel format used in the video
+     * @return True if the given dimensions are accepted, false otherwise
+     * @throws NotEnoughArgumentsException         If the pixel format is null or an empty string
+     * @throws UnsupportedOperatingSystemException If the Operating System the user is currently operating on is not yet
+     *                                             supported by this library
+     */
+    private boolean checkSize(@NotNull String width, @NotNull String height, @NotNull String pix_fmt) throws NotEnoughArgumentsException, UnsupportedOperatingSystemException {
+        if (pix_fmt == null || pix_fmt.isEmpty()) {
+            throw new NotEnoughArgumentsException("The pixel format must neither be null nor an empty string.",
+                    "Il formato dei pixel non puo' essere null o una stringa vuota.");
+        }
+        CommandLine cmdLine;
+        Map<String, String> m = new HashMap<>();
+        m.put("width", width);
+        m.put("height", height);
+        pix_fmt = Encode.forJava(pix_fmt);
+        m.put("pix_fmt", pix_fmt);
+        if (SystemUtils.IS_OS_LINUX) {
+            cmdLine = CommandLine.parse("./src/ffcodec/bin/linux/checkSize/main ${width} ${height} ${pix_fmt}", m);
+        } else {
+            if (SystemUtils.IS_OS_WINDOWS) {
+                cmdLine = CommandLine.parse("./src/ffcodec/bin/windows/checkSize.exe ${width} ${height} ${pix_fmt}",
+                        m);
+            } else {
+                throw new UnsupportedOperatingSystemException();
+            }
+        }
+        PumpStreamHandler streamHandler = new PumpStreamHandler();
+        DefaultExecutor executor = DefaultExecutor.builder().get();
+        executor.setStreamHandler(streamHandler);
+        ExecutorResHandler execResHandler = new ExecutorResHandler();
+        return executeCML(executor, execResHandler, cmdLine);
+    }
+
+    /**
      * This method sets the width and height of the video.
      * @param width The video's width
      * @param height The video's height
      * @throws InvalidArgumentException If the video's with or height is null or an empty string
      * @throws UnsupportedOperationException If the video's size id is already set
      */
-    public void setSize(@NotNull String width, @NotNull String height) throws InvalidArgumentException, UnsupportedOperationException {
-        if(checkNullOrEmpty(width)) {
-            throw new InvalidArgumentException("The video width cannot be null or an empty string.", "L'ampiezza dell'immagine " +
-                    "non puo' essere null o una stringa vuota.");
-        }
-
+    public void setSize(boolean development, @NotNull String width, @NotNull String height, @NotNull String pix_fmt)
+            throws InvalidArgumentException, UnsupportedOperationException, UnsupportedOperatingSystemException, NotEnoughArgumentsException {
         if(videoSizeID != null && !videoSizeID.isEmpty()) {
             Locale l = Locale.getDefault();
             if(l == Locale.ITALIAN || l == Locale.ITALY) {
@@ -74,13 +161,20 @@ public class Scale extends VideoFilter {
             throw new UnsupportedOperationException();
         }
 
+        if(checkNullOrEmpty(width)) {
+            throw new InvalidArgumentException("The video width cannot be null or an empty string.", "L'ampiezza dell'immagine " +
+                    "non puo' essere null o una stringa vuota.");
+        }
+
         if(checkNullOrEmpty(height)) {
             throw new InvalidArgumentException("The video height cannot be null or an empty string.", "L'altezza dell'immagine " +
                     "non puo' essere null o una stringa vuota.");
         }
 
-        this.width = width;
-        this.height = height;
+        if (!development || checkSize(width, height, pix_fmt)) {
+            this.width = width;
+            this.height = height;
+        }
     }
 
     /**
@@ -205,15 +299,13 @@ public class Scale extends VideoFilter {
             default -> throw new InvalidArgumentException("The parameter given to this method must have a value recognizable " +
                     "by FFmpeg.", "Il parametro fornito a questo metodo deve avere un valore riconoscibile da FFmpeg.");
         }
-
-        force_original_aspect_ratio = val;
     }
 
     /**
      * Sets the integer by which the width and the height must be divisible.
      * @param val The given integer
      */
-    public void setDivisibleBy(int val) throws InvalidArgumentException {
+    public void setDivisibleBy(int val) {
         if(val > 0) {
             force_divisible_by = val;
         }
