@@ -4,10 +4,12 @@ import it.disi.unitn.FFMpegBuilder;
 import it.disi.unitn.exceptions.InvalidArgumentException;
 import it.disi.unitn.exceptions.NotEnoughArgumentsException;
 import it.disi.unitn.videocreator.VideoCreator;
+/*import it.disi.unitn.videocreator.filtergraph.FilterGraph;
 import it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.AudioFilter;
-import it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.scale.scalingalgs.ScalingAlgorithm;
+import it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.scale.Scale;
+import it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.scale.scalingalgs.ScalingAlgorithm;*/
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+//import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
@@ -137,20 +139,21 @@ public class VideoTranscoder extends VideoCreator {
     /**
      * This method will create the FFmpeg command which can then be used to run the FFmpeg process and produce the desired
      * result.
-     * @param audioFilter The given audio filter. Can be null
-     * @param alg The given scaling algorithm. Can be null
-     * @param outcolmatname The name of the output color matrix according to the FFmpeg documentation
+     //* @param audioFilter The given audio filter. Can be null
+     //* @param alg The given scaling algorithm. Can be null
+     //* @param outcolmatname The name of the output color matrix according to the FFmpeg documentation
      * @throws InvalidArgumentException If either the user wants to stream-copy the audio or video track or to extract the
      * video track (therefore creating a new video) and the video size ID or the width and the height parameters
      * are not set accordingly
      */
-    public void createCommand(@Nullable AudioFilter audioFilter, @Nullable ScalingAlgorithm alg, @NotNull String incolmatname,
+    public void createCommand(/*@Nullable AudioFilter audioFilter, @Nullable ScalingAlgorithm alg, @NotNull String width,
+                              @NotNull String height, @NotNull String incolmatname,
                               @NotNull String outcolmatname, @NotNull String incolrange, @NotNull String outcolrange,
                               @NotNull String evalSize, @NotNull String interlMode, @NotNull String forceOAsRatio,
-                              int divisibleBy)
+                              int divisibleBy*/)
             throws InvalidArgumentException {
-        super.createCommand(videoStreamCopy || extractVideo || audioStreamCopy, audioFilter, alg, incolmatname,
-                outcolmatname, incolrange, outcolrange, evalSize, interlMode, forceOAsRatio, divisibleBy);
+        super.createCommand(videoStreamCopy || extractVideo || audioStreamCopy/*, audioFilter, alg, incolmatname,
+                outcolmatname, incolrange, outcolrange, evalSize, interlMode, forceOAsRatio, divisibleBy*/);
 
         try {
             if(videoStreamCopy) {
