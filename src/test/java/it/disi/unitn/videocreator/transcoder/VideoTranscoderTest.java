@@ -22,8 +22,8 @@ class VideoTranscoderTest {
     @Test
     void createCommand() throws NotEnoughArgumentsException, IOException, InvalidArgumentException, UnsupportedOperatingSystemException {
         FFMpegBuilder builder = new FFMpegBuilder("ffmpeg");
-        VideoTranscoder transcoder = builder.newVideoTranscoder("./src/test/resources/input/mp4/example.mov",
-                "./src/test/resources/input/mp4", "example.mp4");
+        VideoTranscoder transcoder = builder.newVideoTranscoder("./src/test/resources/input/mp4/example.mov");
+        transcoder.addInput("./src/test/resources/input/mp4/002.mp4");
         transcoder.enableVideoExtraction();
 
         //transcoder.setVideoSize(800, 600, "yuv420p", true);
@@ -31,10 +31,9 @@ class VideoTranscoderTest {
         transcoder.setPixelFormat("yuv420p");
         transcoder.setOutFullRange(true); //If using mjpeg and YUV pixel formats, we have to set the color range to full.
         transcoder.setVideoQuality(18);
-        transcoder.setAudioCodec("flac");
 
         Scale scale = new Scale();
-        transcoder.setScaleParams(true, scale, null, "800", "-1", "auto",
+        transcoder.setScaleParams(true, scale, null, "2048", "1920", "auto",
                 "bt709", "auto", "auto", "init", "0",
                 "disable", 0);
         VideoSimpleFilterGraph vsfg = new VideoSimpleFilterGraph();
@@ -43,10 +42,6 @@ class VideoTranscoderTest {
         vsfc.addAllFilters(scale, format);
         vsfg.addFilterChain(vsfc);
         transcoder.setVideoSimpleFilterGraph(vsfg);
-
-        ACompressor acomp = new ACompressor();
-        acomp.setThreshold(0.123);
-        acomp.setAttack(0.01);
 
         transcoder.createCommand(/*acomp, null, "auto", "bt709", "auto",
                 "auto", "init", "0", "disable", 0*/);
@@ -57,8 +52,8 @@ class VideoTranscoderTest {
     @Test
     void createCommandForAudio() throws NotEnoughArgumentsException, InvalidArgumentException, IOException {
         FFMpegBuilder builder = new FFMpegBuilder("ffmpeg");
-        VideoTranscoder transcoder = builder.newVideoTranscoder("./src/test/resources/input/mp4/002.wav",
-                "./src/test/resources/input/mp4", "002.wmv");
+        VideoTranscoder transcoder = builder.newVideoTranscoder("./src/test/resources/input/mp4/002.wav");
+        transcoder.addInput("./src/test/resources/input/mp4/002.wmv");
         transcoder.enableAudioExtraction();
 
         //FLAC supports encoding with 4-32 bits per sample, but encoders only support encoding with 4-24 bits per sample.

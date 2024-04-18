@@ -8,7 +8,7 @@ import it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.A
  */
 public class ADynamicSmooth extends AudioFilter {
 
-    private long sensitivity = 2L, basefreq = 22050L;
+    private long sensitivity, basefreq;
 
     /**
      * This class's constructor.
@@ -17,6 +17,8 @@ public class ADynamicSmooth extends AudioFilter {
      */
     public ADynamicSmooth() throws InvalidArgumentException {
         super("adynamicsmooth");
+        sensitivity = 2L;
+        basefreq = 22050L;
     }
 
     /**

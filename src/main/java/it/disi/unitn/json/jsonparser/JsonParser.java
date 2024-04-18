@@ -10,6 +10,7 @@ import java.io.Reader;
  * Classe wrapper per il parser JSON di Google.
  */
 public class JsonParser {
+
     private final JsonObject obj;
 
     /**

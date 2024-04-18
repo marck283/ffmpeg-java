@@ -8,9 +8,9 @@ import it.disi.unitn.videocreator.filtergraph.filterchain.filters.Filter;
  */
 public class ADecorrelate extends Filter {
 
-    private int stages = 6;
+    private int stages;
 
-    private long seed = -1;
+    private long seed;
 
     /**
      * This class's constructor. Constructs a new filter (whether video or audio).
@@ -19,6 +19,8 @@ public class ADecorrelate extends Filter {
      */
     public ADecorrelate() throws InvalidArgumentException {
         super("adecorrelate");
+        stages = 6;
+        seed = -1;
     }
 
     /**

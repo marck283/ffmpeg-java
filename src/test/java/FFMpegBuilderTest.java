@@ -20,11 +20,11 @@ class FFMpegBuilderTest {
     @Test
     void setVideoFrameSize() throws NotEnoughArgumentsException, IOException, InvalidArgumentException, UnsupportedOperatingSystemException {
         FFMpegBuilder builder = new FFMpegBuilder("ffmpeg");
-        VideoCreator vc = builder.newVideoCreator("./src/test/resources/input/mp4/000-1.mp4",
-                "./src/test/resources/input/mp4", "000.mp4");
-        builder.addInput("./src/test/resources/input/mp4/000.mp4");
+        VideoCreator vc = builder.newVideoCreator("./src/test/resources/input/mp4/000-1.mp4");
+        vc.addInput("./src/test/resources/input/mp4/000.mp4");
         //vc.setVideoSize(250, 200, "yuvj420p", true);
 
+        vc.setCodecID("mjpeg", true);
         vc.setPixelFormat("yuvj420p");
 
         Scale scale = new Scale();
@@ -37,12 +37,12 @@ class FFMpegBuilderTest {
         vsfc.addAllFilters(scale, format);
         vsfg.addFilterChain(vsfc);
         vc.setVideoSimpleFilterGraph(vsfg);
+        vc.createCommand();
 
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         System.out.println("WIDTH: " + screenSize.getWidth());
         System.out.println("HEIGHT: " + screenSize.getHeight());
 
-        builder.addOutput("./src/test/resources/input/mp4/000-1.mp4");
         FFMpeg ffmpeg = builder.build();
         ffmpeg.executeCMD(1L, TimeUnit.MINUTES);
     }

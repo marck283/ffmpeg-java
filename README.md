@@ -1,5 +1,10 @@
 # ffmpeg-java
-This repository holds an implementation of a wrapper for FFmpeg in Java. In order to work properly, however, the user needs to install FFmpeg and give this library the path to the location at which it was installed.
+This repository holds an implementation of a wrapper for FFmpeg in Java. 
+In order to work properly, however, the user needs to install FFmpeg 
+and give this library the path to the location at which it was 
+installed. The command can be either a path to FFmpeg or a simple 
+
+    ffmpeg
 
 # Copyright notice
 Copyright 2024 Marco Lasagna

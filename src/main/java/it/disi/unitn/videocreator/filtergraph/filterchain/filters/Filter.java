@@ -15,7 +15,7 @@ public abstract class Filter {
     /**
      * The set of options to be used in the filter.
      */
-    protected Map<String, String> options;
+    protected final Map<String, String> options;
 
     /**
      * This method chcks if the given parameter is null or an empty string.

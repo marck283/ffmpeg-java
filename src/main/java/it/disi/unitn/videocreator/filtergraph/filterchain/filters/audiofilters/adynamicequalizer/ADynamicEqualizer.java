@@ -2,6 +2,7 @@ package it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.
 
 import it.disi.unitn.exceptions.InvalidArgumentException;
 import it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.AudioFilter;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -9,12 +10,117 @@ import org.jetbrains.annotations.NotNull;
  */
 public class ADynamicEqualizer extends AudioFilter {
 
-    private int threshold = 0, dfrequency = 1000, tfrequency = 1000, attack = 20, release = 200, ratio = 1, makeup = 0,
-    range = 50;
+    enum Mode { LISTEN, CUTBELOW, CUTABOVE, BOOSTBELOW, BOOSTABOVE;
+        @Contract(pure = true)
+        @Override
+        public @NotNull String toString() {
+            switch(this) {
+                case LISTEN -> {
+                    return "listen";
+                }
+                case CUTABOVE -> {
+                    return "cutabove";
+                }
+                case BOOSTBELOW -> {
+                    return "boostbelow";
+                }
+                case BOOSTABOVE -> {
+                    return "boostabove";
+                }
+                default -> {
+                    return "cutbelow";
+                }
+            }
+        }
+    }
 
-    private double dqfactor = 1.0, tqfactor = 1.0;
+    enum DFtype { BANDPASS, LOWPASS, HIGHPASS, PEAK;
+        @Override
+        public @NotNull String toString() {
+            switch(this) {
+                case LOWPASS -> {
+                    return "lowpass";
+                }
+                case HIGHPASS -> {
+                    return "highpass";
+                }
+                case PEAK -> {
+                    return "peak";
+                }
+                default -> {
+                    return "bandpass";
+                }
+            }
+        }
+    }
 
-    private String mode = "cutbelow", dftype = "bandpass", tftype = "bell", auto = "disabled", precision = "auto";
+    enum TFtype { BELL, LOWSHELF, HIGHSHELF;
+        @Override
+        public @NotNull String toString() {
+            switch(this) {
+                case LOWSHELF -> {
+                    return "lowshelf";
+                }
+                case HIGHSHELF -> {
+                    return "highshelf";
+                }
+                default -> {
+                    return "bell";
+                }
+            }
+        }
+    }
+
+    enum Auto { DISABLED, OFF, ON, ADAPTIVE;
+        @Override
+        public @NotNull String toString() {
+            switch(this) {
+                case OFF -> {
+                    return "off";
+                }
+                case ON -> {
+                    return "on";
+                }
+                case ADAPTIVE -> {
+                    return "adaptive";
+                }
+                default -> {
+                    return "disabled";
+                }
+            }
+        }
+    }
+
+    enum Precision { AUTO, FLOAT, DOUBLE;
+        @Override
+        public @NotNull String toString() {
+            switch(this) {
+                case FLOAT -> {
+                    return "float";
+                }
+                case DOUBLE -> {
+                    return "double";
+                }
+                default -> {
+                    return "auto";
+                }
+            }
+        }
+    }
+
+    private int threshold, dfrequency, tfrequency, attack, release, ratio, makeup, range;
+
+    private double dqfactor, tqfactor;
+
+    private Mode mode;
+
+    private DFtype dftype;
+
+    private TFtype tftype;
+
+    private Auto auto;
+
+    private Precision precision;
 
     /**
      * This class's constructor.
@@ -23,6 +129,21 @@ public class ADynamicEqualizer extends AudioFilter {
      */
     public ADynamicEqualizer() throws InvalidArgumentException {
         super("adynamicequalizer");
+        threshold = 0;
+        dfrequency = 1000;
+        tfrequency = 1000;
+        attack = 20;
+        release = 200;
+        ratio = 1;
+        makeup = 0;
+        range = 50;
+        dqfactor = 1.0;
+        tqfactor = 1.0;
+        mode = Mode.CUTBELOW;
+        dftype = DFtype.BANDPASS;
+        tftype = TFtype.BELL;
+        auto = Auto.DISABLED;
+        precision = Precision.AUTO;
     }
 
     /**
@@ -168,7 +289,11 @@ public class ADynamicEqualizer extends AudioFilter {
         }
 
         switch(mode) {
-            case "listen", "cutbelow", "cutabove", "boostbelow", "boostabove" -> this.mode = mode;
+            case "listen" -> this.mode = Mode.LISTEN;
+            case "cutbelow" -> this.mode = Mode.CUTBELOW;
+            case "cutabove" -> this.mode = Mode.CUTABOVE;
+            case "boostbelow" -> this.mode = Mode.BOOSTBELOW;
+            case "boostabove" -> this.mode = Mode.BOOSTABOVE;
             default -> throw new InvalidArgumentException("The mode of filter operation must be equal to \"listen\", " +
                     "\"cutbelow\", \"cutabove\", \"boostbelow\" or \"boostabove\".", "La modalita' con cui il filtro opera " +
                     "deve essere uguale a \"listen\", \"cutbelow\", \"cutabove\", \"boostbelow\" o \"boostabove\".");
@@ -188,7 +313,10 @@ public class ADynamicEqualizer extends AudioFilter {
         }
 
         switch(dftype) {
-            case "bandpass", "lowpass", "highpass", "peak" -> this.dftype = dftype;
+            case "bandpass" -> this.dftype = DFtype.BANDPASS;
+            case "lowpass" -> this.dftype = DFtype.LOWPASS;
+            case "highpass" -> this.dftype = DFtype.HIGHPASS;
+            case "peak" -> this.dftype = DFtype.PEAK;
             default -> throw new InvalidArgumentException("The detection filter's type must be equal to \"bandpass\", " +
                     "\"lowpass\", \"highpass\" or \"peak\".", "Il tipo del filtro di rilevamento deve essere uguale a " +
                     "\"bandpass\", \"lowpass\", \"highpass\" o \"peak\".");
@@ -207,7 +335,9 @@ public class ADynamicEqualizer extends AudioFilter {
         }
 
         switch(tftype) {
-            case "bell", "lowshelf", "highshelf" -> this.tftype = tftype;
+            case "bell" -> this.tftype = TFtype.BELL;
+            case "lowshelf" -> this.tftype = TFtype.LOWSHELF;
+            case "highshelf" -> this.tftype = TFtype.HIGHSHELF;
             default -> throw new InvalidArgumentException("The target filter's type must be equal to \"bell\", \"lowshelf\" " +
                     "or \"highshelf\".", "Il tipo del filtro obiettivo deve essere uguale a \"bell\", \"lowshelf\" o " +
                     "\"highshelf\".");
@@ -227,7 +357,10 @@ public class ADynamicEqualizer extends AudioFilter {
         }
 
         switch(auto) {
-            case "disabled", "off", "on", "adaptive" -> this.auto = auto;
+            case "disabled" -> this.auto = Auto.DISABLED;
+            case "off" -> this.auto = Auto.OFF;
+            case "on" -> this.auto = Auto.ON;
+            case "adaptive" -> this.auto = Auto.ADAPTIVE;
             default -> throw new InvalidArgumentException("The \"auto\" value must be equal to \"disabled\", \"off\", " +
                     "\"on\" or \"adaptive\".", "Il valore \"auto\" deve essere uguale a \"disabled\", \"off\", \"on\" o " +
                     "\"adaptive\".");
@@ -246,7 +379,9 @@ public class ADynamicEqualizer extends AudioFilter {
         }
 
         switch(precision) {
-            case "auto", "float", "double" -> this.precision = precision;
+            case "auto" -> this.precision = Precision.AUTO;
+            case "float" -> this.precision = Precision.FLOAT;
+            case "double" -> this.precision = Precision.DOUBLE;
             default -> throw new InvalidArgumentException("The precision value must be equal to \"auto\", \"float\" or " +
                     "\"double\".", "Il valore della precisione deve essere uguale a \"auto\", \"float\" o \"double\".");
         }
@@ -264,10 +399,10 @@ public class ADynamicEqualizer extends AudioFilter {
         options.put("ratio", String.valueOf(ratio));
         options.put("makeup", String.valueOf(makeup));
         options.put("range", String.valueOf(range));
-        options.put("mode", mode);
-        options.put("dftype", dftype);
-        options.put("tftype", tftype);
-        options.put("auto", auto);
-        options.put("precision", precision);
+        options.put("mode", mode.toString());
+        options.put("dftype", dftype.toString());
+        options.put("tftype", tftype.toString());
+        options.put("auto", auto.toString());
+        options.put("precision", precision.toString());
     }
 }
