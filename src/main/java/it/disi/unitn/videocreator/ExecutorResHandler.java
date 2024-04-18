@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Locale;
 
 /**
  * This class handles the result of the command used to check either that the aspect ratio of each frame is compatible with
@@ -19,34 +20,22 @@ public class ExecutorResHandler implements ExecuteResultHandler {
 
     private final Path tempFile;
 
-    //private final String codecID;
-
     /**
      * The class's constructor.
      * @param out The given OutputStream to write to.
      * @param tempp The Path instance corresponding to the OutputStream
-     * //@param codecID The codec's ID
      */
-    public ExecutorResHandler(OutputStream out, Path tempp/*, @NotNull String codecID*/) {
-        /*if(codecID == null || codecID.isEmpty()) {
-            throw new InvalidArgumentException("No arguments to this constructor must be null or empty strings.");
-        }*/
+    public ExecutorResHandler(OutputStream out, Path tempp) {
         outstream = out;
         tempFile = tempp;
-        //this.codecID = codecID;
     }
 
     /**
      * The class's constructor to be used when width and height need to be specified.
-     * //@param width Each frame's width
-     * //@param height Each frame's height
      */
-    public ExecutorResHandler(/*int width, int height*/) {
+    public ExecutorResHandler() {
         outstream = OutputStream.nullOutputStream();
         tempFile = null;
-        //codecID = "";
-        /*this.width = width;
-        this.height = height;*/
     }
 
     /**
@@ -95,6 +84,13 @@ public class ExecutorResHandler implements ExecuteResultHandler {
     public void onProcessFailed(ExecuteException e) {
         try {
             outstream.close();
+            Locale l = Locale.getDefault();
+            if(l == Locale.ITALY || l == Locale.ITALIAN) {
+                System.err.println("Si e' verificato un errore.");
+            } else {
+                System.err.println("An error has occurred.");
+            }
+            System.exit(1);
         } catch (IOException ex) {
             System.err.println(ex.getMessage());
             throw new RuntimeException(ex);

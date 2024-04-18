@@ -9,9 +9,29 @@ import org.jetbrains.annotations.NotNull;
  */
 public class ADenorm extends AudioFilter {
 
-    private int level = -351;
+    enum Type { DC, AC, SQUARE, PULSE;
+        @Override
+        public @NotNull String toString() {
+            switch(this) {
+                case AC -> {
+                    return "ac";
+                }
+                case SQUARE -> {
+                    return "square";
+                }
+                case PULSE -> {
+                    return "pulse";
+                }
+                default -> {
+                    return "dc";
+                }
+            }
+        }
+    }
 
-    private String type = "dc";
+    private int level;
+
+    private Type type;
 
     /**
      * This class's constructor.
@@ -20,6 +40,8 @@ public class ADenorm extends AudioFilter {
      */
     public ADenorm() throws InvalidArgumentException {
         super("adenorm");
+        level = -351;
+        type = Type.DC;
     }
 
     /**
@@ -43,13 +65,16 @@ public class ADenorm extends AudioFilter {
      * by FFmpeg
      */
     public void setType(@NotNull String val) throws InvalidArgumentException {
-        if(val == null || val.isEmpty()) {
+        if(checkNullOrEmpty(val)) {
             throw new InvalidArgumentException("The type of added noise cannot be null or an empty string.", "Il tipo di " +
                     "rumore aggiunto non puo' essere null o una stringa vuota.");
         }
 
         switch(val) {
-            case "dc", "ac", "square", "pulse" -> type = val;
+            case "dc" -> type = Type.DC;
+            case "ac" -> type = Type.AC;
+            case "square" -> type = Type.SQUARE;
+            case "pulse" -> type = Type.PULSE;
             default -> throw new InvalidArgumentException("The type of added noise must be equal to \"dc\", \"ac\", \"square\" " +
                     "or \"pulse\".", "Il tipo di rumore aggiunto deve essere uguale a \"dc\", \"ac\", \"square\" o \"pulse\".");
         }
@@ -58,6 +83,6 @@ public class ADenorm extends AudioFilter {
     @Override
     public void updateMap() {
         options.put("level", String.valueOf(level));
-        options.put("type", type);
+        options.put("type", type.toString());
     }
 }

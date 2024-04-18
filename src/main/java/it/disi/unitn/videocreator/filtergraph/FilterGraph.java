@@ -58,6 +58,11 @@ public class FilterGraph {
         fcList.get(i).addFilter(filter);
     }
 
+    /**
+     * Adds the given filter to the last filter chain in this filter graph
+     * @param filter The given filter
+     * @throws InvalidArgumentException If the given filter is null
+     */
     public void addFilterToFilterChain(@NotNull Filter filter) throws InvalidArgumentException {
         fcList.getLast().addFilter(filter);
     }

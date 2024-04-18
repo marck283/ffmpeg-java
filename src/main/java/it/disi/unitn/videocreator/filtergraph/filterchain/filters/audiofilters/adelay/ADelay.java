@@ -14,7 +14,7 @@ public class ADelay extends AudioFilter {
 
     private final List<String> delList;
 
-    private int all = 0;
+    private int all;
 
     /**
      * This class's constructor.
@@ -24,6 +24,7 @@ public class ADelay extends AudioFilter {
     public ADelay() throws InvalidArgumentException {
         super("adelay");
         delList = new ArrayList<>();
+        all = 0;
     }
 
     /**
@@ -32,7 +33,7 @@ public class ADelay extends AudioFilter {
      * @throws InvalidArgumentException If the new delay is null or an empty string
      */
     public void addDelay(@NotNull String delay) throws InvalidArgumentException {
-        if(delay == null || delay.isEmpty()) {
+        if(checkNullOrEmpty(delay)) {
             throw new InvalidArgumentException("The given delay cannot be null or an empty string.", "Il ritardo fornito " +
                     "non puo' essere null o una stringa vuota.");
         }

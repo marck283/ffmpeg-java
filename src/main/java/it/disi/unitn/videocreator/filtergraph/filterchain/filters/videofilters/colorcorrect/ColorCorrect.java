@@ -9,7 +9,7 @@ import org.jetbrains.annotations.NotNull;
  */
 public class ColorCorrect extends Filter {
 
-    private double rl = 0, bl = 0, rh = 0, bh = 0, saturation = 1.0;
+    private double rl, bl, rh, bh, saturation;
 
     private String analyze;
 
@@ -20,6 +20,11 @@ public class ColorCorrect extends Filter {
      */
     protected ColorCorrect() throws InvalidArgumentException {
         super("colorcorrect");
+        rl = 0D;
+        bl = 0D;
+        rh = 0D;
+        bh = 0D;
+        saturation = 1.0;
     }
 
     /**

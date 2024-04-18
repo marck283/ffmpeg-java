@@ -21,8 +21,8 @@ class VideoCreatorTest {
     void createCommand() throws NotEnoughArgumentsException, InvalidArgumentException, UnsupportedOperatingSystemException,
             IOException {
         FFMpegBuilder builder = new FFMpegBuilder("ffmpeg");
-        VideoCreator creator = builder.newVideoCreator("./src/test/resources/input/mp4/example.mp4",
-                "./src/test/resources/input/images", "000.jpeg");
+        VideoCreator creator = builder.newVideoCreator("./src/test/resources/input/mp4/example.mp4");
+        creator.addInput("./src/test/resources/input/images/000.jpeg");
         //creator.setVideoSize(800, 600, "yuv420p", true);
         //creator.setCodecID("mjpeg", true); //No need to set the codec ID if we maintain the picture format
         creator.setPixelFormat("yuv420p");
@@ -42,7 +42,7 @@ class VideoCreatorTest {
         vsfg.addFilterChain(vsfc);
         creator.setVideoSimpleFilterGraph(vsfg);
 
-        creator.createCommand(true/*, null, new Bicubic(0.3333, 0.3333), "auto",
+        creator.createCommand(/*true, null, new Bicubic(0.3333, 0.3333), "auto",
                 "bt709", "auto", "auto", "init", "0",
                 "disable", 0*/);
 

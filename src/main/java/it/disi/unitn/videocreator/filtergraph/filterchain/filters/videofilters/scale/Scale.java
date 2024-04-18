@@ -27,11 +27,13 @@ public class Scale extends VideoFilter {
 
     private String width, height, videoSizeID;
 
-    private String eval = "init", interl = "0", in_range, out_range, force_original_aspect_ratio;
+    private String eval, interl, in_range, out_range, force_original_aspect_ratio;
 
     private ColorMatrix inColMatrix, outColorMatrix;
 
     private int force_divisible_by;
+
+    private final Locale l;
 
     /**
      * This class's constructor. Constructs a new "scale" filter.
@@ -40,6 +42,9 @@ public class Scale extends VideoFilter {
      */
     public Scale() throws InvalidArgumentException {
         super("scale");
+        l = Locale.getDefault();
+        eval = "init";
+        interl = "0";
     }
 
     /**
@@ -69,7 +74,7 @@ public class Scale extends VideoFilter {
      * @param cmdline        A CommandLine instance
      * @return True if the CommandLine instance has a field "value" whose value is equal to zero, otherwise false
      */
-    private boolean executeCML(@NotNull DefaultExecutor executor, @NotNull ExecutorResHandler execResHandler,
+    private boolean executeCommand(@NotNull DefaultExecutor executor, @NotNull ExecutorResHandler execResHandler,
                                @NotNull CommandLine cmdline) {
         try {
             executor.execute(cmdline, execResHandler);
@@ -86,13 +91,11 @@ public class Scale extends VideoFilter {
             int val = execResHandler.getValue();
             execResHandler.setValue(0);
 
-            Locale l = Locale.getDefault();
             if (val == 0) {
                 if (l == Locale.ITALY || l == Locale.ITALIAN) {
-                    System.err.println("Questo codec non e' supportato dall'installazione di FFmpeg presente in questo sistema. " +
-                            "Si prega di riprovare con un altro codec.");
+                    System.err.println("Almeno uno dei valori forniti non e' stato riconosciuto da FFmpeg.");
                 } else {
-                    System.err.println("This codec is not supported by your installation of FFmpeg. Please try another one.");
+                    System.err.println("At least one of the given values was not recognised by FFmpeg.");
                 }
                 return false;
             }
@@ -109,15 +112,10 @@ public class Scale extends VideoFilter {
      * @param height  The height
      * @param pix_fmt The pixel format used in the video
      * @return True if the given dimensions are accepted, false otherwise
-     * @throws NotEnoughArgumentsException         If the pixel format is null or an empty string
      * @throws UnsupportedOperatingSystemException If the Operating System the user is currently operating on is not yet
      *                                             supported by this library
      */
-    private boolean checkSize(@NotNull String width, @NotNull String height, @NotNull String pix_fmt) throws NotEnoughArgumentsException, UnsupportedOperatingSystemException {
-        if (pix_fmt == null || pix_fmt.isEmpty()) {
-            throw new NotEnoughArgumentsException("The pixel format must neither be null nor an empty string.",
-                    "Il formato dei pixel non puo' essere null o una stringa vuota.");
-        }
+    private boolean checkSize(@NotNull String width, @NotNull String height, @NotNull String pix_fmt) throws UnsupportedOperatingSystemException {
         CommandLine cmdLine;
         Map<String, String> m = new HashMap<>();
         m.put("width", width);
@@ -138,20 +136,23 @@ public class Scale extends VideoFilter {
         DefaultExecutor executor = DefaultExecutor.builder().get();
         executor.setStreamHandler(streamHandler);
         ExecutorResHandler execResHandler = new ExecutorResHandler();
-        return executeCML(executor, execResHandler, cmdLine);
+        return executeCommand(executor, execResHandler, cmdLine);
     }
 
     /**
      * This method sets the width and height of the video.
+     * @param development A boolean parameter to tell the program if the user is running a custom version of FFmpeg
      * @param width The video's width
      * @param height The video's height
+     * @param pix_fmt The video's pixel format
      * @throws InvalidArgumentException If the video's with or height is null or an empty string
      * @throws UnsupportedOperationException If the video's size id is already set
+     * @throws NotEnoughArgumentsException If the given pixel format is null or an empty string
+     * @throws UnsupportedOperatingSystemException If the user's Operating System is not yet supported by this library
      */
     public void setSize(boolean development, @NotNull String width, @NotNull String height, @NotNull String pix_fmt)
             throws InvalidArgumentException, UnsupportedOperationException, UnsupportedOperatingSystemException, NotEnoughArgumentsException {
         if(videoSizeID != null && !videoSizeID.isEmpty()) {
-            Locale l = Locale.getDefault();
             if(l == Locale.ITALIAN || l == Locale.ITALY) {
                 System.err.println("Non e' possibile impostare l'ampiezza e l'altezza del video quando l'id della sua " +
                         "dimensione e' gia' stato impostato.");
@@ -169,6 +170,22 @@ public class Scale extends VideoFilter {
         if(checkNullOrEmpty(height)) {
             throw new InvalidArgumentException("The video height cannot be null or an empty string.", "L'altezza dell'immagine " +
                     "non puo' essere null o una stringa vuota.");
+        }
+
+        try {
+            int w = Integer.parseInt(width), h = Integer.parseInt(height);
+            if(w <= 0 || h <= 0) {
+                throw new InvalidArgumentException("The given width or height cannot be negative or null numbers.",
+                        "L'ampiezza e l' altezza non possono essere numeri negativi o nulli.");
+            }
+        } catch(NumberFormatException ex) {
+            throw new InvalidArgumentException("Either the width or the height is not an integer.", "L'ampiezza o l'altezza " +
+                    "non rappresentano un numero intero.");
+        }
+
+        if(checkNullOrEmpty(pix_fmt)) {
+            throw new NotEnoughArgumentsException("The pixel format must neither be null nor an empty string.",
+                    "Il formato dei pixel non puo' essere null o una stringa vuota.");
         }
 
         if (!development || checkSize(width, height, pix_fmt)) {
@@ -204,7 +221,6 @@ public class Scale extends VideoFilter {
      */
     public void setVideoSizeID(@NotNull String videoSizeID) throws InvalidArgumentException, UnsupportedOperationException {
         if(width != null && !width.isEmpty() && height != null && !height.isEmpty()) {
-            Locale l = Locale.getDefault();
             if(l == Locale.ITALIAN || l == Locale.ITALY) {
                 System.err.println("Impossibile impostare l'id della dimensione del video quando l'ampiezza e l'altezza " +
                         "sono gia' impostate.");
@@ -213,7 +229,7 @@ public class Scale extends VideoFilter {
             }
             throw new UnsupportedOperationException();
         }
-        if (videoSizeID == null) {
+        if (checkNullOrEmpty(videoSizeID)) {
             throw new InvalidArgumentException("The video size ID should not be null.", "L'ID della proporzione visiva " +
                     "non deve essere null.");
         }
@@ -250,7 +266,7 @@ public class Scale extends VideoFilter {
      * @throws InvalidArgumentException If the input color range is null, an empty string or not recognizable by FFmpeg
      */
     public void setInputRange(@NotNull String in_range) throws InvalidArgumentException {
-        if(in_range == null || in_range.isEmpty()) {
+        if(checkNullOrEmpty(in_range)) {
             throw new InvalidArgumentException("The input color range cannot be null or an empty string.", "Il range di " +
                     "input dei colori non puo' essere null o una stringa vuota.");
         }
@@ -269,7 +285,7 @@ public class Scale extends VideoFilter {
      * @throws InvalidArgumentException If the output color range is null, an empty string or not recognizable by FFmpeg
      */
     public void setOutputRange(@NotNull String out_range) throws InvalidArgumentException {
-        if(out_range == null || out_range.isEmpty()) {
+        if(checkNullOrEmpty(out_range)) {
             throw new InvalidArgumentException("The input color range cannot be null or an empty string.", "Il range di " +
                     "input dei colori non puo' essere null o una stringa vuota.");
         }
@@ -289,7 +305,7 @@ public class Scale extends VideoFilter {
      * FFmpeg
      */
     public void forceOriginalAspectRatio(@NotNull String val) throws InvalidArgumentException {
-        if(val == null || val.isEmpty()) {
+        if(checkNullOrEmpty(val)) {
             throw new InvalidArgumentException("The parameter given to this method cannot be null or an empty string.",
                     "Il parametro fornito a questo metodo non puo' essere null o una stringa vuota.");
         }
@@ -318,7 +334,7 @@ public class Scale extends VideoFilter {
      * "init" and "frame"
      */
     public void setEval(@NotNull String eval) throws InvalidArgumentException {
-        if(eval == null || eval.isEmpty()) {
+        if(checkNullOrEmpty(eval)) {
             throw new InvalidArgumentException("The width and height's evaluation parameter cannot be null or an empty " +
                     "string.", "Il valore del parametro di valutazione dell'ampiezza e dell'altezza non puo' essere null " +
                     "o una stringa vuota.");
@@ -339,7 +355,7 @@ public class Scale extends VideoFilter {
      * or "-1"
      */
     public void setInterl(@NotNull String val) throws InvalidArgumentException {
-        if(val == null || val.isEmpty()) {
+        if(checkNullOrEmpty(val)) {
             throw new InvalidArgumentException("The interlacing mode cannot be null or an empty string.", "La modalita' " +
                     "di interlacciamento non puo' essere null o unstringa vuota.");
         }

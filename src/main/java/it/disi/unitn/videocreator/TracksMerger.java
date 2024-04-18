@@ -28,15 +28,13 @@ public class TracksMerger extends VideoCreator {
      * The class's constructor.
      * @param builder The FFMpegBuilderInstance
      * @param outputFile The path to the output video
-     * @param inputFolder The path to the input folder
-     * @param pattern The name of the file to be included in the video
      * @param audioInput The path to the input audio file
      * @param videoInput The path to the input video file
      * @throws NotEnoughArgumentsException If any of the arguments given to this method is null or an empty string
      */
-    public TracksMerger(@NotNull FFMpegBuilder builder, @NotNull String outputFile, @NotNull String inputFolder, @NotNull String pattern,
+    public TracksMerger(@NotNull FFMpegBuilder builder, @NotNull String outputFile,
                  @NotNull String audioInput, @NotNull String videoInput) throws NotEnoughArgumentsException {
-        super(builder, outputFile, inputFolder, pattern);
+        super(builder, outputFile);
         if(audioInput == null || audioInput.isEmpty() || videoInput == null || videoInput.isEmpty()) {
             throw new NotEnoughArgumentsException("The arguments to this class's constructor cannot be null or empty " +
                     "strings.", "Nessuno degli argomenti forniti al costruttore di questa classe puo' essere null o una " +
@@ -54,13 +52,11 @@ public class TracksMerger extends VideoCreator {
      * video.
      * @param builder The FFMpegBuilderInstance
      * @param outputVideo The path to the output video
-     * @param inputFolder The path to the input folder
-     * @param pattern The name of the file to be included in the video
      * @throws NotEnoughArgumentsException If any of the arguments given to this method is null or an empty string
      */
-    public TracksMerger(@NotNull FFMpegBuilder builder, @NotNull String outputVideo, @NotNull String inputFolder, @NotNull String pattern)
+    public TracksMerger(@NotNull FFMpegBuilder builder, @NotNull String outputVideo)
             throws NotEnoughArgumentsException {
-        super(builder, outputVideo, inputFolder, pattern);
+        super(builder, outputVideo);
 
         this.builder = builder;
         videoOutput = outputVideo;
@@ -80,21 +76,18 @@ public class TracksMerger extends VideoCreator {
      * This method sets the correct command to merge the audio and video tracks.
      * @param time The maximum amount of time to wait for the video's creation
      * @param timeUnit The TimeUnit instance to be used
-     * @throws NotEnoughArgumentsException when the video input path or audio input path is null
      * @throws IOException If an I/O error occurs
-     * @throws InvalidArgumentException If the given timeout is negative or the TimeUnit instance is null
+     * @throws InvalidArgumentException If the given timeout is negative, the TimeUnit instance is null, the video input
+     * path or audio input path is null
      */
-    public void mergeAudioWithVideo(long time, @NotNull TimeUnit timeUnit) throws NotEnoughArgumentsException, IOException,
+    public void mergeAudioWithVideo(long time, @NotNull TimeUnit timeUnit) throws IOException,
             InvalidArgumentException {
         builder.addAllInputs(videoInput, audioInput);
         builder.add("-map 0:v");
-        //builder.setCommand(builder.getCommand() + " -map 0:v");
         if(streamCopy) {
             builder.add("-c:v copy");
-            //builder.setCommand(builder.getCommand() + " -c:v copy");
         }
         builder.add("-c:a copy -map 1:a");
-        //builder.setCommand(builder.getCommand() + " -c:a copy -map 1:a");
         builder.addOutput(videoOutput);
 
         FFMpeg ffmpeg = builder.build();
@@ -157,11 +150,8 @@ public class TracksMerger extends VideoCreator {
         File inputTXTFile = writeTXTFile(inputFiles, tempFile);
         builder.add("-f concat -safe 0 -i \"" +
                 inputTXTFile.getPath().replace('\\', '/') + "\"");
-        /*builder.setCommand(builder.getCommand() + " -f concat -safe 0 -i \"" +
-                inputTXTFile.getPath().replace('\\', '/') + "\"");*/
         if(streamCopy) {
             builder.add("-c copy");
-            //builder.setCommand(builder.getCommand() + " -c copy");
         }
         builder.addOutput(videoOutput);
 

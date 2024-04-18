@@ -36,7 +36,7 @@ public class ProcessPool {
 
     private int index;
 
-    private final List<ExecutorResHandler> exlist = new ArrayList<>();
+    private final List<ExecutorResHandler> exlist;
 
     /**
      * This constructor creates a new thread pool which will be used to execute a specified number of threads.
@@ -61,6 +61,7 @@ public class ProcessPool {
         this.pathToImagesFolder = pathToImagesFolder;
         this.width = width;
         this.height = height;
+        exlist = new ArrayList<>();
     }
 
     /**

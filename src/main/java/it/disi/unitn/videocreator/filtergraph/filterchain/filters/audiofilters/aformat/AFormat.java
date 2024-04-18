@@ -12,9 +12,7 @@ import java.util.List;
  */
 public class AFormat extends AudioFilter {
 
-    private final List<String> sample_fmts;
-
-    private final List<String> sample_rates;
+    private final List<String> sample_fmts, sample_rates;
 
     private final List<ChannelLayout> channel_layouts;
 
