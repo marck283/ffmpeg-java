@@ -14,6 +14,8 @@ it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.adecorre
 it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.adelay
 it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.adenorm
 it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.adrc
+it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.adynamicequalizer
+it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.adynamicsmooth
 it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.aformat
 it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.afreqshift
 it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters

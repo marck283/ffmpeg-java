@@ -1,45 +1,26 @@
 package it.disi.unitn.videocreator;
 
-//import it.disi.unitn.FFMpeg;
-
 import it.disi.unitn.FFMpegBuilder;
 import it.disi.unitn.exceptions.InvalidArgumentException;
 import it.disi.unitn.exceptions.NotEnoughArgumentsException;
-//import org.apache.commons.exec.*;
 import it.disi.unitn.exceptions.UnsupportedOperatingSystemException;
 import it.disi.unitn.videocreator.filtergraph.AudioSimpleFilterGraph;
 import it.disi.unitn.videocreator.filtergraph.FilterGraph;
-//import it.disi.unitn.videocreator.filtergraph.SimpleFilterGraph;
 import it.disi.unitn.videocreator.filtergraph.VideoSimpleFilterGraph;
-//import it.disi.unitn.videocreator.filtergraph.filterchain.SimpleFilterChain;
-//import it.disi.unitn.videocreator.filtergraph.filterchain.AudioSimpleFilterChain;
-//import it.disi.unitn.videocreator.filtergraph.filterchain.SimpleFilterChain;
-//import it.disi.unitn.videocreator.filtergraph.filterchain.VideoSimpleFilterChain;
-//import it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.AudioFilter;
-//import it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.adynamicequalizer.ADynamicEqualizer;
 import it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.format.Format;
 import it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.scale.Scale;
 import it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.scale.scalingalgs.ScalingAlgorithm;
 import org.apache.commons.exec.CommandLine;
-//import org.apache.commons.exec.Watchdog;
 import org.apache.commons.exec.DefaultExecutor;
 import org.apache.commons.exec.PumpStreamHandler;
 import org.apache.commons.lang3.SystemUtils;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-//import org.owasp.encoder.Encode;
 
-//import java.awt.*;
 import java.io.*;
-/*import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.StandardOpenOption;*/
 import java.nio.file.*;
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.Map;
-//import java.util.concurrent.TimeUnit;
+import java.util.*;
 
 /**
  * This class is used to create videos using different options compatible with ffmpeg.
@@ -54,22 +35,16 @@ public class VideoCreator {
 
     private String codecID = "h264", audioCodec; //Name of video and audio codec ID
 
-    private final String folder; //Folder to search into when executing the command
-
     //Pattern of the names of the files to be included in the video or name of the file to be included in the video
-    private final String pattern;
+    private final List<String> pattern;
 
     private int videoQuality = 0; //Quality of output video. For "x264", sane values should be between 18 and 28
-
-    //private int videoWidth = 0, videoHeight = 0;
 
     private int startInstant; //Starting instant of the new video with respect to the original video
 
     private String audioBitRate; //Audio track's bitrate (in Kbit/s)
 
     private String videoBitRate; //Video track's bitrate (in Kbit/s or Mbit/s)
-
-    //private String videoSizeID = "";
 
     private String pixelFormat, execFile = "";
 
@@ -84,21 +59,15 @@ public class VideoCreator {
      *
      * @param builder     The FFMpegBuilder instance that called this constructor
      * @param outputFile  The path to the output file
-     * @param inputFolder The path to the folder containing the input files
-     * @param pattern     The pattern of the names of the images to include in the video
-     *                    or the name of the file to be included in the video
      * @throws NotEnoughArgumentsException if any of the arguments given to this constructor is null
      */
-    public VideoCreator(@NotNull FFMpegBuilder builder, @NotNull String outputFile,
-                        @NotNull String inputFolder, @NotNull String pattern) throws NotEnoughArgumentsException {
-        if (builder == null || inputFolder == null || inputFolder.isEmpty() || outputFile == null || outputFile.isEmpty() ||
-                pattern == null || pattern.isEmpty()) {
+    public VideoCreator(@NotNull FFMpegBuilder builder, @NotNull String outputFile) throws NotEnoughArgumentsException {
+        if (builder == null || outputFile == null || outputFile.isEmpty()) {
             throw new NotEnoughArgumentsException("The arguments given to this class's constructor cannot be null or " +
                     "empty values.", "Gli argomenti forniti al costruttore di questa classe non possono essere null o " +
                     "valori non specificati.");
         } else {
-            folder = inputFolder;
-            this.pattern = pattern;
+            this.pattern = new ArrayList<>();
             this.builder = builder;
             this.outputFile = outputFile;
             if (SystemUtils.IS_OS_LINUX) {
@@ -116,6 +85,42 @@ public class VideoCreator {
             isOutFullRange = false;
             l = Locale.getDefault();
         }
+    }
+
+    /**
+     * Adds an input file.
+     * @param input The given input file
+     * @throws InvalidArgumentException If the given input value is null or an empty string or the given file does not
+     * exist
+     */
+    public void addInput(@NotNull String input) throws InvalidArgumentException {
+        if(input == null || input.isEmpty()) {
+            throw new InvalidArgumentException("The given input file cannot be null or an empty string.", "Il file fornito " +
+                    "non puo' essere null o una stringa vuota.");
+        }
+
+        pattern.forEach(e -> {
+            if(e.contains("*.")) {
+                if(l == Locale.ITALY || l == Locale.ITALIAN) {
+                    System.err.println("Non e' possibile inserire un altro valore di input quando ne e' gia' presente uno " +
+                            "che comprenda tutti i file presenti nella cartella.");
+                } else {
+                    System.err.println("Cannot insert another input value when there is already another one that includes " +
+                            "all files in the same folder.");
+                }
+                throw new UnsupportedOperationException();
+            }
+        });
+
+        /*if(input.startsWith("*.") && !pattern.isEmpty()) {
+
+        }*/
+
+        if(!input.startsWith("*.") && !Files.exists(Paths.get(input))) {
+            throw new InvalidArgumentException("The given file does not exist.", "Il file fornito non esiste.");
+        }
+
+        pattern.add(input);
     }
 
     /**
@@ -479,6 +484,7 @@ public class VideoCreator {
     /**
      * Sets the "scale" filter parameters.
      *
+     * @param development A boolean parameter to tell the program if the user is running a custom version of FFmpeg
      * @param scale The "scale" filter instance
      * @param alg   The ScalingAlgorithm instance
      * @param width Each frame's width
@@ -493,11 +499,13 @@ public class VideoCreator {
      * @param forceOAsRatio A parameter that tells the program whether to force the original aspect ratio
      * @param divisibleBy An integer that tells the program what the width and height should be divisible by
      * @throws InvalidArgumentException If the given ScalingAlgorithm has an empty string as its name
+     * @throws NotEnoughArgumentsException If the given pixel format is null or an empty string
+     * @throws UnsupportedOperatingSystemException If the user's Operating System is not yet supported by this library
      */
-    public void setScaleParams(boolean development, @NotNull Scale scale, @Nullable ScalingAlgorithm alg, @NotNull String width, @NotNull String height,
-                                @NotNull String incolmatname, @NotNull String outcolmatname, @NotNull String incolrange,
-                                @NotNull String outcolrange, @NotNull String evalSize, @NotNull String interlMode,
-                                @NotNull String forceOAsRatio, int divisibleBy)
+    public void setScaleParams(boolean development, @NotNull Scale scale, @Nullable ScalingAlgorithm alg, @NotNull String width,
+                               @NotNull String height, @NotNull String incolmatname, @NotNull String outcolmatname,
+                               @NotNull String incolrange, @NotNull String outcolrange, @NotNull String evalSize,
+                               @NotNull String interlMode, @NotNull String forceOAsRatio, int divisibleBy)
             throws InvalidArgumentException, UnsupportedOperatingSystemException, NotEnoughArgumentsException {
         if(alg != null) {
             scale.setSwsFlags(alg);
@@ -632,23 +640,8 @@ public class VideoCreator {
     /**
      * This method creates the command that, when run, will create the output video. WARNING: all needed filters, filter
      * chains and filter graphs must be set BEFORE calling this method.
-     * @param videoCreation A boolean parameter that tells the program if the user wants to create a video. This flag should
-     *                      be set to "false" only when the user is calling this method through {@code VideoTranscoder.createCommand()}
-     *                      in order to extract the audio track from a video; otherwise, it should be set to "true"
-     //* @param audioFilter The given AudioFilter instance. Can be null
-     //* @param alg The given scaling algorithm. Can be null
-     //* @param incolmatname The name of the input color matrix, as described by FFmpeg's documentation of the scaling filter
-     //* @param outcolmatname The name of the output color matrix, as described by FFmpeg's documentation of the scaling
-     //*                      filter
-     //* @param incolrange The input color range
-     //* @param outcolrange The output color range
-     //* @param evalSize The value that tells when to evaluate the expressions for width and height
-     //* @param interlMode The interlacing mode
-     //* @param forceOAsRatio A parameter that tells the program whether to force the original aspect ratio
-     //* @param divisibleBy An integer that tells the program what the width and height should be divisible by
-     //* @throws InvalidArgumentException if the video width or height or the video size ID field is null
      */
-    public void createCommand(boolean videoCreation/*, @Nullable AudioFilter audioFilter, @Nullable ScalingAlgorithm alg,
+    public void createCommand(/*boolean videoCreation, @Nullable AudioFilter audioFilter, @Nullable ScalingAlgorithm alg,
                               @NotNull String incolmatname, @NotNull String outcolmatname, @NotNull String incolrange,
                               @NotNull String outcolrange, @NotNull String evalSize, @NotNull String interlMode,
                               @NotNull String forceOAsRatio, int divisibleBy*/)
@@ -661,7 +654,8 @@ public class VideoCreator {
             try {
                 builder.add("-r " + frameRate);
 
-                builder.addInput(folder + "/" + pattern);
+                //builder.addInput(folder + "/" + pattern);
+                builder.addAllInputs(pattern);
 
                 if (pixelFormat == null || pixelFormat.isEmpty()) {
                     //ATTENZIONE: il codec mjpeg non supporta il formato yuv420p perché non è un formato full-range!
@@ -754,7 +748,7 @@ public class VideoCreator {
                     builder.add("-q:v " + videoQuality);
                 }
                 builder.addOutput(outputFile);
-            } catch(NotEnoughArgumentsException ex) {
+            } catch(InvalidArgumentException ex) {
                 System.err.println(ex.getMessage());
                 //ex.printStackTrace();
                 System.exit(1);

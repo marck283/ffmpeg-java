@@ -8,7 +8,7 @@ import it.disi.unitn.videocreator.filtergraph.filterchain.filters.Filter;
  */
 public class AContrast extends Filter {
 
-    private int contrast = 33;
+    private int contrast;
 
     /**
      * This class's constructor. Constructs a new filter (whether video or audio).
@@ -17,6 +17,7 @@ public class AContrast extends Filter {
      */
     public AContrast() throws InvalidArgumentException {
         super("acontrast");
+        contrast = 33;
     }
 
     /**

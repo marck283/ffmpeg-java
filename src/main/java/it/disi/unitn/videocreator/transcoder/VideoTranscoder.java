@@ -1,7 +1,7 @@
 package it.disi.unitn.videocreator.transcoder;
 
 import it.disi.unitn.FFMpegBuilder;
-import it.disi.unitn.exceptions.InvalidArgumentException;
+//import it.disi.unitn.exceptions.InvalidArgumentException;
 import it.disi.unitn.exceptions.NotEnoughArgumentsException;
 import it.disi.unitn.videocreator.VideoCreator;
 /*import it.disi.unitn.videocreator.filtergraph.FilterGraph;
@@ -26,13 +26,10 @@ public class VideoTranscoder extends VideoCreator {
      * The class's constructor.
      * @param builder The FFMpegBuilder instance
      * @param outputFile The path to the output file
-     * @param inputFolder The path to the input folder
-     * @param fileExtension The output file extension
      * @throws NotEnoughArgumentsException If at least one of the given arguments is null or an empty string
      */
-    public VideoTranscoder(@NotNull FFMpegBuilder builder, @NotNull String outputFile, @NotNull String inputFolder,
-                           @NotNull String fileExtension) throws NotEnoughArgumentsException {
-        super(builder, outputFile, inputFolder, fileExtension);
+    public VideoTranscoder(@NotNull FFMpegBuilder builder, @NotNull String outputFile) throws NotEnoughArgumentsException {
+        super(builder, outputFile);
         audioStreamCopy = false;
         videoStreamCopy = false;
         extractVideo = false;
@@ -139,20 +136,13 @@ public class VideoTranscoder extends VideoCreator {
     /**
      * This method will create the FFmpeg command which can then be used to run the FFmpeg process and produce the desired
      * result.
-     //* @param audioFilter The given audio filter. Can be null
-     //* @param alg The given scaling algorithm. Can be null
-     //* @param outcolmatname The name of the output color matrix according to the FFmpeg documentation
-     * @throws InvalidArgumentException If either the user wants to stream-copy the audio or video track or to extract the
-     * video track (therefore creating a new video) and the video size ID or the width and the height parameters
-     * are not set accordingly
      */
     public void createCommand(/*@Nullable AudioFilter audioFilter, @Nullable ScalingAlgorithm alg, @NotNull String width,
                               @NotNull String height, @NotNull String incolmatname,
                               @NotNull String outcolmatname, @NotNull String incolrange, @NotNull String outcolrange,
                               @NotNull String evalSize, @NotNull String interlMode, @NotNull String forceOAsRatio,
-                              int divisibleBy*/)
-            throws InvalidArgumentException {
-        super.createCommand(videoStreamCopy || extractVideo || audioStreamCopy/*, audioFilter, alg, incolmatname,
+                              int divisibleBy*/) {
+        super.createCommand(/*videoStreamCopy || extractVideo || audioStreamCopy, audioFilter, alg, incolmatname,
                 outcolmatname, incolrange, outcolrange, evalSize, interlMode, forceOAsRatio, divisibleBy*/);
 
         try {

@@ -8,9 +8,9 @@ import it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.A
  */
 public class AFreqShift extends AudioFilter {
 
-    private double shift = 0.0, level = 1.0;
+    private double shift, level;
 
-    private int order = 8;
+    private int order;
 
     /**
      * This class's constructor.
@@ -19,6 +19,9 @@ public class AFreqShift extends AudioFilter {
      */
     public AFreqShift() throws InvalidArgumentException {
         super("afreqshift");
+        shift = 0.0;
+        level = 1.0;
+        order = 8;
     }
 
     /**
