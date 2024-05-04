@@ -567,11 +567,11 @@ public class VideoCreator {
     @Contract("_ -> param1")
     public @NotNull Format setFormat(@NotNull Format format) throws InvalidArgumentException {
         format.addPixelFormat(pixelFormat);
-        if(isOutFullRange) {
+        /*if(isOutFullRange) {
             format.addColorRange("pc"); //Full range
         } else {
             format.addColorRange("tv"); //Limited range
-        }
+        }*/
         format.updateMap();
 
         return format;

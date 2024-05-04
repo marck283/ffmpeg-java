@@ -3,7 +3,7 @@
   "component": {
     "group": "it.disi.unitn.ffmpeg",
     "module": "ffmpeg-java-id",
-    "version": "1.1.19-beta1",
+    "version": "1.1.19-beta3",
     "attributes": {
       "org.gradle.status": "release"
     }
@@ -25,13 +25,13 @@
       },
       "files": [
         {
-          "name": "ffmpeg-java-id-1.1.19-beta1.jar",
-          "url": "ffmpeg-java-id-1.1.19-beta1.jar",
-          "size": 113197,
-          "sha512": "f3caa422b8c8fc5c7cd7e427bcc2cc233ffb7d33160a563e5a6eebbd11888d2e18d80a21d640ef7b104a2eb6cb067066f4f3f3615e2456002f0d07a67d63d062",
-          "sha256": "9af6c7effd5a900c16e473736d9342bc1ddc5aab40e243f73e1abc32344a1270",
-          "sha1": "a213ccb4983492b114aac4bf1ef0971543e227e5",
-          "md5": "e851e914779c1470cead0b4f6cbb5ce4"
+          "name": "ffmpeg-java-id-1.1.19-beta3.jar",
+          "url": "ffmpeg-java-id-1.1.19-beta3.jar",
+          "size": 113132,
+          "sha512": "d3ded3cef9a5cb5ced98446c123fd54d2b4170b9e9db852454aa18c1d0200ddb39940e3e39da167bc8ab63c370286d99dca2cb53d75c6d8937179efca6d4e7d4",
+          "sha256": "106263259a921ba1f84deda19a76027143ca6eff4f33ac694e34442458e09fb2",
+          "sha1": "4617a8f5b4526d7fafefbc8ed09abb79f1d048d8",
+          "md5": "996a6bd073eb784d8c8bc6a53560128b"
         }
       ]
     },
@@ -108,13 +108,13 @@
       ],
       "files": [
         {
-          "name": "ffmpeg-java-id-1.1.19-beta1.jar",
-          "url": "ffmpeg-java-id-1.1.19-beta1.jar",
-          "size": 113197,
-          "sha512": "f3caa422b8c8fc5c7cd7e427bcc2cc233ffb7d33160a563e5a6eebbd11888d2e18d80a21d640ef7b104a2eb6cb067066f4f3f3615e2456002f0d07a67d63d062",
-          "sha256": "9af6c7effd5a900c16e473736d9342bc1ddc5aab40e243f73e1abc32344a1270",
-          "sha1": "a213ccb4983492b114aac4bf1ef0971543e227e5",
-          "md5": "e851e914779c1470cead0b4f6cbb5ce4"
+          "name": "ffmpeg-java-id-1.1.19-beta3.jar",
+          "url": "ffmpeg-java-id-1.1.19-beta3.jar",
+          "size": 113132,
+          "sha512": "d3ded3cef9a5cb5ced98446c123fd54d2b4170b9e9db852454aa18c1d0200ddb39940e3e39da167bc8ab63c370286d99dca2cb53d75c6d8937179efca6d4e7d4",
+          "sha256": "106263259a921ba1f84deda19a76027143ca6eff4f33ac694e34442458e09fb2",
+          "sha1": "4617a8f5b4526d7fafefbc8ed09abb79f1d048d8",
+          "md5": "996a6bd073eb784d8c8bc6a53560128b"
         }
       ]
     },
@@ -128,13 +128,13 @@
       },
       "files": [
         {
-          "name": "ffmpeg-java-id-1.1.19-beta1-javadoc.jar",
-          "url": "ffmpeg-java-id-1.1.19-beta1-javadoc.jar",
-          "size": 337685,
-          "sha512": "47f3b68bc396b60bcd62a42eae788fd8bad90e9ccc2cf1c478f379f16b07cb723902ad92202468a3b8eb442b2e0dd9a47e1cd263f7c573f2b7d8a2a7d3f8bb17",
-          "sha256": "99195bd7dbac384c47e7c78d0cd382885ff1c3ca5af312d30cc3619dbefe3a14",
-          "sha1": "21d1bc56a1befb7e5bc9e4cb831629172b4b438f",
-          "md5": "927fcdfc040e051cf1f2d9d700520ba7"
+          "name": "ffmpeg-java-id-1.1.19-beta3-javadoc.jar",
+          "url": "ffmpeg-java-id-1.1.19-beta3-javadoc.jar",
+          "size": 337242,
+          "sha512": "929007847b89c4ca2cc982bf7bb931c5ecf159e81034681e2f54b7b3a0382f3a709656af58663ad4fea8c1695aef4a1d20969ac457b04dd0eb5c6d036f249598",
+          "sha256": "af9dd96157868298cca99026bf12e5abd0f58d1a22d74d1568caedf393f79ffe",
+          "sha1": "daa835c4f02750f03594694b8e43cbaab5367615",
+          "md5": "7df981edad3f38571447a47cc8567bb7"
         }
       ]
     },
@@ -148,13 +148,13 @@
       },
       "files": [
         {
-          "name": "ffmpeg-java-id-1.1.19-beta1-sources.jar",
-          "url": "ffmpeg-java-id-1.1.19-beta1-sources.jar",
-          "size": 81709,
-          "sha512": "fb87a5b204077acf1776804fba9615a258f8977b837b68ed9e52546f381b69399e739fef3aabae0b19434f37fe26c3f059c980e92b2e8ec0dbc172e0fcc5a9c1",
-          "sha256": "309704e3b557e244fa09613794ac12b4c59f5b72cb9afcc5ad9f9d40d51f21a0",
-          "sha1": "7e338737438087cf153dc79a48741fb81c384f73",
-          "md5": "86aaaec0b796ae367595bc5bf23b5db2"
+          "name": "ffmpeg-java-id-1.1.19-beta3-sources.jar",
+          "url": "ffmpeg-java-id-1.1.19-beta3-sources.jar",
+          "size": 81040,
+          "sha512": "0f552b64f5e3ce6dc7abcb64c623a0d663ccc568e9d044bf4b6273f280640436fa9263d897f760a7ffa61ca36e9d1e69a6b6baf0e89013b1956bab5fb8cbdc33",
+          "sha256": "d6d7c9436a01aa3c0f300d3e17ceb9f90b44486b53d7d510c3b76f2d742abcab",
+          "sha1": "613377f3128a373ce120435cd7827bb6b595c081",
+          "md5": "4b3a71d74e35aa602c38d8efa25524eb"
         }
       ]
     }
