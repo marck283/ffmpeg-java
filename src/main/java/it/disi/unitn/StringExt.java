@@ -34,11 +34,11 @@ public class StringExt {
 
         int missing = 3 - val.length();
         if(missing > 0) {
-            String v = val;
+            String v = "";
             for(int i = 0; i < missing; i++) {
                 v = v.concat("0");
             }
-            val = v;
+            val = v.concat(val);
         }
     }
 
