@@ -41,7 +41,7 @@ public class VideoSimpleFilterChain extends SimpleFilterChain {
             throw new InvalidArgumentException("Cannot add null filters.", "Non e' possibile aggiungere filtr null.");
         }
         if(filterStr1.anyMatch(f -> !(f instanceof VideoFilter))) {
-            throw new InvalidArgumentException("All given filters must be instances of AudioFilter.", "Tutti i filtri " +
+            throw new InvalidArgumentException("All given filters must be instances of VideoFilter.", "Tutti i filtri " +
                     "forniti devono essere istanze di AudioFilter.");
         }
         filterList.addAll(Arrays.asList(filters));
