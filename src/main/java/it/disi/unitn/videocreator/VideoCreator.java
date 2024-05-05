@@ -652,6 +652,10 @@ public class VideoCreator {
                     "e' null o una stringa vuota, o l'ampiezza o l'altezza sono minori o uguali a 0.");
         } else {*/
             try {
+                //Sistemare sincronizzazione audio e video riscrivendo queste due righe in modo tale da supportare la
+                //comunicazione del numero di secondi per entrambe le opzioni.
+                builder.add("-async 1");
+                builder.add("-vsync 1");
                 builder.add("-r " + frameRate);
 
                 //builder.addInput(folder + "/" + pattern);

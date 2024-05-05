@@ -18,6 +18,7 @@ it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.adynamic
 it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.adynamicsmooth
 it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.aformat
 it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.afreqshift
+it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.atempo
 it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters
 it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.colorcorrect
 it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.format
