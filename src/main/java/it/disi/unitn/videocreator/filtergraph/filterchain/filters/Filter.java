@@ -32,7 +32,7 @@ public abstract class Filter {
      * @throws InvalidArgumentException If the given filter's name is null or an empty string
      */
     protected Filter(@NotNull String filterName) throws InvalidArgumentException {
-        if(filterName == null || filterName.isEmpty()) {
+        if(checkNullOrEmpty(filterName)) {
             throw new InvalidArgumentException("The filter's name cannot be null or an empty string.", "Il nome del " +
                     "filtro non puo' essere null o una stringa vuota.");
         }
