@@ -48,7 +48,7 @@ public class VideoCreator {
 
     private String pixelFormat, execFile = "";
 
-    private boolean isOutFullRange, videoStreamCopy, audioStreamCopy;
+    private boolean /*isOutFullRange, */videoStreamCopy, audioStreamCopy;
 
     private final Locale l;
 
@@ -82,7 +82,7 @@ public class VideoCreator {
                 System.err.println("ffcodec does not exist");
                 System.exit(1);
             }
-            isOutFullRange = false;
+            //isOutFullRange = false;
             l = Locale.getDefault();
         }
     }
@@ -176,7 +176,7 @@ public class VideoCreator {
     private boolean checkExecutable() {
         if (!Files.isExecutable(Paths.get(execFile))) {
             if (l == Locale.ITALY || l == Locale.ITALIAN) {
-                System.err.println("Non e' possibile eseguire il file " + execFile + ". Si prega di controllarne i permessi " +
+                System.err.println("Impossibile eseguire il file " + execFile + ". Si prega di controllarne i permessi " +
                         "di esecuzione e l'esistenza.");
             } else {
                 System.err.println("Cannot execute file " + execFile + ". Please check the user's permissions and that " +
@@ -456,14 +456,14 @@ public class VideoCreator {
         pixelFormat = pxfmt;
     }
 
-    /**
+    /*/**
      * Questo metodo imposta la modalit&agrave; di resa dei colori.
      *
      * @param val Valore booleano per indicare la modalit&agrave; di resa dei colori
      */
-    public void setOutFullRange(boolean val) {
+    /*public void setOutFullRange(boolean val) {
         isOutFullRange = val;
-    }
+    }*/
 
     /**
      * Enables/disables video stream copying.
