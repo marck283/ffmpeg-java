@@ -18,7 +18,7 @@ public abstract class Filter {
     protected final Map<String, String> options;
 
     /**
-     * This method chcks if the given parameter is null or an empty string.
+     * This method checks if the given parameter is null or an empty string.
      * @param val The given parameter
      * @return "true" if the given parameter is null or an empty string, otherwise "false".
      */
