@@ -3,7 +3,6 @@ package it.disi.unitn.videocreator.filtergraph;
 import it.disi.unitn.exceptions.InvalidArgumentException;
 import it.disi.unitn.videocreator.filtergraph.filterchain.FilterChain;
 import it.disi.unitn.videocreator.filtergraph.filterchain.SimpleFilterChain;
-import it.disi.unitn.videocreator.filtergraph.filterchain.filters.Filter;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
