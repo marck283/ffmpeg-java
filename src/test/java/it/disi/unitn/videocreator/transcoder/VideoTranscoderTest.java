@@ -23,13 +23,13 @@ class VideoTranscoderTest {
     void createCommand() throws NotEnoughArgumentsException, IOException, InvalidArgumentException, UnsupportedOperatingSystemException {
         FFMpegBuilder builder = new FFMpegBuilder("ffmpeg");
         VideoTranscoder transcoder = builder.newVideoTranscoder("./src/test/resources/input/mp4/example.mov");
-        transcoder.addInput("./src/test/resources/input/mp4/002.mp4");
+        transcoder.addInput("./src/test/resources/input/mp4/000.mp4");
         transcoder.enableVideoExtraction();
 
         //transcoder.setVideoSize(800, 600, "yuv420p", true);
         transcoder.setCodecID("mjpeg", true);
         transcoder.setPixelFormat("yuv420p");
-        transcoder.setOutFullRange(true); //If using mjpeg and YUV pixel formats, we have to set the color range to full.
+        //transcoder.setOutFullRange(true); //If using mjpeg and YUV pixel formats, we have to set the color range to full.
         transcoder.setVideoQuality(18);
 
         Scale scale = new Scale();
