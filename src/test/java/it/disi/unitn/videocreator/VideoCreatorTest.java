@@ -27,7 +27,7 @@ class VideoCreatorTest {
         //creator.setCodecID("mjpeg", true); //No need to set the codec ID if we maintain the picture format
         creator.setPixelFormat("yuv420p");
         creator.setVideoStreamCopy(true);
-        creator.setOutFullRange(true); //If using mjpeg and YUV pixel formats, we have to set the color range to full.
+        //creator.setOutFullRange(true); //If using mjpeg and YUV pixel formats, we have to set the color range to full.
         creator.setVideoQuality(18);
 
         Scale scale = new Scale();

@@ -2,11 +2,17 @@ package it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.
 
 import it.disi.unitn.exceptions.InvalidArgumentException;
 
+/**
+ * This class implements the "timecode" option of the "drawtext" filter.
+ */
 public class TimeCode {
     private int hours, minutes, seconds;
 
     private double rate;
 
+    /**
+     * This class's constructor.
+     */
     public TimeCode() {
         hours = 0;
         minutes = 0;

@@ -15,11 +15,20 @@ public class StringExt {
      * @throws InvalidArgumentException If the given argument is null or the empty string
      */
     public StringExt(@NotNull String str) throws InvalidArgumentException {
-        if(str == null || str.isEmpty()) {
+        if(checkNullOrEmpty(str)) {
             throw new InvalidArgumentException("The argument given to this constructor cannot be null nor can it be an " +
                     "empty string.", "L'argomento fornito a questo costruttore non puo' essere null o una stringa vuota.");
         }
         val = str;
+    }
+
+    /**
+     * This method checks if the given string is null or empty.
+     * @param str The given string.
+     * @return True if the given string is null or empty
+     */
+    public static boolean checkNullOrEmpty(String str) {
+        return str == null || str.isEmpty();
     }
 
     /**

@@ -21,7 +21,11 @@ it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.afreqshi
 it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.atempo
 it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters
 it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.colorcorrect
+it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.drawtext
+it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.drawtext.boxborderw
+it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.drawtext.timecode
 it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.format
 it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.scale
 it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.scale.scalingalgs
+it.disi.unitn.videocreator.fps_mode
 it.disi.unitn.videocreator.transcoder

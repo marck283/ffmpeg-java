@@ -11,6 +11,9 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Objects;
 
+/**
+ * This class implements the "drawtext" filter.
+ */
 public class DrawText extends VideoFilter {
 
     private int box, basetime, fontsize, text_shaping, boxw, boxh, shadowx, shadowy, start_number, tabsize, tc24hmax,
@@ -503,7 +506,7 @@ public class DrawText extends VideoFilter {
     /**
      * Sets the "text_source" option's value.
      * @param text_source The new "text_source" option's value. This value must not be null.
-     * @throws InvalidArgumentException If the given value is null or an empty string
+     * @throws InvalidArgumentException If the given value is null
      */
     public void setTextSource(@NotNull String text_source) throws InvalidArgumentException {
         if(text_source == null) {
