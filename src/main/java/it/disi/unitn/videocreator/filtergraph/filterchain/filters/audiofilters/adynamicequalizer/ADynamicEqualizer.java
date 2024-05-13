@@ -1,5 +1,6 @@
 package it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.adynamicequalizer;
 
+import it.disi.unitn.StringExt;
 import it.disi.unitn.exceptions.InvalidArgumentException;
 import it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.AudioFilter;
 import org.jetbrains.annotations.Contract;
@@ -283,7 +284,7 @@ public class ADynamicEqualizer extends AudioFilter {
      * "cutabove", "boostbelow" or "boostabove"
      */
     public void setMode(@NotNull String mode) throws InvalidArgumentException {
-        if(checkNullOrEmpty(mode)) {
+        if(StringExt.checkNullOrEmpty(mode)) {
             throw new InvalidArgumentException("The mode of filter operation cannot be null or an empty string.", "La " +
                     "modalita' con cui il filtro opera non puo' essere null o una stringa vuota.");
         }
@@ -307,7 +308,7 @@ public class ADynamicEqualizer extends AudioFilter {
      * "lowpass", "highpass" or "peak"
      */
     public void setDFType(@NotNull String dftype) throws InvalidArgumentException {
-        if(checkNullOrEmpty(dftype)) {
+        if(StringExt.checkNullOrEmpty(dftype)) {
             throw new InvalidArgumentException("The detection filter's type cannot be null or an empty string.", "Il tipo " +
                     "del filtro di rilevamento non puo' essere null o una stringa vuota.");
         }
@@ -329,7 +330,7 @@ public class ADynamicEqualizer extends AudioFilter {
      * @throws InvalidArgumentException If the target filter's type is different from "bell", "lowshelf" or "highshelf".
      */
     public void setTFType(@NotNull String tftype) throws InvalidArgumentException {
-        if(checkNullOrEmpty(tftype)) {
+        if(StringExt.checkNullOrEmpty(tftype)) {
             throw new InvalidArgumentException("The target filter's type cannot be null or an empty string.", "Il tipo " +
                     "del filtro obiettivo non puo' essere null o una stringa vuota.");
         }
@@ -351,7 +352,7 @@ public class ADynamicEqualizer extends AudioFilter {
      * "on" or "adaptive"
      */
     public void setAuto(@NotNull String auto) throws InvalidArgumentException {
-        if(checkNullOrEmpty(auto)) {
+        if(StringExt.checkNullOrEmpty(auto)) {
             throw new InvalidArgumentException("The \"auto\" value cannot be null or an empty string.", "Il valore \"auto\" " +
                     "non puo' essere null o una stringa vuota.");
         }
@@ -373,7 +374,7 @@ public class ADynamicEqualizer extends AudioFilter {
      * @throws InvalidArgumentException If the given precision value is different from "auto", "float" or "double"
      */
     public void setPrecision(@NotNull String precision) throws InvalidArgumentException {
-        if(checkNullOrEmpty(precision)) {
+        if(StringExt.checkNullOrEmpty(precision)) {
             throw new InvalidArgumentException("The precision value cannot be null or an empty string.", "Il valore della " +
                     "precisione non puo' essere null o una stringa vuota.");
         }

@@ -29,33 +29,11 @@ public abstract class SimpleFilterGraph extends FilterGraph {
         sfcList = new ArrayList<>();
     }
 
-    /**
-     * This method adds the given filter chain to the calling instance of this class.
-     * @param filterChain The given filter chain
-     * @throws InvalidArgumentException If the given filter chain is not an instance of SimpleFilterChain
-     */
     @Override
-    public void addFilterChain(@NotNull FilterChain filterChain) throws InvalidArgumentException {
-        if(!(filterChain instanceof SimpleFilterChain)) {
-            throw new InvalidArgumentException("The given filter chain must be an instance of SimpleFitlerChain.", "La " +
-                    "catena di filtri fornita in input deve essere un'istanza di SimpleFilterChain.");
-        }
-        sfcList.add((SimpleFilterChain) filterChain);
-    }
+    public abstract void addFilterChain(@NotNull FilterChain filterChain) throws InvalidArgumentException;
 
-    /**
-     * This method removes the given filter chain from the calling instance of this class.
-     * @param filterChain The given filter chain
-     * @throws InvalidArgumentException If the given filter chain is not an instance of SimpleFilterChain
-     */
     @Override
-    public void removeFilterChain(@NotNull FilterChain filterChain) throws InvalidArgumentException {
-        if(!(filterChain instanceof SimpleFilterChain)) {
-            throw new InvalidArgumentException("The given filter chain must be an instance of SimpleFitlerChain.", "La " +
-                    "catena di filtri fornita in input deve essere un'istanza di SimpleFilterChain.");
-        }
-        sfcList.remove(filterChain);
-    }
+    public abstract void removeFilterChain(@NotNull FilterChain filterChain) throws InvalidArgumentException;
 
     /**
      * This method returns the String representation of the calling object.

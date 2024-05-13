@@ -1,5 +1,6 @@
 package it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.acompressor;
 
+import it.disi.unitn.StringExt;
 import it.disi.unitn.exceptions.InvalidArgumentException;
 import it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.AudioFilter;
 import org.jetbrains.annotations.NotNull;
@@ -44,7 +45,7 @@ public class ACompressor extends AudioFilter {
      * @throws InvalidArgumentException If the new mode is null, empty or a value different from "downward" or "upward"
      */
     public void setMode(@NotNull String val) throws InvalidArgumentException {
-        if(checkNullOrEmpty(val) || !(val.equals("downward") || val.equals("upward"))) {
+        if(StringExt.checkNullOrEmpty(val) || !(val.equals("downward") || val.equals("upward"))) {
             throw new InvalidArgumentException("The mode given to the ACompressor filter cannot be null, empty or a value " +
                     "different from \"downward\" and \"upward\".", "La modalita' fornita al filtro ACompressor non puo' " +
                     "essere null, vuota o corrispondere ad un valore diverso da \"downward\" o \"upward\".");
@@ -157,7 +158,7 @@ public class ACompressor extends AudioFilter {
      * @throws InvalidArgumentException If the new link value is null, empty or different from "average" or "maximum"
      */
     public void setLink(@NotNull String val) throws InvalidArgumentException {
-        if(checkNullOrEmpty(val) || !(val.equals("average") || val.equals("maximum"))) {
+        if(StringExt.checkNullOrEmpty(val) || !(val.equals("average") || val.equals("maximum"))) {
             throw new InvalidArgumentException("The link value cannot be null, empty or different from \"average\" or " +
                     "\"maximum\".", "Il valore del parametro \"link\" non puo' essere null, vuoto o diverso da \"average\" " +
                     "o \"maximum\".");
@@ -172,7 +173,7 @@ public class ACompressor extends AudioFilter {
      * @throws InvalidArgumentException If the new detection value is null, empty or different from "peak" or "rms"
      */
     public void setDetection(@NotNull String val) throws InvalidArgumentException {
-        if(checkNullOrEmpty(val) || !(val.equals("peak") || val.equals("rms"))) {
+        if(StringExt.checkNullOrEmpty(val) || !(val.equals("peak") || val.equals("rms"))) {
             throw new InvalidArgumentException("The detection value cannot be null, empty or different from \"peak\" or " +
                     "\"rms\".", "il valore del parametro \"detection\" non puo' essere null, vuoto o diverso da \"peak\" " +
                     "o \"rms\"");

@@ -1,5 +1,6 @@
 package it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.adenorm;
 
+import it.disi.unitn.StringExt;
 import it.disi.unitn.exceptions.InvalidArgumentException;
 import it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.AudioFilter;
 import org.jetbrains.annotations.NotNull;
@@ -65,7 +66,7 @@ public class ADenorm extends AudioFilter {
      * by FFmpeg
      */
     public void setType(@NotNull String val) throws InvalidArgumentException {
-        if(checkNullOrEmpty(val)) {
+        if(StringExt.checkNullOrEmpty(val)) {
             throw new InvalidArgumentException("The type of added noise cannot be null or an empty string.", "Il tipo di " +
                     "rumore aggiunto non puo' essere null o una stringa vuota.");
         }

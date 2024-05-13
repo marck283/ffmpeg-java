@@ -1,5 +1,6 @@
 package it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.adrc;
 
+import it.disi.unitn.StringExt;
 import it.disi.unitn.exceptions.InvalidArgumentException;
 import it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.AudioFilter;
 import it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.aformat.ChannelLayout;
@@ -67,7 +68,7 @@ public class ADrc extends AudioFilter {
      * by FFmpeg
      */
     public void setTransfer(@NotNull String val) throws InvalidArgumentException {
-        if(checkNullOrEmpty(val)) {
+        if(StringExt.checkNullOrEmpty(val)) {
             throw new InvalidArgumentException("The transfer expression cannot be null or an empty string.", "L'espressione " +
                     "di trasferimento non puo' essere null o una stringa vuota.");
         }

@@ -1,6 +1,7 @@
 package it.disi.unitn.json.jsonparser;
 
 import com.google.gson.*;
+import it.disi.unitn.StringExt;
 import it.disi.unitn.exceptions.InvalidArgumentException;
 import org.jetbrains.annotations.NotNull;
 
@@ -36,7 +37,7 @@ public class JsonParser {
      * @throws InvalidArgumentException If the argument given to this method is null or an empty string
      */
     public JsonArray getJsonArray(@NotNull String arrName) throws InvalidArgumentException {
-        if(arrName == null || arrName.isEmpty()) {
+        if(StringExt.checkNullOrEmpty(arrName)) {
             throw new InvalidArgumentException("The parameter given to this method cannot be null or an empty string.",
                     "Il parametro fornito a questo metodo non puo' essere null o una stringa vuota.");
         }
@@ -52,7 +53,7 @@ public class JsonParser {
      * @throws InvalidArgumentException If the argument given to this method is null or an empty string
      */
     public String getString(@NotNull String name) throws InvalidArgumentException {
-        if(name == null || name.isEmpty()) {
+        if(StringExt.checkNullOrEmpty(name)) {
             throw new InvalidArgumentException("The parameter given to this method cannot be null or an empty string.",
                     "Il parametro fornito a questo metodo non puo' essere null o una stringa vuota.");
         }
@@ -97,7 +98,7 @@ public class JsonParser {
      * @throws InvalidArgumentException If any of the parameters passed to this method is null or an empty string
      */
     public String getString(@NotNull JsonElement el, @NotNull String name) throws InvalidArgumentException {
-        if(el == null || name == null || name.isEmpty()) {
+        if(el == null || StringExt.checkNullOrEmpty(name)) {
             throw new InvalidArgumentException("The parameters passed to this method cannot be null or empty strings.",
                     "I parametri passati a questo metodo non possono essere null o stringhe vuote.");
         }
@@ -117,7 +118,7 @@ public class JsonParser {
      * @throws InvalidArgumentException If any of the parameters passed to this method is null or an empty string
      */
     public float getFloat(@NotNull JsonElement el, @NotNull String name) throws InvalidArgumentException {
-        if(el == null || name == null || name.isEmpty()) {
+        if(el == null || StringExt.checkNullOrEmpty(name)) {
             throw new InvalidArgumentException("The parameters passed to this method cannot be null or empty strings.",
                     "I parametri passati a questo metodo non possono essere null o stringhe vuote.");
         }
@@ -137,7 +138,7 @@ public class JsonParser {
      * @throws InvalidArgumentException If any of the parameters passed to this method is null or an empty string
      */
     public int getInt(@NotNull JsonElement el, @NotNull String name) throws InvalidArgumentException {
-        if(el == null || name == null || name.isEmpty()) {
+        if(el == null || StringExt.checkNullOrEmpty(name)) {
             throw new InvalidArgumentException("The parameters passed to this method cannot be null or empty strings.",
                     "I parametri passati a questo metodo non possono essere null o stringhe vuote.");
         }

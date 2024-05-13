@@ -1,5 +1,6 @@
 package it.disi.unitn.videocreator.fps_mode;
 
+import it.disi.unitn.StringExt;
 import it.disi.unitn.exceptions.InvalidArgumentException;
 import org.jetbrains.annotations.NotNull;
 
@@ -24,7 +25,7 @@ public class FPSMode {
      * @throws InvalidArgumentException If the given stream specifier is null or an empty string
      */
     public void setStreamSpecifier(@NotNull String stream_specifier) throws InvalidArgumentException {
-        if(stream_specifier == null || stream_specifier.isEmpty()) {
+        if(StringExt.checkNullOrEmpty(stream_specifier)) {
             throw new InvalidArgumentException("The given stream specifier cannot be null or empty.", "L'identificativo " +
                     "dello stream fornito non puo' essere null o una stringa vuota.");
         }
@@ -39,7 +40,7 @@ public class FPSMode {
      * "cfr", "vfr" or "auto"
      */
     public void setParameter(@NotNull String parameter) throws InvalidArgumentException {
-        if(parameter == null || parameter.isEmpty()) {
+        if(StringExt.checkNullOrEmpty(parameter)) {
             throw new InvalidArgumentException("The given \"parameter\" value cannot be null or an empty string.", "Il " +
                     "valore di \"parameter\" fornito non puo' essere null o una stringa vuota.");
         }

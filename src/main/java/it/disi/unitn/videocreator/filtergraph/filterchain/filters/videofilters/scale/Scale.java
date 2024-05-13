@@ -1,5 +1,6 @@
 package it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.scale;
 
+import it.disi.unitn.StringExt;
 import it.disi.unitn.exceptions.InvalidArgumentException;
 import it.disi.unitn.exceptions.NotEnoughArgumentsException;
 import it.disi.unitn.exceptions.UnsupportedOperatingSystemException;
@@ -162,12 +163,12 @@ public class Scale extends VideoFilter {
             throw new UnsupportedOperationException();
         }
 
-        if(checkNullOrEmpty(width)) {
+        if(StringExt.checkNullOrEmpty(width)) {
             throw new InvalidArgumentException("The video width cannot be null or an empty string.", "L'ampiezza dell'immagine " +
                     "non puo' essere null o una stringa vuota.");
         }
 
-        if(checkNullOrEmpty(height)) {
+        if(StringExt.checkNullOrEmpty(height)) {
             throw new InvalidArgumentException("The video height cannot be null or an empty string.", "L'altezza dell'immagine " +
                     "non puo' essere null o una stringa vuota.");
         }
@@ -183,7 +184,7 @@ public class Scale extends VideoFilter {
                     "non rappresentano un numero intero.");
         }
 
-        if(checkNullOrEmpty(pix_fmt)) {
+        if(StringExt.checkNullOrEmpty(pix_fmt)) {
             throw new NotEnoughArgumentsException("The pixel format must neither be null nor an empty string.",
                     "Il formato dei pixel non puo' essere null o una stringa vuota.");
         }
@@ -229,7 +230,7 @@ public class Scale extends VideoFilter {
             }
             throw new UnsupportedOperationException();
         }
-        if (checkNullOrEmpty(videoSizeID)) {
+        if (StringExt.checkNullOrEmpty(videoSizeID)) {
             throw new InvalidArgumentException("The video size ID should not be null.", "L'ID della proporzione visiva " +
                     "non deve essere null.");
         }
@@ -266,7 +267,7 @@ public class Scale extends VideoFilter {
      * @throws InvalidArgumentException If the input color range is null, an empty string or not recognizable by FFmpeg
      */
     public void setInputRange(@NotNull String in_range) throws InvalidArgumentException {
-        if(checkNullOrEmpty(in_range)) {
+        if(StringExt.checkNullOrEmpty(in_range)) {
             throw new InvalidArgumentException("The input color range cannot be null or an empty string.", "Il range di " +
                     "input dei colori non puo' essere null o una stringa vuota.");
         }
@@ -285,7 +286,7 @@ public class Scale extends VideoFilter {
      * @throws InvalidArgumentException If the output color range is null, an empty string or not recognizable by FFmpeg
      */
     public void setOutputRange(@NotNull String out_range) throws InvalidArgumentException {
-        if(checkNullOrEmpty(out_range)) {
+        if(StringExt.checkNullOrEmpty(out_range)) {
             throw new InvalidArgumentException("The input color range cannot be null or an empty string.", "Il range di " +
                     "input dei colori non puo' essere null o una stringa vuota.");
         }
@@ -305,7 +306,7 @@ public class Scale extends VideoFilter {
      * FFmpeg
      */
     public void forceOriginalAspectRatio(@NotNull String val) throws InvalidArgumentException {
-        if(checkNullOrEmpty(val)) {
+        if(StringExt.checkNullOrEmpty(val)) {
             throw new InvalidArgumentException("The parameter given to this method cannot be null or an empty string.",
                     "Il parametro fornito a questo metodo non puo' essere null o una stringa vuota.");
         }
@@ -334,7 +335,7 @@ public class Scale extends VideoFilter {
      * "init" and "frame"
      */
     public void setEval(@NotNull String eval) throws InvalidArgumentException {
-        if(checkNullOrEmpty(eval)) {
+        if(StringExt.checkNullOrEmpty(eval)) {
             throw new InvalidArgumentException("The width and height's evaluation parameter cannot be null or an empty " +
                     "string.", "Il valore del parametro di valutazione dell'ampiezza e dell'altezza non puo' essere null " +
                     "o una stringa vuota.");
@@ -355,7 +356,7 @@ public class Scale extends VideoFilter {
      * or "-1"
      */
     public void setInterl(@NotNull String val) throws InvalidArgumentException {
-        if(checkNullOrEmpty(val)) {
+        if(StringExt.checkNullOrEmpty(val)) {
             throw new InvalidArgumentException("The interlacing mode cannot be null or an empty string.", "La modalita' " +
                     "di interlacciamento non puo' essere null o unstringa vuota.");
         }

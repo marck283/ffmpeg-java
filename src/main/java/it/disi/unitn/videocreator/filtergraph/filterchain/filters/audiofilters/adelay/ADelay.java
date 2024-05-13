@@ -1,5 +1,6 @@
 package it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.adelay;
 
+import it.disi.unitn.StringExt;
 import it.disi.unitn.exceptions.InvalidArgumentException;
 import it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.AudioFilter;
 import org.jetbrains.annotations.NotNull;
@@ -33,7 +34,7 @@ public class ADelay extends AudioFilter {
      * @throws InvalidArgumentException If the new delay is null or an empty string
      */
     public void addDelay(@NotNull String delay) throws InvalidArgumentException {
-        if(checkNullOrEmpty(delay)) {
+        if(StringExt.checkNullOrEmpty(delay)) {
             throw new InvalidArgumentException("The given delay cannot be null or an empty string.", "Il ritardo fornito " +
                     "non puo' essere null o una stringa vuota.");
         }
@@ -52,7 +53,7 @@ public class ADelay extends AudioFilter {
             throw new InvalidArgumentException("The given position cannot be negative or greater or equal to the list's " +
                     "size.", "La data posizione non puo' essere negativa o maggiore o uguale alla dimensione della lista.");
         }
-        if(delay == null || delay.isEmpty()) {
+        if(StringExt.checkNullOrEmpty(delay)) {
             throw new InvalidArgumentException("The given delay cannot be null or an empty string.", "Il ritardo fornito " +
                     "non puo' essere null o una stringa vuota.");
         }

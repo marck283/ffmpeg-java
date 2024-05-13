@@ -1,5 +1,6 @@
 package it.disi.unitn.videocreator.filtergraph.filterchain;
 
+import it.disi.unitn.StringExt;
 import it.disi.unitn.exceptions.InvalidArgumentException;
 import it.disi.unitn.videocreator.filtergraph.filterchain.filters.Filter;
 import org.jetbrains.annotations.NotNull;
@@ -34,7 +35,7 @@ public class FilterChain {
      * @throws InvalidArgumentException If the given argument is null or an empty string.
      */
     private void checkNullOrEmpty(@NotNull String streamName) throws InvalidArgumentException {
-        if(streamName == null || streamName.isEmpty()) {
+        if(StringExt.checkNullOrEmpty(streamName)) {
             throw new InvalidArgumentException("The inputs and the outputs to the filters cannot be null or empty strings.",
                     "Gli input e gli output dei filtri non possono essere null o stringhe vuote.");
         }

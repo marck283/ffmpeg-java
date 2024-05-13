@@ -1,5 +1,6 @@
 package it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.format;
 
+import it.disi.unitn.StringExt;
 import it.disi.unitn.exceptions.InvalidArgumentException;
 import it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.VideoFilter;
 import org.jetbrains.annotations.NotNull;
@@ -32,7 +33,7 @@ public class Format extends VideoFilter {
      * @throws InvalidArgumentException If the given pixel format is null or an empty string
      */
     public void addPixelFormat(@NotNull String pix_fmt) throws InvalidArgumentException {
-        if(checkNullOrEmpty(pix_fmt)) {
+        if(StringExt.checkNullOrEmpty(pix_fmt)) {
             throw new InvalidArgumentException("The pixel format cannot be null or an empty string.", "Il formato dei " +
                     "pixel non puo' essere null o una stringa vuota.");
         }
@@ -46,7 +47,7 @@ public class Format extends VideoFilter {
      * @throws InvalidArgumentException If the given pixel format is null or an empty string
      */
     public void removePixelFormat(@NotNull String pix_fmt) throws InvalidArgumentException {
-        if(checkNullOrEmpty(pix_fmt)) {
+        if(StringExt.checkNullOrEmpty(pix_fmt)) {
             throw new InvalidArgumentException("The pixel format cannot be null or an empty string.", "Il formato dei " +
                     "pixel non puo' essere null o una stringa vuota.");
         }
@@ -60,7 +61,7 @@ public class Format extends VideoFilter {
      * @throws InvalidArgumentException If the given color space is null or an empty string
      */
     public void addColorSpace(@NotNull String col_spc) throws InvalidArgumentException {
-        if(checkNullOrEmpty(col_spc)) {
+        if(StringExt.checkNullOrEmpty(col_spc)) {
             throw new InvalidArgumentException("The given color space cannot be null or an empty string.", "Il dato spazio " +
                     "dei colori non puo' essere null o una stringa vuota.");
         }
@@ -74,7 +75,7 @@ public class Format extends VideoFilter {
      * @throws InvalidArgumentException If the given color space is null or an empty string
      */
     public void removeColorSpace(@NotNull String col_spc) throws InvalidArgumentException {
-        if(checkNullOrEmpty(col_spc)) {
+        if(StringExt.checkNullOrEmpty(col_spc)) {
             throw new InvalidArgumentException("The given color space cannot be null or an empty string.", "Il dato spazio " +
                     "dei colori non puo' essere null o una stringa vuota.");
         }
@@ -88,7 +89,7 @@ public class Format extends VideoFilter {
      * @throws InvalidArgumentException If the given color range is null or an empty string
      */
     public void addColorRange(@NotNull String col_rng) throws InvalidArgumentException {
-        if(checkNullOrEmpty(col_rng)) {
+        if(StringExt.checkNullOrEmpty(col_rng)) {
             throw new InvalidArgumentException("The given color range cannot be null or an empty string.", "Il dato " +
                     "intervallo dei colori non puo' essere null o una stringa vuota.");
         }
@@ -102,7 +103,7 @@ public class Format extends VideoFilter {
      * @throws InvalidArgumentException If the given color range is null or an empty string
      */
     public void removeColorRange(@NotNull String col_rng) throws InvalidArgumentException {
-        if(checkNullOrEmpty(col_rng)) {
+        if(StringExt.checkNullOrEmpty(col_rng)) {
             throw new InvalidArgumentException("The given color range cannot be null or an empty string.", "Il dato " +
                     "intervallo dei colori non puo' essere null o una stringa vuota.");
         }

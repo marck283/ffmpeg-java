@@ -2,6 +2,7 @@ package it.disi.unitn.videocreator;
 
 import it.disi.unitn.FFMpeg;
 import it.disi.unitn.FFMpegBuilder;
+import it.disi.unitn.StringExt;
 import it.disi.unitn.exceptions.InvalidArgumentException;
 import it.disi.unitn.exceptions.NotEnoughArgumentsException;
 import org.apache.commons.io.FileUtils;
@@ -10,6 +11,7 @@ import org.jetbrains.annotations.NotNull;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
@@ -35,7 +37,7 @@ public class TracksMerger extends VideoCreator {
     public TracksMerger(@NotNull FFMpegBuilder builder, @NotNull String outputFile,
                  @NotNull String audioInput, @NotNull String videoInput) throws NotEnoughArgumentsException {
         super(builder, outputFile);
-        if(audioInput == null || audioInput.isEmpty() || videoInput == null || videoInput.isEmpty()) {
+        if(StringExt.checkNullOrEmpty(audioInput) || StringExt.checkNullOrEmpty(videoInput)) {
             throw new NotEnoughArgumentsException("The arguments to this class's constructor cannot be null or empty " +
                     "strings.", "Nessuno degli argomenti forniti al costruttore di questa classe puo' essere null o una " +
                     "stringa vuota.");
@@ -104,7 +106,8 @@ public class TracksMerger extends VideoCreator {
     private @NotNull File writeTXTFile(@NotNull List<String> inputFiles, @NotNull String tempFile) throws IOException {
         File file = new File(tempFile);
         if(file.exists()) {
-            file.delete();
+            //file.delete();
+            Files.deleteIfExists(file.toPath());
         }
         boolean created = file.createNewFile();
         if(!created) {
@@ -141,7 +144,8 @@ public class TracksMerger extends VideoCreator {
             throw new InvalidArgumentException("Either the given timeout is less than or equal to zero or the given TimeUnit " +
                     "instance is null.", "Il timeout fornito è minore o uguale a zero oppure l'istanza di TimeUnit è null.");
         }
-        if(inputFiles == null || inputFiles.stream().anyMatch(s -> s == null || s.isEmpty()) || tempFile == null || tempFile.isEmpty()) {
+        if(inputFiles == null || inputFiles.stream().anyMatch(StringExt::checkNullOrEmpty) ||
+                StringExt.checkNullOrEmpty(tempFile)) {
             throw new NotEnoughArgumentsException("No argument to this method can be null, less than or equal to zero or " +
                     " an empty string, nor can it contain null or empty strings.", "Nessuno degli argomenti forniti a " +
                     "questo metodo puo' essere null, minore o uguale a zero o una stringa vuota o contenere stringhe null " +

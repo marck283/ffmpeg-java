@@ -1,5 +1,6 @@
 package it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.drawtext;
 
+import it.disi.unitn.StringExt;
 import it.disi.unitn.exceptions.InvalidArgumentException;
 import it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.VideoFilter;
 import it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.drawtext.boxborderw.BoxBorderW;
@@ -101,7 +102,7 @@ public class DrawText extends VideoFilter {
      * @throws InvalidArgumentException If the given value is null or an empty string
      */
     public void setBoxColor(@NotNull String boxcolor) throws InvalidArgumentException {
-        if(checkNullOrEmpty(boxcolor)) {
+        if(StringExt.checkNullOrEmpty(boxcolor)) {
             throw new InvalidArgumentException("The given \"boxcolor\" value cannot be null or empty.", "Il valore " +
                     "fornito per \"boxcolor\" non puo' essere null o una stringa vuota.");
         }
@@ -131,7 +132,7 @@ public class DrawText extends VideoFilter {
      *      information about the accepted values
      */
     public void setTextAlign(@NotNull String text_align) throws InvalidArgumentException {
-        if(checkNullOrEmpty(text_align)) {
+        if(StringExt.checkNullOrEmpty(text_align)) {
             throw new InvalidArgumentException("The \"text_align\" value cannot be null or empty.", "Il valore dell'opzione " +
                     "\"text_align\" non puo' essere null o una stringa vuota.");
         }
@@ -146,7 +147,7 @@ public class DrawText extends VideoFilter {
      *         "font"
      */
     public void setYAlign(@NotNull String y_align) throws InvalidArgumentException {
-        if(checkNullOrEmpty(y_align)) {
+        if(StringExt.checkNullOrEmpty(y_align)) {
             throw new InvalidArgumentException("The \"y_align\" value cannot be null or an empty string.", "Il valore " +
                     "dell'opzione \"y_align\" non puo' essere null o una stringa vuota.");
         }
@@ -180,7 +181,7 @@ public class DrawText extends VideoFilter {
      * for the list of accepted values
      */
     public void setBorderColor(@NotNull String bordercolor) throws InvalidArgumentException {
-        if(checkNullOrEmpty(bordercolor)) {
+        if(StringExt.checkNullOrEmpty(bordercolor)) {
             throw new InvalidArgumentException("The given \"bordercolor\" value cannot be null or an empty string.", "Il " +
                     "valore fornito per l'opzione \"bordercolor\" non puo' essere null o una stringa vuota.");
         }
@@ -196,7 +197,7 @@ public class DrawText extends VideoFilter {
      *     https://ffmpeg.org/ffmpeg-filters.html#drawtext_005fexpansion</a> for specifications on the required syntax
      */
     public void setExpansion(@NotNull String expansion) throws InvalidArgumentException {
-        if(checkNullOrEmpty(expansion)) {
+        if(StringExt.checkNullOrEmpty(expansion)) {
             throw new InvalidArgumentException("The given \"expansion\" value cannot be null or an empty string.", "Il " +
                     "valore fornito per l'opzione \"expansion\" non puo' essere null o una stringa.");
         }
@@ -234,7 +235,7 @@ public class DrawText extends VideoFilter {
      * for the list of accepted color values
      */
     public void setFontColor(@NotNull String fontcolor) throws InvalidArgumentException {
-        if(checkNullOrEmpty(fontcolor)) {
+        if(StringExt.checkNullOrEmpty(fontcolor)) {
             throw new InvalidArgumentException("The given \"fontcolor\" option's value cannot be null or an empty string.",
                     "Il valore dell'opzione \"fontcolor\" non puo' essere null o una stringa vuota.");
         }
@@ -250,7 +251,7 @@ public class DrawText extends VideoFilter {
      * for the list of accepted color values.
      */
     public void setFontColorExpr(@NotNull String fontcolor_expr) throws InvalidArgumentException {
-        if(checkNullOrEmpty(fontcolor_expr)) {
+        if(StringExt.checkNullOrEmpty(fontcolor_expr)) {
             throw new InvalidArgumentException("The given \"fontcolor_expr\" option's value cannot be null or an empty " +
                     "string.", "Il valore dell'opzione \"fontcolor_expr\" non puo' essere null o una stringa vuota.");
         }
@@ -264,7 +265,7 @@ public class DrawText extends VideoFilter {
      * @throws InvalidArgumentException If the given value is null or an empty string
      */
     public void setFont(@NotNull String font) throws InvalidArgumentException {
-        if(checkNullOrEmpty(font)) {
+        if(StringExt.checkNullOrEmpty(font)) {
             throw new InvalidArgumentException("The given \"font\" value cannot be null or an empty string.", "Il valore " +
                     "dell'opzione \"font\" non puo' essere null o una stringa vuota.");
         }
@@ -279,7 +280,7 @@ public class DrawText extends VideoFilter {
      * existing or readable file
      */
     public void setFontFile(@NotNull String fontfile) throws InvalidArgumentException {
-        if(checkNullOrEmpty(fontfile)) {
+        if(StringExt.checkNullOrEmpty(fontfile)) {
             throw new InvalidArgumentException("The given \"fontfile\" option's value cannot be null or an empty string.",
                     "Il valore dell'opzione \"fontfile\" non puo' essere null o una stringa vuota.");
         }
@@ -338,7 +339,7 @@ public class DrawText extends VideoFilter {
      * FFmpeg
      */
     public void setFtLoadFlags(@NotNull String ft_load_flags) throws InvalidArgumentException {
-        if(checkNullOrEmpty(ft_load_flags)) {
+        if(StringExt.checkNullOrEmpty(ft_load_flags)) {
             throw new InvalidArgumentException("The given \"ft_load_flags\" option's value cannot be null or an empty " +
                     "string.", "Il valore dell'opzione \"ft_load_flags\" non puo' essere null o una stringa vuota.");
         }
@@ -361,7 +362,7 @@ public class DrawText extends VideoFilter {
      * for the list of accepted color names
      */
     public void setShadowColor(@NotNull String shadowcolor) throws InvalidArgumentException {
-        if(checkNullOrEmpty(shadowcolor)) {
+        if(StringExt.checkNullOrEmpty(shadowcolor)) {
             throw new InvalidArgumentException("The given \"shadowcolor\" option's value cannot be null or an empty string.",
                     "Il valore dell'opzione \"shadowcolor\" non puo' essere null o una stringa vuota.");
         }
@@ -470,7 +471,7 @@ public class DrawText extends VideoFilter {
      * string
      */
     public void setText(@NotNull String text) throws InvalidArgumentException {
-        if(!checkNullOrEmpty(textfile)) {
+        if(!StringExt.checkNullOrEmpty(textfile)) {
             throw new InvalidArgumentException("The given \"text\" option's value cannot be set because the \"textfile\" " +
                     "option is already set.", "Il valore dell'opzione \"text\" non puo' essere impostato perche' quello " +
                     "dell'opzione \"textfile\" e' gie' stato impostato.");
@@ -489,7 +490,7 @@ public class DrawText extends VideoFilter {
      * @throws InvalidArgumentException If the "text" option is already set or the given value is null
      */
     public synchronized void setTextFile(@NotNull String textfile) throws InvalidArgumentException {
-        if(!checkNullOrEmpty(text)) {
+        if(!StringExt.checkNullOrEmpty(text)) {
             throw new InvalidArgumentException("The given \"textfile\" option's value cannot be set because the \"text\" " +
                     "option is already set.", "Il valore dell'opzione \"textfile\" non puo' essere impostato perche' quello " +
                     "dell'opzione \"text\" e' gia' stato impostato.");
@@ -539,7 +540,7 @@ public class DrawText extends VideoFilter {
      * negative
      */
     public void setX(@NotNull String x) throws InvalidArgumentException {
-        if(checkNullOrEmpty(x)) {
+        if(StringExt.checkNullOrEmpty(x)) {
             throw new InvalidArgumentException("The given \"x\" option's value cannot be null or an empty string.", "Il " +
                     "valore dell'opzione \"x\" non puo' essere null o una stringa vuota.");
         }
@@ -565,7 +566,7 @@ public class DrawText extends VideoFilter {
      * negative
      */
     public void setY(@NotNull String y) throws InvalidArgumentException {
-        if(checkNullOrEmpty(y)) {
+        if(StringExt.checkNullOrEmpty(y)) {
             throw new InvalidArgumentException("The given \"y\" option's value cannot be null or an empty string.", "Il " +
                     "valore dell'opzione \"y\" non puo' essere null o una stringa vuota.");
         }
@@ -620,7 +621,7 @@ public class DrawText extends VideoFilter {
         options.put("tc24hmax", String.valueOf(tc24hmax));
         options.put("text", text);
         options.put("textfile", textfile);
-        if(!checkNullOrEmpty(text_source)) {
+        if(!StringExt.checkNullOrEmpty(text_source)) {
             options.put("text_source", text_source);
         }
         options.put("reload", String.valueOf(reload));
