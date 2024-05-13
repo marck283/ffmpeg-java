@@ -50,8 +50,8 @@ public class ProcessPool {
      */
     public ProcessPool(@NotNull File model, @NotNull String imageExtension, @NotNull String pathToImagesFolder, int width,
                        int height) throws InvalidArgumentException {
-        if(model == null || imageExtension == null || imageExtension.isEmpty() || pathToImagesFolder == null ||
-                pathToImagesFolder.isEmpty() || width <= 0 || height <= 0) {
+        if(model == null || StringExt.checkNullOrEmpty(imageExtension) || StringExt.checkNullOrEmpty(pathToImagesFolder)
+                || width <= 0 || height <= 0) {
             throw new InvalidArgumentException("No argument to this constructor can be null, an empty string  or less " +
                     "than or equal to zero.", "Nessuno degli argomenti forniti a questo costruttore puo' essere null, " +
                     "una stringa vuota o minore o uguale a zero.");
@@ -70,7 +70,7 @@ public class ProcessPool {
      * @throws InvalidArgumentException If the argument given to this method is null or an empty string
      */
     public void setDesc(@NotNull String newdesc) throws InvalidArgumentException {
-        if(newdesc == null || newdesc.isEmpty()) {
+        if(StringExt.checkNullOrEmpty(newdesc)) {
             throw new InvalidArgumentException("The argument to this method cannot be null or an empty string.", "L'argomento " +
                     "fornito a questo metodo non puo' essere null o una stringa vuota.");
         }
@@ -151,7 +151,7 @@ public class ProcessPool {
             PumpStreamHandler streamHandler = new PumpStreamHandler();
             DefaultExecutor executor = DefaultExecutor.builder().get();
             ExecuteWatchdog.Builder builder = ExecuteWatchdog.builder();
-            builder.setTimeout(Duration.ofMillis(timeout)); //Durata in minuti
+            builder.setTimeout(Duration.ofMillis(timeout)); //Duration in milliseconds
             ExecuteWatchdog watchdog = builder.get();
             executor.setStreamHandler(streamHandler);
             executor.setWatchdog(watchdog);

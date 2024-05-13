@@ -16,7 +16,7 @@ import java.nio.file.Paths;*/
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
+//import java.util.Objects;
 
 /**
  * Builder class for convenience class FFMpeg
@@ -71,7 +71,7 @@ public class FFMpegBuilder {
      * @throws InvalidArgumentException If the given argument is null or an empty string
      */
     public void add(@NotNull String elem) throws InvalidArgumentException {
-        if(elem == null || elem.isEmpty()) {
+        if(StringExt.checkNullOrEmpty(elem)) {
             throw new InvalidArgumentException("An attempt to add a null or empty argument to the FFmpeg command was made.",
                     "E' stato effettuato un tentativo di aggiungere un argomento null o una stringa vuota al comando " +
                             "FFmpeg.");
@@ -86,7 +86,7 @@ public class FFMpegBuilder {
      * @throws NotEnoughArgumentsException If the second argument is null or an empty string
      */
     public void add(int index, @NotNull String elem) throws NotEnoughArgumentsException {
-        if(elem == null || elem.isEmpty()) {
+        if(StringExt.checkNullOrEmpty(elem)) {
             throw new NotEnoughArgumentsException("An attempt to add a null or empty argument to the FFmpeg command was made.",
                     "E' stato effettuato un tentativo di aggiungere un argomento null o una stringa vuota al comando " +
                             "FFmpeg.");
@@ -197,7 +197,7 @@ public class FFMpegBuilder {
      * @throws InvalidArgumentException When one of the arguments given to this method is null
      */
     public void addAllInputs(@NotNull String @NotNull ... inputFiles) throws InvalidArgumentException {
-        if(inputFiles == null || Arrays.stream(inputFiles).anyMatch(Objects::isNull)) {
+        if(inputFiles == null || Arrays.stream(inputFiles).anyMatch(StringExt::checkNullOrEmpty)) {
             throw new InvalidArgumentException("None of the arguments given to this method can be null or an empty " +
                     "string.", "Nessuno degli argomenti forniti a questo metodo puo' essere null o una stringa vuota.");
         }
@@ -231,7 +231,7 @@ public class FFMpegBuilder {
      * @throws InvalidArgumentException If the given argument is null or an empty string
      */
     public void addOutput(@NotNull String outputFile) throws InvalidArgumentException {
-        if(outputFile == null || outputFile.isEmpty()) {
+        if(StringExt.checkNullOrEmpty(outputFile)) {
             throw new InvalidArgumentException("An attempt to add a null or empty argument to the FFmpeg command to " +
                     "be executed was made.", "E' stato effettuato un tentativo di aggiungere un argomento null o una " +
                     "stringa vuota al comando FFmpeg da eseguire.");

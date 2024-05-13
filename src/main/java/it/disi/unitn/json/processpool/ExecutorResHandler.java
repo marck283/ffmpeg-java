@@ -43,8 +43,8 @@ public class ExecutorResHandler implements ExecuteResultHandler {
     public ExecutorResHandler(@NotNull JsonArray arr, int i, @NotNull String pathToImagesFolder,
                               @NotNull String imageExtension, @NotNull JSONToImage jti, @NotNull ProcessPool pp)
             throws InvalidArgumentException {
-        if (arr == null || pathToImagesFolder == null || pathToImagesFolder.isEmpty() || imageExtension == null ||
-                imageExtension.isEmpty() || jti == null || pp == null) {
+        if (arr == null || StringExt.checkNullOrEmpty(pathToImagesFolder) || StringExt.checkNullOrEmpty(imageExtension)
+                || jti == null || pp == null) {
             throw new InvalidArgumentException("No argument to this constructor can be null or an empty string.",
                     "Nessuno degli argomenti forniti a questo costruttore puo' essere null o una stringa vuota.");
         }

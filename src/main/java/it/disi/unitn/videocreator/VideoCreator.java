@@ -1,6 +1,7 @@
 package it.disi.unitn.videocreator;
 
 import it.disi.unitn.FFMpegBuilder;
+import it.disi.unitn.StringExt;
 import it.disi.unitn.exceptions.InvalidArgumentException;
 import it.disi.unitn.exceptions.NotEnoughArgumentsException;
 import it.disi.unitn.exceptions.UnsupportedOperatingSystemException;
@@ -58,15 +59,6 @@ public class VideoCreator {
     private FPSMode fps_mode;
 
     /**
-     * Checks if the given string is null or empty.
-     * @param str The given string
-     * @return True if the given string is null or empty, otherwise false
-     */
-    private static boolean checkNullOrEmpty(String str) {
-        return str == null || str.isEmpty();
-    }
-
-    /**
      * The constructor of this class.
      *
      * @param builder     The FFMpegBuilder instance that called this constructor
@@ -74,7 +66,7 @@ public class VideoCreator {
      * @throws NotEnoughArgumentsException if any of the arguments given to this constructor is null
      */
     public VideoCreator(@NotNull FFMpegBuilder builder, @NotNull String outputFile) throws NotEnoughArgumentsException {
-        if (builder == null || checkNullOrEmpty(outputFile)) {
+        if (builder == null || StringExt.checkNullOrEmpty(outputFile)) {
             throw new NotEnoughArgumentsException("The arguments given to this class's constructor cannot be null or " +
                     "empty values.", "Gli argomenti forniti al costruttore di questa classe non possono essere null o " +
                     "valori non specificati.");
@@ -106,7 +98,7 @@ public class VideoCreator {
      * exist
      */
     public void addInput(@NotNull String input) throws InvalidArgumentException {
-        if(checkNullOrEmpty(input)) {
+        if(StringExt.checkNullOrEmpty(input)) {
             throw new InvalidArgumentException("The given input file cannot be null or an empty string.", "Il file fornito " +
                     "non puo' essere null o una stringa vuota.");
         }
@@ -300,7 +292,7 @@ public class VideoCreator {
      */
     public void setCodecID(@NotNull String codecID, boolean development) throws NotEnoughArgumentsException, InvalidArgumentException,
             IOException, UnsupportedOperatingSystemException {
-        if (checkNullOrEmpty(codecID)) {
+        if (StringExt.checkNullOrEmpty(codecID)) {
             throw new NotEnoughArgumentsException("The codec id must not be null.", "L'id del codec non deve essere null " +
                     "o una stringa vuota.");
         }
@@ -329,7 +321,7 @@ public class VideoCreator {
      * @throws InvalidArgumentException If the given audio codec is represented by a nul or empty string
      */
     public void setAudioCodec(@NotNull String ac) throws InvalidArgumentException {
-        if (checkNullOrEmpty(ac)) {
+        if (StringExt.checkNullOrEmpty(ac)) {
             throw new InvalidArgumentException("The given audio codec is represented by a null or empty string.", "Il " +
                     "codec audio fornito e' rappresentato da una stringa null o vuota.");
         }
@@ -446,7 +438,7 @@ public class VideoCreator {
      * @throws InvalidArgumentException If the "mode" argument is null, or it is not equal to "k" or "m"
      */
     public void setVideoBitRate(int val, @NotNull String mode) throws InvalidArgumentException {
-        if (checkNullOrEmpty(mode) || (!mode.equals("k") && !mode.equals("m"))) {
+        if (StringExt.checkNullOrEmpty(mode) || (!mode.equals("k") && !mode.equals("m"))) {
             throw new InvalidArgumentException("The \"mode\" parameter must be specified and it must be either \"k\" " +
                     "or \"m\".", "Il parametro \"mode\" deve essere specificato e deve avere valore pari a \"k\" o " +
                     "\"m\".");
@@ -461,7 +453,7 @@ public class VideoCreator {
      * @throws InvalidArgumentException If the given pixel format is null
      */
     public void setPixelFormat(@NotNull String pxfmt) throws InvalidArgumentException {
-        if (checkNullOrEmpty(pxfmt)) {
+        if (StringExt.checkNullOrEmpty(pxfmt)) {
             throw new InvalidArgumentException("The argument to this method cannot be null or an empty string.", "L'argomento " +
                     "fornito a questo metodo non puo' essere null o una stringa vuota.");
         }
@@ -657,7 +649,7 @@ public class VideoCreator {
      */
     public void setFPSMode(@NotNull String parameter, String stream_specifier) throws InvalidArgumentException {
         fps_mode = new FPSMode();
-        if(!checkNullOrEmpty(stream_specifier)) {
+        if(!StringExt.checkNullOrEmpty(stream_specifier)) {
             fps_mode.setStreamSpecifier(stream_specifier);
         }
         fps_mode.setParameter(parameter);

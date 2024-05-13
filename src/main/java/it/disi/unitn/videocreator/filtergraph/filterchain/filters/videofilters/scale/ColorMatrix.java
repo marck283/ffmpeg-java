@@ -1,5 +1,6 @@
 package it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.scale;
 
+import it.disi.unitn.StringExt;
 import it.disi.unitn.exceptions.InvalidArgumentException;
 import org.jetbrains.annotations.NotNull;
 
@@ -17,7 +18,7 @@ public class ColorMatrix {
      * by FFmpeg
      */
     public ColorMatrix(@NotNull String name) throws InvalidArgumentException {
-        if(name == null || name.isEmpty()) {
+        if(StringExt.checkNullOrEmpty(name)) {
             throw new InvalidArgumentException("The name of this color matrix cannot be null or an empty string.", "Il " +
                     "nome della matrice dei colori non puo' essere null o una stringa vuota.");
         }

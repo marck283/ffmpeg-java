@@ -1,5 +1,6 @@
 package it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.aformat;
 
+import it.disi.unitn.StringExt;
 import it.disi.unitn.exceptions.InvalidArgumentException;
 import it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.AudioFilter;
 import org.jetbrains.annotations.NotNull;
@@ -35,7 +36,7 @@ public class AFormat extends AudioFilter {
      * @throws InvalidArgumentException If the given sample format is null or an empty string
      */
     public void addSampleFormat(@NotNull String sample_format) throws InvalidArgumentException {
-        if(sample_format == null || sample_format.isEmpty()) {
+        if(StringExt.checkNullOrEmpty(sample_format)) {
             throw new InvalidArgumentException("The given sample format cannot be null or an empty string.", "Il formato " +
                     "audio fornito non puo' essere null o una stringa vuota.");
         }
@@ -50,7 +51,7 @@ public class AFormat extends AudioFilter {
      * @throws InvalidArgumentException If the given sample rate is null or an empty string
      */
     public void addSampleRate(@NotNull String sample_rate) throws InvalidArgumentException {
-        if(sample_rate == null || sample_rate.isEmpty()) {
+        if(StringExt.checkNullOrEmpty(sample_rate)) {
             throw new InvalidArgumentException("The given sample rate cannot be null or an empty string.", "La data frequenza " +
                     "audio non puo' essere null o una stringa vuota.");
         }

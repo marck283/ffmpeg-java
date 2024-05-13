@@ -97,9 +97,8 @@ public class VideoTranscoder extends VideoCreator {
      * This method allows the program to remove the unnecessary parameters from the FFmpeg command which will be executed.
      * @param param This is a parameter that indicates whether this method is being called to deal with video or audio
      *              parameters
-     * @throws NotEnoughArgumentsException If the argument given to this method is null or an empty string
      */
-    private void removeParams(@NotNull String param) throws NotEnoughArgumentsException {
+    private void removeParams(@NotNull String param) {
         builder.getLCommand().forEach(e -> {
             if((param.equals("vs") && e.startsWith("-c:v")) || (param.equals("as") && e.startsWith("-c:a"))) {
                 int index = builder.getLCommand().indexOf(e);

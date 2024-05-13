@@ -53,7 +53,7 @@ public class JSONToImage {
      * @throws InvalidArgumentException If the first parameter of this method is null or an empty string
      */
     public JSONToImage(@NotNull String pathToJsonFile, boolean useGAN) throws IOException, InvalidArgumentException {
-        if(pathToJsonFile == null || pathToJsonFile.isEmpty()) {
+        if(StringExt.checkNullOrEmpty(pathToJsonFile)) {
             throw new InvalidArgumentException("The first parameter of this method cannot be null or an empty string.",
                     "Il primo parametro passato a questo metodo non puo' essere null o una stringa vuota.");
         }
@@ -96,8 +96,7 @@ public class JSONToImage {
     public void modifyImage(@NotNull JsonObject obj, int i, @NotNull String pathToImagesFolder, @NotNull String mime)
             throws IOException {
         try {
-            if(obj == null || i < 0 || pathToImagesFolder == null || pathToImagesFolder.isEmpty() || mime == null ||
-                    mime.isEmpty()) {
+            if(obj == null || i < 0 || StringExt.checkNullOrEmpty(pathToImagesFolder) || StringExt.checkNullOrEmpty(mime)) {
                 throw new InvalidArgumentException("None of the arguments given to this method can be null, less than zero " +
                         "or an empty string.", "Nessuno degli argomenti forniti a questo metodo puo' essere null, minore " +
                         "di zero o una stringa vuota.");
@@ -252,8 +251,8 @@ public class JSONToImage {
         System.out.println(width);
         System.out.println(height);
         System.out.println(timeout);
-        if (pathToImagesFolder == null || pathToImagesFolder.isEmpty() || imageExtension == null ||
-                imageExtension.isEmpty() || width <= 0 || height <= 0 || timeout <= 0) {
+        if (StringExt.checkNullOrEmpty(pathToImagesFolder) || StringExt.checkNullOrEmpty(imageExtension) || width <= 0
+                || height <= 0 || timeout <= 0) {
             throw new InvalidArgumentException("A null or illegal value was passed as argument to this method.", "Almeno " +
                     "uno dei parametri ha valore null o ha un valore non consentito.");
         }
@@ -296,8 +295,8 @@ public class JSONToImage {
      */
     public void addText(@NotNull String filePath, @NotNull String formatName, @NotNull String inputText, int x, int y,
                         float fontDim, @NotNull Color color) throws IOException, InvalidArgumentException {
-        if(filePath == null || filePath.isEmpty() || formatName == null || formatName.isEmpty() || inputText == null ||
-        inputText.isEmpty() || x < 0 || y < 0 || color == null) {
+        if(StringExt.checkNullOrEmpty(filePath) || StringExt.checkNullOrEmpty(formatName) ||
+                StringExt.checkNullOrEmpty(inputText) || x < 0 || y < 0 || color == null) {
             throw new InvalidArgumentException("None of the parameters passed to this method can be null, less than zero " +
                     "or an empty string.", "Nessuno dei parametri forniti a questo metodo puo' essere null, minore di zero " +
                     "o una stringa vuota.");

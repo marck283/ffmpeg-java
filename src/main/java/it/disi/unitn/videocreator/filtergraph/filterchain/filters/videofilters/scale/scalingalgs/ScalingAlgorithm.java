@@ -1,5 +1,6 @@
 package it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.scale.scalingalgs;
 
+import it.disi.unitn.StringExt;
 import it.disi.unitn.exceptions.InvalidArgumentException;
 import org.jetbrains.annotations.NotNull;
 
@@ -22,7 +23,7 @@ public abstract class ScalingAlgorithm {
      * @throws InvalidArgumentException If the name of the given scaling algorithm is null or an empty string
      */
     public ScalingAlgorithm(@NotNull String name) throws InvalidArgumentException {
-        if(name == null || name.isEmpty()) {
+        if(StringExt.checkNullOrEmpty(name)) {
             throw new InvalidArgumentException("The name of the scaling algorithm cannot be null or an empty string.",
                     "Il nome dello scaling algorithm non puo' essere null o una stringa vuota.");
         }
