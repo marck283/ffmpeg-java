@@ -1,5 +1,6 @@
 package it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.scale;
 
+import it.disi.unitn.ProcessController;
 import it.disi.unitn.StringExt;
 import it.disi.unitn.exceptions.InvalidArgumentException;
 import it.disi.unitn.exceptions.NotEnoughArgumentsException;
@@ -78,20 +79,8 @@ public class Scale extends VideoFilter {
     private boolean executeCommand(@NotNull DefaultExecutor executor, @NotNull ExecutorResHandler execResHandler,
                                @NotNull CommandLine cmdline) {
         try {
-            executor.execute(cmdline, execResHandler);
-            Thread t1 = new Thread(() -> {
-                try {
-                    execResHandler.doWait();
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
-            });
-            t1.start();
-            t1.join();
-
-            int val = execResHandler.getValue();
-            execResHandler.setValue(0);
-
+            ProcessController controller = new ProcessController(executor, execResHandler);
+            int val = controller.execute(cmdline);
             if (val == 0) {
                 if (l == Locale.ITALY || l == Locale.ITALIAN) {
                     System.err.println("Almeno uno dei valori forniti non e' stato riconosciuto da FFmpeg.");
