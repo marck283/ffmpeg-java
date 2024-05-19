@@ -107,11 +107,12 @@ public class JSONToImage {
                 String text = parser.getString(e1, "name"), text1 = parser.getString(e1, "value");
 
                 //fontDim = textInfo.get("font").getAsFloat();
-                fontDim = parser.getFloat(e1, "font");
+                fontDim = parser.getFloat(e1, "fontDim");
                 //positionx = textInfo.get("print-x").getAsInt();
                 positionx = parser.getInt(e1, "print-x");
                 //positiony = textInfo.get("print-y").getAsInt();
                 positiony = parser.getInt(e1, "print-y");
+                System.err.println(fontDim);
                 addText(pathToImagesFolder + "/" + i1ext.getVal(), mime, text + ": " + text1,
                         positionx, positiony, fontDim, Color.BLACK);
             }
@@ -123,11 +124,12 @@ public class JSONToImage {
                 String text = parser.getString(e1, "text");
 
                 //fontDim = textInfo.get("font").getAsFloat();
-                fontDim = parser.getFloat(e1, "font");
+                fontDim = parser.getFloat(e1, "fontDim");
                 //positionx = textInfo.get("print-x").getAsInt();
                 positionx = parser.getInt(e1, "print-x");
                 //positiony = textInfo.get("print-y").getAsInt();
                 positiony = parser.getInt(e1, "print-y");
+                System.err.println(fontDim);
                 addText(pathToImagesFolder + "/" + i1ext.getVal(), mime, text,
                         positionx, positiony, fontDim, Color.BLACK);
             }
@@ -240,11 +242,6 @@ public class JSONToImage {
     public void generate(@NotNull String pathToImagesFolder, @NotNull String imageExtension, int width, int height,
                          long timeout)
             throws IOException, InvalidArgumentException, InterruptedException {
-        System.out.println(pathToImagesFolder);
-        System.out.println(imageExtension);
-        System.out.println(width);
-        System.out.println(height);
-        System.out.println(timeout);
         if (StringExt.checkNullOrEmpty(pathToImagesFolder) || StringExt.checkNullOrEmpty(imageExtension) || width <= 0
                 || height <= 0 || timeout <= 0) {
             throw new InvalidArgumentException("A null or illegal value was passed as argument to this method.", "Almeno " +
@@ -276,20 +273,15 @@ public class JSONToImage {
      * Returns a new Font instance.
      * @param name The font's name
      * @param style The font's style
-     * @param size The font's size
      * @throws InvalidArgumentException If the font's name is null or an empty string or if the font's size is negative
      * or null
      */
-    public void getFont(@NotNull String name, int style, int size) throws InvalidArgumentException {
+    public void getFont(@NotNull String name, int style) throws InvalidArgumentException {
         if(StringExt.checkNullOrEmpty(name)) {
             throw new InvalidArgumentException("The file's name cannot be null or an empty string.", "Il nome del file " +
                     "non puo' essere null o una stringa vuota.");
         }
-        if(size <= 0) {
-            throw new InvalidArgumentException("The font's size cannot be less than or equal to zero.", "La dimensione " +
-                    "del font non puo' essere minore o uguale a zero.");
-        }
-        font = new Font(name, style, size);
+        font = new Font(name, style, 0);
     }
 
     /**
@@ -314,6 +306,20 @@ public class JSONToImage {
      */
     public Font createFont(int fontFormat, InputStream fontStream) throws IOException, FontFormatException {
         return Font.createFont(fontFormat, fontStream);
+    }
+
+    /**
+     * Sets the font to the given Font instance.
+     * @param font The given Font instance
+     * @throws InvalidArgumentException If the given Font instance is null
+     */
+    public void setFont(@NotNull Font font) throws InvalidArgumentException {
+        if(font == null) {
+            throw new InvalidArgumentException("The given Font instance cannot be null.", "L'istanza di Font fornita non " +
+                    "puo' essere null.");
+        }
+
+        this.font = font;
     }
 
     /**

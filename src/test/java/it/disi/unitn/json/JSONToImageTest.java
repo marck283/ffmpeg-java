@@ -5,6 +5,7 @@ import it.disi.unitn.exceptions.InvalidArgumentException;
 import it.disi.unitn.json.jsonparser.JsonParser;
 import org.junit.jupiter.api.Test;
 
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.io.Reader;
@@ -34,6 +35,7 @@ class JSONToImageTest {
             JsonArray array = parser.getJsonArray("array");
             JSONToImage json2image = new JSONToImage(jsonFile, false);
             String imageExt = json2image.getMIME(array.get(0).getAsJsonObject());
+            json2image.getFont("Serif", Font.ITALIC);
             json2image.generate("./src/test/resources/input/images", imageExt, 800, 600, 1800000);
         } catch (InvalidArgumentException | InterruptedException e) {
             System.err.println(e.getMessage());
