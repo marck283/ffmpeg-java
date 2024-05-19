@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="it.disi.unitn.json.JSONToImageTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-05-15T16:35:50" hostname="marco-lasagna-Dell-G15-5530" time="1.7">
+<testsuite name="it.disi.unitn.json.JSONToImageTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-05-19T03:48:05" hostname="marco-lasagna-Dell-G15-5530" time="1.592">
   <properties/>
-  <testcase name="generate()" classname="it.disi.unitn.json.JSONToImageTest" time="1.7"/>
+  <testcase name="generate()" classname="it.disi.unitn.json.JSONToImageTest" time="1.592"/>
   <system-out><![CDATA[./src/test/resources/input/images
 jpeg
 800
