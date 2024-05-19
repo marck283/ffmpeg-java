@@ -62,8 +62,8 @@ public class VideoCreator {
     /**
      * The constructor of this class.
      *
-     * @param builder     The FFMpegBuilder instance that called this constructor
-     * @param outputFile  The path to the output file
+     * @param builder    The FFMpegBuilder instance that called this constructor
+     * @param outputFile The path to the output file
      * @throws NotEnoughArgumentsException if any of the arguments given to this constructor is null
      */
     public VideoCreator(@NotNull FFMpegBuilder builder, @NotNull String outputFile) throws NotEnoughArgumentsException {
@@ -94,19 +94,20 @@ public class VideoCreator {
 
     /**
      * Adds an input file.
+     *
      * @param input The given input file
      * @throws InvalidArgumentException If the given input value is null or an empty string or the given file does not
-     * exist
+     *                                  exist
      */
     public void addInput(@NotNull String input) throws InvalidArgumentException {
-        if(StringExt.checkNullOrEmpty(input)) {
+        if (StringExt.checkNullOrEmpty(input)) {
             throw new InvalidArgumentException("The given input file cannot be null or an empty string.", "Il file fornito " +
                     "non puo' essere null o una stringa vuota.");
         }
 
         pattern.forEach(e -> {
-            if(e.contains("*.")) {
-                if(l == Locale.ITALY || l == Locale.ITALIAN) {
+            if (e.contains("*.")) {
+                if (l == Locale.ITALY || l == Locale.ITALIAN) {
                     System.err.println("Non e' possibile inserire un altro valore di input quando ne e' gia' presente uno " +
                             "che comprenda tutti i file presenti nella cartella.");
                 } else {
@@ -121,7 +122,7 @@ public class VideoCreator {
 
         }*/
 
-        if(!input.startsWith("*.") && !Files.exists(Paths.get(input))) {
+        if (!input.startsWith("*.") && !Files.exists(Paths.get(input))) {
             throw new InvalidArgumentException("The given file does not exist.", "Il file fornito non esiste.");
         }
 
@@ -227,7 +228,7 @@ public class VideoCreator {
      *
      * @param cmdline The CommandLine instance
      * @return True if the user's installation of FFmpeg supports the given codec, otherwise false
-     * @throws IOException              If an I/O error occurs
+     * @throws IOException If an I/O error occurs
      */
     private boolean performCheck(@NotNull CommandLine cmdline) throws IOException {
         try {
@@ -461,6 +462,7 @@ public class VideoCreator {
 
     /**
      * Enables/disables video stream copying.
+     *
      * @param streamCopy Boolean parameter to enable/disable video stream copying
      */
     public void setVideoStreamCopy(boolean streamCopy) {
@@ -469,6 +471,7 @@ public class VideoCreator {
 
     /**
      * Enables/disables audio stream copying.
+     *
      * @param streamCopy Boolean parameter to enable/disable audio stream copying
      */
     public void setAudioStreamCopy(boolean streamCopy) {
@@ -478,22 +481,22 @@ public class VideoCreator {
     /**
      * Sets the "scale" filter parameters.
      *
-     * @param development A boolean parameter to tell the program if the user is running a custom version of FFmpeg
-     * @param scale The "scale" filter instance
-     * @param alg   The ScalingAlgorithm instance
-     * @param width Each frame's width
-     * @param height Each frame's height
-     * @param incolmatname The name of the input color matrix, as described by FFmpeg's documentation of the scaling filter
+     * @param development   A boolean parameter to tell the program if the user is running a custom version of FFmpeg
+     * @param scale         The "scale" filter instance
+     * @param alg           The ScalingAlgorithm instance
+     * @param width         Each frame's width
+     * @param height        Each frame's height
+     * @param incolmatname  The name of the input color matrix, as described by FFmpeg's documentation of the scaling filter
      * @param outcolmatname The name of the output color matrix, as described by FFmpeg's documentation of the scaling
      *                      filter
-     * @param incolrange The input color range
-     * @param outcolrange The output color range
-     * @param evalSize The value that tells when to evaluate the expressions for width and height
-     * @param interlMode The interlacing mode
+     * @param incolrange    The input color range
+     * @param outcolrange   The output color range
+     * @param evalSize      The value that tells when to evaluate the expressions for width and height
+     * @param interlMode    The interlacing mode
      * @param forceOAsRatio A parameter that tells the program whether to force the original aspect ratio
-     * @param divisibleBy An integer that tells the program what the width and height should be divisible by
-     * @throws InvalidArgumentException If the given ScalingAlgorithm has an empty string as its name
-     * @throws NotEnoughArgumentsException If the given pixel format is null or an empty string
+     * @param divisibleBy   An integer that tells the program what the width and height should be divisible by
+     * @throws InvalidArgumentException            If the given ScalingAlgorithm has an empty string as its name
+     * @throws NotEnoughArgumentsException         If the given pixel format is null or an empty string
      * @throws UnsupportedOperatingSystemException If the user's Operating System is not yet supported by this library
      */
     public void setScaleParams(boolean development, @NotNull Scale scale, @Nullable ScalingAlgorithm alg, @NotNull String width,
@@ -501,7 +504,7 @@ public class VideoCreator {
                                @NotNull String incolrange, @NotNull String outcolrange, @NotNull String evalSize,
                                @NotNull String interlMode, @NotNull String forceOAsRatio, int divisibleBy)
             throws InvalidArgumentException, UnsupportedOperatingSystemException, NotEnoughArgumentsException {
-        if(alg != null) {
+        if (alg != null) {
             scale.setSwsFlags(alg);
         }
         scale.setSize(development, width, height, pixelFormat);
@@ -519,25 +522,25 @@ public class VideoCreator {
     /**
      * Sets the "scale" filter parameters.
      *
-     * @param scale The "scale" filter instance
-     * @param alg   The ScalingAlgorithm instance
-     * @param videoSizeID A parameter that sets the video size id according to the FFmpeg documentation on this matter
-     * @param incolmatname The name of the input color matrix, as described by FFmpeg's documentation of the scaling filter
+     * @param scale         The "scale" filter instance
+     * @param alg           The ScalingAlgorithm instance
+     * @param videoSizeID   A parameter that sets the video size id according to the FFmpeg documentation on this matter
+     * @param incolmatname  The name of the input color matrix, as described by FFmpeg's documentation of the scaling filter
      * @param outcolmatname The name of the output color matrix, as described by FFmpeg's documentation of the scalingù
      *                      filter
-     * @param incolrange The input color range
-     * @param outcolrange The output color range
-     * @param evalSize The value that tells when to evaluate the expressions for width and height
-     * @param interlMode The interlacing mode
+     * @param incolrange    The input color range
+     * @param outcolrange   The output color range
+     * @param evalSize      The value that tells when to evaluate the expressions for width and height
+     * @param interlMode    The interlacing mode
      * @param forceOAsRatio A parameter that tells the program whether to force the original aspect ratio
-     * @param divisibleBy An integer that tells the program what the width and height should be divisible by
+     * @param divisibleBy   An integer that tells the program what the width and height should be divisible by
      * @throws InvalidArgumentException If the given ScalingAlgorithm has an empty string as its name
      */
     public void setScaleParamsWithSizeID(@NotNull Scale scale, @Nullable ScalingAlgorithm alg, @NotNull String videoSizeID,
-                                @NotNull String incolmatname, @NotNull String outcolmatname, @NotNull String incolrange,
-                                @NotNull String outcolrange, @NotNull String evalSize, @NotNull String interlMode,
-                                @NotNull String forceOAsRatio, int divisibleBy) throws InvalidArgumentException {
-        if(alg != null) {
+                                         @NotNull String incolmatname, @NotNull String outcolmatname, @NotNull String incolrange,
+                                         @NotNull String outcolrange, @NotNull String evalSize, @NotNull String interlMode,
+                                         @NotNull String forceOAsRatio, int divisibleBy) throws InvalidArgumentException {
+        if (alg != null) {
             scale.setSwsFlags(alg);
         }
         scale.setVideoSizeID(videoSizeID);
@@ -554,6 +557,7 @@ public class VideoCreator {
 
     /**
      * Sets the parameters of a Format filter instance.
+     *
      * @param format The given Format filter instance
      * @return The given Format filter instance with all parameters set
      * @throws InvalidArgumentException If the set pixel format is null or an empty string
@@ -573,17 +577,18 @@ public class VideoCreator {
 
     /**
      * Sets the video simple filter graph.
+     *
      * @param vfg The given video simple filter graph
      * @throws InvalidArgumentException If the given video simple filter graph is null or not an instance of VideoSimpleFilterGraph
-     * or the complex filter graph is not null
+     *                                  or the complex filter graph is not null
      */
     public void setVideoSimpleFilterGraph(@NotNull FilterGraph vfg) throws InvalidArgumentException {
-        if(vfg == null || !(vfg instanceof VideoSimpleFilterGraph)) {
+        if (vfg == null || !(vfg instanceof VideoSimpleFilterGraph)) {
             throw new InvalidArgumentException("The video filter graph must be an instance of VideoSimpleFilterGraph.",
                     "Il grafo del filtro video deve essere un'istanza di VideoSimpleFilterGraph.");
         }
 
-        if(cfg != null) {
+        if (cfg != null) {
             throw new InvalidArgumentException("The complex filter graph must be null in order to set the video simple " +
                     "filter graph.", "Il grafo complesso dei filtri deve essere null per impostare quello semplice dei " +
                     "filtri video.");
@@ -594,17 +599,18 @@ public class VideoCreator {
 
     /**
      * Sets the audio simple filter graph
+     *
      * @param afg The given audio simple filter graph
      * @throws InvalidArgumentException If the given audio simple filter graph is null or not an instance of AudioSimpleFilterGraph
-     * or the complex filter graph is not null
+     *                                  or the complex filter graph is not null
      */
     public void setAudioSimpleFilterGraph(@NotNull FilterGraph afg) throws InvalidArgumentException {
-        if(afg == null || !(afg instanceof AudioSimpleFilterGraph)) {
+        if (afg == null || !(afg instanceof AudioSimpleFilterGraph)) {
             throw new InvalidArgumentException("The audio filter graph must be an instance of AudioSimpleFilterGraph.",
                     "Il grafo del filtro audio deve essere un'istanza di AudioSimpleFilterGraph.");
         }
 
-        if(cfg != null) {
+        if (cfg != null) {
             throw new InvalidArgumentException("The complex filter graph must be null in order to set the audio simple " +
                     "filter graph.", "Il grafo complesso dei filtri deve essere null per poter impostare il grafo semplice " +
                     "dei filtri audio.");
@@ -615,16 +621,17 @@ public class VideoCreator {
 
     /**
      * Sets the complex filter graph.
+     *
      * @param cfg The given complex filter graph
      * @throws InvalidArgumentException If the given complex filter graph is null or the video or audio filter graphs are
-     * not null
+     *                                  not null
      */
     public void setComplexFilterGraph(@NotNull FilterGraph cfg) throws InvalidArgumentException {
-        if(cfg == null) {
+        if (cfg == null) {
             throw new InvalidArgumentException("The given complex filter graph cannot be null.", "Il grafo dei filtri " +
                     "non puo' essere null.");
         }
-        if(vfg != null || afg != null) {
+        if (vfg != null || afg != null) {
             throw new InvalidArgumentException("The video and audio filter graphs must be null in order to set the complex " +
                     "filter graph.", "I grafi dei filtri video e audio devono essere null per poter impostare quello complesso.");
         }
@@ -633,13 +640,14 @@ public class VideoCreator {
 
     /**
      * Sets the "-fps_mode" option parameters.
-     * @param parameter The "parameter" value. Cannot be null or empty
+     *
+     * @param parameter        The "parameter" value. Cannot be null or empty
      * @param stream_specifier The "stream_specifier" value. Can be null or empty.
      * @throws InvalidArgumentException If the given "parameter" value is null or an empty string
      */
     public void setFPSMode(@NotNull String parameter, String stream_specifier) throws InvalidArgumentException {
         fps_mode = new FPSMode();
-        if(!StringExt.checkNullOrEmpty(stream_specifier)) {
+        if (!StringExt.checkNullOrEmpty(stream_specifier)) {
             fps_mode.setStreamSpecifier(stream_specifier);
         }
         fps_mode.setParameter(parameter);
@@ -649,125 +657,69 @@ public class VideoCreator {
      * This method creates the command that, when run, will create the output video. WARNING: all needed filters, filter
      * chains and filter graphs must be set BEFORE calling this method.
      */
-    public void createCommand(/*boolean videoCreation, @Nullable AudioFilter audioFilter, @Nullable ScalingAlgorithm alg,
-                              @NotNull String incolmatname, @NotNull String outcolmatname, @NotNull String incolrange,
-                              @NotNull String outcolrange, @NotNull String evalSize, @NotNull String interlMode,
-                              @NotNull String forceOAsRatio, int divisibleBy*/)
-            /*throws InvalidArgumentException*/ {
-        /*if (videoCreation && (videoWidth <= 0 || videoHeight <= 0) && (videoSizeID == null || videoSizeID.isEmpty())) {
-            throw new InvalidArgumentException("Either the video size ID is null or an empty string or the video width " +
-                    "or height are less than or equal to 0.", "Si e' verificato un errore: o la proporzione di ogni frame " +
-                    "e' null o una stringa vuota, o l'ampiezza o l'altezza sono minori o uguali a 0.");
-        } else {*/
-            try {
-                //Sistemare sincronizzazione audio e video riscrivendo queste due righe in modo tale da supportare la
-                //comunicazione del numero di secondi per entrambe le opzioni.
-                builder.add("-async 1");
+    public void createCommand() {
+        try {
+            //Sistemare sincronizzazione audio e video riscrivendo queste due righe in modo tale da supportare la
+            //comunicazione del numero di secondi per entrambe le opzioni.
+            builder.add("-async 1");
 
-                if(fps_mode != null) {
-                    builder.add(fps_mode.toString());
-                }
-                builder.add("-r " + frameRate);
-
-                //builder.addInput(folder + "/" + pattern);
-                builder.addAllInputs(pattern);
-
-                if (pixelFormat == null || pixelFormat.isEmpty()) {
-                    //ATTENZIONE: il codec mjpeg non supporta il formato yuv420p perché non è un formato full-range!
-                    pixelFormat = "yuv420p";
-                }
-
-                //builder.add("-pix_fmt " + pixelFormat);
-                if (codecID != null && !codecID.isEmpty()) {
-                    if(videoStreamCopy) {
-                        //No video filtering allowed when stream copying video
-                        builder.add("-c:v copy");
-                    } else {
-                        builder.add("-c:v " + codecID);
-
-                        /*Scale scale1 = new Scale();
-                        VideoSimpleFilterGraph sfg = new VideoSimpleFilterGraph();
-                        VideoSimpleFilterChain sfc = new VideoSimpleFilterChain();
-                        String width = "", height = "";
-                        if (codecID.equals("h264")) {
-                            //h264 (default codec when no value is specified) needs even width and height, so we need to add
-                            //this filter in order to divide them by 2.
-
-                            width = "ceil(.5*iw)*2";
-                            height = "ceil(.5*ih)*2";
-                        } else {
-                            if (videoWidth > 0 && videoHeight > 0) {
-                                width = String.valueOf(videoWidth);
-                                height = String.valueOf(videoHeight);
-                            } else {
-                                //Ancora da testare
-                                setScaleParamsWithSizeID(scale1, alg, videoSizeID, incolmatname, outcolmatname, incolrange,
-                                        outcolrange, evalSize, interlMode, forceOAsRatio, divisibleBy);
-                            }
-                        }
-
-                        if(!width.isEmpty()) {
-                            //Width and height are always assigned together, so, if width is not empty, height is also
-                            //not empty.
-                            setScaleParams(scale1, alg, width, height,
-                                    incolmatname, outcolmatname, incolrange, outcolrange,
-                                    evalSize, interlMode, forceOAsRatio, divisibleBy);
-                        }
-
-                        //All needed filters must be added by the users to this library
-                        Format format = setFormat(new Format());
-                        sfc.addAllFilters(scale1, format);
-                        sfg.addFilterChain(sfc);
-                        builder.add(sfg.toString());*/
-                        if(vfg != null) {
-                            builder.add(vfg.toString());
-                        }
-                    }
-                }
-                if (audioCodec != null && !audioCodec.isEmpty()) {
-                    if(audioStreamCopy) {
-                        //No audio filtering allowed when stream copying audio
-                        builder.add("-c:a copy");
-                    } else {
-                        builder.add("-c:a " + audioCodec);
-
-                        /*if(audioFilter != null) {
-                            SimpleFilterGraph sfg = new AudioSimpleFilterGraph();
-                            SimpleFilterChain sfc = new AudioSimpleFilterChain();
-                            sfc.addFilter(audioFilter);
-                            sfg.addFilterChain(sfc);
-                            builder.add(sfg.toString());
-                        }*/
-
-                        if(afg != null) {
-                            builder.add(afg.toString());
-                        }
-                    }
-                }
-                if(cfg != null) {
-                    builder.add(cfg.toString());
-                }
-                if (videoBitRate != null && !videoBitRate.isEmpty()) {
-                    builder.add("-b:v " + videoBitRate);
-                }
-                if (audioBitRate != null && !audioBitRate.isEmpty()) {
-                    builder.add("-b:a " + audioBitRate);
-                }
-                if (startInstant > 0) {
-                    builder.add("-ss " + startInstant);
-                }
-                if (videoDuration > 0) {
-                    builder.add("-t " + videoDuration);
-                }
-                if (videoQuality != 0) {
-                    builder.add("-q:v " + videoQuality);
-                }
-                builder.addOutput(outputFile);
-            } catch(InvalidArgumentException ex) {
-                System.err.println(ex.getMessage());
-                //ex.printStackTrace();
-                System.exit(1);
+            if (fps_mode != null) {
+                builder.add(fps_mode.toString());
             }
-        //}
+            builder.add("-r " + frameRate);
+            builder.addAllInputs(pattern);
+
+            if (pixelFormat == null || pixelFormat.isEmpty()) {
+                //ATTENZIONE: il codec mjpeg non supporta il formato yuv420p perché non è un formato full-range!
+                pixelFormat = "yuv420p";
+            }
+
+            if (codecID != null && !codecID.isEmpty()) {
+                if (videoStreamCopy) {
+                    //No video filtering allowed when stream copying video
+                    builder.add("-c:v copy");
+                } else {
+                    builder.add("-c:v " + codecID);
+
+                    if (vfg != null) {
+                        builder.add(vfg.toString());
+                    }
+                }
+            }
+            if (audioCodec != null && !audioCodec.isEmpty()) {
+                if (audioStreamCopy) {
+                    //No audio filtering allowed when stream copying audio
+                    builder.add("-c:a copy");
+                } else {
+                    builder.add("-c:a " + audioCodec);
+
+                    if (afg != null) {
+                        builder.add(afg.toString());
+                    }
+                }
+            }
+            if (cfg != null) {
+                builder.add(cfg.toString());
+            }
+            if (videoBitRate != null && !videoBitRate.isEmpty()) {
+                builder.add("-b:v " + videoBitRate);
+            }
+            if (audioBitRate != null && !audioBitRate.isEmpty()) {
+                builder.add("-b:a " + audioBitRate);
+            }
+            if (startInstant > 0) {
+                builder.add("-ss " + startInstant);
+            }
+            if (videoDuration > 0) {
+                builder.add("-t " + videoDuration);
+            }
+            if (videoQuality != 0) {
+                builder.add("-q:v " + videoQuality);
+            }
+            builder.addOutput(outputFile);
+        } catch (InvalidArgumentException ex) {
+            System.err.println(ex.getMessage());
+            System.exit(1);
+        }
     }
 }

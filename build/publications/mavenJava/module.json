@@ -3,7 +3,7 @@
   "component": {
     "group": "it.disi.unitn.ffmpeg",
     "module": "ffmpeg-java-id",
-    "version": "1.1.19-beta13",
+    "version": "1.1.19-beta14",
     "attributes": {
       "org.gradle.status": "release"
     }
@@ -25,13 +25,13 @@
       },
       "files": [
         {
-          "name": "ffmpeg-java-id-1.1.19-beta13.jar",
-          "url": "ffmpeg-java-id-1.1.19-beta13.jar",
-          "size": 127140,
-          "sha512": "ab70ab4897a40aa3c389b5504f99016cf362e57fc8142fdcb12ec75eeb970f3791b5664414be20631940c762568065ea1d8e4e6e79443dee5dbc6a71c88f9665",
-          "sha256": "f5dee3a596dad87a66ecb45723244b557aaacbabe19e1b43b370b7d32db1681c",
-          "sha1": "80d0f65e3af65a0d3363c7817c6e60a3986024c8",
-          "md5": "69b101b0ea13c703933bc6a21d58e6b2"
+          "name": "ffmpeg-java-id-1.1.19-beta14.jar",
+          "url": "ffmpeg-java-id-1.1.19-beta14.jar",
+          "size": 127769,
+          "sha512": "abfdd52aaa8a60490f98aac513755c87d09b0870cd4b424ec261604293fadb4898f35e23d517c3ac6a1f063def895b709b56293be1c9f85b26ee2a8738a27485",
+          "sha256": "6cc5c1a3cc692d0a40b350e2060d5761c17af96ef2a033ccf31109f4c813814b",
+          "sha1": "7358246fcfd158cedaa256a5ec732b8f7637663a",
+          "md5": "3ee7afb22ef91f02ba2d8cc47c5acd52"
         }
       ]
     },
@@ -108,13 +108,13 @@
       ],
       "files": [
         {
-          "name": "ffmpeg-java-id-1.1.19-beta13.jar",
-          "url": "ffmpeg-java-id-1.1.19-beta13.jar",
-          "size": 127140,
-          "sha512": "ab70ab4897a40aa3c389b5504f99016cf362e57fc8142fdcb12ec75eeb970f3791b5664414be20631940c762568065ea1d8e4e6e79443dee5dbc6a71c88f9665",
-          "sha256": "f5dee3a596dad87a66ecb45723244b557aaacbabe19e1b43b370b7d32db1681c",
-          "sha1": "80d0f65e3af65a0d3363c7817c6e60a3986024c8",
-          "md5": "69b101b0ea13c703933bc6a21d58e6b2"
+          "name": "ffmpeg-java-id-1.1.19-beta14.jar",
+          "url": "ffmpeg-java-id-1.1.19-beta14.jar",
+          "size": 127769,
+          "sha512": "abfdd52aaa8a60490f98aac513755c87d09b0870cd4b424ec261604293fadb4898f35e23d517c3ac6a1f063def895b709b56293be1c9f85b26ee2a8738a27485",
+          "sha256": "6cc5c1a3cc692d0a40b350e2060d5761c17af96ef2a033ccf31109f4c813814b",
+          "sha1": "7358246fcfd158cedaa256a5ec732b8f7637663a",
+          "md5": "3ee7afb22ef91f02ba2d8cc47c5acd52"
         }
       ]
     },
@@ -128,13 +128,13 @@
       },
       "files": [
         {
-          "name": "ffmpeg-java-id-1.1.19-beta13-javadoc.jar",
-          "url": "ffmpeg-java-id-1.1.19-beta13-javadoc.jar",
-          "size": 379290,
-          "sha512": "a247335de884826c6513b11113cdd1c955ffcfcd41a1ff69c7ca0b6a00fdd742fd6ae953775bd7629774593101047231b52483b936042d381c6f0040cd872b5b",
-          "sha256": "88c4fe815d0b208da46d38902d25320a250813b479b199cc3d5328a8de5be8d2",
-          "sha1": "e164081d41940f48284ae269ee0fa5d202ff2949",
-          "md5": "38df3be56594ee793846e1235e26d795"
+          "name": "ffmpeg-java-id-1.1.19-beta14-javadoc.jar",
+          "url": "ffmpeg-java-id-1.1.19-beta14-javadoc.jar",
+          "size": 379954,
+          "sha512": "28626e452ad232f236c4ce4c2777a1594660b8f5adcf19422b3a9f35b43117b259fd8aa22ae5097cd4cecb942f60b49be0da12e9ffd7335b0d715c96af228561",
+          "sha256": "8c1a4c6819c89a6a566b4af33b276dd76f4b3ce77b57abb5602ecc02c6d9159e",
+          "sha1": "08715d140918645d32a4923d5e8a400dc1af20de",
+          "md5": "9cf46c811565f1ac4971ffb2cd832060"
         }
       ]
     },
@@ -148,13 +148,13 @@
       },
       "files": [
         {
-          "name": "ffmpeg-java-id-1.1.19-beta13-sources.jar",
-          "url": "ffmpeg-java-id-1.1.19-beta13-sources.jar",
-          "size": 91848,
-          "sha512": "e35b3ca9f593091824be8dcce56eb316b4f87ebaa2d8fb4a1bc304fde9f98f76aac38b27951a8c5502f545547252a9302a2dffddc902f032ce0758171e0ab675",
-          "sha256": "1da3608e9ea98dd7b306387926f81cc190f0e9326fc5e777d257ef8cf35c89ad",
-          "sha1": "31e6018b140e8beebd03db4630f9815e25092582",
-          "md5": "09e83fc14a580594319442f6d154e5b6"
+          "name": "ffmpeg-java-id-1.1.19-beta14-sources.jar",
+          "url": "ffmpeg-java-id-1.1.19-beta14-sources.jar",
+          "size": 91413,
+          "sha512": "2d1b129b30d16420ebab1c41b884fa3b50bf08261fd9217ca1d2a84af2b8368314bfd26c74fdac6300e113fdc3a2891a4b4bc4026bc1483f1118a9f16637c52c",
+          "sha256": "a89682ff66a0b3dc88414b7eaf7b5ceb49b69689cbec0862a088415dd1c05aa4",
+          "sha1": "9f54c2bc30c76fd22e1221ff17e9b4315a409d03",
+          "md5": "674963fbc443bdf07fd349c5b39e0041"
         }
       ]
     }

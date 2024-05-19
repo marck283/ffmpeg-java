@@ -139,8 +139,8 @@ public class JsonParser {
      */
     public int getInt(@NotNull JsonElement el, @NotNull String name) throws InvalidArgumentException {
         if(el == null || StringExt.checkNullOrEmpty(name)) {
-            throw new InvalidArgumentException("The parameters passed to this method cannot be null or empty strings.",
-                    "I parametri passati a questo metodo non possono essere null o stringhe vuote.");
+            throw new InvalidArgumentException("The parameters passed to getInt() cannot be null or empty strings.",
+                    "I parametri passati al metodo getInt() non possono essere null o stringhe vuote.");
         }
 
         JsonElement jel = getElement(el, name);

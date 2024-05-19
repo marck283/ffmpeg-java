@@ -1,15 +1,9 @@
 package it.disi.unitn.videocreator.transcoder;
 
 import it.disi.unitn.FFMpegBuilder;
-//import it.disi.unitn.exceptions.InvalidArgumentException;
 import it.disi.unitn.exceptions.NotEnoughArgumentsException;
 import it.disi.unitn.videocreator.VideoCreator;
-/*import it.disi.unitn.videocreator.filtergraph.FilterGraph;
-import it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.AudioFilter;
-import it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.scale.Scale;
-import it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.scale.scalingalgs.ScalingAlgorithm;*/
 import org.jetbrains.annotations.NotNull;
-//import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
@@ -107,7 +101,6 @@ public class VideoTranscoder extends VideoCreator {
                     builder.add(index, e + " copy");
                 } catch (NotEnoughArgumentsException ex) {
                     System.err.println(ex.getMessage());
-                    //ex.printStackTrace();
                     System.exit(1);
                 }
             }
