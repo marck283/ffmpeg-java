@@ -35,7 +35,7 @@ class JSONToImageTest {
             JsonArray array = parser.getJsonArray("array");
             JSONToImage json2image = new JSONToImage(jsonFile, false);
             String imageExt = json2image.getMIME(array.get(0).getAsJsonObject());
-            json2image.getFont("Serif", Font.ITALIC);
+            json2image.getFontFromJSON(parser);
             json2image.generate("./src/test/resources/input/images", imageExt, 800, 600, 1800000);
         } catch (InvalidArgumentException | InterruptedException e) {
             System.err.println(e.getMessage());

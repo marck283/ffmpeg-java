@@ -112,7 +112,6 @@ public class JSONToImage {
                 positionx = parser.getInt(e1, "print-x");
                 //positiony = textInfo.get("print-y").getAsInt();
                 positiony = parser.getInt(e1, "print-y");
-                System.err.println(fontDim);
                 addText(pathToImagesFolder + "/" + i1ext.getVal(), mime, text + ": " + text1,
                         positionx, positiony, fontDim, Color.BLACK);
             }
@@ -129,7 +128,6 @@ public class JSONToImage {
                 positionx = parser.getInt(e1, "print-x");
                 //positiony = textInfo.get("print-y").getAsInt();
                 positiony = parser.getInt(e1, "print-y");
-                System.err.println(fontDim);
                 addText(pathToImagesFolder + "/" + i1ext.getVal(), mime, text,
                         positionx, positiony, fontDim, Color.BLACK);
             }
@@ -282,6 +280,29 @@ public class JSONToImage {
                     "non puo' essere null o una stringa vuota.");
         }
         font = new Font(name, style, 0);
+    }
+
+    /**
+     * Gets the appropriate font as requested by the user in the JsonParser instance. WARNING: the "fontStyle" values must
+     * be equal to "italic", "bold" or "plain".
+     * @param parser The given JsonParser instance. This parameter cannot be null.
+     * @throws InvalidArgumentException If the given JsonParser instance is null or the "fontStyle" value is different
+     * from "italic", "bold" or "plain"
+     */
+    public void getFontFromJSON(@NotNull JsonParser parser) throws InvalidArgumentException {
+        if(parser == null) {
+            throw new InvalidArgumentException("The JsonParser instance given to this method cannot be null.", "L'istanza " +
+                    "di JsonParser fornita a questo metodo non puo' essere null.");
+        }
+
+        int style;
+        switch(parser.getString("fontStyle")) {
+            case "italic" -> style = Font.ITALIC;
+            case "bold" -> style = Font.BOLD;
+            case "plain" -> style = Font.PLAIN;
+            default -> throw new InvalidArgumentException("Unrecognized font style.", "Stile del font non riconosciuto.");
+        }
+        getFont(parser.getString("fontFamily"), style);
     }
 
     /**
