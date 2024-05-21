@@ -6,9 +6,9 @@ import it.disi.unitn.StringExt;
 import it.disi.unitn.exceptions.InvalidArgumentException;
 import it.disi.unitn.exceptions.NotEnoughArgumentsException;
 import it.disi.unitn.exceptions.UnsupportedOperatingSystemException;
-import it.disi.unitn.videocreator.filtergraph.AudioSimpleFilterGraph;
+import it.disi.unitn.videocreator.filtergraph.AudioFilterGraph;
 import it.disi.unitn.videocreator.filtergraph.FilterGraph;
-import it.disi.unitn.videocreator.filtergraph.VideoSimpleFilterGraph;
+import it.disi.unitn.videocreator.filtergraph.VideoFilterGraph;
 import it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.format.Format;
 import it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.scale.Scale;
 import it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.scale.scalingalgs.ScalingAlgorithm;
@@ -583,7 +583,7 @@ public class VideoCreator {
      *                                  or the complex filter graph is not null
      */
     public void setVideoSimpleFilterGraph(@NotNull FilterGraph vfg) throws InvalidArgumentException {
-        if (vfg == null || !(vfg instanceof VideoSimpleFilterGraph)) {
+        if (vfg == null || !(vfg instanceof VideoFilterGraph)) {
             throw new InvalidArgumentException("The video filter graph must be an instance of VideoSimpleFilterGraph.",
                     "Il grafo del filtro video deve essere un'istanza di VideoSimpleFilterGraph.");
         }
@@ -605,7 +605,7 @@ public class VideoCreator {
      *                                  or the complex filter graph is not null
      */
     public void setAudioSimpleFilterGraph(@NotNull FilterGraph afg) throws InvalidArgumentException {
-        if (afg == null || !(afg instanceof AudioSimpleFilterGraph)) {
+        if (afg == null || !(afg instanceof AudioFilterGraph)) {
             throw new InvalidArgumentException("The audio filter graph must be an instance of AudioSimpleFilterGraph.",
                     "Il grafo del filtro audio deve essere un'istanza di AudioSimpleFilterGraph.");
         }

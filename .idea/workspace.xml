@@ -5,17 +5,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4e206741-5dd1-4a84-99b2-29854b378e54" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/disi/unitn/json/JSONToImage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/disi/unitn/json/JSONToImage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/disi/unitn/videocreator/VideoCreator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/disi/unitn/videocreator/VideoCreator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/disi/unitn/videocreator/filtergraph/AudioSimpleFilterGraph.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/disi/unitn/videocreator/filtergraph/AudioSimpleFilterGraph.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/disi/unitn/videocreator/filtergraph/FilterGraph.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/disi/unitn/videocreator/filtergraph/FilterGraph.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/disi/unitn/videocreator/filtergraph/SimpleFilterGraph.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/disi/unitn/videocreator/filtergraph/VideoSimpleFilterGraph.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/disi/unitn/videocreator/filtergraph/VideoFilterGraph.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/disi/unitn/videocreator/filtergraph/filterchain/AudioSimpleFilterChain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/disi/unitn/videocreator/filtergraph/filterchain/AudioSimpleFilterChain.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/disi/unitn/videocreator/filtergraph/filterchain/FilterChain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/disi/unitn/videocreator/filtergraph/filterchain/FilterChain.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/disi/unitn/videocreator/filtergraph/filterchain/SimpleFilterChain.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/disi/unitn/videocreator/filtergraph/filterchain/VideoSimpleFilterChain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/disi/unitn/videocreator/filtergraph/filterchain/VideoSimpleFilterChain.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/disi/unitn/videocreator/filtergraph/filterchain/filters/Filter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/disi/unitn/videocreator/filtergraph/filterchain/filters/Filter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/FFMpegBuilderTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/FFMpegBuilderTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/it/disi/unitn/json/JSONToImageTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/disi/unitn/json/JSONToImageTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/input/imageArray.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/input/imageArray.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/input/images/000.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/input/images/000.jpeg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/input/json/imageArray.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/input/json/imageArray.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/input/json/test.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/input/json/test.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/input/nngen.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/input/nngen.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/input/test.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/input/test.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/it/disi/unitn/videocreator/VideoCreatorTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/disi/unitn/videocreator/VideoCreatorTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/it/disi/unitn/videocreator/transcoder/VideoTranscoderTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/disi/unitn/videocreator/transcoder/VideoTranscoderTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,7 +82,7 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="ProjectErrors" />
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 7
@@ -252,6 +256,30 @@
       <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
+    <configuration name="VideoTranscoderTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;it.disi.unitn.videocreator.transcoder.VideoTranscoderTest&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
     <configuration name="ffmpeg-java [publishAllPublicationsToMavenRepository]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -274,30 +302,8 @@
       <RunAsTest>false</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="ffmpeg-java [publishToMavenLocal]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value="publishToMavenLocal" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>false</RunAsTest>
-      <method v="2" />
-    </configuration>
     <list>
-      <item itemvalue="Gradle.ffmpeg-java [publishToMavenLocal]" />
+      <item itemvalue="Gradle.VideoTranscoderTest" />
       <item itemvalue="Gradle.ffmpeg-java [publishAllPublicationsToMavenRepository]" />
       <item itemvalue="Gradle.FFMpegBuilderTest" />
       <item itemvalue="Gradle.JSONToImageTest" />
@@ -306,10 +312,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Gradle.ffmpeg-java [publishAllPublicationsToMavenRepository]" />
-        <item itemvalue="Gradle.ffmpeg-java [publishToMavenLocal]" />
-        <item itemvalue="Gradle.JSONToImageTest" />
         <item itemvalue="Gradle.FFMpegBuilderTest" />
         <item itemvalue="Gradle.VideoCreatorTest" />
+        <item itemvalue="Gradle.VideoTranscoderTest" />
+        <item itemvalue="Gradle.JSONToImageTest" />
       </list>
     </recent_temporary>
   </component>
@@ -413,11 +419,25 @@
       <workItem from="1715791805837" duration="5276000" />
       <workItem from="1715977547036" duration="6523000" />
       <workItem from="1716152306722" duration="1727000" />
+      <workItem from="1716308120591" duration="1584000" />
+      <workItem from="1716324422760" duration="2352000" />
+      <workItem from="1716329209142" duration="4285000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

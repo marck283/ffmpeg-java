@@ -18,6 +18,8 @@ public abstract class Filter {
      */
     protected final Map<String, String> options;
 
+    private final List<String> input, output;
+
     /**
      * This class's constructor. Constructs a new filter (whether video or audio).
      * @param filterName The given filter's name.
@@ -30,6 +32,46 @@ public abstract class Filter {
         }
         this.filterName = filterName;
         options = new LinkedHashMap<>();
+        input = new ArrayList<>();
+        output = new ArrayList<>();
+    }
+
+    /**
+     * Private method to check if the argument is null or an empty string.
+     * @param streamName The given argument
+     * @throws InvalidArgumentException If the given argument is null or an empty string.
+     */
+    private void checkNullStreamName(@NotNull String streamName) throws InvalidArgumentException {
+        if(StringExt.checkNullOrEmpty(streamName)) {
+            throw new InvalidArgumentException("The inputs and the outputs to the filters cannot be null or empty strings.",
+                    "Gli input e gli output dei filtri non possono essere null o stringhe vuote.");
+        }
+    }
+
+    /**
+     * Adds an input stream to this filter chain. The given input stream must be expressed without the square brackets
+     * around.
+     * @param streamName The input stream's name
+     * @throws InvalidArgumentException If the given argument is null or an empty string
+     */
+    public void addInput(@NotNull String streamName) throws InvalidArgumentException {
+        checkNullStreamName(streamName);
+        if(!streamName.isEmpty()) {
+            input.add("[" + streamName + "]");
+        }
+    }
+
+    /**
+     * Adds an output stream to this filter chain. The given output stream must be expressed without the square brackets
+     * around.
+     * @param streamName The output stream's name
+     * @throws InvalidArgumentException If the given argument is null or an empty string
+     */
+    public void addOutput(@NotNull String streamName) throws InvalidArgumentException {
+        checkNullStreamName(streamName);
+        if(!streamName.isEmpty()) {
+            output.add("[" + streamName + "]");
+        }
     }
 
     /**
@@ -45,6 +87,9 @@ public abstract class Filter {
                 helpList.add(e.getKey() + "=" + e.getValue());
             }
         }
-        return String.join("=", filterName, String.join(":", helpList));
+
+        String inputString = String.join("", input), outputString = String.join("", output);
+        return inputString + String.join("=", filterName, String.join(":", helpList)).trim().
+                replaceAll("  +", " ") + outputString;
     }
 }

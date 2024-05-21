@@ -3,7 +3,6 @@ package it.disi.unitn.videocreator.filtergraph.filterchain;
 import it.disi.unitn.exceptions.InvalidArgumentException;
 import it.disi.unitn.videocreator.filtergraph.filterchain.filters.Filter;
 import it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.AudioFilter;
-import it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.VideoFilter;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
@@ -13,10 +12,10 @@ import java.util.stream.Stream;
 /**
  * This class implements a new simple filter chain for the audio filters.
  */
-public class AudioSimpleFilterChain extends SimpleFilterChain {
+public class AudioSimpleFilterChain extends FilterChain {
 
     /**
-     * This class's constructor.
+     * The class's constructor.
      */
     public AudioSimpleFilterChain() {
         super();
@@ -62,7 +61,7 @@ public class AudioSimpleFilterChain extends SimpleFilterChain {
     @Override
     public void removeFilter(@NotNull Filter filter) throws InvalidArgumentException {
         checkNullFilter(filter);
-        if(!(filter instanceof VideoFilter)) {
+        if(!(filter instanceof AudioFilter)) {
             throw new InvalidArgumentException("Cannot remove a video filter from an audio filter chain.", "Non e' possibile " +
                     "rimuovere un filtro video da una catena di filtri audio.");
         }

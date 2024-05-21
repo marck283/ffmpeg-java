@@ -5,8 +5,8 @@ import it.disi.unitn.FFMpegBuilder;
 import it.disi.unitn.exceptions.InvalidArgumentException;
 import it.disi.unitn.exceptions.NotEnoughArgumentsException;
 import it.disi.unitn.exceptions.UnsupportedOperatingSystemException;
-import it.disi.unitn.videocreator.filtergraph.AudioSimpleFilterGraph;
-import it.disi.unitn.videocreator.filtergraph.VideoSimpleFilterGraph;
+import it.disi.unitn.videocreator.filtergraph.AudioFilterGraph;
+import it.disi.unitn.videocreator.filtergraph.VideoFilterGraph;
 import it.disi.unitn.videocreator.filtergraph.filterchain.AudioSimpleFilterChain;
 import it.disi.unitn.videocreator.filtergraph.filterchain.VideoSimpleFilterChain;
 import it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.acompressor.ACompressor;
@@ -36,7 +36,7 @@ class VideoTranscoderTest {
         transcoder.setScaleParams(true, scale, null, "2048", "1920", "auto",
                 "bt709", "auto", "auto", "init", "0",
                 "disable", 0);
-        VideoSimpleFilterGraph vsfg = new VideoSimpleFilterGraph();
+        VideoFilterGraph vsfg = new VideoFilterGraph();
         VideoSimpleFilterChain vsfc = new VideoSimpleFilterChain();
         Format format = transcoder.setFormat(new Format());
         vsfc.addAllFilters(scale, format);
@@ -63,7 +63,7 @@ class VideoTranscoderTest {
         acomp.setThreshold(0.123);
         acomp.setAttack(0.01);
 
-        AudioSimpleFilterGraph asfg = new AudioSimpleFilterGraph();
+        AudioFilterGraph asfg = new AudioFilterGraph();
         AudioSimpleFilterChain asfc = new AudioSimpleFilterChain();
         asfc.addFilter(acomp);
         asfg.addFilterChain(asfc);

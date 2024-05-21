@@ -5,7 +5,6 @@ import it.disi.unitn.exceptions.InvalidArgumentException;
 import it.disi.unitn.json.jsonparser.JsonParser;
 import org.junit.jupiter.api.Test;
 
-import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.io.Reader;

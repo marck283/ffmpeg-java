@@ -3,7 +3,6 @@ package it.disi.unitn.videocreator.filtergraph;
 import it.disi.unitn.exceptions.InvalidArgumentException;
 import it.disi.unitn.videocreator.filtergraph.filterchain.AudioSimpleFilterChain;
 import it.disi.unitn.videocreator.filtergraph.filterchain.FilterChain;
-import it.disi.unitn.videocreator.filtergraph.filterchain.SimpleFilterChain;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -12,12 +11,12 @@ import java.util.List;
 /**
  * This class is used to instantiate a new simple filter graph for the audio track.
  */
-public class AudioSimpleFilterGraph extends SimpleFilterGraph {
+public class AudioFilterGraph extends FilterGraph {
 
     /**
-     * This class's constructor.
+     * The class's constructor.
      */
-    public AudioSimpleFilterGraph() {
+    public AudioFilterGraph() {
         super();
     }
 
@@ -32,7 +31,7 @@ public class AudioSimpleFilterGraph extends SimpleFilterGraph {
             throw new InvalidArgumentException("The given filter chain must be an instance of AudioSimpleFilterChain.",
                     "La catena di filtri fornita in input deve essere un'istanza di AudioSimpleFilterChain.");
         }
-        sfcList.add((SimpleFilterChain) filterChain);
+        fcList.add(filterChain);
     }
 
     /**
@@ -46,13 +45,13 @@ public class AudioSimpleFilterGraph extends SimpleFilterGraph {
             throw new InvalidArgumentException("The given filter chain must be an instance of AudioSimpleFilterChain.",
                     "La catena di filtri fornita in input deve essere un'istanza di AudioSimpleFilterChain.");
         }
-        sfcList.remove(filterChain);
+        fcList.remove(filterChain);
     }
 
     @Override
     public String toString() {
         List<String> helperList = new ArrayList<>();
-        for(SimpleFilterChain fc: sfcList) {
+        for(FilterChain fc: fcList) {
             helperList.add(fc.toString());
         }
         return "-af \"" + String.join(";", helperList) + "\"";

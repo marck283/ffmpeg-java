@@ -12,10 +12,10 @@ import java.util.stream.Stream;
 /**
  * This class is used to distinguish video simple filter chains from audio ones.
  */
-public class VideoSimpleFilterChain extends SimpleFilterChain {
+public class VideoSimpleFilterChain extends FilterChain {
 
     /**
-     * This class's constructor.
+     * The class's constructor.
      */
     public VideoSimpleFilterChain() {
         super();

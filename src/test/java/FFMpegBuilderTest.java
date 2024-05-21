@@ -4,7 +4,7 @@ import it.disi.unitn.exceptions.InvalidArgumentException;
 import it.disi.unitn.exceptions.NotEnoughArgumentsException;
 import it.disi.unitn.exceptions.UnsupportedOperatingSystemException;
 import it.disi.unitn.videocreator.VideoCreator;
-import it.disi.unitn.videocreator.filtergraph.VideoSimpleFilterGraph;
+import it.disi.unitn.videocreator.filtergraph.VideoFilterGraph;
 import it.disi.unitn.videocreator.filtergraph.filterchain.VideoSimpleFilterChain;
 import it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.format.Format;
 import it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.scale.Scale;
@@ -31,7 +31,7 @@ class FFMpegBuilderTest {
         vc.setScaleParams(true, scale, new Bicubic(0.3333, 0.3333), String.valueOf(800), String.valueOf(600),
                 "auto", "bt709", "auto", "auto", "init",
                 "0", "disable", 0);
-        VideoSimpleFilterGraph vsfg = new VideoSimpleFilterGraph();
+        VideoFilterGraph vsfg = new VideoFilterGraph();
         VideoSimpleFilterChain vsfc = new VideoSimpleFilterChain();
         Format format = vc.setFormat(new Format());
         vsfc.addAllFilters(scale, format);

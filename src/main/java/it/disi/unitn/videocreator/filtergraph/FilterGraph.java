@@ -13,7 +13,10 @@ import java.util.List;
  */
 public class FilterGraph {
 
-    private final List<FilterChain> fcList;
+    /**
+     * The list of FilterChain instances.
+     */
+    protected final List<FilterChain> fcList;
 
     /**
      * This class's constructor.
