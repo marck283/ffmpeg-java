@@ -3,10 +3,7 @@ package it.disi.unitn.json;
 import com.google.gson.*;
 import it.disi.unitn.StringExt;
 import it.disi.unitn.exceptions.InvalidArgumentException;
-//import it.disi.unitn.exceptions.ProcessStillAliveException;
 import it.disi.unitn.json.processpool.ProcessPool;
-/*import it.disi.unitn.streamhandlers.InputHandler;
-import org.apache.commons.lang3.SystemUtils;*/
 import it.disi.unitn.json.jsonparser.JsonParser;
 import org.jetbrains.annotations.NotNull;
 
@@ -18,14 +15,8 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Base64;
+import java.util.*;
 import java.util.List;
-import java.util.Locale;
-/*import java.util.Locale;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.locks.ReentrantLock;
-import java.util.function.Consumer;*/
 
 /**
  * This class translates a given JSON file into a list of Image objects.
@@ -43,6 +34,8 @@ public class JSONToImage {
 
     private final JsonParser parser;
 
+    private Font font;
+
     /**
      * The class's constructor. At the time of writing, this constructor only supports "image/jpeg" and "image/png" types.
      * Any other type will make this constructor throw an InvalidArgumentException.
@@ -53,7 +46,7 @@ public class JSONToImage {
      * @throws InvalidArgumentException If the first parameter of this method is null or an empty string
      */
     public JSONToImage(@NotNull String pathToJsonFile, boolean useGAN) throws IOException, InvalidArgumentException {
-        if(pathToJsonFile == null || pathToJsonFile.isEmpty()) {
+        if(StringExt.checkNullOrEmpty(pathToJsonFile)) {
             throw new InvalidArgumentException("The first parameter of this method cannot be null or an empty string.",
                     "Il primo parametro passato a questo metodo non puo' essere null o una stringa vuota.");
         }
@@ -66,6 +59,7 @@ public class JSONToImage {
         parser = new JsonParser(r);
         array = object.getAsJsonArray("array");
         this.useGAN = useGAN;
+        font = null;
     }
 
     /**
@@ -96,11 +90,10 @@ public class JSONToImage {
     public void modifyImage(@NotNull JsonObject obj, int i, @NotNull String pathToImagesFolder, @NotNull String mime)
             throws IOException {
         try {
-            if(obj == null || i < 0 || pathToImagesFolder == null || pathToImagesFolder.isEmpty() || mime == null ||
-                    mime.isEmpty()) {
+            if(obj == null || i < 0 || StringExt.checkNullOrEmpty(pathToImagesFolder) || StringExt.checkNullOrEmpty(mime)) {
                 throw new InvalidArgumentException("None of the arguments given to this method can be null, less than zero " +
-                        "or an empty string.", "Nessuno degli argomenti forniti a questo metodo puo' essere null, minore " +
-                        "di zero o una stringa vuota.");
+                        "or an empty string.", "Nessuno degli argomenti forniti al metodo di modifica dell'immagine puo' " +
+                        "essere null, minore di zero o una stringa vuota.");
             }
             JsonArray imageText = obj.getAsJsonArray("stats");
             StringExt i1ext = new StringExt(String.valueOf(i));
@@ -114,7 +107,7 @@ public class JSONToImage {
                 String text = parser.getString(e1, "name"), text1 = parser.getString(e1, "value");
 
                 //fontDim = textInfo.get("font").getAsFloat();
-                fontDim = parser.getFloat(e1, "font");
+                fontDim = parser.getFloat(e1, "fontDim");
                 //positionx = textInfo.get("print-x").getAsInt();
                 positionx = parser.getInt(e1, "print-x");
                 //positiony = textInfo.get("print-y").getAsInt();
@@ -130,7 +123,7 @@ public class JSONToImage {
                 String text = parser.getString(e1, "text");
 
                 //fontDim = textInfo.get("font").getAsFloat();
-                fontDim = parser.getFloat(e1, "font");
+                fontDim = parser.getFloat(e1, "fontDim");
                 //positionx = textInfo.get("print-x").getAsInt();
                 positionx = parser.getInt(e1, "print-x");
                 //positiony = textInfo.get("print-y").getAsInt();
@@ -189,16 +182,6 @@ public class JSONToImage {
      */
     private void generateWithGAN(@NotNull String pathToImagesFolder, @NotNull String imageExtension,
                                  int width, int height, long timeout) throws InterruptedException, InvalidArgumentException {
-        if (pathToImagesFolder == null || pathToImagesFolder.isEmpty() || imageExtension == null || imageExtension.isEmpty()) {
-            throw new InvalidArgumentException("At least one of the given arguments is either null or an empty string.",
-                    "Almeno uno degli argomenti forniti e' null o una stringa vuota.");
-        }
-
-        if (width <= 0 || height <= 0) {
-            throw new InvalidArgumentException("Both the image's width and height must be strictly positive.", "Sia " +
-                    "l'ampiezza che l'altezza dell'immagine devono essere strettamente positive.");
-        }
-
         if (width % 8 != 0 || height % 8 != 0) {
             throw new InvalidArgumentException("Both the image's width and height must be divisible by 8.", "Sia l'ampiezza " +
                     "che l'altezza dell'immagine devono essere divisibili per 8.");
@@ -257,13 +240,8 @@ public class JSONToImage {
     public void generate(@NotNull String pathToImagesFolder, @NotNull String imageExtension, int width, int height,
                          long timeout)
             throws IOException, InvalidArgumentException, InterruptedException {
-        System.out.println(pathToImagesFolder);
-        System.out.println(imageExtension);
-        System.out.println(width);
-        System.out.println(height);
-        System.out.println(timeout);
-        if (pathToImagesFolder == null || pathToImagesFolder.isEmpty() || imageExtension == null ||
-                imageExtension.isEmpty() || width <= 0 || height <= 0 || timeout <= 0) {
+        if (StringExt.checkNullOrEmpty(pathToImagesFolder) || StringExt.checkNullOrEmpty(imageExtension) || width <= 0
+                || height <= 0 || timeout <= 0) {
             throw new InvalidArgumentException("A null or illegal value was passed as argument to this method.", "Almeno " +
                     "uno dei parametri ha valore null o ha un valore non consentito.");
         }
@@ -290,6 +268,82 @@ public class JSONToImage {
     }
 
     /**
+     * Returns a new Font instance.
+     * @param name The font's name
+     * @param style The font's style
+     * @throws InvalidArgumentException If the font's name is null or an empty string or if the font's size is negative
+     * or null
+     */
+    public void getFont(@NotNull String name, int style) throws InvalidArgumentException {
+        if(StringExt.checkNullOrEmpty(name)) {
+            throw new InvalidArgumentException("The file's name cannot be null or an empty string.", "Il nome del file " +
+                    "non puo' essere null o una stringa vuota.");
+        }
+        font = new Font(name, style, 0);
+    }
+
+    /**
+     * Gets the appropriate font as requested by the user in the JsonParser instance. WARNING: the "fontStyle" values must
+     * be equal to "italic", "bold" or "plain".
+     * @param parser The given JsonParser instance. This parameter cannot be null.
+     * @throws InvalidArgumentException If the given JsonParser instance is null or the "fontStyle" value is different
+     * from "italic", "bold" or "plain"
+     */
+    public void getFontFromJSON(@NotNull JsonParser parser) throws InvalidArgumentException {
+        if(parser == null) {
+            throw new InvalidArgumentException("The JsonParser instance given to this method cannot be null.", "L'istanza " +
+                    "di JsonParser fornita a questo metodo non puo' essere null.");
+        }
+
+        int style;
+        switch(parser.getString("fontStyle")) {
+            case "italic" -> style = Font.ITALIC;
+            case "bold" -> style = Font.BOLD;
+            case "plain" -> style = Font.PLAIN;
+            default -> throw new InvalidArgumentException("Unrecognized font style.", "Stile del font non riconosciuto.");
+        }
+        getFont(parser.getString("fontFamily"), style);
+    }
+
+    /**
+     * Creates a new Font instance by using the font's format and File instance.
+     * @param fontFormat The font's format
+     * @param fontFile The font's File instance
+     * @return A new Font instance
+     * @throws IOException If the fontFile parameter cannot be read
+     * @throws FontFormatException If fontFile does not contain the required font tables for the specified format.
+     */
+    public Font createFont(int fontFormat, File fontFile) throws IOException, FontFormatException {
+        return Font.createFont(fontFormat, fontFile);
+    }
+
+    /**
+     * Creates a new Font instance by using the font's format and InputStream instance.
+     * @param fontFormat The font's format
+     * @param fontStream The font's InputStream instance
+     * @return A new Font instance
+     * @throws IOException If the fontStream cannot be completely read
+     * @throws FontFormatException If the fontStream data does not contain the required font tables for the specified format
+     */
+    public Font createFont(int fontFormat, InputStream fontStream) throws IOException, FontFormatException {
+        return Font.createFont(fontFormat, fontStream);
+    }
+
+    /**
+     * Sets the font to the given Font instance.
+     * @param font The given Font instance
+     * @throws InvalidArgumentException If the given Font instance is null
+     */
+    public void setFont(@NotNull Font font) throws InvalidArgumentException {
+        if(font == null) {
+            throw new InvalidArgumentException("The given Font instance cannot be null.", "L'istanza di Font fornita non " +
+                    "puo' essere null.");
+        }
+
+        this.font = font;
+    }
+
+    /**
      * Adds the given text to the image associated to the given file path starting at the point (x, y). This method also
      * allows the user to specify the font's dimension and its color.
      *
@@ -306,11 +360,11 @@ public class JSONToImage {
      */
     public void addText(@NotNull String filePath, @NotNull String formatName, @NotNull String inputText, int x, int y,
                         float fontDim, @NotNull Color color) throws IOException, InvalidArgumentException {
-        if(filePath == null || filePath.isEmpty() || formatName == null || formatName.isEmpty() || inputText == null ||
-        inputText.isEmpty() || x < 0 || y < 0 || color == null) {
+        if(StringExt.checkNullOrEmpty(filePath) || StringExt.checkNullOrEmpty(formatName) ||
+                StringExt.checkNullOrEmpty(inputText) || x < 0 || y < 0 || color == null) {
             throw new InvalidArgumentException("None of the parameters passed to this method can be null, less than zero " +
-                    "or an empty string.", "Nessuno dei parametri forniti a questo metodo puo' essere null, minore di zero " +
-                    "o una stringa vuota.");
+                    "or an empty string.", "Nessuno dei parametri forniti al metodo di aggiunta del testo ad un'immagine " +
+                    "puo' essere null, minore di zero o una stringa vuota.");
         }
         if(Float.max(fontDim, 0.0F) == 0.0F) {
             throw new InvalidArgumentException("The font's dimension cannot be less than or equal to zero.", "La dimensione " +
@@ -330,7 +384,10 @@ public class JSONToImage {
 
         Graphics g = image.getGraphics();
         //g.setFont(<font>); //Per font personalizzati
-        g.setFont(g.getFont().deriveFont(fontDim));
+        if(font != null) {
+            font = font.deriveFont(fontDim);
+        }
+        g.setFont(Objects.requireNonNullElseGet(font, () -> g.getFont().deriveFont(fontDim)));
         g.setColor(color);
         g.drawString(inputText, x, y);
         g.dispose();

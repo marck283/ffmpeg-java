@@ -43,8 +43,8 @@ public class ExecutorResHandler implements ExecuteResultHandler {
     public ExecutorResHandler(@NotNull JsonArray arr, int i, @NotNull String pathToImagesFolder,
                               @NotNull String imageExtension, @NotNull JSONToImage jti, @NotNull ProcessPool pp)
             throws InvalidArgumentException {
-        if (arr == null || pathToImagesFolder == null || pathToImagesFolder.isEmpty() || imageExtension == null ||
-                imageExtension.isEmpty() || jti == null || pp == null) {
+        if (arr == null || StringExt.checkNullOrEmpty(pathToImagesFolder) || StringExt.checkNullOrEmpty(imageExtension)
+                || jti == null || pp == null) {
             throw new InvalidArgumentException("No argument to this constructor can be null or an empty string.",
                     "Nessuno degli argomenti forniti a questo costruttore puo' essere null o una stringa vuota.");
         }
@@ -88,7 +88,7 @@ public class ExecutorResHandler implements ExecuteResultHandler {
                 jti.modifyImage(obj, index, pathToImagesFolder, mime);
                 pp.removeHandler(this);
             } catch (InvalidArgumentException | IOException ex) {
-                ex.printStackTrace();
+                //ex.printStackTrace();
                 System.err.println(ex.getMessage());
                 System.exit(1);
             }
@@ -108,7 +108,7 @@ public class ExecutorResHandler implements ExecuteResultHandler {
      */
     @Override
     public void onProcessFailed(@NotNull ExecuteException e) {
-        e.printStackTrace();
+        //e.printStackTrace();
         System.err.println(e.getMessage());
         System.exit(1);
     }

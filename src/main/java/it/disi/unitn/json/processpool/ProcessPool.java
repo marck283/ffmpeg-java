@@ -4,6 +4,7 @@ import com.google.gson.JsonArray;
 /*import com.google.gson.JsonObject;
 import it.disi.unitn.StringExt;
 import it.disi.unitn.exceptions.InvalidArgumentException;*/
+import it.disi.unitn.StringExt;
 import it.disi.unitn.exceptions.InvalidArgumentException;
 import it.disi.unitn.json.JSONToImage;
 import org.apache.commons.exec.*;
@@ -27,8 +28,6 @@ import java.util.Map;
  */
 public class ProcessPool {
 
-    //private final ThreadPoolExecutor executor;
-
     private final String scriptpath, imageExtension, pathToImagesFolder;
 
     private String desc;
@@ -37,14 +36,10 @@ public class ProcessPool {
 
     private int index;
 
-    private final List<ExecutorResHandler> exlist = new ArrayList<>();
+    private final List<ExecutorResHandler> exlist;
 
     /**
      * This constructor creates a new thread pool which will be used to execute a specified number of threads.
-     //* @param num The number of threads to be executed
-     //* @param keepAliveTime when the number of threads is greater than the core, this is the maximum time that excess
-     //*                      idle threads will wait for new tasks before terminating
-     //* @param tu the time unit for the keepAliveTime argument
      * @param model The File instance from which to create the process pool
      * @param imageExtension The picture's extension
      * @param pathToImagesFolder The path to the pictures' folder
@@ -55,8 +50,8 @@ public class ProcessPool {
      */
     public ProcessPool(@NotNull File model, @NotNull String imageExtension, @NotNull String pathToImagesFolder, int width,
                        int height) throws InvalidArgumentException {
-        if(model == null || imageExtension == null || imageExtension.isEmpty() || pathToImagesFolder == null ||
-                pathToImagesFolder.isEmpty() || width <= 0 || height <= 0) {
+        if(model == null || StringExt.checkNullOrEmpty(imageExtension) || StringExt.checkNullOrEmpty(pathToImagesFolder)
+                || width <= 0 || height <= 0) {
             throw new InvalidArgumentException("No argument to this constructor can be null, an empty string  or less " +
                     "than or equal to zero.", "Nessuno degli argomenti forniti a questo costruttore puo' essere null, " +
                     "una stringa vuota o minore o uguale a zero.");
@@ -66,6 +61,7 @@ public class ProcessPool {
         this.pathToImagesFolder = pathToImagesFolder;
         this.width = width;
         this.height = height;
+        exlist = new ArrayList<>();
     }
 
     /**
@@ -74,7 +70,7 @@ public class ProcessPool {
      * @throws InvalidArgumentException If the argument given to this method is null or an empty string
      */
     public void setDesc(@NotNull String newdesc) throws InvalidArgumentException {
-        if(newdesc == null || newdesc.isEmpty()) {
+        if(StringExt.checkNullOrEmpty(newdesc)) {
             throw new InvalidArgumentException("The argument to this method cannot be null or an empty string.", "L'argomento " +
                     "fornito a questo metodo non puo' essere null o una stringa vuota.");
         }
@@ -140,8 +136,10 @@ public class ProcessPool {
             m.put("scriptpath", nscriptpath);
             m.put("desc", "\"" + ndesc + "\"");
 
-            String i = String.valueOf(index);
-            m.put(i, i);
+            StringExt i = new StringExt(String.valueOf(index));
+            i.padStart();
+            System.out.println("INDEX: " + i.getVal());
+            m.put("i", i.getVal());
             m.put("imageExtension", niext);
             m.put("pathToImagesFolder", nptif);
 
@@ -153,7 +151,7 @@ public class ProcessPool {
             PumpStreamHandler streamHandler = new PumpStreamHandler();
             DefaultExecutor executor = DefaultExecutor.builder().get();
             ExecuteWatchdog.Builder builder = ExecuteWatchdog.builder();
-            builder.setTimeout(Duration.ofMillis(timeout)); //Durata in minuti
+            builder.setTimeout(Duration.ofMillis(timeout)); //Duration in milliseconds
             ExecuteWatchdog watchdog = builder.get();
             executor.setStreamHandler(streamHandler);
             executor.setWatchdog(watchdog);
@@ -161,7 +159,7 @@ public class ProcessPool {
             exlist.add(exrhandler);
             executor.execute(cmdLine, exrhandler);
         } catch (IOException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
             System.err.println(e.getLocalizedMessage());
             System.exit(1);
         }

@@ -1,18 +1,10 @@
 package it.disi.unitn;
 
-/*import com.google.gson.JsonObject;
 import it.disi.unitn.exceptions.InvalidArgumentException;
-import it.disi.unitn.streamhandlers.InputHandler;*/
 import org.apache.commons.exec.*;
-//import org.apache.commons.lang3.SystemUtils;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.*;
-/*import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.FileSystem;
-import java.nio.file.FileSystems;*/
 import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
@@ -50,7 +42,7 @@ public class FFMpeg {
                 throw new Exception("An error has occurred.");
             }
         } catch(Exception ex) {
-            ex.printStackTrace();
+            //ex.printStackTrace();
             System.err.println(ex.getMessage());
             System.exit(1);
         }
@@ -64,34 +56,8 @@ public class FFMpeg {
      * @throws IOException If an I/O error occurs
      */
     public void executeCMD() throws IOException {
-        /*ProcessBuilder builder = new ProcessBuilder(ffBuilder.getCommand());
-        Process p;
-        try {
-            p = builder.start();
-            InputStream istream = p.getErrorStream();
-
-            /*
-             * FFMpeg hangs when we do not use two separate threads to handle the Error and Output streams.
-             * See here: https://ffmpeg-user.ffmpeg.narkive.com/3WBzsW4a/ffmpeg-hangs-when-being-executed-from-within-java
-             */
-            /*InputHandler errorHandler = new InputHandler(istream, "Error Stream");
-            errorHandler.start();
-            InputHandler inputHandler = new InputHandler(p.getInputStream(), "Output Stream");
-            inputHandler.start();
-
-            //Wait for the process's termination before continuing.
-            int exitValue = p.waitFor();
-            if(exitValue != 0) {
-                p.destroy(); //Kill the process to release resources
-                throw new Exception("An error has occurred.");
-            }
-        } catch(Exception ex) {
-            ex.printStackTrace();
-            System.out.println("oops");
-        }*/
-
         //Utilizzo la libreria Apache Commons Exec per eseguire FFmpeg.
-        execProcess(false, 0);
+        execProcess(false, 0L);
     }
 
     /**
@@ -128,8 +94,17 @@ public class FFMpeg {
      * @param timeout The maximum time interval the calling process will wait for the child process to terminate
      * @param timeUnit The TimeUnit instance that specifies the time unit associated to the first parameter
      * @throws IOException If an I/O error occurs
+     * @throws InvalidArgumentException If the given timeout is negative or the TimeUnit instance is null
      */
-    public void executeCMD(long timeout, @NotNull TimeUnit timeUnit) throws IOException {
+    public void executeCMD(long timeout, @NotNull TimeUnit timeUnit) throws IOException, InvalidArgumentException {
+        if(timeout < 0) {
+            throw new InvalidArgumentException("The given timeout cannot be negative.", "Il timeout fornito non puo' essere " +
+                    "negativo.");
+        }
+        if(timeUnit == null) {
+            throw new InvalidArgumentException("The given TimeUnit instance cannot be null.", "L'istanza di TimeUnit " +
+                    "fornita non puo' essere null.");
+        }
         /*ProcessBuilder builder;
         if(SystemUtils.IS_OS_WINDOWS) {
             builder = new ProcessBuilder(ffBuilder.getCommand());

@@ -16,25 +16,25 @@ plugins {
 }
 
 group 'io.github.marck283'
-version '1.1.18'
+version '1.1.20.2'
 
 java {
     withJavadocJar()
     withSourcesJar()
 
-    sourceCompatibility = JavaVersion.VERSION_18
-    targetCompatibility = JavaVersion.VERSION_18
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
 }
 
 configurations {
     java11ApiElements {
         attributes {
-            attribute TargetJvmVersion.TARGET_JVM_VERSION_ATTRIBUTE, 18
+            attribute TargetJvmVersion.TARGET_JVM_VERSION_ATTRIBUTE, 21
         }
     }
     java11RuntimeElements {
         attributes {
-            attribute TargetJvmVersion.TARGET_JVM_VERSION_ATTRIBUTE, 18
+            attribute TargetJvmVersion.TARGET_JVM_VERSION_ATTRIBUTE, 21
         }
     }
 }
@@ -72,11 +72,11 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.10.2'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.10.2'
 
-    implementation platform('com.google.cloud:libraries-bom:26.34.0')
-    implementation 'com.google.code.gson:gson:2.10.1'
+    implementation platform('com.google.cloud:libraries-bom:26.39.0')
+    implementation 'com.google.code.gson:gson:2.11.0'
 
-    implementation 'org.slf4j:slf4j-api:2.0.12'
-    implementation 'commons-io:commons-io:2.15.1'
+    implementation 'org.slf4j:slf4j-api:2.0.13'
+    implementation 'commons-io:commons-io:2.16.1'
     implementation 'org.apache.commons:commons-lang3:3.14.0'
     implementation 'org.apache.commons:commons-exec:1.4.0'
 
