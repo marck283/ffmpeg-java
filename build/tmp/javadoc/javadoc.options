@@ -1,10 +1,10 @@
 -classpath '/home/marco-lasagna/IdeaProjects/ffmpeg-java/build/classes/java/main:/home/marco-lasagna/IdeaProjects/ffmpeg-java/build/resources/main:/home/marco-lasagna/.gradle/caches/modules-2/files-2.1/org.jetbrains/annotations/24.1.0/7af6a669488450c4a07c2c3254e2151df42d7d04/annotations-24.1.0.jar:/home/marco-lasagna/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.11.0/527175ca6d81050b53bdd4c457a6d6e017626b0e/gson-2.11.0.jar:/home/marco-lasagna/.gradle/caches/modules-2/files-2.1/org.slf4j/slf4j-api/2.0.13/80229737f704b121a318bba5d5deacbcf395bc77/slf4j-api-2.0.13.jar:/home/marco-lasagna/.gradle/caches/modules-2/files-2.1/commons-io/commons-io/2.16.1/377d592e740dc77124e0901291dbfaa6810a200e/commons-io-2.16.1.jar:/home/marco-lasagna/.gradle/caches/modules-2/files-2.1/org.apache.commons/commons-lang3/3.14.0/1ed471194b02f2c6cb734a0cd6f6f107c673afae/commons-lang3-3.14.0.jar:/home/marco-lasagna/.gradle/caches/modules-2/files-2.1/org.apache.commons/commons-exec/1.4.0/e9061b21958bfaf1cb736eb22e36cbf02d8fe9f/commons-exec-1.4.0.jar:/home/marco-lasagna/.gradle/caches/modules-2/files-2.1/org.owasp.encoder/encoder/1.2.3/35ae93be1524b161525da2c9a110019616f67548/encoder-1.2.3.jar:/home/marco-lasagna/.gradle/caches/modules-2/files-2.1/com.google.errorprone/error_prone_annotations/2.27.0/91b2c29d8a6148b5e2e4930f070d4840e2e48e34/error_prone_annotations-2.27.0.jar'
 -d '/home/marco-lasagna/IdeaProjects/ffmpeg-java/build/docs/javadoc'
--doctitle 'ffmpeg-java-id 1.1.20.2 API'
+-doctitle 'ffmpeg-java-id 1.1.20.5 API'
 -html5 
 -notimestamp 
 -quiet 
--windowtitle 'ffmpeg-java-id 1.1.20.2 API'
+-windowtitle 'ffmpeg-java-id 1.1.20.5 API'
 '/home/marco-lasagna/IdeaProjects/ffmpeg-java/src/main/java/it/disi/unitn/videocreator/ExecutorResHandler.java'
 '/home/marco-lasagna/IdeaProjects/ffmpeg-java/src/main/java/it/disi/unitn/videocreator/filtergraph/AudioFilterGraph.java'
 '/home/marco-lasagna/IdeaProjects/ffmpeg-java/src/main/java/it/disi/unitn/videocreator/filtergraph/filterchain/VideoSimpleFilterChain.java'
@@ -50,6 +50,8 @@
 '/home/marco-lasagna/IdeaProjects/ffmpeg-java/src/main/java/it/disi/unitn/json/JSONToImage.java'
 '/home/marco-lasagna/IdeaProjects/ffmpeg-java/src/main/java/it/disi/unitn/ProcessController.java'
 '/home/marco-lasagna/IdeaProjects/ffmpeg-java/src/main/java/it/disi/unitn/FFMpegBuilder.java'
+'/home/marco-lasagna/IdeaProjects/ffmpeg-java/src/main/java/it/disi/unitn/exceptions/InvalidJSONFileException.java'
+'/home/marco-lasagna/IdeaProjects/ffmpeg-java/src/main/java/it/disi/unitn/exceptions/PermissionsException.java'
 '/home/marco-lasagna/IdeaProjects/ffmpeg-java/src/main/java/it/disi/unitn/exceptions/NotEnoughArgumentsException.java'
 '/home/marco-lasagna/IdeaProjects/ffmpeg-java/src/main/java/it/disi/unitn/exceptions/InvalidArgumentException.java'
 '/home/marco-lasagna/IdeaProjects/ffmpeg-java/src/main/java/it/disi/unitn/exceptions/UnsupportedOperatingSystemException.java'

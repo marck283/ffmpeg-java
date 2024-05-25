@@ -3,6 +3,7 @@ package it.disi.unitn.json;
 import com.google.gson.*;
 import it.disi.unitn.StringExt;
 import it.disi.unitn.exceptions.InvalidArgumentException;
+import it.disi.unitn.exceptions.InvalidJSONFileException;
 import it.disi.unitn.json.processpool.ProcessPool;
 import it.disi.unitn.json.jsonparser.JsonParser;
 import org.jetbrains.annotations.NotNull;
@@ -68,7 +69,7 @@ public class JSONToImage {
      * @throws InvalidArgumentException If any of the elements of the JSON array taken from the input file is null or an
      * empty string
      */
-    private void toByteArray() throws InvalidArgumentException {
+    private void toByteArray() throws InvalidArgumentException, InvalidJSONFileException {
         for (JsonElement e : array) {
             String data = parser.getString(e, "image-background")
                     .replace("data:image/jpeg;base64,", "")
@@ -133,7 +134,8 @@ public class JSONToImage {
             }
         } catch (InvalidArgumentException ex) {
             System.err.println(ex.getMessage());
-            System.err.println("Si prega di contattare il produttore di questa libreria per risolvere il problema.");
+        } catch (InvalidJSONFileException ex) {
+            System.err.println(ex.getMessage());
         }
     }
 
@@ -181,7 +183,7 @@ public class JSONToImage {
      * empty string, or either the given width or height is less than or equal to zero or not divisible by both 8 and 64
      */
     private void generateWithGAN(@NotNull String pathToImagesFolder, @NotNull String imageExtension,
-                                 int width, int height, long timeout) throws InterruptedException, InvalidArgumentException {
+                                 int width, int height, long timeout) throws InterruptedException, InvalidArgumentException, InvalidJSONFileException {
         if (width % 8 != 0 || height % 8 != 0) {
             throw new InvalidArgumentException("Both the image's width and height must be divisible by 8.", "Sia l'ampiezza " +
                     "che l'altezza dell'immagine devono essere divisibili per 8.");
@@ -234,12 +236,14 @@ public class JSONToImage {
      * @throws IOException If an error occurs when writing to or creating the file
      * @throws InvalidArgumentException If a null or illegal value (e.e, the empty string) is passed as argument to this
      * @throws InterruptedException If the current thread is interrupted while waiting
-     * @throws InvalidArgumentException If either the first two parameters an null or empty strings, or the last three
+     * @throws InvalidArgumentException If either the first two parameters are null or empty strings, or the last three
      * are less than or equal to zero
+     * @throws InvalidJSONFileException If the JSON file given as input to this library does not contain all the required
+     * fields
      */
     public void generate(@NotNull String pathToImagesFolder, @NotNull String imageExtension, int width, int height,
                          long timeout)
-            throws IOException, InvalidArgumentException, InterruptedException {
+            throws IOException, InvalidArgumentException, InterruptedException, InvalidJSONFileException {
         if (StringExt.checkNullOrEmpty(pathToImagesFolder) || StringExt.checkNullOrEmpty(imageExtension) || width <= 0
                 || height <= 0 || timeout <= 0) {
             throw new InvalidArgumentException("A null or illegal value was passed as argument to this method.", "Almeno " +
@@ -288,8 +292,10 @@ public class JSONToImage {
      * @param parser The given JsonParser instance. This parameter cannot be null.
      * @throws InvalidArgumentException If the given JsonParser instance is null or the "fontStyle" value is different
      * from "italic", "bold" or "plain"
+     * @throws InvalidJSONFileException If the JSON file given as input to this library does not contain a field
+     * identified by the name "fontStyle"
      */
-    public void getFontFromJSON(@NotNull JsonParser parser) throws InvalidArgumentException {
+    public void getFontFromJSON(@NotNull JsonParser parser) throws InvalidArgumentException, InvalidJSONFileException {
         if(parser == null) {
             throw new InvalidArgumentException("The JsonParser instance given to this method cannot be null.", "L'istanza " +
                     "di JsonParser fornita a questo metodo non puo' essere null.");

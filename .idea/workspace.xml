@@ -5,21 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4e206741-5dd1-4a84-99b2-29854b378e54" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/it/disi/unitn/exceptions/InvalidJSONFileException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/it/disi/unitn/exceptions/PermissionsException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase_[Changes]/fileHashes.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase__Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/disi/unitn/exceptions/InvalidArgumentException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/disi/unitn/exceptions/InvalidArgumentException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/disi/unitn/json/JSONToImage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/disi/unitn/json/JSONToImage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/disi/unitn/json/jsonparser/JsonParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/disi/unitn/json/jsonparser/JsonParser.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/disi/unitn/videocreator/VideoCreator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/disi/unitn/videocreator/VideoCreator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/disi/unitn/videocreator/filtergraph/AudioSimpleFilterGraph.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/disi/unitn/videocreator/filtergraph/AudioSimpleFilterGraph.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/disi/unitn/videocreator/filtergraph/FilterGraph.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/disi/unitn/videocreator/filtergraph/FilterGraph.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/disi/unitn/videocreator/filtergraph/SimpleFilterGraph.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/disi/unitn/videocreator/filtergraph/VideoSimpleFilterGraph.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/disi/unitn/videocreator/filtergraph/VideoFilterGraph.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/disi/unitn/videocreator/filtergraph/filterchain/AudioSimpleFilterChain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/disi/unitn/videocreator/filtergraph/filterchain/AudioSimpleFilterChain.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/disi/unitn/videocreator/filtergraph/filterchain/FilterChain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/disi/unitn/videocreator/filtergraph/filterchain/FilterChain.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/disi/unitn/videocreator/filtergraph/filterchain/SimpleFilterChain.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/disi/unitn/videocreator/filtergraph/filterchain/VideoSimpleFilterChain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/disi/unitn/videocreator/filtergraph/filterchain/VideoSimpleFilterChain.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/disi/unitn/videocreator/filtergraph/filterchain/filters/Filter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/disi/unitn/videocreator/filtergraph/filterchain/filters/Filter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/FFMpegBuilderTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/FFMpegBuilderTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/it/disi/unitn/json/JSONToImageTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/disi/unitn/json/JSONToImageTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/it/disi/unitn/videocreator/VideoCreatorTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/disi/unitn/videocreator/VideoCreatorTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/it/disi/unitn/videocreator/transcoder/VideoTranscoderTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/disi/unitn/videocreator/transcoder/VideoTranscoderTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,7 +52,18 @@
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="ffmpeg-java-id" type="f1a62948:ProjectNode" />
                 <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="build" type="c8890929:TasksNode$1" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="ffmpeg-java-id" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
                 <item name="publishing" type="c8890929:TasksNode$1" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="ffmpeg-java-id" type="f1a62948:ProjectNode" />
+                <item name="Run Configurations" type="7b0102dc:RunConfigurationsNode" />
               </path>
             </expand>
             <select />
@@ -71,18 +81,10 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_BRANCH_BY_REPOSITORY">
-      <map>
-        <entry key="$PROJECT_DIR$" value="master" />
-      </map>
-    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
-  </component>
-  <component name="ProblemsViewState">
-    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 7
@@ -107,7 +109,7 @@
     &quot;Gradle.FFMpegBuilderTest.testSetVideoFrameSize.executor&quot;: &quot;Run&quot;,
     &quot;Gradle.JSONToImageTest.executor&quot;: &quot;Run&quot;,
     &quot;Gradle.JSONToImageTest.generate.executor&quot;: &quot;Debug&quot;,
-    &quot;Gradle.VideoCreatorTest.createCommand.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.VideoCreatorTest.createCommand.executor&quot;: &quot;Debug&quot;,
     &quot;Gradle.VideoCreatorTest.executor&quot;: &quot;Run&quot;,
     &quot;Gradle.VideoTranscoderTest.createCommandForAudio.executor&quot;: &quot;Run&quot;,
     &quot;Gradle.VideoTranscoderTest.executor&quot;: &quot;Run&quot;,
@@ -115,7 +117,6 @@
     &quot;Gradle.ffmpeg-java [publishAllPublicationsToMavenRepository].executor&quot;: &quot;Run&quot;,
     &quot;Gradle.ffmpeg-java [publishCentralPortalPublicationToMavenRepository].executor&quot;: &quot;Run&quot;,
     &quot;Gradle.ffmpeg-java [publishMavenJavaPublicationToMavenLocal].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.ffmpeg-java [publishMavenJavaPublicationToMavenRepository].executor&quot;: &quot;Run&quot;,
     &quot;Gradle.ffmpeg-java [publishToCentralPortal].executor&quot;: &quot;Run&quot;,
     &quot;Gradle.ffmpeg-java [publishToMavenLocal].executor&quot;: &quot;Run&quot;,
     &quot;Gradle.ffmpeg-java [testClasses].executor&quot;: &quot;Run&quot;,
@@ -134,31 +135,31 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;com.google.cloudcode.ide_session_index&quot;: &quot;20240417_0001&quot;,
+    &quot;com.google.cloudcode.ide_session_index&quot;: &quot;20240326_0014&quot;,
     &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
     &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
     &quot;create.test.in.the.same.root&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;newFilterGraph&quot;,
+    &quot;extract.method.default.visibility&quot;: &quot;private&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
     &quot;last_directory_selection&quot;: &quot;/home/marco/IdeaProjects/ffmpeg-java/src/test/java/it/disi/unitn/videocreator&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/marco-lasagna/IdeaProjects/ffmpeg-java&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/marco/IdeaProjects/ffmpeg-java/build/MavenCompFolder&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.3356828&quot;,
-    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.project.gradle&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/test/resources/input/mp4" />
       <recent name="$PROJECT_DIR$/build/MavenCompFolder" />
+      <recent name="$PROJECT_DIR$/src/test/resources/input/mp4" />
       <recent name="$PROJECT_DIR$/src/ffcodec/cpp" />
       <recent name="$PROJECT_DIR$/src/test/resources/input/json" />
       <recent name="$PROJECT_DIR$/src/test/input/mp4" />
@@ -173,41 +174,17 @@
       <recent name="$PROJECT_DIR$/src/test/resources" />
       <recent name="$PROJECT_DIR$/src/test/java" />
     </key>
-    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
-      <recent name="it.disi.unitn" />
-    </key>
     <key name="CreateTestDialog.RecentsKey">
       <recent name="it.disi.unitn.videocreator.transcoder" />
       <recent name="it.disi.unitn.videocreator" />
       <recent name="it.disi.unitn.json" />
       <recent name="it.disi.unitn" />
     </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="it.disi.unitn.exceptions" />
+    </key>
   </component>
   <component name="RunManager" selected="Gradle.ffmpeg-java [publishAllPublicationsToMavenRepository]">
-    <configuration name="FFMpegBuilderTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":test" />
-            <option value="--tests" />
-            <option value="&quot;FFMpegBuilderTest&quot;" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>true</RunAsTest>
-      <method v="2" />
-    </configuration>
     <configuration name="JSONToImageTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -302,28 +279,50 @@
       <RunAsTest>false</RunAsTest>
       <method v="2" />
     </configuration>
+    <configuration name="ffmpeg-java [publishToCentralPortal]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="publishToCentralPortal" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
     <list>
-      <item itemvalue="Gradle.VideoTranscoderTest" />
-      <item itemvalue="Gradle.ffmpeg-java [publishAllPublicationsToMavenRepository]" />
-      <item itemvalue="Gradle.FFMpegBuilderTest" />
       <item itemvalue="Gradle.JSONToImageTest" />
+      <item itemvalue="Gradle.VideoTranscoderTest" />
+      <item itemvalue="Gradle.ffmpeg-java [publishToCentralPortal]" />
+      <item itemvalue="Gradle.ffmpeg-java [publishAllPublicationsToMavenRepository]" />
       <item itemvalue="Gradle.VideoCreatorTest" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Gradle.ffmpeg-java [publishAllPublicationsToMavenRepository]" />
-        <item itemvalue="Gradle.FFMpegBuilderTest" />
-        <item itemvalue="Gradle.VideoCreatorTest" />
-        <item itemvalue="Gradle.VideoTranscoderTest" />
         <item itemvalue="Gradle.JSONToImageTest" />
+        <item itemvalue="Gradle.VideoTranscoderTest" />
+        <item itemvalue="Gradle.VideoCreatorTest" />
+        <item itemvalue="Gradle.ffmpeg-java [publishToCentralPortal]" />
       </list>
     </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.15989.150" />
-        <option value="bundled-js-predefined-1d06a55b98c1-91d5c284f522-JavaScript-IU-241.15989.150" />
+        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.17011.79" />
+        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-IU-241.17011.79" />
       </set>
     </attachedChunks>
   </component>
@@ -375,69 +374,31 @@
       <workItem from="1711051974101" duration="15593000" />
       <workItem from="1711342446626" duration="2300000" />
       <workItem from="1711409304134" duration="623000" />
-      <workItem from="1711412361039" duration="15323000" />
-      <workItem from="1711608165969" duration="642000" />
-      <workItem from="1711634842706" duration="2626000" />
-      <workItem from="1711726069548" duration="687000" />
-      <workItem from="1711798224845" duration="9666000" />
-      <workItem from="1711841226315" duration="1289000" />
-      <workItem from="1711923606256" duration="11466000" />
-      <workItem from="1712013185933" duration="67000" />
-      <workItem from="1712098134893" duration="986000" />
-      <workItem from="1712155719603" duration="9239000" />
-      <workItem from="1712196496869" duration="89000" />
-      <workItem from="1712196755559" duration="133000" />
-      <workItem from="1712223884142" duration="2774000" />
-      <workItem from="1712226808835" duration="3636000" />
-      <workItem from="1712240031949" duration="6126000" />
-      <workItem from="1712281029229" duration="22000" />
-      <workItem from="1712312499247" duration="9919000" />
-      <workItem from="1712399343221" duration="6703000" />
-      <workItem from="1712445363177" duration="10548000" />
-      <workItem from="1712456177947" duration="2802000" />
-      <workItem from="1712527950173" duration="6569000" />
-      <workItem from="1712581987985" duration="3414000" />
-      <workItem from="1712604886329" duration="618000" />
-      <workItem from="1712656209086" duration="12813000" />
-      <workItem from="1712712654975" duration="268000" />
-      <workItem from="1712713543497" duration="32000" />
-      <workItem from="1713189671852" duration="2427000" />
-      <workItem from="1713192109957" duration="8361000" />
-      <workItem from="1713324231308" duration="249000" />
-      <workItem from="1713324487509" duration="10991000" />
-      <workItem from="1714780619383" duration="37901000" />
-      <workItem from="1715179184553" duration="1150000" />
-      <workItem from="1715180454624" duration="944000" />
-      <workItem from="1715296829778" duration="2204000" />
-      <workItem from="1715299248880" duration="1288000" />
-      <workItem from="1715302836468" duration="609000" />
-      <workItem from="1715309200826" duration="118000" />
-      <workItem from="1715310396593" duration="3949000" />
-      <workItem from="1715361055073" duration="222000" />
-      <workItem from="1715361665455" duration="7126000" />
-      <workItem from="1715529598645" duration="5265000" />
-      <workItem from="1715791805837" duration="5276000" />
-      <workItem from="1715977547036" duration="6523000" />
-      <workItem from="1716152306722" duration="1727000" />
-      <workItem from="1716308120591" duration="1584000" />
-      <workItem from="1716324422760" duration="2352000" />
-      <workItem from="1716329209142" duration="4454000" />
+      <workItem from="1711412361039" duration="9912000" />
+      <workItem from="1716468200572" duration="613000" />
+      <workItem from="1716503205215" duration="6171000" />
+      <workItem from="1716578336650" duration="2244000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State />
-          </value>
-        </entry>
-      </map>
-    </option>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/it/disi/unitn/videocreator/VideoCreatorTest.java</url>
+          <line>48</line>
+          <option name="timeStamp" value="128" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/it/disi/unitn/videocreator/VideoCreatorTest.java</url>
+          <line>49</line>
+          <option name="timeStamp" value="129" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

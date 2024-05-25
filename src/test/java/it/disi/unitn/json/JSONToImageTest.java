@@ -2,6 +2,7 @@ package it.disi.unitn.json;
 
 import com.google.gson.JsonArray;
 import it.disi.unitn.exceptions.InvalidArgumentException;
+import it.disi.unitn.exceptions.InvalidJSONFileException;
 import it.disi.unitn.json.jsonparser.JsonParser;
 import org.junit.jupiter.api.Test;
 
@@ -39,6 +40,8 @@ class JSONToImageTest {
         } catch (InvalidArgumentException | InterruptedException e) {
             System.err.println(e.getMessage());
             //throw new RuntimeException(e);
+        } catch (InvalidJSONFileException e) {
+            System.err.println(e.getMessage());
         }
     }
 }

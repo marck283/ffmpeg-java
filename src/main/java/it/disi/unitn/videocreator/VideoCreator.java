@@ -5,6 +5,7 @@ import it.disi.unitn.ProcessController;
 import it.disi.unitn.StringExt;
 import it.disi.unitn.exceptions.InvalidArgumentException;
 import it.disi.unitn.exceptions.NotEnoughArgumentsException;
+import it.disi.unitn.exceptions.PermissionsException;
 import it.disi.unitn.exceptions.UnsupportedOperatingSystemException;
 import it.disi.unitn.videocreator.filtergraph.AudioFilterGraph;
 import it.disi.unitn.videocreator.filtergraph.FilterGraph;
@@ -179,17 +180,16 @@ public class VideoCreator {
      *
      * @return True if thr path refers to an executable file, otherwise false.
      */
-    private boolean checkExecutable() {
+    private boolean checkExecutable() throws PermissionsException {
         if (!Files.isExecutable(Paths.get(execFile))) {
-            if (l == Locale.ITALY || l == Locale.ITALIAN) {
-                System.err.println("Impossibile eseguire il file " + execFile + ". Si prega di controllarne i permessi " +
+            try {
+                throw new PermissionsException("Cannot execute file " + execFile + ". Please check the user's permissions and that " +
+                        "the file exists.", "Impossibile eseguire il file " + execFile + ". Si prega di controllarne i permessi " +
                         "di esecuzione e l'esistenza.");
-            } else {
-                System.err.println("Cannot execute file " + execFile + ". Please check the user's permissions and that " +
-                        "the file exists.");
+            } catch(InvalidArgumentException e) {
+                System.err.println(e.getMessage());
+                System.exit(1);
             }
-
-            return false;
         }
 
         return true;
