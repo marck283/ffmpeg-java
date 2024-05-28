@@ -1,8 +1,6 @@
 package it.disi.unitn;
 
-//import it.disi.unitn.exceptions.InvalidArgumentException;
 import it.disi.unitn.exceptions.InvalidArgumentException;
-import it.disi.unitn.exceptions.NotEnoughArgumentsException;
 import it.disi.unitn.exceptions.UnsupportedOperatingSystemException;
 import it.disi.unitn.videocreator.TracksMerger;
 import it.disi.unitn.videocreator.VideoCreator;
@@ -11,12 +9,9 @@ import org.apache.commons.lang3.SystemUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-/*import java.nio.file.Files;
-import java.nio.file.Paths;*/
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-//import java.util.Objects;
 
 /**
  * Builder class for convenience class FFMpeg
@@ -30,13 +25,14 @@ public class FFMpegBuilder {
      * This constructor initializes the class with the path to ffmpeg's command line utility.
      * @param ffmpegPath The relative path to ffmpeg's command line utility. This parameter must not be null only if
      *                   the user is operating on a Windows Operating System.
-     * @throws NotEnoughArgumentsException when this constructor's argument is set to null
+     * @throws InvalidArgumentException If this constructor's argument is set to null and the user is running a Windows
+     * Operating System
      */
-    public FFMpegBuilder(@Nullable String ffmpegPath) throws NotEnoughArgumentsException {
+    public FFMpegBuilder(@Nullable String ffmpegPath) throws InvalidArgumentException {
         lcommand = new ArrayList<>();
         if(SystemUtils.IS_OS_WINDOWS) {
             if(ffmpegPath == null || ffmpegPath.isEmpty()) {
-                throw new NotEnoughArgumentsException("The argument to this class's constructor cannot be null or an " +
+                throw new InvalidArgumentException("The argument to this class's constructor cannot be null or an " +
                         "empty string.", "L'argomento fornito al costruttore di questa classe non puo' essere " +
                         "null o una stringa vuota.");
             }
@@ -83,11 +79,11 @@ public class FFMpegBuilder {
      * This method adds the given string at the given position inside the FFmpeg command.
      * @param index The given position
      * @param elem The string to be inserted
-     * @throws NotEnoughArgumentsException If the second argument is null or an empty string
+     * @throws InvalidArgumentException If the second argument is null or an empty string
      */
-    public void add(int index, @NotNull String elem) throws NotEnoughArgumentsException {
+    public void add(int index, @NotNull String elem) throws InvalidArgumentException {
         if(StringExt.checkNullOrEmpty(elem)) {
-            throw new NotEnoughArgumentsException("An attempt to add a null or empty argument to the FFmpeg command was made.",
+            throw new InvalidArgumentException("An attempt to add a null or empty argument to the FFmpeg command was made.",
                     "E' stato effettuato un tentativo di aggiungere un argomento null o una stringa vuota al comando " +
                             "FFmpeg.");
         }
@@ -146,10 +142,10 @@ public class FFMpegBuilder {
      * @param audioInput The given audio input file
      * @param videoInput The given video input file
      * @return The newly created TracksMerger instance
-     * @throws NotEnoughArgumentsException when the TracksMerger's constructor throws this exception
+     * @throws InvalidArgumentException If the TracksMerger's constructor throws this exception
      */
     public TracksMerger newTracksMerger(@NotNull String outputFile, @NotNull String audioInput, @NotNull String videoInput)
-            throws NotEnoughArgumentsException {
+            throws InvalidArgumentException {
         return new TracksMerger(this, outputFile, audioInput, videoInput);
     }
 
@@ -158,10 +154,9 @@ public class FFMpegBuilder {
      * creating the final output video.
      * @param outputFile The path to the output file
      * @return The newly created TracksMerger instance
-     * @throws NotEnoughArgumentsException when the TracksMerger's constructor throws this exception
+     * @throws InvalidArgumentException If the TracksMerger's constructor throws this exception
      */
-    public TracksMerger newTracksMerger(@NotNull String outputFile)
-            throws NotEnoughArgumentsException {
+    public TracksMerger newTracksMerger(@NotNull String outputFile) throws InvalidArgumentException {
         return new TracksMerger(this, outputFile);
     }
 
@@ -171,10 +166,9 @@ public class FFMpegBuilder {
      * @param outputFile The path to the output file
      * This path has to be ffmpeg-compatible, and it must include the file extensions.
      * @return A new VideoCreator instance
-     * @throws NotEnoughArgumentsException If at least one of the given arguments is null or an empty string
+     * @throws InvalidArgumentException If at least one of the given arguments is null or an empty string
      */
-    public VideoCreator newVideoCreator(@NotNull String outputFile)
-            throws NotEnoughArgumentsException {
+    public VideoCreator newVideoCreator(@NotNull String outputFile) throws InvalidArgumentException {
         return new VideoCreator(this, outputFile);
     }
 
@@ -183,10 +177,10 @@ public class FFMpegBuilder {
      * output file's extension.
      * @param outputFile The path to the output file
      * @return A new VideoTranscoder instance
-     * @throws NotEnoughArgumentsException If at least one of the given arguments is null or an empty string
+     * @throws InvalidArgumentException If at least one of the given arguments is null or an empty string
      */
     public VideoTranscoder newVideoTranscoder(@NotNull String outputFile)
-            throws NotEnoughArgumentsException {
+            throws InvalidArgumentException {
         return new VideoTranscoder(this, outputFile);
     }
 

@@ -1,7 +1,7 @@
 package it.disi.unitn.videocreator.transcoder;
 
 import it.disi.unitn.FFMpegBuilder;
-import it.disi.unitn.exceptions.NotEnoughArgumentsException;
+import it.disi.unitn.exceptions.InvalidArgumentException;
 import it.disi.unitn.videocreator.VideoCreator;
 import org.jetbrains.annotations.NotNull;
 
@@ -20,9 +20,9 @@ public class VideoTranscoder extends VideoCreator {
      * The class's constructor.
      * @param builder The FFMpegBuilder instance
      * @param outputFile The path to the output file
-     * @throws NotEnoughArgumentsException If at least one of the given arguments is null or an empty string
+     * @throws InvalidArgumentException If at least one of the given arguments is null or an empty string
      */
-    public VideoTranscoder(@NotNull FFMpegBuilder builder, @NotNull String outputFile) throws NotEnoughArgumentsException {
+    public VideoTranscoder(@NotNull FFMpegBuilder builder, @NotNull String outputFile) throws InvalidArgumentException {
         super(builder, outputFile);
         audioStreamCopy = false;
         videoStreamCopy = false;
@@ -99,7 +99,7 @@ public class VideoTranscoder extends VideoCreator {
                 builder.getLCommand().remove(e);
                 try {
                     builder.add(index, e + " copy");
-                } catch (NotEnoughArgumentsException ex) {
+                } catch (InvalidArgumentException ex) {
                     System.err.println(ex.getMessage());
                     System.exit(1);
                 }
@@ -111,9 +111,9 @@ public class VideoTranscoder extends VideoCreator {
      * This method sets up the correct track extraction flag.
      * @param whichTrack A String parameter that indicates which track is to be extracted. The only admissible values are
      *                   "video" and "audio"
-     * @throws NotEnoughArgumentsException If the given argument to this method is null or an empty string
+     * @throws InvalidArgumentException If the given argument to this method is null or an empty string
      */
-    private void readyUpForTrackExtraction(@NotNull String whichTrack) throws NotEnoughArgumentsException {
+    private void readyUpForTrackExtraction(@NotNull String whichTrack) throws InvalidArgumentException {
         List<String> outList = builder.getLCommand();
         int finInd = outList.indexOf(outList.getLast());
         if(whichTrack.equals("video")) {
@@ -129,13 +129,8 @@ public class VideoTranscoder extends VideoCreator {
      * This method will create the FFmpeg command which can then be used to run the FFmpeg process and produce the desired
      * result.
      */
-    public void createCommand(/*@Nullable AudioFilter audioFilter, @Nullable ScalingAlgorithm alg, @NotNull String width,
-                              @NotNull String height, @NotNull String incolmatname,
-                              @NotNull String outcolmatname, @NotNull String incolrange, @NotNull String outcolrange,
-                              @NotNull String evalSize, @NotNull String interlMode, @NotNull String forceOAsRatio,
-                              int divisibleBy*/) {
-        super.createCommand(/*videoStreamCopy || extractVideo || audioStreamCopy, audioFilter, alg, incolmatname,
-                outcolmatname, incolrange, outcolrange, evalSize, interlMode, forceOAsRatio, divisibleBy*/);
+    public void createCommand() {
+        super.createCommand();
 
         try {
             if(videoStreamCopy) {
@@ -153,7 +148,7 @@ public class VideoTranscoder extends VideoCreator {
                     readyUpForTrackExtraction("audio");
                 }
             }
-        } catch (NotEnoughArgumentsException ex) {
+        } catch (InvalidArgumentException ex) {
             System.err.println(ex.getMessage());
             //ex.printStackTrace();
             System.exit(1);

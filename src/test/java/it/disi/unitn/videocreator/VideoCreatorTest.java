@@ -3,7 +3,6 @@ package it.disi.unitn.videocreator;
 import it.disi.unitn.FFMpeg;
 import it.disi.unitn.FFMpegBuilder;
 import it.disi.unitn.exceptions.InvalidArgumentException;
-import it.disi.unitn.exceptions.NotEnoughArgumentsException;
 import it.disi.unitn.exceptions.UnsupportedOperatingSystemException;
 import it.disi.unitn.videocreator.filtergraph.VideoFilterGraph;
 import it.disi.unitn.videocreator.filtergraph.filterchain.VideoSimpleFilterChain;
@@ -18,7 +17,7 @@ import java.util.concurrent.TimeUnit;
 class VideoCreatorTest {
 
     @Test
-    void createCommand() throws NotEnoughArgumentsException, InvalidArgumentException, UnsupportedOperatingSystemException,
+    void createCommand() throws InvalidArgumentException, UnsupportedOperatingSystemException,
             IOException {
         FFMpegBuilder builder = new FFMpegBuilder("ffmpeg");
         VideoCreator creator = builder.newVideoCreator("./src/test/resources/input/mp4/example.mp4");

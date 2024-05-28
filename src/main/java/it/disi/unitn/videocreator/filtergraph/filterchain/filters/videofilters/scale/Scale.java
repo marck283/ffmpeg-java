@@ -3,7 +3,6 @@ package it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.
 import it.disi.unitn.ProcessController;
 import it.disi.unitn.StringExt;
 import it.disi.unitn.exceptions.InvalidArgumentException;
-import it.disi.unitn.exceptions.NotEnoughArgumentsException;
 import it.disi.unitn.exceptions.UnsupportedOperatingSystemException;
 import it.disi.unitn.videocreator.ExecutorResHandler;
 import it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.VideoFilter;
@@ -135,13 +134,13 @@ public class Scale extends VideoFilter {
      * @param width The video's width
      * @param height The video's height
      * @param pix_fmt The video's pixel format
-     * @throws InvalidArgumentException If the video's with or height is null or an empty string
+     * @throws InvalidArgumentException If the video's with or height is null or an empty string, or the given pixel
+     * format is null or an empty string
      * @throws UnsupportedOperationException If the video's size id is already set
-     * @throws NotEnoughArgumentsException If the given pixel format is null or an empty string
      * @throws UnsupportedOperatingSystemException If the user's Operating System is not yet supported by this library
      */
     public void setSize(boolean development, @NotNull String width, @NotNull String height, @NotNull String pix_fmt)
-            throws InvalidArgumentException, UnsupportedOperationException, UnsupportedOperatingSystemException, NotEnoughArgumentsException {
+            throws InvalidArgumentException, UnsupportedOperationException, UnsupportedOperatingSystemException {
         if(videoSizeID != null && !videoSizeID.isEmpty()) {
             if(l == Locale.ITALIAN || l == Locale.ITALY) {
                 System.err.println("Non e' possibile impostare l'ampiezza e l'altezza del video quando l'id della sua " +
@@ -174,7 +173,7 @@ public class Scale extends VideoFilter {
         }
 
         if(StringExt.checkNullOrEmpty(pix_fmt)) {
-            throw new NotEnoughArgumentsException("The pixel format must neither be null nor an empty string.",
+            throw new InvalidArgumentException("The pixel format must neither be null nor an empty string.",
                     "Il formato dei pixel non puo' essere null o una stringa vuota.");
         }
 

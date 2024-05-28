@@ -4,7 +4,6 @@ import it.disi.unitn.FFMpegBuilder;
 import it.disi.unitn.ProcessController;
 import it.disi.unitn.StringExt;
 import it.disi.unitn.exceptions.InvalidArgumentException;
-import it.disi.unitn.exceptions.NotEnoughArgumentsException;
 import it.disi.unitn.exceptions.PermissionsException;
 import it.disi.unitn.exceptions.UnsupportedOperatingSystemException;
 import it.disi.unitn.videocreator.filtergraph.AudioFilterGraph;
@@ -52,7 +51,7 @@ public class VideoCreator {
 
     private String pixelFormat, execFile = "";
 
-    private boolean /*isOutFullRange, */videoStreamCopy, audioStreamCopy;
+    private boolean videoStreamCopy, audioStreamCopy;
 
     private final Locale l;
 
@@ -65,11 +64,11 @@ public class VideoCreator {
      *
      * @param builder    The FFMpegBuilder instance that called this constructor
      * @param outputFile The path to the output file
-     * @throws NotEnoughArgumentsException if any of the arguments given to this constructor is null
+     * @throws InvalidArgumentException If any of the arguments given to this constructor is null
      */
-    public VideoCreator(@NotNull FFMpegBuilder builder, @NotNull String outputFile) throws NotEnoughArgumentsException {
+    public VideoCreator(@NotNull FFMpegBuilder builder, @NotNull String outputFile) throws InvalidArgumentException {
         if (builder == null || StringExt.checkNullOrEmpty(outputFile)) {
-            throw new NotEnoughArgumentsException("The arguments given to this class's constructor cannot be null or " +
+            throw new InvalidArgumentException("The arguments given to this class's constructor cannot be null or " +
                     "empty values.", "Gli argomenti forniti al costruttore di questa classe non possono essere null o " +
                     "valori non specificati.");
         } else {
@@ -118,10 +117,6 @@ public class VideoCreator {
                 throw new UnsupportedOperationException();
             }
         });
-
-        /*if(input.startsWith("*.") && !pattern.isEmpty()) {
-
-        }*/
 
         if (!input.startsWith("*.") && !Files.exists(Paths.get(input))) {
             throw new InvalidArgumentException("The given file does not exist.", "Il file fornito non esiste.");
@@ -276,15 +271,14 @@ public class VideoCreator {
      * @param codecID     The given codec ID
      * @param development This boolean field tells the method if th user is running the program with a recompiled version
      *                    of FFmpeg
-     * @throws NotEnoughArgumentsException         if the given codec ID is null
-     * @throws InvalidArgumentException            if the given codec ID is not supported by ffmpeg
-     * @throws IOException                         if an I/O error occurs
-     * @throws UnsupportedOperatingSystemException if the Operating System is not yet supported
+     * @throws InvalidArgumentException            If the given codec ID is null or not supported by ffmpeg
+     * @throws IOException                         If an I/O error occurs
+     * @throws UnsupportedOperatingSystemException If the Operating System is not yet supported
      */
-    public void setCodecID(@NotNull String codecID, boolean development) throws NotEnoughArgumentsException, InvalidArgumentException,
+    public void setCodecID(@NotNull String codecID, boolean development) throws InvalidArgumentException,
             IOException, UnsupportedOperatingSystemException {
         if (StringExt.checkNullOrEmpty(codecID)) {
-            throw new NotEnoughArgumentsException("The codec id must not be null.", "L'id del codec non deve essere null " +
+            throw new InvalidArgumentException("The codec id must not be null.", "L'id del codec non deve essere null " +
                     "o una stringa vuota.");
         }
         if (!development) {
@@ -451,15 +445,6 @@ public class VideoCreator {
         pixelFormat = pxfmt;
     }
 
-    /*/**
-     * Questo metodo imposta la modalit&agrave; di resa dei colori.
-     *
-     * @param val Valore booleano per indicare la modalit&agrave; di resa dei colori
-     */
-    /*public void setOutFullRange(boolean val) {
-        isOutFullRange = val;
-    }*/
-
     /**
      * Enables/disables video stream copying.
      *
@@ -479,6 +464,35 @@ public class VideoCreator {
     }
 
     /**
+     * This method sets the values of the standard parameters of the Scale filter. It is not meant to be used outside of
+     * this library.
+     * @param scale The Scale filter instance
+     * @param incolmatname  The name of the input color matrix, as described by FFmpeg's documentation of the scaling filter
+     * @param outcolmatname The name of the output color matrix, as described by FFmpeg's documentation of the scaling
+     *                      filter
+     * @param incolrange    The input color range
+     * @param outcolrange   The output color range
+     * @param evalSize      The value that tells when to evaluate the expressions for width and height
+     * @param interlMode    The interlacing mode
+     * @param forceOAsRatio A parameter that tells the program whether to force the original aspect ratio
+     * @param divisibleBy   An integer that tells the program what the width and height should be divisible by
+     * @throws InvalidArgumentException If the given ScalingAlgorithm has an empty string as its name
+     */
+    private void setStandardScaleParams(@NotNull Scale scale, @NotNull String incolmatname, @NotNull String outcolmatname,
+                                        @NotNull String incolrange, @NotNull String outcolrange, @NotNull String evalSize,
+                                        @NotNull String interlMode, @NotNull String forceOAsRatio, int divisibleBy)
+            throws InvalidArgumentException {
+        scale.setInputColorMatrix(incolmatname);
+        scale.setOutColorMatrix(outcolmatname);
+        scale.setInputRange(incolrange);
+        scale.setOutputRange(outcolrange);
+        scale.setEval(evalSize);
+        scale.setInterl(interlMode);
+        scale.forceOriginalAspectRatio(forceOAsRatio);
+        scale.setDivisibleBy(divisibleBy);
+    }
+
+    /**
      * Sets the "scale" filter parameters.
      *
      * @param development   A boolean parameter to tell the program if the user is running a custom version of FFmpeg
@@ -495,27 +509,21 @@ public class VideoCreator {
      * @param interlMode    The interlacing mode
      * @param forceOAsRatio A parameter that tells the program whether to force the original aspect ratio
      * @param divisibleBy   An integer that tells the program what the width and height should be divisible by
-     * @throws InvalidArgumentException            If the given ScalingAlgorithm has an empty string as its name
-     * @throws NotEnoughArgumentsException         If the given pixel format is null or an empty string
+     * @throws InvalidArgumentException If the given ScalingAlgorithm has an empty string as its name, the with or the
+     * height values are null or empty strings, or the pixel format is null or an empty string
      * @throws UnsupportedOperatingSystemException If the user's Operating System is not yet supported by this library
      */
     public void setScaleParams(boolean development, @NotNull Scale scale, @Nullable ScalingAlgorithm alg, @NotNull String width,
                                @NotNull String height, @NotNull String incolmatname, @NotNull String outcolmatname,
                                @NotNull String incolrange, @NotNull String outcolrange, @NotNull String evalSize,
                                @NotNull String interlMode, @NotNull String forceOAsRatio, int divisibleBy)
-            throws InvalidArgumentException, UnsupportedOperatingSystemException, NotEnoughArgumentsException {
+            throws InvalidArgumentException, UnsupportedOperatingSystemException {
         if (alg != null) {
             scale.setSwsFlags(alg);
         }
         scale.setSize(development, width, height, pixelFormat);
-        scale.setInputColorMatrix(incolmatname);
-        scale.setOutColorMatrix(outcolmatname);
-        scale.setInputRange(incolrange);
-        scale.setOutputRange(outcolrange);
-        scale.setEval(evalSize);
-        scale.setInterl(interlMode);
-        scale.forceOriginalAspectRatio(forceOAsRatio);
-        scale.setDivisibleBy(divisibleBy);
+        setStandardScaleParams(scale, incolmatname, outcolmatname, incolrange, outcolrange, evalSize, interlMode,
+                forceOAsRatio, divisibleBy);
         scale.updateMap();
     }
 
@@ -544,14 +552,8 @@ public class VideoCreator {
             scale.setSwsFlags(alg);
         }
         scale.setVideoSizeID(videoSizeID);
-        scale.setInputColorMatrix(incolmatname);
-        scale.setOutColorMatrix(outcolmatname);
-        scale.setInputRange(incolrange);
-        scale.setOutputRange(outcolrange);
-        scale.setEval(evalSize);
-        scale.setInterl(interlMode);
-        scale.forceOriginalAspectRatio(forceOAsRatio);
-        scale.setDivisibleBy(divisibleBy);
+        setStandardScaleParams(scale, incolmatname, outcolmatname, incolrange, outcolrange, evalSize, interlMode,
+                forceOAsRatio, divisibleBy);
         scale.updateMap();
     }
 

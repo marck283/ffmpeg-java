@@ -4,7 +4,6 @@ import it.disi.unitn.FFMpeg;
 import it.disi.unitn.FFMpegBuilder;
 import it.disi.unitn.StringExt;
 import it.disi.unitn.exceptions.InvalidArgumentException;
-import it.disi.unitn.exceptions.NotEnoughArgumentsException;
 import org.apache.commons.io.FileUtils;
 import org.jetbrains.annotations.NotNull;
 
@@ -32,13 +31,13 @@ public class TracksMerger extends VideoCreator {
      * @param outputFile The path to the output video
      * @param audioInput The path to the input audio file
      * @param videoInput The path to the input video file
-     * @throws NotEnoughArgumentsException If any of the arguments given to this method is null or an empty string
+     * @throws InvalidArgumentException If any of the arguments given to this method is null or an empty string
      */
     public TracksMerger(@NotNull FFMpegBuilder builder, @NotNull String outputFile,
-                 @NotNull String audioInput, @NotNull String videoInput) throws NotEnoughArgumentsException {
+                 @NotNull String audioInput, @NotNull String videoInput) throws InvalidArgumentException {
         super(builder, outputFile);
         if(StringExt.checkNullOrEmpty(audioInput) || StringExt.checkNullOrEmpty(videoInput)) {
-            throw new NotEnoughArgumentsException("The arguments to this class's constructor cannot be null or empty " +
+            throw new InvalidArgumentException("The arguments to this class's constructor cannot be null or empty " +
                     "strings.", "Nessuno degli argomenti forniti al costruttore di questa classe puo' essere null o una " +
                     "stringa vuota.");
         }
@@ -54,10 +53,10 @@ public class TracksMerger extends VideoCreator {
      * video.
      * @param builder The FFMpegBuilderInstance
      * @param outputVideo The path to the output video
-     * @throws NotEnoughArgumentsException If any of the arguments given to this method is null or an empty string
+     * @throws InvalidArgumentException If any of the arguments given to this method is null or an empty string
      */
     public TracksMerger(@NotNull FFMpegBuilder builder, @NotNull String outputVideo)
-            throws NotEnoughArgumentsException {
+            throws InvalidArgumentException {
         super(builder, outputVideo);
 
         this.builder = builder;
@@ -134,19 +133,18 @@ public class TracksMerger extends VideoCreator {
      * @param timeUnit The TimeUnit instance to be used
      * @param tempFile A temporary file used to store the paths of the files to be merged
      * @throws IOException if an I/O error occurs
-     * @throws NotEnoughArgumentsException If the third or fourth arguments are null or an empty string or contain null
-     * or empty strings
-     * @throws InvalidArgumentException If the given timeout is negative or the given TimeUnit instance is null
+     * @throws InvalidArgumentException If the given timeout is negative or the given TimeUnit instance is null, or if
+     * the third or fourth arguments are null or an empty string or contain null or empty strings
      */
     public void mergeVideos(long time, @NotNull TimeUnit timeUnit, @NotNull List<String> inputFiles,
-                            @NotNull String tempFile) throws IOException, NotEnoughArgumentsException, InvalidArgumentException {
+                            @NotNull String tempFile) throws IOException, InvalidArgumentException {
         if(time <= 0 || timeUnit == null) {
             throw new InvalidArgumentException("Either the given timeout is less than or equal to zero or the given TimeUnit " +
                     "instance is null.", "Il timeout fornito è minore o uguale a zero oppure l'istanza di TimeUnit è null.");
         }
         if(inputFiles == null || inputFiles.stream().anyMatch(StringExt::checkNullOrEmpty) ||
                 StringExt.checkNullOrEmpty(tempFile)) {
-            throw new NotEnoughArgumentsException("No argument to this method can be null, less than or equal to zero or " +
+            throw new InvalidArgumentException("No argument to this method can be null, less than or equal to zero or " +
                     " an empty string, nor can it contain null or empty strings.", "Nessuno degli argomenti forniti a " +
                     "questo metodo puo' essere null, minore o uguale a zero o una stringa vuota o contenere stringhe null " +
                     "o vuote.");

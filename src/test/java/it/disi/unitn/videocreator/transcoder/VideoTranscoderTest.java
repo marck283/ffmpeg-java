@@ -3,7 +3,6 @@ package it.disi.unitn.videocreator.transcoder;
 import it.disi.unitn.FFMpeg;
 import it.disi.unitn.FFMpegBuilder;
 import it.disi.unitn.exceptions.InvalidArgumentException;
-import it.disi.unitn.exceptions.NotEnoughArgumentsException;
 import it.disi.unitn.exceptions.UnsupportedOperatingSystemException;
 import it.disi.unitn.videocreator.filtergraph.AudioFilterGraph;
 import it.disi.unitn.videocreator.filtergraph.VideoFilterGraph;
@@ -20,7 +19,7 @@ import java.util.concurrent.TimeUnit;
 class VideoTranscoderTest {
 
     @Test
-    void createCommand() throws NotEnoughArgumentsException, IOException, InvalidArgumentException, UnsupportedOperatingSystemException {
+    void createCommand() throws IOException, InvalidArgumentException, UnsupportedOperatingSystemException {
         FFMpegBuilder builder = new FFMpegBuilder("ffmpeg");
         VideoTranscoder transcoder = builder.newVideoTranscoder("./src/test/resources/input/mp4/example.mov");
         transcoder.addInput("./src/test/resources/input/mp4/000.mp4");
@@ -50,7 +49,7 @@ class VideoTranscoderTest {
     }
 
     @Test
-    void createCommandForAudio() throws NotEnoughArgumentsException, InvalidArgumentException, IOException {
+    void createCommandForAudio() throws InvalidArgumentException, IOException {
         FFMpegBuilder builder = new FFMpegBuilder("ffmpeg");
         VideoTranscoder transcoder = builder.newVideoTranscoder("./src/test/resources/input/mp4/002.wav");
         transcoder.addInput("./src/test/resources/input/mp4/002.wmv");
