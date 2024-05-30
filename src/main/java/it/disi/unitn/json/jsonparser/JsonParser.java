@@ -40,7 +40,9 @@ public class JsonParser {
      * to this method
      */
     public JsonArray getJsonArray(@NotNull String arrName) throws InvalidArgumentException, InvalidJSONFileException {
-        if(StringExt.checkNullOrEmpty(arrName)) {
+        JsonElement jel = checkField(obj, arrName);
+        return jel.getAsJsonArray();
+        /*if(StringExt.checkNullOrEmpty(arrName)) {
             throw new InvalidArgumentException("The parameter given to this method cannot be null or an empty string.",
                     "Il parametro fornito a questo metodo non puo' essere null o una stringa vuota.");
         }
@@ -51,7 +53,7 @@ public class JsonParser {
                     "the name given to this method.", "Il file JSON fornito deve contenere almeno un array di oggetti " +
                     "JSON con il nome fornito a questo metodo.");
         }
-        return obj.getAsJsonArray(arrName);
+        return jsonArr;*/
     }
 
     /**
@@ -63,16 +65,17 @@ public class JsonParser {
      * @throws InvalidJSONFileException If the JSON file does not contain any JSON element with the given name
      */
     public String getString(@NotNull String name) throws InvalidArgumentException, InvalidJSONFileException {
-        if(StringExt.checkNullOrEmpty(name)) {
+        JsonElement jel = checkField(obj, name);
+        /*if(StringExt.checkNullOrEmpty(name)) {
             throw new InvalidArgumentException("The parameter given to this method cannot be null or an empty string.",
                     "Il parametro fornito a questo metodo non puo' essere null o una stringa vuota.");
         }
 
-        JsonElement jel = obj.get(name);
+        JsonElement jel = getElement(obj, name);
         if(jel == null) {
             throw new InvalidJSONFileException("The field \"" + name + "\" is missing.", "Il campo \"" + name + "\" non " +
                     "e' presente.");
-        }
+        }*/
         //if(jel != null) {
             return jel.getAsString();
         //}
@@ -100,8 +103,12 @@ public class JsonParser {
      * @return A JsonElement instance representing the so found element
      * @throws InvalidArgumentException If any of the parameters declared for this method is null or an empty string
      */
-    private JsonElement getElement(@NotNull JsonElement el, @NotNull String name) throws InvalidArgumentException {
-        return getJsonObject(el).get(name);
+    private JsonElement getElement(@NotNull JsonObject el, @NotNull String name) throws InvalidArgumentException {
+        if(el == null || StringExt.checkNullOrEmpty(name)) {
+            throw new InvalidArgumentException("None of the parameters declared for this method can be null.", "Nessuno " +
+                    "dei parametri dichiarati per questo metodo puo' essere null.");
+        }
+        return el.get(name);
     }
 
     /**
@@ -113,7 +120,7 @@ public class JsonParser {
      * @throws InvalidJSONFileException If the JSON file does not contain any field identified by the given name
      */
     public String getString(@NotNull JsonElement el, @NotNull String name) throws InvalidArgumentException, InvalidJSONFileException {
-        JsonElement jel = checkField(el, name);
+        JsonElement jel = checkField(getJsonObject(el), name);
         //if(jel != null) {
         return jel.getAsString();
         //}
@@ -125,12 +132,17 @@ public class JsonParser {
      * @param el The given JsonElement instance.
      * @param name The given field's name.
      * @return The JsonElement instance representing the requested field.
-     * @throws InvalidArgumentException If the given field's name is null or an empty string
+     * @throws InvalidArgumentException If the JsonObject instance given to this method is null or the given field's name
+     * is null or an empty string
      * @throws InvalidJSONFileException If the JsonElement instance representing the requested field is null
      */
-    private @NotNull JsonElement checkField(@NotNull JsonElement el, @NotNull String name) throws InvalidArgumentException,
+    private @NotNull JsonElement checkField(@NotNull JsonObject el, @NotNull String name) throws InvalidArgumentException,
             InvalidJSONFileException {
-        if(el == null || StringExt.checkNullOrEmpty(name)) {
+        if(el == null) {
+            throw new InvalidArgumentException("The JsonObject instance given to this method cannot be null.", "L'istanza " +
+                    "di JsonObject fornita a questo metodo non puo' essere null.");
+        }
+        if(StringExt.checkNullOrEmpty(name)) {
             throw new InvalidArgumentException("The parameters passed to this method cannot be null or empty strings.",
                     "I parametri passati a questo metodo non possono essere null o stringhe vuote.");
         }
@@ -153,7 +165,7 @@ public class JsonParser {
      * @throws InvalidJSONFileException If the JSON file does not contain any field identified by the given name
      */
     public float getFloat(@NotNull JsonElement el, @NotNull String name) throws InvalidArgumentException, InvalidJSONFileException {
-        JsonElement jel = checkField(el, name);
+        JsonElement jel = checkField(getJsonObject(el), name);
         //if(jel != null) {
         return jel.getAsFloat();
         //}
@@ -170,7 +182,7 @@ public class JsonParser {
      * identified by the name given to this method
      */
     public int getInt(@NotNull JsonElement el, @NotNull String name) throws InvalidArgumentException, InvalidJSONFileException {
-        JsonElement jel = checkField(el, name);
+        JsonElement jel = checkField(getJsonObject(el), name);
         //if(jel != null) {
         return jel.getAsInt();
         //}
