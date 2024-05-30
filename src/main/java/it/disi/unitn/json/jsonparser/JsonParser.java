@@ -9,15 +9,15 @@ import org.jetbrains.annotations.NotNull;
 import java.io.Reader;
 
 /**
- * Classe wrapper per il parser JSON di Google.
+ * Wrapper class for Google's JSON parser.
  */
 public class JsonParser {
 
     private final JsonObject obj;
 
     /**
-     * Il costruttore della classe. Costruisce un'istanza di questa classe utilizzando un Reader.
-     * @param reader Il Reader utilizzato
+     * This class's constructor. Builds an instance of this class using the given Reader.
+     * @param reader The given Reader
      * @throws InvalidArgumentException If the parameter passed to this constructor is null
      */
     public JsonParser(@NotNull Reader reader) throws InvalidArgumentException {
@@ -30,11 +30,9 @@ public class JsonParser {
     }
 
     /**
-     * Ritorna un'istanza della classe JsonArray che rappresenta l'oggetto identificato dal nome fornito
-     * come parametro.
-     * @param arrName Il nome dell'oggetto da ritornare
-     * @return Un'istanza di JsonArray che rappresenta l'oggetto identificato dal nome fornito come
-     * parametro, o null se tale parametro non esiste.
+     * Returns an instance of the JsonArray class that represents the object identified by the name given as parameter.
+     * @param arrName The name of the object to be returned
+     * @return An instance of the object identified by the name given as parameter, or null should that object not exist
      * @throws InvalidArgumentException If the argument given to this method is null or an empty string
      * @throws InvalidJSONFileException If the given JSON file does not contain any array identified by the name given
      * to this method
@@ -42,18 +40,6 @@ public class JsonParser {
     public JsonArray getJsonArray(@NotNull String arrName) throws InvalidArgumentException, InvalidJSONFileException {
         JsonElement jel = checkField(obj, arrName);
         return jel.getAsJsonArray();
-        /*if(StringExt.checkNullOrEmpty(arrName)) {
-            throw new InvalidArgumentException("The parameter given to this method cannot be null or an empty string.",
-                    "Il parametro fornito a questo metodo non puo' essere null o una stringa vuota.");
-        }
-
-        JsonArray jsonArr = obj.getAsJsonArray(arrName);
-        if(jsonArr == null) {
-            throw new InvalidJSONFileException("The given JSON file must contain at least one array of JSON objects with " +
-                    "the name given to this method.", "Il file JSON fornito deve contenere almeno un array di oggetti " +
-                    "JSON con il nome fornito a questo metodo.");
-        }
-        return jsonArr;*/
     }
 
     /**
@@ -66,20 +52,21 @@ public class JsonParser {
      */
     public String getString(@NotNull String name) throws InvalidArgumentException, InvalidJSONFileException {
         JsonElement jel = checkField(obj, name);
-        /*if(StringExt.checkNullOrEmpty(name)) {
-            throw new InvalidArgumentException("The parameter given to this method cannot be null or an empty string.",
-                    "Il parametro fornito a questo metodo non puo' essere null o una stringa vuota.");
-        }
+        return jel.getAsString();
+    }
 
-        JsonElement jel = getElement(obj, name);
-        if(jel == null) {
-            throw new InvalidJSONFileException("The field \"" + name + "\" is missing.", "Il campo \"" + name + "\" non " +
-                    "e' presente.");
-        }*/
-        //if(jel != null) {
-            return jel.getAsString();
-        //}
-        //return "";
+    /**
+     * Gets the String value of the element identified by the given name.
+     * @param el A JsonElement instance
+     * @param name The given element's name. This element has to be inside the structure of the given JsonElement
+     * @return The value of the element identified by the given name if such element can be found, otherwise an empty string
+     * @throws InvalidArgumentException If any of the parameters passed to this method is null or an empty string
+     * @throws InvalidJSONFileException If the JSON file does not contain any field identified by the given name
+     */
+    public String getString(@NotNull JsonElement el, @NotNull String name) throws InvalidArgumentException,
+            InvalidJSONFileException {
+        JsonElement jel = checkField(getJsonObject(el), name);
+        return jel.getAsString();
     }
 
     /**
@@ -109,22 +96,6 @@ public class JsonParser {
                     "dei parametri dichiarati per questo metodo puo' essere null.");
         }
         return el.get(name);
-    }
-
-    /**
-     * Gets the String value of the element identified by the given name.
-     * @param el A JsonElement instance
-     * @param name The given element's name. This element has to be inside the structure of the given JsonElement
-     * @return The value of the element identified by the given name if such element can be found, otherwise an empty string
-     * @throws InvalidArgumentException If any of the parameters passed to this method is null or an empty string
-     * @throws InvalidJSONFileException If the JSON file does not contain any field identified by the given name
-     */
-    public String getString(@NotNull JsonElement el, @NotNull String name) throws InvalidArgumentException, InvalidJSONFileException {
-        JsonElement jel = checkField(getJsonObject(el), name);
-        //if(jel != null) {
-        return jel.getAsString();
-        //}
-        //return "";
     }
 
     /**
@@ -166,10 +137,7 @@ public class JsonParser {
      */
     public float getFloat(@NotNull JsonElement el, @NotNull String name) throws InvalidArgumentException, InvalidJSONFileException {
         JsonElement jel = checkField(getJsonObject(el), name);
-        //if(jel != null) {
         return jel.getAsFloat();
-        //}
-        //return "";
     }
 
     /**
@@ -183,9 +151,6 @@ public class JsonParser {
      */
     public int getInt(@NotNull JsonElement el, @NotNull String name) throws InvalidArgumentException, InvalidJSONFileException {
         JsonElement jel = checkField(getJsonObject(el), name);
-        //if(jel != null) {
         return jel.getAsInt();
-        //}
-        //return "";
     }
 }
