@@ -4,13 +4,14 @@ import it.disi.unitn.FFMpeg;
 import it.disi.unitn.FFMpegBuilder;
 import it.disi.unitn.StringExt;
 import it.disi.unitn.exceptions.InvalidArgumentException;
-import org.apache.commons.io.FileUtils;
+//import org.apache.commons.io.FileUtils;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.StandardOpenOption;
 import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
@@ -119,8 +120,10 @@ public class TracksMerger extends VideoCreator {
             System.exit(1);
         }
         for(String s: inputFiles) {
-            FileUtils.writeStringToFile(file, "file '" + s.replace('\\', '/') + "'\n",
-                    StandardCharsets.UTF_8, true);
+            Files.writeString(file.toPath(), "file '" + s.replace('\\', '/') + "'\n",
+                    StandardCharsets.UTF_8, StandardOpenOption.APPEND);
+            /*FileUtils.writeStringToFile(file, "file '" + s.replace('\\', '/') + "'\n",
+                    StandardCharsets.UTF_8, true);*/
         }
 
         return file;
@@ -144,10 +147,9 @@ public class TracksMerger extends VideoCreator {
         }
         if(inputFiles == null || inputFiles.stream().anyMatch(StringExt::checkNullOrEmpty) ||
                 StringExt.checkNullOrEmpty(tempFile)) {
-            throw new InvalidArgumentException("No argument to this method can be null, less than or equal to zero or " +
-                    " an empty string, nor can it contain null or empty strings.", "Nessuno degli argomenti forniti a " +
-                    "questo metodo puo' essere null, minore o uguale a zero o una stringa vuota o contenere stringhe null " +
-                    "o vuote.");
+            throw new InvalidArgumentException("No argument to this method can be null or an empty string, nor can it " +
+                    "contain null or empty strings.", "Nessuno degli argomenti forniti a questo metodo puo' essere null " +
+                    "o una stringa vuota o contenere stringhe null o vuote.");
         }
         File inputTXTFile = writeTXTFile(inputFiles, tempFile);
         builder.add("-f concat -safe 0 -i \"" +

@@ -1,11 +1,12 @@
 package it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.aformat;
 
+import it.disi.unitn.StringExt;
 import it.disi.unitn.exceptions.InvalidArgumentException;
+import it.disi.unitn.exceptions.UnsupportedOperationException;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 /**
  * This class implements FFmpeg's channel layouts.
@@ -29,7 +30,7 @@ public class ChannelLayout {
      * @throws InvalidArgumentException If the given channel layout does not match any of the values accepted by FFmpeg
      * @throws UnsupportedOperationException If the user already specified a channel ID by calling addChannelID()
      */
-    public void setChannelID(@NotNull String chID) throws InvalidArgumentException {
+    public void setChannelID(@NotNull String chID) throws InvalidArgumentException, UnsupportedOperationException {
         if(chidList.isEmpty()) {
             switch(chID) {
                 case "mono", "stereo", "2.1", "3.0", "3.0(back)", "4.0", "quad", "quad(side)", "3.1", "5.0", "5.0(side)",
@@ -41,15 +42,9 @@ public class ChannelLayout {
                         "vuota o un qualunque valore non riconosciuto da FFmpeg.");
             }
         } else {
-            Locale l = Locale.getDefault();
-            if(l == Locale.ITALIAN || l == Locale.ITALY) {
-                System.err.println("Non e' possibile impostare una combinazione di ID dei canali audio se la lista dei " +
-                        "canali audio non e' vuota.");
-            } else {
-                System.err.println("The list of audio channel IDs must be empty in order to set a combination of audio " +
-                        "channels.");
-            }
-            throw new UnsupportedOperationException();
+            UnsupportedOperationException.throwUnsupportedOperationException("The list of audio channel IDs must be " +
+                    "empty in order to set a combination of audio channels.", "Non e' possibile impostare una " +
+                    "combinazione di ID dei canali audio se la lista dei canali audio non e' vuota.");
         }
     }
 
@@ -61,8 +56,8 @@ public class ChannelLayout {
      * @throws UnsupportedOperationException If the user already specified a combination of audio channels by calling
      * setChannelID()
      */
-    public void addChannelID(@NotNull String channelID) throws InvalidArgumentException {
-        if(chID == null || chID.isEmpty()) {
+    public void addChannelID(@NotNull String channelID) throws InvalidArgumentException, UnsupportedOperationException {
+        if(StringExt.checkNullOrEmpty(chID)) {
             switch(channelID) {
                 case "FL", "FR", "FC", "LFE", "BL", "BR", "FLC", "FRC", "BC", "SL", "SR", "TC", "TFL", "TFC", "TFR", "TBL",
                         "TBC", "TBR", "DL", "DR", "WL", "WR", "SDL", "SDR", "LFE2" -> this.chID = channelID;
@@ -71,15 +66,10 @@ public class ChannelLayout {
                         "vuota o un qualunque valore non riconosciuto da FFmpeg.");
             }
         } else {
-            Locale l = Locale.getDefault();
-            if(l == Locale.ITALIAN || l == Locale.ITALY) {
-                System.err.println("La combinazione di canali audio deve essere null o una stringa vuota per poter aggiungere " +
-                        "l'ID di un singolo canale audio.");
-            } else {
-                System.err.println("The combination of audio channels must be null or an empty string in order to add the " +
-                        "ID of a single audio channel.");
-            }
-            throw new UnsupportedOperationException();
+            UnsupportedOperationException.throwUnsupportedOperationException("The combination of audio channels must be " +
+                    "null or an empty string in order to add the ID of a single audio channel.", "La combinazione di " +
+                    "canali audio deve essere null o una stringa vuota per poter aggiungere l'ID di un singolo canale " +
+                    "audio.");
         }
     }
 

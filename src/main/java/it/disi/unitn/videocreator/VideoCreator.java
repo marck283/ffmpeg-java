@@ -6,6 +6,7 @@ import it.disi.unitn.StringExt;
 import it.disi.unitn.exceptions.InvalidArgumentException;
 import it.disi.unitn.exceptions.PermissionsException;
 import it.disi.unitn.exceptions.UnsupportedOperatingSystemException;
+import it.disi.unitn.exceptions.UnsupportedOperationException;
 import it.disi.unitn.videocreator.filtergraph.AudioFilterGraph;
 import it.disi.unitn.videocreator.filtergraph.FilterGraph;
 import it.disi.unitn.videocreator.filtergraph.VideoFilterGraph;
@@ -98,25 +99,20 @@ public class VideoCreator {
      * @param input The given input file
      * @throws InvalidArgumentException If the given input value is null or an empty string or the given file does not
      *                                  exist
+     * @throws UnsupportedOperationException If the input value already includes all files in the folder
      */
-    public void addInput(@NotNull String input) throws InvalidArgumentException {
+    public void addInput(@NotNull String input) throws InvalidArgumentException, UnsupportedOperationException {
         if (StringExt.checkNullOrEmpty(input)) {
             throw new InvalidArgumentException("The given input file cannot be null or an empty string.", "Il file fornito " +
                     "non puo' essere null o una stringa vuota.");
         }
 
-        pattern.forEach(e -> {
-            if (e.contains("*.")) {
-                if (l == Locale.ITALY || l == Locale.ITALIAN) {
-                    System.err.println("Non e' possibile inserire un altro valore di input quando ne e' gia' presente uno " +
-                            "che comprenda tutti i file presenti nella cartella.");
-                } else {
-                    System.err.println("Cannot insert another input value when there is already another one that includes " +
-                            "all files in the same folder.");
-                }
-                throw new UnsupportedOperationException();
-            }
-        });
+        if(pattern.stream().anyMatch(e -> e.contains("*."))) {
+            UnsupportedOperationException.throwUnsupportedOperationException("Cannot insert another input value when " +
+                    "there is already another one that includes all files in the same folder.", "Non e' possibile " +
+                    "inserire un altro valore di input quando ne e' gia' presente uno che comprenda tutti i file " +
+                    "presenti nella cartella.");
+        }
 
         if (!input.startsWith("*.") && !Files.exists(Paths.get(input))) {
             throw new InvalidArgumentException("The given file does not exist.", "Il file fornito non esiste.");
@@ -512,12 +508,13 @@ public class VideoCreator {
      * @throws InvalidArgumentException If the given ScalingAlgorithm has an empty string as its name, the with or the
      * height values are null or empty strings, or the pixel format is null or an empty string
      * @throws UnsupportedOperatingSystemException If the user's Operating System is not yet supported by this library
+     * @throws UnsupportedOperationException If the video size's id is already set
      */
     public void setScaleParams(boolean development, @NotNull Scale scale, @Nullable ScalingAlgorithm alg, @NotNull String width,
                                @NotNull String height, @NotNull String incolmatname, @NotNull String outcolmatname,
                                @NotNull String incolrange, @NotNull String outcolrange, @NotNull String evalSize,
                                @NotNull String interlMode, @NotNull String forceOAsRatio, int divisibleBy)
-            throws InvalidArgumentException, UnsupportedOperatingSystemException {
+            throws InvalidArgumentException, UnsupportedOperatingSystemException, UnsupportedOperationException {
         if (alg != null) {
             scale.setSwsFlags(alg);
         }
@@ -543,11 +540,13 @@ public class VideoCreator {
      * @param forceOAsRatio A parameter that tells the program whether to force the original aspect ratio
      * @param divisibleBy   An integer that tells the program what the width and height should be divisible by
      * @throws InvalidArgumentException If the given ScalingAlgorithm has an empty string as its name
+     * @throws UnsupportedOperationException If the video's width and height are already set
      */
     public void setScaleParamsWithSizeID(@NotNull Scale scale, @Nullable ScalingAlgorithm alg, @NotNull String videoSizeID,
                                          @NotNull String incolmatname, @NotNull String outcolmatname, @NotNull String incolrange,
                                          @NotNull String outcolrange, @NotNull String evalSize, @NotNull String interlMode,
-                                         @NotNull String forceOAsRatio, int divisibleBy) throws InvalidArgumentException {
+                                         @NotNull String forceOAsRatio, int divisibleBy) throws InvalidArgumentException,
+            UnsupportedOperationException {
         if (alg != null) {
             scale.setSwsFlags(alg);
         }

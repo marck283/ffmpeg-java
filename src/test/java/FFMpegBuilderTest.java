@@ -2,6 +2,7 @@ import it.disi.unitn.FFMpeg;
 import it.disi.unitn.FFMpegBuilder;
 import it.disi.unitn.exceptions.InvalidArgumentException;
 import it.disi.unitn.exceptions.UnsupportedOperatingSystemException;
+import it.disi.unitn.exceptions.UnsupportedOperationException;
 import it.disi.unitn.videocreator.VideoCreator;
 import it.disi.unitn.videocreator.filtergraph.VideoFilterGraph;
 import it.disi.unitn.videocreator.filtergraph.filterchain.VideoSimpleFilterChain;
@@ -17,7 +18,7 @@ import java.util.concurrent.TimeUnit;
 class FFMpegBuilderTest {
 
     @Test
-    void setVideoFrameSize() throws IOException, InvalidArgumentException, UnsupportedOperatingSystemException {
+    void setVideoFrameSize() throws IOException, InvalidArgumentException, UnsupportedOperatingSystemException, UnsupportedOperationException {
         FFMpegBuilder builder = new FFMpegBuilder("ffmpeg");
         VideoCreator vc = builder.newVideoCreator("./src/test/resources/input/mp4/000-1.mp4");
         vc.addInput("./src/test/resources/input/mp4/000.mp4");

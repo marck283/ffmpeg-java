@@ -4,6 +4,7 @@ import it.disi.unitn.ProcessController;
 import it.disi.unitn.StringExt;
 import it.disi.unitn.exceptions.InvalidArgumentException;
 import it.disi.unitn.exceptions.UnsupportedOperatingSystemException;
+import it.disi.unitn.exceptions.UnsupportedOperationException;
 import it.disi.unitn.videocreator.ExecutorResHandler;
 import it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.VideoFilter;
 import it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.scale.scalingalgs.ScalingAlgorithm;
@@ -140,15 +141,11 @@ public class Scale extends VideoFilter {
      * @throws UnsupportedOperatingSystemException If the user's Operating System is not yet supported by this library
      */
     public void setSize(boolean development, @NotNull String width, @NotNull String height, @NotNull String pix_fmt)
-            throws InvalidArgumentException, UnsupportedOperationException, UnsupportedOperatingSystemException {
-        if(videoSizeID != null && !videoSizeID.isEmpty()) {
-            if(l == Locale.ITALIAN || l == Locale.ITALY) {
-                System.err.println("Non e' possibile impostare l'ampiezza e l'altezza del video quando l'id della sua " +
-                        "dimensione e' gia' stato impostato.");
-            } else {
-                System.err.println("Cannot set video width and height if the video's size id is already set.");
-            }
-            throw new UnsupportedOperationException();
+            throws InvalidArgumentException, UnsupportedOperatingSystemException, UnsupportedOperationException {
+        if(!StringExt.checkNullOrEmpty(videoSizeID)) {
+            UnsupportedOperationException.throwUnsupportedOperationException("Cannot set video width and height if the " +
+                    "video's size id is already set.", "Non e' possibile impostare l'ampiezza e l'altezza del video " +
+                    "quando l'id della sua dimensione e' gia' stato impostato.");
         }
 
         if(StringExt.checkNullOrEmpty(width)) {
@@ -209,14 +206,10 @@ public class Scale extends VideoFilter {
      * @throws UnsupportedOperationException If the video's width and height are already set
      */
     public void setVideoSizeID(@NotNull String videoSizeID) throws InvalidArgumentException, UnsupportedOperationException {
-        if(width != null && !width.isEmpty() && height != null && !height.isEmpty()) {
-            if(l == Locale.ITALIAN || l == Locale.ITALY) {
-                System.err.println("Impossibile impostare l'id della dimensione del video quando l'ampiezza e l'altezza " +
-                        "sono gia' impostate.");
-            } else {
-                System.err.println("Cannot set video size id if width and height are already set.");
-            }
-            throw new UnsupportedOperationException();
+        if(!StringExt.checkNullOrEmpty(width) && !StringExt.checkNullOrEmpty(height)) {
+            UnsupportedOperationException.throwUnsupportedOperationException("Cannot set video size id if width and " +
+                    "height are already set.", "Impossibile impostare l'id della dimensione del video quando l'ampiezza " +
+                    "e l'altezza sono gia' impostate.");
         }
         if (StringExt.checkNullOrEmpty(videoSizeID)) {
             throw new InvalidArgumentException("The video size ID should not be null.", "L'ID della proporzione visiva " +

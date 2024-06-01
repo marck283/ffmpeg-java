@@ -4,6 +4,7 @@ import it.disi.unitn.FFMpeg;
 import it.disi.unitn.FFMpegBuilder;
 import it.disi.unitn.exceptions.InvalidArgumentException;
 import it.disi.unitn.exceptions.UnsupportedOperatingSystemException;
+import it.disi.unitn.exceptions.UnsupportedOperationException;
 import it.disi.unitn.videocreator.filtergraph.VideoFilterGraph;
 import it.disi.unitn.videocreator.filtergraph.filterchain.VideoSimpleFilterChain;
 import it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.format.Format;
@@ -18,7 +19,7 @@ class VideoCreatorTest {
 
     @Test
     void createCommand() throws InvalidArgumentException, UnsupportedOperatingSystemException,
-            IOException {
+            IOException, UnsupportedOperationException {
         FFMpegBuilder builder = new FFMpegBuilder("ffmpeg");
         VideoCreator creator = builder.newVideoCreator("./src/test/resources/input/mp4/example.mp4");
         creator.addInput("./src/test/resources/input/images/000.jpeg");
