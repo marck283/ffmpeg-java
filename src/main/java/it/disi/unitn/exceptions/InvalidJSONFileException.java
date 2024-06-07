@@ -13,9 +13,8 @@ public class InvalidJSONFileException extends GeneralException {
      * This exception's constructor.
      * @param msg The English message. This value cannot be null or an empty string.
      * @param itmsg The Italian message. This value cannot be null or an empty string.
-     * @throws InvalidArgumentException If any of the given arguments is null or an empty string
      */
-    public InvalidJSONFileException(@NotNull String msg, @NotNull String itmsg) throws InvalidArgumentException {
+    public InvalidJSONFileException(@NotNull String msg, @NotNull String itmsg) {
         super(msg, itmsg);
     }
 

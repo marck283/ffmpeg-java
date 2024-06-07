@@ -168,10 +168,8 @@ public class VideoCreator {
 
     /**
      * This method checks if the given file path refers to an executable file.
-     *
-     * @return True if thr path refers to an executable file, otherwise false.
      */
-    private boolean checkExecutable() throws PermissionsException {
+    private void checkExecutable() throws PermissionsException {
         if (!Files.isExecutable(Paths.get(execFile))) {
             try {
                 throw new PermissionsException("Cannot execute file " + execFile + ". Please check the user's permissions and that " +
@@ -182,8 +180,6 @@ public class VideoCreator {
                 System.exit(1);
             }
         }
-
-        return true;
     }
 
     /**
@@ -223,9 +219,7 @@ public class VideoCreator {
      */
     private boolean performCheck(@NotNull CommandLine cmdline) throws IOException {
         try {
-            if (!checkExecutable()) {
-                return false;
-            }
+            checkExecutable();
 
             Path tempFile = Files.createTempFile("ffmpeg-java-temp", ".txt");
             BufferedOutputStream outstream = new BufferedOutputStream(Files.newOutputStream(tempFile,

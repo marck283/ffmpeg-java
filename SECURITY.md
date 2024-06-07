@@ -4,9 +4,10 @@
 
 The following versions of this library are supported with new features and security updates. No other version is currently supported.
 
-| Version | Supported          |
-| ------- | ------------------ |
-| 1.1.19.x   | :white_check_mark: |
+| Version  | Supported          |
+|----------|--------------------|
+| 1.1.19.x | :white_check_mark: |
+| 1.2.x    | :white_check_mark: |
 
 ## Reporting a Vulnerability
 

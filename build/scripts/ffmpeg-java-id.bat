@@ -68,7 +68,7 @@ goto fail
 :execute
 @rem Setup the command line
 
-set CLASSPATH=%APP_HOME%\lib\ffmpeg-java-id-1.1.19-beta14.jar;%APP_HOME%\lib\annotations-24.1.0.jar;%APP_HOME%\lib\gson-2.10.1.jar;%APP_HOME%\lib\slf4j-api-2.0.13.jar;%APP_HOME%\lib\commons-io-2.16.1.jar;%APP_HOME%\lib\commons-lang3-3.14.0.jar;%APP_HOME%\lib\commons-exec-1.4.0.jar;%APP_HOME%\lib\encoder-1.2.3.jar
+set CLASSPATH=%APP_HOME%\lib\ffmpeg-java-id-1.2.1.jar;%APP_HOME%\lib\annotations-24.1.0.jar;%APP_HOME%\lib\gson-2.11.0.jar;%APP_HOME%\lib\slf4j-api-2.0.13.jar;%APP_HOME%\lib\commons-io-2.16.1.jar;%APP_HOME%\lib\commons-lang3-3.14.0.jar;%APP_HOME%\lib\commons-exec-1.4.0.jar;%APP_HOME%\lib\encoder-1.2.3.jar;%APP_HOME%\lib\error_prone_annotations-2.27.0.jar
 
 
 @rem Execute ffmpeg-java-id

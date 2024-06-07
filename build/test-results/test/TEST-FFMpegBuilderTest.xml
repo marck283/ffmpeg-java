@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="FFMpegBuilderTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-06-01T15:01:12" hostname="marco-lasagna-Dell-G15-5530" time="0.146">
+<testsuite name="FFMpegBuilderTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-06-04T10:27:13" hostname="marco-lasagna-Dell-G15-5530" time="0.351">
   <properties/>
-  <testcase name="setVideoFrameSize()" classname="FFMpegBuilderTest" time="0.146"/>
+  <testcase name="setVideoFrameSize()" classname="FFMpegBuilderTest" time="0.351"/>
   <system-out><![CDATA[WIDTH: 1920.0
 HEIGHT: 1080.0
 ]]></system-out>
@@ -31,7 +31,7 @@ Input #0, mov,mp4,m4a,3gp,3g2,mj2, from './src/test/resources/input/mp4/000.mp4'
 Stream mapping:
   Stream #0:0 -> #0:0 (mjpeg (native) -> mjpeg (native))
 Press [q] to stop, [?] for help
-[swscaler @ 0x7944d4014b00] deprecated pixel format used, make sure you did set range correctly
+[swscaler @ 0x7b2f90014b00] deprecated pixel format used, make sure you did set range correctly
     Last message repeated 3 times
 Output #0, mp4, to './src/test/resources/input/mp4/000-1.mp4':
   Metadata:
@@ -46,7 +46,7 @@ Output #0, mp4, to './src/test/resources/input/mp4/000-1.mp4':
         encoder         : Lavc61.5.104 mjpeg
       Side data:
         cpb: bitrate max/min/avg: 0/0/200000 buffer size: 0 vbv_delay: N/A
-[out#0/mp4 @ 0x61bc51106140] video:24KiB audio:0KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: 3.375425%
-frame=    1 fps=0.0 q=7.1 Lsize=      25KiB time=00:00:01.00 bitrate= 204.3kbits/s speed=26.9x    
+[out#0/mp4 @ 0x5ba9446f6140] video:24KiB audio:0KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: 3.375425%
+frame=    1 fps=0.0 q=7.1 Lsize=      25KiB time=00:00:01.00 bitrate= 204.3kbits/s speed=15.4x    
 ]]></system-err>
 </testsuite>
