@@ -1,22 +1,15 @@
 package it.disi.unitn.json.processpool;
 
 import com.google.gson.JsonArray;
-/*import com.google.gson.JsonObject;
-import it.disi.unitn.StringExt;
-import it.disi.unitn.exceptions.InvalidArgumentException;*/
 import it.disi.unitn.StringExt;
 import it.disi.unitn.exceptions.InvalidArgumentException;
 import it.disi.unitn.json.JSONToImage;
 import org.apache.commons.exec.*;
-//import org.apache.commons.lang3.tuple.Pair;
 import org.jetbrains.annotations.NotNull;
 import org.owasp.encoder.Encode;
 
 import java.io.File;
 import java.io.IOException;
-/*import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;*/
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -116,19 +109,7 @@ public class ProcessPool {
      * @throws InvalidArgumentException if any of the arguments to this method is null
      */
     public void execute(@NotNull JsonArray array, @NotNull JSONToImage jti, long timeout) throws InvalidArgumentException {
-        /*Process p = pb.start();
-
-        InputStream istream = p.getErrorStream();
-
-        InputHandler errorHandler = new InputHandler(istream, "Error Stream");
-        errorHandler.start();
-        InputHandler inputHandler = new InputHandler(p.getInputStream(), "Output Stream");
-        inputHandler.start();*/
-
         try {
-            /*String s = "python3 " + scriptpath + " \"" + desc + "\" " + index + " " + imageExtension + " " +
-                    pathToImagesFolder + " " + width + " " + height;
-            CommandLine cmdLine = CommandLine.parse(s);*/
             Map<String, String> m = new HashMap<>();
 
             String nscriptpath = Encode.forJava(scriptpath), ndesc = Encode.forJava(desc), niext = Encode.forJava(imageExtension),
@@ -159,27 +140,8 @@ public class ProcessPool {
             exlist.add(exrhandler);
             executor.execute(cmdLine, exrhandler);
         } catch (IOException e) {
-            //e.printStackTrace();
             System.err.println(e.getLocalizedMessage());
             System.exit(1);
         }
-
-        //executor.execute(new ProcessObserver(c, p, 30, TimeUnit.MINUTES));
     }
-
-    ///**
-     //* This method can be used to shut down the thread pool.
-     //* @return true if the thread pool is terminated, false otherwise
-     //*/
-    /*public boolean shutdown() {
-        executor.shutdown();
-
-        boolean aterm;
-        try {
-            aterm = executor.awaitTermination(30, TimeUnit.MINUTES);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-        return aterm && executor.isTerminated();
-    }*/
 }
