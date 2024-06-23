@@ -2,10 +2,14 @@ package it.disi.unitn.videocreator.filtergraph.filterchain;
 
 import it.disi.unitn.exceptions.InvalidArgumentException;
 import it.disi.unitn.videocreator.filtergraph.filterchain.filters.Filter;
+import it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.VideoFilter;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Stream;
 
 /**
  * This class handles the implementation of the filter chain.
@@ -44,6 +48,19 @@ public class FilterChain {
     public void addFilter(@NotNull Filter filter) throws InvalidArgumentException {
         checkNullFilter(filter);
         filterList.add(filter);
+    }
+
+    /**
+     * Adds all given filters if none of them is null.
+     * @param filters The given Filter instances.
+     * @throws InvalidArgumentException If any of the given filters is null
+     */
+    public void addAllFilters(@NotNull Filter @NotNull ... filters) throws InvalidArgumentException {
+        Stream<Filter> filterStr = Arrays.stream(filters);
+        if(filterStr.anyMatch(Objects::isNull)) {
+            throw new InvalidArgumentException("Cannot add null filters.", "Non e' possibile aggiungere filtr null.");
+        }
+        filterList.addAll(Arrays.asList(filters));
     }
 
     /**
