@@ -1,0 +1,13 @@
+digraph G {
+node [shape=box]
+rankdir=LR
+"Parsed_buffer_0\n(buffer)" -> "Parsed_scale_1\n(scale)" [ label= "inpad:default -> outpad:default\nfmt:yuv420p w:320 h:240 tb:1/24" ];
+"Parsed_scale_1\n(scale)" -> "Parsed_format_2\n(format)" [ label= "inpad:default -> outpad:default\nfmt:yuv420p w:800 h:600 tb:1/24" ];
+"Parsed_format_2\n(format)" -> "Parsed_concat_6\n(concat)" [ label= "inpad:default -> outpad:in0:v0\nfmt:yuv420p w:800 h:600 tb:1/24" ];
+"Parsed_abuffer_3\n(abuffer)" -> "Parsed_aformat_4\n(aformat)" [ label= "inpad:default -> outpad:default\nfmt:u8 sr:400 cl:stereo tb:1/400" ];
+"Parsed_aformat_4\n(aformat)" -> "auto_aresample_0\n(aresample)" [ label= "inpad:default -> outpad:default\nfmt:u8 sr:400 cl:stereo tb:1/400" ];
+"Parsed_adecorrelate_5\n(adecorrelate)" -> "Parsed_concat_6\n(concat)" [ label= "inpad:default -> outpad:in0:a0\nfmt:dblp sr:400 cl:stereo tb:1/400" ];
+"Parsed_concat_6\n(concat)" -> "Parsed_nullsink_7\n(nullsink)" [ label= "inpad:out:v0 -> outpad:default\nfmt:yuv420p w:800 h:600 tb:1/1000000" ];
+"Parsed_concat_6\n(concat)" -> "Parsed_anullsink_8\n(anullsink)" [ label= "inpad:out:a0 -> outpad:default\nfmt:dblp sr:400 cl:stereo tb:1/1000000" ];
+"auto_aresample_0\n(aresample)" -> "Parsed_adecorrelate_5\n(adecorrelate)" [ label= "inpad:default -> outpad:default\nfmt:dblp sr:400 cl:stereo tb:1/400" ];
+}

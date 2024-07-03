@@ -16,7 +16,7 @@ plugins {
 }
 
 group 'io.github.marck283'
-version '1.2.2'
+version '1.2.5'
 
 java {
     withJavadocJar()
@@ -69,8 +69,8 @@ repositories {
 
 dependencies {
     implementation 'org.jetbrains:annotations:24.1.0'
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.10.2'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.10.2'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.10.3'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.10.3'
 
     implementation platform('com.google.cloud:libraries-bom:26.42.0')
     implementation 'com.google.code.gson:gson:2.11.0'

@@ -90,10 +90,14 @@ public class JsonParser {
      * @return A JsonElement instance representing the so found element
      * @throws InvalidArgumentException If any of the parameters declared for this method is null or an empty string
      */
-    private JsonElement getElement(@NotNull JsonObject el, @NotNull String name) throws InvalidArgumentException {
-        if(el == null || StringExt.checkNullOrEmpty(name)) {
-            throw new InvalidArgumentException("None of the parameters declared for this method can be null.", "Nessuno " +
-                    "dei parametri dichiarati per questo metodo puo' essere null.");
+    private JsonElement getJsonElement(@NotNull JsonObject el, @NotNull String name) throws InvalidArgumentException {
+        if(el == null) {
+            throw new InvalidArgumentException("The JsonObject instance given to this method cannot be null.", "L'istanza " +
+                    "di JsonObject fornita a questo metodo non puo' essere null.");
+        }
+        if(StringExt.checkNullOrEmpty(name)) {
+            throw new InvalidArgumentException("The parameters passed to this method cannot be null or empty strings.",
+                    "I parametri passati a questo metodo non possono essere null o stringhe vuote.");
         }
         return el.get(name);
     }
@@ -109,16 +113,7 @@ public class JsonParser {
      */
     private @NotNull JsonElement checkField(@NotNull JsonObject el, @NotNull String name) throws InvalidArgumentException,
             InvalidJSONFileException {
-        if(el == null) {
-            throw new InvalidArgumentException("The JsonObject instance given to this method cannot be null.", "L'istanza " +
-                    "di JsonObject fornita a questo metodo non puo' essere null.");
-        }
-        if(StringExt.checkNullOrEmpty(name)) {
-            throw new InvalidArgumentException("The parameters passed to this method cannot be null or empty strings.",
-                    "I parametri passati a questo metodo non possono essere null o stringhe vuote.");
-        }
-
-        JsonElement jel = getElement(el, name);
+        JsonElement jel = getJsonElement(el, name);
         if(jel == null) {
             throw new InvalidJSONFileException("The field \"" + name + "\" is missing.", "Il campo \"" + name + "\" non " +
                     "e' presente.");

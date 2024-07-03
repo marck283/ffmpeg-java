@@ -158,7 +158,7 @@ public class Scale extends VideoFilter {
                     "non puo' essere null o una stringa vuota.");
         }
 
-        try {
+        /*try {
             int w = Integer.parseInt(width), h = Integer.parseInt(height);
             if(w <= 0 || h <= 0) {
                 throw new InvalidArgumentException("The given width or height cannot be negative or null numbers.",
@@ -167,7 +167,7 @@ public class Scale extends VideoFilter {
         } catch(NumberFormatException ex) {
             throw new InvalidArgumentException("Either the width or the height is not an integer.", "L'ampiezza o l'altezza " +
                     "non rappresentano un numero intero.");
-        }
+        }*/
 
         if(StringExt.checkNullOrEmpty(pix_fmt)) {
             throw new InvalidArgumentException("The pixel format must neither be null nor an empty string.",

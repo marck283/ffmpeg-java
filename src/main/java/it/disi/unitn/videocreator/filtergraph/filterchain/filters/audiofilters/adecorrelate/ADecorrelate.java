@@ -1,12 +1,12 @@
 package it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.adecorrelate;
 
 import it.disi.unitn.exceptions.InvalidArgumentException;
-import it.disi.unitn.videocreator.filtergraph.filterchain.filters.Filter;
+import it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.AudioFilter;
 
 /**
  * Apply decorrelation to input audio stream.
  */
-public class ADecorrelate extends Filter {
+public class ADecorrelate extends AudioFilter {
 
     private int stages;
 

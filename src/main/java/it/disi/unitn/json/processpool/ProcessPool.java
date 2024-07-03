@@ -109,39 +109,41 @@ public class ProcessPool {
      * @throws InvalidArgumentException if any of the arguments to this method is null
      */
     public void execute(@NotNull JsonArray array, @NotNull JSONToImage jti, long timeout) throws InvalidArgumentException {
-        try {
-            Map<String, String> m = new HashMap<>();
+        Map<String, String> m = new HashMap<>();
 
-            String nscriptpath = Encode.forJava(scriptpath), ndesc = Encode.forJava(desc), niext = Encode.forJava(imageExtension),
-            nptif = Encode.forJava(pathToImagesFolder);
-            m.put("scriptpath", nscriptpath);
-            m.put("desc", "\"" + ndesc + "\"");
+        String nscriptpath = Encode.forJava(scriptpath), ndesc = Encode.forJava(desc), niext = Encode.forJava(imageExtension),
+        nptif = Encode.forJava(pathToImagesFolder);
+        m.put("scriptpath", nscriptpath);
+        m.put("desc", "\"" + ndesc + "\"");
 
-            StringExt i = new StringExt(String.valueOf(index));
-            i.padStart();
-            System.out.println("INDEX: " + i.getVal());
-            m.put("i", i.getVal());
-            m.put("imageExtension", niext);
-            m.put("pathToImagesFolder", nptif);
+        StringExt i = new StringExt(String.valueOf(index));
+        i.padStart();
+        System.out.println("INDEX: " + i.getVal());
+        m.put("i", i.getVal());
+        m.put("imageExtension", niext);
+        m.put("pathToImagesFolder", nptif);
 
-            String w = String.valueOf(width), h = String.valueOf(height);
-            m.put("w", w);
-            m.put("h", h);
-            CommandLine cmdLine = CommandLine.parse("python3 ${scriptpath} ${desc} ${i} ${imageExtension} " +
-                    "${pathToImagesFolder} ${w} ${h}", m);
-            PumpStreamHandler streamHandler = new PumpStreamHandler();
-            DefaultExecutor executor = DefaultExecutor.builder().get();
-            ExecuteWatchdog.Builder builder = ExecuteWatchdog.builder();
-            builder.setTimeout(Duration.ofMillis(timeout)); //Duration in milliseconds
-            ExecuteWatchdog watchdog = builder.get();
-            executor.setStreamHandler(streamHandler);
-            executor.setWatchdog(watchdog);
-            ExecutorResHandler exrhandler = new ExecutorResHandler(array, index, nptif, niext, jti, this);
-            exlist.add(exrhandler);
-            executor.execute(cmdLine, exrhandler);
-        } catch (IOException e) {
-            System.err.println(e.getLocalizedMessage());
-            System.exit(1);
-        }
+        String w = String.valueOf(width), h = String.valueOf(height);
+        m.put("w", w);
+        m.put("h", h);
+        CommandLine cmdLine = CommandLine.parse("python3 ${scriptpath} ${desc} ${i} ${imageExtension} " +
+                "${pathToImagesFolder} ${w} ${h}", m);
+        PumpStreamHandler streamHandler = new PumpStreamHandler();
+        DefaultExecutor executor = DefaultExecutor.builder().get();
+        ExecuteWatchdog.Builder builder = ExecuteWatchdog.builder();
+        builder.setTimeout(Duration.ofMillis(timeout)); //Duration in milliseconds
+        ExecuteWatchdog watchdog = builder.get();
+        executor.setStreamHandler(streamHandler);
+        executor.setWatchdog(watchdog);
+        ExecutorResHandler exrhandler = new ExecutorResHandler(array, index, nptif, niext, jti, this);
+        exlist.add(exrhandler);
+        new Thread(() -> {
+            try {
+                executor.execute(cmdLine, exrhandler);
+            } catch (IOException e) {
+                System.err.println(e.getLocalizedMessage());
+                System.exit(1);
+            }
+        }).start();
     }
 }

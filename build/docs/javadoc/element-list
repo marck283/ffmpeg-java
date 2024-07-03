@@ -8,6 +8,7 @@ it.disi.unitn.videocreator.filtergraph
 it.disi.unitn.videocreator.filtergraph.filterchain
 it.disi.unitn.videocreator.filtergraph.filterchain.filters
 it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters
+it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.abuffer
 it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.acompressor
 it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.acontrast
 it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.adecorrelate
@@ -20,7 +21,11 @@ it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.aformat
 it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.afreqshift
 it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.asplit
 it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.atempo
+it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.sinks.abuffersink
+it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.sinks.anullsink
+it.disi.unitn.videocreator.filtergraph.filterchain.filters.multimedia.concat
 it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters
+it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.buffer
 it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.colorcorrect
 it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.drawtext
 it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.drawtext.boxborderw
@@ -28,6 +33,8 @@ it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.drawtext
 it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.format
 it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.scale
 it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.scale.scalingalgs
+it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.sinks.buffersink
+it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.sinks.nullsink
 it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.vsplit
 it.disi.unitn.videocreator.fps_mode
 it.disi.unitn.videocreator.transcoder

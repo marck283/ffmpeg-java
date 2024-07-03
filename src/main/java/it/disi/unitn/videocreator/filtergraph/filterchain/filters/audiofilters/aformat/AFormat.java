@@ -15,7 +15,9 @@ public class AFormat extends AudioFilter {
 
     private final List<String> sample_fmts, sample_rates;
 
-    private final List<ChannelLayout> channel_layouts;
+    //private final List<ChannelLayout> channel_layouts;
+
+    private final ChannelLayout chLayout;
 
     /**
      * This class's constructor.
@@ -26,7 +28,8 @@ public class AFormat extends AudioFilter {
         super("aformat");
         sample_fmts = new ArrayList<>();
         sample_rates = new ArrayList<>();
-        channel_layouts = new ArrayList<>();
+        //channel_layouts = new ArrayList<>();
+        chLayout = new ChannelLayout();
     }
 
     /**
@@ -61,12 +64,30 @@ public class AFormat extends AudioFilter {
 
     /**
      * Adds a new ChannelLayout instance to this filter.
+     * @param chid The given channel ID
      * @return The newly created ChannelLayout instance
+     * @throws InvalidArgumentException If the given channel ID is null or an empty string
      */
-    public ChannelLayout addChannelLayout() {
+    public ChannelLayout addChannelLayout(@NotNull String chid) throws InvalidArgumentException {
         ChannelLayout chlay = new ChannelLayout();
-        channel_layouts.add(chlay);
+       //channel_layouts.add(chlay);
+        chlay.addChannelID(chid);
         return chlay;
+    }
+
+    /**
+     * Adds the given ChannelLayout instance to this filter.
+     * @param chlay The given ChannelLayout instance
+     * @throws InvalidArgumentException If the given ChannelLayout instance is null
+     */
+    public void addChannelLayout(@NotNull ChannelLayout chlay) throws InvalidArgumentException {
+        if(chlay == null) {
+            throw new RuntimeException();
+        }
+        //channel_layouts.add(chlay);
+        for(String chid: chlay.getChannels()) {
+            chLayout.addChannelID(chid);
+        }
     }
 
     @Override
@@ -74,10 +95,11 @@ public class AFormat extends AudioFilter {
         options.put("sample_fmts", String.join("|", sample_fmts));
         options.put("sample_rates", String.join("|", sample_rates));
 
-        List<String> chLayouts = new ArrayList<>();
+        /*List<String> chLayouts = new ArrayList<>();
         for(ChannelLayout cl: channel_layouts) {
             chLayouts.add(cl.toString());
         }
-        options.put("channel_layouts", String.join("|", chLayouts));
+        options.put("channel_layouts", String.join("|", chLayouts));*/
+        options.put("channel_layouts", chLayout.toStringBar());
     }
 }

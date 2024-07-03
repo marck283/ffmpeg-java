@@ -476,6 +476,7 @@ public class VideoCreator {
         scale.setOutColorMatrix(outcolmatname);
         scale.setInputRange(incolrange);
         scale.setOutputRange(outcolrange);
+        scale.setOutputRange(outcolrange);
         scale.setEval(evalSize);
         scale.setInterl(interlMode);
         scale.forceOriginalAspectRatio(forceOAsRatio);
@@ -579,8 +580,8 @@ public class VideoCreator {
      */
     public void setVideoSimpleFilterGraph(@NotNull FilterGraph vfg) throws InvalidArgumentException {
         if (vfg == null || !(vfg instanceof VideoFilterGraph)) {
-            throw new InvalidArgumentException("The video filter graph must be an instance of VideoSimpleFilterGraph.",
-                    "Il grafo del filtro video deve essere un'istanza di VideoSimpleFilterGraph.");
+            throw new InvalidArgumentException("The video filter graph must be an instance of VideoFilterGraph.",
+                    "Il grafo del filtro video deve essere un'istanza di VideoFilterGraph.");
         }
 
         if (cfg != null) {
@@ -601,8 +602,8 @@ public class VideoCreator {
      */
     public void setAudioSimpleFilterGraph(@NotNull FilterGraph afg) throws InvalidArgumentException {
         if (afg == null || !(afg instanceof AudioFilterGraph)) {
-            throw new InvalidArgumentException("The audio filter graph must be an instance of AudioSimpleFilterGraph.",
-                    "Il grafo del filtro audio deve essere un'istanza di AudioSimpleFilterGraph.");
+            throw new InvalidArgumentException("The audio filter graph must be an instance of AudioFilterGraph.",
+                    "Il grafo del filtro audio deve essere un'istanza di AudioFilterGraph.");
         }
 
         if (cfg != null) {

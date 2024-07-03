@@ -60,7 +60,7 @@ public class ChannelLayout {
         if(StringExt.checkNullOrEmpty(chID)) {
             switch(channelID) {
                 case "FL", "FR", "FC", "LFE", "BL", "BR", "FLC", "FRC", "BC", "SL", "SR", "TC", "TFL", "TFC", "TFR", "TBL",
-                        "TBC", "TBR", "DL", "DR", "WL", "WR", "SDL", "SDR", "LFE2" -> this.chID = channelID;
+                        "TBC", "TBR", "DL", "DR", "WL", "WR", "SDL", "SDR", "LFE2", "stereo", "quad" -> chidList.add(channelID);
                 default -> throw new InvalidArgumentException("The given channel ID cannot be null, an empty string or any value not " +
                         "recognized by FFmpeg.", "Il valore fonito per l'id del canale audio non puo' essere null, una stringa " +
                         "vuota o un qualunque valore non riconosciuto da FFmpeg.");
@@ -74,7 +74,7 @@ public class ChannelLayout {
     }
 
     /**
-     * Gets the list of channel IDs in this ChannelLayout instance.
+     * Gets the list of channel IDs in this ChannelLayout instance. The elements are separated by a "+" symbol.
      * @return The list of channel IDs in this ChannelLayout instance
      */
     public List<String> getChannels() {
@@ -87,6 +87,17 @@ public class ChannelLayout {
             return chID;
         }
         return String.join("+", chidList);
+    }
+
+    /**
+     * Gets the list of channel IDs in this ChannelLayout instance. The elements are separated by a "|" symbol.
+     * @return The list of channel IDs in this ChannelLayout instance
+     */
+    public String toStringBar() {
+        if(chidList.isEmpty()) {
+            return chID;
+        }
+        return String.join("|", chidList);
     }
 
 }

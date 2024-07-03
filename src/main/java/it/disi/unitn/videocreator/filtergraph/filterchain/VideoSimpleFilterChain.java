@@ -38,11 +38,11 @@ public class VideoSimpleFilterChain extends FilterChain {
     public void addAllFilters(@NotNull Filter @NotNull ... filters) throws InvalidArgumentException {
         Stream<Filter> filterStr = Arrays.stream(filters), filterStr1 = Arrays.stream(filters);
         if(filterStr.anyMatch(Objects::isNull)) {
-            throw new InvalidArgumentException("Cannot add null filters.", "Non e' possibile aggiungere filtr null.");
+            throw new InvalidArgumentException("Cannot add null filters.", "Non e' possibile aggiungere filtri null.");
         }
         if(filterStr1.anyMatch(f -> !(f instanceof VideoFilter))) {
             throw new InvalidArgumentException("All given filters must be instances of VideoFilter.", "Tutti i filtri " +
-                    "forniti devono essere istanze di AudioFilter.");
+                    "forniti devono essere istanze di VideoFilter.");
         }
         filterList.addAll(Arrays.asList(filters));
     }

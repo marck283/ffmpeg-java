@@ -2,7 +2,6 @@ package it.disi.unitn.videocreator.filtergraph.filterchain;
 
 import it.disi.unitn.exceptions.InvalidArgumentException;
 import it.disi.unitn.videocreator.filtergraph.filterchain.filters.Filter;
-import it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.VideoFilter;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
