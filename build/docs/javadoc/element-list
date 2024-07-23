@@ -3,6 +3,9 @@ it.disi.unitn.exceptions
 it.disi.unitn.json
 it.disi.unitn.json.jsonparser
 it.disi.unitn.json.processpool
+it.disi.unitn.lasagna
+it.disi.unitn.lasagna.audio.audiocreator
+it.disi.unitn.lasagna.audio.exceptions
 it.disi.unitn.videocreator
 it.disi.unitn.videocreator.filtergraph
 it.disi.unitn.videocreator.filtergraph.filterchain
