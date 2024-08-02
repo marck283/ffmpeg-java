@@ -8,13 +8,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4e206741-5dd1-4a84-99b2-29854b378e54" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/disi/unitn/FFMpeg.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/disi/unitn/FFMpeg.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/disi/unitn/lasagna/audio/audiocreator/Audio.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/disi/unitn/lasagna/audio/audiocreator/Audio.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/input/images/000.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/input/images/000.jpeg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/input/images/001.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/input/images/001.jpeg" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -773,11 +769,11 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.ffmpeg-java [publishAllPublicationsToMavenRepository]" />
         <item itemvalue="Gradle.FFMpegBuilderTest" />
         <item itemvalue="Gradle.VideoCreatorTest" />
         <item itemvalue="Gradle.VideoTranscoderTest" />
         <item itemvalue="Gradle.JSONToImageTest" />
-        <item itemvalue="Gradle.ffmpeg-java [publishAllPublicationsToMavenRepository]" />
       </list>
     </recent_temporary>
   </component>
@@ -869,7 +865,7 @@
       <workItem from="1720877433661" duration="748000" />
       <workItem from="1721340926785" duration="1799000" />
       <workItem from="1721743245457" duration="1622000" />
-      <workItem from="1722558582665" duration="792000" />
+      <workItem from="1722558582665" duration="907000" />
     </task>
     <servers />
   </component>

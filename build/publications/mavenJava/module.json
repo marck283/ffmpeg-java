@@ -3,7 +3,7 @@
   "component": {
     "group": "it.disi.unitn.ffmpeg",
     "module": "ffmpeg-java-id",
-    "version": "1.2.6-alpha5",
+    "version": "1.2.6-alpha6",
     "attributes": {
       "org.gradle.status": "release"
     }
@@ -25,13 +25,13 @@
       },
       "files": [
         {
-          "name": "ffmpeg-java-id-1.2.6-alpha5.jar",
-          "url": "ffmpeg-java-id-1.2.6-alpha5.jar",
+          "name": "ffmpeg-java-id-1.2.6-alpha6.jar",
+          "url": "ffmpeg-java-id-1.2.6-alpha6.jar",
           "size": 147360,
-          "sha512": "1aa4d533d67e85daf7fd4160a826d40e55ce5bd70eaf6ea206e6451dae43900d69d92cc706c41062725747b63a771840efe7b45a1ecce2fab234786f0eff57d9",
-          "sha256": "e34221c2199e5741d77361130862ada0d5b9a3db2319837cf3fad38528e26f3d",
-          "sha1": "4dd12fc18010fe2965dd9e1932c7c7d381aade15",
-          "md5": "d136d0f4ac451dc0846e42d891ebfe9f"
+          "sha512": "f12cb232a739c900733bcc7fb5dc39b1bb97c80e37c529a09f63089589cbce4917af5002cc1068dc03ea045c650346ecd8dc61c3c5d90522f6a2fdffd21fd51f",
+          "sha256": "052587ae01c2d3d56a3f4a16a7131571beeca234b0494e58d100a662bdffdb56",
+          "sha1": "729842bd8329598aa3a3959d7d76b7ad02d2ac8d",
+          "md5": "945c92e7e9593d91ed8d40ac66b741d4"
         }
       ]
     },
@@ -115,13 +115,13 @@
       ],
       "files": [
         {
-          "name": "ffmpeg-java-id-1.2.6-alpha5.jar",
-          "url": "ffmpeg-java-id-1.2.6-alpha5.jar",
+          "name": "ffmpeg-java-id-1.2.6-alpha6.jar",
+          "url": "ffmpeg-java-id-1.2.6-alpha6.jar",
           "size": 147360,
-          "sha512": "1aa4d533d67e85daf7fd4160a826d40e55ce5bd70eaf6ea206e6451dae43900d69d92cc706c41062725747b63a771840efe7b45a1ecce2fab234786f0eff57d9",
-          "sha256": "e34221c2199e5741d77361130862ada0d5b9a3db2319837cf3fad38528e26f3d",
-          "sha1": "4dd12fc18010fe2965dd9e1932c7c7d381aade15",
-          "md5": "d136d0f4ac451dc0846e42d891ebfe9f"
+          "sha512": "f12cb232a739c900733bcc7fb5dc39b1bb97c80e37c529a09f63089589cbce4917af5002cc1068dc03ea045c650346ecd8dc61c3c5d90522f6a2fdffd21fd51f",
+          "sha256": "052587ae01c2d3d56a3f4a16a7131571beeca234b0494e58d100a662bdffdb56",
+          "sha1": "729842bd8329598aa3a3959d7d76b7ad02d2ac8d",
+          "md5": "945c92e7e9593d91ed8d40ac66b741d4"
         }
       ]
     },
@@ -135,13 +135,13 @@
       },
       "files": [
         {
-          "name": "ffmpeg-java-id-1.2.6-alpha5-javadoc.jar",
-          "url": "ffmpeg-java-id-1.2.6-alpha5-javadoc.jar",
-          "size": 468393,
-          "sha512": "f6ae38219bf6a97e071406223015ff1145b56dde0d17f60471d1f00e988dd4e93141b402661a04bf0a3ca9dd45b385b5e80b19ad3aadd65071a8015fbad76d1a",
-          "sha256": "31bf2aaba590b435fa26a8699ce77c70c590320a7f4a11816ea0fbdb5a592273",
-          "sha1": "e5547a69d9d0b94df631d1f8f6ce3dc10e025da5",
-          "md5": "a4cfaa715548d477366fd048e7ccf0a0"
+          "name": "ffmpeg-java-id-1.2.6-alpha6-javadoc.jar",
+          "url": "ffmpeg-java-id-1.2.6-alpha6-javadoc.jar",
+          "size": 468328,
+          "sha512": "81df1e5ee9bb7a2288196f96469b33134f22296d75f541a9900375b33c16d1054c22761381877e06846fa262c37bd296cc76edfe4ee0a0bb7f5346234767d260",
+          "sha256": "39c8d4af9efd98b3d9effb772ddba6ff4a5f4c65831a7af6b32b7dc4c7cde398",
+          "sha1": "bab13d3664a4625893f1e111d74de8fc3274a15b",
+          "md5": "0aa099703864338051d16b9856bb612f"
         }
       ]
     },
@@ -155,13 +155,13 @@
       },
       "files": [
         {
-          "name": "ffmpeg-java-id-1.2.6-alpha5-sources.jar",
-          "url": "ffmpeg-java-id-1.2.6-alpha5-sources.jar",
-          "size": 106420,
-          "sha512": "c43b6a898589151e59c447cf9988b7a2255919de3479ef5b5311f4081bf4ed6a6174061475c363aca01de659e513929ba74d2a5e165f90af84859c6643b6f955",
-          "sha256": "d5194b1d262a87e7d0e54a4d8b10bbca07c93f758948873810c3da8a5bc3cd75",
-          "sha1": "1d6ac950ac6034505b7d15d5552a2d0d46ff4aea",
-          "md5": "637598fb226c57198a158e21cac68126"
+          "name": "ffmpeg-java-id-1.2.6-alpha6-sources.jar",
+          "url": "ffmpeg-java-id-1.2.6-alpha6-sources.jar",
+          "size": 106424,
+          "sha512": "f0e192ea410a2fd0ad0b7ee9ea4d0530436e77d09309bb2dff3de447d1af722cc695a5bd76ac597ee9a4ada44485b4de16735806cad64263f513a81061c149f0",
+          "sha256": "3b87af08afe47170f3ef84a63f9827c683ada6289ec5a2705fc1324f8d1ae01c",
+          "sha1": "8cbbf82a36f78b100a21862b3a61190ae33f794c",
+          "md5": "15f1b34a28a1bc27d3be3b6b65a59568"
         }
       ]
     }
