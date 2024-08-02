@@ -84,6 +84,7 @@ public class FFMpeg {
                 return (long)(0.001*timeout);
             }
             default -> {
+                //TimeUnit.MILLISECONDS
                 return timeout;
             }
         }
@@ -105,37 +106,6 @@ public class FFMpeg {
             throw new InvalidArgumentException("The given TimeUnit instance cannot be null.", "L'istanza di TimeUnit " +
                     "fornita non puo' essere null.");
         }
-        /*ProcessBuilder builder;
-        if(SystemUtils.IS_OS_WINDOWS) {
-            builder = new ProcessBuilder(ffBuilder.getCommand());
-        } else {
-            builder = new ProcessBuilder("bash", "-c", ffBuilder.getCommand());
-        }
-
-        try {
-            Process p = builder.start();
-            builder.inheritIO();*/
-
-            /*
-             * FFMpeg hangs when we do not use two separate threads to handle the Error and Output streams.
-             * See here: https://ffmpeg-user.ffmpeg.narkive.com/3WBzsW4a/ffmpeg-hangs-when-being-executed-from-within-java
-             */
-            /*InputHandler errorHandler = new InputHandler(p.getErrorStream(), "Error Stream");
-            errorHandler.start();
-            InputHandler inputHandler = new InputHandler(p.getInputStream(), "Output Stream");
-            inputHandler.start();
-
-            //Wait for the process's termination or for the time limit to be reached before continuing.
-            boolean exited = p.waitFor(timeout, timeUnit);
-            if(!exited) {
-                System.out.println("Exit code: " + p.exitValue());
-                p.destroy(); //Kill the process to release resources
-                throw new Exception("An error has occurred.");
-            }
-        } catch(Exception ex) {
-            ex.printStackTrace();
-            System.err.println(ex.getMessage());
-        }*/
         
         //A questo punto, utilizzo la libreria Apache Commons Exec per eseguire FFmpeg.
         execProcess(true, timeConversion(timeout, timeUnit));

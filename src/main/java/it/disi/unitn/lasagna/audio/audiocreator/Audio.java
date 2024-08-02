@@ -143,7 +143,7 @@ public class Audio {
             String audioFileFolderPath = "./src/main/resources/it/disi/unitn/input/audio";
             try (OutputStream out = new FileOutputStream(audioFileFolderPath + "/" + val.getVal() + "." + extension)) {
                 File audioFile = new File(audioFileFolderPath);
-                Path audioFileFolder = new File(audioFileFolderPath).toPath();
+                //Path audioFileFolder = new File(audioFileFolderPath).toPath();
                 audioFile.checkReadWritePermissions();
                 out.write(response.getAudioContent().toByteArray());
                 if(locale == Locale.ITALIAN || locale == Locale.ITALY) {
