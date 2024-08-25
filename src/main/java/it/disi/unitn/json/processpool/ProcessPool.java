@@ -137,13 +137,11 @@ public class ProcessPool {
         executor.setWatchdog(watchdog);
         ExecutorResHandler exrhandler = new ExecutorResHandler(array, index, nptif, niext, jti, this);
         exlist.add(exrhandler);
-        new Thread(() -> {
-            try {
-                executor.execute(cmdLine, exrhandler);
-            } catch (IOException e) {
-                System.err.println(e.getLocalizedMessage());
-                System.exit(1);
-            }
-        }).start();
+        try {
+            executor.execute(cmdLine, exrhandler);
+        } catch (IOException e) {
+            System.err.println(e.getLocalizedMessage());
+            System.exit(1);
+        }
     }
 }

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="FFMpegBuilderTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-08-25T09:26:41" hostname="marco-lasagna-Dell-G15-5530" time="0.121">
+  <properties/>
+  <testcase name="setVideoFrameSize()" classname="FFMpegBuilderTest" time="0.121"/>
+  <system-out><![CDATA[WIDTH: 1920.0
+HEIGHT: 1080.0
+]]></system-out>
+  <system-err><![CDATA[ffmpeg version N-115985-gc3814d5409 Copyright (c) 2000-2024 the FFmpeg developers
+  built with gcc 13 (Ubuntu 13.2.0-23ubuntu4)
+  configuration: --prefix=/home/marco-lasagna/ffmpeg_build --pkg-config-flags=--static --extra-cflags=-I/home/marco-lasagna/ffmpeg_build/include --extra-ldflags=-L/home/marco-lasagna/ffmpeg_build/lib --extra-libs='-lpthread -lm' --ld=g++ --bindir=/home/marco-lasagna/bin --enable-gpl --enable-gnutls --enable-libaom --enable-libass --enable-libfdk-aac --enable-libfreetype --enable-libmp3lame --enable-libopus --enable-libsvtav1 --enable-libdav1d --enable-libvorbis --enable-libvpx --enable-libx264 --enable-libx265 --enable-nonfree
+  libavutil      59. 25.100 / 59. 25.100
+  libavcodec     61.  8.100 / 61.  8.100
+  libavformat    61.  4.100 / 61.  4.100
+  libavdevice    61.  2.100 / 61.  2.100
+  libavfilter    10.  2.102 / 10.  2.102
+  libswscale      8.  2.100 /  8.  2.100
+  libswresample   5.  2.100 /  5.  2.100
+  libpostproc    58.  2.100 / 58.  2.100
+Input #0, mov,mp4,m4a,3gp,3g2,mj2, from './src/test/resources/input/mp4/000.mp4':
+  Metadata:
+    major_brand     : isom
+    minor_version   : 512
+    compatible_brands: isomiso2avc1mp41
+    encoder         : Lavf61.4.100
+  Duration: 00:00:01.00, start: 0.000000, bitrate: 169 kb/s
+  Stream #0:0[0x1](und): Video: h264 (High) (avc1 / 0x31637661), yuvj420p(pc, progressive), 800x600 [SAR 1126:1501 DAR 4504:4503], 162 kb/s, SAR 4501:6000 DAR 4501:4500, 1 fps, 1 tbr, 16384 tbn (default)
+      Metadata:
+        handler_name    : VideoHandler
+        vendor_id       : [0][0][0][0]
+        encoder         : Lavc61.8.100 libx264
+Stream mapping:
+  Stream #0:0 -> #0:0 (h264 (native) -> mjpeg (native))
+Press [q] to stop, [?] for help
+Output #0, mp4, to './src/test/resources/input/mp4/000-1.mp4':
+  Metadata:
+    major_brand     : isom
+    minor_version   : 512
+    compatible_brands: isomiso2avc1mp41
+    encoder         : Lavf61.4.100
+  Stream #0:0(und): Video: mjpeg (mp4v / 0x7634706D), yuvj420p(pc, progressive), 800x600 [SAR 4501:6000 DAR 4501:4500], q=2-31, 200 kb/s, 1 fps, 16384 tbn (default)
+      Metadata:
+        handler_name    : VideoHandler
+        vendor_id       : [0][0][0][0]
+        encoder         : Lavc61.8.100 mjpeg
+      Side data:
+        cpb: bitrate max/min/avg: 0/0/200000 buffer size: 0 vbv_delay: N/A
+[out#0/mp4 @ 0x654485f65080] video:26KiB audio:0KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: 3.141361%
+frame=    1 fps=0.0 q=7.2 Lsize=      27KiB time=00:00:01.00 bitrate= 219.1kbits/s speed= 145x    
+]]></system-err>
+</testsuite>
