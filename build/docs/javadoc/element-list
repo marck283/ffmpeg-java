@@ -4,7 +4,7 @@ it.disi.unitn.json
 it.disi.unitn.json.jsonparser
 it.disi.unitn.json.processpool
 it.disi.unitn.lasagna
-it.disi.unitn.lasagna.audio
+it.disi.unitn.lasagna.audiocreator
 it.disi.unitn.videocreator
 it.disi.unitn.videocreator.filtergraph
 it.disi.unitn.videocreator.filtergraph.filterchain
