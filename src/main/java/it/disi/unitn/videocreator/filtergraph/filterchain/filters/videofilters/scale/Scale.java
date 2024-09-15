@@ -6,6 +6,7 @@ import it.disi.unitn.exceptions.InvalidArgumentException;
 import it.disi.unitn.exceptions.UnsupportedOperatingSystemException;
 import it.disi.unitn.exceptions.UnsupportedOperationException;
 import it.disi.unitn.videocreator.ExecutorResHandler;
+import it.disi.unitn.videocreator.filtergraph.filterchain.filters.size.Size;
 import it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.VideoFilter;
 import it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.scale.scalingalgs.ScalingAlgorithm;
 import org.apache.commons.exec.CommandLine;
@@ -181,23 +182,6 @@ public class Scale extends VideoFilter {
     }
 
     /**
-     * This method checks if the given size ID is accepted by FFmpeg.
-     *
-     * @param sizeID The given size ID
-     * @return True if the given size ID is accepted by FFmpeg, otherwise false
-     */
-    private boolean checkSizeID(@NotNull String sizeID) {
-        return switch (sizeID) {
-            case "ntsc", "pal", "qntsc", "qpal", "sntsc", "spal", "film", "ntsc-film", "sqcif", "qcif", "cif", "4cif",
-                 "16cif", "qqvga", "qvga", "vga", "svga", "xga", "uxga", "qxga", "sxga", "qsxga", "hsxga", "wvga",
-                 "wxga", "wsxga", "wuxga", "woxga", "wqsxga", "wquxga", "whsxga", "whuxga", "cga", "ega", "hd480",
-                 "hd720", "hd1080", "2k", "2kflat", "2kscope", "4k", "4kflat", "4kscope", "nhd", "hqvga", "wqvga",
-                 "fwqvga", "hvga", "qhd", "2kdci", "4kdci", "uhd2160", "uhd4320" -> true;
-            default -> false;
-        };
-    }
-
-    /**
      * This method sets the width and height of the resulting video by means of the given video size ID.
      * See <a href="https://ffmpeg.org/ffmpeg-all.html#Video-size">here</a> for the recognized size IDs.
      *
@@ -215,7 +199,7 @@ public class Scale extends VideoFilter {
             throw new InvalidArgumentException("The video size ID should not be null.", "L'ID della proporzione visiva " +
                     "non deve essere null.");
         }
-        if (checkSizeID(videoSizeID)) {
+        if (Size.checkSizeID(videoSizeID)) {
             this.videoSizeID = videoSizeID;
         } else {
             throw new InvalidArgumentException("Invalid image resolution", "Risoluzione immagine non valida.");

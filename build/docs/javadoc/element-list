@@ -4,8 +4,7 @@ it.disi.unitn.json
 it.disi.unitn.json.jsonparser
 it.disi.unitn.json.processpool
 it.disi.unitn.lasagna
-it.disi.unitn.lasagna.audio.audiocreator
-it.disi.unitn.lasagna.audio.exceptions
+it.disi.unitn.lasagna.audio
 it.disi.unitn.videocreator
 it.disi.unitn.videocreator.filtergraph
 it.disi.unitn.videocreator.filtergraph.filterchain
@@ -26,7 +25,9 @@ it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.asplit
 it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.atempo
 it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.sinks.abuffersink
 it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.sinks.anullsink
+it.disi.unitn.videocreator.filtergraph.filterchain.filters.multimedia.a3dscope
 it.disi.unitn.videocreator.filtergraph.filterchain.filters.multimedia.concat
+it.disi.unitn.videocreator.filtergraph.filterchain.filters.size
 it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters
 it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.buffer
 it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.colorcorrect

@@ -1,7 +1,6 @@
-package it.disi.unitn.lasagna.audio.exceptions;
+package it.disi.unitn.exceptions;
 
 import com.google.api.gax.rpc.ApiException;
-import it.disi.unitn.exceptions.GeneralException;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Locale;

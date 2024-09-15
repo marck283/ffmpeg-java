@@ -15,8 +15,8 @@ plugins {
     //id 'cpp'
 }
 
-group 'io.github.marck283'
-version '1.2.6'
+group 'it.disi.unitn.ffmpeg'
+version '1.2.7'
 
 java {
     withJavadocJar()
@@ -72,18 +72,18 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.11.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.11.0'
 
-    implementation platform('com.google.cloud:libraries-bom:26.44.0')
+    implementation platform('com.google.cloud:libraries-bom:26.45.0')
     implementation 'com.google.code.gson:gson:2.11.0'
 
     implementation 'org.slf4j:slf4j-api:2.0.16'
     implementation 'commons-io:commons-io:2.16.1'
-    implementation 'org.apache.commons:commons-lang3:3.16.0'
+    implementation 'org.apache.commons:commons-lang3:3.17.0'
     implementation 'org.apache.commons:commons-exec:1.4.0'
 
     // https://mvnrepository.com/artifact/org.owasp.esapi/esapi
     implementation 'org.owasp.encoder:encoder:1.3.1'
 
-    implementation "com.google.cloud:google-cloud-texttospeech:2.49.0"
+    implementation "com.google.cloud:google-cloud-texttospeech:2.50.0"
 
 }
 
