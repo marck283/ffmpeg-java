@@ -6,6 +6,7 @@ import it.disi.unitn.StringExt;
 import it.disi.unitn.exceptions.InvalidArgumentException;
 import it.disi.unitn.exceptions.AudioConversionException;
 import it.disi.unitn.lasagna.File;
+import it.disi.unitn.videocreator.filtergraph.AudioFilterGraph;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.FileOutputStream;
@@ -24,6 +25,8 @@ public class Audio {
     private AudioConfig audioConfig;
 
     private Locale locale;
+
+    private AudioFilterGraph afg;
 
     /**
      * Checks if the given string is null or empty.
@@ -63,6 +66,8 @@ public class Audio {
         checkNullOrEmpty(encoding, "The encoding must be equal to \"mp3\", \"linear16\", " +
                 "\"ogg_opus\", \"mulaw\" or \"alaw\".", "La codifica audio deve essere uguale a \"mp3\", " +
                 "\"linear16\", \"ogg_opus\", \"mulaw\" o \"alaw\".");
+
+        afg = new AudioFilterGraph();
 
         // Instantiates a client
         try {
@@ -158,5 +163,19 @@ public class Audio {
         } catch(ApiException ex) {
             throw new AudioConversionException(ex);
         }
+    }
+
+    /**
+     * This method sets the AudioFilterGraph on the audio track.
+     * @param afg The given AudioFilterGraph. This parameter cannot be null.
+     * @throws InvalidArgumentException If the given parameter is null
+     */
+    public void setAudioFilterGraph(@NotNull AudioFilterGraph afg) throws InvalidArgumentException {
+        if (afg == null) {
+            throw new InvalidArgumentException("The audio filter graph must not be null.", "Il grafo del filtro audio " +
+                    "non puo' essere null.");
+        }
+
+        this.afg = afg;
     }
 }

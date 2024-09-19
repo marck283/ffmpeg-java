@@ -10,7 +10,9 @@ import org.jetbrains.annotations.NotNull;
  */
 public class ABuffer extends AudioFilter {
 
-    private String time_base, sample_fmt;
+    private float time_base;
+
+    private String sample_fmt;
 
     private int sample_rate, channels;
 
@@ -25,11 +27,15 @@ public class ABuffer extends AudioFilter {
         super("abuffer");
         channels = -1;
         channel_layout = new ChannelLayout();
+        time_base = 0F;
+        sample_rate = 0;
+        sample_fmt = "";
     }
 
     /**
-     * Sets this field's time_base parameter.
-     * @param time_base The given time_base value. This value cannot be null or an empty string
+     * Sets this filter's time_base parameter.
+     * @param time_base The given time_base value. This value cannot be null or an empty string, and it has to be in the
+     *                  form num/den.
      * @throws InvalidArgumentException If the given value is null or an empty string
      */
     public void setTimeBase(@NotNull String time_base) throws InvalidArgumentException {
@@ -37,7 +43,23 @@ public class ABuffer extends AudioFilter {
             throw new InvalidArgumentException("The time_base parameter cannot be null or an empty string.", "Il valore " +
                     "del parametro \"time_base\" non puo' essere null o una stringa vuota.");
         }
-        this.time_base = time_base;
+        if(!time_base.contains("/") || time_base.charAt(0) == '/' || time_base.charAt(time_base.length() - 1) == '/') {
+            throw new InvalidArgumentException("The time_base value given to this method must be in the form <num1>/<num2>.",
+                    "Il valore del parametro time_base fornito a questo metodo deve essere della forma <num1>/<num2>.");
+        }
+
+        String[] timeBaseArr = time_base.split("/");
+        setTimeBase(Float.parseFloat(timeBaseArr[0]), Float.parseFloat(timeBaseArr[1]));
+    }
+
+    /**
+     * This method sets the time_base parameter's value as a floating-point number given a fraction's numerator and
+     * denominator.
+     * @param num The numerator.
+     * @param den The denominator.
+     */
+    public void setTimeBase(float num, float den) {
+        time_base = num / den;
     }
 
     /**
@@ -84,7 +106,7 @@ public class ABuffer extends AudioFilter {
 
     @Override
     public void updateMap() {
-        options.put("time_base", time_base);
+        options.put("time_base", String.valueOf(time_base));
         options.put("sample_fmt", sample_fmt);
         options.put("sample_rate", String.valueOf(sample_rate));
         options.put("channel_layout", channel_layout.toString());

@@ -199,7 +199,9 @@ public class Scale extends VideoFilter {
             throw new InvalidArgumentException("The video size ID should not be null.", "L'ID della proporzione visiva " +
                     "non deve essere null.");
         }
-        if (Size.checkSizeID(videoSizeID)) {
+
+        Size size = new Size();
+        if (size.checkSizeID(videoSizeID)) {
             this.videoSizeID = videoSizeID;
         } else {
             throw new InvalidArgumentException("Invalid image resolution", "Risoluzione immagine non valida.");

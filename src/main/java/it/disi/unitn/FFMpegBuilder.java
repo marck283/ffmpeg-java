@@ -2,6 +2,7 @@ package it.disi.unitn;
 
 import it.disi.unitn.exceptions.InvalidArgumentException;
 import it.disi.unitn.exceptions.UnsupportedOperatingSystemException;
+import it.disi.unitn.lasagna.audiocreator.Audio;
 import it.disi.unitn.videocreator.TracksMerger;
 import it.disi.unitn.videocreator.VideoCreator;
 import it.disi.unitn.videocreator.transcoder.VideoTranscoder;
@@ -162,14 +163,15 @@ public class FFMpegBuilder {
 
     /**
      * Returns a new VideoCreator instance given the path to the output file, the path to the input folder and the
-     * output file's extension.
+     * output file's extension. None of the values given to this method can be null.
      * @param outputFile The path to the output file
+     * @param audio An instance of the Audio class.
      * This path has to be ffmpeg-compatible, and it must include the file extensions.
      * @return A new VideoCreator instance
      * @throws InvalidArgumentException If at least one of the given arguments is null or an empty string
      */
-    public VideoCreator newVideoCreator(@NotNull String outputFile) throws InvalidArgumentException {
-        return new VideoCreator(this, outputFile);
+    public VideoCreator newVideoCreator(@NotNull String outputFile, @NotNull Audio audio) throws InvalidArgumentException {
+        return new VideoCreator(this, outputFile, audio);
     }
 
     /**

@@ -23,7 +23,8 @@ public class A3DScope extends Filter {
         super("a3dscope");
 
         rate = 25;
-        size = new Size("hd720");
+        size = new Size();
+        size.setSizeID("hd720");
         fov = 90;
         roll = 0;
         pitch = 0;
@@ -56,12 +57,13 @@ public class A3DScope extends Filter {
      * @throws InvalidArgumentException If the given value is null, an empty string, or it is not accepted by FFmpeg
      */
     public void setSizeID(@NotNull String sizeID) throws InvalidArgumentException {
-        if(!Size.checkSizeID(sizeID)) {
+        Size size = new Size();
+        if(!size.checkSizeID(sizeID)) {
             throw new InvalidArgumentException("The size's ID must be accepted by FFmpeg.", "L'ID della dimensione deve " +
                     "essere accettato da FFmpeg.");
         }
 
-        size = new Size(sizeID);
+        size.setSizeID(sizeID);
     }
 
     /**

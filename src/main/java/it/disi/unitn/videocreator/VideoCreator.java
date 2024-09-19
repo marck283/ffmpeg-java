@@ -7,6 +7,7 @@ import it.disi.unitn.exceptions.InvalidArgumentException;
 import it.disi.unitn.exceptions.PermissionsException;
 import it.disi.unitn.exceptions.UnsupportedOperatingSystemException;
 import it.disi.unitn.exceptions.UnsupportedOperationException;
+import it.disi.unitn.lasagna.audiocreator.Audio;
 import it.disi.unitn.videocreator.filtergraph.AudioFilterGraph;
 import it.disi.unitn.videocreator.filtergraph.FilterGraph;
 import it.disi.unitn.videocreator.filtergraph.VideoFilterGraph;
@@ -58,6 +59,8 @@ public class VideoCreator {
 
     private FilterGraph vfg, afg, cfg; //Video, audio and complex filter graphs
 
+    private Audio audio;
+
     private FPSMode fps_mode;
 
     /**
@@ -67,8 +70,8 @@ public class VideoCreator {
      * @param outputFile The path to the output file
      * @throws InvalidArgumentException If any of the arguments given to this constructor is null
      */
-    public VideoCreator(@NotNull FFMpegBuilder builder, @NotNull String outputFile) throws InvalidArgumentException {
-        if (builder == null || StringExt.checkNullOrEmpty(outputFile)) {
+    public VideoCreator(@NotNull FFMpegBuilder builder, @NotNull String outputFile, @NotNull Audio audio) throws InvalidArgumentException {
+        if (builder == null || StringExt.checkNullOrEmpty(outputFile) || audio == null) {
             throw new InvalidArgumentException("The arguments given to this class's constructor cannot be null or " +
                     "empty values.", "Gli argomenti forniti al costruttore di questa classe non possono essere null o " +
                     "valori non specificati.");
@@ -90,6 +93,8 @@ public class VideoCreator {
             }
             //isOutFullRange = false;
             l = Locale.getDefault();
+
+            this.audio = audio;
         }
     }
 
@@ -578,8 +583,8 @@ public class VideoCreator {
      * @throws InvalidArgumentException If the given video simple filter graph is null or not an instance of VideoSimpleFilterGraph
      *                                  or the complex filter graph is not null
      */
-    public void setVideoSimpleFilterGraph(@NotNull FilterGraph vfg) throws InvalidArgumentException {
-        if (vfg == null || !(vfg instanceof VideoFilterGraph)) {
+    public void setVideoSimpleFilterGraph(@NotNull VideoFilterGraph vfg) throws InvalidArgumentException {
+        if (vfg == null) {
             throw new InvalidArgumentException("The video filter graph must be an instance of VideoFilterGraph.",
                     "Il grafo del filtro video deve essere un'istanza di VideoFilterGraph.");
         }
@@ -600,19 +605,14 @@ public class VideoCreator {
      * @throws InvalidArgumentException If the given audio simple filter graph is null or not an instance of AudioSimpleFilterGraph
      *                                  or the complex filter graph is not null
      */
-    public void setAudioSimpleFilterGraph(@NotNull FilterGraph afg) throws InvalidArgumentException {
-        if (afg == null || !(afg instanceof AudioFilterGraph)) {
-            throw new InvalidArgumentException("The audio filter graph must be an instance of AudioFilterGraph.",
-                    "Il grafo del filtro audio deve essere un'istanza di AudioFilterGraph.");
-        }
-
+    public void setAudioSimpleFilterGraph(@NotNull AudioFilterGraph afg) throws InvalidArgumentException {
         if (cfg != null) {
             throw new InvalidArgumentException("The complex filter graph must be null in order to set the audio simple " +
                     "filter graph.", "Il grafo complesso dei filtri deve essere null per poter impostare il grafo semplice " +
                     "dei filtri audio.");
         }
 
-        this.afg = afg;
+        audio.setAudioFilterGraph(afg);
     }
 
     /**
