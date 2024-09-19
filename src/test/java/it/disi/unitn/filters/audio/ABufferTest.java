@@ -27,7 +27,7 @@ public class ABufferTest {
     @Test
     void test() throws InvalidArgumentException, UnsupportedOperatingSystemException, IOException {
         FFMpegBuilder builder = new FFMpegBuilder("ffmpeg");
-        VideoCreator creator = builder.newVideoCreator("./src/test/resources/input/mp4/002.mp4", null);
+        VideoCreator creator = builder.newVideoCreator("./src/test/resources/input/mp4/002.mp4");
         creator.addInput("./src/test/resources/input/images/000.jpeg");
         creator.setPixelFormat("yuv420p");
         creator.setVideoQuality(18);

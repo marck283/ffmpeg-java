@@ -59,8 +59,6 @@ public class VideoCreator {
 
     private FilterGraph vfg, afg, cfg; //Video, audio and complex filter graphs
 
-    private final AudioFiltering audioFiltering;
-
     private FPSMode fps_mode;
 
     /**
@@ -70,7 +68,7 @@ public class VideoCreator {
      * @param outputFile The path to the output file
      * @throws InvalidArgumentException If any of the arguments given to this constructor is null
      */
-    public VideoCreator(@NotNull FFMpegBuilder builder, @NotNull String outputFile, @Nullable AudioFiltering audioFiltering)
+    public VideoCreator(@NotNull FFMpegBuilder builder, @NotNull String outputFile)
             throws InvalidArgumentException {
         if (builder == null || StringExt.checkNullOrEmpty(outputFile)) {
             throw new InvalidArgumentException("The arguments given to this class's constructor cannot be null or " +
@@ -94,8 +92,6 @@ public class VideoCreator {
             }
             //isOutFullRange = false;
             l = Locale.getDefault();
-
-            this.audioFiltering = audioFiltering;
         }
     }
 

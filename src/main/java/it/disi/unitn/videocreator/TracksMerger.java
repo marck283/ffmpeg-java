@@ -37,9 +37,9 @@ public class TracksMerger extends VideoCreator {
      * @throws InvalidArgumentException If any of the arguments given to this method is null or an empty string
      */
     public TracksMerger(@NotNull FFMpegBuilder builder, @NotNull String outputFile,
-                        @NotNull String audioInput, @NotNull String videoInput, @Nullable AudioFiltering audioFiltering)
+                        @NotNull String audioInput, @NotNull String videoInput)
             throws InvalidArgumentException {
-        super(builder, outputFile, audioFiltering);
+        super(builder, outputFile);
         if(StringExt.checkNullOrEmpty(audioInput) || StringExt.checkNullOrEmpty(videoInput)) {
             throw new InvalidArgumentException("The arguments to this class's constructor cannot be null or empty " +
                     "strings.", "Nessuno degli argomenti forniti al costruttore di questa classe puo' essere null o una " +
@@ -61,7 +61,7 @@ public class TracksMerger extends VideoCreator {
      */
     public TracksMerger(@NotNull FFMpegBuilder builder, @NotNull String outputVideo)
             throws InvalidArgumentException {
-        super(builder, outputVideo, null);
+        super(builder, outputVideo);
 
         this.builder = builder;
         videoOutput = outputVideo;

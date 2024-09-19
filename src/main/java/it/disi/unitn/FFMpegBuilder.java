@@ -145,10 +145,9 @@ public class FFMpegBuilder {
      * @return The newly created TracksMerger instance
      * @throws InvalidArgumentException If the TracksMerger's constructor throws this exception
      */
-    public TracksMerger newTracksMerger(@NotNull String outputFile, @NotNull String audioInput, @NotNull String videoInput,
-                                        @Nullable AudioFiltering audioFiltering)
+    public TracksMerger newTracksMerger(@NotNull String outputFile, @NotNull String audioInput, @NotNull String videoInput)
             throws InvalidArgumentException {
-        return new TracksMerger(this, outputFile, audioInput, videoInput, audioFiltering);
+        return new TracksMerger(this, outputFile, audioInput, videoInput);
     }
 
     /**
@@ -166,13 +165,12 @@ public class FFMpegBuilder {
      * Returns a new VideoCreator instance given the path to the output file, the path to the input folder and the
      * output file's extension. None of the values given to this method can be null.
      * @param outputFile The path to the output file
-     * @param audioFiltering An instance of the Audio class.
      * This path has to be ffmpeg-compatible, and it must include the file extensions.
      * @return A new VideoCreator instance
      * @throws InvalidArgumentException If at least one of the given arguments is null or an empty string
      */
-    public VideoCreator newVideoCreator(@NotNull String outputFile, @Nullable AudioFiltering audioFiltering) throws InvalidArgumentException {
-        return new VideoCreator(this, outputFile, audioFiltering);
+    public VideoCreator newVideoCreator(@NotNull String outputFile) throws InvalidArgumentException {
+        return new VideoCreator(this, outputFile);
     }
 
     /**
@@ -187,6 +185,12 @@ public class FFMpegBuilder {
         return new VideoTranscoder(this, outputFile);
     }
 
+    /**
+     * This method returns a new AudioFiltering instance.
+     * @param outputFile The given output audio file.
+     * @return A new AudioFiltering instance made using the given output audio file.
+     * @throws InvalidArgumentException If the given audio file is null or an empty string
+     */
     public AudioFiltering newAudioFiltering(@NotNull String outputFile) throws InvalidArgumentException {
         return new AudioFiltering(this, outputFile);
     }

@@ -6,7 +6,10 @@ import it.disi.unitn.StringExt;
 import it.disi.unitn.exceptions.InvalidJSONFileException;
 import org.jetbrains.annotations.NotNull;
 
-class Description {
+/**
+ * This class is used as a structure for the creation of an audio file.
+ */
+public class Description {
     private final String language, description;
 
     private Description(@NotNull String language, @NotNull String description) {

@@ -29,7 +29,7 @@ class VideoCreatorTest {
     void createCommand() throws InvalidArgumentException, UnsupportedOperatingSystemException,
             IOException, UnsupportedOperationException {
         FFMpegBuilder builder = new FFMpegBuilder("ffmpeg -xerror");
-        VideoCreator creator = builder.newVideoCreator("./src/test/resources/input/mp4/002.mp4", null);
+        VideoCreator creator = builder.newVideoCreator("./src/test/resources/input/mp4/002.mp4");
         creator.addInput("./src/test/resources/input/mp4/001.mp4");
         //creator.addInput("./src/test/resources/input/mp3/000.mp3");
         //creator.setVideoSize(800, 600, "yuv420p", true);
@@ -93,7 +93,7 @@ class VideoCreatorTest {
     @Test
     void createCommandTest1() throws InvalidArgumentException, UnsupportedOperatingSystemException, IOException {
         FFMpegBuilder builder = new FFMpegBuilder("ffmpeg");
-        VideoCreator creator = builder.newVideoCreator("./src/test/resources/input/mp4/002.mp4", null);
+        VideoCreator creator = builder.newVideoCreator("./src/test/resources/input/mp4/002.mp4");
         creator.addInput("./src/test/resources/input/images/000.jpeg");
         creator.setPixelFormat("yuv420p");
         creator.setVideoQuality(18);

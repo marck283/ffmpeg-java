@@ -14,6 +14,9 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class makes audio filtering possible when only an audio track is processed.
+ */
 public class AudioFiltering {
 
     private FilterGraph afg;
@@ -24,6 +27,12 @@ public class AudioFiltering {
 
     private final String outputFile;
 
+    /**
+     * The class's constructor.
+     * @param builder The FFMpegBuilder instance
+     * @param outputFile The output file path. This value cannot be null or an empty string.
+     * @throws InvalidArgumentException If the given output file path is null or an empty string
+     */
     public AudioFiltering(@NotNull FFMpegBuilder builder, @NotNull String outputFile) throws InvalidArgumentException {
         afg = new AudioFilterGraph();
         this.builder = builder;
