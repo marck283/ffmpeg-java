@@ -29,7 +29,7 @@ class VideoCreatorTest {
     void createCommand() throws InvalidArgumentException, UnsupportedOperatingSystemException,
             IOException, UnsupportedOperationException {
         FFMpegBuilder builder = new FFMpegBuilder("ffmpeg -xerror");
-        VideoCreator creator = builder.newVideoCreator("./src/test/resources/input/mp4/002.mp4");
+        VideoCreator creator = builder.newVideoCreator("./src/test/resources/input/mp4/002.mp4", null);
         creator.addInput("./src/test/resources/input/mp4/001.mp4");
         //creator.addInput("./src/test/resources/input/mp3/000.mp3");
         //creator.setVideoSize(800, 600, "yuv420p", true);
@@ -93,7 +93,7 @@ class VideoCreatorTest {
     @Test
     void createCommandTest1() throws InvalidArgumentException, UnsupportedOperatingSystemException, IOException {
         FFMpegBuilder builder = new FFMpegBuilder("ffmpeg");
-        VideoCreator creator = builder.newVideoCreator("./src/test/resources/input/mp4/002.mp4");
+        VideoCreator creator = builder.newVideoCreator("./src/test/resources/input/mp4/002.mp4", null);
         creator.addInput("./src/test/resources/input/images/000.jpeg");
         creator.setPixelFormat("yuv420p");
         creator.setVideoQuality(18);
@@ -151,58 +151,6 @@ class VideoCreatorTest {
         vfg.addFilterChain(fc);
         //vfg.addFilterChain(fc1);
         creator.setComplexFilterGraph(vfg);
-
-        creator.createCommand(/*true, null, new Bicubic(0.3333, 0.3333), "auto",
-                "bt709", "auto", "auto", "init", "0",
-                "disable", 0*/);
-
-        FFMpeg ffmpeg = builder.build();
-        ffmpeg.executeCMD(30L, TimeUnit.SECONDS);
-    }
-
-    @Test
-    void createCommandTest2() throws InvalidArgumentException, UnsupportedOperatingSystemException, IOException {
-        FFMpegBuilder builder = new FFMpegBuilder("ffmpeg");
-        VideoCreator creator = builder.newVideoCreator("./src/test/resources/input/mp4/002.mp4");
-        creator.addInput("./src/test/resources/input/images/000.jpeg");
-        creator.setPixelFormat("yuv420p");
-        creator.setVideoQuality(18);
-
-        AudioFilterGraph afg = new AudioFilterGraph();
-        AudioSimpleFilterChain asfc = new AudioSimpleFilterChain();
-        ABuffer abuffer = new ABuffer();
-        abuffer.addOutput("ain1");
-
-        ChannelLayout chlay = new ChannelLayout();
-        chlay.setChannelID("stereo");
-        abuffer.setChannelLayout(chlay);
-        abuffer.updateMap();
-
-        AFormat aformat = new AFormat();
-        aformat.addInput("ain1");
-        aformat.addOutput("ain");
-        aformat.addSampleFormat("u8");
-        aformat.addSampleFormat("s16");
-
-        aformat.addChannelLayout(chlay);
-        aformat.updateMap();
-
-        ADecorrelate adecor = new ADecorrelate();
-        adecor.addInput("ain");
-        adecor.updateMap();
-        asfc.addAllFilters(abuffer, aformat, adecor);
-        afg.addFilterChain(asfc);
-        creator.setAudioSimpleFilterGraph(afg);
-
-        VideoFilterGraph vfg = new VideoFilterGraph();
-        VideoSimpleFilterChain vsfc = new VideoSimpleFilterChain();
-        Scale scale = new Scale();
-        creator.setScaleParams(true, scale, new Bicubic(0.3333, 0.3333), String.valueOf(800), String.valueOf(600),
-                "auto", "bt709", "auto", "auto", "init",
-                "0", "disable", 0);
-        vsfc.addFilter(scale);
-        vfg.addFilterChain(vsfc);
-        creator.setVideoSimpleFilterGraph(vfg);
 
         creator.createCommand(/*true, null, new Bicubic(0.3333, 0.3333), "auto",
                 "bt709", "auto", "auto", "init", "0",

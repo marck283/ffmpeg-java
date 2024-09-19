@@ -6,7 +6,8 @@ import it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.a
 import org.jetbrains.annotations.NotNull;
 
 /**
- * This class implements FFmpeg's "abuffer" filter.
+ * This class implements FFmpeg's "abuffer" filter. This filter must be used in conjunction with a ffmpeg command trying
+ * to process a video.
  */
 public class ABuffer extends AudioFilter {
 
@@ -25,7 +26,7 @@ public class ABuffer extends AudioFilter {
      */
     public ABuffer() throws InvalidArgumentException {
         super("abuffer");
-        channels = -1;
+        channels = 1;
         channel_layout = new ChannelLayout();
         time_base = 0F;
         sample_rate = 0;
@@ -98,9 +99,14 @@ public class ABuffer extends AudioFilter {
 
     /**
      * Sets the number of channels.
-     * @param channels The given number of channels
+     * @param channels The given number of channels. This value must be greater than or equal to 1.
+     * @throws InvalidArgumentException If the given number of channels is less than or equal to zero
      */
-    public void setChannels(int channels) {
+    public void setChannels(int channels) throws InvalidArgumentException {
+        if(channels <= 0) {
+            throw new InvalidArgumentException("Cannot set number of channels less than or equal to zero.", "Non e' " +
+                    "possibile impostare un numero di canali minore o uguale a zero.");
+        }
         this.channels = channels;
     }
 
@@ -110,8 +116,6 @@ public class ABuffer extends AudioFilter {
         options.put("sample_fmt", sample_fmt);
         options.put("sample_rate", String.valueOf(sample_rate));
         options.put("channel_layout", channel_layout.toString());
-        if(channels != -1) {
-            options.put("channels", String.valueOf(channels));
-        }
+        options.put("channels", String.valueOf(channels));
     }
 }

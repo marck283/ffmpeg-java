@@ -5,7 +5,9 @@ import it.disi.unitn.FFMpegBuilder;
 import it.disi.unitn.StringExt;
 import it.disi.unitn.exceptions.InvalidArgumentException;
 //import org.apache.commons.io.FileUtils;
+import it.disi.unitn.lasagna.audiocreator.AudioFiltering;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
 import java.io.IOException;
@@ -35,8 +37,9 @@ public class TracksMerger extends VideoCreator {
      * @throws InvalidArgumentException If any of the arguments given to this method is null or an empty string
      */
     public TracksMerger(@NotNull FFMpegBuilder builder, @NotNull String outputFile,
-                 @NotNull String audioInput, @NotNull String videoInput) throws InvalidArgumentException {
-        super(builder, outputFile);
+                        @NotNull String audioInput, @NotNull String videoInput, @Nullable AudioFiltering audioFiltering)
+            throws InvalidArgumentException {
+        super(builder, outputFile, audioFiltering);
         if(StringExt.checkNullOrEmpty(audioInput) || StringExt.checkNullOrEmpty(videoInput)) {
             throw new InvalidArgumentException("The arguments to this class's constructor cannot be null or empty " +
                     "strings.", "Nessuno degli argomenti forniti al costruttore di questa classe puo' essere null o una " +
@@ -58,7 +61,7 @@ public class TracksMerger extends VideoCreator {
      */
     public TracksMerger(@NotNull FFMpegBuilder builder, @NotNull String outputVideo)
             throws InvalidArgumentException {
-        super(builder, outputVideo);
+        super(builder, outputVideo, null);
 
         this.builder = builder;
         videoOutput = outputVideo;

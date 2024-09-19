@@ -8,16 +8,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4e206741-5dd1-4a84-99b2-29854b378e54" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/disi/unitn/lasagna/audiocreator/Description.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/it/disi/unitn/filters/audio/ABufferTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/it/disi/unitn/lasagna/audiocreator/AudioFiltering.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/disi/unitn/FFMpegBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/disi/unitn/FFMpegBuilder.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/disi/unitn/lasagna/audiocreator/Audio.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/disi/unitn/lasagna/audiocreator/Audio.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/disi/unitn/videocreator/TracksMerger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/disi/unitn/videocreator/TracksMerger.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/disi/unitn/videocreator/VideoCreator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/disi/unitn/videocreator/VideoCreator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/abuffer/ABuffer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/abuffer/ABuffer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/disi/unitn/videocreator/filtergraph/filterchain/filters/multimedia/a3dscope/A3DScope.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/disi/unitn/videocreator/filtergraph/filterchain/filters/multimedia/a3dscope/A3DScope.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/disi/unitn/videocreator/filtergraph/filterchain/filters/size/Size.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/disi/unitn/videocreator/filtergraph/filterchain/filters/size/Size.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/disi/unitn/videocreator/filtergraph/filterchain/filters/videofilters/scale/Scale.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/disi/unitn/videocreator/filtergraph/filterchain/filters/videofilters/scale/Scale.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/disi/unitn/videocreator/transcoder/VideoTranscoder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/disi/unitn/videocreator/transcoder/VideoTranscoder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/FFMpegBuilderTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/FFMpegBuilderTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/it/disi/unitn/filters/audio/ABufferTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/disi/unitn/filters/audio/ABufferTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/it/disi/unitn/videocreator/VideoCreatorTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/disi/unitn/videocreator/VideoCreatorTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -104,78 +107,79 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ACTIVE_CLOUD_PROJECT_ACCOUNT&quot;: &quot;marvel00.ml@gmail.com&quot;,
-    &quot;ACTIVE_CLOUD_PROJECT_ID&quot;: &quot;tirocinio-380209&quot;,
-    &quot;ACTIVE_CLOUD_PROJECT_NAME&quot;: &quot;Tirocinio&quot;,
-    &quot;ACTIVE_CLOUD_PROJECT_NUMBER&quot;: &quot;984985190211&quot;,
-    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
-    &quot;Gradle.Build ffmpeg-java.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.Download Sources.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.FFMpegBuilderTest.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.FFMpegBuilderTest.setVideoFrameSize.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.FFMpegBuilderTest.testSetVideoFrameSize.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.JSONToImageTest.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.JSONToImageTest.generate.executor&quot;: &quot;Debug&quot;,
-    &quot;Gradle.JSONToImageTest.generateWithGAN.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.VideoCreatorTest.createCommand.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.VideoCreatorTest.createCommandTest1.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.VideoCreatorTest.createCommandTest2.executor&quot;: &quot;Debug&quot;,
-    &quot;Gradle.VideoCreatorTest.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.VideoTranscoderTest.createCommandForAudio.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.VideoTranscoderTest.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.ffmpeg-java [build].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.ffmpeg-java [publishAllPublicationsToMavenRepository].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.ffmpeg-java [publishCentralPortalPublicationToMavenRepository].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.ffmpeg-java [publishMavenJavaPublicationToMavenLocal].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.ffmpeg-java [publishToCentralPortal].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.ffmpeg-java [publishToMavenLocal].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.ffmpeg-java [testClasses].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.ffmpeg-java [test].executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.All in ffmpeg-java-id.test (1).executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.All in ffmpeg-java-id.test.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.FFMpegBuilderTest (1).executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.FFMpegBuilderTest.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.FFMpegBuilderTest.setVideoFrameSize (1).executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.FFMpegBuilderTest.setVideoFrameSize.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.test in ffmpeg-java-id.test.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.unitn in ffmpeg-java-id.test.executor&quot;: &quot;Run&quot;,
-    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;com.google.cloudcode.ide_session_index&quot;: &quot;20240326_0014&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
-    &quot;create.test.in.the.same.root&quot;: &quot;true&quot;,
-    &quot;extract.method.default.visibility&quot;: &quot;private&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_directory_selection&quot;: &quot;/home/marco/IdeaProjects/ffmpeg-java/src/test/java/it/disi/unitn/videocreator&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/marco-lasagna/IdeaProjects/ffmpeg-java/src/main/java/it/disi/unitn/lasagna/audio&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.3356828&quot;,
-    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;settings.qodana&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ACTIVE_CLOUD_PROJECT_ACCOUNT": "marvel00.ml@gmail.com",
+    "ACTIVE_CLOUD_PROJECT_ID": "tirocinio-380209",
+    "ACTIVE_CLOUD_PROJECT_NAME": "Tirocinio",
+    "ACTIVE_CLOUD_PROJECT_NUMBER": "984985190211",
+    "Downloaded.Files.Path.Enabled": "false",
+    "Gradle.ABufferTest.test.executor": "Run",
+    "Gradle.Build ffmpeg-java.executor": "Run",
+    "Gradle.Download Sources.executor": "Run",
+    "Gradle.FFMpegBuilderTest.executor": "Run",
+    "Gradle.FFMpegBuilderTest.setVideoFrameSize.executor": "Run",
+    "Gradle.FFMpegBuilderTest.testSetVideoFrameSize.executor": "Run",
+    "Gradle.JSONToImageTest.executor": "Run",
+    "Gradle.JSONToImageTest.generate.executor": "Debug",
+    "Gradle.JSONToImageTest.generateWithGAN.executor": "Run",
+    "Gradle.VideoCreatorTest.createCommand.executor": "Run",
+    "Gradle.VideoCreatorTest.createCommandTest1.executor": "Run",
+    "Gradle.VideoCreatorTest.createCommandTest2.executor": "Run",
+    "Gradle.VideoCreatorTest.executor": "Run",
+    "Gradle.VideoTranscoderTest.createCommandForAudio.executor": "Run",
+    "Gradle.VideoTranscoderTest.executor": "Run",
+    "Gradle.ffmpeg-java [build].executor": "Run",
+    "Gradle.ffmpeg-java [publishAllPublicationsToMavenRepository].executor": "Run",
+    "Gradle.ffmpeg-java [publishCentralPortalPublicationToMavenRepository].executor": "Run",
+    "Gradle.ffmpeg-java [publishMavenJavaPublicationToMavenLocal].executor": "Run",
+    "Gradle.ffmpeg-java [publishToCentralPortal].executor": "Run",
+    "Gradle.ffmpeg-java [publishToMavenLocal].executor": "Run",
+    "Gradle.ffmpeg-java [testClasses].executor": "Run",
+    "Gradle.ffmpeg-java [test].executor": "Run",
+    "JUnit.All in ffmpeg-java-id.test (1).executor": "Run",
+    "JUnit.All in ffmpeg-java-id.test.executor": "Run",
+    "JUnit.FFMpegBuilderTest (1).executor": "Run",
+    "JUnit.FFMpegBuilderTest.executor": "Run",
+    "JUnit.FFMpegBuilderTest.setVideoFrameSize (1).executor": "Run",
+    "JUnit.FFMpegBuilderTest.setVideoFrameSize.executor": "Run",
+    "JUnit.test in ffmpeg-java-id.test.executor": "Run",
+    "JUnit.unitn in ffmpeg-java-id.test.executor": "Run",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "com.google.cloudcode.ide_session_index": "20240326_0014",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
+    "create.test.in.the.same.root": "true",
+    "extract.method.default.visibility": "private",
+    "git-widget-placeholder": "master",
+    "kotlin-language-version-configured": "true",
+    "last_directory_selection": "/home/marco/IdeaProjects/ffmpeg-java/src/test/java/it/disi/unitn/videocreator",
+    "last_opened_file_path": "/home/marco-lasagna/IdeaProjects/ffmpeg-java/src/test/resources/input/audio",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.3356828",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "settings.qodana",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/test/resources/input/audio" />
       <recent name="$PROJECT_DIR$/src/main/java/it/disi/unitn/lasagna/audio" />
       <recent name="$PROJECT_DIR$/src/main/java/it/disi/unitn/lasagna" />
       <recent name="$PROJECT_DIR$/src/test/resources/input/json" />
       <recent name="$PROJECT_DIR$/src/test/resources/input/mp4" />
-      <recent name="$PROJECT_DIR$/src/test/resources/input/mp3" />
     </key>
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
@@ -198,7 +202,31 @@
       <recent name="it.disi.unitn.exceptions" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.ffmpeg-java [publishAllPublicationsToMavenRepository]">
+  <component name="RunManager" selected="Gradle.ABufferTest.test">
+    <configuration name="ABufferTest.test" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;it.disi.unitn.filters.audio.ABufferTest.test&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
     <configuration name="FFMpegBuilderTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -391,54 +419,6 @@
       <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="VideoCreatorTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":test" />
-            <option value="--tests" />
-            <option value="&quot;it.disi.unitn.videocreator.VideoCreatorTest&quot;" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>true</RunAsTest>
-      <method v="2" />
-    </configuration>
-    <configuration name="VideoCreatorTest.createCommand" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":test" />
-            <option value="--tests" />
-            <option value="&quot;it.disi.unitn.videocreator.VideoCreatorTest.createCommand&quot;" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>true</RunAsTest>
-      <method v="2" />
-    </configuration>
     <configuration name="VideoCreatorTest.createCommandTest1" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -487,12 +467,12 @@
       <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="VideoCreatorTest.createCommandTest1" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="VideoCreatorTest.createCommandTest2" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--debug" />
+        <option name="scriptParameters" value="" />
         <option name="taskDescriptions">
           <list />
         </option>
@@ -500,7 +480,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;it.disi.unitn.videocreator.VideoCreatorTest.createCommandTest1&quot;" />
+            <option value="&quot;it.disi.unitn.videocreator.VideoCreatorTest.createCommandTest2&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -549,30 +529,6 @@
             <option value=":test" />
             <option value="--tests" />
             <option value="&quot;it.disi.unitn.videocreator.VideoCreatorTest.createCommand&quot;" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>true</RunAsTest>
-      <method v="2" />
-    </configuration>
-    <configuration name="VideoTranscoderTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":test" />
-            <option value="--tests" />
-            <option value="&quot;it.disi.unitn.videocreator.transcoder.VideoTranscoderTest&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -806,21 +762,19 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Gradle.VideoCreatorTest.createCommand" />
-      <item itemvalue="Gradle.VideoCreatorTest.createCommandTest1" />
+      <item itemvalue="Gradle.ABufferTest.test" />
+      <item itemvalue="Gradle.VideoCreatorTest.createCommandTest2" />
       <item itemvalue="Gradle.ffmpeg-java [publishToMavenLocal]" />
-      <item itemvalue="Gradle.VideoCreatorTest" />
-      <item itemvalue="Gradle.VideoTranscoderTest" />
       <item itemvalue="Gradle.FFMpegBuilderTest" />
       <item itemvalue="Gradle.ffmpeg-java [publishAllPublicationsToMavenRepository]" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.ABufferTest.test" />
+        <item itemvalue="Gradle.VideoCreatorTest.createCommandTest2" />
         <item itemvalue="Gradle.ffmpeg-java [publishAllPublicationsToMavenRepository]" />
         <item itemvalue="Gradle.ffmpeg-java [publishToMavenLocal]" />
         <item itemvalue="Gradle.FFMpegBuilderTest" />
-        <item itemvalue="Gradle.VideoCreatorTest" />
-        <item itemvalue="Gradle.VideoTranscoderTest" />
       </list>
     </recent_temporary>
   </component>
@@ -922,7 +876,8 @@
       <workItem from="1726491564436" duration="334000" />
       <workItem from="1726569638675" duration="2322000" />
       <workItem from="1726762979978" duration="567000" />
-      <workItem from="1726763579946" duration="9000" />
+      <workItem from="1726763579946" duration="163000" />
+      <workItem from="1726764187310" duration="7782000" />
     </task>
     <servers />
   </component>
@@ -941,6 +896,11 @@
           <url>file://$PROJECT_DIR$/src/test/java/it/disi/unitn/videocreator/VideoCreatorTest.java</url>
           <line>89</line>
           <option name="timeStamp" value="139" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/it/disi/unitn/FFMpeg.java</url>
+          <line>23</line>
+          <option name="timeStamp" value="145" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

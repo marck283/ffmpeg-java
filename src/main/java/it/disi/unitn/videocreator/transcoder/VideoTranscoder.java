@@ -23,7 +23,7 @@ public class VideoTranscoder extends VideoCreator {
      * @throws InvalidArgumentException If at least one of the given arguments is null or an empty string
      */
     public VideoTranscoder(@NotNull FFMpegBuilder builder, @NotNull String outputFile) throws InvalidArgumentException {
-        super(builder, outputFile);
+        super(builder, outputFile, null);
         audioStreamCopy = false;
         videoStreamCopy = false;
         extractVideo = false;

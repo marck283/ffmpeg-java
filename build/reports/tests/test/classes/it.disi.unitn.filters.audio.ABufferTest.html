@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="x-ua-compatible" content="IE=edge"/>
+<title>Test results - ABufferTest</title>
+<link href="../css/base-style.css" rel="stylesheet" type="text/css"/>
+<link href="../css/style.css" rel="stylesheet" type="text/css"/>
+<script src="../js/report.js" type="text/javascript"></script>
+</head>
+<body>
+<div id="content">
+<h1>ABufferTest</h1>
+<div class="breadcrumbs">
+<a href="../index.html">all</a> &gt; 
+<a href="../packages/it.disi.unitn.filters.audio.html">it.disi.unitn.filters.audio</a> &gt; ABufferTest</div>
+<div id="summary">
+<table>
+<tr>
+<td>
+<div class="summaryGroup">
+<table>
+<tr>
+<td>
+<div class="infoBox" id="tests">
+<div class="counter">1</div>
+<p>tests</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="failures">
+<div class="counter">0</div>
+<p>failures</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="ignored">
+<div class="counter">0</div>
+<p>ignored</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="duration">
+<div class="counter">0.414s</div>
+<p>duration</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+<td>
+<div class="infoBox success" id="successRate">
+<div class="percent">100%</div>
+<p>successful</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div id="tabs">
+<ul class="tabLinks">
+<li>
+<a href="#tab0">Tests</a>
+</li>
+<li>
+<a href="#tab1">Standard error</a>
+</li>
+</ul>
+<div id="tab0" class="tab">
+<h2>Tests</h2>
+<table>
+<thead>
+<tr>
+<th>Test</th>
+<th>Duration</th>
+<th>Result</th>
+</tr>
+</thead>
+<tr>
+<td class="success">test()</td>
+<td class="success">0.414s</td>
+<td class="success">passed</td>
+</tr>
+</table>
+</div>
+<div id="tab1" class="tab">
+<h2>Standard error</h2>
+<span class="code">
+<pre>ffmpeg version 6.1.1-3ubuntu5+esm2 Copyright (c) 2000-2023 the FFmpeg developers
+  built with gcc 13 (Ubuntu 13.2.0-23ubuntu4)
+  configuration: --prefix=/usr --extra-version=3ubuntu5+esm2 --toolchain=hardened --libdir=/usr/lib/x86_64-linux-gnu --incdir=/usr/include/x86_64-linux-gnu --arch=amd64 --enable-gpl --disable-stripping --disable-omx --enable-gnutls --enable-libaom --enable-libass --enable-libbs2b --enable-libcaca --enable-libcdio --enable-libcodec2 --enable-libdav1d --enable-libflite --enable-libfontconfig --enable-libfreetype --enable-libfribidi --enable-libglslang --enable-libgme --enable-libgsm --enable-libharfbuzz --enable-libmp3lame --enable-libmysofa --enable-libopenjpeg --enable-libopenmpt --enable-libopus --enable-librubberband --enable-libshine --enable-libsnappy --enable-libsoxr --enable-libspeex --enable-libtheora --enable-libtwolame --enable-libvidstab --enable-libvorbis --enable-libvpx --enable-libwebp --enable-libx265 --enable-libxml2 --enable-libxvid --enable-libzimg --enable-openal --enable-opencl --enable-opengl --disable-sndio --enable-libvpl --disable-libmfx --enable-libdc1394 --enable-libdrm --enable-libiec61883 --enable-chromaprint --enable-frei0r --enable-ladspa --enable-libbluray --enable-libjack --enable-libpulse --enable-librabbitmq --enable-librist --enable-libsrt --enable-libssh --enable-libsvtav1 --enable-libx264 --enable-libzmq --enable-libzvbi --enable-lv2 --enable-sdl2 --enable-libplacebo --enable-librav1e --enable-pocketsphinx --enable-librsvg --enable-libjxl --enable-shared
+  libavutil      58. 29.100 / 58. 29.100
+  libavcodec     60. 31.102 / 60. 31.102
+  libavformat    60. 16.100 / 60. 16.100
+  libavdevice    60.  3.100 / 60.  3.100
+  libavfilter     9. 12.100 /  9. 12.100
+  libswscale      7.  5.100 /  7.  5.100
+  libswresample   4. 12.100 /  4. 12.100
+  libpostproc    57.  3.100 / 57.  3.100
+Input #0, image2, from './src/test/resources/input/images/000.jpeg':
+  Duration: 00:00:00.04, start: 0.000000, bitrate: 107484 kb/s
+  Stream #0:0: Video: mjpeg (Baseline), yuvj420p(pc, bt470bg/unknown/unknown), 4501x4500 [SAR 1:1 DAR 4501:4500], 25 fps, 25 tbr, 25 tbn
+Stream mapping:
+  Stream #0:0 -&gt; #0:0 (mjpeg (native) -&gt; h264 (libx264))
+Press [q] to stop, [?] for help
+[swscaler @ 0x631c698b2e40] deprecated pixel format used, make sure you did set range correctly
+[swscaler @ 0x631c699ad500] deprecated pixel format used, make sure you did set range correctly
+[swscaler @ 0x631c69a4c900] deprecated pixel format used, make sure you did set range correctly
+    Last message repeated 1 times
+[libx264 @ 0x631c69851600] -qscale is ignored, -crf is recommended.
+[libx264 @ 0x631c69851600] using SAR=1126/1501
+[libx264 @ 0x631c69851600] using cpu capabilities: MMX2 SSE2Fast SSSE3 SSE4.2 AVX FMA3 BMI2 AVX2
+[libx264 @ 0x631c69851600] profile High, level 3.1, 4:2:0, 8-bit
+[libx264 @ 0x631c69851600] 264 - core 164 r3108 31e19f9 - H.264/MPEG-4 AVC codec - Copyleft 2003-2023 - http://www.videolan.org/x264.html - options: cabac=1 ref=3 deblock=1:0:0 analyse=0x3:0x113 me=hex subme=7 psy=1 psy_rd=1.00:0.00 mixed_ref=1 me_range=16 chroma_me=1 trellis=1 8x8dct=1 cqm=0 deadzone=21,11 fast_pskip=1 chroma_qp_offset=-2 threads=19 lookahead_threads=3 sliced_threads=0 nr=0 decimate=1 interlaced=0 bluray_compat=0 constrained_intra=0 bframes=3 b_pyramid=2 b_adapt=1 b_bias=0 direct=1 weightb=1 open_gop=0 weightp=2 keyint=250 keyint_min=1 scenecut=40 intra_refresh=0 rc_lookahead=40 rc=crf mbtree=1 crf=23.0 qcomp=0.60 qpmin=0 qpmax=69 qpstep=4 ip_ratio=1.40 aq=1:1.00
+Output #0, mp4, to './src/test/resources/input/mp4/002.mp4':
+  Metadata:
+    encoder         : Lavf60.16.100
+  Stream #0:0: Video: h264 (avc1 / 0x31637661), yuvj420p(pc, bt470bg/unknown/unknown, progressive), 800x600 [SAR 4501:6000 DAR 4501:4500], q=2-31, 1 fps, 16384 tbn
+    Metadata:
+      encoder         : Lavc60.31.102 libx264
+    Side data:
+      cpb: bitrate max/min/avg: 0/0/0 buffer size: 0 vbv_delay: N/A
+frame=    0 fps=0.0 q=0.0 size=       0kB time=N/A bitrate=N/A speed=N/A    [out#0/mp4 @ 0x631c69855980] video:19kB audio:0kB subtitle:0kB other streams:0kB global headers:0kB muxing overhead: 4.329886%
+frame=    1 fps=0.0 q=17.0 Lsize=      20kB time=00:00:00.00 bitrate=N/A speed=   0x    
+[libx264 @ 0x631c69851600] frame I:1     Avg QP:11.03  size: 18942
+[libx264 @ 0x631c69851600] mb I  I16..4: 81.4%  0.4% 18.3%
+[libx264 @ 0x631c69851600] 8x8 transform intra:0.4%
+[libx264 @ 0x631c69851600] coded y,uvDC,uvAC intra: 17.0% 17.5% 16.6%
+[libx264 @ 0x631c69851600] i16 v,h,dc,p: 24% 75%  0%  0%
+[libx264 @ 0x631c69851600] i8 v,h,dc,ddl,ddr,vr,hd,vl,hu: 29% 46% 14%  4%  0%  0%  0%  4%  4%
+[libx264 @ 0x631c69851600] i4 v,h,dc,ddl,ddr,vr,hd,vl,hu: 31% 30% 17%  5%  2%  3%  4%  4%  4%
+[libx264 @ 0x631c69851600] i8c dc,h,v,p: 71% 13% 15%  1%
+[libx264 @ 0x631c69851600] kb/s:151.54
+</pre>
+</span>
+</div>
+</div>
+<div id="footer">
+<p>
+<div>
+<label class="hidden" id="label-for-line-wrapping-toggle" for="line-wrapping-toggle">Wrap lines
+<input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
+</label>
+</div>Generated by 
+<a href="http://www.gradle.org">Gradle 8.9</a> at 20 set 2024, 00:14:09</p>
+</div>
+</div>
+</body>
+</html>

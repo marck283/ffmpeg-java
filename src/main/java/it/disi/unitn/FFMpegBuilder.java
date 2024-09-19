@@ -2,7 +2,7 @@ package it.disi.unitn;
 
 import it.disi.unitn.exceptions.InvalidArgumentException;
 import it.disi.unitn.exceptions.UnsupportedOperatingSystemException;
-import it.disi.unitn.lasagna.audiocreator.Audio;
+import it.disi.unitn.lasagna.audiocreator.AudioFiltering;
 import it.disi.unitn.videocreator.TracksMerger;
 import it.disi.unitn.videocreator.VideoCreator;
 import it.disi.unitn.videocreator.transcoder.VideoTranscoder;
@@ -145,9 +145,10 @@ public class FFMpegBuilder {
      * @return The newly created TracksMerger instance
      * @throws InvalidArgumentException If the TracksMerger's constructor throws this exception
      */
-    public TracksMerger newTracksMerger(@NotNull String outputFile, @NotNull String audioInput, @NotNull String videoInput)
+    public TracksMerger newTracksMerger(@NotNull String outputFile, @NotNull String audioInput, @NotNull String videoInput,
+                                        @Nullable AudioFiltering audioFiltering)
             throws InvalidArgumentException {
-        return new TracksMerger(this, outputFile, audioInput, videoInput);
+        return new TracksMerger(this, outputFile, audioInput, videoInput, audioFiltering);
     }
 
     /**
@@ -165,13 +166,13 @@ public class FFMpegBuilder {
      * Returns a new VideoCreator instance given the path to the output file, the path to the input folder and the
      * output file's extension. None of the values given to this method can be null.
      * @param outputFile The path to the output file
-     * @param audio An instance of the Audio class.
+     * @param audioFiltering An instance of the Audio class.
      * This path has to be ffmpeg-compatible, and it must include the file extensions.
      * @return A new VideoCreator instance
      * @throws InvalidArgumentException If at least one of the given arguments is null or an empty string
      */
-    public VideoCreator newVideoCreator(@NotNull String outputFile, @NotNull Audio audio) throws InvalidArgumentException {
-        return new VideoCreator(this, outputFile, audio);
+    public VideoCreator newVideoCreator(@NotNull String outputFile, @Nullable AudioFiltering audioFiltering) throws InvalidArgumentException {
+        return new VideoCreator(this, outputFile, audioFiltering);
     }
 
     /**
@@ -184,6 +185,10 @@ public class FFMpegBuilder {
     public VideoTranscoder newVideoTranscoder(@NotNull String outputFile)
             throws InvalidArgumentException {
         return new VideoTranscoder(this, outputFile);
+    }
+
+    public AudioFiltering newAudioFiltering(@NotNull String outputFile) throws InvalidArgumentException {
+        return new AudioFiltering(this, outputFile);
     }
 
     /**
@@ -218,7 +223,7 @@ public class FFMpegBuilder {
         }
 
         String res = String.join(" -i ", inputFiles);
-        add("-i " + res.trim().replaceAll("  +", " "));
+        add("-i \"" + res.trim().replaceAll("  +", " ") + "\"");
     }
 
     /**

@@ -7,7 +7,7 @@ import it.disi.unitn.exceptions.InvalidArgumentException;
 import it.disi.unitn.exceptions.PermissionsException;
 import it.disi.unitn.exceptions.UnsupportedOperatingSystemException;
 import it.disi.unitn.exceptions.UnsupportedOperationException;
-import it.disi.unitn.lasagna.audiocreator.Audio;
+import it.disi.unitn.lasagna.audiocreator.AudioFiltering;
 import it.disi.unitn.videocreator.filtergraph.AudioFilterGraph;
 import it.disi.unitn.videocreator.filtergraph.FilterGraph;
 import it.disi.unitn.videocreator.filtergraph.VideoFilterGraph;
@@ -59,7 +59,7 @@ public class VideoCreator {
 
     private FilterGraph vfg, afg, cfg; //Video, audio and complex filter graphs
 
-    private Audio audio;
+    private final AudioFiltering audioFiltering;
 
     private FPSMode fps_mode;
 
@@ -70,8 +70,9 @@ public class VideoCreator {
      * @param outputFile The path to the output file
      * @throws InvalidArgumentException If any of the arguments given to this constructor is null
      */
-    public VideoCreator(@NotNull FFMpegBuilder builder, @NotNull String outputFile, @NotNull Audio audio) throws InvalidArgumentException {
-        if (builder == null || StringExt.checkNullOrEmpty(outputFile) || audio == null) {
+    public VideoCreator(@NotNull FFMpegBuilder builder, @NotNull String outputFile, @Nullable AudioFiltering audioFiltering)
+            throws InvalidArgumentException {
+        if (builder == null || StringExt.checkNullOrEmpty(outputFile)) {
             throw new InvalidArgumentException("The arguments given to this class's constructor cannot be null or " +
                     "empty values.", "Gli argomenti forniti al costruttore di questa classe non possono essere null o " +
                     "valori non specificati.");
@@ -94,7 +95,7 @@ public class VideoCreator {
             //isOutFullRange = false;
             l = Locale.getDefault();
 
-            this.audio = audio;
+            this.audioFiltering = audioFiltering;
         }
     }
 
@@ -612,7 +613,7 @@ public class VideoCreator {
                     "dei filtri audio.");
         }
 
-        audio.setAudioFilterGraph(afg);
+        this.afg = afg;
     }
 
     /**
@@ -689,9 +690,7 @@ public class VideoCreator {
                 } else {
                     builder.add("-c:a " + audioCodec);
 
-                    if (afg != null) {
-                        builder.add(afg.toString());
-                    }
+                    builder.add(afg.toString());
                 }
             }
             if (cfg != null) {
