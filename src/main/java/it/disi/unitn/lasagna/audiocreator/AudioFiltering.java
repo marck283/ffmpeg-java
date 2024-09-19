@@ -42,7 +42,7 @@ public class AudioFiltering {
      * @param afg The given AudioFilterGraph. This parameter cannot be null.
      * @throws InvalidArgumentException If the given parameter is null
      */
-    public void setFilterGraph(@NotNull FilterGraph afg) throws InvalidArgumentException {
+    public void setAudioFilterGraph(@NotNull AudioFilterGraph afg) throws InvalidArgumentException {
         if (afg == null) {
             throw new InvalidArgumentException("The audio filter graph must not be null.", "Il grafo del filtro audio " +
                     "non puo' essere null.");
