@@ -20,7 +20,7 @@ public class ADecorrelate extends AudioFilter {
     public ADecorrelate() throws InvalidArgumentException {
         super("adecorrelate");
         stages = 6;
-        seed = -1;
+        seed = -1L;
     }
 
     /**
