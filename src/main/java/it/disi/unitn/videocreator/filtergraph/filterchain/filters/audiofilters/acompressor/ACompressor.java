@@ -74,7 +74,7 @@ public class ACompressor extends AudioFilter {
         double interm = Math.pow(10D, val/20D);
         if(interm < 0.00097563 || interm > 1) {
             throw new InvalidArgumentException("The threshold given to the ACompressor filter cannot be less than " +
-                    "0.00097563 or greater than 1.", "Il limite massimo fornito al filtero ACompressor non puo' essere " +
+                    "0.00097563 or greater than 1.", "Il limite massimo fornito al filtro ACompressor non puo' essere " +
                     "inferiore a 0.00097563 o maggiore di 1.");
         }
 
