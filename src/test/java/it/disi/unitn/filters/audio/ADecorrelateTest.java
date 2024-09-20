@@ -30,7 +30,7 @@ public class ADecorrelateTest {
         afg.addFilterChain(afc);
 
         AudioFiltering audioFiltering = builder.newAudioFiltering("./src/test/resources/output/audio/adecorrelate.mp3");
-        audioFiltering.addInput("./src/test/resources/output/audio/input.mp3");
+        audioFiltering.addInput("./src/test/resources/input/audio/input.mp3");
         audioFiltering.setAudioFilterGraph(afg);
         audioFiltering.createCommand();
 
