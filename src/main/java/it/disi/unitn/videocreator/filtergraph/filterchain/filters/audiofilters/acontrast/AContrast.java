@@ -2,11 +2,12 @@ package it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.
 
 import it.disi.unitn.exceptions.InvalidArgumentException;
 import it.disi.unitn.videocreator.filtergraph.filterchain.filters.Filter;
+import it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.AudioFilter;
 
 /**
  * Simple audio dynamic range compression/expansion filter.
  */
-public class AContrast extends Filter {
+public class AContrast extends AudioFilter {
 
     private int contrast;
 
