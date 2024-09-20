@@ -98,7 +98,7 @@ public class JSONToImage {
             }
             JsonArray imageText = obj.getAsJsonArray("stats");
             StringExt i1ext = new StringExt(String.valueOf(i));
-            i1ext.padStart();
+            i1ext.padStart(3);
 
             int positionx, positiony;
             float fontDim;
@@ -261,7 +261,7 @@ public class JSONToImage {
                 JsonObject obj = parser.getJsonObject(array.get(i));
                 String mime = obj.get("mime").getAsString();
                 StringExt fileName = new StringExt(String.valueOf(i));
-                fileName.padStart();
+                fileName.padStart(3);
                 Path path = Paths.get(pathToImagesFolder, fileName.getVal() + "." + imageExtension);
                 Files.write(path, arr);
 

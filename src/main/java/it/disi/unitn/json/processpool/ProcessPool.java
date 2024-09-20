@@ -117,7 +117,7 @@ public class ProcessPool {
         m.put("desc", "\"" + ndesc + "\"");
 
         StringExt i = new StringExt(String.valueOf(index));
-        i.padStart();
+        i.padStart(3);
         System.out.println("INDEX: " + i.getVal());
         m.put("i", i.getVal());
         m.put("imageExtension", niext);

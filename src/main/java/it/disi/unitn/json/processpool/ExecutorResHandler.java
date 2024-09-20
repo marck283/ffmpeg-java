@@ -78,7 +78,7 @@ public class ExecutorResHandler implements ExecuteResultHandler {
         Thread t2 = new Thread(() -> {
             try {
                 StringExt i = new StringExt(String.valueOf(index));
-                i.padStart();
+                i.padStart(3);
                 JsonObject obj = array.get(index).getAsJsonObject();
                 String mime = obj.get("mime").getAsString();
                 Path path = getPath(pathToImagesFolder, i.getVal() + "." + imageExtension);

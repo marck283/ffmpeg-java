@@ -139,7 +139,7 @@ public class Audio {
 
             // Write the response to the output file.
             StringExt val = new StringExt(String.valueOf(index));
-            val.padStart();
+            val.padStart(3);
 
             String audioFileFolderPath = "./src/main/resources/it/disi/unitn/input/audio";
             try (OutputStream out = new FileOutputStream(audioFileFolderPath + "/" + val.getVal() + "." + extension)) {

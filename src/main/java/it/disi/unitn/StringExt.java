@@ -35,13 +35,13 @@ public class StringExt {
      * This method can be used to pad the given string with 0s at its beginning.
      * @throws InvalidArgumentException If the original string's length is not greater than 0 and less than or equal to 3.
      */
-    public void padStart() throws InvalidArgumentException {
-        if(val.isEmpty() || val.length() > 3) {
+    public void padStart(int maxlen) throws InvalidArgumentException {
+        if(val.isEmpty() || val.length() > maxlen) {
             throw new InvalidArgumentException("The original string's length is not greater than 0 and less than or " +
                     "equal to 3.", "La lunghezza della stringa originale non e' maggiore di zero e minore o uguale a 3.");
         }
 
-        int missing = 3 - val.length();
+        int missing = maxlen - val.length();
         if(missing > 0) {
             String v = "";
             for(int i = 0; i < missing; i++) {
