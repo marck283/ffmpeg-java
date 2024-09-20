@@ -23,6 +23,17 @@ public class ACompressor extends AudioFilter {
      */
     public ACompressor() throws InvalidArgumentException {
         super("acompressor");
+        levelIn = 1;
+        mode = "downward";
+        threshold = 0.125;
+        ratio = "2";
+        attack = 20;
+        release = 250;
+        makeup = 1;
+        knee = 2.82843;
+        link = "average";
+        detection = "rms";
+        mix = 1;
     }
 
     /**
@@ -55,18 +66,19 @@ public class ACompressor extends AudioFilter {
     }
 
     /**
-     * Sets the threshold.
-     * @param val The new threshold
+     * Sets the threshold as a fraction number. This value is computed as 10^val/20.
+     * @param val The new threshold in dB
      * @throws InvalidArgumentException If the new threshold is less than 0.00097563 or greater than 1
      */
     public void setThreshold(double val) throws InvalidArgumentException {
-        if(val < 0.00097563 || val > 1) {
+        double interm = Math.pow(10D, val/20D);
+        if(interm < 0.00097563 || interm > 1) {
             throw new InvalidArgumentException("The threshold given to the ACompressor filter cannot be less than " +
                     "0.00097563 or greater than 1.", "Il limite massimo fornito al filtero ACompressor non puo' essere " +
                     "inferiore a 0.00097563 o maggiore di 1.");
         }
 
-        threshold = val;
+        threshold = interm;
     }
 
     /**
@@ -77,9 +89,9 @@ public class ACompressor extends AudioFilter {
     public void setRatio(double val) throws InvalidArgumentException {
         //Remember that it is possible to have a ratio of 1:2!
         if((val < 1 && val != 0.5) || val > 20) {
-            throw new InvalidArgumentException("The ratio given to the ACompressor filter cannot be less than 1 or " +
-                    "greater than 20.", "La proporzione data al filtro ACompressor non puo' essere inferiore a 1 o " +
-                    "maggiore di 20.");
+            throw new InvalidArgumentException("The ratio given to the ACompressor filter cannot be less than 1 and " +
+                    "different from 0.5 or greater than 20.", "La proporzione data al filtro ACompressor non puo' essere " +
+                    "inferiore a 1 e diversa da 0.5 o maggiore di 20.");
         }
 
         if(val == 0.5) {
