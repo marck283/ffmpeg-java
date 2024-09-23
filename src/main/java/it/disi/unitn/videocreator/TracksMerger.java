@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.StandardOpenOption;
+import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
@@ -119,6 +120,8 @@ public class TracksMerger extends VideoCreator {
             }
             System.exit(1);
         }
+
+        Collections.sort(inputFiles);
         for(String s: inputFiles) {
             Files.writeString(file.toPath(), "file '" + s.replace('\\', '/') + "'\n",
                     StandardCharsets.UTF_8, StandardOpenOption.APPEND);

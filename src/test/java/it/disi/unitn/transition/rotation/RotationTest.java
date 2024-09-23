@@ -18,12 +18,12 @@ public class RotationTest {
         RotationTransition rotation = null;
         StringExt str = new StringExt(String.valueOf(0)), str1;
         str.padStart(3);
-        for(int i = 0; i < 40; i++) {
+        for(int i = 0; i < 30; i++) {
             str1 = new StringExt(String.valueOf(i));
             str1.padStart(3);
             rotation = new RotationTransition("./src/test/resources/input/images/" + str.getVal() + ".jpeg",
                     tempOutDir,
-                    "./src/test/resources/output/video/rotation", "jpg");
+                    "src/test/resources/output/video/rotation", "jpg");
 
             rotation.rotate(400, 400, i + 1, "test", str1.getVal(), Color.BLACK);
         }

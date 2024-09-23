@@ -1,6 +1,5 @@
 package it.disi.unitn.transitions.rotation;
 
-import it.disi.unitn.FFMpeg;
 import it.disi.unitn.FFMpegBuilder;
 import it.disi.unitn.exceptions.RotationFailedException;
 import it.disi.unitn.lasagna.File;
@@ -13,6 +12,9 @@ import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -68,7 +70,7 @@ public class RotationTransition {
 
         File f1 = new File(videoOutDir + "/temp");
         pl1 = f1.getFileList();
-        TracksMerger merger = builder.newTracksMerger(videoOutDir + "/" + outfile);
+        TracksMerger merger = builder.newTracksMerger(videoOutDir + "/" + outfile + "." + fileExt);
         Concat concat = new Concat();
         int i = 0;
 
@@ -95,10 +97,9 @@ public class RotationTransition {
 
         merger.setFrameRate(1);
         merger.setStreamToMap("[v]");
-        merger.createCommand();
 
-        FFMpeg ffmpeg = builder.build();
-        ffmpeg.executeCMD(timeout, tu, "./", null);
+        Path p = Paths.get("inputFile.txt");
+        merger.mergeVideos(timeout, tu, pl1, p.toFile().getAbsolutePath(), "./");
     }
 
     public void performRotation(long timeout, @NotNull TimeUnit tu, int width, int height, @NotNull String outfile,
