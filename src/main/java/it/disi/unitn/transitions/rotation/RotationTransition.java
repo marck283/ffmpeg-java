@@ -1,6 +1,7 @@
 package it.disi.unitn.transitions.rotation;
 
 import it.disi.unitn.FFMpegBuilder;
+import it.disi.unitn.exceptions.InvalidArgumentException;
 import it.disi.unitn.exceptions.RotationFailedException;
 import it.disi.unitn.lasagna.File;
 import it.disi.unitn.transitions.rotation.processpool.ProcessPool;
@@ -12,7 +13,6 @@ import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
@@ -34,7 +34,7 @@ public class RotationTransition {
     }
 
     public void rotate(int anchorx, int anchory, double angle, @NotNull String text, @NotNull String name,
-                       @NotNull Color color) throws RotationFailedException, IOException {
+                       @NotNull Color color) throws RotationFailedException, IOException, InvalidArgumentException {
         rotation.rotate(anchorx, anchory, angle, text, name, fname, color);
     }
 
