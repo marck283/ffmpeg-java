@@ -7,7 +7,6 @@ import it.disi.unitn.exceptions.InvalidArgumentException;
 import it.disi.unitn.exceptions.PermissionsException;
 import it.disi.unitn.exceptions.UnsupportedOperatingSystemException;
 import it.disi.unitn.exceptions.UnsupportedOperationException;
-import it.disi.unitn.lasagna.audiocreator.AudioFiltering;
 import it.disi.unitn.videocreator.filtergraph.AudioFilterGraph;
 import it.disi.unitn.videocreator.filtergraph.FilterGraph;
 import it.disi.unitn.videocreator.filtergraph.VideoFilterGraph;
@@ -52,6 +51,8 @@ public class VideoCreator {
     private String videoBitRate; //Video track's bitrate (in Kbit/s or Mbit/s)
 
     private String pixelFormat, execFile = "";
+
+    private String streamToMap;
 
     private boolean videoStreamCopy, audioStreamCopy;
 
@@ -109,7 +110,7 @@ public class VideoCreator {
                     "non puo' essere null o una stringa vuota.");
         }
 
-        if(pattern.stream().anyMatch(e -> e.contains("*."))) {
+        if(pattern.size() > 1 && pattern.stream().anyMatch(e -> e.contains("*."))) {
             UnsupportedOperationException.throwUnsupportedOperationException("Cannot insert another input value when " +
                     "there is already another one that includes all files in the same folder.", "Non e' possibile " +
                     "inserire un altro valore di input quando ne e' gia' presente uno che comprenda tutti i file " +
@@ -646,6 +647,25 @@ public class VideoCreator {
         fps_mode.setParameter(parameter);
     }
 
+    private void add(boolean cond, @NotNull String toAdd) throws InvalidArgumentException {
+        if(toAdd == null) {
+            throw new InvalidArgumentException("The argument to be added to FFmpeg's command cannot be null.",
+                    "L'argomento da aggiungere al comando FFmpeg non puo' essere null.");
+        }
+        if(cond && !toAdd.isEmpty()) {
+            builder.add(toAdd);
+        }
+    }
+
+    public void setStreamToMap(@NotNull String stream) throws InvalidArgumentException {
+        if(StringExt.checkNullOrEmpty(stream)) {
+            throw new InvalidArgumentException("The given stream to map cannot be null or an empty string.", "Lo stream " +
+                    "da mappare non puo' essere null o una stringa vuota.");
+        }
+
+        streamToMap = stream;
+    }
+
     /**
      * This method creates the command that, when run, will create the output video. WARNING: all needed filters, filter
      * chains and filter graphs must be set BEFORE calling this method.
@@ -654,13 +674,14 @@ public class VideoCreator {
         try {
             //Sistemare sincronizzazione audio e video riscrivendo queste due righe in modo tale da supportare la
             //comunicazione del numero di secondi per entrambe le opzioni.
-            builder.add("-async 1");
+            //builder.add("-async 1");
 
-            if (fps_mode != null) {
-                builder.add(fps_mode.toString());
+            add(fps_mode != null, (fps_mode != null) ? fps_mode.toString() : "");
+
+            for(String p: pattern) {
+                builder.add("-r " + frameRate);
+                builder.addInput(p);
             }
-            builder.add("-r " + frameRate);
-            builder.addAllInputs(pattern);
 
             if (pixelFormat == null || pixelFormat.isEmpty()) {
                 //ATTENZIONE: il codec mjpeg non supporta il formato yuv420p perché non è un formato full-range!
@@ -674,9 +695,7 @@ public class VideoCreator {
                 } else {
                     builder.add("-c:v " + codecID);
 
-                    if (vfg != null) {
-                        builder.add(vfg.toString());
-                    }
+                    add(vfg != null, (vfg != null) ? vfg.toString() : "");
                 }
             }
             if (audioCodec != null && !audioCodec.isEmpty()) {
@@ -686,27 +705,20 @@ public class VideoCreator {
                 } else {
                     builder.add("-c:a " + audioCodec);
 
-                    builder.add(afg.toString());
+                    add(afg != null, (afg != null) ? afg.toString() : "");
                 }
             }
-            if (cfg != null) {
-                builder.add(cfg.toString());
-            }
-            if (videoBitRate != null && !videoBitRate.isEmpty()) {
-                builder.add("-b:v " + videoBitRate);
-            }
-            if (audioBitRate != null && !audioBitRate.isEmpty()) {
-                builder.add("-b:a " + audioBitRate);
-            }
-            if (startInstant > 0) {
-                builder.add("-ss " + startInstant);
-            }
-            if (videoDuration > 0) {
-                builder.add("-t " + videoDuration);
-            }
-            if (videoQuality != 0) {
-                builder.add("-q:v " + videoQuality);
-            }
+
+            add(cfg != null, (cfg != null) ? cfg.toString() : "");
+            add(streamToMap != null, (streamToMap != null) ? "-map " + streamToMap : "");
+            add(videoBitRate != null && !videoBitRate.isEmpty(),
+                    (videoBitRate != null && !videoBitRate.isEmpty()) ? "-b:v " + videoBitRate : "");
+            add(audioBitRate != null && !audioBitRate.isEmpty(),
+                    (audioBitRate != null && !audioBitRate.isEmpty()) ? "-a:v " + audioBitRate : "");
+            add(startInstant > 0, (startInstant > 0) ? "-ss " + startInstant : "");
+            add(videoDuration > 0, (videoDuration > 0) ? "-t " + videoDuration : "");
+            add(videoQuality != 0, (videoQuality != 0) ? "-q:v " + videoQuality : "");
+
             builder.addOutput(outputFile);
         } catch (InvalidArgumentException ex) {
             System.err.println(ex.getMessage());

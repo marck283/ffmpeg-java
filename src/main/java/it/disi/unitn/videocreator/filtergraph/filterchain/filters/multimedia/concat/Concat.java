@@ -53,12 +53,12 @@ public class Concat extends Filter {
     /**
      * Sets the "a" parameter.
      * @param a The given "a" parameter's value
-     * @throws InvalidArgumentException If the given value is less than or equal to zero
+     * @throws InvalidArgumentException If the given value is less than zero
      */
     public void setA(int a) throws InvalidArgumentException {
-        if(a <= 0) {
-            throw new InvalidArgumentException("The \"a\" parameter cannot be less than or equal to zero.", "Il parametro " +
-                    "\"a\" non puo' essere minore o uguale a zero.");
+        if(a < 0) {
+            throw new InvalidArgumentException("The \"a\" parameter cannot be less than to zero.", "Il parametro " +
+                    "\"a\" non puo' essere minore di zero.");
         }
 
         this.a = a;

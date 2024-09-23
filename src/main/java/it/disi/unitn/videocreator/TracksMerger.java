@@ -4,10 +4,7 @@ import it.disi.unitn.FFMpeg;
 import it.disi.unitn.FFMpegBuilder;
 import it.disi.unitn.StringExt;
 import it.disi.unitn.exceptions.InvalidArgumentException;
-//import org.apache.commons.io.FileUtils;
-import it.disi.unitn.lasagna.audiocreator.AudioFiltering;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
 import java.io.IOException;
@@ -85,7 +82,7 @@ public class TracksMerger extends VideoCreator {
      * @throws InvalidArgumentException If the given timeout is negative, the TimeUnit instance is null, the video input
      * path or audio input path is null
      */
-    public void mergeAudioWithVideo(long time, @NotNull TimeUnit timeUnit) throws IOException,
+    public void mergeAudioWithVideo(long time, @NotNull TimeUnit timeUnit, @NotNull String outdir) throws IOException,
             InvalidArgumentException {
         builder.addAllInputs(videoInput, audioInput);
         builder.add("-map 0:v");
@@ -96,7 +93,7 @@ public class TracksMerger extends VideoCreator {
         builder.addOutput(videoOutput);
 
         FFMpeg ffmpeg = builder.build();
-        ffmpeg.executeCMD(time, timeUnit);
+        ffmpeg.executeCMD(time, timeUnit, outdir, null);
     }
 
     /**
@@ -143,7 +140,7 @@ public class TracksMerger extends VideoCreator {
      * the third or fourth arguments are null or an empty string or contain null or empty strings
      */
     public void mergeVideos(long time, @NotNull TimeUnit timeUnit, @NotNull List<String> inputFiles,
-                            @NotNull String tempFile) throws IOException, InvalidArgumentException {
+                            @NotNull String tempFile, @NotNull String outdir) throws IOException, InvalidArgumentException {
         if(time <= 0 || timeUnit == null) {
             throw new InvalidArgumentException("Either the given timeout is less than or equal to zero or the given TimeUnit " +
                     "instance is null.", "Il timeout fornito è minore o uguale a zero oppure l'istanza di TimeUnit è null.");
@@ -163,6 +160,6 @@ public class TracksMerger extends VideoCreator {
         builder.addOutput(videoOutput);
 
         FFMpeg ffmpeg = builder.build();
-        ffmpeg.executeCMD(time, timeUnit); //"time" and "timeUnit" are never null here.
+        ffmpeg.executeCMD(time, timeUnit, outdir, null); //"time" and "timeUnit" are never null here.
     }
 }

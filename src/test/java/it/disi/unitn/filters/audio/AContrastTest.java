@@ -34,7 +34,7 @@ public class AContrastTest {
         audioFiltering.createCommand();
 
         FFMpeg ffmpeg = builder.build();
-        ffmpeg.executeCMD(10L, TimeUnit.SECONDS);
+        ffmpeg.executeCMD(10L, TimeUnit.SECONDS, "./", null);
     }
 
 }

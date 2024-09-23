@@ -5,12 +5,8 @@ import it.disi.unitn.FFMpegBuilder;
 import it.disi.unitn.exceptions.InvalidArgumentException;
 import it.disi.unitn.exceptions.UnsupportedOperatingSystemException;
 import it.disi.unitn.exceptions.UnsupportedOperationException;
-import it.disi.unitn.videocreator.filtergraph.AudioFilterGraph;
 import it.disi.unitn.videocreator.filtergraph.FilterGraph;
-import it.disi.unitn.videocreator.filtergraph.VideoFilterGraph;
-import it.disi.unitn.videocreator.filtergraph.filterchain.AudioSimpleFilterChain;
 import it.disi.unitn.videocreator.filtergraph.filterchain.FilterChain;
-import it.disi.unitn.videocreator.filtergraph.filterchain.VideoSimpleFilterChain;
 import it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.abuffer.ABuffer;
 import it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.adecorrelate.ADecorrelate;
 import it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.aformat.AFormat;
@@ -87,7 +83,7 @@ class VideoCreatorTest {
                 "disable", 0*/);
 
         FFMpeg ffmpeg = builder.build();
-        ffmpeg.executeCMD(30L, TimeUnit.SECONDS);
+        ffmpeg.executeCMD(30L, TimeUnit.SECONDS, "./", null);
     }
 
     @Test
@@ -108,7 +104,8 @@ class VideoCreatorTest {
         buffer.updateMap();*/
 
         Scale scale = new Scale();
-        creator.setScaleParams(false, scale, new Bicubic(0.3333, 0.3333), "(rw*.256)", "(rh*.256)",
+        creator.setScaleParams(false, scale, new Bicubic(2, 2), String.valueOf(800),
+                String.valueOf(600),
                 "auto", "bt709", "auto", "auto", "init",
                 "0", "disable", 2);
         //scale.addInput("vin");
@@ -145,7 +142,7 @@ class VideoCreatorTest {
         adecor.updateMap();
 
         FilterGraph vfg = new FilterGraph();
-        FilterChain fc = new FilterChain(), fc1 = new FilterChain();
+        FilterChain fc = new FilterChain()/*, fc1 = new FilterChain()*/;
         fc.addAllFilters(/*buffer, */scale, format, abuffer, aformat, adecor);
         //fc1.addAllFilters(abuffer, aformat, adecor);
         vfg.addFilterChain(fc);
@@ -157,6 +154,6 @@ class VideoCreatorTest {
                 "disable", 0*/);
 
         FFMpeg ffmpeg = builder.build();
-        ffmpeg.executeCMD(30L, TimeUnit.SECONDS);
+        ffmpeg.executeCMD(30L, TimeUnit.SECONDS, "./", null);
     }
 }

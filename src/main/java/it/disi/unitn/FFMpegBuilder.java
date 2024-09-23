@@ -226,8 +226,14 @@ public class FFMpegBuilder {
                     "stringhe vuote.");
         }
 
-        String res = String.join(" -i ", inputFiles);
-        add("-i \"" + res.trim().replaceAll("  +", " ") + "\"");
+        String first = "-i \"" + inputFiles.removeFirst();
+        inputFiles.addFirst(first);
+
+        String last = inputFiles.removeLast() + "\"";
+        inputFiles.addLast(last);
+
+        String res = String.join("\" -i \"", inputFiles);
+        add(res.trim().replaceAll("  +", " "));
     }
 
     /**

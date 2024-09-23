@@ -73,7 +73,7 @@ public class ABufferTest {
                 "disable", 0*/);
 
         FFMpeg ffmpeg = builder.build();
-        ffmpeg.executeCMD(30L, TimeUnit.SECONDS);
+        ffmpeg.executeCMD(30L, TimeUnit.SECONDS, "./", null);
     }
 
 }

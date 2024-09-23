@@ -46,7 +46,7 @@ class VideoTranscoderTest {
         transcoder.createCommand(/*acomp, null, "auto", "bt709", "auto",
                 "auto", "init", "0", "disable", 0*/);
         FFMpeg ffmpeg = builder.build();
-        ffmpeg.executeCMD(30L, TimeUnit.MINUTES);
+        ffmpeg.executeCMD(30L, TimeUnit.MINUTES, "./", null);
     }
 
     @Test
@@ -72,6 +72,6 @@ class VideoTranscoderTest {
         transcoder.createCommand(/*acomp, null, "auto", "bt601", "auto",
                 "auto", "init", "0", "disable", 0*/);
         FFMpeg ffmpeg = builder.build();
-        ffmpeg.executeCMD(30L, TimeUnit.MINUTES);
+        ffmpeg.executeCMD(30L, TimeUnit.MINUTES, "./", null);
     }
 }

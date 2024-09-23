@@ -44,6 +44,6 @@ class FFMpegBuilderTest {
         System.out.println("HEIGHT: " + screenSize.getHeight());
 
         FFMpeg ffmpeg = builder.build();
-        ffmpeg.executeCMD(1L, TimeUnit.MINUTES);
+        ffmpeg.executeCMD(1L, TimeUnit.MINUTES, "./", null);
     }
 }
