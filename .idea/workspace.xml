@@ -9,8 +9,7 @@
   <component name="ChangeListManager">
     <list default="true" id="4e206741-5dd1-4a84-99b2-29854b378e54" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/disi/unitn/transitions/rotation/Rotation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/disi/unitn/transitions/rotation/Rotation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/disi/unitn/transitions/rotation/RotationTransition.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/disi/unitn/transitions/rotation/RotationTransition.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -756,11 +755,11 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.RotationTest" />
+        <item itemvalue="Gradle.ffmpeg-java [publishToMavenLocal]" />
+        <item itemvalue="Gradle.ffmpeg-java [publishAllPublicationsToMavenRepository]" />
         <item itemvalue="Gradle.VideoCreatorTest.createCommandTest1" />
-        <item itemvalue="Gradle.ADecorrelateTest.test" />
-        <item itemvalue="Gradle.AContrastTest.test" />
-        <item itemvalue="Gradle.ACompressorTest.test" />
+        <item itemvalue="Gradle.RotationTest" />
+        <item itemvalue="Gradle.FFMpegBuilderTest" />
       </list>
     </recent_temporary>
   </component>
@@ -869,6 +868,8 @@
       <workItem from="1726929388699" duration="41967000" />
       <workItem from="1727047550864" duration="668000" />
       <workItem from="1727048381108" duration="2851000" />
+      <workItem from="1727267614066" duration="99000" />
+      <workItem from="1727267724857" duration="675000" />
     </task>
     <servers />
   </component>
