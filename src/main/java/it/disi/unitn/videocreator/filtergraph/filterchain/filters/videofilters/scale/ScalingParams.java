@@ -20,6 +20,9 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
+/**
+ * This class implements the parameters of the scaling filter.
+ */
 class ScalingParams {
 
     private ScalingAlgorithm sws_flags; //These flags will then be joined by using String.join("+", sws_flags)
