@@ -33,7 +33,7 @@ class Rotation {
         FontMetrics fm = g2d.getFontMetrics();
         int strWidth = fm.stringWidth(text);
 
-        angle = angle/57.2958;
+        angle /= 57.2958D;
         double interAngle = angle%360D;
         if(interAngle <= 180D) {
             anchory -= strWidth*Math.sin(angle)/2;
@@ -68,7 +68,7 @@ class Rotation {
 
         Pair<Double, Double> pair = getAnchors(text, angle, anchorx, anchory);
 
-        g2d.rotate(angle, pair.getLeft(), pair.getRight());
+        g2d.rotate(angle/57.2958D, pair.getLeft(), pair.getRight());
         g2d.drawString(text,100F, 350F);
 
         boolean res = ImageIO.write(img, fname, new File(tempOutdir + "/" + name + "." + fname));

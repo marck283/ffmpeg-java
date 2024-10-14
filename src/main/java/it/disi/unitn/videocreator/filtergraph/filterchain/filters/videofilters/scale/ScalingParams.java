@@ -23,7 +23,7 @@ import java.util.Map;
 /**
  * This class implements the parameters of the scaling filter.
  */
-class ScalingParams {
+public class ScalingParams {
 
     private ScalingAlgorithm sws_flags; //These flags will then be joined by using String.join("+", sws_flags)
 
@@ -35,11 +35,17 @@ class ScalingParams {
 
     private int force_divisible_by;
 
-    ScalingParams() {
+    public ScalingParams() throws InvalidArgumentException {
         eval = "init";
         interl = "0";
         width = "";
         height = "";
+        videoSizeID = "";
+        in_range = "auto";
+        out_range = "auto";
+        force_original_aspect_ratio = "disable"; //Custom default value for this parameter
+        inColMatrix = new ColorMatrix("auto");
+        outColorMatrix = new ColorMatrix("auto");
         force_divisible_by = 1;
     }
 
@@ -246,6 +252,14 @@ class ScalingParams {
     }
 
     /**
+     * This method returns the name of the selected input color matrix.
+     * @return The name of the selected input color matrix
+     */
+    public String getInputColorMatrix() {
+        return inColMatrix.getName();
+    }
+
+    /**
      * Sets a new input color matrix with the given name.
      * @param name The name of the color matrix
      * @throws InvalidArgumentException If the color matrix's name is null, an empty string or a value not recognized by
@@ -253,6 +267,14 @@ class ScalingParams {
      */
     public void setOutColorMatrix(@NotNull String name) throws InvalidArgumentException {
         outColorMatrix = new ColorMatrix(name);
+    }
+
+    /**
+     * This method returns the selected output color matrix.
+     * @return The selected output color matrix
+     */
+    public String getOutputColorMatrix() {
+        return outColorMatrix.getName();
     }
 
     /**
@@ -275,6 +297,14 @@ class ScalingParams {
     }
 
     /**
+     * This method returns the selected input color range.
+     * @return The selected input color range
+     */
+    public String getInputRange() {
+        return in_range;
+    }
+
+    /**
      * Sets the output color range.
      * @param out_range The output color range
      * @throws InvalidArgumentException If the output color range is null, an empty string or not recognizable by FFmpeg
@@ -294,6 +324,14 @@ class ScalingParams {
     }
 
     /**
+     * This method returns the selected output range.
+     * @return The selected output range
+     */
+    public String getOutputRange() {
+        return out_range;
+    }
+
+    /**
      * Tells the program how to force the original aspect ratio.
      * @param val The parameter that tells the program how to force the original aspect ratio
      * @throws InvalidArgumentException If the parameter's value is null, an empty string or a value not recognized by
@@ -310,6 +348,10 @@ class ScalingParams {
             default -> throw new InvalidArgumentException("The parameter given to this method must have a value recognizable " +
                     "by FFmpeg.", "Il parametro fornito a questo metodo deve avere un valore riconoscibile da FFmpeg.");
         }
+    }
+
+    public String getForceOriginalAspectRatio() {
+        return force_original_aspect_ratio;
     }
 
     /**

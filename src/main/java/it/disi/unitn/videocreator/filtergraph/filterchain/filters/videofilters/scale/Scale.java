@@ -1,25 +1,18 @@
 package it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.scale;
 
 import it.disi.unitn.ProcessController;
-import it.disi.unitn.StringExt;
 import it.disi.unitn.exceptions.InvalidArgumentException;
 import it.disi.unitn.exceptions.UnsupportedOperatingSystemException;
 import it.disi.unitn.exceptions.UnsupportedOperationException;
 import it.disi.unitn.videocreator.ExecutorResHandler;
-import it.disi.unitn.videocreator.filtergraph.filterchain.filters.size.Size;
 import it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.VideoFilter;
 import it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.scale.scalingalgs.ScalingAlgorithm;
 import org.apache.commons.exec.CommandLine;
 import org.apache.commons.exec.DefaultExecutor;
-import org.apache.commons.exec.PumpStreamHandler;
-import org.apache.commons.lang3.SystemUtils;
 import org.jetbrains.annotations.NotNull;
-import org.owasp.encoder.Encode;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.Locale;
-import java.util.Map;
 
 /**
  * This class implements the "scale" video filter.
@@ -38,6 +31,23 @@ public class Scale extends VideoFilter {
     public Scale() throws InvalidArgumentException {
         super("scale");
         scalingParams = new ScalingParams();
+        l = Locale.getDefault();
+    }
+
+    /**
+     * The class's constructor given pre-established scaling parameters.
+     * @param scalingParams The given ScalingParams instance. This value cannot be null.
+     * @throws InvalidArgumentException If the given value is null
+     */
+    public Scale(@NotNull ScalingParams scalingParams) throws InvalidArgumentException {
+        super("scale");
+
+        if(scalingParams == null) {
+            throw new InvalidArgumentException("The scaling parameters argument given to this constructor cannot be null.",
+                    "L'istanza dei parametri di scaling fornita a questo costruttore non puo' essere null.");
+        }
+
+        this.scalingParams = scalingParams;
         l = Locale.getDefault();
     }
 
@@ -194,22 +204,13 @@ public class Scale extends VideoFilter {
             setOption("width", scalingParams.getWidth());
             setOption("height", scalingParams.getHeight());
 
-            setOptionWithCond(inColMatrix == null, "in_color_matrix", "auto");
-            setOptionWithCond(inColMatrix != null, "in_color_matrix", (inColMatrix != null) ? inColMatrix.getName() : "");
+            setOption("in_color_matrix", scalingParams.getInputColorMatrix());
+            setOption("out_color_matrix", scalingParams.getOutputColorMatrix());
 
-            setOptionWithCond(outColorMatrix == null, "out_color_matrix", "auto");
-            setOptionWithCond(outColorMatrix != null, "out_color_matrix", (outColorMatrix != null) ? outColorMatrix.getName() : "");
+            setOption("in_range", scalingParams.getInputRange());
+            setOption("out_range", scalingParams.getOutputRange());
 
-            setOptionWithCond(StringExt.checkNullOrEmpty(in_range), "in_range", "auto");
-            setOptionWithCond(!StringExt.checkNullOrEmpty(in_range), "in_range", in_range);
-
-            setOptionWithCond(StringExt.checkNullOrEmpty(out_range), "out_range", "auto");
-            setOptionWithCond(!StringExt.checkNullOrEmpty(out_range), "out_range", (out_range != null) ? out_range : "");
-
-            setOptionWithCond(StringExt.checkNullOrEmpty(force_original_aspect_ratio), "force_original_aspect_ratio", "disable");
-            setOptionWithCond(!StringExt.checkNullOrEmpty(force_original_aspect_ratio), "force_original_aspect_ratio",
-                    force_original_aspect_ratio);
-
+            setOption("force_original_aspect_ratio", scalingParams.getForceOriginalAspectRatio());
             setOption("force_divisible_by", scalingParams.getDivisibleBy());
         } catch(InvalidArgumentException ex) {
             System.err.println(ex.getMessage());

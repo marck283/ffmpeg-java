@@ -1,4 +1,3 @@
-file './src/test/resources/output/images/rotation/000.jpg'
 file './src/test/resources/output/images/rotation/001.jpg'
 file './src/test/resources/output/images/rotation/002.jpg'
 file './src/test/resources/output/images/rotation/003.jpg'
