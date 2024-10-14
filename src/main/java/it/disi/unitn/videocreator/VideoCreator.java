@@ -58,7 +58,7 @@ public class VideoCreator {
 
     private final Locale l;
 
-    private FilterGraph vfg, afg, cfg; //Video, audio and complex filter graphs
+    protected FilterGraph vfg, afg, cfg; //Video, audio and complex filter graphs
 
     private FPSMode fps_mode;
 
@@ -647,7 +647,7 @@ public class VideoCreator {
         fps_mode.setParameter(parameter);
     }
 
-    private void add(boolean cond, @NotNull String toAdd) throws InvalidArgumentException {
+    void add(boolean cond, @NotNull String toAdd) throws InvalidArgumentException {
         if(toAdd == null) {
             throw new InvalidArgumentException("The argument to be added to FFmpeg's command cannot be null.",
                     "L'argomento da aggiungere al comando FFmpeg non puo' essere null.");

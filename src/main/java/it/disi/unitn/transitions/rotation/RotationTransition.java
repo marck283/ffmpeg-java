@@ -7,8 +7,11 @@ import it.disi.unitn.lasagna.File;
 import it.disi.unitn.transitions.rotation.processpool.ProcessPool;
 import it.disi.unitn.videocreator.TracksMerger;
 import it.disi.unitn.videocreator.filtergraph.FilterGraph;
+import it.disi.unitn.videocreator.filtergraph.VideoFilterGraph;
 import it.disi.unitn.videocreator.filtergraph.filterchain.FilterChain;
+import it.disi.unitn.videocreator.filtergraph.filterchain.VideoSimpleFilterChain;
 import it.disi.unitn.videocreator.filtergraph.filterchain.filters.multimedia.concat.Concat;
+import it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.scale.Scale;
 import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
@@ -18,6 +21,7 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+//Try transparent background
 public class RotationTransition {
 
     private final Rotation rotation;
@@ -38,7 +42,7 @@ public class RotationTransition {
         rotation.rotate(anchorx, anchory, angle, text, name, fname, color);
     }
 
-    private void scaleEach(@NotNull List<String> pathList, int width, int height,
+    /*private void scaleEach(@NotNull List<String> pathList, int width, int height,
                            @NotNull String codec, @NotNull String fileExt)
             throws Exception {
         String temp = videoOutDir + "/temp";
@@ -58,48 +62,56 @@ public class RotationTransition {
             }
         });
         t1.join();
-    }
+    }*/
 
     private void createVideo(@NotNull FFMpegBuilder builder, long timeout, @NotNull TimeUnit tu, int width, int height,
                              @NotNull String outfile, @NotNull String codec, @NotNull String fileExt)
             throws Exception {
         File outDirPath = new File(tempOutDir);
-        List<String> pathList = outDirPath.getFileList(), pl1;
+        List<String> pathList = outDirPath.getFileList()/*, pl1*/;
 
-        scaleEach(pathList, width, height, codec, fileExt);
+        //scaleEach(pathList, width, height, codec, fileExt);
 
-        File f1 = new File(videoOutDir + "/temp");
-        pl1 = f1.getFileList();
+        /*File f1 = new File(videoOutDir + "/temp");
+        pl1 = f1.getFileList();*/
         TracksMerger merger = builder.newTracksMerger(videoOutDir + "/" + outfile + "." + fileExt);
-        Concat concat = new Concat();
-        int i = 0;
+        //Concat concat = new Concat();
+        //int i = 0;
 
-        while(pl1.size() != pathList.size()) {
+        /*while(pl1.size() != pathList.size()) {
             pl1 = f1.getFileList();
-        }
-        for(String path: pl1) {
+        }*/
+        //for(String path: pl1) {
+        for(String path: pathList) {
             merger.addInput(path.replace('\\', '/'));
-            concat.addInput(i + ":0");
-            i += 1;
+            //concat.addInput(i + ":0");
+            //i += 1;
         }
 
-        concat.setN(pl1.size());
+        /*concat.setN(pl1.size());
         concat.setV(1);
         concat.setA(0);
         concat.addOutput("v");
-        concat.updateMap();
+        concat.updateMap();*/
 
-        FilterGraph vsfg = new FilterGraph();
-        FilterChain vsfc = new FilterChain();
-        vsfc.addFilter(concat);
+        Scale scale = new Scale();
+        scale.setSize(false, String.valueOf(width), String.valueOf(height), "yuv420p");
+        scale.setDivisibleBy(2);
+        scale.updateMap();
+
+        VideoFilterGraph vsfg = new VideoFilterGraph();
+        VideoSimpleFilterChain vsfc = new VideoSimpleFilterChain();
+        vsfc.addFilter(scale);
+        //vsfc.addFilter(concat);
         vsfg.addFilterChain(vsfc);
-        merger.setComplexFilterGraph(vsfg);
+        merger.setVideoSimpleFilterGraph(vsfg);
 
         merger.setFrameRate(1);
-        merger.setStreamToMap("[v]");
+        //merger.setStreamToMap("[v]");
 
-        Path p = Paths.get("inputFile.txt");
-        merger.mergeVideos(timeout, tu, pl1, p.toFile().getAbsolutePath(), "./");
+        Path p = Paths.get("inputFile.txt").toAbsolutePath();
+        //merger.mergeVideos(timeout, tu, pl1, p.toFile().getAbsolutePath(), "./");
+        merger.mergeVideos(timeout, tu, pathList, p.toString(), "./");
     }
 
     public void performRotation(long timeout, @NotNull TimeUnit tu, int width, int height, @NotNull String outfile,

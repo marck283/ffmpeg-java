@@ -8,14 +8,148 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4e206741-5dd1-4a84-99b2-29854b378e54" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/it/disi/unitn/videocreator/filtergraph/filterchain/filters/videofilters/geq/Geq.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/it/disi/unitn/videocreator/filtergraph/filterchain/filters/videofilters/scale/ScalingParams.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.10.2/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.10.2/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.10.2/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.10.2/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/cache.properties" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/cache.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/it/disi/unitn/transitions/rotation/Rotation.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/it/disi/unitn/transitions/rotation/Rotation.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/it/disi/unitn/transitions/rotation/RotationTransition.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/it/disi/unitn/transitions/rotation/RotationTransition.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/it/disi/unitn/videocreator/TracksMerger.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/it/disi/unitn/videocreator/TracksMerger.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/it/disi/unitn/videocreator/VideoCreator.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/it/disi/unitn/videocreator/VideoCreator.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/it/disi/unitn/videocreator/filtergraph/filterchain/filters/Filter.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/it/disi/unitn/videocreator/filtergraph/filterchain/filters/Filter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/it/disi/unitn/videocreator/filtergraph/filterchain/filters/videofilters/scale/Scale.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/it/disi/unitn/videocreator/filtergraph/filterchain/filters/videofilters/scale/Scale.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/reports/tests/test/classes/it.disi.unitn.transition.rotation.RotationTest.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/tests/test/classes/it.disi.unitn.transition.rotation.RotationTest.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/reports/tests/test/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/tests/test/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/reports/tests/test/packages/it.disi.unitn.transition.rotation.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/tests/test/packages/it.disi.unitn.transition.rotation.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/test/input/audio/input.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/test/input/mp4/002.mp4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/test/output/audio/acompressor.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/test/output/audio/acontrast.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/test/output/audio/adecorrelate.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/test/output/audio/output.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/test/output/images/rotation/000.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/test/output/images/rotation/000.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/test/output/images/rotation/001.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/test/output/images/rotation/001.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/test/output/images/rotation/002.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/test/output/images/rotation/002.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/test/output/images/rotation/003.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/test/output/images/rotation/003.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/test/output/images/rotation/004.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/test/output/images/rotation/004.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/test/output/images/rotation/005.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/test/output/images/rotation/005.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/test/output/images/rotation/006.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/test/output/images/rotation/006.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/test/output/images/rotation/007.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/test/output/images/rotation/007.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/test/output/images/rotation/008.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/test/output/images/rotation/008.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/test/output/images/rotation/009.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/test/output/images/rotation/009.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/test/output/images/rotation/010.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/test/output/images/rotation/010.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/test/output/images/rotation/011.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/test/output/images/rotation/011.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/test/output/images/rotation/012.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/test/output/images/rotation/012.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/test/output/images/rotation/013.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/test/output/images/rotation/013.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/test/output/images/rotation/014.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/test/output/images/rotation/014.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/test/output/images/rotation/015.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/test/output/images/rotation/015.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/test/output/images/rotation/016.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/test/output/images/rotation/016.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/test/output/images/rotation/017.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/test/output/images/rotation/017.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/test/output/images/rotation/018.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/test/output/images/rotation/018.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/test/output/images/rotation/019.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/test/output/images/rotation/019.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/test/output/images/rotation/020.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/test/output/images/rotation/020.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/test/output/images/rotation/021.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/test/output/images/rotation/021.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/test/output/images/rotation/022.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/test/output/images/rotation/022.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/test/output/images/rotation/023.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/test/output/images/rotation/023.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/test/output/images/rotation/024.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/test/output/images/rotation/024.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/test/output/images/rotation/025.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/test/output/images/rotation/025.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/test/output/images/rotation/026.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/test/output/images/rotation/026.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/test/output/images/rotation/027.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/test/output/images/rotation/027.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/test/output/images/rotation/028.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/test/output/images/rotation/028.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/test/output/images/rotation/029.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/test/output/images/rotation/029.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/test/output/video/rotation/temp/000.mp4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/test/output/video/rotation/temp/001.mp4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/test/output/video/rotation/temp/002.mp4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/test/output/video/rotation/temp/003.mp4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/test/output/video/rotation/temp/004.mp4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/test/output/video/rotation/temp/005.mp4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/test/output/video/rotation/temp/006.mp4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/test/output/video/rotation/temp/007.mp4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/test/output/video/rotation/temp/008.mp4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/test/output/video/rotation/temp/009.mp4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/test/output/video/rotation/temp/010.mp4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/test/output/video/rotation/temp/011.mp4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/test/output/video/rotation/temp/012.mp4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/test/output/video/rotation/temp/013.mp4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/test/output/video/rotation/temp/014.mp4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/test/output/video/rotation/temp/015.mp4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/test/output/video/rotation/temp/016.mp4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/test/output/video/rotation/temp/017.mp4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/test/output/video/rotation/temp/018.mp4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/test/output/video/rotation/temp/019.mp4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/test/output/video/rotation/temp/020.mp4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/test/output/video/rotation/temp/021.mp4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/test/output/video/rotation/temp/022.mp4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/test/output/video/rotation/temp/023.mp4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/test/output/video/rotation/temp/024.mp4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/test/output/video/rotation/temp/025.mp4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/test/output/video/rotation/temp/026.mp4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/test/output/video/rotation/temp/027.mp4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/test/output/video/rotation/temp/028.mp4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/test/output/video/rotation/temp/029.mp4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/test-results/test/TEST-it.disi.unitn.transition.rotation.RotationTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/build/test-results/test/TEST-it.disi.unitn.transition.rotation.RotationTest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/test-results/test/binary/output.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/test-results/test/binary/output.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/test-results/test/binary/output.bin.idx" beforeDir="false" afterPath="$PROJECT_DIR$/build/test-results/test/binary/output.bin.idx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/test-results/test/binary/results.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/test-results/test/binary/results.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/ACompressor.class.uniqueId40" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/ACrossFade.class.uniqueId37" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/ADelay.class.uniqueId8" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/ADenorm$Type.class.uniqueId24" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/ADenorm.class.uniqueId20" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/ADrc$Transfer.class.uniqueId23" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/ADrc.class.uniqueId36" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/ADynamicEqualizer$Auto.class.uniqueId9" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/ADynamicEqualizer$DFtype.class.uniqueId33" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/ADynamicEqualizer$Mode.class.uniqueId28" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/ADynamicEqualizer$Precision.class.uniqueId12" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/ADynamicEqualizer$TFtype.class.uniqueId5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/ADynamicEqualizer.class.uniqueId11" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/AFormat.class.uniqueId25" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/Audio.class.uniqueId3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/AudioFiltering.class.uniqueId13" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/ChannelLayout.class.uniqueId16" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/ColorMatrix.class.uniqueId38" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/Curve.class.uniqueId21" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/Description.class.uniqueId6" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/DrawText.class.uniqueId14" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/Duration.class.uniqueId27" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/ExecutorResHandler.class.uniqueId39" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/FFMpeg$1.class.uniqueId30" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/FFMpeg.class.uniqueId1" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/FFMpegBuilder.class.uniqueId4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/FPSMode.class.uniqueId22" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/File.class.uniqueId32" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/Filter.class.uniqueId17" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/Format.class.uniqueId0" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/GeneralException.class.uniqueId26" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/JSONToImage.class.uniqueId29" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/JsonParser.class.uniqueId2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/PermissionsException.class.uniqueId35" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/ProcessPool.class.uniqueId18" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/ProcessPool.class.uniqueId31" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/RotationTransition.class.uniqueId0" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/RotationTransition.class.uniqueId0" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/Scale.class.uniqueId10" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/ScalingAlgorithm.class.uniqueId41" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/Size.class.uniqueId19" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/StringExt.class.uniqueId15" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/TracksMerger.class.uniqueId7" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/VideoCreator.class.uniqueId34" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/VideoTranscoder.class.uniqueId42" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileTestJava/compileTransaction/stash-dir/FFMpegBuilderTest.class.uniqueId6" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileTestJava/compileTransaction/stash-dir/RotationTest.class.uniqueId2" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileTestJava/compileTransaction/stash-dir/RotationTest.class.uniqueId2" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileTestJava/compileTransaction/stash-dir/VideoCreatorTest.class.uniqueId5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileTestJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileTestJava/previous-compilation-data.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/inputFile.txt" beforeDir="false" afterPath="$PROJECT_DIR$/inputFile.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/disi/unitn/transitions/rotation/Rotation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/disi/unitn/transitions/rotation/Rotation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/disi/unitn/transitions/rotation/RotationTransition.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/disi/unitn/transitions/rotation/RotationTransition.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/disi/unitn/videocreator/TracksMerger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/disi/unitn/videocreator/TracksMerger.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/disi/unitn/videocreator/VideoCreator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/disi/unitn/videocreator/VideoCreator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/disi/unitn/videocreator/filtergraph/filterchain/filters/Filter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/disi/unitn/videocreator/filtergraph/filterchain/filters/Filter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/disi/unitn/videocreator/filtergraph/filterchain/filters/videofilters/scale/Scale.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/disi/unitn/videocreator/filtergraph/filterchain/filters/videofilters/scale/Scale.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,12 +199,12 @@
     &quot;assignee&quot;: &quot;marck283&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/marck283/ffmpeg-java.git",
-    "accountId": "ff46598b-b4f8-4a65-a5a7-8d954259e77f"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/marck283/ffmpeg-java.git&quot;,
+    &quot;accountId&quot;: &quot;ff46598b-b4f8-4a65-a5a7-8d954259e77f&quot;
   }
-}]]></component>
+}</component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -139,7 +273,7 @@
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
     "create.test.in.the.same.root": "true",
     "extract.method.default.visibility": "private",
-    "git-widget-placeholder": "master",
+    "git-widget-placeholder": "rotation",
     "kotlin-language-version-configured": "true",
     "last_directory_selection": "/home/marco/IdeaProjects/ffmpeg-java/src/test/java/it/disi/unitn/videocreator",
     "last_opened_file_path": "C:/Users/marve/IdeaProjects/ffmpeg-java/src/main/java/it/disi/unitn/transitions/rotation",
@@ -152,7 +286,7 @@
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.3356828",
     "run.code.analysis.last.selected.profile": "pProject Default",
-    "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -756,10 +890,10 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.RotationTest" />
         <item itemvalue="Gradle.ffmpeg-java [publishToMavenLocal]" />
         <item itemvalue="Gradle.ffmpeg-java [publishAllPublicationsToMavenRepository]" />
         <item itemvalue="Gradle.VideoCreatorTest.createCommandTest1" />
-        <item itemvalue="Gradle.RotationTest" />
         <item itemvalue="Gradle.FFMpegBuilderTest" />
       </list>
     </recent_temporary>
@@ -868,6 +1002,32 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/it/disi/unitn/videocreator/TracksMerger.java</url>
+          <line>170</line>
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/it/disi/unitn/videocreator/filtergraph/filterchain/filters/videofilters/scale/Scale.java</url>
+          <line>199</line>
+          <option name="timeStamp" value="23" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/it/disi/unitn/videocreator/filtergraph/filterchain/filters/videofilters/scale/Scale.java</url>
+          <line>200</line>
+          <option name="timeStamp" value="24" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/it/disi/unitn/videocreator/filtergraph/filterchain/filters/videofilters/scale/Scale.java</url>
+          <line>212</line>
+          <option name="timeStamp" value="31" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

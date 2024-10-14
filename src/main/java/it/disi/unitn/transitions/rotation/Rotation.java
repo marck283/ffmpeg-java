@@ -5,6 +5,7 @@ import it.disi.unitn.exceptions.RotationFailedException;
 import it.disi.unitn.lasagna.File;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import javax.imageio.ImageIO;
@@ -27,7 +28,8 @@ class Rotation {
         this.tempOutdir = tempOutdir;
     }
 
-    private Pair<Double, Double> getAnchors(@NotNull String text, double angle, double anchorx, double anchory) {
+    @Contract("_, _, _, _ -> new")
+    private @NotNull Pair<Double, Double> getAnchors(@NotNull String text, double angle, double anchorx, double anchory) {
         FontMetrics fm = g2d.getFontMetrics();
         int strWidth = fm.stringWidth(text);
 

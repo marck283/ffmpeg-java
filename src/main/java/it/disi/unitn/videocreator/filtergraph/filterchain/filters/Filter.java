@@ -92,4 +92,34 @@ public abstract class Filter {
         return inputString + String.join("=", filterName, String.join(":", helpList)).trim().
                 replaceAll("  +", " ") + outputString;
     }
+
+    /**
+     * This method allows the program to set the filter's options if the given condition is met.
+     * @param cond The given condition.
+     * @param oname The given option's name. This value cannot be null or an empty string.
+     * @param val The given option's value. This value cannot be null or an empty string.
+     * @throws InvalidArgumentException If either the option's name or its value (or both) is null or an empty string
+     */
+    protected void setOptionWithCond(boolean cond, @NotNull String oname, @NotNull String val) throws InvalidArgumentException {
+        if(cond) {
+            setOption(oname, val);
+        }
+    }
+
+    /**
+     * This method allows the program to set the filter's options even without any condition.
+     * @param oname The given option's name. This value cannot be null or an empty string.
+     * @param val The given option's value. This value cannot be null or an empty string.
+     * @throws InvalidArgumentException If either the option's name or its value (or both) is null or an empty string
+     */
+    protected void setOption(@NotNull String oname, @NotNull String val) throws InvalidArgumentException {
+        if(StringExt.checkNullOrEmpty(oname)) {
+            throw new InvalidArgumentException("The option's name cannot be null or an empty string.", "Il nome " +
+                    "dell'opzione non puo' essere null o una stringa vuota.");
+        }
+
+        if(!StringExt.checkNullOrEmpty(val)) {
+            options.put(oname, val);
+        }
+    }
 }

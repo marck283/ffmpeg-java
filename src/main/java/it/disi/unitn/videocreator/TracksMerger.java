@@ -160,6 +160,11 @@ public class TracksMerger extends VideoCreator {
         if(streamCopy) {
             builder.add("-c copy");
         }
+
+        add(vfg != null, (vfg != null) ? vfg.toString() : "");
+        add(afg != null, (afg != null) ? afg.toString() : "");
+        add(cfg != null, (cfg != null) ? cfg.toString() : "");
+
         builder.addOutput(videoOutput);
 
         FFMpeg ffmpeg = builder.build();
