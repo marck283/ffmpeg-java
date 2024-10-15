@@ -37,10 +37,9 @@ public class ScalingParams {
 
     /**
      * This class's constructor.
-     * @throws InvalidArgumentException If the given color matrix's name is null, an empty string or a value not
-     * recognized by FFmpe
      */
-    public ScalingParams() throws InvalidArgumentException {
+    public ScalingParams() {
+        sws_flags = null;
         eval = "init";
         interl = "0";
         width = "";
@@ -52,6 +51,24 @@ public class ScalingParams {
         inColMatrix = new ColorMatrix("auto");
         outColorMatrix = new ColorMatrix("auto");
         force_divisible_by = 1;
+    }
+
+    public ScalingParams(@NotNull ScalingAlgorithm sws_flags, @NotNull String eval, @NotNull String interl,
+                         @NotNull String width, @NotNull String height, @NotNull String videoSizeID,
+                         @NotNull String in_range, @NotNull String out_range, @NotNull String force_original_aspect_ratio,
+                         @NotNull String inColMatrix, @NotNull String outColorMatrix, int force_divisible_by) {
+        this.sws_flags = sws_flags;
+        this.eval = eval;
+        this.interl = interl;
+        this.width = width;
+        this.height = height;
+        this.videoSizeID = videoSizeID;
+        this.in_range = in_range;
+        this.out_range = out_range;
+        this.force_original_aspect_ratio = force_original_aspect_ratio;
+        this.inColMatrix = new ColorMatrix(inColMatrix);
+        this.outColorMatrix = new ColorMatrix(outColorMatrix);
+        this.force_divisible_by = force_divisible_by;
     }
 
     /**
@@ -79,6 +96,14 @@ public class ScalingParams {
      */
     public String getFlagsName() {
         return (sws_flags == null) ? "" : sws_flags.getName();
+    }
+
+    /**
+     * This method returns the chosen ScalingAlgorithm instance.
+     * @return The chosen ScalingAlgorithm instance
+     */
+    public ScalingAlgorithm getAlgorithm() {
+        return sws_flags;
     }
 
     /**
@@ -139,7 +164,7 @@ public class ScalingParams {
         PumpStreamHandler streamHandler = new PumpStreamHandler();
         DefaultExecutor executor = DefaultExecutor.builder().get();
         executor.setStreamHandler(streamHandler);
-        ExecutorResHandler execResHandler = new ExecutorResHandler();
+        ExecutorResHandler execResHandler = new ExecutorResHandler(null, null);
         return executeCommand(executor, execResHandler, cmdLine);
     }
 
@@ -238,10 +263,8 @@ public class ScalingParams {
     /**
      * Sets a new input color matrix with the given name.
      * @param name The name of the color matrix
-     * @throws InvalidArgumentException If the color matrix's name is null, an empty string or a value not recognized by
-     * FFmpeg
      */
-    public void setInputColorMatrix(@NotNull String name) throws InvalidArgumentException {
+    public void setInputColorMatrix(@NotNull String name) {
         inColMatrix = new ColorMatrix(name);
     }
 
@@ -256,10 +279,8 @@ public class ScalingParams {
     /**
      * Sets a new input color matrix with the given name.
      * @param name The name of the color matrix
-     * @throws InvalidArgumentException If the color matrix's name is null, an empty string or a value not recognized by
-     * FFmpeg
      */
-    public void setOutColorMatrix(@NotNull String name) throws InvalidArgumentException {
+    public void setOutColorMatrix(@NotNull String name) {
         outColorMatrix = new ColorMatrix(name);
     }
 
@@ -366,8 +387,8 @@ public class ScalingParams {
      * This method gets the integer to which the window's size can be divisible by.
      * @return The integer to which the window's size can be divisible by
      */
-    public String getDivisibleBy() {
-        return String.valueOf(force_divisible_by);
+    public int getDivisibleBy() {
+        return force_divisible_by;
     }
 
     /**

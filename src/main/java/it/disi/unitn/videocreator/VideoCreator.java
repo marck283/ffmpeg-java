@@ -70,33 +70,32 @@ public class VideoCreator {
      *
      * @param builder    The FFMpegBuilder instance that called this constructor
      * @param outputFile The path to the output file
-     * @throws InvalidArgumentException If any of the arguments given to this constructor is null
      */
-    public VideoCreator(@NotNull FFMpegBuilder builder, @NotNull String outputFile)
-            throws InvalidArgumentException {
+    public VideoCreator(@NotNull FFMpegBuilder builder, @NotNull String outputFile) {
         if (builder == null || StringExt.checkNullOrEmpty(outputFile)) {
-            throw new InvalidArgumentException("The arguments given to this class's constructor cannot be null or " +
+            System.err.println((new InvalidArgumentException("The arguments given to this class's constructor cannot be null or " +
                     "empty values.", "Gli argomenti forniti al costruttore di questa classe non possono essere null o " +
-                    "valori non specificati.");
-        } else {
-            this.pattern = new ArrayList<>();
-            this.builder = builder;
-            this.outputFile = outputFile;
-            if (SystemUtils.IS_OS_LINUX) {
-                execFile = "./src/ffcodec/bin/linux/ffcodec";
-            } else {
-                if (SystemUtils.IS_OS_WINDOWS) {
-                    execFile = "./src/ffcodec/bin/windows/ffcodec.exe";
-                }
-            }
-            File file = new File(execFile);
-            if (!file.exists()) {
-                System.err.println("ffcodec does not exist");
-                System.exit(1);
-            }
-            //isOutFullRange = false;
-            l = Locale.getDefault();
+                    "valori non specificati.")).getMessage());
+            System.exit(1);
         }
+
+        this.pattern = new ArrayList<>();
+        this.builder = builder;
+        this.outputFile = outputFile;
+        if (SystemUtils.IS_OS_LINUX) {
+            execFile = "./src/ffcodec/bin/linux/ffcodec";
+        } else {
+            if (SystemUtils.IS_OS_WINDOWS) {
+                execFile = "./src/ffcodec/bin/windows/ffcodec.exe";
+            }
+        }
+        File file = new File(execFile);
+        if (!file.exists()) {
+            System.err.println("ffcodec does not exist");
+            System.exit(1);
+        }
+        //isOutFullRange = false;
+        l = Locale.getDefault();
     }
 
     /**

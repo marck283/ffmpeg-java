@@ -16,7 +16,7 @@ import java.util.stream.Stream;
 /**
  * This class extends java.io.File to provide further functionality.
  */
-public class File extends java.io.File {
+public class MyFile extends java.io.File {
 
     /**
      * The path to the file the user wants to identify
@@ -27,7 +27,7 @@ public class File extends java.io.File {
      * The class's constructor.
      * @param pathname The path to the file the user wants to identify
      */
-    public File(@NotNull String pathname) {
+    public MyFile(@NotNull String pathname) {
         super(pathname);
         this.pathname = pathname;
     }
@@ -38,7 +38,7 @@ public class File extends java.io.File {
      * @param filename Il nome del file da risolvere
      * @return Un'istanza di Path che rappresenta il file passato come parametro.
      */
-    public static @NotNull Path getPath(String path, String filename) {
+    public static Path getPath(String path, String filename) {
         Path path1 = Paths.get(path);
         return path1.resolve(filename);
     }
@@ -120,5 +120,18 @@ public class File extends java.io.File {
         }
 
         return filePathList;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof MyFile myFile)) return false;
+        if (!super.equals(o)) return false;
+        return Objects.equals(pathname, myFile.pathname);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), pathname);
     }
 }

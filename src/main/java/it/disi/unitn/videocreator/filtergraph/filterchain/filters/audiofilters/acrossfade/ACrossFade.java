@@ -1,5 +1,6 @@
 package it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.acrossfade;
 
+import it.disi.unitn.StringExt;
 import it.disi.unitn.exceptions.InvalidArgumentException;
 import it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.AudioFilter;
 import org.jetbrains.annotations.NotNull;
@@ -19,10 +20,8 @@ public class ACrossFade extends AudioFilter {
 
     /**
      * This class's constructor.
-     *
-     * @throws InvalidArgumentException If the given filter's name is null or an empty string
      */
-    public ACrossFade() throws InvalidArgumentException {
+    public ACrossFade() {
         super("acrossfade");
         nb_samples = 44100;
         duration = new Duration();
@@ -33,11 +32,12 @@ public class ACrossFade extends AudioFilter {
 
     /**
      * This method set the nb_samples value.
+     *
      * @param nb_samples The given nb_samples value. This value must not be negative.
      * @throws InvalidArgumentException If the given value is negative
      */
     public void setNbSamples(long nb_samples) throws InvalidArgumentException {
-        if(nb_samples < 0L) {
+        if (nb_samples < 0L) {
             throw new InvalidArgumentException("The \"nb_samples\" value must not be negative.", "Il valore \"nb_samples\" " +
                     "non puo' essere negativo.");
         }
@@ -47,6 +47,7 @@ public class ACrossFade extends AudioFilter {
 
     /**
      * This method sets the duration's number of hours.
+     *
      * @param hours The given number of hours. This value cannot be negative or greater than 23.
      * @throws InvalidArgumentException If the given value is negative or greater than 23
      */
@@ -56,6 +57,7 @@ public class ACrossFade extends AudioFilter {
 
     /**
      * This method sets the duration's number of minutes.
+     *
      * @param minutes The given number of minutes. This value cannot be negative or greater than 59.
      * @throws InvalidArgumentException If the given value is negative or greater than 59
      */
@@ -65,6 +67,7 @@ public class ACrossFade extends AudioFilter {
 
     /**
      * This method sets the duration's number of seconds.
+     *
      * @param seconds The given number of seconds. This value cannot be negative or greater than 59.
      * @throws InvalidArgumentException If the given value is negative or greater than 59
      */
@@ -74,6 +77,7 @@ public class ACrossFade extends AudioFilter {
 
     /**
      * This method sets the decimal part of the duration.
+     *
      * @param decimal The given decimal value as an integer. This value must not be negative.
      * @throws InvalidArgumentException If the given value is negative
      */
@@ -83,6 +87,7 @@ public class ACrossFade extends AudioFilter {
 
     /**
      * This method sets the overlap parameter.
+     *
      * @param overlap The given overlap boolean value.
      */
     public void setOverlap(boolean overlap) {
@@ -90,7 +95,7 @@ public class ACrossFade extends AudioFilter {
     }
 
     private void checkCurve(@NotNull Curve curve) throws InvalidArgumentException {
-        if(curve == null) {
+        if (curve == null) {
             throw new InvalidArgumentException("The given Curve instance cannot be null.", "L'istanza di Curve fornita " +
                     "non puo' essere null.");
         }
@@ -98,22 +103,36 @@ public class ACrossFade extends AudioFilter {
 
     /**
      * This method sets the "curve1" parameter's value.
-     * @param curve1 The given {@link Curve} instance. This value cannot be null.
-     * @throws InvalidArgumentException If the given {@link Curve} instance is null
+     *
+     * @param curve1 The name of the chosen curve. This value cannot be null or an empty string.
+     * @throws InvalidArgumentException If the given curve name is null or an empty string
      */
-    public void setCurve1(@NotNull Curve curve1) throws InvalidArgumentException {
-        checkCurve(curve1);
-        this.curve1 = curve1;
+    public void setCurve1(@NotNull String curve1) throws InvalidArgumentException {
+        if (StringExt.checkNullOrEmpty(curve1)) {
+            throw new InvalidArgumentException("The given curve name cannot be null or an empty string.", "Il nome della " +
+                    "curva fornito non puo' essere null o una stringa vuota.");
+        }
+
+        Curve c1 = new Curve(curve1);
+        checkCurve(c1);
+        this.curve1 = c1;
     }
 
     /**
      * This method sets the "curve2" parameter's value.
-     * @param curve2 The given {@link Curve} instance. This value cannot be null.
-     * @throws InvalidArgumentException If the given {@link Curve} instance is null
+     *
+     * @param curve2 The name of the chosen curve. This value cannot be null or an empty string.
+     * @throws InvalidArgumentException If the given curve name is null or an empty string
      */
-    public void setCurve2(@NotNull Curve curve2) throws InvalidArgumentException {
-        checkCurve(curve2);
-        this.curve2 = curve2;
+    public void setCurve2(@NotNull String curve2) throws InvalidArgumentException {
+        if (StringExt.checkNullOrEmpty(curve2)) {
+            throw new InvalidArgumentException("The given curve name cannot be null or an empty string.", "Il nome della " +
+                    "curva fornito non puo' essere null o una stringa vuota.");
+        }
+
+        Curve c2 = new Curve(curve2);
+        checkCurve(c2);
+        this.curve2 = c2;
     }
 
     @Override
@@ -123,10 +142,10 @@ public class ACrossFade extends AudioFilter {
         options.put("overlap", String.valueOf(overlap));
 
         String c1 = curve1.toString(), c2 = curve2.toString();
-        if(c1 != null) {
+        if (!StringExt.checkNullOrEmpty(c1)) {
             options.put("curve1", c1);
         }
-        if(c2 != null) {
+        if (!StringExt.checkNullOrEmpty(c2)) {
             options.put("curve2", c2);
         }
     }

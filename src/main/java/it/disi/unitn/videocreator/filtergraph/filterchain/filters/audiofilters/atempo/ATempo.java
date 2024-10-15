@@ -13,20 +13,20 @@ public class ATempo extends AudioFilter {
     /**
      * This class's constructor.
      *
-     * @throws InvalidArgumentException If the given filter's name is null or an empty string
      */
-    public ATempo() throws InvalidArgumentException {
+    public ATempo() {
         super("atempo");
         val = 1.0;
     }
 
     /**
      * Sets this filter's value.
+     *
      * @param val This filter's value. Must be between 0.5 and 100.0
      * @throws InvalidArgumentException If the given value is less than 0.5 or greater than 100.0
      */
     public void setVal(double val) throws InvalidArgumentException {
-        if(val < 0.5 || val > 100.0) {
+        if (val < 0.5 || val > 100.0) {
             throw new InvalidArgumentException("The value given to the \"atempo\" filter cannot be less than 0.5 or " +
                     "greater than 100.0.", "Il valore fornito al filtro \"atempo\" non puo' essere minore di 0.5 o " +
                     "maggiore di 100.0.");

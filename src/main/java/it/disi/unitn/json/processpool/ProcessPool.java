@@ -38,16 +38,14 @@ public class ProcessPool {
      * @param pathToImagesFolder The path to the pictures' folder
      * @param width The pictures' width
      * @param height The pictures' height
-     * @throws InvalidArgumentException If any of the arguments given to this constructor is null or less than or equal
-     * to zero
      */
     public ProcessPool(@NotNull File model, @NotNull String imageExtension, @NotNull String pathToImagesFolder, int width,
-                       int height) throws InvalidArgumentException {
+                       int height) {
         if(model == null || StringExt.checkNullOrEmpty(imageExtension) || StringExt.checkNullOrEmpty(pathToImagesFolder)
                 || width <= 0 || height <= 0) {
-            throw new InvalidArgumentException("No argument to this constructor can be null, an empty string  or less " +
+            System.err.println((new InvalidArgumentException("No argument to this constructor can be null, an empty string  or less " +
                     "than or equal to zero.", "Nessuno degli argomenti forniti a questo costruttore puo' essere null, " +
-                    "una stringa vuota o minore o uguale a zero.");
+                    "una stringa vuota o minore o uguale a zero.")).getMessage());
         }
         scriptpath = model.getAbsolutePath();
         this.imageExtension = imageExtension;

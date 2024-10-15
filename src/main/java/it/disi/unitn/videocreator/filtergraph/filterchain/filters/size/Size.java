@@ -15,7 +15,7 @@ public class Size {
      * This class's constructor.
      */
     public Size() {
-
+        sizeID = "";
     }
 
     /**

@@ -1,6 +1,7 @@
 package it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.scale;
 
 import it.disi.unitn.ProcessController;
+import it.disi.unitn.StringExt;
 import it.disi.unitn.exceptions.InvalidArgumentException;
 import it.disi.unitn.exceptions.UnsupportedOperatingSystemException;
 import it.disi.unitn.exceptions.UnsupportedOperationException;
@@ -12,6 +13,7 @@ import org.apache.commons.exec.DefaultExecutor;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Locale;
 
 /**
@@ -25,10 +27,8 @@ public class Scale extends VideoFilter {
 
     /**
      * This class's constructor. Constructs a new "scale" filter.
-     * @throws InvalidArgumentException If the filter's name (given by this constructor to the superclass) is null or
-     * an empty string
      */
-    public Scale() throws InvalidArgumentException {
+    public Scale() {
         super("scale");
         scalingParams = new ScalingParams();
         l = Locale.getDefault();
@@ -36,19 +36,39 @@ public class Scale extends VideoFilter {
 
     /**
      * The class's constructor given pre-established scaling parameters.
-     * @param scalingParams The given ScalingParams instance. This value cannot be null.
-     * @throws InvalidArgumentException If the given value is null
      */
-    public Scale(@NotNull ScalingParams scalingParams) throws InvalidArgumentException {
+    public Scale(@NotNull ScalingAlgorithm sws_flags, @NotNull String eval, @NotNull String interl,
+                 @NotNull String width, @NotNull String height, @NotNull String videoSizeID,
+                 @NotNull String in_range, @NotNull String out_range, @NotNull String force_original_aspect_ratio,
+                 @NotNull String inColMatrix, @NotNull String outColorMatrix, int force_divisible_by) {
         super("scale");
 
-        if(scalingParams == null) {
-            throw new InvalidArgumentException("The scaling parameters argument given to this constructor cannot be null.",
+        if(sws_flags == null || checkNullOrEmpty(eval, interl, width, height, videoSizeID, in_range, out_range,
+                force_original_aspect_ratio, inColMatrix, outColorMatrix)) {
+            printMsg("The scaling parameters arguments given to this constructor cannot be null.",
                     "L'istanza dei parametri di scaling fornita a questo costruttore non puo' essere null.");
         }
 
-        this.scalingParams = scalingParams;
+        if(force_divisible_by <= 0) {
+            printMsg("The force_divisible_by argument cannot be less than or equal to zero.", "L'argomento " +
+                    "force_divisible_by non puo' essere minore o uguale a zero.");
+        }
+
+        this.scalingParams = new ScalingParams(sws_flags, eval, interl, width, height, videoSizeID, in_range, out_range,
+                force_original_aspect_ratio, inColMatrix, outColorMatrix, force_divisible_by);
         l = Locale.getDefault();
+    }
+
+    private static boolean checkNullOrEmpty(String ... args) {
+        return Arrays.stream(args).anyMatch(StringExt::checkNullOrEmpty);
+    }
+
+    private void printMsg(@NotNull String msg, @NotNull String itmsg) {
+        if(l == Locale.ITALIAN || l == Locale.ITALY) {
+            System.err.println(itmsg);
+        } else {
+            System.err.println(msg);
+        }
     }
 
     /**
@@ -72,13 +92,9 @@ public class Scale extends VideoFilter {
                                @NotNull CommandLine cmdline) {
         try {
             ProcessController controller = new ProcessController(executor, execResHandler);
-            int val = controller.execute(cmdline);
-            if (val == 0) {
-                if (l == Locale.ITALY || l == Locale.ITALIAN) {
-                    System.err.println("Almeno uno dei valori forniti non e' stato riconosciuto da FFmpeg.");
-                } else {
-                    System.err.println("At least one of the given values was not recognised by FFmpeg.");
-                }
+            if (controller.execute(cmdline) == 0) {
+                printMsg("At least one of the given values was not recognised by FFmpeg.",
+                        "Almeno uno dei valori forniti non e' stato riconosciuto da FFmpeg.");
                 return false;
             }
             return true;
@@ -211,7 +227,7 @@ public class Scale extends VideoFilter {
             setOption("out_range", scalingParams.getOutputRange());
 
             setOption("force_original_aspect_ratio", scalingParams.getForceOriginalAspectRatio());
-            setOption("force_divisible_by", scalingParams.getDivisibleBy());
+            setOption("force_divisible_by", String.valueOf(scalingParams.getDivisibleBy()));
         } catch(InvalidArgumentException ex) {
             System.err.println(ex.getMessage());
         }

@@ -3,7 +3,7 @@ package it.disi.unitn.transition.rotation;
 import it.disi.unitn.StringExt;
 import it.disi.unitn.exceptions.InvalidArgumentException;
 import it.disi.unitn.exceptions.UnsupportedOperatingSystemException;
-import it.disi.unitn.lasagna.File;
+import it.disi.unitn.lasagna.MyFile;
 import it.disi.unitn.transitions.rotation.RotationTransition;
 import it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.scale.ScalingParams;
 import it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.scale.scalingalgs.Bicubic;
@@ -18,7 +18,7 @@ public class RotationTest {
     @Test
     public void test() throws Exception {
         String tempOutDir = "./src/test/resources/output/images/rotation";
-        File.makeDirs(tempOutDir);
+        MyFile.makeDirs(tempOutDir);
 
         RotationTransition rotation = null;
         StringExt str = new StringExt(String.valueOf(0)), str1;
@@ -35,13 +35,17 @@ public class RotationTest {
             j++;
         }
 
-        rotation.performRotation(1L, TimeUnit.MINUTES, "output", "mp4", getScalingParams());
+        ScalingParams scPars = getScalingParams();
+        rotation.performRotation(1L, TimeUnit.MINUTES, "output", "mp4", scPars.getAlgorithm(),
+                scPars.getEval(), scPars.getInterl(), scPars.getWidth(), scPars.getHeight(), scPars.getVideoSizeID(),
+                scPars.getInputRange(), scPars.getOutputRange(), scPars.getForceOriginalAspectRatio(), scPars.getInputColorMatrix(),
+                scPars.getOutputColorMatrix(), scPars.getDivisibleBy());
         rotation.dispose();
     }
 
     private @NotNull ScalingParams getScalingParams() throws InvalidArgumentException, UnsupportedOperatingSystemException {
         ScalingParams scalingParams = new ScalingParams();
-        scalingParams.setSize(false, String.valueOf(800), String.valueOf(600), "yuv420p");
+        scalingParams.setSize(false, String.valueOf(2048), String.valueOf(1024), "yuv420p");
         scalingParams.setSwsFlags(new Bicubic(2, 2));
         scalingParams.setInputColorMatrix("auto");
         scalingParams.setOutColorMatrix("bt709");

@@ -8,6 +8,7 @@ import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Locale;
+import java.util.Objects;
 
 /**
  * This class handles the result of the command used to check either that the aspect ratio of each frame is compatible with
@@ -26,16 +27,8 @@ public class ExecutorResHandler implements ExecuteResultHandler {
      * @param tempp The Path instance corresponding to the OutputStream
      */
     public ExecutorResHandler(OutputStream out, Path tempp) {
-        outstream = out;
+        outstream = Objects.requireNonNullElseGet(out, OutputStream::nullOutputStream);
         tempFile = tempp;
-    }
-
-    /**
-     * The class's constructor to be used when width and height need to be specified.
-     */
-    public ExecutorResHandler() {
-        outstream = OutputStream.nullOutputStream();
-        tempFile = null;
     }
 
     /**

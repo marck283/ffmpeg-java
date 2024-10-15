@@ -5,14 +5,12 @@ import com.google.cloud.texttospeech.v1.*;
 import it.disi.unitn.StringExt;
 import it.disi.unitn.exceptions.InvalidArgumentException;
 import it.disi.unitn.exceptions.AudioConversionException;
-import it.disi.unitn.lasagna.File;
-import it.disi.unitn.videocreator.filtergraph.AudioFilterGraph;
+import it.disi.unitn.lasagna.MyFile;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-//import java.nio.file.Path;
 import java.util.Locale;
 
 /**
@@ -31,27 +29,23 @@ public class Audio {
      * @param str The given string.
      * @param msg The English message if the result is "True".
      * @param itmsg The Italian message if the result is "True".
-     * @throws InvalidArgumentException If the given string is null or empty
      */
-    private static void checkNullOrEmpty(String str, @NotNull String msg, @NotNull String itmsg) throws InvalidArgumentException {
+    private static void checkNullOrEmpty(String str, @NotNull String msg, @NotNull String itmsg) {
         if(StringExt.checkNullOrEmpty(str)) {
-            throw new InvalidArgumentException(msg, itmsg);
+            System.err.println((new InvalidArgumentException(msg, itmsg)).getMessage());
+            System.exit(8);
         }
     }
 
     /**
      * This class's constructor
      * @param description The description to be narrated in the audio track. Cannot be null or an empty string.
-     * @param language The langage spoken by the selected voice. Cannot be null or an empty string.
+     * @param language The language spoken by the selected voice. Cannot be null or an empty string.
      * @param voiceType The given voice type. Can be either "male" or "female". Cannot be null or an empty string.
      * @param encoding The given audio encoding. Cannot be null or an empty string. Must be equal to "mp3", "linear16",
      *                 "ogg_opus", "mulaw" or "alaw" and must be compatible with the audio output format.
-     * @throws InvalidArgumentException If any of the given parameters is null or an empty string, or the given voice
-     * type or the given encoding values are incompatible with the specification given above.
      */
-    public Audio(@NotNull String description, @NotNull String language, @NotNull String voiceType, @NotNull String encoding)
-            throws
-            InvalidArgumentException {
+    public Audio(@NotNull String description, @NotNull String language, @NotNull String voiceType, @NotNull String encoding) {
         checkNullOrEmpty(description, "The given description cannot be null or an empty string.", "La descrizione " +
                 "fornita non puo' essere null o una stringa vuota.");
 
@@ -81,8 +75,11 @@ public class Audio {
                         builder.setSsmlGender(SsmlVoiceGender.FEMALE);
                 case "male" -> //Male voice. Gender neutral voices are not supported anymore
                         builder.setSsmlGender(SsmlVoiceGender.MALE);
-                default -> throw new InvalidArgumentException("The voice type can only be \"female\" or \"male\".", "Il " +
-                        "tipo di voce richiesto puo' essere soltanto \"female\" o \"male\".");
+                default -> {
+                    System.err.println((new InvalidArgumentException("The voice type can only be \"female\" or \"male\".", "Il " +
+                            "tipo di voce richiesto puo' essere soltanto \"female\" o \"male\".")).getMessage());
+                    System.exit(9);
+                }
             }
             voice = builder.build();
 
@@ -94,9 +91,12 @@ public class Audio {
                 case "ogg_opus" -> builder1.setAudioEncoding(AudioEncoding.OGG_OPUS);
                 case "mulaw" -> builder1.setAudioEncoding(AudioEncoding.MULAW);
                 case "alaw" -> builder1.setAudioEncoding(AudioEncoding.ALAW);
-                default -> throw new InvalidArgumentException("The encoding must be equal to \"mp3\", \"linear16\", " +
-                        "\"ogg_opus\", \"mulaw\" or \"alaw\".", "La codifica audio deve essere uguale a \"mp3\", " +
-                        "\"linear16\", \"ogg_opus\", \"mulaw\" o \"alaw\".");
+                default -> {
+                    System.err.println((new InvalidArgumentException("The encoding must be equal to \"mp3\", \"linear16\", " +
+                            "\"ogg_opus\", \"mulaw\" or \"alaw\".", "La codifica audio deve essere uguale a \"mp3\", " +
+                            "\"linear16\", \"ogg_opus\", \"mulaw\" o \"alaw\".")).getMessage());
+                    System.exit(9);
+                }
             }
             audioConfig = builder1.build();
 
@@ -143,7 +143,7 @@ public class Audio {
 
             String audioFileFolderPath = "./src/main/resources/it/disi/unitn/input/audio";
             try (OutputStream out = new FileOutputStream(audioFileFolderPath + "/" + val.getVal() + "." + extension)) {
-                File audioFile = new File(audioFileFolderPath);
+                MyFile audioFile = new MyFile(audioFileFolderPath);
                 //Path audioFileFolder = new File(audioFileFolderPath).toPath();
                 audioFile.checkReadWritePermissions();
                 out.write(response.getAudioContent().toByteArray());

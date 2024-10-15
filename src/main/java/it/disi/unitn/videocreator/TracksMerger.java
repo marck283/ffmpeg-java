@@ -4,6 +4,7 @@ import it.disi.unitn.FFMpeg;
 import it.disi.unitn.FFMpegBuilder;
 import it.disi.unitn.StringExt;
 import it.disi.unitn.exceptions.InvalidArgumentException;
+import it.disi.unitn.lasagna.MyFile;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
@@ -32,16 +33,15 @@ public class TracksMerger extends VideoCreator {
      * @param outputFile The path to the output video
      * @param audioInput The path to the input audio file
      * @param videoInput The path to the input video file
-     * @throws InvalidArgumentException If any of the arguments given to this method is null or an empty string
      */
     public TracksMerger(@NotNull FFMpegBuilder builder, @NotNull String outputFile,
-                        @NotNull String audioInput, @NotNull String videoInput)
-            throws InvalidArgumentException {
+                        @NotNull String audioInput, @NotNull String videoInput) {
         super(builder, outputFile);
         if(StringExt.checkNullOrEmpty(audioInput) || StringExt.checkNullOrEmpty(videoInput)) {
-            throw new InvalidArgumentException("The arguments to this class's constructor cannot be null or empty " +
+            System.err.println((new InvalidArgumentException("The arguments to this class's constructor cannot be null or empty " +
                     "strings.", "Nessuno degli argomenti forniti al costruttore di questa classe puo' essere null o una " +
-                    "stringa vuota.");
+                    "stringa vuota.")).getMessage());
+            System.exit(11);
         }
 
         this.builder = builder;
@@ -55,10 +55,8 @@ public class TracksMerger extends VideoCreator {
      * video.
      * @param builder The FFMpegBuilderInstance
      * @param outputVideo The path to the output video
-     * @throws InvalidArgumentException If any of the arguments given to this method is null or an empty string
      */
-    public TracksMerger(@NotNull FFMpegBuilder builder, @NotNull String outputVideo)
-            throws InvalidArgumentException {
+    public TracksMerger(@NotNull FFMpegBuilder builder, @NotNull String outputVideo) {
         super(builder, outputVideo);
 
         this.builder = builder;
@@ -106,7 +104,7 @@ public class TracksMerger extends VideoCreator {
      * @throws IOException if an I/O error occurred
      */
     private @NotNull File writeTXTFile(@NotNull List<String> inputFiles, @NotNull String tempFile) throws IOException {
-        File file = new File(tempFile);
+        MyFile file = new MyFile(tempFile);
         if(file.exists()) {
             //file.delete();
             Files.deleteIfExists(file.toPath());

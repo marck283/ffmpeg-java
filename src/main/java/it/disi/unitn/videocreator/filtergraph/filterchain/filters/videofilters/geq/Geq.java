@@ -15,16 +15,16 @@ public class Geq extends VideoFilter {
     /**
      * This class's constructor. Constructs a new video filter.
      *
-     * @throws InvalidArgumentException If the given filter's name is null or an empty string
      */
-    public Geq() throws InvalidArgumentException {
+    public Geq() {
         super("geq");
     }
 
-    private void setParam(@NotNull String optName, @NotNull String optVal) throws InvalidArgumentException {
+    private void setParam(@NotNull String optName, @NotNull String optVal) {
         if(StringExt.checkNullOrEmpty(optVal)) {
-            throw new InvalidArgumentException("The \"" + optName + "\" expression cannot be null or an empty string.",
-                    "L'espressione per il parametro \"" + optName + "\" non puo' essere null o una stringa vuota.");
+            System.err.println((new InvalidArgumentException("The \"" + optName + "\" expression cannot be null or an " +
+                    "empty string.", "L'espressione per il parametro \"" + optName + "\" non puo' essere null o una " +
+                    "stringa vuota.")).getMessage());
         }
 
         switch(optName) {
@@ -35,6 +35,11 @@ public class Geq extends VideoFilter {
             case "r" -> this.r = optVal;
             case "g" -> this.g = optVal;
             case "b" -> this.b = optVal;
+            default -> {
+                System.err.println((new InvalidArgumentException("Invalid option name.", "Nome opzione non valido."))
+                        .getMessage());
+                System.exit(6);
+            }
         }
     }
 

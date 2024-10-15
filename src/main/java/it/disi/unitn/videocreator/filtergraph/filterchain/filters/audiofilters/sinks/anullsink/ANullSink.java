@@ -1,6 +1,5 @@
 package it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.sinks.anullsink;
 
-import it.disi.unitn.exceptions.InvalidArgumentException;
 import it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.AudioFilter;
 
 /**
@@ -10,9 +9,8 @@ public class ANullSink extends AudioFilter {
     /**
      * This class's constructor.
      *
-     * @throws InvalidArgumentException If the given filter's name is null or an empty string
      */
-    public ANullSink() throws InvalidArgumentException {
+    public ANullSink() {
         super("anullsink");
     }
 

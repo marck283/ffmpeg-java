@@ -3,12 +3,12 @@ package it.disi.unitn.transitions.rotation;
 import it.disi.unitn.FFMpegBuilder;
 import it.disi.unitn.exceptions.InvalidArgumentException;
 import it.disi.unitn.exceptions.RotationFailedException;
-import it.disi.unitn.lasagna.File;
+import it.disi.unitn.lasagna.MyFile;
 import it.disi.unitn.videocreator.TracksMerger;
 import it.disi.unitn.videocreator.filtergraph.VideoFilterGraph;
 import it.disi.unitn.videocreator.filtergraph.filterchain.VideoSimpleFilterChain;
 import it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.scale.Scale;
-import it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.scale.ScalingParams;
+import it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.scale.scalingalgs.ScalingAlgorithm;
 import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
@@ -33,11 +33,9 @@ public class RotationTransition {
      * @param tempOutDir The given temporary output directory's path.
      * @param videoOutDir The temporary video output directory's path.
      * @param fname The output file's name.
-     * @throws IOException if an error occurs during reading or when not able to create required ImageInputStream
      */
     public RotationTransition(@NotNull String inputFile, @NotNull String tempOutDir, @NotNull String videoOutDir,
-                              @NotNull String fname)
-            throws IOException {
+                              @NotNull String fname) {
         rotation = new Rotation(inputFile, tempOutDir);
         this.tempOutDir = tempOutDir;
         this.videoOutDir = videoOutDir;
@@ -62,9 +60,13 @@ public class RotationTransition {
     }
 
     private void createVideo(@NotNull FFMpegBuilder builder, long timeout, @NotNull TimeUnit tu,
-                             @NotNull String outfile, @NotNull String fileExt, @NotNull ScalingParams scalingParams)
+                             @NotNull String outfile, @NotNull String fileExt, @NotNull ScalingAlgorithm sws_flags,
+                             @NotNull String eval, @NotNull String interl,
+                             @NotNull String width, @NotNull String height, @NotNull String videoSizeID,
+                             @NotNull String in_range, @NotNull String out_range, @NotNull String force_original_aspect_ratio,
+                             @NotNull String inColMatrix, @NotNull String outColorMatrix, int force_divisible_by)
             throws Exception {
-        File outDirPath = new File(tempOutDir);
+        MyFile outDirPath = new MyFile(tempOutDir);
         List<String> pathList = outDirPath.getFileList();
         TracksMerger merger = builder.newTracksMerger(videoOutDir + "/" + outfile + "." + fileExt);
 
@@ -72,7 +74,8 @@ public class RotationTransition {
             merger.addInput(path.replace('\\', '/'));
         }
 
-        Scale scale = new Scale(scalingParams);
+        Scale scale = new Scale(sws_flags, eval, interl, width, height, videoSizeID, in_range, out_range, force_original_aspect_ratio,
+                inColMatrix, outColorMatrix, force_divisible_by);
         scale.updateMap();
 
         VideoFilterGraph vsfg = new VideoFilterGraph();
@@ -91,14 +94,17 @@ public class RotationTransition {
      * @param tu The given TimeUnit instance.
      * @param outfile The given output file's path.
      * @param fileExt The file's extension.
-     * @param scalingParams The scaling parameters.
      * @throws Exception If any exception is thrown
      */
     public void performRotation(long timeout, @NotNull TimeUnit tu, @NotNull String outfile,
-                                @NotNull String fileExt, @NotNull ScalingParams scalingParams)
-            throws Exception {
+                                @NotNull String fileExt, @NotNull ScalingAlgorithm sws_flags, @NotNull String eval,
+                                @NotNull String interl, @NotNull String width, @NotNull String height,
+                                @NotNull String videoSizeID, @NotNull String in_range, @NotNull String out_range,
+                                @NotNull String force_original_aspect_ratio, @NotNull String inColMatrix,
+                                @NotNull String outColorMatrix, int force_divisible_by) throws Exception {
         FFMpegBuilder builder = new FFMpegBuilder("ffmpeg");
-        createVideo(builder, timeout, tu, outfile, fileExt, scalingParams);
+        createVideo(builder, timeout, tu, outfile, fileExt, sws_flags, eval, interl, width, height, videoSizeID, in_range,
+                out_range, force_original_aspect_ratio, inColMatrix, outColorMatrix, force_divisible_by);
     }
 
     /**
@@ -107,7 +113,7 @@ public class RotationTransition {
      */
     public void dispose() throws IOException {
         rotation.dispose();
-        File dir = new File(tempOutDir);
+        MyFile dir = new MyFile(tempOutDir);
         dir.removeSelf();
     }
 

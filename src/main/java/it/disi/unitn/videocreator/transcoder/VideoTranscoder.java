@@ -5,7 +5,7 @@ import it.disi.unitn.exceptions.InvalidArgumentException;
 import it.disi.unitn.videocreator.VideoCreator;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.List;
+//import java.util.List;
 
 /**
  * This class performs the video transcoding operations.
@@ -20,9 +20,8 @@ public class VideoTranscoder extends VideoCreator {
      * The class's constructor.
      * @param builder The FFMpegBuilder instance
      * @param outputFile The path to the output file
-     * @throws InvalidArgumentException If at least one of the given arguments is null or an empty string
      */
-    public VideoTranscoder(@NotNull FFMpegBuilder builder, @NotNull String outputFile) throws InvalidArgumentException {
+    public VideoTranscoder(@NotNull FFMpegBuilder builder, @NotNull String outputFile) {
         super(builder, outputFile);
         audioStreamCopy = false;
         videoStreamCopy = false;
@@ -92,16 +91,13 @@ public class VideoTranscoder extends VideoCreator {
      * @param param This is a parameter that indicates whether this method is being called to deal with video or audio
      *              parameters
      */
-    private void removeParams(@NotNull String param) {
-        builder.getLCommand().forEach(e -> {
+    private void modifyParams(@NotNull String param) {
+        builder.modifyParams(e -> {
             if((param.equals("vs") && e.startsWith("-c:v")) || (param.equals("as") && e.startsWith("-c:a"))) {
-                int index = builder.getLCommand().indexOf(e);
-                builder.getLCommand().remove(e);
                 try {
-                    builder.add(index, e + " copy");
+                    builder.modifyParam(e, e + " copy");
                 } catch (InvalidArgumentException ex) {
                     System.err.println(ex.getMessage());
-                    System.exit(1);
                 }
             }
         });
@@ -114,14 +110,16 @@ public class VideoTranscoder extends VideoCreator {
      * @throws InvalidArgumentException If the given argument to this method is null or an empty string
      */
     private void readyUpForTrackExtraction(@NotNull String whichTrack) throws InvalidArgumentException {
-        List<String> outList = builder.getLCommand();
-        int finInd = outList.indexOf(outList.getLast());
+        /*List<String> outList = builder.getLCommand();
+        int finInd = outList.indexOf(outList.getLast());*/
         if(whichTrack.equals("video")) {
             //Video track is extracted
-            builder.add(finInd, "-an");
+            builder.modifyLast("-an");
+            //builder.add(finInd, "-an");
         } else {
             //Audio track is extracted
-            builder.add(finInd, "-vn");
+            builder.modifyLast("-vn");
+            //builder.add(finInd, "-vn");
         }
     }
 
@@ -134,7 +132,7 @@ public class VideoTranscoder extends VideoCreator {
 
         try {
             if(videoStreamCopy) {
-                removeParams("vs");
+                modifyParams("vs");
             } else {
                 if(extractVideo) {
                     readyUpForTrackExtraction("video");
@@ -142,7 +140,7 @@ public class VideoTranscoder extends VideoCreator {
             }
 
             if(audioStreamCopy) {
-                removeParams("va");
+                modifyParams("va");
             } else {
                 if(extractAudio) {
                     readyUpForTrackExtraction("audio");

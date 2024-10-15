@@ -20,15 +20,18 @@ public abstract class Filter {
 
     private final List<String> input, output;
 
+    protected final Locale l;
+
     /**
      * This class's constructor. Constructs a new filter (whether video or audio).
      * @param filterName The given filter's name.
-     * @throws InvalidArgumentException If the given filter's name is null or an empty string
      */
-    protected Filter(@NotNull String filterName) throws InvalidArgumentException {
+    protected Filter(@NotNull String filterName) {
+        l = Locale.getDefault();
+
         if(StringExt.checkNullOrEmpty(filterName)) {
-            throw new InvalidArgumentException("The filter's name cannot be null or an empty string.", "Il nome del " +
-                    "filtro non puo' essere null o una stringa vuota.");
+            System.err.println((new InvalidArgumentException("The filter's name cannot be null or an empty string.",
+                    "Il nome del filtro non puo' essere null o una stringa vuota.").getMessage()));
         }
         this.filterName = filterName;
         options = new LinkedHashMap<>();

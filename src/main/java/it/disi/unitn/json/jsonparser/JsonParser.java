@@ -18,12 +18,12 @@ public class JsonParser {
     /**
      * This class's constructor. Builds an instance of this class using the given Reader.
      * @param reader The given Reader
-     * @throws InvalidArgumentException If the parameter passed to this constructor is null
      */
-    public JsonParser(@NotNull Reader reader) throws InvalidArgumentException {
+    public JsonParser(@NotNull Reader reader) {
         if(reader == null) {
-            throw new InvalidArgumentException("The parameter passed to this constructor cannot be null.", "Il parametro " +
-                    "fornito a questo costruttore non puo' essere null.");
+            System.err.println((new InvalidArgumentException("The parameter passed to this constructor cannot be null.", "Il parametro " +
+                    "fornito a questo costruttore non puo' essere null.")).getMessage());
+            System.exit(7);
         }
         Gson gson = new GsonBuilder().create();
         obj = gson.fromJson(reader, JsonObject.class);
