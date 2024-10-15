@@ -103,7 +103,7 @@ public class RotationTransition {
 
     /**
      * This method disposes of the underlying objects used in this class.
-     * @throws IOException se occorre un errore di I/O
+     * @throws IOException If an I/O error occurs
      */
     public void dispose() throws IOException {
         rotation.dispose();
