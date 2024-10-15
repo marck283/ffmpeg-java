@@ -33,6 +33,7 @@ public class StringExt {
 
     /**
      * This method can be used to pad the given string with 0s at its beginning.
+     * @param maxlen The given string's maximum length.
      * @throws InvalidArgumentException If the original string's length is not greater than 0 and less than or equal to 3.
      */
     public void padStart(int maxlen) throws InvalidArgumentException {

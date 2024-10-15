@@ -21,6 +21,12 @@ class Rotation {
 
     private final Graphics2D g2d;
 
+    /**
+     * This class's constructor
+     * @param inputFile The given input file's path.
+     * @param tempOutdir The path to the temporary output directory.
+     * @throws IOException if an error occurs during reading or when not able to create required ImageInputStream
+     */
     public Rotation(@NotNull String inputFile, @NotNull String tempOutdir) throws IOException {
         img = ImageIO.read(new File(inputFile));
         g2d = (Graphics2D) img.getGraphics();
@@ -33,7 +39,6 @@ class Rotation {
         FontMetrics fm = g2d.getFontMetrics();
         int strWidth = fm.stringWidth(text);
 
-        angle /= 57.2958D;
         double interAngle = angle%360D;
         if(interAngle <= 180D) {
             anchory -= strWidth*Math.sin(angle)/2;
@@ -66,9 +71,11 @@ class Rotation {
         g2d.setFont(new Font("Arial Unicode MS", Font.PLAIN, 200));
         g2d.setColor(color);
 
+        angle /= 57.2958D;
+
         Pair<Double, Double> pair = getAnchors(text, angle, anchorx, anchory);
 
-        g2d.rotate(angle/57.2958D, pair.getLeft(), pair.getRight());
+        g2d.rotate(angle, pair.getLeft(), pair.getRight());
         g2d.drawString(text,100F, 350F);
 
         boolean res = ImageIO.write(img, fname, new File(tempOutdir + "/" + name + "." + fname));

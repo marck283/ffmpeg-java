@@ -11,6 +11,9 @@ public class Curve {
 
     private String curve;
 
+    /**
+     * This class's constructor.
+     */
     public Curve() {
         curve = "";
     }

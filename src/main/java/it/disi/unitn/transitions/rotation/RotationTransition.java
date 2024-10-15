@@ -18,12 +18,23 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * This class performs the rotation.
+ */
 public class RotationTransition {
 
     private final Rotation rotation;
 
     private final String tempOutDir, videoOutDir, fname;
 
+    /**
+     * The class's constructor. None of the given values can be null or empty strings.
+     * @param inputFile The given input file's path.
+     * @param tempOutDir The given temporary output directory's path.
+     * @param videoOutDir The temporary video output directory's path.
+     * @param fname The output file's name.
+     * @throws IOException if an error occurs during reading or when not able to create required ImageInputStream
+     */
     public RotationTransition(@NotNull String inputFile, @NotNull String tempOutDir, @NotNull String videoOutDir,
                               @NotNull String fname)
             throws IOException {
@@ -33,6 +44,18 @@ public class RotationTransition {
         this.fname = fname;
     }
 
+    /**
+     * This method performs the rotation.
+     * @param anchorx The x-value of the anchor.
+     * @param anchory The y-value of the anchor.
+     * @param angle The angle expressed in radians.
+     * @param text The text to be writer.
+     * @param name The given output file's name.
+     * @param color The chosen Color instance
+     * @throws RotationFailedException If the rotation fails for any reason
+     * @throws IOException if an error occurs during reading or when not able to create required ImageInputStream
+     * @throws InvalidArgumentException If one of the non-null arguments is null or an empty string
+     */
     public void rotate(int anchorx, int anchory, double angle, @NotNull String text, @NotNull String name,
                        @NotNull Color color) throws RotationFailedException, IOException, InvalidArgumentException {
         rotation.rotate(anchorx, anchory, angle, text, name, fname, color);
@@ -62,6 +85,15 @@ public class RotationTransition {
         merger.mergeVideos(timeout, tu, pathList, p.toString(), "./");
     }
 
+    /**
+     * This method allows the user to create the output video.
+     * @param timeout The given timeout.
+     * @param tu The given TimeUnit instance.
+     * @param outfile The given output file's path.
+     * @param fileExt The file's extension.
+     * @param scalingParams The scaling parameters.
+     * @throws Exception If any exception is thrown
+     */
     public void performRotation(long timeout, @NotNull TimeUnit tu, @NotNull String outfile,
                                 @NotNull String fileExt, @NotNull ScalingParams scalingParams)
             throws Exception {
@@ -69,6 +101,10 @@ public class RotationTransition {
         createVideo(builder, timeout, tu, outfile, fileExt, scalingParams);
     }
 
+    /**
+     * This method disposes of the underlying objects used in this class.
+     * @throws IOException se occorre un errore di I/O
+     */
     public void dispose() throws IOException {
         rotation.dispose();
         File dir = new File(tempOutDir);

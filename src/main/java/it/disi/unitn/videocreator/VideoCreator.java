@@ -58,6 +58,9 @@ public class VideoCreator {
 
     private final Locale l;
 
+    /**
+     * These are instances of FilterGraph.
+     */
     protected FilterGraph vfg, afg, cfg; //Video, audio and complex filter graphs
 
     private FPSMode fps_mode;
@@ -657,6 +660,11 @@ public class VideoCreator {
         }
     }
 
+    /**
+     * This method sets a stream to map.
+     * @param stream The given stream to map. This value cannot be null or an empty string.
+     * @throws InvalidArgumentException If the given argument is null or an empty string
+     */
     public void setStreamToMap(@NotNull String stream) throws InvalidArgumentException {
         if(StringExt.checkNullOrEmpty(stream)) {
             throw new InvalidArgumentException("The given stream to map cannot be null or an empty string.", "Lo stream " +

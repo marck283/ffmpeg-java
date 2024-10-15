@@ -35,6 +35,11 @@ public class ScalingParams {
 
     private int force_divisible_by;
 
+    /**
+     * This class's constructor.
+     * @throws InvalidArgumentException If the given color matrix's name is null, an empty string or a value not
+     * recognized by FFmpe
+     */
     public ScalingParams() throws InvalidArgumentException {
         eval = "init";
         interl = "0";
@@ -166,17 +171,6 @@ public class ScalingParams {
             throw new InvalidArgumentException("The video height cannot be null or an empty string.", "L'altezza dell'immagine " +
                     "non puo' essere null o una stringa vuota.");
         }
-
-        /*try {
-            int w = Integer.parseInt(width), h = Integer.parseInt(height);
-            if(w <= 0 || h <= 0) {
-                throw new InvalidArgumentException("The given width or height cannot be negative or null numbers.",
-                        "L'ampiezza e l' altezza non possono essere numeri negativi o nulli.");
-            }
-        } catch(NumberFormatException ex) {
-            throw new InvalidArgumentException("Either the width or the height is not an integer.", "L'ampiezza o l'altezza " +
-                    "non rappresentano un numero intero.");
-        }*/
 
         if(StringExt.checkNullOrEmpty(pix_fmt)) {
             throw new InvalidArgumentException("The pixel format must neither be null nor an empty string.",
@@ -350,6 +344,10 @@ public class ScalingParams {
         }
     }
 
+    /**
+     * This method returns the "force_original_aspect_ratio" for the scaling filter.
+     * @return The "force_original_aspect_ratio" for the scaling filter
+     */
     public String getForceOriginalAspectRatio() {
         return force_original_aspect_ratio;
     }
@@ -364,6 +362,10 @@ public class ScalingParams {
         }
     }
 
+    /**
+     * This method gets the integer to which the window's size can be divisible by.
+     * @return The integer to which the window's size can be divisible by
+     */
     public String getDivisibleBy() {
         return String.valueOf(force_divisible_by);
     }

@@ -77,8 +77,9 @@ public class TracksMerger extends VideoCreator {
 
     /**
      * This method sets the correct command to merge the audio and video tracks.
-     * @param time The maximum amount of time to wait for the video's creation
-     * @param timeUnit The TimeUnit instance to be used
+     * @param time The maximum amount of time to wait for the video's creation.
+     * @param timeUnit The TimeUnit instance to be used.
+     * @param outdir The given output directory.
      * @throws IOException If an I/O error occurs
      * @throws InvalidArgumentException If the given timeout is negative, the TimeUnit instance is null, the video input
      * path or audio input path is null
@@ -134,10 +135,11 @@ public class TracksMerger extends VideoCreator {
 
     /**
      * This method allows any object of this class to concatenate two or more videos whose path is given as input.
-     * @param inputFiles The paths to the input files
-     * @param time The maximum amount of time to wait for the video's creation
-     * @param timeUnit The TimeUnit instance to be used
-     * @param tempFile A temporary file used to store the paths of the files to be merged
+     * @param inputFiles The paths to the input files.
+     * @param time The maximum amount of time to wait for the video's creation.
+     * @param timeUnit The TimeUnit instance to be used.
+     * @param tempFile A temporary file used to store the paths of the files to be merged.
+     * @param outdir The output directory.
      * @throws IOException if an I/O error occurs
      * @throws InvalidArgumentException If the given timeout is negative or the given TimeUnit instance is null, or if
      * the third or fourth arguments are null or an empty string or contain null or empty strings
