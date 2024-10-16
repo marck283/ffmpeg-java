@@ -2,7 +2,6 @@ package it.disi.unitn.transitions.rotation;
 
 import it.disi.unitn.FFMpegBuilder;
 import it.disi.unitn.exceptions.InvalidArgumentException;
-import it.disi.unitn.exceptions.RotationFailedException;
 import it.disi.unitn.lasagna.MyFile;
 import it.disi.unitn.videocreator.TracksMerger;
 import it.disi.unitn.videocreator.filtergraph.VideoFilterGraph;
@@ -50,12 +49,10 @@ public class RotationTransition {
      * @param text The text to be writer.
      * @param name The given output file's name.
      * @param color The chosen Color instance
-     * @throws RotationFailedException If the rotation fails for any reason
-     * @throws IOException if an error occurs during reading or when not able to create required ImageInputStream
      * @throws InvalidArgumentException If one of the non-null arguments is null or an empty string
      */
     public void rotate(int anchorx, int anchory, double angle, @NotNull String text, @NotNull String name,
-                       @NotNull Color color) throws RotationFailedException, IOException, InvalidArgumentException {
+                       @NotNull Color color) throws InvalidArgumentException {
         rotation.rotate(anchorx, anchory, angle, text, name, fname, color);
     }
 
