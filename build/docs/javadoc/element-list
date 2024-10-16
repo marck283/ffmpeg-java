@@ -5,7 +5,9 @@ it.disi.unitn.json.jsonparser
 it.disi.unitn.json.processpool
 it.disi.unitn.lasagna
 it.disi.unitn.lasagna.audiocreator
+it.disi.unitn.transitions
 it.disi.unitn.transitions.rotation
+it.disi.unitn.transitions.translation
 it.disi.unitn.videocreator
 it.disi.unitn.videocreator.filtergraph
 it.disi.unitn.videocreator.filtergraph.filterchain
@@ -37,6 +39,7 @@ it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.drawtext
 it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.drawtext.boxborderw
 it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.drawtext.timecode
 it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.format
+it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.fps
 it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.geq
 it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.scale
 it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.scale.scalingalgs

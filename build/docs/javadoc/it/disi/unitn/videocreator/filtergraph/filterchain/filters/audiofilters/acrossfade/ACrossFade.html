@@ -76,8 +76,8 @@ loadScripts(document, 'script');</script>
 <li><a href="#setSeconds(int)" tabindex="0">setSeconds(int)</a></li>
 <li><a href="#setDecimal(long)" tabindex="0">setDecimal(long)</a></li>
 <li><a href="#setOverlap(boolean)" tabindex="0">setOverlap(boolean)</a></li>
-<li><a href="#setCurve1(it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.acrossfade.Curve)" tabindex="0">setCurve1(Curve)</a></li>
-<li><a href="#setCurve2(it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.acrossfade.Curve)" tabindex="0">setCurve2(Curve)</a></li>
+<li><a href="#setCurve1(java.lang.String)" tabindex="0">setCurve1(String)</a></li>
+<li><a href="#setCurve2(java.lang.String)" tabindex="0">setCurve2(String)</a></li>
 <li><a href="#updateMap()" tabindex="0">updateMap()</a></li>
 </ol>
 </li>
@@ -111,7 +111,7 @@ loadScripts(document, 'script');</script>
 <h2>Field Summary</h2>
 <div class="inherited-list">
 <h3 id="fields-inherited-from-class-it.disi.unitn.videocreator.filtergraph.filterchain.filters.Filter">Fields inherited from class&nbsp;it.disi.unitn.videocreator.filtergraph.filterchain.filters.<a href="../../Filter.html" title="class in it.disi.unitn.videocreator.filtergraph.filterchain.filters">Filter</a></h3>
-<code><a href="../../Filter.html#options">options</a></code></div>
+<code><a href="../../Filter.html#l">l</a>, <a href="../../Filter.html#options">options</a></code></div>
 </section>
 </li>
 <!-- ======== CONSTRUCTOR SUMMARY ======== -->
@@ -141,12 +141,12 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setCurve1(it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.acrossfade.Curve)" class="member-name-link">setCurve1</a><wbr>(@NotNull <a href="Curve.html" title="class in it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.acrossfade">Curve</a>&nbsp;curve1)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setCurve1(java.lang.String)" class="member-name-link">setCurve1</a><wbr>(@NotNull <a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;curve1)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">This method sets the "curve1" parameter's value.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setCurve2(it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.acrossfade.Curve)" class="member-name-link">setCurve2</a><wbr>(@NotNull <a href="Curve.html" title="class in it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.acrossfade">Curve</a>&nbsp;curve2)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setCurve2(java.lang.String)" class="member-name-link">setCurve2</a><wbr>(@NotNull <a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;curve2)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">This method sets the "curve2" parameter's value.</div>
 </div>
@@ -209,13 +209,8 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="&lt;init&gt;()">
 <h3>ACrossFade</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">ACrossFade</span>()
-           throws <span class="exceptions"><a href="../../../../../../exceptions/InvalidArgumentException.html" title="class in it.disi.unitn.exceptions">InvalidArgumentException</a></span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">ACrossFade</span>()</div>
 <div class="block">This class's constructor.</div>
-<dl class="notes">
-<dt>Throws:</dt>
-<dd><code><a href="../../../../../../exceptions/InvalidArgumentException.html" title="class in it.disi.unitn.exceptions">InvalidArgumentException</a></code> - If the given filter's name is null or an empty string</dd>
-</dl>
 </div>
 </section>
 </li>
@@ -321,35 +316,35 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="detail" id="setCurve1(it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.acrossfade.Curve)">
+<section class="detail" id="setCurve1(java.lang.String)">
 <h3>setCurve1</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setCurve1</span><wbr><span class="parameters">(@NotNull
- @NotNull <a href="Curve.html" title="class in it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.acrossfade">Curve</a>&nbsp;curve1)</span>
+ @NotNull <a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;curve1)</span>
                throws <span class="exceptions"><a href="../../../../../../exceptions/InvalidArgumentException.html" title="class in it.disi.unitn.exceptions">InvalidArgumentException</a></span></div>
 <div class="block">This method sets the "curve1" parameter's value.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>curve1</code> - The given <a href="Curve.html" title="class in it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.acrossfade"><code>Curve</code></a> instance. This value cannot be null.</dd>
+<dd><code>curve1</code> - The name of the chosen curve. This value cannot be null or an empty string.</dd>
 <dt>Throws:</dt>
-<dd><code><a href="../../../../../../exceptions/InvalidArgumentException.html" title="class in it.disi.unitn.exceptions">InvalidArgumentException</a></code> - If the given <a href="Curve.html" title="class in it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.acrossfade"><code>Curve</code></a> instance is null</dd>
+<dd><code><a href="../../../../../../exceptions/InvalidArgumentException.html" title="class in it.disi.unitn.exceptions">InvalidArgumentException</a></code> - If the given curve name is null or an empty string</dd>
 </dl>
 </div>
 </section>
 </li>
 <li>
-<section class="detail" id="setCurve2(it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.acrossfade.Curve)">
+<section class="detail" id="setCurve2(java.lang.String)">
 <h3>setCurve2</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setCurve2</span><wbr><span class="parameters">(@NotNull
- @NotNull <a href="Curve.html" title="class in it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.acrossfade">Curve</a>&nbsp;curve2)</span>
+ @NotNull <a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;curve2)</span>
                throws <span class="exceptions"><a href="../../../../../../exceptions/InvalidArgumentException.html" title="class in it.disi.unitn.exceptions">InvalidArgumentException</a></span></div>
 <div class="block">This method sets the "curve2" parameter's value.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>curve2</code> - The given <a href="Curve.html" title="class in it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.acrossfade"><code>Curve</code></a> instance. This value cannot be null.</dd>
+<dd><code>curve2</code> - The name of the chosen curve. This value cannot be null or an empty string.</dd>
 <dt>Throws:</dt>
-<dd><code><a href="../../../../../../exceptions/InvalidArgumentException.html" title="class in it.disi.unitn.exceptions">InvalidArgumentException</a></code> - If the given <a href="Curve.html" title="class in it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.acrossfade"><code>Curve</code></a> instance is null</dd>
+<dd><code><a href="../../../../../../exceptions/InvalidArgumentException.html" title="class in it.disi.unitn.exceptions">InvalidArgumentException</a></code> - If the given curve name is null or an empty string</dd>
 </dl>
 </div>
 </section>

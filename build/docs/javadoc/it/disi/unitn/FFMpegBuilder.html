@@ -73,7 +73,6 @@ loadScripts(document, 'script');</script>
 <li><a href="#getCommand()" tabindex="0">getCommand()</a></li>
 <li><a href="#add(java.lang.String)" tabindex="0">add(String)</a></li>
 <li><a href="#add(int,java.lang.String)" tabindex="0">add(int, String)</a></li>
-<li><a href="#getLCommand()" tabindex="0">getLCommand()</a></li>
 <li><a href="#resetCommand(java.lang.String)" tabindex="0">resetCommand(String)</a></li>
 <li><a href="#addInput(java.lang.String)" tabindex="0">addInput(String)</a></li>
 <li><a href="#newTracksMerger(java.lang.String,java.lang.String,java.lang.String)" tabindex="0">newTracksMerger(String, String, String)</a></li>
@@ -83,6 +82,10 @@ loadScripts(document, 'script');</script>
 <li><a href="#newAudioFiltering(java.lang.String)" tabindex="0">newAudioFiltering(String)</a></li>
 <li><a href="#addAllInputs(java.lang.String...)" tabindex="0">addAllInputs(String...)</a></li>
 <li><a href="#addAllInputs(java.util.List)" tabindex="0">addAllInputs(List)</a></li>
+<li><a href="#removeParam(java.lang.String)" tabindex="0">removeParam(String)</a></li>
+<li><a href="#modifyParam(java.lang.String,java.lang.String)" tabindex="0">modifyParam(String, String)</a></li>
+<li><a href="#modifyParams(java.util.function.Consumer)" tabindex="0">modifyParams(Consumer)</a></li>
+<li><a href="#modifyLast(java.lang.String)" tabindex="0">modifyLast(String)</a></li>
 <li><a href="#addOutput(java.lang.String)" tabindex="0">addOutput(String)</a></li>
 </ol>
 </li>
@@ -99,7 +102,7 @@ loadScripts(document, 'script');</script>
 <section class="class-description" id="class-description">
 <div class="horizontal-scroll">
 <hr>
-<div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">FFMpegBuilder</span>
+<div class="type-signature"><span class="modifiers">public final class </span><span class="element-name type-name-label">FFMpegBuilder</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
 <div class="block">Builder class for convenience class FFMpeg</div>
 </div>
@@ -163,7 +166,7 @@ loadScripts(document, 'script');</script>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Adds the path of an output file to the command.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="FFMpeg.html" title="class in it.disi.unitn">FFMpeg</a></code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@NotNull <a href="FFMpeg.html" title="class in it.disi.unitn">FFMpeg</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#build()" class="member-name-link">build</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Creates a new FFMpeg instance using the information given to this FFMpegBuilder instance.</div>
@@ -173,23 +176,28 @@ loadScripts(document, 'script');</script>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Convenience method to get the ffmpeg command to be executed.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a><wbr>&lt;<a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getLCommand()" class="member-name-link">getLCommand</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Convenience method to get the FFmpeg command to be executed as a List instance.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="lasagna/audiocreator/AudioFiltering.html" title="class in it.disi.unitn.lasagna.audiocreator">AudioFiltering</a></code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#modifyLast(java.lang.String)" class="member-name-link">modifyLast</a><wbr>(@NotNull <a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;newVal)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#modifyParam(java.lang.String,java.lang.String)" class="member-name-link">modifyParam</a><wbr>(@NotNull <a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;oldVal,
+ @NotNull <a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;newVal)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#modifyParams(java.util.function.Consumer)" class="member-name-link">modifyParams</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/util/function/Consumer.html" title="class or interface in java.util.function" class="external-link">Consumer</a>&lt;? super <a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;&nbsp;action)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@NotNull <a href="lasagna/audiocreator/AudioFiltering.html" title="class in it.disi.unitn.lasagna.audiocreator">AudioFiltering</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#newAudioFiltering(java.lang.String)" class="member-name-link">newAudioFiltering</a><wbr>(@NotNull <a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;outputFile)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">This method returns a new AudioFiltering instance.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="videocreator/TracksMerger.html" title="class in it.disi.unitn.videocreator">TracksMerger</a></code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@NotNull <a href="videocreator/TracksMerger.html" title="class in it.disi.unitn.videocreator">TracksMerger</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#newTracksMerger(java.lang.String)" class="member-name-link">newTracksMerger</a><wbr>(@NotNull <a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;outputFile)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">This method performs the same action as newTracksMerger(String, String, String), but it should be used only when
  creating the final output video.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="videocreator/TracksMerger.html" title="class in it.disi.unitn.videocreator">TracksMerger</a></code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@NotNull <a href="videocreator/TracksMerger.html" title="class in it.disi.unitn.videocreator">TracksMerger</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#newTracksMerger(java.lang.String,java.lang.String,java.lang.String)" class="member-name-link">newTracksMerger</a><wbr>(@NotNull <a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;outputFile,
  @NotNull <a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;audioInput,
  @NotNull <a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;videoInput)</code></div>
@@ -202,15 +210,18 @@ loadScripts(document, 'script');</script>
 <div class="block">Returns a new VideoCreator instance given the path to the output file, the path to the input folder and the
  output file's extension.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="videocreator/transcoder/VideoTranscoder.html" title="class in it.disi.unitn.videocreator.transcoder">VideoTranscoder</a></code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@NotNull <a href="videocreator/transcoder/VideoTranscoder.html" title="class in it.disi.unitn.videocreator.transcoder">VideoTranscoder</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#newVideoTranscoder(java.lang.String)" class="member-name-link">newVideoTranscoder</a><wbr>(@NotNull <a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;outputFile)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns a new VideoTranscoder instance given the path to the output file, the path to the input folder and the
  output file's extension.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#resetCommand(java.lang.String)" class="member-name-link">resetCommand</a><wbr>(@Nullable <a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;pathToFFMpeg)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#removeParam(java.lang.String)" class="member-name-link">removeParam</a><wbr>(@NotNull <a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;e)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#resetCommand(java.lang.String)" class="member-name-link">resetCommand</a><wbr>(@Nullable <a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;pathToFFMpeg)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">This method allows the user to reset the command of this Builder.</div>
 </div>
 </div>
@@ -261,7 +272,10 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="build()">
 <h3>build</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="FFMpeg.html" title="class in it.disi.unitn">FFMpeg</a></span>&nbsp;<span class="element-name">build</span>()</div>
+<div class="member-signature"><span class="annotations">@Contract(value=" -&gt; new",
+          pure=true)
+@NotNull
+</span><span class="modifiers">public</span>&nbsp;<span class="return-type">@NotNull <a href="FFMpeg.html" title="class in it.disi.unitn">FFMpeg</a></span>&nbsp;<span class="element-name">build</span>()</div>
 <div class="block">Creates a new FFMpeg instance using the information given to this FFMpegBuilder instance.</div>
 <dl class="notes">
 <dt>Returns:</dt>
@@ -320,19 +334,6 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="detail" id="getLCommand()">
-<h3>getLCommand</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;</span>&nbsp;<span class="element-name">getLCommand</span>()</div>
-<div class="block">Convenience method to get the FFmpeg command to be executed as a List instance.</div>
-<dl class="notes">
-<dt>Returns:</dt>
-<dd>The FFmpeg command to be executed as a List instance</dd>
-</dl>
-</div>
-</section>
-</li>
-<li>
 <section class="detail" id="resetCommand(java.lang.String)">
 <h3>resetCommand</h3>
 <div class="horizontal-scroll">
@@ -375,13 +376,14 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="newTracksMerger(java.lang.String,java.lang.String,java.lang.String)">
 <h3>newTracksMerger</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="videocreator/TracksMerger.html" title="class in it.disi.unitn.videocreator">TracksMerger</a></span>&nbsp;<span class="element-name">newTracksMerger</span><wbr><span class="parameters">(@NotNull
+<div class="member-signature"><span class="annotations">@Contract("_, _, _ -&gt; new")
+@NotNull
+</span><span class="modifiers">public</span>&nbsp;<span class="return-type">@NotNull <a href="videocreator/TracksMerger.html" title="class in it.disi.unitn.videocreator">TracksMerger</a></span>&nbsp;<span class="element-name">newTracksMerger</span><wbr><span class="parameters">(@NotNull
  @NotNull <a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;outputFile,
  @NotNull
  @NotNull <a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;audioInput,
  @NotNull
- @NotNull <a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;videoInput)</span>
-                             throws <span class="exceptions"><a href="exceptions/InvalidArgumentException.html" title="class in it.disi.unitn.exceptions">InvalidArgumentException</a></span></div>
+ @NotNull <a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;videoInput)</span></div>
 <div class="block">Create a new TracksMerger instance given a video output file and an audio and a video input file.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -390,8 +392,6 @@ loadScripts(document, 'script');</script>
 <dd><code>videoInput</code> - The given video input file</dd>
 <dt>Returns:</dt>
 <dd>The newly created TracksMerger instance</dd>
-<dt>Throws:</dt>
-<dd><code><a href="exceptions/InvalidArgumentException.html" title="class in it.disi.unitn.exceptions">InvalidArgumentException</a></code> - If the TracksMerger's constructor throws this exception</dd>
 </dl>
 </div>
 </section>
@@ -400,9 +400,10 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="newTracksMerger(java.lang.String)">
 <h3>newTracksMerger</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="videocreator/TracksMerger.html" title="class in it.disi.unitn.videocreator">TracksMerger</a></span>&nbsp;<span class="element-name">newTracksMerger</span><wbr><span class="parameters">(@NotNull
- @NotNull <a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;outputFile)</span>
-                             throws <span class="exceptions"><a href="exceptions/InvalidArgumentException.html" title="class in it.disi.unitn.exceptions">InvalidArgumentException</a></span></div>
+<div class="member-signature"><span class="annotations">@Contract("_ -&gt; new")
+@NotNull
+</span><span class="modifiers">public</span>&nbsp;<span class="return-type">@NotNull <a href="videocreator/TracksMerger.html" title="class in it.disi.unitn.videocreator">TracksMerger</a></span>&nbsp;<span class="element-name">newTracksMerger</span><wbr><span class="parameters">(@NotNull
+ @NotNull <a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;outputFile)</span></div>
 <div class="block">This method performs the same action as newTracksMerger(String, String, String), but it should be used only when
  creating the final output video.</div>
 <dl class="notes">
@@ -410,8 +411,6 @@ loadScripts(document, 'script');</script>
 <dd><code>outputFile</code> - The path to the output file</dd>
 <dt>Returns:</dt>
 <dd>The newly created TracksMerger instance</dd>
-<dt>Throws:</dt>
-<dd><code><a href="exceptions/InvalidArgumentException.html" title="class in it.disi.unitn.exceptions">InvalidArgumentException</a></code> - If the TracksMerger's constructor throws this exception</dd>
 </dl>
 </div>
 </section>
@@ -441,9 +440,10 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="newVideoTranscoder(java.lang.String)">
 <h3>newVideoTranscoder</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="videocreator/transcoder/VideoTranscoder.html" title="class in it.disi.unitn.videocreator.transcoder">VideoTranscoder</a></span>&nbsp;<span class="element-name">newVideoTranscoder</span><wbr><span class="parameters">(@NotNull
- @NotNull <a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;outputFile)</span>
-                                   throws <span class="exceptions"><a href="exceptions/InvalidArgumentException.html" title="class in it.disi.unitn.exceptions">InvalidArgumentException</a></span></div>
+<div class="member-signature"><span class="annotations">@Contract("_ -&gt; new")
+@NotNull
+</span><span class="modifiers">public</span>&nbsp;<span class="return-type">@NotNull <a href="videocreator/transcoder/VideoTranscoder.html" title="class in it.disi.unitn.videocreator.transcoder">VideoTranscoder</a></span>&nbsp;<span class="element-name">newVideoTranscoder</span><wbr><span class="parameters">(@NotNull
+ @NotNull <a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;outputFile)</span></div>
 <div class="block">Returns a new VideoTranscoder instance given the path to the output file, the path to the input folder and the
  output file's extension.</div>
 <dl class="notes">
@@ -451,8 +451,6 @@ loadScripts(document, 'script');</script>
 <dd><code>outputFile</code> - The path to the output file</dd>
 <dt>Returns:</dt>
 <dd>A new VideoTranscoder instance</dd>
-<dt>Throws:</dt>
-<dd><code><a href="exceptions/InvalidArgumentException.html" title="class in it.disi.unitn.exceptions">InvalidArgumentException</a></code> - If at least one of the given arguments is null or an empty string</dd>
 </dl>
 </div>
 </section>
@@ -461,9 +459,11 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="newAudioFiltering(java.lang.String)">
 <h3>newAudioFiltering</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="lasagna/audiocreator/AudioFiltering.html" title="class in it.disi.unitn.lasagna.audiocreator">AudioFiltering</a></span>&nbsp;<span class="element-name">newAudioFiltering</span><wbr><span class="parameters">(@NotNull
+<div class="member-signature"><span class="annotations">@Contract("_ -&gt; new")
+@NotNull
+</span><span class="modifiers">public</span>&nbsp;<span class="return-type">@NotNull <a href="lasagna/audiocreator/AudioFiltering.html" title="class in it.disi.unitn.lasagna.audiocreator">AudioFiltering</a></span>&nbsp;<span class="element-name">newAudioFiltering</span><wbr><span class="parameters">(@NotNull
  @NotNull <a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;outputFile)</span>
-                                 throws <span class="exceptions"><a href="exceptions/InvalidArgumentException.html" title="class in it.disi.unitn.exceptions">InvalidArgumentException</a></span></div>
+                                          throws <span class="exceptions"><a href="exceptions/InvalidArgumentException.html" title="class in it.disi.unitn.exceptions">InvalidArgumentException</a></span></div>
 <div class="block">This method returns a new AudioFiltering instance.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -509,6 +509,53 @@ loadScripts(document, 'script');</script>
 <dt>Throws:</dt>
 <dd><code><a href="exceptions/InvalidArgumentException.html" title="class in it.disi.unitn.exceptions">InvalidArgumentException</a></code> - When the argument given to this method is null or contains a null value or an
  empty string</dd>
+</dl>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="removeParam(java.lang.String)">
+<h3>removeParam</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">removeParam</span><wbr><span class="parameters">(@NotNull
+ @NotNull <a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;e)</span></div>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="modifyParam(java.lang.String,java.lang.String)">
+<h3>modifyParam</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">modifyParam</span><wbr><span class="parameters">(@NotNull
+ @NotNull <a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;oldVal,
+ @NotNull
+ @NotNull <a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;newVal)</span>
+                 throws <span class="exceptions"><a href="exceptions/InvalidArgumentException.html" title="class in it.disi.unitn.exceptions">InvalidArgumentException</a></span></div>
+<dl class="notes">
+<dt>Throws:</dt>
+<dd><code><a href="exceptions/InvalidArgumentException.html" title="class in it.disi.unitn.exceptions">InvalidArgumentException</a></code></dd>
+</dl>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="modifyParams(java.util.function.Consumer)">
+<h3>modifyParams</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">modifyParams</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/util/function/Consumer.html" title="class or interface in java.util.function" class="external-link">Consumer</a>&lt;? super <a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;&nbsp;action)</span></div>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="modifyLast(java.lang.String)">
+<h3>modifyLast</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">modifyLast</span><wbr><span class="parameters">(@NotNull
+ @NotNull <a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;newVal)</span>
+                throws <span class="exceptions"><a href="exceptions/InvalidArgumentException.html" title="class in it.disi.unitn.exceptions">InvalidArgumentException</a></span></div>
+<dl class="notes">
+<dt>Throws:</dt>
+<dd><code><a href="exceptions/InvalidArgumentException.html" title="class in it.disi.unitn.exceptions">InvalidArgumentException</a></code></dd>
 </dl>
 </div>
 </section>

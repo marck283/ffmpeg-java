@@ -66,6 +66,7 @@ loadScripts(document, 'script');</script>
 <li><a href="#field-detail" tabindex="0">Field Details</a>
 <ol class="toc-list">
 <li><a href="#options" tabindex="0">options</a></li>
+<li><a href="#l" tabindex="0">l</a></li>
 </ol>
 </li>
 <li><a href="#constructor-detail" tabindex="0">Constructor Details</a>
@@ -116,9 +117,12 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Field</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color"><code>protected final <a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a><wbr>&lt;<a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;</code></div>
-<div class="col-second even-row-color"><code><a href="#options" class="member-name-link">options</a></code></div>
-<div class="col-last even-row-color">
+<div class="col-first even-row-color"><code>protected final <a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/util/Locale.html" title="class or interface in java.util" class="external-link">Locale</a></code></div>
+<div class="col-second even-row-color"><code><a href="#l" class="member-name-link">l</a></code></div>
+<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-first odd-row-color"><code>protected final <a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a><wbr>&lt;<a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;</code></div>
+<div class="col-second odd-row-color"><code><a href="#options" class="member-name-link">options</a></code></div>
+<div class="col-last odd-row-color">
 <div class="block">The set of options to be used in the filter.</div>
 </div>
 </div>
@@ -209,6 +213,14 @@ loadScripts(document, 'script');</script>
 </div>
 </section>
 </li>
+<li>
+<section class="detail" id="l">
+<h3>l</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">protected final</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/util/Locale.html" title="class or interface in java.util" class="external-link">Locale</a></span>&nbsp;<span class="element-name">l</span></div>
+</div>
+</section>
+</li>
 </ul>
 </section>
 </li>
@@ -222,14 +234,11 @@ loadScripts(document, 'script');</script>
 <h3>Filter</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="element-name">Filter</span><wbr><span class="parameters">(@NotNull
- @NotNull <a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;filterName)</span>
-          throws <span class="exceptions"><a href="../../../../exceptions/InvalidArgumentException.html" title="class in it.disi.unitn.exceptions">InvalidArgumentException</a></span></div>
+ @NotNull <a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;filterName)</span></div>
 <div class="block">This class's constructor. Constructs a new filter (whether video or audio).</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>filterName</code> - The given filter's name.</dd>
-<dt>Throws:</dt>
-<dd><code><a href="../../../../exceptions/InvalidArgumentException.html" title="class in it.disi.unitn.exceptions">InvalidArgumentException</a></code> - If the given filter's name is null or an empty string</dd>
 </dl>
 </div>
 </section>

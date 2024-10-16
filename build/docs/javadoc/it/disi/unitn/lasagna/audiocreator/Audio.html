@@ -155,19 +155,15 @@ loadScripts(document, 'script');</script>
  @NotNull
  @NotNull <a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;voiceType,
  @NotNull
- @NotNull <a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;encoding)</span>
-      throws <span class="exceptions"><a href="../../exceptions/InvalidArgumentException.html" title="class in it.disi.unitn.exceptions">InvalidArgumentException</a></span></div>
+ @NotNull <a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;encoding)</span></div>
 <div class="block">This class's constructor</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>description</code> - The description to be narrated in the audio track. Cannot be null or an empty string.</dd>
-<dd><code>language</code> - The langage spoken by the selected voice. Cannot be null or an empty string.</dd>
+<dd><code>language</code> - The language spoken by the selected voice. Cannot be null or an empty string.</dd>
 <dd><code>voiceType</code> - The given voice type. Can be either "male" or "female". Cannot be null or an empty string.</dd>
 <dd><code>encoding</code> - The given audio encoding. Cannot be null or an empty string. Must be equal to "mp3", "linear16",
                  "ogg_opus", "mulaw" or "alaw" and must be compatible with the audio output format.</dd>
-<dt>Throws:</dt>
-<dd><code><a href="../../exceptions/InvalidArgumentException.html" title="class in it.disi.unitn.exceptions">InvalidArgumentException</a></code> - If any of the given parameters is null or an empty string, or the given voice
- type or the given encoding values are incompatible with the specification given above.</dd>
 </dl>
 </div>
 </section>

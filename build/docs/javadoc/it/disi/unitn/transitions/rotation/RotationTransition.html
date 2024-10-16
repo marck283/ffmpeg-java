@@ -70,7 +70,7 @@ loadScripts(document, 'script');</script>
 <li><a href="#method-detail" tabindex="0">Method Details</a>
 <ol class="toc-list">
 <li><a href="#rotate(int,int,double,java.lang.String,java.lang.String,java.awt.Color)" tabindex="0">rotate(int, int, double, String, String, Color)</a></li>
-<li><a href="#performRotation(long,java.util.concurrent.TimeUnit,java.lang.String,java.lang.String,it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.scale.ScalingParams)" tabindex="0">performRotation(long, TimeUnit, String, String, ScalingParams)</a></li>
+<li><a href="#performRotation(long,java.util.concurrent.TimeUnit,java.lang.String,java.lang.String,it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.scale.scalingalgs.ScalingAlgorithm,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,int)" tabindex="0">performRotation(long, TimeUnit, String, String, ScalingAlgorithm, String, String, String, String, String, String, String, String, String, String, int)</a></li>
 <li><a href="#dispose()" tabindex="0">dispose()</a></li>
 </ol>
 </li>
@@ -129,11 +129,22 @@ loadScripts(document, 'script');</script>
 <div class="block">This method disposes of the underlying objects used in this class.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#performRotation(long,java.util.concurrent.TimeUnit,java.lang.String,java.lang.String,it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.scale.ScalingParams)" class="member-name-link">performRotation</a><wbr>(long&nbsp;timeout,
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#performRotation(long,java.util.concurrent.TimeUnit,java.lang.String,java.lang.String,it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.scale.scalingalgs.ScalingAlgorithm,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,int)" class="member-name-link">performRotation</a><wbr>(long&nbsp;timeout,
  @NotNull <a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/util/concurrent/TimeUnit.html" title="class or interface in java.util.concurrent" class="external-link">TimeUnit</a>&nbsp;tu,
  @NotNull <a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;outfile,
  @NotNull <a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;fileExt,
- @NotNull <a href="../../videocreator/filtergraph/filterchain/filters/videofilters/scale/ScalingParams.html" title="class in it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.scale">ScalingParams</a>&nbsp;scalingParams)</code></div>
+ @NotNull <a href="../../videocreator/filtergraph/filterchain/filters/videofilters/scale/scalingalgs/ScalingAlgorithm.html" title="class in it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.scale.scalingalgs">ScalingAlgorithm</a>&nbsp;sws_flags,
+ @NotNull <a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;eval,
+ @NotNull <a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;interl,
+ @NotNull <a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;width,
+ @NotNull <a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;height,
+ @NotNull <a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;videoSizeID,
+ @NotNull <a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;in_range,
+ @NotNull <a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;out_range,
+ @NotNull <a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;force_original_aspect_ratio,
+ @NotNull <a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;inColMatrix,
+ @NotNull <a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;outColorMatrix,
+ int&nbsp;force_divisible_by)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">This method allows the user to create the output video.</div>
 </div>
@@ -175,8 +186,7 @@ loadScripts(document, 'script');</script>
  @NotNull
  @NotNull <a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;videoOutDir,
  @NotNull
- @NotNull <a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;fname)</span>
-                   throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/io/IOException.html" title="class or interface in java.io" class="external-link">IOException</a></span></div>
+ @NotNull <a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;fname)</span></div>
 <div class="block">The class's constructor. None of the given values can be null or empty strings.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -184,8 +194,6 @@ loadScripts(document, 'script');</script>
 <dd><code>tempOutDir</code> - The given temporary output directory's path.</dd>
 <dd><code>videoOutDir</code> - The temporary video output directory's path.</dd>
 <dd><code>fname</code> - The output file's name.</dd>
-<dt>Throws:</dt>
-<dd><code><a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/io/IOException.html" title="class or interface in java.io" class="external-link">IOException</a></code> - if an error occurs during reading or when not able to create required ImageInputStream</dd>
 </dl>
 </div>
 </section>
@@ -211,9 +219,7 @@ loadScripts(document, 'script');</script>
  @NotNull <a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name,
  @NotNull
  @NotNull <a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.desktop/java/awt/Color.html" title="class or interface in java.awt" class="external-link">Color</a>&nbsp;color)</span>
-            throws <span class="exceptions"><a href="../../exceptions/RotationFailedException.html" title="class in it.disi.unitn.exceptions">RotationFailedException</a>,
-<a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/io/IOException.html" title="class or interface in java.io" class="external-link">IOException</a>,
-<a href="../../exceptions/InvalidArgumentException.html" title="class in it.disi.unitn.exceptions">InvalidArgumentException</a></span></div>
+            throws <span class="exceptions"><a href="../../exceptions/InvalidArgumentException.html" title="class in it.disi.unitn.exceptions">InvalidArgumentException</a></span></div>
 <div class="block">This method performs the rotation.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -224,15 +230,13 @@ loadScripts(document, 'script');</script>
 <dd><code>name</code> - The given output file's name.</dd>
 <dd><code>color</code> - The chosen Color instance</dd>
 <dt>Throws:</dt>
-<dd><code><a href="../../exceptions/RotationFailedException.html" title="class in it.disi.unitn.exceptions">RotationFailedException</a></code> - If the rotation fails for any reason</dd>
-<dd><code><a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/io/IOException.html" title="class or interface in java.io" class="external-link">IOException</a></code> - if an error occurs during reading or when not able to create required ImageInputStream</dd>
 <dd><code><a href="../../exceptions/InvalidArgumentException.html" title="class in it.disi.unitn.exceptions">InvalidArgumentException</a></code> - If one of the non-null arguments is null or an empty string</dd>
 </dl>
 </div>
 </section>
 </li>
 <li>
-<section class="detail" id="performRotation(long,java.util.concurrent.TimeUnit,java.lang.String,java.lang.String,it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.scale.ScalingParams)">
+<section class="detail" id="performRotation(long,java.util.concurrent.TimeUnit,java.lang.String,java.lang.String,it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.scale.scalingalgs.ScalingAlgorithm,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,int)">
 <h3>performRotation</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">performRotation</span><wbr><span class="parameters">(long&nbsp;timeout,
@@ -243,7 +247,28 @@ loadScripts(document, 'script');</script>
  @NotNull
  @NotNull <a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;fileExt,
  @NotNull
- @NotNull <a href="../../videocreator/filtergraph/filterchain/filters/videofilters/scale/ScalingParams.html" title="class in it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.scale">ScalingParams</a>&nbsp;scalingParams)</span>
+ @NotNull <a href="../../videocreator/filtergraph/filterchain/filters/videofilters/scale/scalingalgs/ScalingAlgorithm.html" title="class in it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.scale.scalingalgs">ScalingAlgorithm</a>&nbsp;sws_flags,
+ @NotNull
+ @NotNull <a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;eval,
+ @NotNull
+ @NotNull <a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;interl,
+ @NotNull
+ @NotNull <a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;width,
+ @NotNull
+ @NotNull <a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;height,
+ @NotNull
+ @NotNull <a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;videoSizeID,
+ @NotNull
+ @NotNull <a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;in_range,
+ @NotNull
+ @NotNull <a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;out_range,
+ @NotNull
+ @NotNull <a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;force_original_aspect_ratio,
+ @NotNull
+ @NotNull <a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;inColMatrix,
+ @NotNull
+ @NotNull <a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;outColorMatrix,
+ int&nbsp;force_divisible_by)</span>
                      throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/Exception.html" title="class or interface in java.lang" class="external-link">Exception</a></span></div>
 <div class="block">This method allows the user to create the output video.</div>
 <dl class="notes">
@@ -252,7 +277,6 @@ loadScripts(document, 'script');</script>
 <dd><code>tu</code> - The given TimeUnit instance.</dd>
 <dd><code>outfile</code> - The given output file's path.</dd>
 <dd><code>fileExt</code> - The file's extension.</dd>
-<dd><code>scalingParams</code> - The scaling parameters.</dd>
 <dt>Throws:</dt>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/Exception.html" title="class or interface in java.lang" class="external-link">Exception</a></code> - If any exception is thrown</dd>
 </dl>

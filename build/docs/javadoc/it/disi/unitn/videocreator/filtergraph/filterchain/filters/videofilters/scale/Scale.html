@@ -66,7 +66,7 @@ loadScripts(document, 'script');</script>
 <li><a href="#constructor-detail" tabindex="0">Constructor Details</a>
 <ol class="toc-list">
 <li><a href="#%3Cinit%3E()" tabindex="0">Scale()</a></li>
-<li><a href="#%3Cinit%3E(it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.scale.ScalingParams)" tabindex="0">Scale(ScalingParams)</a></li>
+<li><a href="#%3Cinit%3E(it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.scale.scalingalgs.ScalingAlgorithm,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,int)" tabindex="0">Scale(ScalingAlgorithm, String, String, String, String, String, String, String, String, String, String, int)</a></li>
 </ol>
 </li>
 <li><a href="#method-detail" tabindex="0">Method Details</a>
@@ -130,7 +130,18 @@ loadScripts(document, 'script');</script>
 <div class="col-last even-row-color">
 <div class="block">This class's constructor.</div>
 </div>
-<div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.scale.ScalingParams)" class="member-name-link">Scale</a><wbr>(@NotNull <a href="ScalingParams.html" title="class in it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.scale">ScalingParams</a>&nbsp;scalingParams)</code></div>
+<div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.scale.scalingalgs.ScalingAlgorithm,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,int)" class="member-name-link">Scale</a><wbr>(@NotNull <a href="scalingalgs/ScalingAlgorithm.html" title="class in it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.scale.scalingalgs">ScalingAlgorithm</a>&nbsp;sws_flags,
+ @NotNull <a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;eval,
+ @NotNull <a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;interl,
+ @NotNull <a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;width,
+ @NotNull <a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;height,
+ @NotNull <a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;videoSizeID,
+ @NotNull <a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;in_range,
+ @NotNull <a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;out_range,
+ @NotNull <a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;force_original_aspect_ratio,
+ @NotNull <a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;inColMatrix,
+ @NotNull <a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;outColorMatrix,
+ int&nbsp;force_divisible_by)</code></div>
 <div class="col-last odd-row-color">
 <div class="block">The class's constructor given pre-established scaling parameters.</div>
 </div>
@@ -235,31 +246,39 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="&lt;init&gt;()">
 <h3>Scale</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Scale</span>()
-      throws <span class="exceptions"><a href="../../../../../../exceptions/InvalidArgumentException.html" title="class in it.disi.unitn.exceptions">InvalidArgumentException</a></span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Scale</span>()</div>
 <div class="block">This class's constructor. Constructs a new "scale" filter.</div>
-<dl class="notes">
-<dt>Throws:</dt>
-<dd><code><a href="../../../../../../exceptions/InvalidArgumentException.html" title="class in it.disi.unitn.exceptions">InvalidArgumentException</a></code> - If the filter's name (given by this constructor to the superclass) is null or
- an empty string</dd>
-</dl>
 </div>
 </section>
 </li>
 <li>
-<section class="detail" id="&lt;init&gt;(it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.scale.ScalingParams)">
+<section class="detail" id="&lt;init&gt;(it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.scale.scalingalgs.ScalingAlgorithm,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,int)">
 <h3>Scale</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Scale</span><wbr><span class="parameters">(@NotNull
- @NotNull <a href="ScalingParams.html" title="class in it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.scale">ScalingParams</a>&nbsp;scalingParams)</span>
-      throws <span class="exceptions"><a href="../../../../../../exceptions/InvalidArgumentException.html" title="class in it.disi.unitn.exceptions">InvalidArgumentException</a></span></div>
+ @NotNull <a href="scalingalgs/ScalingAlgorithm.html" title="class in it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.scale.scalingalgs">ScalingAlgorithm</a>&nbsp;sws_flags,
+ @NotNull
+ @NotNull <a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;eval,
+ @NotNull
+ @NotNull <a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;interl,
+ @NotNull
+ @NotNull <a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;width,
+ @NotNull
+ @NotNull <a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;height,
+ @NotNull
+ @NotNull <a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;videoSizeID,
+ @NotNull
+ @NotNull <a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;in_range,
+ @NotNull
+ @NotNull <a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;out_range,
+ @NotNull
+ @NotNull <a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;force_original_aspect_ratio,
+ @NotNull
+ @NotNull <a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;inColMatrix,
+ @NotNull
+ @NotNull <a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;outColorMatrix,
+ int&nbsp;force_divisible_by)</span></div>
 <div class="block">The class's constructor given pre-established scaling parameters.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>scalingParams</code> - The given ScalingParams instance. This value cannot be null.</dd>
-<dt>Throws:</dt>
-<dd><code><a href="../../../../../../exceptions/InvalidArgumentException.html" title="class in it.disi.unitn.exceptions">InvalidArgumentException</a></code> - If the given value is null</dd>
-</dl>
 </div>
 </section>
 </li>

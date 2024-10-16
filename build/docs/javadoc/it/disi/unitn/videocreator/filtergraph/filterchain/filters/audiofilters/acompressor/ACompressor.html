@@ -114,7 +114,7 @@ loadScripts(document, 'script');</script>
 <h2>Field Summary</h2>
 <div class="inherited-list">
 <h3 id="fields-inherited-from-class-it.disi.unitn.videocreator.filtergraph.filterchain.filters.Filter">Fields inherited from class&nbsp;it.disi.unitn.videocreator.filtergraph.filterchain.filters.<a href="../../Filter.html" title="class in it.disi.unitn.videocreator.filtergraph.filterchain.filters">Filter</a></h3>
-<code><a href="../../Filter.html#options">options</a></code></div>
+<code><a href="../../Filter.html#l">l</a>, <a href="../../Filter.html#options">options</a></code></div>
 </section>
 </li>
 <!-- ======== CONSTRUCTOR SUMMARY ======== -->
@@ -227,14 +227,8 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="&lt;init&gt;()">
 <h3>ACompressor</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">ACompressor</span>()
-            throws <span class="exceptions"><a href="../../../../../../exceptions/InvalidArgumentException.html" title="class in it.disi.unitn.exceptions">InvalidArgumentException</a></span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">ACompressor</span>()</div>
 <div class="block">The class's constructor.</div>
-<dl class="notes">
-<dt>Throws:</dt>
-<dd><code><a href="../../../../../../exceptions/InvalidArgumentException.html" title="class in it.disi.unitn.exceptions">InvalidArgumentException</a></code> - If the filter's name (given by this constructor to the superclass) is null or
- an empty string</dd>
-</dl>
 </div>
 </section>
 </li>
@@ -323,7 +317,7 @@ loadScripts(document, 'script');</script>
 <dd><code>val</code> - The amount of milliseconds the signal has to rise above the threshold before gain reduction starts</dd>
 <dt>Throws:</dt>
 <dd><code><a href="../../../../../../exceptions/InvalidArgumentException.html" title="class in it.disi.unitn.exceptions">InvalidArgumentException</a></code> - If the given amount of milliseconds the signal has to rise above the threshold before
- gain reduction starts is less than 0.01 or greater than 2000</dd>
+                                  gain reduction starts is less than 0.01 or greater than 2000</dd>
 </dl>
 </div>
 </section>
@@ -340,7 +334,7 @@ loadScripts(document, 'script');</script>
 <dd><code>val</code> - The amount of milliseconds the signal has to fall below the threshold before reduction is decreased again</dd>
 <dt>Throws:</dt>
 <dd><code><a href="../../../../../../exceptions/InvalidArgumentException.html" title="class in it.disi.unitn.exceptions">InvalidArgumentException</a></code> - If the given amount of milliseconds the signal has to fall below the threshold before
- reduction is decreased again is less than 0.01 or greater than 9000</dd>
+                                  reduction is decreased again is less than 0.01 or greater than 9000</dd>
 </dl>
 </div>
 </section>

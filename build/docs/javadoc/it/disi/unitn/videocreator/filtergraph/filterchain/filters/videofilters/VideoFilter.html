@@ -84,7 +84,7 @@ loadScripts(document, 'script');</script>
 <div class="horizontal-scroll">
 <dl class="notes">
 <dt>Direct Known Subclasses:</dt>
-<dd><code><a href="buffer/Buffer.html" title="class in it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.buffer">Buffer</a></code>, <code><a href="sinks/buffersink/BufferSink.html" title="class in it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.sinks.buffersink">BufferSink</a></code>, <code><a href="drawtext/DrawText.html" title="class in it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.drawtext">DrawText</a></code>, <code><a href="format/Format.html" title="class in it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.format">Format</a></code>, <code><a href="geq/Geq.html" title="class in it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.geq">Geq</a></code>, <code><a href="sinks/nullsink/NullSink.html" title="class in it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.sinks.nullsink">NullSink</a></code>, <code><a href="scale/Scale.html" title="class in it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.scale">Scale</a></code></dd>
+<dd><code><a href="buffer/Buffer.html" title="class in it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.buffer">Buffer</a></code>, <code><a href="sinks/buffersink/BufferSink.html" title="class in it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.sinks.buffersink">BufferSink</a></code>, <code><a href="drawtext/DrawText.html" title="class in it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.drawtext">DrawText</a></code>, <code><a href="format/Format.html" title="class in it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.format">Format</a></code>, <code><a href="fps/FPS.html" title="class in it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.fps">FPS</a></code>, <code><a href="geq/Geq.html" title="class in it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.geq">Geq</a></code>, <code><a href="sinks/nullsink/NullSink.html" title="class in it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.sinks.nullsink">NullSink</a></code>, <code><a href="scale/Scale.html" title="class in it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.scale">Scale</a></code></dd>
 </dl>
 <hr>
 <div class="type-signature"><span class="modifiers">public abstract class </span><span class="element-name type-name-label">VideoFilter</span>
@@ -100,7 +100,7 @@ loadScripts(document, 'script');</script>
 <h2>Field Summary</h2>
 <div class="inherited-list">
 <h3 id="fields-inherited-from-class-it.disi.unitn.videocreator.filtergraph.filterchain.filters.Filter">Fields inherited from class&nbsp;it.disi.unitn.videocreator.filtergraph.filterchain.filters.<a href="../Filter.html" title="class in it.disi.unitn.videocreator.filtergraph.filterchain.filters">Filter</a></h3>
-<code><a href="../Filter.html#options">options</a></code></div>
+<code><a href="../Filter.html#l">l</a>, <a href="../Filter.html#options">options</a></code></div>
 </section>
 </li>
 <!-- ======== CONSTRUCTOR SUMMARY ======== -->
@@ -146,14 +146,11 @@ loadScripts(document, 'script');</script>
 <h3>VideoFilter</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="element-name">VideoFilter</span><wbr><span class="parameters">(@NotNull
- @NotNull <a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;filterName)</span>
-               throws <span class="exceptions"><a href="../../../../../exceptions/InvalidArgumentException.html" title="class in it.disi.unitn.exceptions">InvalidArgumentException</a></span></div>
+ @NotNull <a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;filterName)</span></div>
 <div class="block">This class's constructor. Constructs a new video filter.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>filterName</code> - The given filter's name</dd>
-<dt>Throws:</dt>
-<dd><code><a href="../../../../../exceptions/InvalidArgumentException.html" title="class in it.disi.unitn.exceptions">InvalidArgumentException</a></code> - If the given filter's name is null or an empty string</dd>
 </dl>
 </div>
 </section>
