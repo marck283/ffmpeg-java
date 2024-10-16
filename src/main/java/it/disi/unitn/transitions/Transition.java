@@ -1,6 +1,5 @@
 package it.disi.unitn.transitions;
 
-import it.disi.unitn.exceptions.RotationFailedException;
 import it.disi.unitn.lasagna.MyFile;
 import org.jetbrains.annotations.NotNull;
 
