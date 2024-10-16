@@ -43,15 +43,36 @@ public class Scale extends VideoFilter {
                  @NotNull String inColMatrix, @NotNull String outColorMatrix, int force_divisible_by) {
         super("scale");
 
-        if(sws_flags == null || checkNullOrEmpty(eval, interl, width, height, videoSizeID, in_range, out_range,
+        if(sws_flags == null || checkNullOrEmpty(eval, interl, in_range, out_range,
                 force_original_aspect_ratio, inColMatrix, outColorMatrix)) {
             printMsg("The scaling parameters arguments given to this constructor cannot be null.",
                     "L'istanza dei parametri di scaling fornita a questo costruttore non puo' essere null.");
+            System.exit(1);
+        }
+
+        if(StringExt.checkNullOrEmpty(width) && StringExt.checkNullOrEmpty(height) && StringExt.checkNullOrEmpty(videoSizeID)) {
+            printMsg("Either the frames' width and height or their size's ID must be set.",
+                    "Almeno un parametro tra le dimensioni dei frame e l'ID della dimensione deve essere impostato.");
+            System.exit(2);
+        }
+
+        if((StringExt.checkNullOrEmpty(width) && !StringExt.checkNullOrEmpty(height)) ||
+                (!StringExt.checkNullOrEmpty(width) && StringExt.checkNullOrEmpty(height))) {
+            printMsg("The width and height must be set at the same time.", "La larghezza e l'altezza devono " +
+                    "essere impostate contemporaneamente.");
+            System.exit(3);
+        }
+
+        if(!StringExt.checkNullOrEmpty(width) && !StringExt.checkNullOrEmpty(height) && !StringExt.checkNullOrEmpty(videoSizeID)) {
+            printMsg("The frames' size and the size ID cannot be set at the same time.", "Le dimensioni dei " +
+                    "frame e l'ID della dimensione non possono essere impostati contemporaneamente.");
+            System.exit(4);
         }
 
         if(force_divisible_by <= 0) {
             printMsg("The force_divisible_by argument cannot be less than or equal to zero.", "L'argomento " +
                     "force_divisible_by non puo' essere minore o uguale a zero.");
+            System.exit(5);
         }
 
         this.scalingParams = new ScalingParams(sws_flags, eval, interl, width, height, videoSizeID, in_range, out_range,

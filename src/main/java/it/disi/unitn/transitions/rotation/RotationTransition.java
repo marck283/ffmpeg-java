@@ -6,6 +6,7 @@ import it.disi.unitn.lasagna.MyFile;
 import it.disi.unitn.videocreator.TracksMerger;
 import it.disi.unitn.videocreator.filtergraph.VideoFilterGraph;
 import it.disi.unitn.videocreator.filtergraph.filterchain.VideoSimpleFilterChain;
+import it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.fps.FPS;
 import it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.scale.Scale;
 import it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.scale.scalingalgs.ScalingAlgorithm;
 import org.jetbrains.annotations.NotNull;
@@ -75,9 +76,13 @@ public class RotationTransition {
                 inColMatrix, outColorMatrix, force_divisible_by);
         scale.updateMap();
 
+        FPS fps = new FPS();
+        fps.setFPS("60*pal/pal");
+        fps.updateMap();
+
         VideoFilterGraph vsfg = new VideoFilterGraph();
         VideoSimpleFilterChain vsfc = new VideoSimpleFilterChain();
-        vsfc.addFilter(scale);
+        vsfc.addAllFilters(scale, fps);
         vsfg.addFilterChain(vsfc);
         merger.setVideoSimpleFilterGraph(vsfg);
 
