@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="it.disi.unitn.transition.rotation.RotationTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-10-16T20:20:41" hostname="marco-lasagna-Dell-G15-5530" time="14.104">
+<testsuite name="it.disi.unitn.transition.rotation.RotationTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-10-16T20:39:02" hostname="marco-lasagna-Dell-G15-5530" time="14.252">
   <properties/>
-  <testcase name="test()" classname="it.disi.unitn.transition.rotation.RotationTest" time="14.104"/>
+  <testcase name="test()" classname="it.disi.unitn.transition.rotation.RotationTest" time="14.252"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[ffmpeg version 7.0.2-3ubuntu1 Copyright (c) 2000-2024 the FFmpeg developers
   built with gcc 14 (Ubuntu 14.2.0-2ubuntu1)
@@ -20,12 +20,12 @@ Input #0, concat, from '/home/marco-lasagna/IdeaProjects/ffmpeg-java/inputFile.t
 Stream mapping:
   Stream #0:0 -> #0:0 (mjpeg (native) -> h264 (libx264))
 Press [q] to stop, [?] for help
-[swscaler @ 0x74eee8015b00] deprecated pixel format used, make sure you did set range correctly
+[swscaler @ 0x7f21fc015b00] deprecated pixel format used, make sure you did set range correctly
     Last message repeated 3 times
-[libx264 @ 0x5ada75c9c380] using SAR=2048/4095
-[libx264 @ 0x5ada75c9c380] using cpu capabilities: MMX2 SSE2Fast SSSE3 SSE4.2 AVX FMA3 BMI2 AVX2
-[libx264 @ 0x5ada75c9c380] profile High, level 4.2, 4:2:0, 8-bit
-[libx264 @ 0x5ada75c9c380] 264 - core 164 r3108 31e19f9 - H.264/MPEG-4 AVC codec - Copyleft 2003-2023 - http://www.videolan.org/x264.html - options: cabac=1 ref=3 deblock=1:0:0 analyse=0x3:0x113 me=hex subme=7 psy=1 psy_rd=1.00:0.00 mixed_ref=1 me_range=16 chroma_me=1 trellis=1 8x8dct=1 cqm=0 deadzone=21,11 fast_pskip=1 chroma_qp_offset=-2 threads=30 lookahead_threads=5 sliced_threads=0 nr=0 decimate=1 interlaced=0 bluray_compat=0 constrained_intra=0 bframes=3 b_pyramid=2 b_adapt=1 b_bias=0 direct=1 weightb=1 open_gop=0 weightp=2 keyint=250 keyint_min=25 scenecut=40 intra_refresh=0 rc_lookahead=40 rc=crf mbtree=1 crf=23.0 qcomp=0.60 qpmin=0 qpmax=69 qpstep=4 ip_ratio=1.40 aq=1:1.00
+[libx264 @ 0x578da6b61380] using SAR=2048/4095
+[libx264 @ 0x578da6b61380] using cpu capabilities: MMX2 SSE2Fast SSSE3 SSE4.2 AVX FMA3 BMI2 AVX2
+[libx264 @ 0x578da6b61380] profile High, level 4.2, 4:2:0, 8-bit
+[libx264 @ 0x578da6b61380] 264 - core 164 r3108 31e19f9 - H.264/MPEG-4 AVC codec - Copyleft 2003-2023 - http://www.videolan.org/x264.html - options: cabac=1 ref=3 deblock=1:0:0 analyse=0x3:0x113 me=hex subme=7 psy=1 psy_rd=1.00:0.00 mixed_ref=1 me_range=16 chroma_me=1 trellis=1 8x8dct=1 cqm=0 deadzone=21,11 fast_pskip=1 chroma_qp_offset=-2 threads=30 lookahead_threads=5 sliced_threads=0 nr=0 decimate=1 interlaced=0 bluray_compat=0 constrained_intra=0 bframes=3 b_pyramid=2 b_adapt=1 b_bias=0 direct=1 weightb=1 open_gop=0 weightp=2 keyint=250 keyint_min=25 scenecut=40 intra_refresh=0 rc_lookahead=40 rc=crf mbtree=1 crf=23.0 qcomp=0.60 qpmin=0 qpmax=69 qpstep=4 ip_ratio=1.40 aq=1:1.00
 Output #0, mp4, to 'src/test/resources/output/video/rotation/output.mp4':
   Metadata:
     encoder         : Lavf61.1.100
@@ -34,25 +34,25 @@ Output #0, mp4, to 'src/test/resources/output/video/rotation/output.mp4':
         encoder         : Lavc61.3.100 libx264
       Side data:
         cpb: bitrate max/min/avg: 0/0/0 buffer size: 0 vbv_delay: N/A
-frame=    0 fps=0.0 q=0.0 size=       0KiB time=N/A bitrate=N/A speed=N/A    frame=    0 fps=0.0 q=0.0 size=       0KiB time=N/A bitrate=N/A speed=N/A    [out#0/mp4 @ 0x5ada75ca3e80] video:52KiB audio:0KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: 3.249684%
-frame=   70 fps= 48 q=-1.0 Lsize=      53KiB time=00:00:01.13 bitrate= 386.0kbits/s speed=0.784x    
-[libx264 @ 0x5ada75c9c380] frame I:1     Avg QP:17.84  size: 33714
-[libx264 @ 0x5ada75c9c380] frame P:18    Avg QP:28.50  size:   674
-[libx264 @ 0x5ada75c9c380] frame B:51    Avg QP:21.39  size:   126
-[libx264 @ 0x5ada75c9c380] consecutive B-frames:  2.9%  0.0%  0.0% 97.1%
-[libx264 @ 0x5ada75c9c380] mb I  I16..4: 38.2% 51.4% 10.4%
-[libx264 @ 0x5ada75c9c380] mb P  I16..4:  0.0%  0.0%  0.0%  P16..4:  0.6%  0.1%  0.1%  0.0%  0.0%    skip:99.1%
-[libx264 @ 0x5ada75c9c380] mb B  I16..4:  0.0%  0.0%  0.0%  B16..8:  0.4%  0.0%  0.0%  direct: 0.0%  skip:99.5%  L0:40.4% L1:57.9% BI: 1.8%
-[libx264 @ 0x5ada75c9c380] 8x8 transform intra:51.5% inter:10.7%
-[libx264 @ 0x5ada75c9c380] coded y,uvDC,uvAC intra: 6.0% 9.8% 9.0% inter: 0.1% 0.0% 0.0%
-[libx264 @ 0x5ada75c9c380] i16 v,h,dc,p: 91%  8%  1%  0%
-[libx264 @ 0x5ada75c9c380] i8 v,h,dc,ddl,ddr,vr,hd,vl,hu: 43%  6% 50%  0%  0%  0%  0%  0%  0%
-[libx264 @ 0x5ada75c9c380] i4 v,h,dc,ddl,ddr,vr,hd,vl,hu: 34% 29% 14%  4%  2%  2%  4%  4%  6%
-[libx264 @ 0x5ada75c9c380] i8c dc,h,v,p: 82%  9%  8%  1%
-[libx264 @ 0x5ada75c9c380] Weighted P-Frames: Y:0.0% UV:0.0%
-[libx264 @ 0x5ada75c9c380] ref P L0: 92.1%  2.5%  3.3%  2.1%
-[libx264 @ 0x5ada75c9c380] ref B L0: 65.2% 33.0%  1.9%
-[libx264 @ 0x5ada75c9c380] ref B L1: 99.0%  1.0%
-[libx264 @ 0x5ada75c9c380] kb/s:358.42
+frame=    0 fps=0.0 q=0.0 size=       0KiB time=N/A bitrate=N/A speed=N/A    frame=    0 fps=0.0 q=0.0 size=       0KiB time=N/A bitrate=N/A speed=N/A    frame=   69 fps= 46 q=-1.0 size=       0KiB time=00:00:01.11 bitrate=   0.3kbits/s speed=0.744x    [out#0/mp4 @ 0x578da6b68e80] video:52KiB audio:0KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: 3.249684%
+frame=   70 fps= 47 q=-1.0 Lsize=      53KiB time=00:00:01.13 bitrate= 386.0kbits/s speed=0.755x    
+[libx264 @ 0x578da6b61380] frame I:1     Avg QP:17.84  size: 33714
+[libx264 @ 0x578da6b61380] frame P:18    Avg QP:28.50  size:   674
+[libx264 @ 0x578da6b61380] frame B:51    Avg QP:21.39  size:   126
+[libx264 @ 0x578da6b61380] consecutive B-frames:  2.9%  0.0%  0.0% 97.1%
+[libx264 @ 0x578da6b61380] mb I  I16..4: 38.2% 51.4% 10.4%
+[libx264 @ 0x578da6b61380] mb P  I16..4:  0.0%  0.0%  0.0%  P16..4:  0.6%  0.1%  0.1%  0.0%  0.0%    skip:99.1%
+[libx264 @ 0x578da6b61380] mb B  I16..4:  0.0%  0.0%  0.0%  B16..8:  0.4%  0.0%  0.0%  direct: 0.0%  skip:99.5%  L0:40.4% L1:57.9% BI: 1.8%
+[libx264 @ 0x578da6b61380] 8x8 transform intra:51.5% inter:10.7%
+[libx264 @ 0x578da6b61380] coded y,uvDC,uvAC intra: 6.0% 9.8% 9.0% inter: 0.1% 0.0% 0.0%
+[libx264 @ 0x578da6b61380] i16 v,h,dc,p: 91%  8%  1%  0%
+[libx264 @ 0x578da6b61380] i8 v,h,dc,ddl,ddr,vr,hd,vl,hu: 43%  6% 50%  0%  0%  0%  0%  0%  0%
+[libx264 @ 0x578da6b61380] i4 v,h,dc,ddl,ddr,vr,hd,vl,hu: 34% 29% 14%  4%  2%  2%  4%  4%  6%
+[libx264 @ 0x578da6b61380] i8c dc,h,v,p: 82%  9%  8%  1%
+[libx264 @ 0x578da6b61380] Weighted P-Frames: Y:0.0% UV:0.0%
+[libx264 @ 0x578da6b61380] ref P L0: 92.1%  2.5%  3.3%  2.1%
+[libx264 @ 0x578da6b61380] ref B L0: 65.2% 33.0%  1.9%
+[libx264 @ 0x578da6b61380] ref B L1: 99.0%  1.0%
+[libx264 @ 0x578da6b61380] kb/s:358.42
 ]]></system-err>
 </testsuite>

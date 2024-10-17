@@ -36,10 +36,12 @@ public class RotationTest {
         }
 
         ScalingParams scPars = getScalingParams();
-        rotation.performRotation(1L, TimeUnit.MINUTES, "output", "mp4", scPars.getAlgorithm(),
+        rotation.setScale(scPars.getAlgorithm(),
                 scPars.getEval(), scPars.getInterl(), scPars.getWidth(), scPars.getHeight(), scPars.getVideoSizeID(),
                 scPars.getInputRange(), scPars.getOutputRange(), scPars.getForceOriginalAspectRatio(), scPars.getInputColorMatrix(),
                 scPars.getOutputColorMatrix(), scPars.getDivisibleBy());
+        rotation.setFPS("60*pal/pal", 0, null, null);
+        rotation.performRotation(1L, TimeUnit.MINUTES, "output", "mp4");
         rotation.dispose();
     }
 
