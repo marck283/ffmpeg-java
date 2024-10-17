@@ -20,12 +20,11 @@ public abstract class ScalingAlgorithm {
     /**
      * The class's constructor.
      * @param name The name of the scaling algorithm
-     * @throws InvalidArgumentException If the name of the given scaling algorithm is null or an empty string
      */
-    public ScalingAlgorithm(@NotNull String name) throws InvalidArgumentException {
+    public ScalingAlgorithm(@NotNull String name) {
         if(StringExt.checkNullOrEmpty(name)) {
-            throw new InvalidArgumentException("The name of the scaling algorithm cannot be null or an empty string.",
-                    "Il nome dello scaling algorithm non puo' essere null o una stringa vuota.");
+            System.err.println((new InvalidArgumentException("The name of the scaling algorithm cannot be null or an " +
+                    "empty string.", "Il nome dello scaling algorithm non puo' essere null o una stringa vuota.")).getMessage());
         }
         algname = name;
     }

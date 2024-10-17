@@ -1,6 +1,5 @@
 package it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters;
 
-import it.disi.unitn.exceptions.InvalidArgumentException;
 import it.disi.unitn.videocreator.filtergraph.filterchain.filters.Filter;
 import org.jetbrains.annotations.NotNull;
 
@@ -12,9 +11,8 @@ public abstract class VideoFilter extends Filter {
     /**
      * This class's constructor. Constructs a new video filter.
      * @param filterName The given filter's name
-     * @throws InvalidArgumentException If the given filter's name is null or an empty string
      */
-    protected VideoFilter(@NotNull String filterName) throws InvalidArgumentException {
+    protected VideoFilter(@NotNull String filterName) {
         super(filterName);
     }
 }

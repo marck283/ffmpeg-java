@@ -17,10 +17,8 @@ public class Format extends VideoFilter {
 
     /**
      * This class's constructor. Constructs a new "format" filter.
-     * @throws InvalidArgumentException If the filter's name (given by this constructor to the superclass) is null or
-     * an empty string
      */
-    public Format() throws InvalidArgumentException {
+    public Format() {
         super("format");
         pix_fmts = new ArrayList<>();
         col_spcs = new ArrayList<>();

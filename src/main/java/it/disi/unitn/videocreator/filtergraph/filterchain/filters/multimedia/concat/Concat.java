@@ -13,9 +13,8 @@ public class Concat extends Filter {
     /**
      * This class's constructor. Constructs a new filter (whether video or audio).
      *
-     * @throws InvalidArgumentException If the given filter's name is null or an empty string
      */
-    public Concat() throws InvalidArgumentException {
+    public Concat() {
         super("concat");
         n = 2;
         v = 1;

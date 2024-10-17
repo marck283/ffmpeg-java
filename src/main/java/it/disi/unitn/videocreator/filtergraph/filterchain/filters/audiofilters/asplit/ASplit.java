@@ -10,9 +10,8 @@ public class ASplit extends AudioFilter {
     /**
      * This class's constructor. Constructs a new filter (whether video or audio).
      *
-     * @throws InvalidArgumentException If the given filter's name is null or an empty string
      */
-    public ASplit() throws InvalidArgumentException {
+    public ASplit() {
         super("asplit");
     }
 

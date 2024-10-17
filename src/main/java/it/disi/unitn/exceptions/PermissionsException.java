@@ -30,9 +30,9 @@ public class PermissionsException extends IOException {
      */
     public PermissionsException(@NotNull String msg, @NotNull String itmsg) throws InvalidArgumentException {
         if(StringExt.checkNullOrEmpty(msg) || StringExt.checkNullOrEmpty(itmsg)) {
-            throw new InvalidArgumentException("No argument given to this exception's constructor can be null or an empty " +
-                    "string.", "Nessun argomento fornito al costruttore di questa eccezione puo' essere null o una stringa " +
-                    "vuota.");
+            System.err.println((new InvalidArgumentException("No argument given to this exception's constructor can be " +
+                    "null or an empty string.", "Nessun argomento fornito al costruttore di questa eccezione puo' essere " +
+                    "null o una stringa vuota.")).getMessage());
         }
 
         this.msg = msg;

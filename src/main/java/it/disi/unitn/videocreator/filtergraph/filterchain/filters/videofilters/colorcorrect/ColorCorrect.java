@@ -16,9 +16,8 @@ public class ColorCorrect extends Filter {
     /**
      * This class's constructor. Constructs a new filter (whether video or audio).
      *
-     * @throws InvalidArgumentException If the given filter's name is null or an empty string
      */
-    protected ColorCorrect() throws InvalidArgumentException {
+    protected ColorCorrect() {
         super("colorcorrect");
         rl = 0D;
         bl = 0D;

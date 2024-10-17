@@ -31,17 +31,17 @@ public class AudioFiltering {
      * The class's constructor.
      * @param builder The FFMpegBuilder instance
      * @param outputFile The output file path. This value cannot be null or an empty string.
-     * @throws InvalidArgumentException If the given output file path is null or an empty string
      */
-    public AudioFiltering(@NotNull FFMpegBuilder builder, @NotNull String outputFile) throws InvalidArgumentException {
+    public AudioFiltering(@NotNull FFMpegBuilder builder, @NotNull String outputFile) {
         afg = new AudioFilterGraph();
         this.builder = builder;
         pattern = new ArrayList<>();
 
         if(StringExt.checkNullOrEmpty(outputFile)) {
-            throw new InvalidArgumentException("Cannot give FFmpeg an output file represented by a null value or an empty " +
+            System.err.println((new InvalidArgumentException("Cannot give FFmpeg an output file represented by a null value or an empty " +
                     "string.", "Non e' possibile fornire a FFmpeg un file di output identificato da un valore null o da " +
-                    "una stringa vuota.");
+                    "una stringa vuota.")).getMessage());
+            System.exit(10);
         }
         this.outputFile = outputFile;
     }

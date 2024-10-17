@@ -34,9 +34,8 @@ public class DrawText extends VideoFilter {
     /**
      * This class's constructor. Constructs a new video filter.
      *
-     * @throws InvalidArgumentException If the given filter's name is null or an empty string
      */
-    public DrawText() throws InvalidArgumentException {
+    public DrawText() {
         super("drawtext");
         box = 0;
         boxborderw = new BoxBorderW();

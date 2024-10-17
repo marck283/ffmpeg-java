@@ -119,8 +119,10 @@ public class FFMpeg {
 
     /**
      * This method executes the given command on the ProcessBuilder instance on which this class has been instantiated.
-     * @param timeout The maximum time interval the calling process will wait for the child process to terminate
-     * @param timeUnit The TimeUnit instance that specifies the time unit associated to the first parameter
+     * @param timeout The maximum time interval the calling process will wait for the child process to terminate.
+     * @param timeUnit The TimeUnit instance that specifies the time unit associated to the first parameter.
+     * @param workdir The chosen working directory.
+     * @param resHandler The given ExecuteResultHandler instance. This value can be null.
      * @throws IOException If an I/O error occurs
      * @throws InvalidArgumentException If the given timeout is negative or the TimeUnit instance is null
      */

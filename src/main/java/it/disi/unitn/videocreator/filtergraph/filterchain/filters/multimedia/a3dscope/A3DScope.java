@@ -5,6 +5,8 @@ import it.disi.unitn.videocreator.filtergraph.filterchain.filters.Filter;
 import it.disi.unitn.videocreator.filtergraph.filterchain.filters.size.Size;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Locale;
+
 /**
  * This class implements FFmpeg's "a3dscope" multimedia filter.
  */
@@ -12,19 +14,27 @@ public class A3DScope extends Filter {
 
     private int rate, fov, roll, pitch, yaw, xzoom, yzoom, zzoom, xpos, ypos, zpos, length;
 
-    private Size size;
+    private final Size size;
 
     /**
      * This class's constructor. Constructs a new filter (whether video or audio).
      *+
-     * @throws InvalidArgumentException If the given filter's name is null or an empty string
      */
-    protected A3DScope() throws InvalidArgumentException {
+    protected A3DScope() {
         super("a3dscope");
 
         rate = 25;
         size = new Size();
-        size.setSizeID("hd720");
+        try {
+            size.setSizeID("hd720");
+        } catch(InvalidArgumentException ex) {
+            if(l == Locale.ITALIAN || l == Locale.ITALY) {
+                System.err.println("L'ID della dimensione impostata non puo' essere null o una stringa vuota.");
+            } else {
+                System.err.println("The size ID cannot be null or an empty string.");
+            }
+            System.exit(1);
+        }
         fov = 90;
         roll = 0;
         pitch = 0;

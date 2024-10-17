@@ -4,6 +4,9 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Locale;
 
+/**
+ * This class implements an exception being thrown when the rotation fails for some reason.
+ */
 public class RotationFailedException extends GeneralException{
     /**
      * The class's constructor.

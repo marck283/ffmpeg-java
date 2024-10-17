@@ -12,12 +12,12 @@ public class StringExt {
     /**
      * The class's constructor.
      * @param str The String object with which to initialize this object
-     * @throws InvalidArgumentException If the given argument is null or the empty string
      */
-    public StringExt(@NotNull String str) throws InvalidArgumentException {
+    public StringExt(@NotNull String str) {
         if(checkNullOrEmpty(str)) {
-            throw new InvalidArgumentException("The argument given to this constructor cannot be null nor can it be an " +
-                    "empty string.", "L'argomento fornito a questo costruttore non puo' essere null o una stringa vuota.");
+            System.err.println((new InvalidArgumentException("The argument given to this constructor cannot be null nor " +
+                    "can it be an empty string.", "L'argomento fornito a questo costruttore non puo' essere null o una " +
+                    "stringa vuota.")).getMessage());
         }
         val = str;
     }
@@ -33,6 +33,7 @@ public class StringExt {
 
     /**
      * This method can be used to pad the given string with 0s at its beginning.
+     * @param maxlen The given string's maximum length.
      * @throws InvalidArgumentException If the original string's length is not greater than 0 and less than or equal to 3.
      */
     public void padStart(int maxlen) throws InvalidArgumentException {

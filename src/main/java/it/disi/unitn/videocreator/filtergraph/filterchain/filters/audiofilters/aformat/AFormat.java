@@ -22,9 +22,8 @@ public class AFormat extends AudioFilter {
     /**
      * This class's constructor.
      *
-     * @throws InvalidArgumentException If the given filter's name is null or an empty string
      */
-    public AFormat() throws InvalidArgumentException {
+    public AFormat() {
         super("aformat");
         sample_fmts = new ArrayList<>();
         sample_rates = new ArrayList<>();
@@ -35,11 +34,12 @@ public class AFormat extends AudioFilter {
     /**
      * Adds the given sample format to the filter. ATTENTION: in order to use this filter, the user must make sure that the
      * given audio format is supported by FFmpeg.
+     *
      * @param sample_format The given sample format
      * @throws InvalidArgumentException If the given sample format is null or an empty string
      */
     public void addSampleFormat(@NotNull String sample_format) throws InvalidArgumentException {
-        if(StringExt.checkNullOrEmpty(sample_format)) {
+        if (StringExt.checkNullOrEmpty(sample_format)) {
             throw new InvalidArgumentException("The given sample format cannot be null or an empty string.", "Il formato " +
                     "audio fornito non puo' essere null o una stringa vuota.");
         }
@@ -50,11 +50,12 @@ public class AFormat extends AudioFilter {
     /**
      * Adds the gien sample rate to this filter. ATTENTION: in order to use this filter, the user must make sure that the
      * given sample rate is supported by FFMpeg.
+     *
      * @param sample_rate The given sample rate
      * @throws InvalidArgumentException If the given sample rate is null or an empty string
      */
     public void addSampleRate(@NotNull String sample_rate) throws InvalidArgumentException {
-        if(StringExt.checkNullOrEmpty(sample_rate)) {
+        if (StringExt.checkNullOrEmpty(sample_rate)) {
             throw new InvalidArgumentException("The given sample rate cannot be null or an empty string.", "La data frequenza " +
                     "audio non puo' essere null o una stringa vuota.");
         }
@@ -63,43 +64,29 @@ public class AFormat extends AudioFilter {
     }
 
     /**
-     * Adds a new ChannelLayout instance to this filter.
+     * Adds a new channel layout to this filter.
+     *
      * @param chid The given channel ID
-     * @return The newly created ChannelLayout instance
      * @throws InvalidArgumentException If the given channel ID is null or an empty string
      */
-    public ChannelLayout addChannelLayout(@NotNull String chid) throws InvalidArgumentException {
-        ChannelLayout chlay = new ChannelLayout();
-       //channel_layouts.add(chlay);
-        chlay.addChannelID(chid);
-        return chlay;
+    public void addChannelLayout(@NotNull String chid) throws InvalidArgumentException {
+        chLayout.addChannelID(chid);
     }
 
     /**
      * Adds the given ChannelLayout instance to this filter.
+     *
      * @param chlay The given ChannelLayout instance
      * @throws InvalidArgumentException If the given ChannelLayout instance is null
      */
     public void addChannelLayout(@NotNull ChannelLayout chlay) throws InvalidArgumentException {
-        if(chlay == null) {
-            throw new RuntimeException();
-        }
-        //channel_layouts.add(chlay);
-        for(String chid: chlay.getChannels()) {
-            chLayout.addChannelID(chid);
-        }
+        chLayout.addChannels(chlay);
     }
 
     @Override
     public void updateMap() {
         options.put("sample_fmts", String.join("|", sample_fmts));
         options.put("sample_rates", String.join("|", sample_rates));
-
-        /*List<String> chLayouts = new ArrayList<>();
-        for(ChannelLayout cl: channel_layouts) {
-            chLayouts.add(cl.toString());
-        }
-        options.put("channel_layouts", String.join("|", chLayouts));*/
         options.put("channel_layouts", chLayout.toStringBar());
     }
 }

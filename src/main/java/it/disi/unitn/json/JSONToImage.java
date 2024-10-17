@@ -29,11 +29,11 @@ public class JSONToImage {
      */
     private final List<byte[]> byteArrList;
 
-    private final JsonArray array;
+    private JsonArray array;
 
-    private final boolean useGAN;
+    private boolean useGAN;
 
-    private final JsonParser parser;
+    private JsonParser parser;
 
     private Font font;
 
@@ -43,24 +43,27 @@ public class JSONToImage {
      *
      * @param pathToJsonFile The path to the JSON file on which to initialize an object of this class
      * @param useGAN A boolean value that, if true, instructs the program to use a GAN
-     * @throws IOException If an I/O error occurs opening the file
-     * @throws InvalidArgumentException If the first parameter of this method is null or an empty string
      */
-    public JSONToImage(@NotNull String pathToJsonFile, boolean useGAN) throws IOException, InvalidArgumentException {
+    public JSONToImage(@NotNull String pathToJsonFile, boolean useGAN) {
         if(StringExt.checkNullOrEmpty(pathToJsonFile)) {
-            throw new InvalidArgumentException("The first parameter of this method cannot be null or an empty string.",
-                    "Il primo parametro passato a questo metodo non puo' essere null o una stringa vuota.");
+            System.err.println((new InvalidArgumentException("The first parameter of this method cannot be null or an empty string.",
+                    "Il primo parametro passato a questo metodo non puo' essere null o una stringa vuota.")).getMessage());
         }
         File jsonFile = new File(pathToJsonFile);
 
         byteArrList = new ArrayList<>();
         Gson gson = new GsonBuilder().create();
-        Reader r = Files.newBufferedReader(jsonFile.toPath().toAbsolutePath());
-        JsonObject object = gson.fromJson(r, JsonObject.class);
-        parser = new JsonParser(r);
-        array = object.getAsJsonArray("array");
-        this.useGAN = useGAN;
-        font = null;
+        try(Reader r = Files.newBufferedReader(jsonFile.toPath().toAbsolutePath())) {
+            JsonObject object = gson.fromJson(r, JsonObject.class);
+            parser = new JsonParser(r);
+            array = object.getAsJsonArray("array");
+            this.useGAN = useGAN;
+            font = null;
+        } catch(IOException | IOError ex) {
+            array = null;
+            System.err.println("An I/O error occurred. Please restart the program.");
+            System.exit(12);
+        }
     }
 
     /**
