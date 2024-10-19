@@ -123,6 +123,17 @@ public class VideoTranscoder extends VideoCreator {
         }
     }
 
+    private void modifyOrReadyUp(boolean cond, @NotNull String param, boolean otherCond, @NotNull String track)
+            throws InvalidArgumentException {
+        if(cond) {
+            modifyParams(param);
+        } else {
+            if(otherCond) {
+                readyUpForTrackExtraction(track);
+            }
+        }
+    }
+
     /**
      * This method will create the FFmpeg command which can then be used to run the FFmpeg process and produce the desired
      * result.
@@ -131,21 +142,8 @@ public class VideoTranscoder extends VideoCreator {
         super.createCommand();
 
         try {
-            if(videoStreamCopy) {
-                modifyParams("vs");
-            } else {
-                if(extractVideo) {
-                    readyUpForTrackExtraction("video");
-                }
-            }
-
-            if(audioStreamCopy) {
-                modifyParams("va");
-            } else {
-                if(extractAudio) {
-                    readyUpForTrackExtraction("audio");
-                }
-            }
+            modifyOrReadyUp(videoStreamCopy, "vs", extractVideo, "video");
+            modifyOrReadyUp(audioStreamCopy, "va", extractAudio, "audio");
         } catch (InvalidArgumentException ex) {
             System.err.println(ex.getMessage());
             //ex.printStackTrace();
