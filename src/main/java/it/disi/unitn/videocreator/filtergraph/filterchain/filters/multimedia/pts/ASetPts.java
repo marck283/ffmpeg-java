@@ -5,13 +5,14 @@ import it.disi.unitn.exceptions.InvalidArgumentException;
 import it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.AudioFilter;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Locale;
-
 /**
  * This class implements the "asetpts" multimedia filter.
  */
 public class ASetPts extends AudioFilter {
 
+    /**
+     * The timestamps' expression. This value defaults to "1*PTS".
+     */
     private String expr;
 
     /**
@@ -20,7 +21,7 @@ public class ASetPts extends AudioFilter {
     public ASetPts() {
         super("asetpts");
 
-        expr = "";
+        expr = "1*PTS";
     }
 
     /**
@@ -51,17 +52,6 @@ public class ASetPts extends AudioFilter {
 
     @Override
     public void updateMap() {
-        if(expr.isEmpty()) {
-            Locale l = Locale.getDefault();
-            if(l == Locale.ITALIAN || l == Locale.ITALY) {
-                System.err.println("L'espressione fornita per il filtro asetpts non puo' essere una stringa vuota se il " +
-                        "filtro sta per essere impostato.");
-            } else {
-                System.err.println("The expression's value for the asetpts filter cannot be empty if the filter is being " +
-                        "set.");
-            }
-            System.exit(2);
-        }
         options.put("expr", expr);
     }
 }

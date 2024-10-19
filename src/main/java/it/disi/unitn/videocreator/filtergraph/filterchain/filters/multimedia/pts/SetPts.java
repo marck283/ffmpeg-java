@@ -5,13 +5,14 @@ import it.disi.unitn.exceptions.InvalidArgumentException;
 import it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.VideoFilter;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Locale;
-
 /**
  * This class implements the "setpts" multimedia filter.
  */
 public class SetPts extends VideoFilter {
 
+    /**
+     * The timestamps' expression. This value defaults to "1*PTS".
+     */
     private String expr;
 
     /**
@@ -20,7 +21,7 @@ public class SetPts extends VideoFilter {
     public SetPts() {
         super("setpts");
 
-        expr = "";
+        expr = "1*PTS";
     }
 
     /**
@@ -51,17 +52,6 @@ public class SetPts extends VideoFilter {
 
     @Override
     public void updateMap() {
-        if(expr.isEmpty()) {
-            Locale l = Locale.getDefault();
-            if(l == Locale.ITALIAN || l == Locale.ITALY) {
-                System.err.println("L'espressione fornita per il filtro setpts non puo' essere una stringa vuota se il " +
-                        "filtro sta per essere impostato.");
-            } else {
-                System.err.println("The expression's value for the setpts filter cannot be empty if the filter is being " +
-                        "set.");
-            }
-            System.exit(2);
-        }
         options.put("expr", expr);
     }
 }
