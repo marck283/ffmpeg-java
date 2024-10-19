@@ -55,12 +55,15 @@ public class RotationTransition {
      * @param angle The angle expressed in radians.
      * @param text The text to be writer.
      * @param name The given output file's name.
+     * @param fontFamily The given font's family. This value cannot be null or an empty string.
+     * @param fontStyle The given font's style.
+     * @param fontSize The given font's size. This value cannot be less than or equal to zero.
      * @param color The chosen Color instance
      * @throws InvalidArgumentException If one of the non-null arguments is null or an empty string
      */
     public void rotate(int anchorx, int anchory, double angle, @NotNull String text, @NotNull String name,
-                       @NotNull Color color) throws InvalidArgumentException {
-        rotation.rotate(anchorx, anchory, angle, text, name, fname, color);
+                       @NotNull String fontFamily, int fontStyle, int fontSize, @NotNull Color color) throws InvalidArgumentException {
+        rotation.rotate(anchorx, anchory, angle, text, name, fname, fontFamily, fontStyle, fontSize, color);
     }
 
     /**
