@@ -31,6 +31,7 @@ it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.sinks.ab
 it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.sinks.anullsink
 it.disi.unitn.videocreator.filtergraph.filterchain.filters.multimedia.a3dscope
 it.disi.unitn.videocreator.filtergraph.filterchain.filters.multimedia.concat
+it.disi.unitn.videocreator.filtergraph.filterchain.filters.multimedia.pts
 it.disi.unitn.videocreator.filtergraph.filterchain.filters.size
 it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters
 it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.buffer
