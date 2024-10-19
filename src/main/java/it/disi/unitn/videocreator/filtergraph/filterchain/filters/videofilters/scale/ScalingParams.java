@@ -5,7 +5,6 @@ import it.disi.unitn.StringExt;
 import it.disi.unitn.exceptions.InvalidArgumentException;
 import it.disi.unitn.exceptions.UnsupportedOperatingSystemException;
 import it.disi.unitn.exceptions.UnsupportedOperationException;
-import it.disi.unitn.videocreator.ExecutorResHandler;
 import it.disi.unitn.videocreator.filtergraph.filterchain.filters.size.Size;
 import it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.scale.scalingalgs.ScalingAlgorithm;
 import org.apache.commons.exec.CommandLine;
@@ -13,9 +12,12 @@ import org.apache.commons.exec.DefaultExecutor;
 import org.apache.commons.exec.PumpStreamHandler;
 import org.apache.commons.lang3.SystemUtils;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.owasp.encoder.Encode;
 
 import java.io.IOException;
+import java.io.OutputStream;
+import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -109,15 +111,16 @@ public class ScalingParams {
     /**
      * This method executes the given Command Line command.
      *
-     * @param executor       A DefaultExecutor instance
-     * @param execResHandler An ExecutorResHandler instance
-     * @param cmdline        A CommandLine instance
+     * @param executor A DefaultExecutor instance.
+     * @param outstream An OutputStream instance.
+     * @param tempp A temporary file on which the user has writing permissions.
+     * @param cmdline A CommandLine instance.
      * @return True if the CommandLine instance has a field "value" whose value is equal to zero, otherwise false
      */
-    private boolean executeCommand(@NotNull DefaultExecutor executor, @NotNull ExecutorResHandler execResHandler,
+    private boolean executeCommand(@NotNull DefaultExecutor executor, @Nullable OutputStream outstream, @Nullable Path tempp,
                                    @NotNull CommandLine cmdline) {
         try {
-            ProcessController controller = new ProcessController(executor, execResHandler);
+            ProcessController controller = new ProcessController(executor, outstream, tempp);
             int val = controller.execute(cmdline);
             if (val == 0) {
                 Locale l = Locale.getDefault();
@@ -164,8 +167,7 @@ public class ScalingParams {
         PumpStreamHandler streamHandler = new PumpStreamHandler();
         DefaultExecutor executor = DefaultExecutor.builder().get();
         executor.setStreamHandler(streamHandler);
-        ExecutorResHandler execResHandler = new ExecutorResHandler(null, null);
-        return executeCommand(executor, execResHandler, cmdLine);
+        return executeCommand(executor, null, null, cmdLine);
     }
 
     /**

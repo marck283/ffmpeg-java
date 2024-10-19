@@ -6,6 +6,7 @@ import it.disi.unitn.exceptions.InvalidArgumentException;
 import it.disi.unitn.exceptions.InvalidJSONFileException;
 import it.disi.unitn.json.processpool.ProcessPool;
 import it.disi.unitn.json.jsonparser.JsonParser;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import javax.imageio.ImageIO;
@@ -276,17 +277,23 @@ public class JSONToImage {
 
     /**
      * Returns a new Font instance.
-     * @param name The font's name
-     * @param style The font's style
+     * @param name The font's name.
+     * @param style The font's style.
+     * @param size The font's point size.
      * @throws InvalidArgumentException If the font's name is null or an empty string or if the font's size is negative
      * or null
      */
-    public void getFont(@NotNull String name, int style) throws InvalidArgumentException {
+    public void getFont(@NotNull String name, int style, int size) throws InvalidArgumentException {
         if(StringExt.checkNullOrEmpty(name)) {
             throw new InvalidArgumentException("The file's name cannot be null or an empty string.", "Il nome del file " +
                     "non puo' essere null o una stringa vuota.");
         }
-        font = new Font(name, style, 0);
+
+        if(size <= 0) {
+            throw new InvalidArgumentException("The font's size cannot be less than or equal to zero.", "La dimensione " +
+                    "del font non puo' essere minore o uguale a zero.");
+        }
+        font = new Font(name, style, size);
     }
 
     /**
@@ -311,7 +318,8 @@ public class JSONToImage {
             case "plain" -> style = Font.PLAIN;
             default -> throw new InvalidArgumentException("Unrecognized font style.", "Stile del font non riconosciuto.");
         }
-        getFont(parser.getString("fontFamily"), style);
+        
+        getFont(parser.getString("fontFamily"), style, parser.getInt("fontSize"));
     }
 
     /**
@@ -322,7 +330,8 @@ public class JSONToImage {
      * @throws IOException If the fontFile parameter cannot be read
      * @throws FontFormatException If fontFile does not contain the required font tables for the specified format.
      */
-    public Font createFont(int fontFormat, File fontFile) throws IOException, FontFormatException {
+    @Contract("_, _ -> new")
+    public @NotNull Font createFont(int fontFormat, File fontFile) throws IOException, FontFormatException {
         return Font.createFont(fontFormat, fontFile);
     }
 
@@ -392,7 +401,6 @@ public class JSONToImage {
         final BufferedImage image = ImageIO.read(file);
 
         Graphics g = image.getGraphics();
-        //g.setFont(<font>); //Per font personalizzati
         if(font != null) {
             font = font.deriveFont(fontDim);
         }

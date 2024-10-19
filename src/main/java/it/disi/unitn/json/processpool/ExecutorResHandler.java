@@ -90,7 +90,7 @@ public class ExecutorResHandler implements ExecuteResultHandler {
             } catch (InvalidArgumentException | IOException ex) {
                 //ex.printStackTrace();
                 System.err.println(ex.getMessage());
-                System.exit(1);
+                throw new RuntimeException(ex);
             }
         });
         t2.start();
@@ -110,6 +110,6 @@ public class ExecutorResHandler implements ExecuteResultHandler {
     public void onProcessFailed(@NotNull ExecuteException e) {
         //e.printStackTrace();
         System.err.println(e.getMessage());
-        System.exit(1);
+        throw new RuntimeException(e);
     }
 }

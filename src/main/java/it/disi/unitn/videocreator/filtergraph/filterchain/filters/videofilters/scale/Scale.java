@@ -13,6 +13,8 @@ import org.apache.commons.exec.DefaultExecutor;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
+import java.io.OutputStream;
+import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.Locale;
 
@@ -104,15 +106,16 @@ public class Scale extends VideoFilter {
     /**
      * This method executes the given Command Line command.
      *
-     * @param executor       A DefaultExecutor instance
-     * @param execResHandler An ExecutorResHandler instance
-     * @param cmdline        A CommandLine instance
+     * @param executor A DefaultExecutor instance.
+     * @param outstream An OutputStream instance.
+     * @param tempp A temporary file on which the user has writing permissions.
+     * @param cmdline A CommandLine instance
      * @return True if the CommandLine instance has a field "value" whose value is equal to zero, otherwise false
      */
-    private boolean executeCommand(@NotNull DefaultExecutor executor, @NotNull ExecutorResHandler execResHandler,
-                               @NotNull CommandLine cmdline) {
+    private boolean executeCommand(@NotNull DefaultExecutor executor, @NotNull OutputStream outstream, @NotNull Path tempp,
+                                   @NotNull CommandLine cmdline) {
         try {
-            ProcessController controller = new ProcessController(executor, execResHandler);
+            ProcessController controller = new ProcessController(executor, outstream, tempp);
             if (controller.execute(cmdline) == 0) {
                 printMsg("At least one of the given values was not recognised by FFmpeg.",
                         "Almeno uno dei valori forniti non e' stato riconosciuto da FFmpeg.");

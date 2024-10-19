@@ -190,22 +190,24 @@ public class VideoCreator {
     /**
      * This method executes the given Command Line command.
      *
-     * @param executor       A DefaultExecutor instance
-     * @param execResHandler An ExecutorResHandler instance
-     * @param cmdline        A CommandLine instance
+     * @param executor A DefaultExecutor instance
+     * @param outstream An OutputStream instance
+     * @param tempp The path to a temporary file the user has writing permissions on.
+     * @param cmdline A CommandLine instance
      * @return True if the CommandLine instance has a field "value" whose value is equal to zero, otherwise false
      */
-    private boolean executeCML(@NotNull DefaultExecutor executor, @NotNull ExecutorResHandler execResHandler,
+    private boolean executeCML(@NotNull DefaultExecutor executor, @NotNull OutputStream outstream, @NotNull Path tempp,
                                @NotNull CommandLine cmdline) {
         try {
-            ProcessController controller = new ProcessController(executor, execResHandler);
+            ProcessController controller = new ProcessController(executor, outstream, tempp);
             int val = controller.execute(cmdline);
             if (val == 0) {
                 if (l == Locale.ITALY || l == Locale.ITALIAN) {
-                    System.err.println("Questo codec non e' supportato dall'installazione di FFmpeg presente in questo sistema. " +
-                            "Si prega di riprovare con un altro codec.");
+                    System.err.println("Questo codec non e' supportato dall'installazione di FFmpeg presente in questo " +
+                            "sistema. Si prega di riprovare con un altro codec.");
                 } else {
-                    System.err.println("This codec is not supported by your installation of FFmpeg. Please try another one.");
+                    System.err.println("This codec is not supported by your installation of FFmpeg. Please try another " +
+                            "one.");
                 }
                 return false;
             }
@@ -232,8 +234,7 @@ public class VideoCreator {
             PumpStreamHandler streamHandler = new PumpStreamHandler(outstream, System.err);
             DefaultExecutor executor = DefaultExecutor.builder().get();
             executor.setStreamHandler(streamHandler);
-            ExecutorResHandler execResHandler = new ExecutorResHandler(outstream, tempFile);
-            return executeCML(executor, execResHandler, cmdline);
+            return executeCML(executor, outstream, tempFile, cmdline);
         } catch (InvalidPathException ex) {
             System.err.println(ex.getLocalizedMessage());
         }

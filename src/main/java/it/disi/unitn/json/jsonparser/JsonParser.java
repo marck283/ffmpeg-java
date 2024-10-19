@@ -126,7 +126,7 @@ public class JsonParser {
      * Gets the floating point value of the element identified by the given name.
      * @param el A JsonElement instance
      * @param name The given element's name. This element has to be inside the structure of the given JsonElement
-     * @return The value of the element identified by the given name (if such element can be found), otherwise -1F
+     * @return The value of the element identified by the given name (if such element can be found)
      * @throws InvalidArgumentException If any of the parameters passed to this method is null or an empty string
      * @throws InvalidJSONFileException If the JSON file does not contain any field identified by the given name
      */
@@ -139,13 +139,26 @@ public class JsonParser {
      * Gets the integer value of the element identified by the given name.
      * @param el A JsonElement instance
      * @param name The given element's name. This element has to be inside the structure of the given JsonElement
-     * @return The value of the element identified by the given name if such element can be found, otherwise -1
+     * @return The value of the element identified by the given name if such element can be found
      * @throws InvalidArgumentException If any of the parameters passed to this method is null or an empty string
      * @throws InvalidJSONFileException If the JSON file given as input to this library does not contain a field
      * identified by the name given to this method
      */
     public int getInt(@NotNull JsonElement el, @NotNull String name) throws InvalidArgumentException, InvalidJSONFileException {
         JsonElement jel = checkField(getJsonObject(el), name);
+        return jel.getAsInt();
+    }
+
+    /**
+     *
+     * @param name The given element's name. This element has to be inside the structure of the given JsonElement
+     * @return The value of the element identified by the given name if such element can be found
+     * @throws InvalidArgumentException If any of the parameters passed to this method is null or an empty string
+     * @throws InvalidJSONFileException If the JSON file given as input to this library does not contain a field
+     * identified by the name given to this method
+     */
+    public int getInt(@NotNull String name) throws InvalidJSONFileException, InvalidArgumentException {
+        JsonElement jel = checkField(obj, name);
         return jel.getAsInt();
     }
 }
