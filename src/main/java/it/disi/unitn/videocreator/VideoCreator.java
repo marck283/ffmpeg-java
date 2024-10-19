@@ -92,7 +92,7 @@ public class VideoCreator {
         File file = new File(execFile);
         if (!file.exists()) {
             System.err.println("ffcodec does not exist");
-            System.exit(1);
+            //System.exit(1);
         }
         //isOutFullRange = false;
         l = Locale.getDefault();
