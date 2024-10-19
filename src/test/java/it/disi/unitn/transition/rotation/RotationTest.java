@@ -41,6 +41,7 @@ public class RotationTest {
                 scPars.getInputRange(), scPars.getOutputRange(), scPars.getForceOriginalAspectRatio(), scPars.getInputColorMatrix(),
                 scPars.getOutputColorMatrix(), scPars.getDivisibleBy());
         rotation.setFPS("60*pal/pal", 0, null, null);
+        rotation.setRotationSpeed("0.5*PTS");
         rotation.performRotation(1L, TimeUnit.MINUTES, "output", "mp4");
         rotation.dispose();
     }

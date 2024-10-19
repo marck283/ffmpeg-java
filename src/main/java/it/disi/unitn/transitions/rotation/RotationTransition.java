@@ -7,6 +7,7 @@ import it.disi.unitn.lasagna.MyFile;
 import it.disi.unitn.videocreator.TracksMerger;
 import it.disi.unitn.videocreator.filtergraph.VideoFilterGraph;
 import it.disi.unitn.videocreator.filtergraph.filterchain.VideoSimpleFilterChain;
+import it.disi.unitn.videocreator.filtergraph.filterchain.filters.multimedia.pts.SetPts;
 import it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.fps.FPS;
 import it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.scale.Scale;
 import it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.scale.scalingalgs.ScalingAlgorithm;
@@ -117,6 +118,21 @@ public class RotationTransition {
         fps.updateMap();
 
         vsfc.addFilter(fps);
+    }
+
+    /**
+     * This method allows the program to set the rotation's speed by manipulating the video's timestamps.
+     * @param rotExpr The given expression. This value must not be null or empty, and it must conform to FFmpeg's
+     *                setpts and asetpts filters specifications.
+     * @throws InvalidArgumentException If the given value is null or empty, or if it does not conform to the given
+     * specifications.
+     */
+    public void setRotationSpeed(@NotNull String rotExpr) throws InvalidArgumentException {
+        SetPts pts = new SetPts();
+        pts.setExpr(rotExpr);
+        pts.updateMap();
+
+        vsfc.addFilter(pts);
     }
 
     private void createVideo(@NotNull FFMpegBuilder builder, long timeout, @NotNull TimeUnit tu,
