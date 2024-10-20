@@ -6,6 +6,7 @@ import it.disi.unitn.exceptions.InvalidArgumentException;
 import it.disi.unitn.exceptions.InvalidJSONFileException;
 import it.disi.unitn.json.processpool.ProcessPool;
 import it.disi.unitn.json.jsonparser.JsonParser;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import javax.imageio.ImageIO;
@@ -29,11 +30,11 @@ public class JSONToImage {
      */
     private final List<byte[]> byteArrList;
 
-    private final JsonArray array;
+    private JsonArray array;
 
-    private final boolean useGAN;
+    private boolean useGAN;
 
-    private final JsonParser parser;
+    private JsonParser parser;
 
     private Font font;
 
@@ -43,24 +44,27 @@ public class JSONToImage {
      *
      * @param pathToJsonFile The path to the JSON file on which to initialize an object of this class
      * @param useGAN A boolean value that, if true, instructs the program to use a GAN
-     * @throws IOException If an I/O error occurs opening the file
-     * @throws InvalidArgumentException If the first parameter of this method is null or an empty string
      */
-    public JSONToImage(@NotNull String pathToJsonFile, boolean useGAN) throws IOException, InvalidArgumentException {
+    public JSONToImage(@NotNull String pathToJsonFile, boolean useGAN) {
         if(StringExt.checkNullOrEmpty(pathToJsonFile)) {
-            throw new InvalidArgumentException("The first parameter of this method cannot be null or an empty string.",
-                    "Il primo parametro passato a questo metodo non puo' essere null o una stringa vuota.");
+            System.err.println((new InvalidArgumentException("The first parameter of this method cannot be null or an empty string.",
+                    "Il primo parametro passato a questo metodo non puo' essere null o una stringa vuota.")).getMessage());
         }
         File jsonFile = new File(pathToJsonFile);
 
         byteArrList = new ArrayList<>();
         Gson gson = new GsonBuilder().create();
-        Reader r = Files.newBufferedReader(jsonFile.toPath().toAbsolutePath());
-        JsonObject object = gson.fromJson(r, JsonObject.class);
-        parser = new JsonParser(r);
-        array = object.getAsJsonArray("array");
-        this.useGAN = useGAN;
-        font = null;
+        try(Reader r = Files.newBufferedReader(jsonFile.toPath().toAbsolutePath())) {
+            JsonObject object = gson.fromJson(r, JsonObject.class);
+            parser = new JsonParser(r);
+            array = object.getAsJsonArray("array");
+            this.useGAN = useGAN;
+            font = null;
+        } catch(IOException | IOError ex) {
+            array = null;
+            System.err.println("An I/O error occurred. Please restart the program.");
+            System.exit(12);
+        }
     }
 
     /**
@@ -273,17 +277,23 @@ public class JSONToImage {
 
     /**
      * Returns a new Font instance.
-     * @param name The font's name
-     * @param style The font's style
+     * @param name The font's name.
+     * @param style The font's style.
+     * @param size The font's point size.
      * @throws InvalidArgumentException If the font's name is null or an empty string or if the font's size is negative
      * or null
      */
-    public void getFont(@NotNull String name, int style) throws InvalidArgumentException {
+    public void getFont(@NotNull String name, int style, int size) throws InvalidArgumentException {
         if(StringExt.checkNullOrEmpty(name)) {
             throw new InvalidArgumentException("The file's name cannot be null or an empty string.", "Il nome del file " +
                     "non puo' essere null o una stringa vuota.");
         }
-        font = new Font(name, style, 0);
+
+        if(size <= 0) {
+            throw new InvalidArgumentException("The font's size cannot be less than or equal to zero.", "La dimensione " +
+                    "del font non puo' essere minore o uguale a zero.");
+        }
+        font = new Font(name, style, size);
     }
 
     /**
@@ -308,7 +318,8 @@ public class JSONToImage {
             case "plain" -> style = Font.PLAIN;
             default -> throw new InvalidArgumentException("Unrecognized font style.", "Stile del font non riconosciuto.");
         }
-        getFont(parser.getString("fontFamily"), style);
+        
+        getFont(parser.getString("fontFamily"), style, parser.getInt("fontSize"));
     }
 
     /**
@@ -319,7 +330,8 @@ public class JSONToImage {
      * @throws IOException If the fontFile parameter cannot be read
      * @throws FontFormatException If fontFile does not contain the required font tables for the specified format.
      */
-    public Font createFont(int fontFormat, File fontFile) throws IOException, FontFormatException {
+    @Contract("_, _ -> new")
+    public @NotNull Font createFont(int fontFormat, File fontFile) throws IOException, FontFormatException {
         return Font.createFont(fontFormat, fontFile);
     }
 
@@ -389,7 +401,6 @@ public class JSONToImage {
         final BufferedImage image = ImageIO.read(file);
 
         Graphics g = image.getGraphics();
-        //g.setFont(<font>); //Per font personalizzati
         if(font != null) {
             font = font.deriveFont(fontDim);
         }

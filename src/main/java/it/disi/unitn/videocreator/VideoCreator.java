@@ -58,7 +58,10 @@ public class VideoCreator {
 
     private final Locale l;
 
-    private FilterGraph vfg, afg, cfg; //Video, audio and complex filter graphs
+    /**
+     * These are instances of FilterGraph.
+     */
+    protected FilterGraph vfg, afg, cfg; //Video, audio and complex filter graphs
 
     private FPSMode fps_mode;
 
@@ -67,33 +70,32 @@ public class VideoCreator {
      *
      * @param builder    The FFMpegBuilder instance that called this constructor
      * @param outputFile The path to the output file
-     * @throws InvalidArgumentException If any of the arguments given to this constructor is null
      */
-    public VideoCreator(@NotNull FFMpegBuilder builder, @NotNull String outputFile)
-            throws InvalidArgumentException {
+    public VideoCreator(@NotNull FFMpegBuilder builder, @NotNull String outputFile) {
         if (builder == null || StringExt.checkNullOrEmpty(outputFile)) {
-            throw new InvalidArgumentException("The arguments given to this class's constructor cannot be null or " +
+            System.err.println((new InvalidArgumentException("The arguments given to this class's constructor cannot be null or " +
                     "empty values.", "Gli argomenti forniti al costruttore di questa classe non possono essere null o " +
-                    "valori non specificati.");
-        } else {
-            this.pattern = new ArrayList<>();
-            this.builder = builder;
-            this.outputFile = outputFile;
-            if (SystemUtils.IS_OS_LINUX) {
-                execFile = "./src/ffcodec/bin/linux/ffcodec";
-            } else {
-                if (SystemUtils.IS_OS_WINDOWS) {
-                    execFile = "./src/ffcodec/bin/windows/ffcodec.exe";
-                }
-            }
-            File file = new File(execFile);
-            if (!file.exists()) {
-                System.err.println("ffcodec does not exist");
-                System.exit(1);
-            }
-            //isOutFullRange = false;
-            l = Locale.getDefault();
+                    "valori non specificati.")).getMessage());
+            System.exit(1);
         }
+
+        this.pattern = new ArrayList<>();
+        this.builder = builder;
+        this.outputFile = outputFile;
+        if (SystemUtils.IS_OS_LINUX) {
+            execFile = "./src/ffcodec/bin/linux/ffcodec";
+        } else {
+            if (SystemUtils.IS_OS_WINDOWS) {
+                execFile = "./src/ffcodec/bin/windows/ffcodec.exe";
+            }
+        }
+        File file = new File(execFile);
+        if (!file.exists()) {
+            System.err.println("ffcodec does not exist");
+            //System.exit(1);
+        }
+        //isOutFullRange = false;
+        l = Locale.getDefault();
     }
 
     /**
@@ -188,22 +190,24 @@ public class VideoCreator {
     /**
      * This method executes the given Command Line command.
      *
-     * @param executor       A DefaultExecutor instance
-     * @param execResHandler An ExecutorResHandler instance
-     * @param cmdline        A CommandLine instance
+     * @param executor A DefaultExecutor instance
+     * @param outstream An OutputStream instance
+     * @param tempp The path to a temporary file the user has writing permissions on.
+     * @param cmdline A CommandLine instance
      * @return True if the CommandLine instance has a field "value" whose value is equal to zero, otherwise false
      */
-    private boolean executeCML(@NotNull DefaultExecutor executor, @NotNull ExecutorResHandler execResHandler,
+    private boolean executeCML(@NotNull DefaultExecutor executor, @NotNull OutputStream outstream, @NotNull Path tempp,
                                @NotNull CommandLine cmdline) {
         try {
-            ProcessController controller = new ProcessController(executor, execResHandler);
+            ProcessController controller = new ProcessController(executor, outstream, tempp);
             int val = controller.execute(cmdline);
             if (val == 0) {
                 if (l == Locale.ITALY || l == Locale.ITALIAN) {
-                    System.err.println("Questo codec non e' supportato dall'installazione di FFmpeg presente in questo sistema. " +
-                            "Si prega di riprovare con un altro codec.");
+                    System.err.println("Questo codec non e' supportato dall'installazione di FFmpeg presente in questo " +
+                            "sistema. Si prega di riprovare con un altro codec.");
                 } else {
-                    System.err.println("This codec is not supported by your installation of FFmpeg. Please try another one.");
+                    System.err.println("This codec is not supported by your installation of FFmpeg. Please try another " +
+                            "one.");
                 }
                 return false;
             }
@@ -230,8 +234,7 @@ public class VideoCreator {
             PumpStreamHandler streamHandler = new PumpStreamHandler(outstream, System.err);
             DefaultExecutor executor = DefaultExecutor.builder().get();
             executor.setStreamHandler(streamHandler);
-            ExecutorResHandler execResHandler = new ExecutorResHandler(outstream, tempFile);
-            return executeCML(executor, execResHandler, cmdline);
+            return executeCML(executor, outstream, tempFile, cmdline);
         } catch (InvalidPathException ex) {
             System.err.println(ex.getLocalizedMessage());
         }
@@ -647,7 +650,7 @@ public class VideoCreator {
         fps_mode.setParameter(parameter);
     }
 
-    private void add(boolean cond, @NotNull String toAdd) throws InvalidArgumentException {
+    void add(boolean cond, @NotNull String toAdd) throws InvalidArgumentException {
         if(toAdd == null) {
             throw new InvalidArgumentException("The argument to be added to FFmpeg's command cannot be null.",
                     "L'argomento da aggiungere al comando FFmpeg non puo' essere null.");
@@ -657,6 +660,11 @@ public class VideoCreator {
         }
     }
 
+    /**
+     * This method sets a stream to map.
+     * @param stream The given stream to map. This value cannot be null or an empty string.
+     * @throws InvalidArgumentException If the given argument is null or an empty string
+     */
     public void setStreamToMap(@NotNull String stream) throws InvalidArgumentException {
         if(StringExt.checkNullOrEmpty(stream)) {
             throw new InvalidArgumentException("The given stream to map cannot be null or an empty string.", "Lo stream " +

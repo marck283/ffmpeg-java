@@ -2,6 +2,7 @@ package it.disi.unitn.json.processpool;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.disi.unitn.StringExt;
 import it.disi.unitn.exceptions.InvalidArgumentException;
 import it.disi.unitn.json.JSONToImage;
@@ -38,15 +39,13 @@ public class ExecutorResHandler implements ExecuteResultHandler {
      * @param imageExtension The picture's file extension
      * @param jti The JSONToImage instance to be used
      * @param pp The ProcessPool instance to be used
-     * @throws InvalidArgumentException If any of the arguments given to this constructor is null or an empty string
      */
     public ExecutorResHandler(@NotNull JsonArray arr, int i, @NotNull String pathToImagesFolder,
-                              @NotNull String imageExtension, @NotNull JSONToImage jti, @NotNull ProcessPool pp)
-            throws InvalidArgumentException {
+                              @NotNull String imageExtension, @NotNull JSONToImage jti, @NotNull ProcessPool pp) {
         if (arr == null || StringExt.checkNullOrEmpty(pathToImagesFolder) || StringExt.checkNullOrEmpty(imageExtension)
                 || jti == null || pp == null) {
-            throw new InvalidArgumentException("No argument to this constructor can be null or an empty string.",
-                    "Nessuno degli argomenti forniti a questo costruttore puo' essere null o una stringa vuota.");
+            System.err.println((new InvalidArgumentException("No argument to this constructor can be null or an empty string.",
+                    "Nessuno degli argomenti forniti a questo costruttore puo' essere null o una stringa vuota.")).getMessage());
         }
         array = arr;
         index = i;
@@ -64,6 +63,7 @@ public class ExecutorResHandler implements ExecuteResultHandler {
      *             in the file system)
      * @return The resulting Path instance
      */
+    @SuppressFBWarnings("NP_NONNULL_RETURN_VIOLATION")
     private @NotNull Path getPath(@NonNls String first, @NonNls String ... path) {
         return Paths.get(first, path);
     }
@@ -90,7 +90,7 @@ public class ExecutorResHandler implements ExecuteResultHandler {
             } catch (InvalidArgumentException | IOException ex) {
                 //ex.printStackTrace();
                 System.err.println(ex.getMessage());
-                System.exit(1);
+                throw new RuntimeException(ex);
             }
         });
         t2.start();
@@ -110,6 +110,6 @@ public class ExecutorResHandler implements ExecuteResultHandler {
     public void onProcessFailed(@NotNull ExecuteException e) {
         //e.printStackTrace();
         System.err.println(e.getMessage());
-        System.exit(1);
+        throw new RuntimeException(e);
     }
 }

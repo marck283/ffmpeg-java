@@ -6,48 +6,92 @@ import it.disi.unitn.exceptions.InvalidArgumentException;
 import it.disi.unitn.exceptions.UnsupportedOperatingSystemException;
 import it.disi.unitn.exceptions.UnsupportedOperationException;
 import it.disi.unitn.videocreator.ExecutorResHandler;
-import it.disi.unitn.videocreator.filtergraph.filterchain.filters.size.Size;
 import it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.VideoFilter;
 import it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.scale.scalingalgs.ScalingAlgorithm;
 import org.apache.commons.exec.CommandLine;
 import org.apache.commons.exec.DefaultExecutor;
-import org.apache.commons.exec.PumpStreamHandler;
-import org.apache.commons.lang3.SystemUtils;
 import org.jetbrains.annotations.NotNull;
-import org.owasp.encoder.Encode;
 
 import java.io.IOException;
-import java.util.HashMap;
+import java.io.OutputStream;
+import java.nio.file.Path;
+import java.util.Arrays;
 import java.util.Locale;
-import java.util.Map;
 
 /**
  * This class implements the "scale" video filter.
  */
 public class Scale extends VideoFilter {
 
-    private ScalingAlgorithm sws_flags; //These flags will then be joined by using String.join("+", sws_flags)
-
-    private String width, height, videoSizeID;
-
-    private String eval, interl, in_range, out_range, force_original_aspect_ratio;
-
-    private ColorMatrix inColMatrix, outColorMatrix;
-
-    private int force_divisible_by;
+    private final ScalingParams scalingParams;
 
     private final Locale l;
 
     /**
      * This class's constructor. Constructs a new "scale" filter.
-     * @throws InvalidArgumentException If the filter's name (given by this constructor to the superclass) is null or
-     * an empty string
      */
-    public Scale() throws InvalidArgumentException {
+    public Scale() {
         super("scale");
+        scalingParams = new ScalingParams();
         l = Locale.getDefault();
-        eval = "init";
-        interl = "0";
+    }
+
+    /**
+     * The class's constructor given pre-established scaling parameters.
+     */
+    public Scale(@NotNull ScalingAlgorithm sws_flags, @NotNull String eval, @NotNull String interl,
+                 @NotNull String width, @NotNull String height, @NotNull String videoSizeID,
+                 @NotNull String in_range, @NotNull String out_range, @NotNull String force_original_aspect_ratio,
+                 @NotNull String inColMatrix, @NotNull String outColorMatrix, int force_divisible_by) {
+        super("scale");
+
+        if(sws_flags == null || checkNullOrEmpty(eval, interl, in_range, out_range,
+                force_original_aspect_ratio, inColMatrix, outColorMatrix)) {
+            printMsg("The scaling parameters arguments given to this constructor cannot be null.",
+                    "L'istanza dei parametri di scaling fornita a questo costruttore non puo' essere null.");
+            System.exit(1);
+        }
+
+        if(StringExt.checkNullOrEmpty(width) && StringExt.checkNullOrEmpty(height) && StringExt.checkNullOrEmpty(videoSizeID)) {
+            printMsg("Either the frames' width and height or their size's ID must be set.",
+                    "Almeno un parametro tra le dimensioni dei frame e l'ID della dimensione deve essere impostato.");
+            System.exit(2);
+        }
+
+        if((StringExt.checkNullOrEmpty(width) && !StringExt.checkNullOrEmpty(height)) ||
+                (!StringExt.checkNullOrEmpty(width) && StringExt.checkNullOrEmpty(height))) {
+            printMsg("The width and height must be set at the same time.", "La larghezza e l'altezza devono " +
+                    "essere impostate contemporaneamente.");
+            System.exit(3);
+        }
+
+        if(!StringExt.checkNullOrEmpty(width) && !StringExt.checkNullOrEmpty(height) && !StringExt.checkNullOrEmpty(videoSizeID)) {
+            printMsg("The frames' size and the size ID cannot be set at the same time.", "Le dimensioni dei " +
+                    "frame e l'ID della dimensione non possono essere impostati contemporaneamente.");
+            System.exit(4);
+        }
+
+        if(force_divisible_by <= 0) {
+            printMsg("The force_divisible_by argument cannot be less than or equal to zero.", "L'argomento " +
+                    "force_divisible_by non puo' essere minore o uguale a zero.");
+            System.exit(5);
+        }
+
+        this.scalingParams = new ScalingParams(sws_flags, eval, interl, width, height, videoSizeID, in_range, out_range,
+                force_original_aspect_ratio, inColMatrix, outColorMatrix, force_divisible_by);
+        l = Locale.getDefault();
+    }
+
+    private static boolean checkNullOrEmpty(String ... args) {
+        return Arrays.stream(args).anyMatch(StringExt::checkNullOrEmpty);
+    }
+
+    private void printMsg(@NotNull String msg, @NotNull String itmsg) {
+        if(l == Locale.ITALIAN || l == Locale.ITALY) {
+            System.err.println(itmsg);
+        } else {
+            System.err.println(msg);
+        }
     }
 
     /**
@@ -56,78 +100,31 @@ public class Scale extends VideoFilter {
      * @throws InvalidArgumentException If the given ScalingAlgorithm instance is null
      */
     public void setSwsFlags(@NotNull ScalingAlgorithm val) throws InvalidArgumentException {
-        String algName = val.getName();
-        if(algName.isEmpty()) {
-            throw new InvalidArgumentException("The given \"sws flags\" value cannot be an empty string.", "Il " +
-                    "valore \"sws flags\" fornito non puo' essere null o una stringa vuota.");
-        }
-
-        switch(algName) {
-            case "fast_bilinear", "bilinear", "bicubic", "experimental", "neighbor", "area", "bicublin", "gauss", "sinc",
-                    "lanczos", "spline", "print_info", "accurate_rnd", "full_chroma_int", "full_chroma_inp", "bitexact" -> sws_flags = val;
-            default -> throw new InvalidArgumentException("Illegal sws_flags value.", "Valore sws_flags non permesso.");
-        }
+        scalingParams.setSwsFlags(val);
     }
 
     /**
      * This method executes the given Command Line command.
      *
-     * @param executor       A DefaultExecutor instance
-     * @param execResHandler An ExecutorResHandler instance
-     * @param cmdline        A CommandLine instance
+     * @param executor A DefaultExecutor instance.
+     * @param outstream An OutputStream instance.
+     * @param tempp A temporary file on which the user has writing permissions.
+     * @param cmdline A CommandLine instance
      * @return True if the CommandLine instance has a field "value" whose value is equal to zero, otherwise false
      */
-    private boolean executeCommand(@NotNull DefaultExecutor executor, @NotNull ExecutorResHandler execResHandler,
-                               @NotNull CommandLine cmdline) {
+    private boolean executeCommand(@NotNull DefaultExecutor executor, @NotNull OutputStream outstream, @NotNull Path tempp,
+                                   @NotNull CommandLine cmdline) {
         try {
-            ProcessController controller = new ProcessController(executor, execResHandler);
-            int val = controller.execute(cmdline);
-            if (val == 0) {
-                if (l == Locale.ITALY || l == Locale.ITALIAN) {
-                    System.err.println("Almeno uno dei valori forniti non e' stato riconosciuto da FFmpeg.");
-                } else {
-                    System.err.println("At least one of the given values was not recognised by FFmpeg.");
-                }
+            ProcessController controller = new ProcessController(executor, outstream, tempp);
+            if (controller.execute(cmdline) == 0) {
+                printMsg("At least one of the given values was not recognised by FFmpeg.",
+                        "Almeno uno dei valori forniti non e' stato riconosciuto da FFmpeg.");
                 return false;
             }
             return true;
         } catch (IOException | InterruptedException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    /**
-     * This method checks if the given dimensions are accepted by FFmpeg.
-     *
-     * @param width   The width
-     * @param height  The height
-     * @param pix_fmt The pixel format used in the video
-     * @return True if the given dimensions are accepted, false otherwise
-     * @throws UnsupportedOperatingSystemException If the Operating System the user is currently operating on is not yet
-     *                                             supported by this library
-     */
-    private boolean checkSize(@NotNull String width, @NotNull String height, @NotNull String pix_fmt) throws UnsupportedOperatingSystemException {
-        CommandLine cmdLine;
-        Map<String, String> m = new HashMap<>();
-        m.put("width", width);
-        m.put("height", height);
-        pix_fmt = Encode.forJava(pix_fmt);
-        m.put("pix_fmt", pix_fmt);
-        if (SystemUtils.IS_OS_LINUX) {
-            cmdLine = CommandLine.parse("./src/ffcodec/bin/linux/checkSize/main ${width} ${height} ${pix_fmt}", m);
-        } else {
-            if (SystemUtils.IS_OS_WINDOWS) {
-                cmdLine = CommandLine.parse("./src/ffcodec/bin/windows/checkSize.exe ${width} ${height} ${pix_fmt}",
-                        m);
-            } else {
-                throw new UnsupportedOperatingSystemException();
-            }
-        }
-        PumpStreamHandler streamHandler = new PumpStreamHandler();
-        DefaultExecutor executor = DefaultExecutor.builder().get();
-        executor.setStreamHandler(streamHandler);
-        ExecutorResHandler execResHandler = new ExecutorResHandler();
-        return executeCommand(executor, execResHandler, cmdLine);
     }
 
     /**
@@ -143,42 +140,7 @@ public class Scale extends VideoFilter {
      */
     public void setSize(boolean development, @NotNull String width, @NotNull String height, @NotNull String pix_fmt)
             throws InvalidArgumentException, UnsupportedOperatingSystemException, UnsupportedOperationException {
-        if(!StringExt.checkNullOrEmpty(videoSizeID)) {
-            UnsupportedOperationException.throwUnsupportedOperationException("Cannot set video width and height if the " +
-                    "video's size id is already set.", "Non e' possibile impostare l'ampiezza e l'altezza del video " +
-                    "quando l'id della sua dimensione e' gia' stato impostato.");
-        }
-
-        if(StringExt.checkNullOrEmpty(width)) {
-            throw new InvalidArgumentException("The video width cannot be null or an empty string.", "L'ampiezza dell'immagine " +
-                    "non puo' essere null o una stringa vuota.");
-        }
-
-        if(StringExt.checkNullOrEmpty(height)) {
-            throw new InvalidArgumentException("The video height cannot be null or an empty string.", "L'altezza dell'immagine " +
-                    "non puo' essere null o una stringa vuota.");
-        }
-
-        /*try {
-            int w = Integer.parseInt(width), h = Integer.parseInt(height);
-            if(w <= 0 || h <= 0) {
-                throw new InvalidArgumentException("The given width or height cannot be negative or null numbers.",
-                        "L'ampiezza e l' altezza non possono essere numeri negativi o nulli.");
-            }
-        } catch(NumberFormatException ex) {
-            throw new InvalidArgumentException("Either the width or the height is not an integer.", "L'ampiezza o l'altezza " +
-                    "non rappresentano un numero intero.");
-        }*/
-
-        if(StringExt.checkNullOrEmpty(pix_fmt)) {
-            throw new InvalidArgumentException("The pixel format must neither be null nor an empty string.",
-                    "Il formato dei pixel non puo' essere null o una stringa vuota.");
-        }
-
-        if (!development || checkSize(width, height, pix_fmt)) {
-            this.width = width;
-            this.height = height;
-        }
+        scalingParams.setSize(development, width, height, pix_fmt);
     }
 
     /**
@@ -190,22 +152,7 @@ public class Scale extends VideoFilter {
      * @throws UnsupportedOperationException If the video's width and height are already set
      */
     public void setVideoSizeID(@NotNull String videoSizeID) throws InvalidArgumentException, UnsupportedOperationException {
-        if(!StringExt.checkNullOrEmpty(width) && !StringExt.checkNullOrEmpty(height)) {
-            UnsupportedOperationException.throwUnsupportedOperationException("Cannot set video size id if width and " +
-                    "height are already set.", "Impossibile impostare l'id della dimensione del video quando l'ampiezza " +
-                    "e l'altezza sono gia' impostate.");
-        }
-        if (StringExt.checkNullOrEmpty(videoSizeID)) {
-            throw new InvalidArgumentException("The video size ID should not be null.", "L'ID della proporzione visiva " +
-                    "non deve essere null.");
-        }
-
-        Size size = new Size();
-        if (size.checkSizeID(videoSizeID)) {
-            this.videoSizeID = videoSizeID;
-        } else {
-            throw new InvalidArgumentException("Invalid image resolution", "Risoluzione immagine non valida.");
-        }
+        scalingParams.setVideoSizeID(videoSizeID);
     }
 
     /**
@@ -215,7 +162,7 @@ public class Scale extends VideoFilter {
      * FFmpeg
      */
     public void setInputColorMatrix(@NotNull String name) throws InvalidArgumentException {
-        inColMatrix = new ColorMatrix(name);
+        scalingParams.setInputColorMatrix(name);
     }
 
     /**
@@ -225,7 +172,7 @@ public class Scale extends VideoFilter {
      * FFmpeg
      */
     public void setOutColorMatrix(@NotNull String name) throws InvalidArgumentException {
-        outColorMatrix = new ColorMatrix(name);
+        scalingParams.setOutColorMatrix(name);
     }
 
     /**
@@ -234,17 +181,7 @@ public class Scale extends VideoFilter {
      * @throws InvalidArgumentException If the input color range is null, an empty string or not recognizable by FFmpeg
      */
     public void setInputRange(@NotNull String in_range) throws InvalidArgumentException {
-        if(StringExt.checkNullOrEmpty(in_range)) {
-            throw new InvalidArgumentException("The input color range cannot be null or an empty string.", "Il range di " +
-                    "input dei colori non puo' essere null o una stringa vuota.");
-        }
-
-        switch(in_range) {
-            case "auto", "unknown", "jpeg", "full", "pc", "mpeg", "limited", "tv" -> this.in_range = in_range;
-            default -> throw new InvalidArgumentException("The input color range must be equal to \"auto/unknown\", " +
-                    "\"jpeg/full/pc\" or \"mpeg/limited/tv\".", "L'intervallo dei colori in input deve essere uguale a " +
-                    "\"auto/unknown\", \"jpeg/full/pc\" o \"mpeg/limited/tv\".");
-        }
+        scalingParams.setInputRange(in_range);
     }
 
     /**
@@ -253,17 +190,7 @@ public class Scale extends VideoFilter {
      * @throws InvalidArgumentException If the output color range is null, an empty string or not recognizable by FFmpeg
      */
     public void setOutputRange(@NotNull String out_range) throws InvalidArgumentException {
-        if(StringExt.checkNullOrEmpty(out_range)) {
-            throw new InvalidArgumentException("The input color range cannot be null or an empty string.", "Il range di " +
-                    "input dei colori non puo' essere null o una stringa vuota.");
-        }
-
-        switch(out_range) {
-            case "auto", "unknown", "jpeg", "full", "pc", "mpeg", "limited", "tv" -> this.out_range = out_range;
-            default -> throw new InvalidArgumentException("The input color range must be equal to \"auto/unknown\", " +
-                    "\"jpeg/full/pc\" or \"mpeg/limited/tv\".", "L'intervallo dei colori in input deve essere uguale a " +
-                    "\"auto/unknown\", \"jpeg/full/pc\" o \"mpeg/limited/tv\".");
-        }
+        scalingParams.setOutputRange(out_range);
     }
 
     /**
@@ -273,16 +200,7 @@ public class Scale extends VideoFilter {
      * FFmpeg
      */
     public void forceOriginalAspectRatio(@NotNull String val) throws InvalidArgumentException {
-        if(StringExt.checkNullOrEmpty(val)) {
-            throw new InvalidArgumentException("The parameter given to this method cannot be null or an empty string.",
-                    "Il parametro fornito a questo metodo non puo' essere null o una stringa vuota.");
-        }
-
-        switch(val) {
-            case "disable", "decrease", "increase" -> force_original_aspect_ratio = val;
-            default -> throw new InvalidArgumentException("The parameter given to this method must have a value recognizable " +
-                    "by FFmpeg.", "Il parametro fornito a questo metodo deve avere un valore riconoscibile da FFmpeg.");
-        }
+        scalingParams.forceOriginalAspectRatio(val);
     }
 
     /**
@@ -290,9 +208,7 @@ public class Scale extends VideoFilter {
      * @param val The given integer
      */
     public void setDivisibleBy(int val) {
-        if(val > 0) {
-            force_divisible_by = val;
-        }
+        scalingParams.setDivisibleBy(val);
     }
 
     /**
@@ -302,18 +218,7 @@ public class Scale extends VideoFilter {
      * "init" and "frame"
      */
     public void setEval(@NotNull String eval) throws InvalidArgumentException {
-        if(StringExt.checkNullOrEmpty(eval)) {
-            throw new InvalidArgumentException("The width and height's evaluation parameter cannot be null or an empty " +
-                    "string.", "Il valore del parametro di valutazione dell'ampiezza e dell'altezza non puo' essere null " +
-                    "o una stringa vuota.");
-        }
-
-        switch(eval) {
-            case "eval", "init" -> this.eval = eval;
-            default -> throw new InvalidArgumentException("The width and height's evaluation parameter's value must be " +
-                    "equal to \"eval\" or \"init\".", "Il valore del parametro di valutazione dell'ampiezza e dell'altezza " +
-                    "deve essere uguale a \"eval\" o \"init\".");
-        }
+        scalingParams.setEval(eval);
     }
 
     /**
@@ -323,56 +228,32 @@ public class Scale extends VideoFilter {
      * or "-1"
      */
     public void setInterl(@NotNull String val) throws InvalidArgumentException {
-        if(StringExt.checkNullOrEmpty(val)) {
-            throw new InvalidArgumentException("The interlacing mode cannot be null or an empty string.", "La modalita' " +
-                    "di interlacciamento non puo' essere null o unstringa vuota.");
-        }
-
-        interl = val;
+        scalingParams.setInterl(val);
     }
 
     /**
      * Fills the Map declared in Filter with the correct values.
      */
     public void updateMap() {
-        if(sws_flags != null) {
-            options.put("flags", sws_flags.toString());
-        }
-        options.put("eval", eval);
-        options.put("interl", interl);
-        if(videoSizeID != null && !videoSizeID.isEmpty()) {
-            options.put("size", videoSizeID);
-        } else {
-            options.put("width", width);
-            options.put("height", height);
-        }
-        if(inColMatrix == null) {
-            options.put("in_color_matrix", "auto");
-        } else {
-            options.put("in_color_matrix", inColMatrix.getName());
-        }
-        if(outColorMatrix == null) {
-            options.put("out_color_matrix", "auto");
-        } else {
-            options.put("out_color_matrix", outColorMatrix.getName());
-        }
-        if(in_range == null || in_range.isEmpty()) {
-            options.put("in_range", "auto");
-        } else {
-            options.put("in_range", in_range);
-        }
-        if(out_range == null || out_range.isEmpty()) {
-            options.put("out_range", "auto");
-        } else {
-            options.put("out_range", out_range);
-        }
-        if(force_original_aspect_ratio == null || force_original_aspect_ratio.isEmpty()) {
-            options.put("force_original_aspect_ratio", "disable");
-        } else {
-            options.put("force_original_aspect_ratio", force_original_aspect_ratio);
-        }
-        if(force_divisible_by > 0) {
-            options.put("force_divisible_by", String.valueOf(force_divisible_by));
+        try {
+            setOption("flags", scalingParams.getFlagsName());
+            setOption("eval", scalingParams.getEval());
+            setOption("interl", scalingParams.getInterl());
+
+            setOption("size", scalingParams.getVideoSizeID());
+            setOption("width", scalingParams.getWidth());
+            setOption("height", scalingParams.getHeight());
+
+            setOption("in_color_matrix", scalingParams.getInputColorMatrix());
+            setOption("out_color_matrix", scalingParams.getOutputColorMatrix());
+
+            setOption("in_range", scalingParams.getInputRange());
+            setOption("out_range", scalingParams.getOutputRange());
+
+            setOption("force_original_aspect_ratio", scalingParams.getForceOriginalAspectRatio());
+            setOption("force_divisible_by", String.valueOf(scalingParams.getDivisibleBy()));
+        } catch(InvalidArgumentException ex) {
+            System.err.println(ex.getMessage());
         }
     }
 }

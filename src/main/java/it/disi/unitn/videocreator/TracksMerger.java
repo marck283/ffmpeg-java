@@ -4,6 +4,7 @@ import it.disi.unitn.FFMpeg;
 import it.disi.unitn.FFMpegBuilder;
 import it.disi.unitn.StringExt;
 import it.disi.unitn.exceptions.InvalidArgumentException;
+import it.disi.unitn.lasagna.MyFile;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
@@ -32,16 +33,15 @@ public class TracksMerger extends VideoCreator {
      * @param outputFile The path to the output video
      * @param audioInput The path to the input audio file
      * @param videoInput The path to the input video file
-     * @throws InvalidArgumentException If any of the arguments given to this method is null or an empty string
      */
     public TracksMerger(@NotNull FFMpegBuilder builder, @NotNull String outputFile,
-                        @NotNull String audioInput, @NotNull String videoInput)
-            throws InvalidArgumentException {
+                        @NotNull String audioInput, @NotNull String videoInput) {
         super(builder, outputFile);
         if(StringExt.checkNullOrEmpty(audioInput) || StringExt.checkNullOrEmpty(videoInput)) {
-            throw new InvalidArgumentException("The arguments to this class's constructor cannot be null or empty " +
+            System.err.println((new InvalidArgumentException("The arguments to this class's constructor cannot be null or empty " +
                     "strings.", "Nessuno degli argomenti forniti al costruttore di questa classe puo' essere null o una " +
-                    "stringa vuota.");
+                    "stringa vuota.")).getMessage());
+            System.exit(11);
         }
 
         this.builder = builder;
@@ -55,10 +55,8 @@ public class TracksMerger extends VideoCreator {
      * video.
      * @param builder The FFMpegBuilderInstance
      * @param outputVideo The path to the output video
-     * @throws InvalidArgumentException If any of the arguments given to this method is null or an empty string
      */
-    public TracksMerger(@NotNull FFMpegBuilder builder, @NotNull String outputVideo)
-            throws InvalidArgumentException {
+    public TracksMerger(@NotNull FFMpegBuilder builder, @NotNull String outputVideo) {
         super(builder, outputVideo);
 
         this.builder = builder;
@@ -77,8 +75,9 @@ public class TracksMerger extends VideoCreator {
 
     /**
      * This method sets the correct command to merge the audio and video tracks.
-     * @param time The maximum amount of time to wait for the video's creation
-     * @param timeUnit The TimeUnit instance to be used
+     * @param time The maximum amount of time to wait for the video's creation.
+     * @param timeUnit The TimeUnit instance to be used.
+     * @param outdir The given output directory.
      * @throws IOException If an I/O error occurs
      * @throws InvalidArgumentException If the given timeout is negative, the TimeUnit instance is null, the video input
      * path or audio input path is null
@@ -105,7 +104,7 @@ public class TracksMerger extends VideoCreator {
      * @throws IOException if an I/O error occurred
      */
     private @NotNull File writeTXTFile(@NotNull List<String> inputFiles, @NotNull String tempFile) throws IOException {
-        File file = new File(tempFile);
+        MyFile file = new MyFile(tempFile);
         if(file.exists()) {
             //file.delete();
             Files.deleteIfExists(file.toPath());
@@ -134,10 +133,11 @@ public class TracksMerger extends VideoCreator {
 
     /**
      * This method allows any object of this class to concatenate two or more videos whose path is given as input.
-     * @param inputFiles The paths to the input files
-     * @param time The maximum amount of time to wait for the video's creation
-     * @param timeUnit The TimeUnit instance to be used
-     * @param tempFile A temporary file used to store the paths of the files to be merged
+     * @param inputFiles The paths to the input files.
+     * @param time The maximum amount of time to wait for the video's creation.
+     * @param timeUnit The TimeUnit instance to be used.
+     * @param tempFile A temporary file used to store the paths of the files to be merged.
+     * @param outdir The output directory.
      * @throws IOException if an I/O error occurs
      * @throws InvalidArgumentException If the given timeout is negative or the given TimeUnit instance is null, or if
      * the third or fourth arguments are null or an empty string or contain null or empty strings
@@ -160,6 +160,11 @@ public class TracksMerger extends VideoCreator {
         if(streamCopy) {
             builder.add("-c copy");
         }
+
+        add(vfg != null, (vfg != null) ? vfg.toString() : "");
+        add(afg != null, (afg != null) ? afg.toString() : "");
+        add(cfg != null, (cfg != null) ? cfg.toString() : "");
+
         builder.addOutput(videoOutput);
 
         FFMpeg ffmpeg = builder.build();

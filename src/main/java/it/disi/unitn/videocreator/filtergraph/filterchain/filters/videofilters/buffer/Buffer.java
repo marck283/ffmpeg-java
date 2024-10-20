@@ -16,9 +16,8 @@ public class Buffer extends VideoFilter {
 
     /**
      * The class's constructor
-     * @throws InvalidArgumentException If this filter's name is null or an empty string
      */
-    public Buffer() throws InvalidArgumentException {
+    public Buffer() {
         super("buffer");
         video_size = "";
         width = 0;

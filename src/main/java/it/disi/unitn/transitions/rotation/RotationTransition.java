@@ -1,15 +1,18 @@
 package it.disi.unitn.transitions.rotation;
 
 import it.disi.unitn.FFMpegBuilder;
+import it.disi.unitn.StringExt;
 import it.disi.unitn.exceptions.InvalidArgumentException;
-import it.disi.unitn.exceptions.RotationFailedException;
-import it.disi.unitn.lasagna.File;
-import it.disi.unitn.transitions.rotation.processpool.ProcessPool;
+import it.disi.unitn.lasagna.MyFile;
 import it.disi.unitn.videocreator.TracksMerger;
-import it.disi.unitn.videocreator.filtergraph.FilterGraph;
-import it.disi.unitn.videocreator.filtergraph.filterchain.FilterChain;
-import it.disi.unitn.videocreator.filtergraph.filterchain.filters.multimedia.concat.Concat;
+import it.disi.unitn.videocreator.filtergraph.VideoFilterGraph;
+import it.disi.unitn.videocreator.filtergraph.filterchain.VideoSimpleFilterChain;
+import it.disi.unitn.videocreator.filtergraph.filterchain.filters.multimedia.pts.SetPts;
+import it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.fps.FPS;
+import it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.scale.Scale;
+import it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.scale.scalingalgs.ScalingAlgorithm;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.awt.*;
 import java.io.IOException;
@@ -18,100 +21,162 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * This class performs the rotation.
+ */
 public class RotationTransition {
 
     private final Rotation rotation;
 
     private final String tempOutDir, videoOutDir, fname;
 
+    private final VideoSimpleFilterChain vsfc;
+
+    /**
+     * The class's constructor. None of the given values can be null or empty strings.
+     * @param inputFile The given input file's path.
+     * @param tempOutDir The given temporary output directory's path.
+     * @param videoOutDir The temporary video output directory's path.
+     * @param fname The output file's name.
+     */
     public RotationTransition(@NotNull String inputFile, @NotNull String tempOutDir, @NotNull String videoOutDir,
-                              @NotNull String fname)
-            throws IOException {
+                              @NotNull String fname) {
         rotation = new Rotation(inputFile, tempOutDir);
         this.tempOutDir = tempOutDir;
         this.videoOutDir = videoOutDir;
         this.fname = fname;
+        vsfc = new VideoSimpleFilterChain();
     }
 
+    /**
+     * This method performs the rotation.
+     * @param anchorx The x-value of the anchor.
+     * @param anchory The y-value of the anchor.
+     * @param angle The angle expressed in radians.
+     * @param text The text to be writer.
+     * @param name The given output file's name.
+     * @param fontFamily The given font's family. This value cannot be null or an empty string.
+     * @param fontStyle The given font's style.
+     * @param fontSize The given font's size. This value cannot be less than or equal to zero.
+     * @param color The chosen Color instance
+     * @throws InvalidArgumentException If one of the non-null arguments is null or an empty string
+     */
     public void rotate(int anchorx, int anchory, double angle, @NotNull String text, @NotNull String name,
-                       @NotNull Color color) throws RotationFailedException, IOException, InvalidArgumentException {
-        rotation.rotate(anchorx, anchory, angle, text, name, fname, color);
+                       @NotNull String fontFamily, int fontStyle, int fontSize, @NotNull Color color) throws InvalidArgumentException {
+        rotation.rotate(anchorx, anchory, angle, text, name, fname, fontFamily, fontStyle, fontSize, color);
     }
 
-    private void scaleEach(@NotNull List<String> pathList, int width, int height,
-                           @NotNull String codec, @NotNull String fileExt)
-            throws Exception {
-        String temp = videoOutDir + "/temp";
-        File.makeDirs(temp);
-        ProcessPool pool = new ProcessPool(width, height);
-        int i = 0;
-        for(String path: pathList) {
-            pool.execute(i, temp, fileExt, path, codec, 1L);
-            i += 1;
+    /**
+     * This method sets the scaling filter's parameters.
+     * @param sws_flags The chosen ScalingAlgorithm instance.
+     * @param eval The "eval" parameter's expression.
+     * @param interl The interlacing mode.
+     * @param width The frames' width.
+     * @param height The frames' height.
+     * @param videoSizeID The frames' video size ID.
+     * @param in_range The input color's range.
+     * @param out_range The output color's range.
+     * @param force_original_aspect_ratio This parameter tells the program how to force the aspect ratio. See {@link Scale}
+     *                                    for more information.
+     * @param inColMatrix The input color's matrix.
+     * @param outColorMatrix The output color's matrix.
+     * @param force_divisible_by An integer value by which the width and the height must be divisible (if set).
+     * @throws InvalidArgumentException If any of the given values is null, an empty string or less than or equal to zero
+     */
+    public void setScale(@NotNull ScalingAlgorithm sws_flags,
+                         @NotNull String eval, @NotNull String interl,
+                         @NotNull String width, @NotNull String height, @NotNull String videoSizeID,
+                         @NotNull String in_range, @NotNull String out_range, @NotNull String force_original_aspect_ratio,
+                         @NotNull String inColMatrix, @NotNull String outColorMatrix, int force_divisible_by) throws InvalidArgumentException {
+        Scale scale = new Scale(sws_flags, eval, interl, width, height, videoSizeID, in_range, out_range, force_original_aspect_ratio,
+                inColMatrix, outColorMatrix, force_divisible_by);
+        scale.updateMap();
+
+        vsfc.addFilter(scale);
+
+    }
+
+    /**
+     * This method sets the "fps"'s video filter parameters.
+     * @param fpsEx The framerate expression.
+     * @param start_time The starting instant.
+     * @param round The "round" parameter's value.
+     * @param eof_action The "eof_action" parameter's value.
+     * @throws InvalidArgumentException If the given framerate expression is null or an empty string
+     */
+    public void setFPS(@NotNull String fpsEx, int start_time, @Nullable String round, @Nullable String eof_action)
+            throws InvalidArgumentException {
+        FPS fps = new FPS();
+        fps.setFPS(fpsEx);
+        fps.setStartTime(start_time);
+
+        if(!StringExt.checkNullOrEmpty(round)) {
+            fps.setRound(round);
         }
 
-        Thread t1 = new Thread(() -> {
-            try {
-                pool.doWait();
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-        });
-        t1.join();
+        if(!StringExt.checkNullOrEmpty(eof_action)) {
+            fps.setEOFAction(eof_action);
+        }
+
+        fps.updateMap();
+
+        vsfc.addFilter(fps);
     }
 
-    private void createVideo(@NotNull FFMpegBuilder builder, long timeout, @NotNull TimeUnit tu, int width, int height,
-                             @NotNull String outfile, @NotNull String codec, @NotNull String fileExt)
-            throws Exception {
-        File outDirPath = new File(tempOutDir);
-        List<String> pathList = outDirPath.getFileList(), pl1;
+    /**
+     * This method allows the program to set the rotation's speed by manipulating the video's timestamps.
+     * @param rotExpr The given expression. This value must not be null or empty, and it must conform to FFmpeg's
+     *                setpts and asetpts filters specifications.
+     * @throws InvalidArgumentException If the given value is null or empty, or if it does not conform to the given
+     * specifications.
+     */
+    public void setRotationSpeed(@NotNull String rotExpr) throws InvalidArgumentException {
+        SetPts pts = new SetPts();
+        pts.setExpr(rotExpr);
+        pts.updateMap();
 
-        scaleEach(pathList, width, height, codec, fileExt);
+        vsfc.addFilter(pts);
+    }
 
-        File f1 = new File(videoOutDir + "/temp");
-        pl1 = f1.getFileList();
+    private void createVideo(@NotNull FFMpegBuilder builder, long timeout, @NotNull TimeUnit tu,
+                             @NotNull String outfile, @NotNull String fileExt) throws Exception {
+        MyFile outDirPath = new MyFile(tempOutDir);
+        List<String> pathList = outDirPath.getFileList();
         TracksMerger merger = builder.newTracksMerger(videoOutDir + "/" + outfile + "." + fileExt);
-        Concat concat = new Concat();
-        int i = 0;
 
-        while(pl1.size() != pathList.size()) {
-            pl1 = f1.getFileList();
-        }
-        for(String path: pl1) {
+        for(String path: pathList) {
             merger.addInput(path.replace('\\', '/'));
-            concat.addInput(i + ":0");
-            i += 1;
         }
 
-        concat.setN(pl1.size());
-        concat.setV(1);
-        concat.setA(0);
-        concat.addOutput("v");
-        concat.updateMap();
-
-        FilterGraph vsfg = new FilterGraph();
-        FilterChain vsfc = new FilterChain();
-        vsfc.addFilter(concat);
+        VideoFilterGraph vsfg = new VideoFilterGraph();
         vsfg.addFilterChain(vsfc);
-        merger.setComplexFilterGraph(vsfg);
+        merger.setVideoSimpleFilterGraph(vsfg);
 
-        merger.setFrameRate(1);
-        merger.setStreamToMap("[v]");
-
-        Path p = Paths.get("inputFile.txt");
-        merger.mergeVideos(timeout, tu, pl1, p.toFile().getAbsolutePath(), "./");
+        Path p = Paths.get("inputFile.txt").toAbsolutePath();
+        merger.mergeVideos(timeout, tu, pathList, p.toString(), "./");
     }
 
-    public void performRotation(long timeout, @NotNull TimeUnit tu, int width, int height, @NotNull String outfile,
-                                @NotNull String codec, @NotNull String fileExt)
+    /**
+     * This method allows the user to create the output video.
+     * @param timeout The given timeout.
+     * @param tu The given TimeUnit instance.
+     * @param outfile The given output file's path.
+     * @param fileExt The file's extension.
+     * @throws Exception If any exception is thrown
+     */
+    public void performRotation(long timeout, @NotNull TimeUnit tu, @NotNull String outfile, @NotNull String fileExt)
             throws Exception {
         FFMpegBuilder builder = new FFMpegBuilder("ffmpeg");
-        createVideo(builder, timeout, tu, width, height, outfile, codec, fileExt);
+        createVideo(builder, timeout, tu, outfile, fileExt);
     }
 
+    /**
+     * This method disposes of the underlying objects used in this class.
+     * @throws IOException If an I/O error occurs
+     */
     public void dispose() throws IOException {
         rotation.dispose();
-        File dir = new File(tempOutDir);
+        MyFile dir = new MyFile(tempOutDir);
         dir.removeSelf();
     }
 

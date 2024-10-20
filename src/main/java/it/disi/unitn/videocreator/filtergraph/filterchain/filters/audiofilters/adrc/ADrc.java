@@ -17,7 +17,7 @@ public class ADrc extends AudioFilter {
 
         @Override
         public @NotNull String toString() {
-            switch(this) {
+            switch (this) {
                 case CH -> {
                     return "ch";
                 }
@@ -52,9 +52,8 @@ public class ADrc extends AudioFilter {
     /**
      * This class's constructor.
      *
-     * @throws InvalidArgumentException If the given filter's name is null or an empty string
      */
-    public ADrc() throws InvalidArgumentException {
+    public ADrc() {
         super("adrc");
         chLayout = new ChannelLayout();
         attack = 50;
@@ -64,17 +63,18 @@ public class ADrc extends AudioFilter {
 
     /**
      * Sets the transfer expression. This value must be recognizable by FFmpeg.
+     *
      * @param val The given transfer expression
      * @throws InvalidArgumentException If the given transfer expression is null or an empty string or not a value recognized
-     * by FFmpeg
+     *                                  by FFmpeg
      */
     public void setTransfer(@NotNull String val) throws InvalidArgumentException {
-        if(StringExt.checkNullOrEmpty(val)) {
+        if (StringExt.checkNullOrEmpty(val)) {
             throw new InvalidArgumentException("The transfer expression cannot be null or an empty string.", "L'espressione " +
                     "di trasferimento non puo' essere null o una stringa vuota.");
         }
 
-        switch(val) {
+        switch (val) {
             case "ch" -> transfer = Transfer.CH;
             case "sn" -> transfer = Transfer.SN;
             case "nb_channels" -> transfer = Transfer.NB_CHANNELS;
@@ -90,11 +90,12 @@ public class ADrc extends AudioFilter {
 
     /**
      * Sets the attack value in milliseconds.
+     *
      * @param val The given attack value in milliseconds
      * @throws InvalidArgumentException If the given attack value is less than 1 or greater than 1000
      */
     public void setAttack(int val) throws InvalidArgumentException {
-        if(val < 1 || val > 1000) {
+        if (val < 1 || val > 1000) {
             throw new InvalidArgumentException("The attack value cannot be less than 1 or greater than 1000.", "Il valore " +
                     "di attacco non puo' essere minore di 1 o maggiore di 1000.");
         }
@@ -104,11 +105,12 @@ public class ADrc extends AudioFilter {
 
     /**
      * Sets the release value in milliseconds.
+     *
      * @param val The given release value in milliseconds
      * @throws InvalidArgumentException If the given release value is less than 5 or greater than 2000
      */
     public void setRelease(int val) throws InvalidArgumentException {
-        if(val < 5 || val > 2000) {
+        if (val < 5 || val > 2000) {
             throw new InvalidArgumentException("The release value cannot be less than 5 or greater than 2000.", "Il valore " +
                     "di rilascio non puo' essere minore di 5 o maggiore di 2000.");
         }
@@ -118,9 +120,10 @@ public class ADrc extends AudioFilter {
 
     /**
      * Adds a new channel ID to this filter.
+     *
      * @param channelID The channel ID to be added
-     * @throws InvalidArgumentException If the given channel ID is null, an empty string or any value not recognized by
-     * FFmpeg
+     * @throws InvalidArgumentException      If the given channel ID is null, an empty string or any value not recognized by
+     *                                       FFmpeg
      * @throws UnsupportedOperationException If the channel identified by the given channel ID cannot be added
      */
     public void addChannel(@NotNull String channelID) throws InvalidArgumentException, UnsupportedOperationException {
@@ -133,6 +136,6 @@ public class ADrc extends AudioFilter {
         options.put("transfer", transfer.toString());
         options.put("attack", String.valueOf(attack));
         options.put("release", String.valueOf(release));
-        options.put("channels", (chLayout.getChannels().isEmpty()) ? "all" : chLayout.toString());
+        options.put("channels", (chLayout.isEmpty()) ? "all" : chLayout.toString());
     }
 }

@@ -4,8 +4,11 @@ import it.disi.unitn.videocreator.ExecutorResHandler;
 import org.apache.commons.exec.CommandLine;
 import org.apache.commons.exec.DefaultExecutor;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
+import java.io.OutputStream;
+import java.nio.file.Path;
 
 /**
  * This class acts as a wrapper to control and execute the video creation processes.
@@ -18,12 +21,13 @@ public class ProcessController {
 
     /**
      * This class's constructor.
-     * @param executor The DefaultExecutor instance
-     * @param handler The ExecutorResHandler instance
+     * @param executor The DefaultExecutor instance.
+     * @param outstream An OutputStream instance.
+     * @param tempp A temporary file on which the user has writing permissions.
      */
-    public ProcessController(DefaultExecutor executor, ExecutorResHandler handler) {
+    public ProcessController(DefaultExecutor executor, @Nullable OutputStream outstream, @Nullable Path tempp) {
         this.executor = executor;
-        this.handler = handler;
+        this.handler = new ExecutorResHandler(outstream, tempp);
     }
 
     /**

@@ -7,17 +7,19 @@ import it.disi.unitn.videocreator.TracksMerger;
 import it.disi.unitn.videocreator.VideoCreator;
 import it.disi.unitn.videocreator.transcoder.VideoTranscoder;
 import org.apache.commons.lang3.SystemUtils;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Consumer;
 
 /**
  * Builder class for convenience class FFMpeg
  */
-public class FFMpegBuilder {
+public final class FFMpegBuilder {
     //private String command;
 
     private final List<String> lcommand;
@@ -33,9 +35,9 @@ public class FFMpegBuilder {
         lcommand = new ArrayList<>();
         if(SystemUtils.IS_OS_WINDOWS) {
             if(ffmpegPath == null || ffmpegPath.isEmpty()) {
-                throw new InvalidArgumentException("The argument to this class's constructor cannot be null or an " +
+                System.err.println((new InvalidArgumentException("The argument to this class's constructor cannot be null or an " +
                         "empty string.", "L'argomento fornito al costruttore di questa classe non puo' essere " +
-                        "null o una stringa vuota.");
+                        "null o una stringa vuota.").getMessage()));
             }
             //command = ffmpegPath;
             lcommand.add(ffmpegPath);
@@ -49,7 +51,8 @@ public class FFMpegBuilder {
      * Creates a new FFMpeg instance using the information given to this FFMpegBuilder instance.
      * @return The created FFMpeg instance
      */
-    public FFMpeg build() {
+    @Contract(value = " -> new", pure = true)
+    public @NotNull FFMpeg build() {
         return new FFMpeg(this);
     }
 
@@ -89,14 +92,6 @@ public class FFMpegBuilder {
                             "FFmpeg.");
         }
         lcommand.add(index, elem);
-    }
-
-    /**
-     * Convenience method to get the FFmpeg command to be executed as a List instance.
-     * @return The FFmpeg command to be executed as a List instance
-     */
-    public List<String> getLCommand() {
-        return lcommand;
     }
 
     /**
@@ -143,10 +138,9 @@ public class FFMpegBuilder {
      * @param audioInput The given audio input file
      * @param videoInput The given video input file
      * @return The newly created TracksMerger instance
-     * @throws InvalidArgumentException If the TracksMerger's constructor throws this exception
      */
-    public TracksMerger newTracksMerger(@NotNull String outputFile, @NotNull String audioInput, @NotNull String videoInput)
-            throws InvalidArgumentException {
+    @Contract("_, _, _ -> new")
+    public @NotNull TracksMerger newTracksMerger(@NotNull String outputFile, @NotNull String audioInput, @NotNull String videoInput) {
         return new TracksMerger(this, outputFile, audioInput, videoInput);
     }
 
@@ -155,9 +149,9 @@ public class FFMpegBuilder {
      * creating the final output video.
      * @param outputFile The path to the output file
      * @return The newly created TracksMerger instance
-     * @throws InvalidArgumentException If the TracksMerger's constructor throws this exception
      */
-    public TracksMerger newTracksMerger(@NotNull String outputFile) throws InvalidArgumentException {
+    @Contract("_ -> new")
+    public @NotNull TracksMerger newTracksMerger(@NotNull String outputFile) {
         return new TracksMerger(this, outputFile);
     }
 
@@ -178,10 +172,9 @@ public class FFMpegBuilder {
      * output file's extension.
      * @param outputFile The path to the output file
      * @return A new VideoTranscoder instance
-     * @throws InvalidArgumentException If at least one of the given arguments is null or an empty string
      */
-    public VideoTranscoder newVideoTranscoder(@NotNull String outputFile)
-            throws InvalidArgumentException {
+    @Contract("_ -> new")
+    public @NotNull VideoTranscoder newVideoTranscoder(@NotNull String outputFile) {
         return new VideoTranscoder(this, outputFile);
     }
 
@@ -191,7 +184,8 @@ public class FFMpegBuilder {
      * @return A new AudioFiltering instance made using the given output audio file.
      * @throws InvalidArgumentException If the given audio file is null or an empty string
      */
-    public AudioFiltering newAudioFiltering(@NotNull String outputFile) throws InvalidArgumentException {
+    @Contract("_ -> new")
+    public @NotNull AudioFiltering newAudioFiltering(@NotNull String outputFile) throws InvalidArgumentException {
         return new AudioFiltering(this, outputFile);
     }
 
@@ -220,7 +214,7 @@ public class FFMpegBuilder {
      * empty string
      */
     public void addAllInputs(@NotNull List<String> inputFiles) throws InvalidArgumentException{
-        if(inputFiles == null || inputFiles.contains(null) || inputFiles.contains("")) {
+        if(inputFiles == null || inputFiles.stream().anyMatch(StringExt::checkNullOrEmpty)) {
             throw new InvalidArgumentException("The given list of input files cannot be null or contain null or empty " +
                     "strings.", "La data lista di file in input non puo' essere null o contenere valori null o pari a " +
                     "stringhe vuote.");
@@ -234,6 +228,24 @@ public class FFMpegBuilder {
 
         String res = String.join("\" -i \"", inputFiles);
         add(res.trim().replaceAll("  +", " "));
+    }
+
+    public void removeParam(@NotNull String e) {
+        lcommand.remove(e);
+    }
+
+    public void modifyParam(@NotNull String oldVal, @NotNull String newVal) throws InvalidArgumentException {
+        int index = lcommand.indexOf(oldVal);
+        removeParam(oldVal);
+        add(index, newVal);
+    }
+
+    public void modifyParams(Consumer<? super String> action) {
+        lcommand.forEach(action);
+    }
+
+    public void modifyLast(@NotNull String newVal) throws InvalidArgumentException {
+        add(lcommand.size() - 1, newVal);
     }
 
     /**
