@@ -4,9 +4,6 @@ import it.disi.unitn.StringExt;
 import it.disi.unitn.exceptions.InvalidArgumentException;
 import it.disi.unitn.exceptions.RotationFailedException;
 import it.disi.unitn.transitions.Transition;
-import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.apache.commons.lang3.tuple.Pair;
-import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
@@ -23,49 +20,6 @@ class Rotation extends Transition {
      */
     public Rotation(@NotNull String inputFile, @NotNull String tempOutDir) {
         super(inputFile, tempOutDir);
-    }
-
-    /**
-     * This method allows the text's rotation given an angle in degrees, and the x and y anchors.
-     * @param text The given text. This value cannot be null or an empty string.
-     * @param angle The given angle.
-     * @param anchorx The given x-anchor. This value cannot be less than 0.
-     * @param anchory The given y-anchor. This value cannot be less than 0.
-     * @return A (x-anchor, y-anchor) pair. This pair is an instance of ImmutablePair.
-     * @throws InvalidArgumentException If one of the given anchor values is less than 0, as that would mean that the
-     * given text would be rotated on a point beyond the frame's bounds.
-     */
-    @Contract("_, _, _, _ -> new")
-    private @NotNull ImmutablePair<Double, Double> getAnchors(@NotNull String text, double angle, double anchorx,
-                                                              double anchory) throws InvalidArgumentException {
-        if(anchorx < 0 || anchory < 0) {
-            throw new InvalidArgumentException("The given anchors cannot be less than 0.", "I valori forniti per il " +
-                    "perno della rotazione non possono essere minori di 0.");
-        }
-
-        FontMetrics fm = g2d.getFontMetrics();
-        int strWidth = fm.stringWidth(text);
-
-        double interAngle = angle%360D;
-        if(interAngle <= 180D) {
-            anchory -= strWidth*Math.sin(angle)/2;
-
-            if(interAngle < 90D) {
-                anchorx -= strWidth*Math.cos(angle)/2;
-            } else {
-                anchorx += strWidth*Math.sin(angle)/2;
-            }
-        } else {
-            anchory += strWidth*Math.sin(angle)/2;
-
-            if(interAngle <= 270D) {
-                anchorx += strWidth*Math.cos(angle)/2;
-            } else {
-                anchorx += strWidth*Math.sin(angle)/2;
-            }
-        }
-
-        return new ImmutablePair<>(anchorx, anchory);
     }
 
     /**
@@ -115,10 +69,7 @@ class Rotation extends Transition {
         g2d.setColor(fontColor);
 
         angle /= 57.2958D;
-
-        Pair<Double, Double> pair = getAnchors(text, angle, anchorx, anchory);
-
-        g2d.rotate(angle, pair.getLeft(), pair.getRight());
+        g2d.rotate(angle, anchorx, anchory);
         g2d.drawString(text,100F, 350F);
 
         try {

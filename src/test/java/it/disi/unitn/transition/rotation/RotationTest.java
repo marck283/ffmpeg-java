@@ -31,7 +31,7 @@ public class RotationTest {
                     tempOutDir,
                     "src/test/resources/output/video/rotation", "jpg");
 
-            rotation.rotate(400, 400, j + 1, "test", str1.getVal(), "Arial Unicode MS",
+            rotation.rotate(300, 300, j + 1, "test", str1.getVal(), "Arial Unicode MS",
                     Font.PLAIN, 200, Color.BLACK);
             j++;
         }
