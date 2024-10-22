@@ -2,6 +2,7 @@ package it.disi.unitn.transition.rotation;
 
 import it.disi.unitn.StringExt;
 import it.disi.unitn.exceptions.InvalidArgumentException;
+import it.disi.unitn.exceptions.MultiLanguageUnsupportedOperationException;
 import it.disi.unitn.exceptions.UnsupportedOperatingSystemException;
 import it.disi.unitn.lasagna.MyFile;
 import it.disi.unitn.transitions.rotation.RotationTransition;
@@ -47,7 +48,7 @@ public class RotationTest {
         rotation.dispose();
     }
 
-    private @NotNull ScalingParams getScalingParams() throws InvalidArgumentException, UnsupportedOperatingSystemException {
+    private @NotNull ScalingParams getScalingParams() throws InvalidArgumentException, UnsupportedOperatingSystemException, MultiLanguageUnsupportedOperationException {
         ScalingParams scalingParams = new ScalingParams();
         scalingParams.setSize(false, String.valueOf(2048), String.valueOf(1024), "yuv420p");
         scalingParams.setSwsFlags(new Bicubic(2, 2));

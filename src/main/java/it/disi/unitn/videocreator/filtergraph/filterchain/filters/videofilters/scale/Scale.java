@@ -4,7 +4,7 @@ import it.disi.unitn.ProcessController;
 import it.disi.unitn.StringExt;
 import it.disi.unitn.exceptions.InvalidArgumentException;
 import it.disi.unitn.exceptions.UnsupportedOperatingSystemException;
-import it.disi.unitn.exceptions.UnsupportedOperationException;
+import it.disi.unitn.exceptions.MultiLanguageUnsupportedOperationException;
 import it.disi.unitn.videocreator.ExecutorResHandler;
 import it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.VideoFilter;
 import it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.scale.scalingalgs.ScalingAlgorithm;
@@ -135,11 +135,11 @@ public class Scale extends VideoFilter {
      * @param pix_fmt The video's pixel format
      * @throws InvalidArgumentException If the video's with or height is null or an empty string, or the given pixel
      * format is null or an empty string
-     * @throws UnsupportedOperationException If the video's size id is already set
+     * @throws MultiLanguageUnsupportedOperationException If the video's size id is already set
      * @throws UnsupportedOperatingSystemException If the user's Operating System is not yet supported by this library
      */
     public void setSize(boolean development, @NotNull String width, @NotNull String height, @NotNull String pix_fmt)
-            throws InvalidArgumentException, UnsupportedOperatingSystemException, UnsupportedOperationException {
+            throws InvalidArgumentException, UnsupportedOperatingSystemException, MultiLanguageUnsupportedOperationException {
         scalingParams.setSize(development, width, height, pix_fmt);
     }
 
@@ -149,9 +149,9 @@ public class Scale extends VideoFilter {
      *
      * @param videoSizeID The given video size ID
      * @throws InvalidArgumentException if the given video size ID is null or not supported by FFmpeg
-     * @throws UnsupportedOperationException If the video's width and height are already set
+     * @throws MultiLanguageUnsupportedOperationException If the video's width and height are already set
      */
-    public void setVideoSizeID(@NotNull String videoSizeID) throws InvalidArgumentException, UnsupportedOperationException {
+    public void setVideoSizeID(@NotNull String videoSizeID) throws InvalidArgumentException, MultiLanguageUnsupportedOperationException {
         scalingParams.setVideoSizeID(videoSizeID);
     }
 

@@ -4,7 +4,7 @@ import it.disi.unitn.ProcessController;
 import it.disi.unitn.StringExt;
 import it.disi.unitn.exceptions.InvalidArgumentException;
 import it.disi.unitn.exceptions.UnsupportedOperatingSystemException;
-import it.disi.unitn.exceptions.UnsupportedOperationException;
+import it.disi.unitn.exceptions.MultiLanguageUnsupportedOperationException;
 import it.disi.unitn.videocreator.filtergraph.filterchain.filters.size.Size;
 import it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.scale.scalingalgs.ScalingAlgorithm;
 import org.apache.commons.exec.CommandLine;
@@ -178,13 +178,13 @@ public class ScalingParams {
      * @param pix_fmt The video's pixel format
      * @throws InvalidArgumentException If the video's with or height is null or an empty string, or the given pixel
      * format is null or an empty string
-     * @throws UnsupportedOperationException If the video's size id is already set
+     * @throws MultiLanguageUnsupportedOperationException If the video's size id is already set
      * @throws UnsupportedOperatingSystemException If the user's Operating System is not yet supported by this library
      */
     public void setSize(boolean development, @NotNull String width, @NotNull String height, @NotNull String pix_fmt)
-            throws InvalidArgumentException, UnsupportedOperatingSystemException, it.disi.unitn.exceptions.UnsupportedOperationException {
+            throws InvalidArgumentException, UnsupportedOperatingSystemException, it.disi.unitn.exceptions.MultiLanguageUnsupportedOperationException {
         if(!StringExt.checkNullOrEmpty(videoSizeID)) {
-            it.disi.unitn.exceptions.UnsupportedOperationException.throwUnsupportedOperationException("Cannot set video width and height if the " +
+            it.disi.unitn.exceptions.MultiLanguageUnsupportedOperationException.throwUnsupportedOperationException("Cannot set video width and height if the " +
                     "video's size id is already set.", "Non e' possibile impostare l'ampiezza e l'altezza del video " +
                     "quando l'id della sua dimensione e' gia' stato impostato.");
         }
@@ -232,11 +232,11 @@ public class ScalingParams {
      *
      * @param videoSizeID The given video size ID
      * @throws InvalidArgumentException if the given video size ID is null or not supported by FFmpeg
-     * @throws it.disi.unitn.exceptions.UnsupportedOperationException If the video's width and height are already set
+     * @throws it.disi.unitn.exceptions.MultiLanguageUnsupportedOperationException If the video's width and height are already set
      */
-    public void setVideoSizeID(@NotNull String videoSizeID) throws InvalidArgumentException, it.disi.unitn.exceptions.UnsupportedOperationException {
+    public void setVideoSizeID(@NotNull String videoSizeID) throws InvalidArgumentException, it.disi.unitn.exceptions.MultiLanguageUnsupportedOperationException {
         if(!StringExt.checkNullOrEmpty(width) && !StringExt.checkNullOrEmpty(height)) {
-            UnsupportedOperationException.throwUnsupportedOperationException("Cannot set video size id if width and " +
+            MultiLanguageUnsupportedOperationException.throwUnsupportedOperationException("Cannot set video size id if width and " +
                     "height are already set.", "Impossibile impostare l'id della dimensione del video quando l'ampiezza " +
                     "e l'altezza sono gia' impostate.");
         }

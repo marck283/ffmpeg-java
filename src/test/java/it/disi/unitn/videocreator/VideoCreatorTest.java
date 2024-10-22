@@ -4,7 +4,7 @@ import it.disi.unitn.FFMpeg;
 import it.disi.unitn.FFMpegBuilder;
 import it.disi.unitn.exceptions.InvalidArgumentException;
 import it.disi.unitn.exceptions.UnsupportedOperatingSystemException;
-import it.disi.unitn.exceptions.UnsupportedOperationException;
+import it.disi.unitn.exceptions.MultiLanguageUnsupportedOperationException;
 import it.disi.unitn.videocreator.filtergraph.FilterGraph;
 import it.disi.unitn.videocreator.filtergraph.filterchain.FilterChain;
 import it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.abuffer.ABuffer;
@@ -23,7 +23,7 @@ class VideoCreatorTest {
 
     @Test
     void createCommand() throws InvalidArgumentException, UnsupportedOperatingSystemException,
-            IOException, UnsupportedOperationException {
+            IOException, MultiLanguageUnsupportedOperationException {
         FFMpegBuilder builder = new FFMpegBuilder("ffmpeg -xerror");
         VideoCreator creator = builder.newVideoCreator("./src/test/resources/input/mp4/002.mp4");
         creator.addInput("./src/test/resources/input/mp4/001.mp4");
@@ -87,7 +87,7 @@ class VideoCreatorTest {
     }
 
     @Test
-    void createCommandTest1() throws InvalidArgumentException, UnsupportedOperatingSystemException, IOException {
+    void createCommandTest1() throws InvalidArgumentException, UnsupportedOperatingSystemException, IOException, MultiLanguageUnsupportedOperationException {
         FFMpegBuilder builder = new FFMpegBuilder("ffmpeg");
         VideoCreator creator = builder.newVideoCreator("./src/test/resources/input/mp4/002.mp4");
         creator.addInput("./src/test/resources/input/images/000.jpeg");

@@ -1,7 +1,7 @@
 package it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.buffer;
 
 import it.disi.unitn.exceptions.InvalidArgumentException;
-import it.disi.unitn.exceptions.UnsupportedOperationException;
+import it.disi.unitn.exceptions.MultiLanguageUnsupportedOperationException;
 import it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.VideoFilter;
 import org.jetbrains.annotations.NotNull;
 
@@ -36,16 +36,17 @@ public class Buffer extends VideoFilter {
      * @param width The video's width
      * @param height The video's height
      * @throws InvalidArgumentException If the video's width or height are less than or equal to zero
-     * @throws UnsupportedOperationException If the video's width and height were already set by setVideoWidthAndHeight()
+     * @throws MultiLanguageUnsupportedOperationException If the video's width and height were already set by setVideoWidthAndHeight()
      */
-    public void setVideoSize(int width, int height) throws InvalidArgumentException, UnsupportedOperationException {
+    public void setVideoSize(int width, int height) throws InvalidArgumentException, MultiLanguageUnsupportedOperationException {
         if(width <= 0 || height <= 0) {
             throw new InvalidArgumentException("The width and height cannot be less than or equal to zero.", "La larghezza " +
                     "e l'altezza non possono essere valori minori o uguali a zero.");
         }
 
         if(this.width > 0 && this.height > 0) {
-            throw new UnsupportedOperationException();
+            throw new MultiLanguageUnsupportedOperationException("The video's width and height have already been set.",
+                    "L'altezza e la larghezza dei frame del video sono gia' state impostate.");
         }
 
         video_size = width + "x" + height;
@@ -56,16 +57,17 @@ public class Buffer extends VideoFilter {
      * @param width The input video's width
      * @param height The input video's height
      * @throws InvalidArgumentException If the given width and height were less than or equal to zero
-     * @throws UnsupportedOperationException If the filter's video_size parameter was already set
+     * @throws MultiLanguageUnsupportedOperationException If the filter's video_size parameter was already set
      */
-    public void setVideoWidthAndHeight(int width, int height) throws InvalidArgumentException, UnsupportedOperationException {
+    public void setVideoWidthAndHeight(int width, int height) throws InvalidArgumentException, MultiLanguageUnsupportedOperationException {
         if(width <= 0 || height <= 0) {
             throw new InvalidArgumentException("The width and height cannot be less than or equal to zero.", "La larghezza " +
                     "e l'altezza non possono essere valori minori o uguali a zero.");
         }
 
         if(video_size != null && !video_size.isEmpty()) {
-            throw new UnsupportedOperationException();
+            throw new MultiLanguageUnsupportedOperationException("The video's size id has already been set.", "L'id della " +
+                    "dimensione dei frame del video e' gia' stato impostato.");
         }
 
         this.width = width;

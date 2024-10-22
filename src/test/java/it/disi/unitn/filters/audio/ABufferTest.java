@@ -3,6 +3,7 @@ package it.disi.unitn.filters.audio;
 import it.disi.unitn.FFMpeg;
 import it.disi.unitn.FFMpegBuilder;
 import it.disi.unitn.exceptions.InvalidArgumentException;
+import it.disi.unitn.exceptions.MultiLanguageUnsupportedOperationException;
 import it.disi.unitn.exceptions.UnsupportedOperatingSystemException;
 import it.disi.unitn.lasagna.audiocreator.AudioFiltering;
 import it.disi.unitn.videocreator.VideoCreator;
@@ -25,7 +26,7 @@ import java.util.concurrent.TimeUnit;
 public class ABufferTest {
 
     @Test
-    void test() throws InvalidArgumentException, UnsupportedOperatingSystemException, IOException {
+    void test() throws InvalidArgumentException, UnsupportedOperatingSystemException, IOException, MultiLanguageUnsupportedOperationException {
         FFMpegBuilder builder = new FFMpegBuilder("ffmpeg");
         VideoCreator creator = builder.newVideoCreator("./src/test/resources/input/mp4/002.mp4");
         creator.addInput("./src/test/resources/input/images/000.jpeg");

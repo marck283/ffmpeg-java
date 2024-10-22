@@ -3,7 +3,7 @@ package it.disi.unitn.lasagna.audiocreator;
 import it.disi.unitn.FFMpegBuilder;
 import it.disi.unitn.StringExt;
 import it.disi.unitn.exceptions.InvalidArgumentException;
-import it.disi.unitn.exceptions.UnsupportedOperationException;
+import it.disi.unitn.exceptions.MultiLanguageUnsupportedOperationException;
 import it.disi.unitn.videocreator.filtergraph.AudioFilterGraph;
 import it.disi.unitn.videocreator.filtergraph.FilterGraph;
 import org.jetbrains.annotations.NotNull;
@@ -65,17 +65,17 @@ public class AudioFiltering {
      * @param input The input file to be added
      * @throws InvalidArgumentException If the given input value is null or an empty string or the given file does not
      *                                  exist
-     * @throws UnsupportedOperationException If the input value already includes all files in
+     * @throws MultiLanguageUnsupportedOperationException If the input value already includes all files in
      *                                  the folder
      */
-    public void addInput(@NotNull String input) throws InvalidArgumentException, UnsupportedOperationException {
+    public void addInput(@NotNull String input) throws InvalidArgumentException, MultiLanguageUnsupportedOperationException {
         if (StringExt.checkNullOrEmpty(input)) {
             throw new InvalidArgumentException("The given input file cannot be null or an empty string.", "Il file fornito " +
                     "non puo' essere null o una stringa vuota.");
         }
 
         if(pattern.stream().anyMatch(e -> e.contains("*."))) {
-            UnsupportedOperationException.throwUnsupportedOperationException("Cannot insert another input value when " +
+            MultiLanguageUnsupportedOperationException.throwUnsupportedOperationException("Cannot insert another input value when " +
                     "there is already another one that includes all files in the same folder.", "Non e' possibile " +
                     "inserire un altro valore di input quando ne e' gia' presente uno che comprenda tutti i file " +
                     "presenti nella cartella.");
@@ -93,9 +93,9 @@ public class AudioFiltering {
      * This method creates the FFmpeg command to apply filters to the given audio files.
      * @throws InvalidArgumentException If
      */
-    public void createCommand() throws InvalidArgumentException {
+    public void createCommand() throws InvalidArgumentException, MultiLanguageUnsupportedOperationException {
         if(afg == null) {
-            UnsupportedOperationException.throwUnsupportedOperationException("No AudioFilterGraph to apply to input files " +
+            MultiLanguageUnsupportedOperationException.throwUnsupportedOperationException("No AudioFilterGraph to apply to input files " +
                     "was given.", "Non e' stato fornito alcun AudioFilterGraph da applicare ai file in input.");
         }
         builder.addAllInputs(pattern);
