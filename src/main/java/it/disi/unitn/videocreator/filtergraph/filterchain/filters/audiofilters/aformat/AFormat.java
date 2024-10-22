@@ -2,6 +2,7 @@ package it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.
 
 import it.disi.unitn.StringExt;
 import it.disi.unitn.exceptions.InvalidArgumentException;
+import it.disi.unitn.exceptions.MultiLanguageUnsupportedOperationException;
 import it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.AudioFilter;
 import org.jetbrains.annotations.NotNull;
 
@@ -69,7 +70,7 @@ public class AFormat extends AudioFilter {
      * @param chid The given channel ID
      * @throws InvalidArgumentException If the given channel ID is null or an empty string
      */
-    public void addChannelLayout(@NotNull String chid) throws InvalidArgumentException {
+    public void addChannelLayout(@NotNull String chid) throws InvalidArgumentException, MultiLanguageUnsupportedOperationException {
         chLayout.addChannelID(chid);
     }
 

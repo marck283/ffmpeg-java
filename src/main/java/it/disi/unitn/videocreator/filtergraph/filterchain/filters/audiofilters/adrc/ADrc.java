@@ -2,7 +2,7 @@ package it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.
 
 import it.disi.unitn.StringExt;
 import it.disi.unitn.exceptions.InvalidArgumentException;
-import it.disi.unitn.exceptions.UnsupportedOperationException;
+import it.disi.unitn.exceptions.MultiLanguageUnsupportedOperationException;
 import it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.AudioFilter;
 import it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.aformat.ChannelLayout;
 import org.jetbrains.annotations.NotNull;
@@ -124,9 +124,9 @@ public class ADrc extends AudioFilter {
      * @param channelID The channel ID to be added
      * @throws InvalidArgumentException      If the given channel ID is null, an empty string or any value not recognized by
      *                                       FFmpeg
-     * @throws UnsupportedOperationException If the channel identified by the given channel ID cannot be added
+     * @throws MultiLanguageUnsupportedOperationException If the channel identified by the given channel ID cannot be added
      */
-    public void addChannel(@NotNull String channelID) throws InvalidArgumentException, UnsupportedOperationException {
+    public void addChannel(@NotNull String channelID) throws InvalidArgumentException, MultiLanguageUnsupportedOperationException {
         chLayout.addChannelID(channelID);
     }
 
