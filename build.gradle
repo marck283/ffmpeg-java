@@ -17,7 +17,7 @@ plugins {
 }
 
 group 'it.disi.unitn.ffmpeg'
-version '1.2.9-beta2.4'
+version '1.2.9-beta2.6'
 
 java {
     withJavadocJar()
@@ -83,7 +83,7 @@ testing {
 dependencies {
     implementation 'org.jetbrains:annotations:26.0.1'
 
-    implementation platform('com.google.cloud:libraries-bom:26.49.0')
+    implementation platform('com.google.cloud:libraries-bom:26.50.0')
     implementation 'com.google.code.gson:gson:2.11.0'
 
     implementation 'org.slf4j:slf4j-api:2.0.16'

@@ -46,63 +46,56 @@ public class Geq extends VideoFilter {
     /**
      * This method sets the "lum" parameter.
      * @param lum The given "lum" expression. This value cannot be null or an empty string.
-     * @throws InvalidArgumentException If the given value is null or an empty string
      */
-    public void setLum(@NotNull String lum) throws InvalidArgumentException {
+    public void setLum(@NotNull String lum) {
         setParam("lum", lum);
     }
 
     /**
      * This method sets the "cb" parameter.
      * @param cb The given "cb" expression. This value cannot be null or an empty string.
-     * @throws InvalidArgumentException If the given value is null or an empty string
      */
-    public void setCB(@NotNull String cb) throws InvalidArgumentException {
+    public void setCB(@NotNull String cb) {
         setParam("cb", cb);
     }
 
     /**
      * This method sets the "cr" parameter.
      * @param cr The given "cr" expression. This value cannot be null or an empty string.
-     * @throws InvalidArgumentException If the given value is null or an empty string
      */
-    public void setCR(@NotNull String cr) throws InvalidArgumentException {
+    public void setCR(@NotNull String cr) {
         setParam("cr", cr);
     }
 
     /**
      * This method sets the "a" parameter.
      * @param a The given "a" expression. This value cannot be null or an empty string.
-     * @throws InvalidArgumentException If the given value is null or an empty string
      */
-    public void setA(@NotNull String a) throws InvalidArgumentException {
+    public void setA(@NotNull String a) {
         setParam("a", a);
     }
 
     /**
      * This method sets the "r" parameter.
      * @param r The given "r" expression. This value cannot be null or an empty string.
-     * @throws InvalidArgumentException If the given value is null or an empty string
      */
-    public void setR(@NotNull String r) throws InvalidArgumentException {
+    public void setR(@NotNull String r) {
         setParam("r", r);
     }
 
     /**
      * This method sets the "g" parameter.
      * @param g The given "g" expression. This value cannot be null or an empty string.
-     * @throws InvalidArgumentException If the given value is null or an empty string
      */
-    public void setG(@NotNull String g) throws InvalidArgumentException {
+    public void setG(@NotNull String g) {
         setParam("g", g);
     }
 
     /**
      * This method sets the "b" parameter.
      * @param b The given "b" expression. This value cannot be null or an empty string.
-     * @throws InvalidArgumentException If the given value is null or an empty string
      */
-    public void setB(@NotNull String b) throws InvalidArgumentException {
+    public void setB(@NotNull String b) {
         setParam("b", b);
     }
 

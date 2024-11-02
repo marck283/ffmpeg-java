@@ -55,6 +55,26 @@ public class ScalingParams {
         force_divisible_by = 1;
     }
 
+    /**
+     * The class's constructor given pre-established scaling parameters. The given values must be compatible with the
+     * specifications given by FFMpeg.
+     * @param sws_flags The chosen scaling algorithm. This value cannot be null.
+     * @param eval The expression to be evaluated. This value cannot be null or an empty string.
+     * @param interl The interlacing mode. This value cannot be null or an empty string.
+     * @param width The frame's width. This value can be null or an empty string only when the {@code videoSizeID} parameter
+     *              is not null and not an empty string, and it must be set along with the {@code height} parameter.
+     * @param height The frame's height. This value can be null or an empty string only when the {@code videoSizeID} parameter
+     *               is not null and not an empty string, and it must be set along with the {@code width} parameter.
+     * @param videoSizeID The frame's video size id. This value must be allowed by the specifications given by FFmpeg,
+     *                    and it can be null only when both the width and height parameters are already set.
+     * @param in_range The input color's range.
+     * @param out_range The output color's range.
+     * @param force_original_aspect_ratio A parameter to force the original aspect ratio.
+     * @param inColMatrix The input color's matrix.
+     * @param outColorMatrix The output color's matrix.
+     * @param force_divisible_by A parameter that, if set, forces FFmpeg to make the width and height to be divisible by
+     *                           it.
+     */
     public ScalingParams(@NotNull ScalingAlgorithm sws_flags, @NotNull String eval, @NotNull String interl,
                          @NotNull String width, @NotNull String height, @NotNull String videoSizeID,
                          @NotNull String in_range, @NotNull String out_range, @NotNull String force_original_aspect_ratio,

@@ -150,7 +150,8 @@ public class JsonParser {
     }
 
     /**
-     *
+     * Gets the integer value of the element identified by the given name from the JsonObject instance given to this
+     * class's constructor upon its creation.
      * @param name The given element's name. This element has to be inside the structure of the given JsonElement
      * @return The value of the element identified by the given name if such element can be found
      * @throws InvalidArgumentException If any of the parameters passed to this method is null or an empty string

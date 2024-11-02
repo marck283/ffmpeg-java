@@ -20,6 +20,9 @@ public abstract class Filter {
 
     private final List<String> input, output;
 
+    /**
+     * The system's Locale.
+     */
     protected final Locale l;
 
     /**

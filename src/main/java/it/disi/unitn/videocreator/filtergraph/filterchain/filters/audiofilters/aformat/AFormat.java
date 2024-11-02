@@ -69,6 +69,8 @@ public class AFormat extends AudioFilter {
      *
      * @param chid The given channel ID
      * @throws InvalidArgumentException If the given channel ID is null or an empty string
+     * @throws MultiLanguageUnsupportedOperationException If the user already specified a combination of audio channels
+     * by calling setChannelID()
      */
     public void addChannelLayout(@NotNull String chid) throws InvalidArgumentException, MultiLanguageUnsupportedOperationException {
         chLayout.addChannelID(chid);

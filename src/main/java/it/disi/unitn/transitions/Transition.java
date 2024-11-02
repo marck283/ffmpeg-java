@@ -13,15 +13,25 @@ import java.io.IOException;
  */
 public class Transition {
 
+    /**
+     * The picture produced by the translation.
+     */
     protected BufferedImage img;
 
+    /**
+     * The path to the chosen temporary output directory.
+     */
     protected String tempOutDir;
 
+    /**
+     * The Graphics2D instance chosen to translate the text.
+     */
     protected Graphics2D g2d;
 
     /**
      * This class's constructor.
      * @param inputFile The path of the chosen input file.
+     * @param tempOutDir The path to the chosen temporary output directory.
      */
     public Transition(@NotNull String inputFile, @NotNull String tempOutDir) {
         try {
