@@ -32,8 +32,12 @@ public class Audio {
      */
     private static void checkNullOrEmpty(String str, @NotNull String msg, @NotNull String itmsg) {
         if(StringExt.checkNullOrEmpty(str)) {
-            System.err.println((new InvalidArgumentException(msg, itmsg)).getMessage());
-            System.exit(8);
+            try {
+                throw new InvalidArgumentException(msg, itmsg);
+            } catch(InvalidArgumentException ex) {
+                System.err.println(ex.getMessage());
+                System.exit(8);
+            }
         }
     }
 

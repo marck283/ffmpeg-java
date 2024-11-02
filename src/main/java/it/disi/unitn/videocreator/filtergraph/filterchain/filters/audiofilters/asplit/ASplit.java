@@ -1,6 +1,5 @@
 package it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.asplit;
 
-import it.disi.unitn.exceptions.InvalidArgumentException;
 import it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.AudioFilter;
 
 /**
