@@ -13,6 +13,8 @@ public class MultiLanguageUnsupportedOperationException extends GeneralException
 
     /**
      * This class's constructor.
+     * @param msg The English message.
+     * @param itmsg The Italian language's message
      */
     public MultiLanguageUnsupportedOperationException(@NotNull String msg, @NotNull String itmsg) {
         super(msg, itmsg);
@@ -25,8 +27,9 @@ public class MultiLanguageUnsupportedOperationException extends GeneralException
 
     /**
      * This class's constructor.
-     * @param message The English message
-     * @param itmsg The Italian message
+     * @param message The English message.
+     * @param itmsg The Italian message.
+     * @throws MultiLanguageUnsupportedOperationException This method always throws this exception
      */
     public static void throwUnsupportedOperationException(@NotNull String message, @NotNull String itmsg) throws MultiLanguageUnsupportedOperationException {
         throw new MultiLanguageUnsupportedOperationException(message, itmsg);

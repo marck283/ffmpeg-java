@@ -230,21 +230,55 @@ public final class FFMpegBuilder {
         add(res.trim().replaceAll("  +", " "));
     }
 
-    public void removeParam(@NotNull String e) {
+    /**
+     * This method removes the given parameter from the FFmpeg command this instance of FFMpegBuilder contains.
+     * @param e The given parameter. This value cannot be null or an empty string.
+     * @throws InvalidArgumentException If the given parameter's value is null or an empty string
+     */
+    public void removeParam(@NotNull String e) throws InvalidArgumentException {
+        if(StringExt.checkNullOrEmpty(e)) {
+            throw new InvalidArgumentException("The given parameter's value cannot be null or an empty string.", "Il " +
+                    "valore del parametro fornito non puo' essere null o una stringa vuota.");
+        }
         lcommand.remove(e);
     }
 
+    /**
+     * This method lets the user modify a parameter's value.
+     * @param oldVal The chosen parameter's current value. This value cannot be null or an empty string.
+     * @param newVal The chosen parameter's new value. This value cannot be null or an empty string.
+     * @throws InvalidArgumentException If any of the given arguments is null or an empty string
+     */
     public void modifyParam(@NotNull String oldVal, @NotNull String newVal) throws InvalidArgumentException {
+        if(StringExt.checkNullOrEmpty(oldVal) || StringExt.checkNullOrEmpty(newVal)) {
+            throw new InvalidArgumentException("None of the given arguments can be null or an empty string.", "Nessuno " +
+                    "degli argomenti forniti puo' essere null o una stringa vuota.");
+        }
         int index = lcommand.indexOf(oldVal);
-        removeParam(oldVal);
-        add(index, newVal);
+        if(index != -1) {
+            removeParam(oldVal);
+            add(index, newVal);
+        }
     }
 
+    /**
+     * This method allows the modification of all the parameters according to the given argument.
+     * @param action The Consumer instance to be used in this method.
+     */
     public void modifyParams(Consumer<? super String> action) {
         lcommand.forEach(action);
     }
 
+    /**
+     * This method changes the last value of the FFmpeg command this instace represents.
+     * @param newVal The new last element. This value cannot be null or an empty string.
+     * @throws InvalidArgumentException If the given value is null or an empty string
+     */
     public void modifyLast(@NotNull String newVal) throws InvalidArgumentException {
+        if(StringExt.checkNullOrEmpty(newVal)) {
+            throw new InvalidArgumentException("The given argument cannot be null or an empty string.", "L'argomento " +
+                    "fornito non puo' essere null o una stringa vuota.");
+        }
         add(lcommand.size() - 1, newVal);
     }
 

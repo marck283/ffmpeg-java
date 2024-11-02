@@ -91,7 +91,10 @@ public class AudioFiltering {
 
     /**
      * This method creates the FFmpeg command to apply filters to the given audio files.
-     * @throws InvalidArgumentException If
+     * @throws InvalidArgumentException If the list of input files is null, or it contains a null or an empty string, or
+     * the audio FilterGraph instance can be translated into an empty string, or the given output file is null or an
+     * empty string
+     * @throws MultiLanguageUnsupportedOperationException If the given audio FilterGraph instance is null
      */
     public void createCommand() throws InvalidArgumentException, MultiLanguageUnsupportedOperationException {
         if(afg == null) {

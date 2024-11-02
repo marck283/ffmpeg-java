@@ -7,6 +7,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * This class implements FFmpeg's channel layouts.
@@ -24,7 +25,20 @@ public class ChannelLayout {
         chidList = new ArrayList<>();
     }
 
+    /**
+     * The class's constructor given a channel's ID.
+     * @param id The given channel's ID
+     */
     public ChannelLayout(@NotNull String id) {
+        if(StringExt.checkNullOrEmpty(id)) {
+            Locale l = Locale.getDefault();
+            if(l == Locale.ITALY || l == Locale.ITALIAN) {
+                System.err.println("L'ID del canale fornito non puo' essere null o una stringa vuota.");
+            } else {
+                System.err.println("The given channel's ID cannot be null or an empty string.");
+            }
+            System.exit(1);
+        }
         chID = id;
         chidList = new ArrayList<>();
     }
@@ -85,6 +99,11 @@ public class ChannelLayout {
         }
     }
 
+    /**
+     * This method adds all channels from the given ChannelLayout instance.
+     * @param chlay The given ChannelLayout instance. This value cannot be null.
+     * @throws InvalidArgumentException If the given ChannelLayout instance is null
+     */
     public void addChannels(@NotNull ChannelLayout chlay) throws InvalidArgumentException {
         if(chlay == null) {
             throw new InvalidArgumentException("The given ChannelLayout instance cannot be null.", "L'istanza di " +
@@ -93,6 +112,10 @@ public class ChannelLayout {
         chidList.addAll(chlay.chidList);
     }
 
+    /**
+     * This method returns true if this ChannelLayout's channel id's list is empty, otherwise it returns false.
+     * @return True if this ChannelLayout's channel id's list is empty, otherwise it returns false.
+     */
     public boolean isEmpty() {
         return chidList.isEmpty();
     }
