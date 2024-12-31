@@ -56,7 +56,7 @@ public class FFMpeg {
         } catch(Exception ex) {
             //ex.printStackTrace();
             System.err.println(ex.getMessage());
-            System.exit(1);
+            throw new RuntimeException(ex);
         }
     }
 

@@ -29,7 +29,7 @@ public class ProcessPool {
 
     private int index;
 
-    private final List<ExecutorResHandler> exlist;
+    private final List<ExecuteResultHandler> exlist;
 
     /**
      * This constructor creates a new thread pool which will be used to execute a specified number of threads.
@@ -89,7 +89,7 @@ public class ProcessPool {
      * This method removes ExecutorResHandler instances from the list of currently active instances.
      * @param handler The ExecutorResHandler instance to be used
      */
-    public synchronized void removeHandler(ExecutorResHandler handler) {
+    public synchronized void removeHandler(ExecuteResultHandler handler) {
         if(exlist.size() == 1 && exlist.contains(handler)) {
             //Notifies all threads that were waiting on this object's monitor. This call needs to happen either inside a
             //synchronized method or inside a synchronized code block.
@@ -133,13 +133,20 @@ public class ProcessPool {
         ExecuteWatchdog watchdog = builder.get();
         executor.setStreamHandler(streamHandler);
         executor.setWatchdog(watchdog);
-        ExecutorResHandler exrhandler = new ExecutorResHandler(array, index, nptif, niext, jti, this);
+        ExecutorResHandler exrhandler = new ExecutorResHandler(array, index, nptif, niext, jti);
         exlist.add(exrhandler);
         try {
             executor.execute(cmdLine, exrhandler);
+            while(exrhandler.getParam() == -1 && !watchdog.killedProcess()); //Busy waiting!
+            if(!watchdog.killedProcess() && exrhandler.getParam() == 1) {
+                //Success
+                exlist.remove(exrhandler);
+            } else {
+                throw new RuntimeException("Something went wrong while creating the picture.");
+            }
         } catch (IOException e) {
             System.err.println(e.getLocalizedMessage());
-            System.exit(1);
+            throw new RuntimeException(e);
         }
     }
 }

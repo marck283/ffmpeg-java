@@ -2,7 +2,6 @@ package it.disi.unitn.json.processpool;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.disi.unitn.StringExt;
 import it.disi.unitn.exceptions.InvalidArgumentException;
 import it.disi.unitn.json.JSONToImage;
@@ -24,12 +23,11 @@ public class ExecutorResHandler implements ExecuteResultHandler {
     private final JsonArray array;
 
     private final int index;
+    private int param;
 
     private final String pathToImagesFolder, imageExtension;
 
     private final JSONToImage jti;
-
-    private final ProcessPool pp;
 
     /**
      * The class's constructor.
@@ -38,12 +36,11 @@ public class ExecutorResHandler implements ExecuteResultHandler {
      * @param pathToImagesFolder The path to each picture's destination folder
      * @param imageExtension The picture's file extension
      * @param jti The JSONToImage instance to be used
-     * @param pp The ProcessPool instance to be used
      */
     public ExecutorResHandler(@NotNull JsonArray arr, int i, @NotNull String pathToImagesFolder,
-                              @NotNull String imageExtension, @NotNull JSONToImage jti, @NotNull ProcessPool pp) {
+                              @NotNull String imageExtension, @NotNull JSONToImage jti) {
         if (arr == null || StringExt.checkNullOrEmpty(pathToImagesFolder) || StringExt.checkNullOrEmpty(imageExtension)
-                || jti == null || pp == null) {
+                || jti == null) {
             System.err.println((new InvalidArgumentException("No argument to this constructor can be null or an empty string.",
                     "Nessuno degli argomenti forniti a questo costruttore puo' essere null o una stringa vuota.")).getMessage());
         }
@@ -52,7 +49,15 @@ public class ExecutorResHandler implements ExecuteResultHandler {
         this.pathToImagesFolder = pathToImagesFolder;
         this.imageExtension = imageExtension;
         this.jti = jti;
-        this.pp = pp;
+        param = -1;
+    }
+
+    /**
+     * Returns the value of a flag that tells if the process was successfully completed or not.
+     * @return The value of a flag that tells if the process was successfully completed or not.
+     */
+    public int getParam() {
+        return param;
     }
 
     /**
@@ -63,9 +68,12 @@ public class ExecutorResHandler implements ExecuteResultHandler {
      *             in the file system)
      * @return The resulting Path instance
      */
-    @SuppressFBWarnings("NP_NONNULL_RETURN_VIOLATION")
     private @NotNull Path getPath(@NonNls String first, @NonNls String ... path) {
-        return Paths.get(first, path);
+        Path p = Paths.get(first, path);
+        if(p == null) {
+            throw new RuntimeException("Invalid path.");
+        }
+        return p;
     }
 
     /**
@@ -86,9 +94,8 @@ public class ExecutorResHandler implements ExecuteResultHandler {
                 Files.write(path, arr);
 
                 jti.modifyImage(obj, index, pathToImagesFolder, mime);
-                pp.removeHandler(this);
+                param = 1;
             } catch (InvalidArgumentException | IOException ex) {
-                //ex.printStackTrace();
                 System.err.println(ex.getMessage());
                 throw new RuntimeException(ex);
             }
@@ -97,6 +104,7 @@ public class ExecutorResHandler implements ExecuteResultHandler {
         try {
             t2.join();
         } catch (InterruptedException e) {
+            param = 0;
             throw new RuntimeException(e);
         }
     }
@@ -108,7 +116,7 @@ public class ExecutorResHandler implements ExecuteResultHandler {
      */
     @Override
     public void onProcessFailed(@NotNull ExecuteException e) {
-        //e.printStackTrace();
+        param = 0;
         System.err.println(e.getMessage());
         throw new RuntimeException(e);
     }
