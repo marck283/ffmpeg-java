@@ -5,6 +5,5 @@ it/disi/unitn/test
 src/main/resources
 CNAME
 application_default_credentials.json
-src/test/resources/
 inputFile.txt
 gradle/

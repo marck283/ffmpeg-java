@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="it.disi.unitn.lasagna.audiocreator.AudioExtractorTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2025-01-27T09:47:42" hostname="marco-lasagna-Dell-G15-5530" time="0.075">
+<testsuite name="it.disi.unitn.lasagna.audiocreator.AudioExtractorTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2025-01-27T10:05:06" hostname="marco-lasagna-Dell-G15-5530" time="0.076">
   <properties/>
-  <testcase name="extractAudio()" classname="it.disi.unitn.lasagna.audiocreator.AudioExtractorTest" time="0.075"/>
+  <testcase name="extractAudio()" classname="it.disi.unitn.lasagna.audiocreator.AudioExtractorTest" time="0.076"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[ffmpeg version 7.0.2-3ubuntu1 Copyright (c) 2000-2024 the FFmpeg developers
   built with gcc 14 (Ubuntu 14.2.0-2ubuntu1)
@@ -29,7 +29,7 @@ Output #0, asf, to './src/test/resources/output/mp3/000.wma':
   Stream #0:0: Audio: wmav2 (a[1][0][0] / 0x0161), 24000 Hz, mono, fltp, 128 kb/s
       Metadata:
         encoder         : Lavc61.3.100 wmav2
-[out#0/asf @ 0x579169673b00] video:0KiB audio:95KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: 19.426301%
-size=     113KiB time=00:00:05.91 bitrate= 156.5kbits/s speed=1.07e+03x    
+[out#0/asf @ 0x5f4b0b877b00] video:0KiB audio:95KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: 19.426301%
+size=     113KiB time=00:00:05.91 bitrate= 156.5kbits/s speed=1.23e+03x    
 ]]></system-err>
 </testsuite>
