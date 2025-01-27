@@ -32,9 +32,9 @@ public class JSONToImage {
 
     private JsonArray array;
 
-    private boolean useGAN;
+    private final boolean useGAN;
 
-    private JsonParser parser;
+    private final JsonParser parser;
 
     private Font font;
 
@@ -63,7 +63,7 @@ public class JSONToImage {
         } catch(IOException | IOError ex) {
             array = null;
             System.err.println("An I/O error occurred. Please restart the program.");
-            System.exit(12);
+            throw new RuntimeException(ex);
         }
     }
 
