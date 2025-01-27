@@ -19,7 +19,7 @@ import java.util.List;
  */
 public class AudioFiltering {
 
-    private FilterGraph afg;
+    private AudioFilterGraph afg;
 
     private final FFMpegBuilder builder;
 
