@@ -22,8 +22,8 @@ public class AudioExtractor {
     public AudioExtractor(@NotNull FFMpegBuilder builder, @NotNull String outputFile, @NotNull String inputFile)
             throws InvalidArgumentException {
         if(builder == null || outputFile == null || inputFile == null) {
-            throw new InvalidArgumentException("None of the arguments given to this constructor can be null.", "Nessuno " +
-                    "degli argomenti forniti a questo costruttore puo' essere null.");
+            throw new InvalidArgumentException("None of the arguments given to AudioExtractor's constructor can be null.",
+                    "Nessuno degli argomenti forniti al costruttore di AudioExtractor puo' essere null.");
         }
         this.ffmpegBuilder = builder;
         this.outputFile = outputFile;
