@@ -25,8 +25,8 @@ class VideoCreatorTest {
     void createCommand() throws InvalidArgumentException, UnsupportedOperatingSystemException,
             IOException, MultiLanguageUnsupportedOperationException {
         FFMpegBuilder builder = new FFMpegBuilder("ffmpeg -xerror");
-        VideoCreator creator = builder.newVideoCreator("./src/test/resources/input/mp4/002.mp4");
-        creator.addInput("./src/test/resources/input/mp4/001.mp4");
+        VideoCreator creator = builder.newVideoCreator("./src/test/resources/output/mp4/001.wmv");
+        creator.addInput("./src/test/resources/input/mp4/000.wmv");
         //creator.addInput("./src/test/resources/input/mp3/000.mp3");
         //creator.setVideoSize(800, 600, "yuv420p", true);
         //creator.setCodecID("mjpeg", true); //No need to set the codec ID if we maintain the picture format
@@ -36,7 +36,7 @@ class VideoCreatorTest {
         creator.setVideoQuality(18);
 
         Scale scale = new Scale();
-        creator.setScaleParams(true, scale, new Bicubic(0.3333, 0.3333), String.valueOf(800), String.valueOf(600),
+        creator.setScaleParams(false, scale, new Bicubic(0.3333, 0.3333), String.valueOf(800), String.valueOf(600),
                 "auto", "bt709", "auto", "auto", "init",
                 "0", "disable", 0);
         scale.addInput("0:v");

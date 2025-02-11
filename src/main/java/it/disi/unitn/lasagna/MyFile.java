@@ -4,6 +4,7 @@ import it.disi.unitn.StringExt;
 import it.disi.unitn.exceptions.InvalidArgumentException;
 import it.disi.unitn.exceptions.PermissionsException;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -83,16 +84,51 @@ public class MyFile extends java.io.File {
     }
 
     /**
-     * Questo metodo rimuove tutte le cartelle interne all'albero avente come radice la cartella
-     * associata al path comunicato in fase di istanziazione della classe.
+     * Questo metodo rimuove tutte le cartelle interne all'albero avente come radice la cartella associata al path
+     * comunicato in fase di istanziazione della classe.
      * @throws IllegalArgumentException Quando almeno un argomento è null
      * @throws IOException se occorre un errore I/O
      */
     public void removeSelf() throws IllegalArgumentException, IOException {
+        removeContent(null);
+    }
+
+    /**
+     * This method removes all files except the ones whose name contains the given value.
+     * @param fileName The given file name. This value cannot be null or an empty string.
+     * @throws IOException If the file cannot be deleted for whatever reason.
+     * @throws InvalidArgumentException If the given argument is null or an empty string
+     */
+    public void removeContentExceptFile(@NotNull String fileName) throws IOException, InvalidArgumentException {
+        if(StringExt.checkNullOrEmpty(fileName)) {
+            throw new InvalidArgumentException("The given file name cannot be null or an empty string.", "Il nome del file " +
+                    "fornito non puo' essere null o una stringa vuota.");
+        }
         try(Stream<Path> walk = Files.walk(getPath(pathname, ""))) {
             walk.sorted(Comparator.reverseOrder()).forEach(path -> {
                 try {
-                    Files.delete(path);
+                    if(!path.getFileName().toString().contains(fileName)) {
+                        Files.delete(path);
+                    }
+                } catch (IOException ex) {
+                    System.err.println("IOException: " + ex.getMessage());
+                }
+            });
+        }
+    }
+
+    /**
+     * This method removes the content of a folder. It can also be used to delete files with specific extensions.
+     * @param fileExt The given file extension. This value can be null or an empty string.
+     * @throws IOException If any file cannot be deleted for whatever reason.
+     */
+    public void removeContent(@Nullable String fileExt) throws IOException {
+        try(Stream<Path> walk = Files.walk(getPath(pathname, ""))) {
+            walk.sorted(Comparator.reverseOrder()).forEach(path -> {
+                try {
+                    if(StringExt.checkNullOrEmpty(fileExt) || path.getFileName().toString().endsWith(fileExt)) {
+                        Files.delete(path);
+                    }
                 } catch (IOException ex) {
                     System.err.println("IOException: " + ex.getMessage());
                 }

@@ -18,24 +18,15 @@ public class RotationTest {
 
     @Test
     public void test() throws Exception {
-        String tempOutDir = "./src/test/resources/output/images/rotation";
+        String tempOutDir = "./src/test/resources/output/rotation/images", videoOutDir = "./src/test/resources/output/rotation/video";
         MyFile.makeDirs(tempOutDir);
+        MyFile.makeDirs(videoOutDir);
 
-        RotationTransition rotation = null;
-        StringExt str = new StringExt(String.valueOf(0)), str1;
+        StringExt str = new StringExt(String.valueOf(0));
         str.padStart(3);
-        int j = 0;
-        for(int i = 1; i < 30; i++) {
-            str1 = new StringExt(String.valueOf(i));
-            str1.padStart(3);
-            rotation = new RotationTransition("./src/test/resources/input/images/" + str.getVal() + ".jpeg",
-                    tempOutDir,
-                    "src/test/resources/output/video/rotation", "jpg");
-
-            rotation.rotate(300, 300, j + 1, "test", str1.getVal(), "Arial Unicode MS",
-                    Font.PLAIN, 200, Color.BLACK);
-            j++;
-        }
+        String inputExt = "jpeg";
+        RotationTransition rotation = new RotationTransition.RotationBuilder("./src/test/resources/input/images/"
+                + str.getVal() + "." + inputExt, tempOutDir, videoOutDir, "mp4", inputExt, 30).build();
 
         ScalingParams scPars = getScalingParams();
         rotation.setScale(scPars.getAlgorithm(),
@@ -44,13 +35,17 @@ public class RotationTest {
                 scPars.getOutputColorMatrix(), scPars.getDivisibleBy());
         rotation.setFPS("60*pal/pal", 0, null, null);
         rotation.setRotationSpeed("0.5*PTS");
-        rotation.performRotation(1L, TimeUnit.MINUTES, "output", "mp4");
+
+        rotation.rotate(300, 300, "test", inputExt, "Arial Unicode MS", Font.PLAIN,200,
+                Color.BLACK);
+
+        rotation.performRotation(1L, TimeUnit.MINUTES, "output", "mp4", true);
         rotation.dispose();
     }
 
     private @NotNull ScalingParams getScalingParams() throws InvalidArgumentException, UnsupportedOperatingSystemException, MultiLanguageUnsupportedOperationException {
         ScalingParams scalingParams = new ScalingParams();
-        scalingParams.setSize(false, String.valueOf(2048), String.valueOf(1024), "yuv420p");
+        scalingParams.setSize(false, String.valueOf(2048), String.valueOf(1024),"yuv420p");
         scalingParams.setSwsFlags(new Bicubic(2, 2));
         scalingParams.setInputColorMatrix("auto");
         scalingParams.setOutColorMatrix("bt709");

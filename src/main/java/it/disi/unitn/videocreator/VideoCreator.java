@@ -46,6 +46,8 @@ public class VideoCreator {
 
     private int startInstant; //Starting instant of the new video with respect to the original video
 
+    private int startIndex;
+
     private String audioBitRate; //Audio track's bitrate (in Kbit/s)
 
     private String videoBitRate; //Video track's bitrate (in Kbit/s or Mbit/s)
@@ -96,6 +98,15 @@ public class VideoCreator {
         }
         //isOutFullRange = false;
         l = Locale.getDefault();
+        startIndex = -1;
+    }
+
+    /**
+     * Sets the starting index for the video codec.
+     * @param startIndex The given starting index.
+     */
+    public void setStartIndex(int startIndex) {
+        this.startIndex = startIndex;
     }
 
     /**
@@ -119,7 +130,7 @@ public class VideoCreator {
                     "presenti nella cartella.");
         }
 
-        if (!input.startsWith("*.") && !Files.exists(Paths.get(input))) {
+        if (!input.contains("%") && !input.startsWith("*.") && !Files.exists(Paths.get(input))) {
             throw new InvalidArgumentException("The given file does not exist.", "Il file fornito non esiste.");
         }
 
@@ -684,6 +695,7 @@ public class VideoCreator {
             //comunicazione del numero di secondi per entrambe le opzioni.
             //builder.add("-async 1");
 
+            add(startIndex != -1, (startIndex != -1) ? "-start_number " + startIndex : "");
             add(fps_mode != null, (fps_mode != null) ? fps_mode.toString() : "");
 
             for(String p: pattern) {

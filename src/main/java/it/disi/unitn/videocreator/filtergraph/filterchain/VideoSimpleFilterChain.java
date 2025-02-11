@@ -60,4 +60,13 @@ public class VideoSimpleFilterChain extends FilterChain {
         }
         filterList.remove(filter);
     }
+
+    /**
+     * This method checks if the given VideoFilter instance is in the current Video Filter Chain.
+     * @param filter The given VideoFilter instance.
+     * @return true if and only if the given VideoFilter instance is in the current Video Filter Chain, otherwise false.
+     */
+    public boolean containsFilter(@NotNull VideoFilter filter) {
+        return filterList.contains(filter);
+    }
 }

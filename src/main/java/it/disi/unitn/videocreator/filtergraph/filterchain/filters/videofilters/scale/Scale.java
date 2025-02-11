@@ -17,6 +17,7 @@ import java.io.OutputStream;
 import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.Locale;
+import java.util.Objects;
 
 /**
  * This class implements the "scale" video filter.
@@ -246,6 +247,17 @@ public class Scale extends VideoFilter {
      */
     public void setInterl(@NotNull String val) throws InvalidArgumentException {
         scalingParams.setInterl(val);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Scale scale)) return false;
+        return Objects.equals(scalingParams, scale.scalingParams) && Objects.equals(l, scale.l);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(scalingParams, l);
     }
 
     /**

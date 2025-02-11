@@ -37,7 +37,7 @@ class Rotation extends Transition {
      * @throws InvalidArgumentException If any of the above parameters' values does not conform to the given specifications
      */
     void rotate(double anchorx, double anchory, double angle, @NotNull String text, @NotNull String name,
-                       @NotNull String fname, @NotNull String fontFamily, int fontStyle, int fontSize,
+                @NotNull String fname, @NotNull String fontFamily, int fontStyle, int fontSize,
                 @NotNull Color fontColor)
             throws InvalidArgumentException {
         if(StringExt.checkNullOrEmpty(text)) {

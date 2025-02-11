@@ -18,6 +18,7 @@ import java.awt.*;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -26,44 +27,110 @@ import java.util.concurrent.TimeUnit;
  */
 public class RotationTransition {
 
-    private final Rotation rotation;
+    /**
+     * Static class to build an instance of RotationTransition.
+     */
+    public static class RotationBuilder {
 
-    private final String tempOutDir, videoOutDir, fname;
+        private final String tempOutDir, videoOutDir, fname, fext, inputFile;
+
+        private final int angle;
+
+        /**
+         * This class's constructor.
+         * @param inputFile The given input file's path.
+         * @param tempOutDir The temporary video output directory's path.
+         * @param videoOutDir The temporary picture output directory's path.
+         * @param fname The output file's extension.
+         * @param fext The given picture extension.
+         * @param angle The angle to be applied to the rotation.
+         */
+        public RotationBuilder(@NotNull String inputFile, @NotNull String tempOutDir, @NotNull String videoOutDir,
+                               @NotNull String fname, @NotNull String fext, int angle) {
+            this.videoOutDir = videoOutDir;
+            this.tempOutDir = tempOutDir;
+            this.fname = fname;
+            this.fext = fext;
+            this.inputFile = inputFile;
+            this.angle = angle;
+        }
+
+        /**
+         * Builds an instance of RotationTransition.
+         * @return an instance of RotationTransition
+         * @throws InvalidArgumentException If the angle given to this instance of RotationBuilder is negative or greater
+         * than 999.
+         */
+        public RotationTransition build() throws InvalidArgumentException {
+            return new RotationTransition(inputFile, videoOutDir, tempOutDir, fname, fext, angle);
+        }
+    }
+
+    private Rotation rotation;
+
+    private final String tempOutDir, videoOutDir, fname, fext, inputFile;
 
     private final VideoSimpleFilterChain vsfc;
+
+    private final int angle;
 
     /**
      * The class's constructor. None of the given values can be null or empty strings.
      * @param inputFile The given input file's path.
-     * @param tempOutDir The given temporary output directory's path.
      * @param videoOutDir The temporary video output directory's path.
-     * @param fname The output file's name.
+     * @param tempOutDir The temporary picture output directory's path.
+     * @param fname The output file's extension.
+     * @throws InvalidArgumentException If the given angle is negative or greater than 999.
      */
-    public RotationTransition(@NotNull String inputFile, @NotNull String tempOutDir, @NotNull String videoOutDir,
-                              @NotNull String fname) {
-        rotation = new Rotation(inputFile, tempOutDir);
-        this.tempOutDir = tempOutDir;
+    private RotationTransition(@NotNull String inputFile, @NotNull String videoOutDir, @NotNull String tempOutDir,
+                              @NotNull String fname, @NotNull String fext, int angle) throws InvalidArgumentException {
+        if(angle < 0 || angle > 999) {
+            throw new InvalidArgumentException("The given angle cannot be less than 0 or greater than 999 degrees.",
+                    "L'angolo fornito non puo' essere minore di 0 o maggiore di 999 gradi.");
+        }
+        this.inputFile = inputFile;
         this.videoOutDir = videoOutDir;
+        this.tempOutDir = tempOutDir;
         this.fname = fname;
+        this.fext = fext;
         vsfc = new VideoSimpleFilterChain();
+        this.angle = angle;
     }
 
     /**
      * This method performs the rotation.
      * @param anchorx The x-value of the anchor.
      * @param anchory The y-value of the anchor.
-     * @param angle The angle expressed in radians.
      * @param text The text to be writer.
-     * @param name The given output file's name.
+     * @param fext The given picture extension.
      * @param fontFamily The given font's family. This value cannot be null or an empty string.
      * @param fontStyle The given font's style.
      * @param fontSize The given font's size. This value cannot be less than or equal to zero.
      * @param color The chosen Color instance
      * @throws InvalidArgumentException If one of the non-null arguments is null or an empty string
      */
-    public void rotate(int anchorx, int anchory, double angle, @NotNull String text, @NotNull String name,
-                       @NotNull String fontFamily, int fontStyle, int fontSize, @NotNull Color color) throws InvalidArgumentException {
-        rotation.rotate(anchorx, anchory, angle, text, name, fname, fontFamily, fontStyle, fontSize, color);
+    public void rotate(int anchorx, int anchory, @NotNull String text, @NotNull String fext,
+                       @NotNull String fontFamily, int fontStyle, int fontSize, @NotNull Color color) throws Exception {
+        int j = 0;
+        for(int i = 0; i < angle; i++) {
+            if((i + 1)%10 == 0) {
+                //Save intermediate video and delete the folder's content.
+                StringExt strExt = new StringExt(String.valueOf(j));
+                strExt.padStart(3);
+                performRotation(1L, TimeUnit.MINUTES, strExt.getVal(), fname, false);
+
+                MyFile tempDir = new MyFile(tempOutDir);
+                tempDir.removeContent(fext);
+            }
+
+            StringExt str1 = new StringExt(String.valueOf(i));
+            str1.padStart(3);
+
+            rotation = new Rotation(inputFile, tempOutDir);
+            rotation.rotate(anchorx, anchory, j + 1, text, str1.getVal(), fext, fontFamily, fontStyle, fontSize, color);
+
+            j++;
+        }
     }
 
     /**
@@ -93,7 +160,6 @@ public class RotationTransition {
         scale.updateMap();
 
         vsfc.addFilter(scale);
-
     }
 
     /**
@@ -139,18 +205,18 @@ public class RotationTransition {
     }
 
     private void createVideo(@NotNull FFMpegBuilder builder, long timeout, @NotNull TimeUnit tu,
-                             @NotNull String outfile, @NotNull String fileExt) throws Exception {
-        MyFile outDirPath = new MyFile(tempOutDir);
+                             @NotNull String outfile, @NotNull String fileExt, boolean isFinal) throws Exception {
+        MyFile outDirPath = new MyFile((isFinal) ? videoOutDir : tempOutDir);
         List<String> pathList = outDirPath.getFileList();
         TracksMerger merger = builder.newTracksMerger(videoOutDir + "/" + outfile + "." + fileExt);
 
-        for(String path: pathList) {
-            merger.addInput(path.replace('\\', '/'));
-        }
+        Collections.sort(pathList);
 
-        VideoFilterGraph vsfg = new VideoFilterGraph();
-        vsfg.addFilterChain(vsfc);
-        merger.setVideoSimpleFilterGraph(vsfg);
+        if(!vsfc.isEmpty()) {
+            VideoFilterGraph vsfg = new VideoFilterGraph();
+            vsfg.addFilterChain(vsfc);
+            merger.setVideoSimpleFilterGraph(vsfg);
+        }
 
         Path p = Paths.get("inputFile.txt").toAbsolutePath();
         merger.mergeVideos(timeout, tu, pathList, p.toString(), "./");
@@ -162,22 +228,29 @@ public class RotationTransition {
      * @param tu The given TimeUnit instance.
      * @param outfile The given output file's path.
      * @param fileExt The file's extension.
+     * @param isFinal Boolean parameter to check if this call to performRotation() will create the output video.
      * @throws Exception If any exception is thrown
      */
-    public void performRotation(long timeout, @NotNull TimeUnit tu, @NotNull String outfile, @NotNull String fileExt)
-            throws Exception {
+    public void performRotation(long timeout, @NotNull TimeUnit tu, @NotNull String outfile, @NotNull String fileExt,
+                                boolean isFinal) throws Exception {
         FFMpegBuilder builder = new FFMpegBuilder("ffmpeg");
-        createVideo(builder, timeout, tu, outfile, fileExt);
+        createVideo(builder, timeout, tu, outfile, fileExt, isFinal);
     }
 
     /**
      * This method disposes of the underlying objects used in this class.
-     * @throws IOException If an I/O error occurs
      */
-    public void dispose() throws IOException {
-        rotation.dispose();
-        MyFile dir = new MyFile(tempOutDir);
-        dir.removeSelf();
+    public void dispose() {
+        try {
+            rotation.dispose();
+            MyFile tempDir = new MyFile(tempOutDir);
+            tempDir.removeContent(fext);
+
+            tempDir = new MyFile(videoOutDir);
+            tempDir.removeContentExceptFile("output");
+        } catch(IOException | InvalidArgumentException ex) {
+            ex.printStackTrace();
+        }
     }
 
 }

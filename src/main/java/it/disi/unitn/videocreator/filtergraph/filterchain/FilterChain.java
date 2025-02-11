@@ -85,4 +85,12 @@ public class FilterChain {
 
         return String.join(",", helpList).trim().replaceAll("  +", " ");
     }
+
+    /**
+     * Checks if the current FilterChain instance does not contain any Filter.
+     * @return true if the current FilterChain instance does not contain any Filter, otherwise false.
+     */
+    public boolean isEmpty() {
+        return filterList.isEmpty();
+    }
 }

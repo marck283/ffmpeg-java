@@ -33,7 +33,7 @@ class VideoTranscoderTest {
         transcoder.setVideoQuality(18);
 
         Scale scale = new Scale();
-        transcoder.setScaleParams(true, scale, null, "2048", "1920", "auto",
+        transcoder.setScaleParams(false, scale, null, "2048", "1920", "auto",
                 "bt709", "auto", "auto", "init", "0",
                 "disable", 0);
         VideoFilterGraph vsfg = new VideoFilterGraph();

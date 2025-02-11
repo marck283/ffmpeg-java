@@ -120,7 +120,7 @@ public class TracksMerger extends VideoCreator {
             System.exit(1);
         }
 
-        Collections.sort(inputFiles);
+        //Collections.sort(inputFiles);
         for(String s: inputFiles) {
             Files.writeString(file.toPath(), "file '" + s.replace('\\', '/') + "'\n",
                     StandardCharsets.UTF_8, StandardOpenOption.APPEND);
@@ -137,7 +137,7 @@ public class TracksMerger extends VideoCreator {
      * @param time The maximum amount of time to wait for the video's creation.
      * @param timeUnit The TimeUnit instance to be used.
      * @param tempFile A temporary file used to store the paths of the files to be merged.
-     * @param outdir The output directory.
+     * @param outdir The chosen working directory.
      * @throws IOException if an I/O error occurs
      * @throws InvalidArgumentException If the given timeout is negative or the given TimeUnit instance is null, or if
      * the third or fourth arguments are null or an empty string or contain null or empty strings
@@ -146,7 +146,7 @@ public class TracksMerger extends VideoCreator {
                             @NotNull String tempFile, @NotNull String outdir) throws IOException, InvalidArgumentException {
         if(time <= 0 || timeUnit == null) {
             throw new InvalidArgumentException("Either the given timeout is less than or equal to zero or the given TimeUnit " +
-                    "instance is null.", "Il timeout fornito è minore o uguale a zero oppure l'istanza di TimeUnit è null.");
+                    "instance is null.", "Il timeout fornito e' minore o uguale a zero oppure l'istanza di TimeUnit e null.");
         }
         if(inputFiles == null || inputFiles.stream().anyMatch(StringExt::checkNullOrEmpty) ||
                 StringExt.checkNullOrEmpty(tempFile)) {

@@ -5,7 +5,7 @@ import org.jetbrains.annotations.NotNull;
 
 class Translation extends Transition {
 
-    Translation(@NotNull String inputFile, @NotNull String tempOutDir) {
+    public Translation(@NotNull String inputFile, @NotNull String tempOutDir) {
         super(inputFile, tempOutDir);
     }
 

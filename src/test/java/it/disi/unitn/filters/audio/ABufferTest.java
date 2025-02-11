@@ -62,7 +62,7 @@ public class ABufferTest {
         VideoFilterGraph vfg = new VideoFilterGraph();
         VideoSimpleFilterChain vsfc = new VideoSimpleFilterChain();
         Scale scale = new Scale();
-        creator.setScaleParams(true, scale, new Bicubic(0.3333, 0.3333), String.valueOf(800), String.valueOf(600),
+        creator.setScaleParams(false, scale, new Bicubic(0.3333, 0.3333), String.valueOf(800), String.valueOf(600),
                 "auto", "bt709", "auto", "auto", "init",
                 "0", "disable", 0);
         vsfc.addFilter(scale);

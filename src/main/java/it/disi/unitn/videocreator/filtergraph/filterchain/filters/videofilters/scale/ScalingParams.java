@@ -21,6 +21,7 @@ import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * This class implements the parameters of the scaling filter.
@@ -465,4 +466,14 @@ public class ScalingParams {
         return interl;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof ScalingParams that)) return false;
+        return force_divisible_by == that.force_divisible_by && Objects.equals(sws_flags, that.sws_flags) && Objects.equals(width, that.width) && Objects.equals(height, that.height) && Objects.equals(videoSizeID, that.videoSizeID) && Objects.equals(eval, that.eval) && Objects.equals(interl, that.interl) && Objects.equals(in_range, that.in_range) && Objects.equals(out_range, that.out_range) && Objects.equals(force_original_aspect_ratio, that.force_original_aspect_ratio) && Objects.equals(inColMatrix, that.inColMatrix) && Objects.equals(outColorMatrix, that.outColorMatrix);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(sws_flags, width, height, videoSizeID, eval, interl, in_range, out_range, force_original_aspect_ratio, inColMatrix, outColorMatrix, force_divisible_by);
+    }
 }

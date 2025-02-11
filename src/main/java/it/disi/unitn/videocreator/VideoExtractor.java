@@ -5,6 +5,9 @@ import it.disi.unitn.StringExt;
 import it.disi.unitn.exceptions.InvalidArgumentException;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * This class implements a video track extractor.
+ */
 public class VideoExtractor {
 
     private final String inputFile, outputFile;
@@ -17,6 +20,7 @@ public class VideoExtractor {
      * @param builder    The FFMpegBuilder instance. This parameter cannot be null.
      * @param outputFile The output file path. This value cannot be null or an empty string.
      * @param inputFile  The input file path. This value cannot be null or an empty string.
+     * @throws InvalidArgumentException If any of the arguments to this constructor is either null or an empty string.
      */
     public VideoExtractor(@NotNull FFMpegBuilder builder, @NotNull String outputFile, @NotNull String inputFile)
             throws InvalidArgumentException {

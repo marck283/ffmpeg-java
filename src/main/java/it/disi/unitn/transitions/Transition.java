@@ -59,8 +59,8 @@ public class Transition {
      * @throws Exception If the picture produced after the transition took place could not be saved.
      */
     public void savePicture(@NotNull String fname, @NotNull String name, @NotNull Exception ex) throws Exception {
-        boolean res = ImageIO.write(img, fname, new MyFile(tempOutDir + "/" + name + "." + fname));
-        if(!res) {
+        MyFile myFile = new MyFile(tempOutDir + "/" + name + "." + fname);
+        if(!ImageIO.write(img, fname, myFile)) {
             throw ex;
         }
     }

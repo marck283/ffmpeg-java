@@ -20,6 +20,7 @@ public class AudioExtractor {
      * @param builder    The FFMpegBuilder instance. This parameter cannot be null.
      * @param outputFile The output file path. This value cannot be null or an empty string.
      * @param inputFile  The input file path. This value cannot be null or an empty string.
+     * @throws InvalidArgumentException If any of the arguments given to this constructor is null or an empty string
      */
     public AudioExtractor(@NotNull FFMpegBuilder builder, @NotNull String outputFile, @NotNull String inputFile)
             throws InvalidArgumentException {
