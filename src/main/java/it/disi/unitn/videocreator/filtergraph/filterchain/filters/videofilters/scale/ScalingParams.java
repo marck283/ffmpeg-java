@@ -77,7 +77,7 @@ public class ScalingParams {
      *                           it.
      */
     public ScalingParams(@NotNull ScalingAlgorithm sws_flags, @NotNull String eval, @NotNull String interl,
-                         @NotNull String width, @NotNull String height, @NotNull String videoSizeID,
+                         @Nullable String width, @Nullable String height, @Nullable String videoSizeID,
                          @NotNull String in_range, @NotNull String out_range, @NotNull String force_original_aspect_ratio,
                          @NotNull String inColMatrix, @NotNull String outColorMatrix, int force_divisible_by) {
         this.sws_flags = sws_flags;
