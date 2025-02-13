@@ -8,59 +8,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4e206741-5dd1-4a84-99b2-29854b378e54" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/build/resources/test/output/rotation/video/output1.mp4" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/resources/test/output/rotation/video/output2.mp4" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/resources/test/output/rotation/video/output3.mp4" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/resources/test/output/translation/video/output1.mp4" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/RotationTransition.class.uniqueId0" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/tmp/compileTestJava/compileTransaction/stash-dir/RotationTest.class.uniqueId0" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/tmp/compileTestJava/compileTransaction/stash-dir/TranslationTest.class.uniqueId1" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/test/resources/output/rotation/video/output1.mp4" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/resources/output/rotation/video/output1.mp4" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/resources/output/rotation/video/output2.mp4" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/resources/output/rotation/video/output3.mp4" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/resources/output/translation/video/output1.mp4" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.12.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.12.1/executionHistory/executionHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.12.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.12.1/executionHistory/executionHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.12.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.12.1/fileHashes/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.12.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.12.1/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.12.1/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.12.1/fileHashes/resourceHashesCache.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/it/disi/unitn/transitions/t2d/Transition2D.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/it/disi/unitn/transitions/t2d/Transition2D.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/it/disi/unitn/transitions/t2d/TransitionParent.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/it/disi/unitn/transitions/t2d/TransitionParent.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/it/disi/unitn/transitions/t2d/rotation/Rotation.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/it/disi/unitn/transitions/t2d/rotation/Rotation.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/it/disi/unitn/transitions/t2d/rotation/RotationTransition.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/it/disi/unitn/transitions/t2d/rotation/RotationTransition.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/it/disi/unitn/transitions/t2d/translation/TranslationTransition.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/it/disi/unitn/transitions/t2d/translation/TranslationTransition.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/test/it/disi/unitn/transition/rotation/RotationTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/test/it/disi/unitn/transition/rotation/RotationTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/test/it/disi/unitn/transition/translation/TranslationTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/test/it/disi/unitn/transition/translation/TranslationTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/reports/tests/test/classes/it.disi.unitn.transition.translation.TranslationTest.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/tests/test/classes/it.disi.unitn.transition.translation.TranslationTest.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/reports/tests/test/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/tests/test/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/reports/tests/test/packages/it.disi.unitn.transition.translation.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/tests/test/packages/it.disi.unitn.transition.translation.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/test/output/rotation/video/output.mp4" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/test/output/rotation/video/output.mp4" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/test/output/translation/video/output.mp4" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/test/output/translation/video/output.mp4" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/test-results/test/TEST-it.disi.unitn.transition.translation.TranslationTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/build/test-results/test/TEST-it.disi.unitn.transition.translation.TranslationTest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/test-results/test/binary/output.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/test-results/test/binary/output.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/test-results/test/binary/output.bin.idx" beforeDir="false" afterPath="$PROJECT_DIR$/build/test-results/test/binary/output.bin.idx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/test-results/test/binary/results.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/test-results/test/binary/results.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/Translation.class.uniqueId0" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/TranslationFailedException.class.uniqueId1" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileTestJava/compileTransaction/stash-dir/TranslationTest.class.uniqueId0" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileTestJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileTestJava/previous-compilation-data.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/inputFile.txt" beforeDir="false" afterPath="$PROJECT_DIR$/inputFile.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/resources/output/rotation/images/output.mp4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/resources/output/rotation/video/output.mp4" beforeDir="false" afterPath="$PROJECT_DIR$/out/test/resources/output/rotation/video/output.mp4" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/disi/unitn/transitions/t2d/Transition2D.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/disi/unitn/transitions/t2d/Transition2D.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/disi/unitn/transitions/t2d/TransitionParent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/disi/unitn/transitions/t2d/TransitionParent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/disi/unitn/transitions/t2d/rotation/Rotation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/disi/unitn/transitions/t2d/rotation/Rotation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/disi/unitn/transitions/t2d/rotation/RotationTransition.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/disi/unitn/transitions/t2d/rotation/RotationTransition.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/disi/unitn/transitions/t2d/translation/TranslationTransition.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/disi/unitn/transitions/t2d/translation/TranslationTransition.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/it/disi/unitn/transition/rotation/RotationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/disi/unitn/transition/rotation/RotationTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/it/disi/unitn/transition/translation/TranslationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/disi/unitn/transition/translation/TranslationTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/output/rotation/video/output.mp4" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/output/rotation/video/output.mp4" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/output/translation/video/output.mp4" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/output/translation/video/output.mp4" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -607,7 +556,7 @@
       <workItem from="1738422019198" duration="1822000" />
       <workItem from="1739111765350" duration="4037000" />
       <workItem from="1739201266927" duration="56194000" />
-      <workItem from="1739480223283" duration="3745000" />
+      <workItem from="1739480223283" duration="4067000" />
     </task>
     <servers />
   </component>
