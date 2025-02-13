@@ -27,17 +27,30 @@ final public class TranslationTransition extends TransitionParent {
      * @param inputFile The given input file. This value must not be null or an empty string.
      * @param tempOutDir The given output directory for the intermediate files. This value must not be null or an empty
      *                   string.
-     * @param videoOutDir The video's output directory.
-     * @param tempVideoDir The temporary video's output directory.
+     * @param videoOutDir The video's output directory. This value cannot be null or an empty string.
+     * @param tempVideoDir The temporary video's output directory. This value cannot be null or an empty string.
+     * @param fname The temporary files' extension. This value cannot be null or an empty string.
      * @param distx The distance on the x-axis. This value can be positive (right translation), negative (left translation), or null.
      * @param theta The translation angle in degrees. This value can be positive (downwards translation), negative (upwards
-     *              translation), or null.
-     * @param fext The intermediate files' extension.
+     *              translation), or null. This value cannot be greater than 999.
+     * @param fext The intermediate files' extension. This value cannot be null or an empty string.
+     * @throws InvalidArgumentException If any of the given arguments (except {@code theta}) does not meet its requirements
      */
     public TranslationTransition(@NotNull String inputFile, @NotNull String tempOutDir, @NotNull String videoOutDir,
                                  @NotNull String tempVideoDir, @NotNull String fname, double distx, double theta,
-                                 @NotNull String fext) {
+                                 @NotNull String fext) throws InvalidArgumentException {
         super(inputFile, tempOutDir, tempVideoDir, videoOutDir, fname);
+        if(StringExt.checkNullOrEmpty(inputFile) || StringExt.checkNullOrEmpty(tempOutDir) ||
+                StringExt.checkNullOrEmpty(videoOutDir) || StringExt.checkNullOrEmpty(tempVideoDir) ||
+        StringExt.checkNullOrEmpty(fname) || StringExt.checkNullOrEmpty(fext)) {
+            throw new InvalidArgumentException("None of the arguments given to TranslationTransition can be null or empty " +
+                    "strings.", "Nessuno degli argomenti forniti a TranslationTransition puo' essere null o una stringa " +
+                    "vuota.");
+        }
+        if(distx < 0) {
+            throw new InvalidArgumentException("The given distance on the x-axis cannot be negative.", "La distanza " +
+                    "fornita sull'asse delle ascisse non puo' essere negativa.");
+        }
         this.distanceX = distx;
         this.theta = Math.toRadians(theta);
         this.fext = fext;
@@ -118,7 +131,7 @@ final public class TranslationTransition extends TransitionParent {
             tempDir.removeContent(fext);
 
             MyFile tempVideoFile = new MyFile(tempVideoDir);
-            tempVideoFile.removeContent(fileExt); //fname = fileExt for now, fix later.
+            tempVideoFile.removeContent(fname);
 
             tempDir = new MyFile(videoOutDir);
             tempDir.removeContentExceptFile("output");
