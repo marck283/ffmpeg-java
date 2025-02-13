@@ -28,7 +28,7 @@ public abstract class TransitionParent {
     /**
      * The input file's path, temporary files' output directory and final video's output directory.
      */
-    protected final String inputFile, tempOutDir, videoOutDir;
+    protected final String inputFile, tempOutDir, tempVideoDir, videoOutDir, fileExt;
 
     private final VideoSimpleFilterChain vsfc;
 
@@ -36,12 +36,16 @@ public abstract class TransitionParent {
      * The class's constructor.
      * @param inputFile The given input file's path.
      * @param tempOutDir The temporary files' output directory.
+     * @param tempVideoDir The temporary videos' output directory.
      * @param videoOutDir The final video's output directory.
      */
-    public TransitionParent(@NotNull String inputFile, @NotNull String tempOutDir, @NotNull String videoOutDir) {
+    public TransitionParent(@NotNull String inputFile, @NotNull String tempOutDir, @NotNull String tempVideoDir,
+                            @NotNull String videoOutDir, @NotNull String fileExt) {
         this.inputFile = inputFile;
         this.tempOutDir = tempOutDir;
+        this.tempVideoDir = tempVideoDir;
         this.videoOutDir = videoOutDir;
+        this.fileExt = fileExt;
         vsfc = new VideoSimpleFilterChain();
     }
 
@@ -117,10 +121,15 @@ public abstract class TransitionParent {
     }
 
     private void createVideo(@NotNull FFMpegBuilder builder, long timeout, @NotNull TimeUnit tu,
-                             @NotNull String outfile, @NotNull String fileExt, boolean isFinal) throws Exception {
-        MyFile outDirPath = new MyFile((isFinal) ? videoOutDir : tempOutDir);
-        List<String> pathList = outDirPath.getFileList();
-        TracksMerger merger = builder.newTracksMerger(videoOutDir + "/" + outfile + "." + fileExt);
+                             @NotNull String outfile, boolean isFinal, boolean isVideo) throws Exception {
+        MyFile inDirPath = new MyFile((isVideo) ? tempOutDir : tempVideoDir);
+        List<String> pathList = inDirPath.getFileList();
+
+        if(pathList.isEmpty()) {
+            return; //Returns if the list of files in the selected directory is empty.
+        }
+
+        TracksMerger merger = builder.newTracksMerger(((isFinal) ? videoOutDir : tempVideoDir) + "/" + outfile + "." + fileExt);
 
         Collections.sort(pathList);
 
@@ -139,14 +148,14 @@ public abstract class TransitionParent {
      * @param timeout The given timeout.
      * @param tu The given TimeUnit instance.
      * @param outfile The given output file's path.
-     * @param fileExt The file's extension.
      * @param isFinal Boolean parameter to check if this call to performTransition() will create the output video.
+     * @param isVideo Boolean parameter to check if this call to performTransition() will create the intermediate videos
      * @throws Exception If any exception is thrown
      */
-    public void performTransition(long timeout, @NotNull TimeUnit tu, @NotNull String outfile, @NotNull String fileExt,
-                                   boolean isFinal) throws Exception {
+    public void performTransition(long timeout, @NotNull TimeUnit tu, @NotNull String outfile,
+                                   boolean isFinal, boolean isVideo) throws Exception {
         FFMpegBuilder builder = new FFMpegBuilder("ffmpeg");
-        createVideo(builder, timeout, tu, outfile, fileExt, isFinal);
+        createVideo(builder, timeout, tu, outfile, isFinal, isVideo);
     }
 
 }

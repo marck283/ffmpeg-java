@@ -26,7 +26,10 @@ class Rotation extends Transition2D {
      * This method rotates the text.
      * @param anchorx The x-axis anchor. This value cannot be negative.
      * @param anchory The y-axis anchor. This value cannot be negative.
-     * @param angle The given angle in radians. This value cannot be negative.
+     * @param x The x-coordinate at which the string will be drawn.
+     * @param y The y-coordinate at which the string will be drawn.
+     * @param angle The given angle in radians. As usual, a positive angle ensures a clockwise rotation, while a
+     *              negative one ensures a counterclockwise rotation.
      * @param text The text to be rotated. This value cannot be null or an empty string.
      * @param name The output file's name. This value cannot be null or an empty string.
      * @param fname The output file's extension. This value cannot be null or an empty string.
@@ -36,7 +39,7 @@ class Rotation extends Transition2D {
      * @param fontColor The font's color. This value cannot be null.
      * @throws InvalidArgumentException If any of the above parameters' values does not conform to the given specifications
      */
-    void rotate(double anchorx, double anchory, double angle, @NotNull String text, @NotNull String name,
+    void rotate(double anchorx, double anchory, float x, float y, double angle, @NotNull String text, @NotNull String name,
                 @NotNull String fname, @NotNull String fontFamily, int fontStyle, int fontSize, @NotNull Color fontColor)
             throws InvalidArgumentException {
         if(StringExt.checkNullOrEmpty(text)) {
@@ -54,11 +57,6 @@ class Rotation extends Transition2D {
                     "L'estensione del file risultante fornita non puo' essere null o una stringa vuota.");
         }
 
-        if(angle < 0D) {
-            throw new InvalidArgumentException("The angle's value cannot be negative.", "L'angolo indicato non puo' " +
-                    "essere negativo.");
-        }
-
         if(fontSize <= 0) {
             throw new InvalidArgumentException("The given font size cannot be less than or equal to zero.", "La dimensione " +
                     "fornita per il font scelto non puo' essere minore o uguale a zero.");
@@ -68,7 +66,7 @@ class Rotation extends Transition2D {
         g2d.setColor(fontColor);
 
         g2d.rotate(angle, anchorx, anchory);
-        g2d.drawString(text,100F, 350F); //Allow the user to choose where to render the output string!
+        g2d.drawString(text,x, y);
 
         try {
             savePicture(fname, name, new RotationFailedException("Text rotation failed.", "Rotazione testo non riuscita."));

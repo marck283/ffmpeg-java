@@ -19,15 +19,17 @@ public class TranslationTest {
 
     @Test
     public void test() throws Exception {
-        String tempOutDir = "./src/test/resources/output/translation/images", videoOutDir = "./src/test/resources/output/translation/video";
+        String tempOutDir = "./src/test/resources/output/translation/images", videoOutDir = "./src/test/resources/output/translation/video",
+                tempVideoDir = "./src/test/resources/output/translation/tempVideo";
         MyFile.makeDirs(tempOutDir);
         MyFile.makeDirs(videoOutDir);
+        MyFile.makeDirs(tempVideoDir);
 
         StringExt str = new StringExt(String.valueOf(0));
         str.padStart(3);
         String inputExt = "jpeg";
         TranslationTransition translation = new TranslationTransition("./src/test/resources/input/images/"
-                + str.getVal() + "." + inputExt, tempOutDir, videoOutDir, 45, 95, inputExt);
+                + str.getVal() + "." + inputExt, tempOutDir, videoOutDir, tempVideoDir, "mp4",45, 95, inputExt);
 
         ScalingParams scPars = getScalingParams();
         translation.setScale(scPars.getAlgorithm(),
@@ -40,22 +42,24 @@ public class TranslationTest {
         translation.translate(new Point2D.Float(200F, 350F), "test", "mp4","Arial Unicode MS",
                 Font.PLAIN,200, Color.BLACK);
 
-        translation.performTransition(1L, TimeUnit.MINUTES, "last", "mp4", false);
-        translation.performTransition(1L, TimeUnit.MINUTES, "output", "mp4", true);
+        //translation.performTransition(1L, TimeUnit.MINUTES, "last", false, true);
+        translation.performTransition(1L, TimeUnit.MINUTES, "output", true, false);
         translation.dispose();
     }
 
     @Test
     public void test1() throws Exception {
-        String tempOutDir = "./src/test/resources/output/translation/images", videoOutDir = "./src/test/resources/output/translation/video";
+        String tempOutDir = "./src/test/resources/output/translation/images", videoOutDir = "./src/test/resources/output/translation/video",
+                tempVideoDir = "./src/test/resources/output/translation/tempVideo";
         MyFile.makeDirs(tempOutDir);
         MyFile.makeDirs(videoOutDir);
+        MyFile.makeDirs(tempVideoDir);
 
         StringExt str = new StringExt(String.valueOf(0));
         str.padStart(3);
         String inputExt = "jpeg";
         TranslationTransition translation = new TranslationTransition("./src/test/resources/input/images/"
-                + str.getVal() + "." + inputExt, tempOutDir, videoOutDir, 45, -95, inputExt);
+                + str.getVal() + "." + inputExt, tempOutDir, videoOutDir, tempVideoDir, "mp4",45, -95, inputExt);
 
         ScalingParams scPars = getScalingParams();
         translation.setScale(scPars.getAlgorithm(),
@@ -68,8 +72,8 @@ public class TranslationTest {
         translation.translate(new Point2D.Float(500F, 850F), "test", "mp4","Arial Unicode MS",
                 Font.PLAIN,200, Color.BLACK);
 
-        translation.performTransition(1L, TimeUnit.MINUTES, "last", "mp4", false);
-        translation.performTransition(1L, TimeUnit.MINUTES, "output", "mp4", true);
+        //translation.performTransition(1L, TimeUnit.MINUTES, "last", false, true);
+        translation.performTransition(1L, TimeUnit.MINUTES, "output1", true, false);
         translation.dispose();
     }
 

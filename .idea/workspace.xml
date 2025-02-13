@@ -8,224 +8,59 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4e206741-5dd1-4a84-99b2-29854b378e54" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gradle/8.12.1/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.12.1/checksums/checksums.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.12.1/checksums/md5-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.12.1/checksums/md5-checksums.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.12.1/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.12.1/checksums/sha1-checksums.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.12.1/checksums/sha256-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.12.1/checksums/sha256-checksums.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.12.1/checksums/sha512-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.12.1/checksums/sha512-checksums.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/resources/test/output/rotation/video/output1.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/resources/test/output/rotation/video/output2.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/resources/test/output/rotation/video/output3.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/resources/test/output/translation/video/output1.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/RotationTransition.class.uniqueId0" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/tmp/compileTestJava/compileTransaction/stash-dir/RotationTest.class.uniqueId0" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/tmp/compileTestJava/compileTransaction/stash-dir/TranslationTest.class.uniqueId1" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/test/resources/output/rotation/video/output1.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/resources/output/rotation/video/output1.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/resources/output/rotation/video/output2.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/resources/output/rotation/video/output3.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/resources/output/translation/video/output1.mp4" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.12.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.12.1/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.12.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.12.1/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.12.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.12.1/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.12.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.12.1/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.12.1/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.12.1/fileHashes/resourceHashesCache.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/it/disi/unitn/transitions/t2d/Transition2D.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/it/disi/unitn/transitions/t2d/Transition2D.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/it/disi/unitn/transitions/t2d/TransitionParent.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/it/disi/unitn/transitions/t2d/TransitionParent.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/it/disi/unitn/transitions/t2d/rotation/Rotation.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/it/disi/unitn/transitions/t2d/rotation/Rotation.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/it/disi/unitn/transitions/t2d/rotation/RotationTransition.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/it/disi/unitn/transitions/t2d/rotation/RotationTransition.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/it/disi/unitn/transitions/t2d/translation/TranslationTransition.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/it/disi/unitn/transitions/t2d/translation/TranslationTransition.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/allclasses-index.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/allclasses-index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/allpackages-index.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/allpackages-index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/element-list" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/element-list" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/help-doc.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/help-doc.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/index-all.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/index-all.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/FFMpeg.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/FFMpeg.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/FFMpegBuilder.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/FFMpegBuilder.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/ProcessController.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/ProcessController.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/StringExt.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/StringExt.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/exceptions/AudioConversionException.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/exceptions/AudioConversionException.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/exceptions/GeneralException.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/exceptions/GeneralException.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/exceptions/InvalidArgumentException.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/exceptions/InvalidArgumentException.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/exceptions/InvalidJSONFileException.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/exceptions/InvalidJSONFileException.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/exceptions/MultiLanguageUnsupportedOperationException.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/exceptions/MultiLanguageUnsupportedOperationException.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/exceptions/PermissionsException.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/exceptions/PermissionsException.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/exceptions/RotationFailedException.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/exceptions/UnsupportedOperatingSystemException.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/exceptions/UnsupportedOperatingSystemException.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/exceptions/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/exceptions/package-summary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/exceptions/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/exceptions/package-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/json/JSONToImage.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/json/JSONToImage.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/json/jsonparser/JsonParser.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/json/jsonparser/JsonParser.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/json/jsonparser/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/json/jsonparser/package-summary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/json/jsonparser/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/json/jsonparser/package-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/json/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/json/package-summary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/json/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/json/package-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/json/processpool/ExecutorResHandler.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/json/processpool/ExecutorResHandler.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/json/processpool/ProcessPool.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/json/processpool/ProcessPool.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/json/processpool/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/json/processpool/package-summary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/json/processpool/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/json/processpool/package-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/lasagna/MyFile.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/lasagna/MyFile.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/lasagna/audiocreator/Audio.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/lasagna/audiocreator/Audio.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/lasagna/audiocreator/AudioExtractor.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/lasagna/audiocreator/AudioExtractor.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/lasagna/audiocreator/AudioFiltering.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/lasagna/audiocreator/AudioFiltering.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/lasagna/audiocreator/AudioGenerator.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/lasagna/audiocreator/AudioGenerator.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/lasagna/audiocreator/Description.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/lasagna/audiocreator/Description.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/lasagna/audiocreator/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/lasagna/audiocreator/package-summary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/lasagna/audiocreator/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/lasagna/audiocreator/package-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/lasagna/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/lasagna/package-summary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/lasagna/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/lasagna/package-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/package-summary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/package-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/transitions/Transition.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/transitions/package-summary.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/transitions/package-tree.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/transitions/rotation/RotationTransition.RotationBuilder.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/transitions/rotation/RotationTransition.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/transitions/rotation/package-summary.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/transitions/rotation/package-tree.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/transitions/translation/TranslationTransition.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/transitions/translation/package-summary.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/transitions/translation/package-tree.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/ExecutorResHandler.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/ExecutorResHandler.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/TracksMerger.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/TracksMerger.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/VideoCreator.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/VideoCreator.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/VideoExtractor.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/VideoExtractor.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/AudioFilterGraph.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/AudioFilterGraph.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/FilterGraph.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/FilterGraph.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/VideoFilterGraph.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/VideoFilterGraph.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/AudioSimpleFilterChain.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/AudioSimpleFilterChain.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/FilterChain.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/FilterChain.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/VideoSimpleFilterChain.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/VideoSimpleFilterChain.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/Filter.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/Filter.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/AudioFilter.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/AudioFilter.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/abuffer/ABuffer.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/abuffer/ABuffer.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/abuffer/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/abuffer/package-summary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/abuffer/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/abuffer/package-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/acompressor/ACompressor.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/acompressor/ACompressor.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/acompressor/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/acompressor/package-summary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/acompressor/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/acompressor/package-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/acontrast/AContrast.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/acontrast/AContrast.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/acontrast/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/acontrast/package-summary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/acontrast/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/acontrast/package-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/acrossfade/ACrossFade.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/acrossfade/ACrossFade.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/acrossfade/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/acrossfade/package-summary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/acrossfade/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/acrossfade/package-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/adecorrelate/ADecorrelate.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/adecorrelate/ADecorrelate.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/adecorrelate/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/adecorrelate/package-summary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/adecorrelate/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/adecorrelate/package-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/adelay/ADelay.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/adelay/ADelay.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/adelay/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/adelay/package-summary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/adelay/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/adelay/package-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/adenorm/ADenorm.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/adenorm/ADenorm.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/adenorm/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/adenorm/package-summary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/adenorm/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/adenorm/package-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/adrc/ADrc.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/adrc/ADrc.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/adrc/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/adrc/package-summary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/adrc/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/adrc/package-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/adynamicequalizer/ADynamicEqualizer.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/adynamicequalizer/ADynamicEqualizer.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/adynamicequalizer/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/adynamicequalizer/package-summary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/adynamicequalizer/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/adynamicequalizer/package-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/adynamicsmooth/ADynamicSmooth.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/adynamicsmooth/ADynamicSmooth.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/adynamicsmooth/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/adynamicsmooth/package-summary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/adynamicsmooth/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/adynamicsmooth/package-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/aformat/AFormat.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/aformat/AFormat.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/aformat/ChannelLayout.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/aformat/ChannelLayout.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/aformat/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/aformat/package-summary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/aformat/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/aformat/package-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/afreqshift/AFreqShift.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/afreqshift/AFreqShift.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/afreqshift/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/afreqshift/package-summary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/afreqshift/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/afreqshift/package-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/asplit/ASplit.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/asplit/ASplit.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/asplit/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/asplit/package-summary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/asplit/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/asplit/package-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/atempo/ATempo.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/atempo/ATempo.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/atempo/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/atempo/package-summary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/atempo/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/atempo/package-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/package-summary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/package-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/sinks/abuffersink/ABufferSink.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/sinks/abuffersink/ABufferSink.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/sinks/abuffersink/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/sinks/abuffersink/package-summary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/sinks/abuffersink/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/sinks/abuffersink/package-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/sinks/anullsink/ANullSink.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/sinks/anullsink/ANullSink.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/sinks/anullsink/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/sinks/anullsink/package-summary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/sinks/anullsink/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/audiofilters/sinks/anullsink/package-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/multimedia/a3dscope/A3DScope.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/multimedia/a3dscope/A3DScope.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/multimedia/a3dscope/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/multimedia/a3dscope/package-summary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/multimedia/a3dscope/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/multimedia/a3dscope/package-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/multimedia/concat/Concat.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/multimedia/concat/Concat.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/multimedia/concat/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/multimedia/concat/package-summary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/multimedia/concat/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/multimedia/concat/package-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/multimedia/pts/ASetPts.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/multimedia/pts/ASetPts.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/multimedia/pts/SetPts.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/multimedia/pts/SetPts.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/multimedia/pts/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/multimedia/pts/package-summary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/multimedia/pts/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/multimedia/pts/package-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/package-summary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/package-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/size/Size.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/size/Size.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/size/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/size/package-summary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/size/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/size/package-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/videofilters/VideoFilter.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/videofilters/VideoFilter.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/videofilters/buffer/Buffer.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/videofilters/buffer/Buffer.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/videofilters/buffer/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/videofilters/buffer/package-summary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/videofilters/buffer/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/videofilters/buffer/package-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/videofilters/colorcorrect/ColorCorrect.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/videofilters/colorcorrect/ColorCorrect.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/videofilters/colorcorrect/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/videofilters/colorcorrect/package-summary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/videofilters/colorcorrect/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/videofilters/colorcorrect/package-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/videofilters/drawtext/DrawText.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/videofilters/drawtext/DrawText.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/videofilters/drawtext/boxborderw/BoxBorderW.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/videofilters/drawtext/boxborderw/BoxBorderW.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/videofilters/drawtext/boxborderw/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/videofilters/drawtext/boxborderw/package-summary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/videofilters/drawtext/boxborderw/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/videofilters/drawtext/boxborderw/package-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/videofilters/drawtext/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/videofilters/drawtext/package-summary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/videofilters/drawtext/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/videofilters/drawtext/package-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/videofilters/drawtext/timecode/TimeCode.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/videofilters/drawtext/timecode/TimeCode.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/videofilters/drawtext/timecode/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/videofilters/drawtext/timecode/package-summary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/videofilters/drawtext/timecode/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/videofilters/drawtext/timecode/package-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/videofilters/format/Format.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/videofilters/format/Format.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/videofilters/format/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/videofilters/format/package-summary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/videofilters/format/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/videofilters/format/package-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/videofilters/fps/FPS.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/videofilters/fps/FPS.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/videofilters/fps/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/videofilters/fps/package-summary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/videofilters/fps/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/videofilters/fps/package-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/videofilters/geq/Geq.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/videofilters/geq/Geq.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/videofilters/geq/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/videofilters/geq/package-summary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/videofilters/geq/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/videofilters/geq/package-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/videofilters/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/videofilters/package-summary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/videofilters/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/videofilters/package-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/videofilters/scale/ColorMatrix.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/videofilters/scale/ColorMatrix.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/videofilters/scale/Scale.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/videofilters/scale/Scale.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/videofilters/scale/ScalingParams.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/videofilters/scale/ScalingParams.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/videofilters/scale/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/videofilters/scale/package-summary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/videofilters/scale/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/videofilters/scale/package-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/videofilters/scale/scalingalgs/Bicubic.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/videofilters/scale/scalingalgs/Bicubic.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/videofilters/scale/scalingalgs/ScalingAlgorithm.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/videofilters/scale/scalingalgs/ScalingAlgorithm.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/videofilters/scale/scalingalgs/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/videofilters/scale/scalingalgs/package-summary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/videofilters/scale/scalingalgs/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/videofilters/scale/scalingalgs/package-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/videofilters/sinks/buffersink/BufferSink.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/videofilters/sinks/buffersink/BufferSink.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/videofilters/sinks/buffersink/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/videofilters/sinks/buffersink/package-summary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/videofilters/sinks/buffersink/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/videofilters/sinks/buffersink/package-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/videofilters/sinks/nullsink/NullSink.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/videofilters/sinks/nullsink/NullSink.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/videofilters/sinks/nullsink/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/videofilters/sinks/nullsink/package-summary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/videofilters/sinks/nullsink/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/videofilters/sinks/nullsink/package-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/videofilters/vsplit/Split.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/videofilters/vsplit/Split.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/videofilters/vsplit/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/videofilters/vsplit/package-summary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/videofilters/vsplit/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/filters/videofilters/vsplit/package-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/package-summary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/filterchain/package-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/package-summary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/filtergraph/package-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/fps_mode/FPSMode.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/fps_mode/FPSMode.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/fps_mode/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/fps_mode/package-summary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/fps_mode/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/fps_mode/package-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/package-summary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/package-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/transcoder/VideoTranscoder.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/transcoder/VideoTranscoder.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/transcoder/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/transcoder/package-summary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/transcoder/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/it/disi/unitn/videocreator/transcoder/package-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/member-search-index.js" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/member-search-index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/overview-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/overview-summary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/overview-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/overview-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/package-search-index.js" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/package-search-index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/search.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/search.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/serialized-form.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/serialized-form.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/type-search-index.js" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/type-search-index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/publications/mavenJava/module.json" beforeDir="false" afterPath="$PROJECT_DIR$/build/publications/mavenJava/module.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/publications/mavenJava/pom-default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/build/publications/mavenJava/pom-default.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/TranslationTransition.class.uniqueId0" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/test/it/disi/unitn/transition/rotation/RotationTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/test/it/disi/unitn/transition/rotation/RotationTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/test/it/disi/unitn/transition/translation/TranslationTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/test/it/disi/unitn/transition/translation/TranslationTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/reports/tests/test/classes/it.disi.unitn.transition.translation.TranslationTest.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/tests/test/classes/it.disi.unitn.transition.translation.TranslationTest.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/reports/tests/test/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/tests/test/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/reports/tests/test/packages/it.disi.unitn.transition.translation.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/tests/test/packages/it.disi.unitn.transition.translation.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/test/output/rotation/video/output.mp4" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/test/output/rotation/video/output.mp4" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/test/output/translation/video/output.mp4" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/test/output/translation/video/output.mp4" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/test-results/test/TEST-it.disi.unitn.transition.translation.TranslationTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/build/test-results/test/TEST-it.disi.unitn.transition.translation.TranslationTest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/test-results/test/binary/output.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/test-results/test/binary/output.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/test-results/test/binary/output.bin.idx" beforeDir="false" afterPath="$PROJECT_DIR$/build/test-results/test/binary/output.bin.idx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/test-results/test/binary/results.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/test-results/test/binary/results.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/Translation.class.uniqueId0" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/TranslationFailedException.class.uniqueId1" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/javadoc/javadoc.options" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/javadoc/javadoc.options" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/publishMavenJavaPublicationToMavenRepository/module-maven-metadata.xml" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/publishMavenJavaPublicationToMavenRepository/module-maven-metadata.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/disi/unitn/exceptions/transitions/TranslationFailedException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/disi/unitn/exceptions/transitions/TranslationFailedException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileTestJava/compileTransaction/stash-dir/TranslationTest.class.uniqueId0" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileTestJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileTestJava/previous-compilation-data.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/inputFile.txt" beforeDir="false" afterPath="$PROJECT_DIR$/inputFile.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/resources/output/rotation/images/output.mp4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/resources/output/rotation/video/output.mp4" beforeDir="false" afterPath="$PROJECT_DIR$/out/test/resources/output/rotation/video/output.mp4" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/disi/unitn/transitions/t2d/Transition2D.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/disi/unitn/transitions/t2d/Transition2D.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/disi/unitn/transitions/t2d/TransitionParent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/disi/unitn/transitions/t2d/TransitionParent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/disi/unitn/transitions/t2d/rotation/Rotation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/disi/unitn/transitions/t2d/rotation/Rotation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/disi/unitn/transitions/t2d/rotation/RotationTransition.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/disi/unitn/transitions/t2d/rotation/RotationTransition.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/disi/unitn/transitions/t2d/translation/TranslationTransition.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/disi/unitn/transitions/t2d/translation/TranslationTransition.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/it/disi/unitn/transition/rotation/RotationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/disi/unitn/transition/rotation/RotationTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/it/disi/unitn/transition/translation/TranslationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/disi/unitn/transition/translation/TranslationTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/output/rotation/video/output.mp4" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/output/rotation/video/output.mp4" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/output/translation/video/output.mp4" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/output/translation/video/output.mp4" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -364,6 +199,8 @@
     "Gradle.JSONToImageTest.generate.executor": "Debug",
     "Gradle.JSONToImageTest.generateWithGAN.executor": "Run",
     "Gradle.RotationTest.executor": "Run",
+    "Gradle.RotationTest.test.executor": "Debug",
+    "Gradle.RotationTest.test3.executor": "Run",
     "Gradle.TranslationTest.executor": "Run",
     "Gradle.TranslationTest.test1.executor": "Run",
     "Gradle.VideoCreatorTest.createCommand.executor": "Run",
@@ -401,7 +238,7 @@
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
     "create.test.in.the.same.root": "true",
     "extract.method.default.visibility": "private",
-    "git-widget-placeholder": "master",
+    "git-widget-placeholder": "fixRotationCoord",
     "kotlin-language-version-configured": "true",
     "last_directory_selection": "/home/marco/IdeaProjects/ffmpeg-java/src/test/java/it/disi/unitn/videocreator",
     "last_opened_file_path": "/home/marco-lasagna/Scaricati/ffmpeg-java/src/test/resources/input/images",
@@ -447,7 +284,7 @@
       <recent name="it.disi.unitn.exceptions" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.ffmpeg-java [publishAllPublicationsToMavenRepository]">
+  <component name="RunManager" selected="Gradle.TranslationTest">
     <configuration name="RotationTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -462,6 +299,54 @@
             <option value=":test" />
             <option value="--tests" />
             <option value="&quot;it.disi.unitn.transition.rotation.RotationTest&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="RotationTest.test" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;it.disi.unitn.transition.rotation.RotationTest.test&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="RotationTest.test3" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;it.disi.unitn.transition.rotation.RotationTest.test3&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -496,30 +381,6 @@
       <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="TranslationTest.test1" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":test" />
-            <option value="--tests" />
-            <option value="&quot;it.disi.unitn.transition.translation.TranslationTest.test1&quot;" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>true</RunAsTest>
-      <method v="2" />
-    </configuration>
     <configuration name="ffmpeg-java [publishAllPublicationsToMavenRepository]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -598,28 +459,6 @@
         <option name="taskNames">
           <list>
             <option value="publishAllPublicationsToMavenRepository" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>false</RunAsTest>
-      <method v="2" />
-    </configuration>
-    <configuration name="ffmpeg-java [publishToMavenLocal]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value="publishToMavenLocal" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -631,27 +470,27 @@
       <method v="2" />
     </configuration>
     <list>
+      <item itemvalue="Gradle.RotationTest.test3" />
+      <item itemvalue="Gradle.RotationTest.test" />
       <item itemvalue="Gradle.TranslationTest" />
-      <item itemvalue="Gradle.TranslationTest.test1" />
-      <item itemvalue="Gradle.ffmpeg-java [publishToMavenLocal]" />
       <item itemvalue="Gradle.ffmpeg-java [publishAllPublicationsToMavenRepository]" />
       <item itemvalue="Gradle.RotationTest" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.ffmpeg-java [publishAllPublicationsToMavenRepository]" />
         <item itemvalue="Gradle.TranslationTest" />
-        <item itemvalue="Gradle.TranslationTest.test1" />
         <item itemvalue="Gradle.RotationTest" />
-        <item itemvalue="Gradle.ffmpeg-java [publishToMavenLocal]" />
+        <item itemvalue="Gradle.RotationTest.test3" />
+        <item itemvalue="Gradle.RotationTest.test" />
+        <item itemvalue="Gradle.ffmpeg-java [publishAllPublicationsToMavenRepository]" />
       </list>
     </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-125ca727e0f0-intellij.indexing.shared.core-IU-243.23654.189" />
-        <option value="bundled-js-predefined-d6986cc7102b-822845ee3bb5-JavaScript-IU-243.23654.189" />
+        <option value="bundled-jdk-9823dce3aa75-125ca727e0f0-intellij.indexing.shared.core-IU-243.24978.46" />
+        <option value="bundled-js-predefined-d6986cc7102b-76f8388c3a79-JavaScript-IU-243.24978.46" />
       </set>
     </attachedChunks>
   </component>
@@ -768,6 +607,7 @@
       <workItem from="1738422019198" duration="1822000" />
       <workItem from="1739111765350" duration="4037000" />
       <workItem from="1739201266927" duration="56194000" />
+      <workItem from="1739480223283" duration="3745000" />
     </task>
     <servers />
   </component>
@@ -794,13 +634,43 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/it/disi/unitn/transitions/t2d/TransitionParent.java</url>
-          <line>122</line>
+          <line>131</line>
           <option name="timeStamp" value="93" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/it/disi/unitn/transitions/t2d/TransitionParent.java</url>
-          <line>148</line>
+          <line>157</line>
           <option name="timeStamp" value="94" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/it/disi/unitn/transitions/t2d/rotation/Rotation.java</url>
+          <line>71</line>
+          <option name="timeStamp" value="95" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/it/disi/unitn/transitions/t2d/TransitionParent.java</url>
+          <line>127</line>
+          <option name="timeStamp" value="97" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/it/disi/unitn/transitions/t2d/translation/TranslationTransition.java</url>
+          <line>48</line>
+          <option name="timeStamp" value="100" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/it/disi/unitn/transitions/t2d/translation/TranslationTransition.java</url>
+          <line>50</line>
+          <option name="timeStamp" value="101" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/it/disi/unitn/transition/rotation/RotationTest.java</url>
+          <line>135</line>
+          <option name="timeStamp" value="103" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/it/disi/unitn/transition/rotation/RotationTest.java</url>
+          <line>131</line>
+          <option name="timeStamp" value="105" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

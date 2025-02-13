@@ -45,9 +45,11 @@ public class Transition2D {
     }
 
     /**
-     * Disposes the current Graphics2D instance.
+     * Disposes the current Graphics2D instance. After the call to this method the current instance of the Transition2D
+     * object cannot be used any longer.
      */
     public void dispose() {
+        img.flush();
         g2d.dispose();
     }
 
