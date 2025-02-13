@@ -8,7 +8,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * This class implements an audio extractor.
  */
-public class AudioExtractor {
+final public class AudioExtractor {
 
     private final String inputFile, outputFile;
 

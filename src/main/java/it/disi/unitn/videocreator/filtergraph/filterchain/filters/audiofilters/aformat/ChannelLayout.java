@@ -12,7 +12,7 @@ import java.util.Locale;
 /**
  * This class implements FFmpeg's channel layouts.
  */
-public class ChannelLayout {
+final public class ChannelLayout {
 
     private String chID;
 

@@ -5,7 +5,7 @@ import it.disi.unitn.exceptions.InvalidArgumentException;
 import it.disi.unitn.exceptions.MultiLanguageUnsupportedOperationException;
 import it.disi.unitn.exceptions.UnsupportedOperatingSystemException;
 import it.disi.unitn.lasagna.MyFile;
-import it.disi.unitn.transitions.rotation.RotationTransition;
+import it.disi.unitn.transitions.t2d.rotation.RotationTransition;
 import it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.scale.ScalingParams;
 import it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.scale.scalingalgs.Bicubic;
 import org.jetbrains.annotations.NotNull;
@@ -25,8 +25,8 @@ public class RotationTest {
         StringExt str = new StringExt(String.valueOf(0));
         str.padStart(3);
         String inputExt = "jpeg";
-        RotationTransition rotation = new RotationTransition.RotationBuilder("./src/test/resources/input/images/"
-                + str.getVal() + "." + inputExt, tempOutDir, videoOutDir, "mp4", inputExt, 30).build();
+        RotationTransition rotation = new RotationTransition("./src/test/resources/input/images/"
+                + str.getVal() + "." + inputExt, videoOutDir, tempOutDir, "mp4", inputExt, 60);
 
         ScalingParams scPars = getScalingParams();
         rotation.setScale(scPars.getAlgorithm(),
@@ -34,16 +34,17 @@ public class RotationTest {
                 scPars.getInputRange(), scPars.getOutputRange(), scPars.getForceOriginalAspectRatio(), scPars.getInputColorMatrix(),
                 scPars.getOutputColorMatrix(), scPars.getDivisibleBy());
         rotation.setFPS("60*pal/pal", 0, null, null);
-        rotation.setRotationSpeed("0.5*PTS");
+        rotation.setTransitionSpeed("0.5*PTS");
 
-        rotation.rotate(300, 300, "test", inputExt, "Arial Unicode MS", Font.PLAIN,200,
+        rotation.rotate(300, 300, "test","Arial Unicode MS", Font.PLAIN,200,
                 Color.BLACK);
 
-        rotation.performRotation(1L, TimeUnit.MINUTES, "output", "mp4", true);
+        rotation.performTransition(1L, TimeUnit.MINUTES, "output", "mp4", true);
         rotation.dispose();
     }
 
-    private @NotNull ScalingParams getScalingParams() throws InvalidArgumentException, UnsupportedOperatingSystemException, MultiLanguageUnsupportedOperationException {
+    private @NotNull ScalingParams getScalingParams() throws InvalidArgumentException, UnsupportedOperatingSystemException,
+            MultiLanguageUnsupportedOperationException {
         ScalingParams scalingParams = new ScalingParams();
         scalingParams.setSize(false, String.valueOf(2048), String.valueOf(1024),"yuv420p");
         scalingParams.setSwsFlags(new Bicubic(2, 2));

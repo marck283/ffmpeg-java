@@ -8,7 +8,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * This class implements a video track extractor.
  */
-public class VideoExtractor {
+final public class VideoExtractor {
 
     private final String inputFile, outputFile;
 
