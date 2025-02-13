@@ -18,15 +18,18 @@ public class RotationTest {
 
     @Test
     public void test() throws Exception {
-        String tempOutDir = "./src/test/resources/output/rotation/images", videoOutDir = "./src/test/resources/output/rotation/video";
+        String tempOutDir = "./src/test/resources/output/rotation/images", videoOutDir = "./src/test/resources/output/rotation/video",
+                tempVideoDir = "./src/test/resources/output/rotation/tempVideo";;
         MyFile.makeDirs(tempOutDir);
         MyFile.makeDirs(videoOutDir);
+        MyFile.makeDirs(tempVideoDir);
 
         StringExt str = new StringExt(String.valueOf(0));
         str.padStart(3);
         String inputExt = "jpeg";
         RotationTransition rotation = new RotationTransition("./src/test/resources/input/images/"
-                + str.getVal() + "." + inputExt, videoOutDir, tempOutDir, "mp4", inputExt, 60);
+                + str.getVal() + "." + inputExt, videoOutDir, tempOutDir, tempVideoDir, "mp4", inputExt,
+                60);
 
         ScalingParams scPars = getScalingParams();
         rotation.setScale(scPars.getAlgorithm(),
@@ -36,10 +39,100 @@ public class RotationTest {
         rotation.setFPS("60*pal/pal", 0, null, null);
         rotation.setTransitionSpeed("0.5*PTS");
 
-        rotation.rotate(300, 300, "test","Arial Unicode MS", Font.PLAIN,200,
-                Color.BLACK);
+        rotation.rotate(300, 300, 100F, 350F, "test","Arial Unicode MS", Font.PLAIN,
+                200, Color.BLACK);
 
-        rotation.performTransition(1L, TimeUnit.MINUTES, "output", "mp4", true);
+        rotation.performTransition(1L, TimeUnit.MINUTES, "output", true, false);
+        rotation.dispose();
+    }
+
+    @Test
+    public void test1() throws Exception {
+        String tempOutDir = "./src/test/resources/output/rotation/images", videoOutDir = "./src/test/resources/output/rotation/video",
+                tempVideoDir = "./src/test/resources/output/rotation/tempVideo";
+        MyFile.makeDirs(tempOutDir);
+        MyFile.makeDirs(videoOutDir);
+        MyFile.makeDirs(tempVideoDir);
+
+        StringExt str = new StringExt(String.valueOf(0));
+        str.padStart(3);
+        String inputExt = "jpeg";
+        RotationTransition rotation = new RotationTransition("./src/test/resources/input/images/"
+                + str.getVal() + "." + inputExt, videoOutDir, tempOutDir, tempVideoDir, "mp4", inputExt,
+                60);
+
+        ScalingParams scPars = getScalingParams();
+        rotation.setScale(scPars.getAlgorithm(),
+                scPars.getEval(), scPars.getInterl(), scPars.getWidth(), scPars.getHeight(), scPars.getVideoSizeID(),
+                scPars.getInputRange(), scPars.getOutputRange(), scPars.getForceOriginalAspectRatio(), scPars.getInputColorMatrix(),
+                scPars.getOutputColorMatrix(), scPars.getDivisibleBy());
+        rotation.setFPS("60*pal/pal", 0, null, null);
+        rotation.setTransitionSpeed("0.5*PTS");
+
+        rotation.rotate(300, 300, 200F, 700F, "test","Arial Unicode MS", Font.PLAIN,
+                200, Color.BLACK);
+
+        rotation.performTransition(1L, TimeUnit.MINUTES, "output1", true, false);
+        rotation.dispose();
+    }
+
+    @Test
+    public void test2() throws Exception {
+        String tempOutDir = "./src/test/resources/output/rotation/images", videoOutDir = "./src/test/resources/output/rotation/video",
+                tempVideoDir = "./src/test/resources/output/rotation/tempVideo";
+        MyFile.makeDirs(tempOutDir);
+        MyFile.makeDirs(videoOutDir);
+        MyFile.makeDirs(tempVideoDir);
+
+        StringExt str = new StringExt(String.valueOf(0));
+        str.padStart(3);
+        String inputExt = "jpeg";
+        RotationTransition rotation = new RotationTransition("./src/test/resources/input/images/"
+                + str.getVal() + "." + inputExt, videoOutDir, tempOutDir, tempVideoDir, "mp4", inputExt,
+                105);
+
+        ScalingParams scPars = getScalingParams();
+        rotation.setScale(scPars.getAlgorithm(),
+                scPars.getEval(), scPars.getInterl(), scPars.getWidth(), scPars.getHeight(), scPars.getVideoSizeID(),
+                scPars.getInputRange(), scPars.getOutputRange(), scPars.getForceOriginalAspectRatio(), scPars.getInputColorMatrix(),
+                scPars.getOutputColorMatrix(), scPars.getDivisibleBy());
+        rotation.setFPS("60*pal/pal", 0, null, null);
+        rotation.setTransitionSpeed("0.5*PTS");
+
+        rotation.rotate(300, 300, 200F, 700F, "test","Arial Unicode MS", Font.PLAIN,
+                200, Color.BLACK);
+
+        rotation.performTransition(1L, TimeUnit.MINUTES, "output2", true, false);
+        rotation.dispose();
+    }
+
+    @Test
+    public void test3() throws Exception {
+        String tempOutDir = "./src/test/resources/output/rotation/images", videoOutDir = "./src/test/resources/output/rotation/video",
+                tempVideoDir = "./src/test/resources/output/rotation/tempVideo";
+        MyFile.makeDirs(tempOutDir);
+        MyFile.makeDirs(videoOutDir);
+        MyFile.makeDirs(tempVideoDir);
+
+        StringExt str = new StringExt(String.valueOf(0));
+        str.padStart(3);
+        String inputExt = "jpeg";
+        RotationTransition rotation = new RotationTransition("./src/test/resources/input/images/"
+                + str.getVal() + "." + inputExt, videoOutDir, tempOutDir, tempVideoDir, "mp4", inputExt,
+                -105);
+
+        ScalingParams scPars = getScalingParams();
+        rotation.setScale(scPars.getAlgorithm(),
+                scPars.getEval(), scPars.getInterl(), scPars.getWidth(), scPars.getHeight(), scPars.getVideoSizeID(),
+                scPars.getInputRange(), scPars.getOutputRange(), scPars.getForceOriginalAspectRatio(), scPars.getInputColorMatrix(),
+                scPars.getOutputColorMatrix(), scPars.getDivisibleBy());
+        rotation.setFPS("60*pal/pal", 0, null, null);
+        rotation.setTransitionSpeed("0.5*PTS");
+
+        rotation.rotate(300, 300, 200F, 700F, "test","Arial Unicode MS", Font.PLAIN,
+                200, Color.BLACK);
+
+        rotation.performTransition(1L, TimeUnit.MINUTES, "output3", true, false);
         rotation.dispose();
     }
 

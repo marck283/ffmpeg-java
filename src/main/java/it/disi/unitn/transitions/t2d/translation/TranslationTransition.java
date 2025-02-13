@@ -28,27 +28,29 @@ final public class TranslationTransition extends TransitionParent {
      * @param tempOutDir The given output directory for the intermediate files. This value must not be null or an empty
      *                   string.
      * @param videoOutDir The video's output directory.
+     * @param tempVideoDir The temporary video's output directory.
      * @param distx The distance on the x-axis. This value can be positive (right translation), negative (left translation), or null.
      * @param theta The translation angle in degrees. This value can be positive (downwards translation), negative (upwards
      *              translation), or null.
-     * @param fext The intermediate files' extension
+     * @param fext The intermediate files' extension.
      */
     public TranslationTransition(@NotNull String inputFile, @NotNull String tempOutDir, @NotNull String videoOutDir,
-                                 double distx, double theta, @NotNull String fext) {
-        super(inputFile, tempOutDir, videoOutDir);
+                                 @NotNull String tempVideoDir, @NotNull String fname, double distx, double theta,
+                                 @NotNull String fext) {
+        super(inputFile, tempOutDir, tempVideoDir, videoOutDir, fname);
         this.distanceX = distx;
         this.theta = Math.toRadians(theta);
         this.fext = fext;
     }
 
     private void translationLoop(double distX, double distY, int i, @NotNull Point2D start, @NotNull String text,
-                                 @NotNull String fname, @NotNull String fontFamily, int fontStyle, int fontSize,
-                                 @NotNull Color fontColor) throws Exception {
-        if((i + 1)%10 == 0) {
+                                 @NotNull String fontFamily, int fontStyle, int fontSize, @NotNull Color fontColor)
+            throws Exception {
+        if(i != 0 && i%10 == 0) {
             //Save intermediate video and delete the folder's content.
             StringExt strExt = new StringExt(String.valueOf(i));
             strExt.padStart(3);
-            performTransition(1L, TimeUnit.MINUTES, strExt.getVal(), fname, false);
+            performTransition(1L, TimeUnit.MINUTES, strExt.getVal(), false, true);
 
             MyFile tempDir = new MyFile(tempOutDir);
             tempDir.removeContent(fext);
@@ -89,12 +91,20 @@ final public class TranslationTransition extends TransitionParent {
         int i = 0;
         double distance = Math.sqrt(Math.pow(distanceX, 2.0D) + distanceY);
         while(Math.sqrt(Math.pow(distX, 2.0D) + Math.pow(distY, 2.0D)) <= distance) {
-            translationLoop(distX, distY, i, start, text, fname, fontFamily, fontStyle, fontSize, fontColor);
+            translationLoop(distX, distY, i, start, text, fontFamily, fontStyle, fontSize, fontColor);
 
             distX += Math.cos(theta);
             distY += Math.sin(theta);
 
             i++;
+        }
+
+        MyFile toutDir = new MyFile(tempOutDir);
+        java.util.List<String> pathList = toutDir.getFileList();
+        if(!pathList.isEmpty()) {
+            StringExt strExt = new StringExt(String.valueOf(i));
+            strExt.padStart(3);
+            performTransition(1L, TimeUnit.MINUTES, strExt.getVal(), false, true);
         }
     }
 
@@ -106,6 +116,9 @@ final public class TranslationTransition extends TransitionParent {
             translation.dispose();
             MyFile tempDir = new MyFile(tempOutDir);
             tempDir.removeContent(fext);
+
+            MyFile tempVideoFile = new MyFile(tempVideoDir);
+            tempVideoFile.removeContent(fileExt); //fname = fileExt for now, fix later.
 
             tempDir = new MyFile(videoOutDir);
             tempDir.removeContentExceptFile("output");
