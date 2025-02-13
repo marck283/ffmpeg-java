@@ -5,6 +5,9 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Locale;
 
+/**
+ * Exception specific for transitions.
+ */
 public class TranslationFailedException extends GeneralException {
 
     /**

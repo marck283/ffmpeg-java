@@ -20,12 +20,24 @@ import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-public class TransitionParent {
+/**
+ * Abstract class to handle transitions.
+ */
+public abstract class TransitionParent {
 
+    /**
+     * The input file's path, temporary files' output directory and final video's output directory.
+     */
     protected final String inputFile, tempOutDir, videoOutDir;
 
     private final VideoSimpleFilterChain vsfc;
 
+    /**
+     * The class's constructor.
+     * @param inputFile The given input file's path.
+     * @param tempOutDir The temporary files' output directory.
+     * @param videoOutDir The final video's output directory.
+     */
     public TransitionParent(@NotNull String inputFile, @NotNull String tempOutDir, @NotNull String videoOutDir) {
         this.inputFile = inputFile;
         this.tempOutDir = tempOutDir;

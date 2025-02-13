@@ -1,13 +1,14 @@
 it.disi.unitn
 it.disi.unitn.exceptions
+it.disi.unitn.exceptions.transitions
 it.disi.unitn.json
 it.disi.unitn.json.jsonparser
 it.disi.unitn.json.processpool
 it.disi.unitn.lasagna
 it.disi.unitn.lasagna.audiocreator
-it.disi.unitn.transitions
-it.disi.unitn.transitions.rotation
-it.disi.unitn.transitions.translation
+it.disi.unitn.transitions.t2d
+it.disi.unitn.transitions.t2d.rotation
+it.disi.unitn.transitions.t2d.translation
 it.disi.unitn.videocreator
 it.disi.unitn.videocreator.filtergraph
 it.disi.unitn.videocreator.filtergraph.filterchain
