@@ -28,7 +28,7 @@ public abstract class TransitionParent {
     /**
      * The input file's path, temporary files' output directory and final video's output directory.
      */
-    protected final String inputFile, tempOutDir, tempVideoDir, videoOutDir, fileExt;
+    protected final String inputFile, tempOutDir, tempVideoDir, videoOutDir, fname;
 
     private final VideoSimpleFilterChain vsfc;
 
@@ -38,14 +38,15 @@ public abstract class TransitionParent {
      * @param tempOutDir The temporary files' output directory.
      * @param tempVideoDir The temporary videos' output directory.
      * @param videoOutDir The final video's output directory.
+     * @param fname The temporary files' extension.
      */
     public TransitionParent(@NotNull String inputFile, @NotNull String tempOutDir, @NotNull String tempVideoDir,
-                            @NotNull String videoOutDir, @NotNull String fileExt) {
+                            @NotNull String videoOutDir, @NotNull String fname) {
         this.inputFile = inputFile;
         this.tempOutDir = tempOutDir;
         this.tempVideoDir = tempVideoDir;
         this.videoOutDir = videoOutDir;
-        this.fileExt = fileExt;
+        this.fname = fname;
         vsfc = new VideoSimpleFilterChain();
     }
 
@@ -129,7 +130,7 @@ public abstract class TransitionParent {
             return; //Returns if the list of files in the selected directory is empty.
         }
 
-        TracksMerger merger = builder.newTracksMerger(((isFinal) ? videoOutDir : tempVideoDir) + "/" + outfile + "." + fileExt);
+        TracksMerger merger = builder.newTracksMerger(((isFinal) ? videoOutDir : tempVideoDir) + "/" + outfile + "." + fname);
 
         Collections.sort(pathList);
 
