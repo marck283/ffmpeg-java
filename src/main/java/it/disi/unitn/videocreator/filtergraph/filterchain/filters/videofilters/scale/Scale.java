@@ -22,7 +22,7 @@ import java.util.Objects;
 /**
  * This class implements the "scale" video filter.
  */
-public class Scale extends VideoFilter {
+final public class Scale extends VideoFilter {
 
     private final ScalingParams scalingParams;
 

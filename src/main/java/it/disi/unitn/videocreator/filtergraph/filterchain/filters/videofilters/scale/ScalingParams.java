@@ -26,7 +26,7 @@ import java.util.Objects;
 /**
  * This class implements the parameters of the scaling filter.
  */
-public class ScalingParams {
+final public class ScalingParams {
 
     private ScalingAlgorithm sws_flags; //These flags will then be joined by using String.join("+", sws_flags)
 

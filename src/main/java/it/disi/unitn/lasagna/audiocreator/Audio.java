@@ -16,7 +16,7 @@ import java.util.Locale;
 /**
  * This class generates the audio files.
  */
-public class Audio {
+final public class Audio {
     private TextToSpeechClient textToSpeechClient;
     private SynthesisInput input;
     private VoiceSelectionParams voice;
@@ -77,7 +77,7 @@ public class Audio {
             switch(voiceType) {
                 case "female" -> //Female voice
                         builder.setSsmlGender(SsmlVoiceGender.FEMALE);
-                case "male" -> //Male voice. Gender neutral voices are not supported anymore
+                case "male" -> //Male voice. Gender-neutral voices are not supported anymore
                         builder.setSsmlGender(SsmlVoiceGender.MALE);
                 default -> {
                     System.err.println((new InvalidArgumentException("The voice type can only be \"female\" or \"male\".", "Il " +

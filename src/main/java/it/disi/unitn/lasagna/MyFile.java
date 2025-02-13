@@ -107,7 +107,7 @@ public class MyFile extends java.io.File {
         try(Stream<Path> walk = Files.walk(getPath(pathname, ""))) {
             walk.sorted(Comparator.reverseOrder()).forEach(path -> {
                 try {
-                    if(!path.getFileName().toString().contains(fileName)) {
+                    if(path.toFile().isFile() && !path.getFileName().toString().contains(fileName)) {
                         Files.delete(path);
                     }
                 } catch (IOException ex) {

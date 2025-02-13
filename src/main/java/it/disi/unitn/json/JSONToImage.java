@@ -23,7 +23,7 @@ import java.util.List;
 /**
  * This class translates a given JSON file into a list of Image objects.
  */
-public class JSONToImage {
+final public class JSONToImage {
 
     /**
      * The list of arrays of bytes representing the images

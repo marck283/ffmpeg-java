@@ -12,7 +12,6 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.StandardOpenOption;
-import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
@@ -20,7 +19,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * A class that helps merge audio and video tracks.
  */
-public class TracksMerger extends VideoCreator {
+final public class TracksMerger extends VideoCreator {
     private final String videoOutput, audioInput, videoInput;
 
     private final FFMpegBuilder builder;
