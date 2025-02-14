@@ -111,12 +111,13 @@ final public class JSONToImage {
                 //String text = textInfo.get("name").getAsString(), text1 = textInfo.get("value").getAsString();
                 String text = parser.getString(e1, "name"), text1 = parser.getString(e1, "value");
 
-                //fontDim = textInfo.get("font").getAsFloat();
                 fontDim = parser.getFloat(e1, "fontDim");
+
                 //positionx = textInfo.get("print-x").getAsInt();
                 positionx = parser.getInt(e1, "print-x");
                 //positiony = textInfo.get("print-y").getAsInt();
                 positiony = parser.getInt(e1, "print-y");
+                getFontFromJSON(parser, e1);
                 addText(pathToImagesFolder + "/" + i1ext.getVal(), mime, text + ": " + text1,
                         positionx, positiony, fontDim, Color.BLACK);
             }
@@ -133,6 +134,7 @@ final public class JSONToImage {
                 positionx = parser.getInt(e1, "print-x");
                 //positiony = textInfo.get("print-y").getAsInt();
                 positiony = parser.getInt(e1, "print-y");
+                getFontFromJSON(parser, e1);
                 addText(pathToImagesFolder + "/" + i1ext.getVal(), mime, text,
                         positionx, positiony, fontDim, Color.BLACK);
             }
@@ -305,21 +307,21 @@ final public class JSONToImage {
      * @throws InvalidJSONFileException If the JSON file given as input to this library does not contain a field
      * identified by the name "fontStyle"
      */
-    public void getFontFromJSON(@NotNull JsonParser parser) throws InvalidArgumentException, InvalidJSONFileException {
+    private void getFontFromJSON(@NotNull JsonParser parser, @NotNull JsonElement el) throws InvalidArgumentException, InvalidJSONFileException {
         if(parser == null) {
             throw new InvalidArgumentException("The JsonParser instance given to this method cannot be null.", "L'istanza " +
                     "di JsonParser fornita a questo metodo non puo' essere null.");
         }
 
         int style;
-        switch(parser.getString("fontStyle")) {
+        switch(parser.getString(el, "fontStyle")) {
             case "italic" -> style = Font.ITALIC;
             case "bold" -> style = Font.BOLD;
             case "plain" -> style = Font.PLAIN;
             default -> throw new InvalidArgumentException("Unrecognized font style.", "Stile del font non riconosciuto.");
         }
         
-        getFont(parser.getString("fontFamily"), style, parser.getInt("fontSize"));
+        getFont(parser.getString(el, "fontFamily"), style, parser.getInt(el, "fontDim"));
     }
 
     /**
@@ -401,10 +403,11 @@ final public class JSONToImage {
         final BufferedImage image = ImageIO.read(file);
 
         Graphics g = image.getGraphics();
-        if(font != null) {
-            font = font.deriveFont(fontDim);
+        if(font == null) {
+            //Font is missing.
+            throw new InvalidArgumentException("Invalid font.", "Font non valido.");
         }
-        g.setFont(Objects.requireNonNullElseGet(font, () -> g.getFont().deriveFont(fontDim)));
+        g.setFont(font);
         g.setColor(color);
         g.drawString(inputText, x, y);
         g.dispose();
