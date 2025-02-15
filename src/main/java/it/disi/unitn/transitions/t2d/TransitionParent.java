@@ -16,7 +16,6 @@ import org.jetbrains.annotations.Nullable;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -131,9 +130,6 @@ public abstract class TransitionParent {
         }
 
         TracksMerger merger = builder.newTracksMerger(((isFinal) ? videoOutDir : tempVideoDir) + "/" + outfile + "." + fname);
-
-        Collections.sort(pathList);
-
         if(!vsfc.isEmpty()) {
             VideoFilterGraph vsfg = new VideoFilterGraph();
             vsfg.addFilterChain(vsfc);

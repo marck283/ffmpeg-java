@@ -139,7 +139,7 @@ public class MyFile extends java.io.File {
     /**
      * Questo metodo permette di ottenere una lista dei path dei file interni alla cartella identificata da questa
      * istanza di File.
-     * @return La lista dei path dei file interni alla cartella associata a questa istanza di File
+     * @return La lista ordinata dei path dei file interni alla cartella associata a questa istanza di File
      * @throws IOException Se si verifica un errore di I/O
      */
     public List<String> getFileList() throws IOException {
@@ -147,12 +147,12 @@ public class MyFile extends java.io.File {
             throw new FileNotFoundException("Il percorso fornito non denota una directory.");
         }
 
-        List<String> filePathList = new ArrayList<>();
+        List<String> filePathList;
         try (Stream<Path> pathStream = Files.list(getPath(pathname, ""))) {
             if(pathStream == null) {
                 throw new FileNotFoundException("Il percorso fornito non denota una directory.");
             }
-            pathStream.forEach(path -> filePathList.add(path.toString()));
+            filePathList = pathStream.filter(Files::isRegularFile).map(Path::toString).sorted().toList();
         }
 
         return filePathList;
