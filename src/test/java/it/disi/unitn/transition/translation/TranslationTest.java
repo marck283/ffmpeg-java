@@ -9,6 +9,7 @@ import it.disi.unitn.transitions.t2d.translation.TranslationTransition;
 import it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.scale.ScalingParams;
 import it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.scale.scalingalgs.Bicubic;
 import org.jetbrains.annotations.NotNull;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.awt.*;
@@ -17,10 +18,17 @@ import java.util.concurrent.TimeUnit;
 
 public class TranslationTest {
 
+    private static String tempOutDir, videoOutDir, tempVideoDir;
+
+    @BeforeAll
+    static void setUpBeforeClass() {
+        tempOutDir = "./src/test/resources/output/translation/images";
+        videoOutDir = "./src/test/resources/output/translation/video";
+        tempVideoDir = "./src/test/resources/output/translation/tempVideo";
+    }
+
     @Test
     public void test() throws Exception {
-        String tempOutDir = "./src/test/resources/output/translation/images", videoOutDir = "./src/test/resources/output/translation/video",
-                tempVideoDir = "./src/test/resources/output/translation/tempVideo";
         MyFile.makeDirs(tempOutDir);
         MyFile.makeDirs(videoOutDir);
         MyFile.makeDirs(tempVideoDir);
@@ -49,8 +57,6 @@ public class TranslationTest {
 
     @Test
     public void test1() throws Exception {
-        String tempOutDir = "./src/test/resources/output/translation/images", videoOutDir = "./src/test/resources/output/translation/video",
-                tempVideoDir = "./src/test/resources/output/translation/tempVideo";
         MyFile.makeDirs(tempOutDir);
         MyFile.makeDirs(videoOutDir);
         MyFile.makeDirs(tempVideoDir);

@@ -9,6 +9,7 @@ import it.disi.unitn.transitions.t2d.rotation.RotationTransition;
 import it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.scale.ScalingParams;
 import it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.scale.scalingalgs.Bicubic;
 import org.jetbrains.annotations.NotNull;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.awt.*;
@@ -16,10 +17,17 @@ import java.util.concurrent.TimeUnit;
 
 public class RotationTest {
 
+    private static String tempOutDir, videoOutDir, tempVideoDir;
+
+    @BeforeAll
+    static void setUpBeforeClass() {
+        tempOutDir = "./src/test/resources/output/rotation/images";
+        videoOutDir = "./src/test/resources/output/rotation/video";
+        tempVideoDir = "./src/test/resources/output/rotation/tempVideo";
+    }
+
     @Test
     public void test() throws Exception {
-        String tempOutDir = "./src/test/resources/output/rotation/images", videoOutDir = "./src/test/resources/output/rotation/video",
-                tempVideoDir = "./src/test/resources/output/rotation/tempVideo";;
         MyFile.makeDirs(tempOutDir);
         MyFile.makeDirs(videoOutDir);
         MyFile.makeDirs(tempVideoDir);
@@ -48,8 +56,6 @@ public class RotationTest {
 
     @Test
     public void test1() throws Exception {
-        String tempOutDir = "./src/test/resources/output/rotation/images", videoOutDir = "./src/test/resources/output/rotation/video",
-                tempVideoDir = "./src/test/resources/output/rotation/tempVideo";
         MyFile.makeDirs(tempOutDir);
         MyFile.makeDirs(videoOutDir);
         MyFile.makeDirs(tempVideoDir);
@@ -78,8 +84,6 @@ public class RotationTest {
 
     @Test
     public void test2() throws Exception {
-        String tempOutDir = "./src/test/resources/output/rotation/images", videoOutDir = "./src/test/resources/output/rotation/video",
-                tempVideoDir = "./src/test/resources/output/rotation/tempVideo";
         MyFile.makeDirs(tempOutDir);
         MyFile.makeDirs(videoOutDir);
         MyFile.makeDirs(tempVideoDir);
@@ -108,8 +112,6 @@ public class RotationTest {
 
     @Test
     public void test3() throws Exception {
-        String tempOutDir = "./src/test/resources/output/rotation/images", videoOutDir = "./src/test/resources/output/rotation/video",
-                tempVideoDir = "./src/test/resources/output/rotation/tempVideo";
         MyFile.makeDirs(tempOutDir);
         MyFile.makeDirs(videoOutDir);
         MyFile.makeDirs(tempVideoDir);

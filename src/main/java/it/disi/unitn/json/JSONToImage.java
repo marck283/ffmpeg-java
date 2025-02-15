@@ -285,7 +285,7 @@ final public class JSONToImage {
      * @throws InvalidArgumentException If the font's name is null or an empty string or if the font's size is negative
      * or null
      */
-    public void getFont(@NotNull String name, int style, int size) throws InvalidArgumentException {
+    private void getFont(@NotNull String name, int style, int size) throws InvalidArgumentException {
         if(StringExt.checkNullOrEmpty(name)) {
             throw new InvalidArgumentException("The file's name cannot be null or an empty string.", "Il nome del file " +
                     "non puo' essere null o una stringa vuota.");
@@ -302,6 +302,7 @@ final public class JSONToImage {
      * Gets the appropriate font as requested by the user in the JsonParser instance. WARNING: the "fontStyle" values must
      * be equal to "italic", "bold" or "plain".
      * @param parser The given JsonParser instance. This parameter cannot be null.
+     * @param el The JsonElement instance from which the font will be derived.
      * @throws InvalidArgumentException If the given JsonParser instance is null or the "fontStyle" value is different
      * from "italic", "bold" or "plain"
      * @throws InvalidJSONFileException If the JSON file given as input to this library does not contain a field
