@@ -9,7 +9,6 @@ import it.disi.unitn.videocreator.transcoder.VideoTranscoder;
 import org.apache.commons.lang3.SystemUtils;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -25,21 +24,10 @@ public final class FFMpegBuilder {
 
     /**
      * This constructor initializes the class with the path to ffmpeg's command line utility.
-     * @param ffmpegPath The relative path to ffmpeg's command line utility. This parameter must not be null only if
-     *                   the user is operating on a Windows Operating System.
      */
-    public FFMpegBuilder(@Nullable String ffmpegPath) {
+    public FFMpegBuilder() {
         lcommand = new ArrayList<>();
-        if(SystemUtils.IS_OS_WINDOWS) {
-            if(ffmpegPath == null || ffmpegPath.isEmpty()) {
-                System.err.println((new InvalidArgumentException("The argument to this class's constructor cannot be null or an " +
-                        "empty string.", "L'argomento fornito al costruttore di questa classe non puo' essere " +
-                        "null o una stringa vuota.").getMessage()));
-            }
-            lcommand.add(ffmpegPath);
-        } else {
-            lcommand.add("ffmpeg");
-        }
+        lcommand.add("ffmpeg");
     }
 
     /**
@@ -90,30 +78,17 @@ public final class FFMpegBuilder {
 
     /**
      * This method allows the user to reset the command of this Builder.
-     * @param pathToFFMpeg The path to the ffmpeg executable. This parameter must not be null only if the user is operating
-     * on a Windows Operating System.
-     * @throws InvalidArgumentException If the user is operating on a Windows Operating System and the parameter of
-     * this method is null.
      * @throws UnsupportedOperatingSystemException If the user is operating on an operating system that is not supported
      * by this library (i.e., all operating systems other than Windows and Linux OSs).
      */
-    public void resetCommand(@Nullable String pathToFFMpeg) throws InvalidArgumentException,
+    public void resetCommand() throws InvalidArgumentException,
             UnsupportedOperatingSystemException {
         lcommand.clear();
 
-        if(SystemUtils.IS_OS_WINDOWS) {
-            if(pathToFFMpeg == null || pathToFFMpeg.isEmpty()) {
-                throw new InvalidArgumentException("The argument to this method cannot be null or an empty string.",
-                        "L'argomento fornito a questo metodo non puo' essere null o una stringa vuota.");
-            } else {
-                add("\"" + pathToFFMpeg + "\"");
-            }
+        if(SystemUtils.IS_OS_LINUX || SystemUtils.IS_OS_WINDOWS) {
+            add("ffmpeg");
         } else {
-            if(SystemUtils.IS_OS_LINUX) {
-                add("ffmpeg");
-            } else {
-                throw new UnsupportedOperatingSystemException();
-            }
+            throw new UnsupportedOperatingSystemException();
         }
     }
 

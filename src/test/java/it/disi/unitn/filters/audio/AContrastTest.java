@@ -17,7 +17,7 @@ public class AContrastTest {
 
     @Test
     public void test() throws InvalidArgumentException, IOException, MultiLanguageUnsupportedOperationException {
-        FFMpegBuilder builder = new FFMpegBuilder("ffmpeg");
+        FFMpegBuilder builder = new FFMpegBuilder();
 
         AudioFilterGraph afg = new AudioFilterGraph();
         AudioSimpleFilterChain afc = new AudioSimpleFilterChain();

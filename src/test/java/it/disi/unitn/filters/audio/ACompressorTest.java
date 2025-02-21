@@ -17,7 +17,7 @@ public class ACompressorTest {
 
     @Test
     public void test() throws InvalidArgumentException, IOException, MultiLanguageUnsupportedOperationException {
-        FFMpegBuilder builder = new FFMpegBuilder("ffmpeg");
+        FFMpegBuilder builder = new FFMpegBuilder();
 
         AudioFiltering audioFiltering = builder.newAudioFiltering("./src/test/resources/output/audio/acompressor.mp3");
         audioFiltering.addInput("./src/test/resources/input/audio/input.mp3");
