@@ -34,21 +34,21 @@ public class StringExt {
     /**
      * This method can be used to pad the given string with 0s at its beginning.
      * @param maxlen The given string's maximum length.
-     * @throws InvalidArgumentException If the original string's length is not greater than 0 and less than or equal to 3.
      */
-    public void padStart(int maxlen) throws InvalidArgumentException {
+    public void padStart(int maxlen) {
         if(val.isEmpty() || val.length() > maxlen) {
-            throw new InvalidArgumentException("The original string's length is not greater than 0 and less than or " +
-                    "equal to 3.", "La lunghezza della stringa originale non e' maggiore di zero e minore o uguale a 3.");
-        }
-
-        int missing = maxlen - val.length();
-        if(missing > 0) {
-            String v = "";
-            for(int i = 0; i < missing; i++) {
-                v = v.concat("0");
+            System.err.println((new InvalidArgumentException("The original string's length is not greater than 0 and less " +
+                    "than or equal to 3.", "La lunghezza della stringa originale non e' maggiore di zero e minore o " +
+                    "uguale a 3.")).getMessage());
+        } else {
+            int missing = maxlen - val.length();
+            if(missing > 0) {
+                String v = "";
+                for(int i = 0; i < missing; i++) {
+                    v = v.concat("0");
+                }
+                val = v.concat(val);
             }
-            val = v.concat(val);
         }
     }
 

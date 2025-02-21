@@ -37,7 +37,8 @@ public class TranslationTest {
         str.padStart(3);
         String inputExt = "jpeg";
         TranslationTransition translation = new TranslationTransition("./src/test/resources/input/images/"
-                + str.getVal() + "." + inputExt, tempOutDir, videoOutDir, tempVideoDir, "mp4",45, 95, inputExt);
+                + str.getVal() + "." + inputExt, tempOutDir, videoOutDir, tempVideoDir,  "output", "mp4",
+                45, 95, inputExt);
 
         ScalingParams scPars = getScalingParams();
         translation.setScale(scPars.getAlgorithm(),
@@ -47,11 +48,11 @@ public class TranslationTest {
         translation.setFPS("60*pal/pal", 0, null, null);
         translation.setTransitionSpeed("0.5*PTS");
 
-        translation.translate(new Point2D.Float(200F, 350F), "test", "mp4","Arial Unicode MS",
+        translation.translate(new Point2D.Float(200F, 350F), "test","Arial Unicode MS",
                 Font.PLAIN,200, Color.BLACK);
 
         //translation.performTransition(1L, TimeUnit.MINUTES, "last", false, true);
-        translation.performTransition(1L, TimeUnit.MINUTES, "output", true, false);
+        translation.performTransition(1L, TimeUnit.MINUTES,true, false);
         translation.dispose();
     }
 
@@ -65,7 +66,8 @@ public class TranslationTest {
         str.padStart(3);
         String inputExt = "jpeg";
         TranslationTransition translation = new TranslationTransition("./src/test/resources/input/images/"
-                + str.getVal() + "." + inputExt, tempOutDir, videoOutDir, tempVideoDir, "mp4",45, -95, inputExt);
+                + str.getVal() + "." + inputExt, tempOutDir, videoOutDir, tempVideoDir, "output1", "mp4",
+                45, -95, inputExt);
 
         ScalingParams scPars = getScalingParams();
         translation.setScale(scPars.getAlgorithm(),
@@ -75,11 +77,11 @@ public class TranslationTest {
         translation.setFPS("60*pal/pal", 0, null, null);
         translation.setTransitionSpeed("0.5*PTS");
 
-        translation.translate(new Point2D.Float(500F, 850F), "test", "mp4","Arial Unicode MS",
+        translation.translate(new Point2D.Float(500F, 850F), "test","Arial Unicode MS",
                 Font.PLAIN,200, Color.BLACK);
 
         //translation.performTransition(1L, TimeUnit.MINUTES, "last", false, true);
-        translation.performTransition(1L, TimeUnit.MINUTES, "output1", true, false);
+        translation.performTransition(1L, TimeUnit.MINUTES,true, false);
         translation.dispose();
     }
 

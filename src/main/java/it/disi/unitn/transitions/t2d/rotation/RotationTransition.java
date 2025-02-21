@@ -17,7 +17,7 @@ final public class RotationTransition extends TransitionParent {
 
     private Rotation rotation;
 
-    private final String fname, fext;
+    private final String fext;
 
     private final int angle;
 
@@ -27,6 +27,7 @@ final public class RotationTransition extends TransitionParent {
      * @param videoOutDir The temporary video output directory's path.
      * @param tempOutDir The temporary picture output directory's path.
      * @param tempVideoDir The temporary videos' output directory's path.
+     * @param outName The output file's name.
      * @param fname The output file's extension.
      * @param fext The intermediate files' extension.
      * @param angle The rotation's angle. This value cannot be greater than 999. As usual, a positive value ensures a
@@ -34,14 +35,14 @@ final public class RotationTransition extends TransitionParent {
      * @throws InvalidArgumentException If the given angle is negative or greater than 999.
      */
     public RotationTransition(@NotNull String inputFile, @NotNull String videoOutDir, @NotNull String tempOutDir,
-                              @NotNull String tempVideoDir, @NotNull String fname, @NotNull String fext, int angle)
+                              @NotNull String tempVideoDir, @NotNull String outName, @NotNull String fname,
+                              @NotNull String fext, int angle)
             throws InvalidArgumentException {
-        super(inputFile, tempOutDir, tempVideoDir, videoOutDir, fname);
+        super(inputFile, tempOutDir, tempVideoDir, videoOutDir, fname, outName, fext);
         if(angle > 999) {
             throw new InvalidArgumentException("The given angle cannot be greater than 999 degrees.",
                     "L'angolo fornito non puo' essere maggiore di 999 gradi.");
         }
-        this.fname = fname;
         this.fext = fext;
         this.angle = angle;
         rotation = new Rotation(inputFile, tempOutDir);
@@ -68,7 +69,8 @@ final public class RotationTransition extends TransitionParent {
                 //Save intermediate video and delete the folder's content.
                 StringExt strExt = new StringExt(String.valueOf(Math.abs(j)));
                 strExt.padStart(3);
-                performTransition(1L, TimeUnit.MINUTES, strExt.getVal(), false, true);
+                setOutName(strExt.getVal());
+                performTransition(1L, TimeUnit.MINUTES, false, true);
 
                 MyFile tempDir = new MyFile(tempOutDir);
                 tempDir.removeContent(fext);
@@ -94,14 +96,7 @@ final public class RotationTransition extends TransitionParent {
     public void dispose() {
         try {
             rotation.dispose();
-            MyFile tempDir = new MyFile(tempOutDir);
-            tempDir.removeContent(fext);
-
-            MyFile tempVideoFile = new MyFile(tempVideoDir);
-            tempVideoFile.removeContent(fname);
-
-            tempDir = new MyFile(videoOutDir);
-            tempDir.removeContentExceptFile("output");
+            super.dispose();
         } catch(IOException | InvalidArgumentException ex) {
             ex.printStackTrace();
         }
