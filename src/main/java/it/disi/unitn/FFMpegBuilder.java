@@ -23,7 +23,7 @@ public final class FFMpegBuilder {
     private final List<String> lcommand;
 
     /**
-     * This constructor initializes the class with the path to ffmpeg's command line utility.
+     * The class's constructor.
      */
     public FFMpegBuilder() {
         lcommand = new ArrayList<>();
