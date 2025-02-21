@@ -1,8 +1,11 @@
-# ffmpeg-java
+# Introduction
 This repository holds an implementation of a wrapper for FFmpeg in Java. 
 In order to work properly, however, the user needs to install FFmpeg either by 
 using *vcpkg* ([see here](https://trac.ffmpeg.org/wiki/CompilationGuide/vcpkg)) 
 or by following [this StackExchange answer](https://video.stackexchange.com/a/20496).
+
+## Supported Operating Systems
+This library currently supports only Linux and Windows operating systems.
 
 # Copyright notice
 Copyright 2024 Marco Lasagna
