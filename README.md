@@ -1,10 +1,8 @@
 # ffmpeg-java
 This repository holds an implementation of a wrapper for FFmpeg in Java. 
-In order to work properly, however, the user needs to install FFmpeg 
-and give this library the path to the location at which it was 
-installed. The command can be either a path to FFmpeg or a simple 
-
-    ffmpeg
+In order to work properly, however, the user needs to install FFmpeg either by 
+using *vcpkg* ([see here](https://trac.ffmpeg.org/wiki/CompilationGuide/vcpkg)) 
+or by following [this StackExchange answer](https://video.stackexchange.com/a/20496).
 
 # Copyright notice
 Copyright 2024 Marco Lasagna
