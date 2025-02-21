@@ -83,25 +83,21 @@ class Duration {
         this.decimal = decimal;
     }
 
-    private void padString(@NotNull StringExt str) throws InvalidArgumentException {
+    private void padString(@NotNull StringExt str) {
         if (str.getVal().length() < 2) {
             str.padStart(2);
         }
     }
 
     public String toString() {
-        try {
-            StringExt hrs = new StringExt(String.valueOf(hours)), mins = new StringExt(String.valueOf(minutes)),
-                    secs = new StringExt(String.valueOf(seconds));
+        StringExt hrs = new StringExt(String.valueOf(hours)), mins = new StringExt(String.valueOf(minutes)),
+                secs = new StringExt(String.valueOf(seconds));
 
-            padString(hrs);
-            padString(mins);
-            padString(secs);
+        padString(hrs);
+        padString(mins);
+        padString(secs);
 
-            return hrs.getVal() + ":" + mins.getVal() + ":" + secs.getVal() + "." + decimal;
-        } catch (InvalidArgumentException e) {
-            throw new RuntimeException(e);
-        }
+        return hrs.getVal() + ":" + mins.getVal() + ":" + secs.getVal() + "." + decimal;
     }
 
 }

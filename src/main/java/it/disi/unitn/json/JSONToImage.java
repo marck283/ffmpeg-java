@@ -6,6 +6,7 @@ import it.disi.unitn.exceptions.InvalidArgumentException;
 import it.disi.unitn.exceptions.InvalidJSONFileException;
 import it.disi.unitn.json.processpool.ProcessPool;
 import it.disi.unitn.json.jsonparser.JsonParser;
+import it.disi.unitn.lasagna.MyFile;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
@@ -50,7 +51,7 @@ final public class JSONToImage {
             System.err.println((new InvalidArgumentException("The first parameter of this method cannot be null or an empty string.",
                     "Il primo parametro passato a questo metodo non puo' essere null o una stringa vuota.")).getMessage());
         }
-        File jsonFile = new File(pathToJsonFile);
+        MyFile jsonFile = new MyFile(pathToJsonFile);
 
         byteArrList = new ArrayList<>();
         Gson gson = new GsonBuilder().create();
@@ -295,12 +296,13 @@ final public class JSONToImage {
             throw new InvalidArgumentException("The font's size cannot be less than or equal to zero.", "La dimensione " +
                     "del font non puo' essere minore o uguale a zero.");
         }
+
         font = new Font(name, style, size);
     }
 
     /**
      * Gets the appropriate font as requested by the user in the JsonParser instance. WARNING: the "fontStyle" values must
-     * be equal to "italic", "bold" or "plain".
+     * be either "italic", "bold" or "plain".
      * @param parser The given JsonParser instance. This parameter cannot be null.
      * @param el The JsonElement instance from which the font will be derived.
      * @throws InvalidArgumentException If the given JsonParser instance is null or the "fontStyle" value is different

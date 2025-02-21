@@ -107,6 +107,10 @@ public class ProcessPool {
      * @throws InvalidArgumentException if any of the arguments to this method is null
      */
     public void execute(@NotNull JsonArray array, @NotNull JSONToImage jti, long timeout) throws InvalidArgumentException {
+        if(array == null || jti == null) {
+            throw new InvalidArgumentException("None of the arguments given to execute() can be null.", "Nessuno degli " +
+                    "argomenti forniti a execute() puo' essere null.");
+        }
         Map<String, String> m = new HashMap<>();
 
         String nscriptpath = Encode.forJava(scriptpath), ndesc = Encode.forJava(desc), niext = Encode.forJava(imageExtension),

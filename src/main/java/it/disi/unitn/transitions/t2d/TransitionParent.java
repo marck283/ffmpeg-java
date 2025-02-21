@@ -14,6 +14,7 @@ import it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.s
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
@@ -25,9 +26,16 @@ import java.util.concurrent.TimeUnit;
 public abstract class TransitionParent {
 
     /**
-     * The input file's path, temporary files' output directory and final video's output directory.
+     * The input file's path, temporary files' output directory, final video's output directory, final video's extension.
      */
     protected final String inputFile, tempOutDir, tempVideoDir, videoOutDir, fname;
+
+    /**
+     * The final video's name and the intermediate pictures' extension.
+     */
+    protected String outName, fext;
+
+    private final String constOutName;
 
     private final VideoSimpleFilterChain vsfc;
 
@@ -38,15 +46,52 @@ public abstract class TransitionParent {
      * @param tempVideoDir The temporary videos' output directory.
      * @param videoOutDir The final video's output directory.
      * @param fname The temporary files' extension.
+     * @param outName The output file's name.
+     * @param fext The output file's
      */
     public TransitionParent(@NotNull String inputFile, @NotNull String tempOutDir, @NotNull String tempVideoDir,
-                            @NotNull String videoOutDir, @NotNull String fname) {
-        this.inputFile = inputFile;
-        this.tempOutDir = tempOutDir;
-        this.tempVideoDir = tempVideoDir;
-        this.videoOutDir = videoOutDir;
-        this.fname = fname;
+                            @NotNull String videoOutDir, @NotNull String fname, @NotNull String outName, @NotNull String fext) {
+        if(StringExt.checkNullOrEmpty(inputFile) || StringExt.checkNullOrEmpty(tempOutDir) ||
+                StringExt.checkNullOrEmpty(tempVideoDir) || StringExt.checkNullOrEmpty(videoOutDir) ||
+        StringExt.checkNullOrEmpty(fname) || StringExt.checkNullOrEmpty(outName) || StringExt.checkNullOrEmpty(fext)) {
+            System.err.println((new InvalidArgumentException("None of the arguments given to TransitionParent can be null " +
+                    "or the empty string.", "Nessuno degli argomenti forniti a TransitionParent puo' essere null o la " +
+                    "stringa vuota.")).getMessage());
+            this.inputFile = "";
+            this.tempOutDir = "";
+            this.tempVideoDir = "";
+            this.videoOutDir = "";
+            this.fname = "";
+            this.outName = "";
+            constOutName = "";
+            this.fext = "";
+        } else {
+            this.inputFile = inputFile;
+            this.tempOutDir = tempOutDir;
+            this.tempVideoDir = tempVideoDir;
+            this.videoOutDir = videoOutDir;
+            this.fname = fname;
+            this.outName = outName;
+            constOutName = outName;
+            this.fext = fext;
+        }
         vsfc = new VideoSimpleFilterChain();
+    }
+
+    /**
+     * This method sets the output file's name.
+     * @param outName The given output file's name. This value cannot be null or an empty string.
+     */
+    public void setOutName(@NotNull String outName) throws InvalidArgumentException {
+        if(StringExt.checkNullOrEmpty(outName)) {
+            throw new InvalidArgumentException("The given file name cannot be null or an empty string.", "Il nome del " +
+                    "file fornito non puo' essere null o una stringa vuota.");
+        }
+        this.outName = outName;
+    }
+
+    public void resetOutName() {
+        this.outName = constOutName;
     }
 
     /**
@@ -121,7 +166,7 @@ public abstract class TransitionParent {
     }
 
     private void createVideo(@NotNull FFMpegBuilder builder, long timeout, @NotNull TimeUnit tu,
-                             @NotNull String outfile, boolean isFinal, boolean isVideo) throws Exception {
+                             boolean isFinal, boolean isVideo) throws IOException {
         MyFile inDirPath = new MyFile((isVideo) ? tempOutDir : tempVideoDir);
         List<String> pathList = inDirPath.getFileList();
 
@@ -129,30 +174,45 @@ public abstract class TransitionParent {
             return; //Returns if the list of files in the selected directory is empty.
         }
 
-        TracksMerger merger = builder.newTracksMerger(((isFinal) ? videoOutDir : tempVideoDir) + "/" + outfile + "." + fname);
-        if(!vsfc.isEmpty()) {
-            VideoFilterGraph vsfg = new VideoFilterGraph();
-            vsfg.addFilterChain(vsfc);
-            merger.setVideoSimpleFilterGraph(vsfg);
+        if(isFinal) {
+            resetOutName();
         }
 
-        Path p = Paths.get("inputFile.txt").toAbsolutePath();
-        merger.mergeVideos(timeout, tu, pathList, p.toString(), "./");
+        try {
+            TracksMerger merger = builder.newTracksMerger(((isFinal) ? videoOutDir : tempVideoDir) + "/" + outName + "." + fname);
+            if(!vsfc.isEmpty()) {
+                VideoFilterGraph vsfg = new VideoFilterGraph();
+                vsfg.addFilterChain(vsfc);
+                merger.setVideoSimpleFilterGraph(vsfg);
+            }
+
+            Path p = Paths.get("inputFile.txt").toAbsolutePath();
+            merger.mergeVideos(timeout, tu, pathList, p.toString(), "./");
+        } catch(InvalidArgumentException e) {
+            System.err.println(e.getLocalizedMessage());
+        }
     }
 
     /**
      * This method allows the user to create the output video.
      * @param timeout The given timeout.
      * @param tu The given TimeUnit instance.
-     * @param outfile The given output file's path.
      * @param isFinal Boolean parameter to check if this call to performTransition() will create the output video.
      * @param isVideo Boolean parameter to check if this call to performTransition() will create the intermediate videos
-     * @throws Exception If any exception is thrown
+     * @throws IOException If an I/O error occurs
      */
-    public void performTransition(long timeout, @NotNull TimeUnit tu, @NotNull String outfile,
-                                   boolean isFinal, boolean isVideo) throws Exception {
+    public void performTransition(long timeout, @NotNull TimeUnit tu,
+                                   boolean isFinal, boolean isVideo) throws IOException {
         FFMpegBuilder builder = new FFMpegBuilder("ffmpeg");
-        createVideo(builder, timeout, tu, outfile, isFinal, isVideo);
+        createVideo(builder, timeout, tu, isFinal, isVideo);
+    }
+
+    protected void dispose() throws IOException, InvalidArgumentException {
+        MyFile tempDir = new MyFile(tempOutDir);
+        tempDir.removeContent(fext);
+
+        MyFile tempVideoFile = new MyFile(tempVideoDir);
+        tempVideoFile.removeContent(fname);
     }
 
 }

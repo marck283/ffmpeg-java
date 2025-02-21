@@ -20,8 +20,6 @@ final public class TranslationTransition extends TransitionParent {
 
     private final double distanceX, theta;
 
-    private final String fext;
-
     /**
      * This class's constructor.
      * @param inputFile The given input file. This value must not be null or an empty string.
@@ -29,6 +27,7 @@ final public class TranslationTransition extends TransitionParent {
      *                   string.
      * @param videoOutDir The video's output directory. This value cannot be null or an empty string.
      * @param tempVideoDir The temporary video's output directory. This value cannot be null or an empty string.
+     * @param outName The output file's name. This value cannot be null or an empty string.
      * @param fname The temporary files' extension. This value cannot be null or an empty string.
      * @param distx The distance on the x-axis. This value can be positive (right translation), negative (left translation), or null.
      * @param theta The translation angle in degrees. This value can be positive (downwards translation), negative (upwards
@@ -37,9 +36,9 @@ final public class TranslationTransition extends TransitionParent {
      * @throws InvalidArgumentException If any of the given arguments (except {@code theta}) does not meet its requirements
      */
     public TranslationTransition(@NotNull String inputFile, @NotNull String tempOutDir, @NotNull String videoOutDir,
-                                 @NotNull String tempVideoDir, @NotNull String fname, double distx, double theta,
-                                 @NotNull String fext) throws InvalidArgumentException {
-        super(inputFile, tempOutDir, tempVideoDir, videoOutDir, fname);
+                                 @NotNull String tempVideoDir, @NotNull String outName, @NotNull String fname,
+                                 double distx, double theta, @NotNull String fext) throws InvalidArgumentException {
+        super(inputFile, tempOutDir, tempVideoDir, videoOutDir, fname, outName, fext);
         if(StringExt.checkNullOrEmpty(inputFile) || StringExt.checkNullOrEmpty(tempOutDir) ||
                 StringExt.checkNullOrEmpty(videoOutDir) || StringExt.checkNullOrEmpty(tempVideoDir) ||
         StringExt.checkNullOrEmpty(fname) || StringExt.checkNullOrEmpty(fext)) {
@@ -63,7 +62,8 @@ final public class TranslationTransition extends TransitionParent {
             //Save intermediate video and delete the folder's content.
             StringExt strExt = new StringExt(String.valueOf(i));
             strExt.padStart(3);
-            performTransition(1L, TimeUnit.MINUTES, strExt.getVal(), false, true);
+            setOutName(strExt.getVal());
+            performTransition(1L, TimeUnit.MINUTES, false, true);
 
             MyFile tempDir = new MyFile(tempOutDir);
             tempDir.removeContent(fext);
@@ -80,16 +80,15 @@ final public class TranslationTransition extends TransitionParent {
      * This method performs the translation.
      * @param start The translation's starting point. This value cannot be null.
      * @param text The string to be translated. This value cannot be null or an empty string.
-     * @param fname The intermediate files' extension. This value cannot be null or an empty string.
      * @param fontFamily The string representing the required font's family. This value cannot be null or an empty string.
      * @param fontStyle The required font's style.
      * @param fontSize The required font's size in points. This value cannot be negative or null.
      * @param fontColor The required font's color. This value cannot be null.
      * @throws Exception If an exception occurs.
      */
-    public void translate(@NotNull Point2D start, @NotNull String text, @NotNull String fname,
+    public void translate(@NotNull Point2D start, @NotNull String text,
                           @NotNull String fontFamily, int fontStyle, int fontSize, @NotNull Color fontColor) throws Exception {
-        if(start == null || StringExt.checkNullOrEmpty(text) || StringExt.checkNullOrEmpty(fname) ||
+        if(start == null || StringExt.checkNullOrEmpty(text) ||
                 StringExt.checkNullOrEmpty(fontFamily) || fontSize <= 0 || fontColor == null) {
             throw new InvalidArgumentException("None of the given arguments can be null, an empty string, negative or " +
                     "the null number.", "Nessuno degli argomenti forniti puo' essere null, una stringa vuota, negativo o" +
@@ -117,7 +116,8 @@ final public class TranslationTransition extends TransitionParent {
         if(!pathList.isEmpty()) {
             StringExt strExt = new StringExt(String.valueOf(i));
             strExt.padStart(3);
-            performTransition(1L, TimeUnit.MINUTES, strExt.getVal(), false, true);
+            setOutName(strExt.getVal());
+            performTransition(1L, TimeUnit.MINUTES, false, true);
         }
     }
 
@@ -127,14 +127,7 @@ final public class TranslationTransition extends TransitionParent {
     public void dispose() {
         try {
             translation.dispose();
-            MyFile tempDir = new MyFile(tempOutDir);
-            tempDir.removeContent(fext);
-
-            MyFile tempVideoFile = new MyFile(tempVideoDir);
-            tempVideoFile.removeContent(fname);
-
-            tempDir = new MyFile(videoOutDir);
-            tempDir.removeContentExceptFile("output");
+            super.dispose();
         } catch(IOException | InvalidArgumentException ex) {
             ex.printStackTrace();
         }

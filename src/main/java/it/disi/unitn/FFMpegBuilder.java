@@ -20,7 +20,6 @@ import java.util.function.Consumer;
  * Builder class for convenience class FFMpeg
  */
 public final class FFMpegBuilder {
-    //private String command;
 
     private final List<String> lcommand;
 
@@ -28,10 +27,8 @@ public final class FFMpegBuilder {
      * This constructor initializes the class with the path to ffmpeg's command line utility.
      * @param ffmpegPath The relative path to ffmpeg's command line utility. This parameter must not be null only if
      *                   the user is operating on a Windows Operating System.
-     * @throws InvalidArgumentException If this constructor's argument is set to null and the user is running a Windows
-     * Operating System
      */
-    public FFMpegBuilder(@Nullable String ffmpegPath) throws InvalidArgumentException {
+    public FFMpegBuilder(@Nullable String ffmpegPath) {
         lcommand = new ArrayList<>();
         if(SystemUtils.IS_OS_WINDOWS) {
             if(ffmpegPath == null || ffmpegPath.isEmpty()) {
@@ -39,10 +36,8 @@ public final class FFMpegBuilder {
                         "empty string.", "L'argomento fornito al costruttore di questa classe non puo' essere " +
                         "null o una stringa vuota.").getMessage()));
             }
-            //command = ffmpegPath;
             lcommand.add(ffmpegPath);
         } else {
-            //command = "ffmpeg";
             lcommand.add("ffmpeg");
         }
     }
@@ -60,8 +55,7 @@ public final class FFMpegBuilder {
      * Convenience method to get the ffmpeg command to be executed.
      * @return The command to be executed
      */
-    public String getCommand() {
-        //return command;
+    public @NotNull String getCommand() {
         return String.join(" ", lcommand).trim().replaceAll("  +", " ");
     }
 

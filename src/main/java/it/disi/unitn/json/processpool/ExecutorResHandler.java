@@ -20,14 +20,15 @@ import java.nio.file.Paths;
  */
 public class ExecutorResHandler implements ExecuteResultHandler {
 
-    private final JsonArray array;
+    private final @NotNull JsonArray array;
 
     private final int index;
+
     private int param;
 
-    private final String pathToImagesFolder, imageExtension;
+    private final @NotNull String pathToImagesFolder, imageExtension;
 
-    private final JSONToImage jti;
+    private final @NotNull JSONToImage jti;
 
     /**
      * The class's constructor.
@@ -43,6 +44,12 @@ public class ExecutorResHandler implements ExecuteResultHandler {
                 || jti == null) {
             System.err.println((new InvalidArgumentException("No argument to this constructor can be null or an empty string.",
                     "Nessuno degli argomenti forniti a questo costruttore puo' essere null o una stringa vuota.")).getMessage());
+            array = new JsonArray();
+            index = -1;
+            this.pathToImagesFolder = "";
+            this.imageExtension = "";
+            this.jti = jti;
+            return;
         }
         array = arr;
         index = i;
@@ -95,7 +102,7 @@ public class ExecutorResHandler implements ExecuteResultHandler {
 
                 jti.modifyImage(obj, index, pathToImagesFolder, mime);
                 param = 1;
-            } catch (InvalidArgumentException | IOException ex) {
+            } catch (IOException ex) {
                 System.err.println(ex.getMessage());
                 throw new RuntimeException(ex);
             }
