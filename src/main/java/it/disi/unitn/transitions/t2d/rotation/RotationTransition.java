@@ -97,7 +97,7 @@ final public class RotationTransition extends TransitionParent {
         try {
             rotation.dispose();
             super.dispose();
-        } catch(IOException | InvalidArgumentException ex) {
+        } catch(IOException ex) {
             ex.printStackTrace();
         }
     }

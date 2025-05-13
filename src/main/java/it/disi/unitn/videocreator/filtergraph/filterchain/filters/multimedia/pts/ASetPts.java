@@ -1,27 +1,18 @@
 package it.disi.unitn.videocreator.filtergraph.filterchain.filters.multimedia.pts;
 
-import it.disi.unitn.StringExt;
 import it.disi.unitn.exceptions.InvalidArgumentException;
-import it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.AudioFilter;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * This class implements the "asetpts" multimedia filter.
  */
-public class ASetPts extends AudioFilter {
-
-    /**
-     * The timestamps' expression. This value defaults to "1*PTS".
-     */
-    private String expr;
+public class ASetPts extends AbstractSetPts {
 
     /**
      * This class's constructor.
      */
     public ASetPts() {
         super("asetpts");
-
-        expr = "1*PTS";
     }
 
     /**
@@ -31,27 +22,15 @@ public class ASetPts extends AudioFilter {
      * @throws InvalidArgumentException If the given value is null or an empty string
      */
     public void setExpr(@NotNull String expr) throws InvalidArgumentException {
-        if(StringExt.checkNullOrEmpty(expr)) {
-            throw new InvalidArgumentException("The given expression for the asetpts filter cannot be null or an empty " +
-                    "string.", "L'espressione fornita per il filtro asetpts non puo' essere null o una stringa vuota.");
-        }
-
-        if(!(expr.contains("FRAME_RATE") || expr.contains("FR") || expr.contains("PTS") || expr.contains("N") ||
-                expr.contains("NB_CONSUMED_SAMPLES") || expr.contains("NB_SAMPLES") || expr.contains("S") ||
-                expr.contains("SAMPLE_RATE") || expr.contains("SR") || expr.contains("STARTPTS") || expr.contains("STARTT")
-                || expr.contains("INTERLACED") || expr.contains("T") || expr.contains("POS") || expr.contains("PREV_INPTS")
-                || expr.contains("PREV_INT") || expr.contains("PREV_OUTPTS") || expr.contains("PREV_OUTT") ||
-                expr.contains("RTCTIME") || expr.contains("RTCSTART") || expr.contains("TB") || expr.contains("T_CHANGE"))) {
+        if(!super.checkExpr(expr) && !(expr.contains("FRAME_RATE") || expr.contains("FR") || expr.contains("PTS") ||
+                expr.contains("N") || expr.contains("NB_CONSUMED_SAMPLES") || expr.contains("NB_SAMPLES") || expr.contains("S"))) {
             throw new InvalidArgumentException("The given expression must conform to FFmpeg's specifications regarding " +
-                    "the \"setpts\" filter.", "L'espressione fornita deve essere conforme alle specifiche di FFmpeg " +
-                    "riguardo il filtro \"setpts\".");
+                    "the \"asetpts\" filter.", "L'espressione fornita deve essere conforme alle specifiche di FFmpeg " +
+                    "riguardo il filtro \"asetpts\".");
         }
 
         this.expr = expr;
     }
 
-    @Override
-    public void updateMap() {
-        options.put("expr", expr);
-    }
+
 }

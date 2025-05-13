@@ -207,7 +207,7 @@ public abstract class TransitionParent {
         createVideo(builder, timeout, tu, isFinal, isVideo);
     }
 
-    protected void dispose() throws IOException, InvalidArgumentException {
+    protected void dispose() throws IOException {
         MyFile tempDir = new MyFile(tempOutDir);
         tempDir.removeContent(fext);
 

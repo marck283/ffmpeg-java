@@ -2,6 +2,7 @@ package it.disi.unitn.videocreator.filtergraph.filterchain;
 
 import it.disi.unitn.exceptions.InvalidArgumentException;
 import it.disi.unitn.videocreator.filtergraph.filterchain.filters.Filter;
+import it.disi.unitn.videocreator.filtergraph.filterchain.filters.audiofilters.AudioFilter;
 import it.disi.unitn.videocreator.filtergraph.filterchain.filters.videofilters.VideoFilter;
 import org.jetbrains.annotations.NotNull;
 
@@ -23,7 +24,7 @@ public class VideoSimpleFilterChain extends FilterChain {
 
     public void addFilter(@NotNull Filter filter) throws InvalidArgumentException {
         checkNullFilter(filter);
-        if(!(filter instanceof VideoFilter)) {
+        if(filter instanceof AudioFilter) {
             throw new InvalidArgumentException("Cannot add an audio filter to a video filter chain.", "Non e' possibile " +
                     "aggiungere un filtro audio ad una catena di filtri video.");
         }
@@ -40,9 +41,9 @@ public class VideoSimpleFilterChain extends FilterChain {
         if(filterStr.anyMatch(Objects::isNull)) {
             throw new InvalidArgumentException("Cannot add null filters.", "Non e' possibile aggiungere filtri null.");
         }
-        if(filterStr1.anyMatch(f -> !(f instanceof VideoFilter))) {
-            throw new InvalidArgumentException("All given filters must be instances of VideoFilter.", "Tutti i filtri " +
-                    "forniti devono essere istanze di VideoFilter.");
+        if(filterStr1.anyMatch(f -> f instanceof AudioFilter)) {
+            throw new InvalidArgumentException("All given filters must not be instances of AudioFilter.", "Nessuno dei filtri " +
+                    "forniti deve essere istanza di AudioFilter.");
         }
         filterList.addAll(Arrays.asList(filters));
     }

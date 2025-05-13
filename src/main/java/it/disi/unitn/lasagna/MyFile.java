@@ -67,19 +67,14 @@ public class MyFile extends java.io.File {
      * @throws PermissionsException If the user does not have reading or writing permissions on the given folder
      */
     public void checkReadWritePermissions() throws PermissionsException {
-        try {
-            Path path = getPath(pathname, "");
-            if(!Files.isReadable(path)) {
-                throw new PermissionsException("Cannot read the content of this directory.", "Non e' possibile " +
-                        "leggere il contenuto di questa directory.");
-            }
-            if(!Files.isWritable(path)) {
-                throw new PermissionsException("Cannot write to this directory.", "Non e' possibile scrivere su questa " +
-                        "directory.");
-            }
-        } catch(InvalidArgumentException ex) {
-            System.err.println(ex.getMessage());
-            System.exit(1);
+        Path path = getPath(pathname, "");
+        if(!Files.isReadable(path)) {
+            throw new PermissionsException("Cannot read the content of this directory.", "Non e' possibile " +
+                    "leggere il contenuto di questa directory.");
+        }
+        if(!Files.isWritable(path)) {
+            throw new PermissionsException("Cannot write to this directory.", "Non e' possibile scrivere su questa " +
+                    "directory.");
         }
     }
 

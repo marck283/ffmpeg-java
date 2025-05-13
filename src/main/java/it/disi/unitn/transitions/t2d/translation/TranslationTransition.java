@@ -128,7 +128,7 @@ final public class TranslationTransition extends TransitionParent {
         try {
             translation.dispose();
             super.dispose();
-        } catch(IOException | InvalidArgumentException ex) {
+        } catch(IOException ex) {
             ex.printStackTrace();
         }
     }

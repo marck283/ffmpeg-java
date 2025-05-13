@@ -130,9 +130,8 @@ public final class FFMpegBuilder {
      * @param outputFile The path to the output file
      * This path has to be ffmpeg-compatible, and it must include the file extensions.
      * @return A new VideoCreator instance
-     * @throws InvalidArgumentException If at least one of the given arguments is null or an empty string
      */
-    public VideoCreator newVideoCreator(@NotNull String outputFile) throws InvalidArgumentException {
+    public VideoCreator newVideoCreator(@NotNull String outputFile) {
         return new VideoCreator(this, outputFile);
     }
 
@@ -151,10 +150,9 @@ public final class FFMpegBuilder {
      * This method returns a new AudioFiltering instance.
      * @param outputFile The given output audio file.
      * @return A new AudioFiltering instance made using the given output audio file.
-     * @throws InvalidArgumentException If the given audio file is null or an empty string
      */
     @Contract("_ -> new")
-    public @NotNull AudioFiltering newAudioFiltering(@NotNull String outputFile) throws InvalidArgumentException {
+    public @NotNull AudioFiltering newAudioFiltering(@NotNull String outputFile) {
         return new AudioFiltering(this, outputFile);
     }
 
@@ -182,7 +180,7 @@ public final class FFMpegBuilder {
      * @throws InvalidArgumentException When the argument given to this method is null or contains a null value or an
      * empty string
      */
-    public void addAllInputs(@NotNull List<String> inputFiles) throws InvalidArgumentException{
+    public void addAllInputs(@NotNull List<String> inputFiles) throws InvalidArgumentException {
         if(inputFiles == null || inputFiles.stream().anyMatch(StringExt::checkNullOrEmpty)) {
             throw new InvalidArgumentException("The given list of input files cannot be null or contain null or empty " +
                     "strings.", "La data lista di file in input non puo' essere null o contenere valori null o pari a " +
