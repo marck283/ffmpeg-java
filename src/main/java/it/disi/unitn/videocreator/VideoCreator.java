@@ -187,14 +187,9 @@ public class VideoCreator {
      */
     private void checkExecutable() throws PermissionsException {
         if (!Files.isExecutable(Paths.get(execFile))) {
-            try {
-                throw new PermissionsException("Cannot execute file " + execFile + ". Please check the user's permissions and that " +
-                        "the file exists.", "Impossibile eseguire il file " + execFile + ". Si prega di controllarne i permessi " +
-                        "di esecuzione e l'esistenza.");
-            } catch(InvalidArgumentException e) {
-                System.err.println(e.getMessage());
-                System.exit(1);
-            }
+            throw new PermissionsException("Cannot execute file " + execFile + ". Please check the user's permissions and that " +
+                    "the file exists.", "Impossibile eseguire il file " + execFile + ". Si prega di controllarne i permessi " +
+                    "di esecuzione e l'esistenza.");
         }
     }
 

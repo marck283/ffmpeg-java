@@ -12,7 +12,7 @@ public class AudioExtractorTest {
 
     @Test
     public void extractAudio() throws InvalidArgumentException, IOException {
-        FFMpegBuilder builder = new FFMpegBuilder("ffmpeg");
+        FFMpegBuilder builder = new FFMpegBuilder();
         AudioExtractor extractor = new AudioExtractor(builder, "./src/test/resources/output/mp3/000.wma",
                 "./src/test/resources/input/mp4/000.wmv");
         extractor.createCommand();

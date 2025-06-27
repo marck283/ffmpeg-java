@@ -21,13 +21,13 @@ class VideoTranscoderTest {
 
     @Test
     void createCommand() throws IOException, InvalidArgumentException, UnsupportedOperatingSystemException, MultiLanguageUnsupportedOperationException {
-        FFMpegBuilder builder = new FFMpegBuilder("ffmpeg");
+        FFMpegBuilder builder = new FFMpegBuilder();
         VideoTranscoder transcoder = builder.newVideoTranscoder("./src/test/resources/input/mp4/example.mov");
         transcoder.addInput("./src/test/resources/input/mp4/000.mp4");
         transcoder.enableVideoExtraction();
 
         //transcoder.setVideoSize(800, 600, "yuv420p", true);
-        transcoder.setCodecID("mjpeg", true);
+        transcoder.setCodecID("mjpeg", false);
         transcoder.setPixelFormat("yuv420p");
         //transcoder.setOutFullRange(true); //If using mjpeg and YUV pixel formats, we have to set the color range to full.
         transcoder.setVideoQuality(18);
@@ -51,7 +51,7 @@ class VideoTranscoderTest {
 
     @Test
     void createCommandForAudio() throws InvalidArgumentException, IOException, MultiLanguageUnsupportedOperationException {
-        FFMpegBuilder builder = new FFMpegBuilder("ffmpeg");
+        FFMpegBuilder builder = new FFMpegBuilder();
         VideoTranscoder transcoder = builder.newVideoTranscoder("./src/test/resources/input/mp4/002.wav");
         transcoder.addInput("./src/test/resources/input/mp4/002.wmv");
         transcoder.enableAudioExtraction();

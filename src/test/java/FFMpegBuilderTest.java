@@ -19,7 +19,7 @@ class FFMpegBuilderTest {
 
     @Test
     void setVideoFrameSize() throws IOException, InvalidArgumentException, UnsupportedOperatingSystemException, MultiLanguageUnsupportedOperationException {
-        FFMpegBuilder builder = new FFMpegBuilder("ffmpeg");
+        FFMpegBuilder builder = new FFMpegBuilder();
         VideoCreator vc = builder.newVideoCreator("./src/test/resources/input/mp4/000-1.mp4");
         vc.addInput("./src/test/resources/input/mp4/000.mp4");
         //vc.setVideoSize(250, 200, "yuvj420p", true);

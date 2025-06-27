@@ -5,7 +5,6 @@ import it.disi.unitn.StringExt;
 import it.disi.unitn.exceptions.InvalidArgumentException;
 import it.disi.unitn.exceptions.MultiLanguageUnsupportedOperationException;
 import it.disi.unitn.videocreator.filtergraph.AudioFilterGraph;
-import it.disi.unitn.videocreator.filtergraph.FilterGraph;
 import org.jetbrains.annotations.NotNull;
 
 import java.nio.file.Files;

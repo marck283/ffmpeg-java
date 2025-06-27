@@ -24,7 +24,8 @@ class VideoCreatorTest {
     @Test
     void createCommand() throws InvalidArgumentException, UnsupportedOperatingSystemException,
             IOException, MultiLanguageUnsupportedOperationException {
-        FFMpegBuilder builder = new FFMpegBuilder("ffmpeg -xerror");
+        FFMpegBuilder builder = new FFMpegBuilder();
+        builder.add("-xerror");
         VideoCreator creator = builder.newVideoCreator("./src/test/resources/output/mp4/001.wmv");
         creator.addInput("./src/test/resources/input/mp4/000.wmv");
         //creator.addInput("./src/test/resources/input/mp3/000.mp3");
@@ -88,7 +89,7 @@ class VideoCreatorTest {
 
     @Test
     void createCommandTest1() throws InvalidArgumentException, UnsupportedOperatingSystemException, IOException, MultiLanguageUnsupportedOperationException {
-        FFMpegBuilder builder = new FFMpegBuilder("ffmpeg");
+        FFMpegBuilder builder = new FFMpegBuilder();
         VideoCreator creator = builder.newVideoCreator("./src/test/resources/input/mp4/002.mp4");
         creator.addInput("./src/test/resources/input/images/000.jpeg");
         creator.setPixelFormat("yuv420p");

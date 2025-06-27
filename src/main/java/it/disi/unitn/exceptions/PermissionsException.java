@@ -26,9 +26,8 @@ public class PermissionsException extends IOException {
      * This class's constructor.
      * @param msg The English message to be printed. This value cannot be null or an empty string.
      * @param itmsg The Italian message to be printed. This value cannot be null or an empty string.
-     * @throws InvalidArgumentException If any of the arguments is null or an empty string
      */
-    public PermissionsException(@NotNull String msg, @NotNull String itmsg) throws InvalidArgumentException {
+    public PermissionsException(@NotNull String msg, @NotNull String itmsg) {
         if(StringExt.checkNullOrEmpty(msg) || StringExt.checkNullOrEmpty(itmsg)) {
             System.err.println((new InvalidArgumentException("No argument given to this exception's constructor can be " +
                     "null or an empty string.", "Nessun argomento fornito al costruttore di questa eccezione puo' essere " +

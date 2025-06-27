@@ -9,7 +9,6 @@ import it.disi.unitn.videocreator.transcoder.VideoTranscoder;
 import org.apache.commons.lang3.SystemUtils;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -24,22 +23,11 @@ public final class FFMpegBuilder {
     private final List<String> lcommand;
 
     /**
-     * This constructor initializes the class with the path to ffmpeg's command line utility.
-     * @param ffmpegPath The relative path to ffmpeg's command line utility. This parameter must not be null only if
-     *                   the user is operating on a Windows Operating System.
+     * The class's constructor.
      */
-    public FFMpegBuilder(@Nullable String ffmpegPath) {
+    public FFMpegBuilder() {
         lcommand = new ArrayList<>();
-        if(SystemUtils.IS_OS_WINDOWS) {
-            if(ffmpegPath == null || ffmpegPath.isEmpty()) {
-                System.err.println((new InvalidArgumentException("The argument to this class's constructor cannot be null or an " +
-                        "empty string.", "L'argomento fornito al costruttore di questa classe non puo' essere " +
-                        "null o una stringa vuota.").getMessage()));
-            }
-            lcommand.add(ffmpegPath);
-        } else {
-            lcommand.add("ffmpeg");
-        }
+        lcommand.add("ffmpeg");
     }
 
     /**
@@ -90,30 +78,17 @@ public final class FFMpegBuilder {
 
     /**
      * This method allows the user to reset the command of this Builder.
-     * @param pathToFFMpeg The path to the ffmpeg executable. This parameter must not be null only if the user is operating
-     * on a Windows Operating System.
-     * @throws InvalidArgumentException If the user is operating on a Windows Operating System and the parameter of
-     * this method is null.
      * @throws UnsupportedOperatingSystemException If the user is operating on an operating system that is not supported
      * by this library (i.e., all operating systems other than Windows and Linux OSs).
      */
-    public void resetCommand(@Nullable String pathToFFMpeg) throws InvalidArgumentException,
+    public void resetCommand() throws InvalidArgumentException,
             UnsupportedOperatingSystemException {
         lcommand.clear();
 
-        if(SystemUtils.IS_OS_WINDOWS) {
-            if(pathToFFMpeg == null || pathToFFMpeg.isEmpty()) {
-                throw new InvalidArgumentException("The argument to this method cannot be null or an empty string.",
-                        "L'argomento fornito a questo metodo non puo' essere null o una stringa vuota.");
-            } else {
-                add("\"" + pathToFFMpeg + "\"");
-            }
+        if(SystemUtils.IS_OS_LINUX || SystemUtils.IS_OS_WINDOWS) {
+            add("ffmpeg");
         } else {
-            if(SystemUtils.IS_OS_LINUX) {
-                add("ffmpeg");
-            } else {
-                throw new UnsupportedOperatingSystemException();
-            }
+            throw new UnsupportedOperatingSystemException();
         }
     }
 
@@ -155,9 +130,8 @@ public final class FFMpegBuilder {
      * @param outputFile The path to the output file
      * This path has to be ffmpeg-compatible, and it must include the file extensions.
      * @return A new VideoCreator instance
-     * @throws InvalidArgumentException If at least one of the given arguments is null or an empty string
      */
-    public VideoCreator newVideoCreator(@NotNull String outputFile) throws InvalidArgumentException {
+    public VideoCreator newVideoCreator(@NotNull String outputFile) {
         return new VideoCreator(this, outputFile);
     }
 
@@ -176,10 +150,9 @@ public final class FFMpegBuilder {
      * This method returns a new AudioFiltering instance.
      * @param outputFile The given output audio file.
      * @return A new AudioFiltering instance made using the given output audio file.
-     * @throws InvalidArgumentException If the given audio file is null or an empty string
      */
     @Contract("_ -> new")
-    public @NotNull AudioFiltering newAudioFiltering(@NotNull String outputFile) throws InvalidArgumentException {
+    public @NotNull AudioFiltering newAudioFiltering(@NotNull String outputFile) {
         return new AudioFiltering(this, outputFile);
     }
 
@@ -207,7 +180,7 @@ public final class FFMpegBuilder {
      * @throws InvalidArgumentException When the argument given to this method is null or contains a null value or an
      * empty string
      */
-    public void addAllInputs(@NotNull List<String> inputFiles) throws InvalidArgumentException{
+    public void addAllInputs(@NotNull List<String> inputFiles) throws InvalidArgumentException {
         if(inputFiles == null || inputFiles.stream().anyMatch(StringExt::checkNullOrEmpty)) {
             throw new InvalidArgumentException("The given list of input files cannot be null or contain null or empty " +
                     "strings.", "La data lista di file in input non puo' essere null o contenere valori null o pari a " +

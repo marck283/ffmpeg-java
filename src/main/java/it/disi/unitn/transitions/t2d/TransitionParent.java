@@ -203,11 +203,11 @@ public abstract class TransitionParent {
      */
     public void performTransition(long timeout, @NotNull TimeUnit tu,
                                    boolean isFinal, boolean isVideo) throws IOException {
-        FFMpegBuilder builder = new FFMpegBuilder("ffmpeg");
+        FFMpegBuilder builder = new FFMpegBuilder();
         createVideo(builder, timeout, tu, isFinal, isVideo);
     }
 
-    protected void dispose() throws IOException, InvalidArgumentException {
+    protected void dispose() throws IOException {
         MyFile tempDir = new MyFile(tempOutDir);
         tempDir.removeContent(fext);
 

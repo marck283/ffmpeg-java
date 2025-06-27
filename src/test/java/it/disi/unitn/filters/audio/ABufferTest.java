@@ -5,10 +5,8 @@ import it.disi.unitn.FFMpegBuilder;
 import it.disi.unitn.exceptions.InvalidArgumentException;
 import it.disi.unitn.exceptions.MultiLanguageUnsupportedOperationException;
 import it.disi.unitn.exceptions.UnsupportedOperatingSystemException;
-import it.disi.unitn.lasagna.audiocreator.AudioFiltering;
 import it.disi.unitn.videocreator.VideoCreator;
 import it.disi.unitn.videocreator.filtergraph.AudioFilterGraph;
-import it.disi.unitn.videocreator.filtergraph.FilterGraph;
 import it.disi.unitn.videocreator.filtergraph.VideoFilterGraph;
 import it.disi.unitn.videocreator.filtergraph.filterchain.AudioSimpleFilterChain;
 import it.disi.unitn.videocreator.filtergraph.filterchain.VideoSimpleFilterChain;
@@ -27,7 +25,7 @@ public class ABufferTest {
 
     @Test
     void test() throws InvalidArgumentException, UnsupportedOperatingSystemException, IOException, MultiLanguageUnsupportedOperationException {
-        FFMpegBuilder builder = new FFMpegBuilder("ffmpeg");
+        FFMpegBuilder builder = new FFMpegBuilder();
         VideoCreator creator = builder.newVideoCreator("./src/test/resources/input/mp4/002.mp4");
         creator.addInput("./src/test/resources/input/images/000.jpeg");
         creator.setPixelFormat("yuv420p");
@@ -69,9 +67,7 @@ public class ABufferTest {
         vfg.addFilterChain(vsfc);
         creator.setVideoSimpleFilterGraph(vfg);
 
-        creator.createCommand(/*true, null, new Bicubic(0.3333, 0.3333), "auto",
-                "bt709", "auto", "auto", "init", "0",
-                "disable", 0*/);
+        creator.createCommand();
 
         FFMpeg ffmpeg = builder.build();
         ffmpeg.executeCMD(30L, TimeUnit.SECONDS, "./", null);

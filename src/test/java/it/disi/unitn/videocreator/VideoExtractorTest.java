@@ -12,7 +12,7 @@ public class VideoExtractorTest {
 
     @Test
     public void extractVideo() throws InvalidArgumentException, IOException {
-        FFMpegBuilder builder = new FFMpegBuilder("ffmpeg");
+        FFMpegBuilder builder = new FFMpegBuilder();
         VideoExtractor extractor = new VideoExtractor(builder, "./src/test/resources/output/mp4/000.wmv",
                 "./src/test/resources/input/mp4/000.wmv");
         extractor.createCommand();

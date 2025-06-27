@@ -285,9 +285,14 @@ final public class ScalingParams {
 
     /**
      * Sets a new input color matrix with the given name.
-     * @param name The name of the color matrix
+     * @param name The name of the color matrix. This value cannot be null or an empty string.
+     * @throws InvalidArgumentException If the given parameter is null or an empty string
      */
-    public void setInputColorMatrix(@NotNull String name) {
+    public void setInputColorMatrix(@NotNull String name) throws InvalidArgumentException {
+        if(StringExt.checkNullOrEmpty(name)) {
+            throw new InvalidArgumentException("The input color matrix's name cannot be null or an empty string.",
+                    "Il nome della matrice dei colori di input non puo' essere null o una stringa vuota.");
+        }
         inColMatrix = new ColorMatrix(name);
     }
 
@@ -301,9 +306,14 @@ final public class ScalingParams {
 
     /**
      * Sets a new input color matrix with the given name.
-     * @param name The name of the color matrix
+     * @param name The name of the color matrix. This value cannot be null or an empty string.
+     * @throws InvalidArgumentException If the given parameter is null or an empty string
      */
-    public void setOutColorMatrix(@NotNull String name) {
+    public void setOutColorMatrix(@NotNull String name) throws InvalidArgumentException {
+        if(StringExt.checkNullOrEmpty(name)) {
+            throw new InvalidArgumentException("The output color matrix's name cannot be null or an empty string.",
+                    "Il nome della matrice dei colori risultanti non puo' essere null o una stringa vuota.");
+        }
         outColorMatrix = new ColorMatrix(name);
     }
 

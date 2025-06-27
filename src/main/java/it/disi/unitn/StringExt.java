@@ -1,5 +1,6 @@
 package it.disi.unitn;
 
+import com.google.common.base.Strings;
 import it.disi.unitn.exceptions.InvalidArgumentException;
 import org.jetbrains.annotations.NotNull;
 
@@ -41,14 +42,7 @@ public class StringExt {
                     "than or equal to 3.", "La lunghezza della stringa originale non e' maggiore di zero e minore o " +
                     "uguale a 3.")).getMessage());
         } else {
-            int missing = maxlen - val.length();
-            if(missing > 0) {
-                String v = "";
-                for(int i = 0; i < missing; i++) {
-                    v = v.concat("0");
-                }
-                val = v.concat(val);
-            }
+            val = Strings.padStart(val, 3, '0');
         }
     }
 

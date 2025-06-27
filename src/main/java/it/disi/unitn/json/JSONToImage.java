@@ -305,7 +305,7 @@ final public class JSONToImage {
      * be either "italic", "bold" or "plain".
      * @param parser The given JsonParser instance. This parameter cannot be null.
      * @param el The JsonElement instance from which the font will be derived.
-     * @throws InvalidArgumentException If the given JsonParser instance is null or the "fontStyle" value is different
+     * @throws InvalidArgumentException If the given JsonParser instance is null, or the "fontStyle" value is different
      * from "italic", "bold" or "plain"
      * @throws InvalidJSONFileException If the JSON file given as input to this library does not contain a field
      * identified by the name "fontStyle"
