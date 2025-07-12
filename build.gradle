@@ -95,7 +95,7 @@ dependencies {
 
     implementation 'org.slf4j:slf4j-api:2.0.17'
     implementation 'commons-io:commons-io:2.19.0'
-    implementation 'org.apache.commons:commons-lang3:3.17.0'
+    implementation 'org.apache.commons:commons-lang3:3.18.0'
     implementation 'org.apache.commons:commons-exec:1.4.0'
 
     // https://mvnrepository.com/artifact/org.owasp.esapi/esapi
